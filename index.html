@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+ <html lang="en"><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=5.0"/><link rel="preload" href="/page-component---src-templates-page-js-8efb54fcd22d26e1aa35.js" as="script"/><link rel="preload" href="/path---index-5976685ffd5e361bff24.js" as="script"/><link rel="preload" href="/layout-component---index-6202cdb855479f6fe6a4.js" as="script"/><link rel="preload" href="/app-ab15e4cdf8ba33ad4aa9.js" as="script"/><link rel="preload" href="/commons-09d1c0a888f75e72f2a0.js" as="script"/><script id="webpack-manifest">
+            //<![CDATA[
+            window.webpackManifest = {"15178676390636814000":"app-ab15e4cdf8ba33ad4aa9.js","11888651905112195000":"page-component---src-templates-page-js-8efb54fcd22d26e1aa35.js","9347362237655822000":"path---index-5976685ffd5e361bff24.js","17241999800008180000":"layout-component---index-6202cdb855479f6fe6a4.js"}
+            //]]>
+            </script><title data-react-helmet="true">graphql-build</title><link data-react-helmet="true" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous"/><meta data-react-helmet="true" name="description" content="TODO"/><meta data-react-helmet="true" name="keywords" content="TODO"/><script data-react-helmet="true" src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script><script data-react-helmet="true" src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script><script data-react-helmet="true" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script><style type="text/css">
+    .anchor {
+      float: left;
+      padding-right: 4px;
+      margin-left: -20px;
+    }
+    h1 .anchor svg,
+    h2 .anchor svg,
+    h3 .anchor svg,
+    h4 .anchor svg,
+    h5 .anchor svg,
+    h6 .anchor svg {
+      visibility: hidden;
+    }
+    h1:hover .anchor svg,
+    h2:hover .anchor svg,
+    h3:hover .anchor svg,
+    h4:hover .anchor svg,
+    h5:hover .anchor svg,
+    h6:hover .anchor svg {
+      visibility: visible;
+    }
+  </style><script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+      var hash = location.hash.replace('#', '')
+      if (hash !== '') {
+        var element = document.getElementById(hash)
+        if (element) {
+          var offset = element.offsetTop
+          // Wait for the browser to finish rendering before scrolling.
+          setTimeout((function() {
+            window.scrollTo(0, offset - 0)
+          }), 0)
+        }
+      }
+    })
+  </script><script>
+  !function(e,t,r){function n(){for(;d[0]&&"loaded"==d[0][f];)c=d.shift(),c[o]=!i.parentNode.insertBefore(c,i)}for(var s,a,c,d=[],i=e.scripts[0],o="onreadystatechange",f="readyState";s=r.shift();)a=e.createElement(t),"async"in i?(a.async=!1,e.head.appendChild(a)):i[f]?(d.push(a),a[o]=n):e.write("<"+t+' src="'+s+'" defer></'+t+">"),a.src=s}(document,"script",[
+  "/commons-09d1c0a888f75e72f2a0.js","/app-ab15e4cdf8ba33ad4aa9.js","/layout-component---index-6202cdb855479f6fe6a4.js","/path---index-5976685ffd5e361bff24.js","/page-component---src-templates-page-js-8efb54fcd22d26e1aa35.js"
+])
+  </script></head><body><div id="___gatsby"><div data-reactroot="" data-reactid="1" data-react-checksum="-613859471"><!-- react-empty: 2 --><div data-reactid="3"><div data-reactid="4"><div data-reactid="5"><section class='header'>
+<div class='container'>
+<h1 id="graphql-build"><a href="#graphql-build" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GraphQL-Build</h1>
+<div class='row'>
+<div class='col-6'>
+<p>Build your schema with plugins  </p>
+<div class="gatsby-highlight">
+      <pre class="language-js"><code><span class="token function">buildSchema</span><span class="token punctuation">(</span>plugins<span class="token punctuation">)</span>
+</code></pre>
+      </div>
+<div class="gatsby-highlight">
+      <pre class="language-graphql"><code>type Person <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true"># @deprecated Use 'name' instead</span>
+  <span class="token comment" spellcheck="true"># The person's first name</span>
+  <span class="token attr-name">firstName</span><span class="token punctuation">:</span> String
+
+  <span class="token comment" spellcheck="true"># @deprecated Use 'name' instead</span>
+  <span class="token comment" spellcheck="true"># The person's last name</span>
+  <span class="token attr-name">lastName</span><span class="token punctuation">:</span> String
+
+  <span class="token comment" spellcheck="true"># The person's full name</span>
+  <span class="token attr-name">name</span><span class="token punctuation">:</span> String<span class="token operator">!</span>
+<span class="token punctuation">}</span>
+</code></pre>
+      </div>
+</div><!-- /col-6 -->
+<div class='col-6'>
+<p>Transform your schema with ease  </p>
+<div class="gatsby-highlight">
+      <pre class="language-js"><code>plugins<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>DeprecationFromCommentPlugin<span class="token punctuation">)</span>
+</code></pre>
+      </div>
+<div class="gatsby-highlight">
+      <pre class="language-graphql"><code>type Person <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true"># The person's first name</span>
+  <span class="token attr-name">firstName</span><span class="token punctuation">:</span> String <span class="token directive function">@deprecated</span><span class="token punctuation">(</span>
+    <span class="token attr-name">reason</span><span class="token punctuation">:</span> <span class="token string">"Use 'name' instead"</span><span class="token punctuation">)</span>
+
+  <span class="token comment" spellcheck="true"># The person's last name</span>
+  <span class="token attr-name">lastName</span><span class="token punctuation">:</span> String <span class="token directive function">@deprecated</span><span class="token punctuation">(</span>
+    <span class="token attr-name">reason</span><span class="token punctuation">:</span> <span class="token string">"Use 'name' instead"</span><span class="token punctuation">)</span>
+
+  <span class="token comment" spellcheck="true"># The person's full name</span>
+  <span class="token attr-name">name</span><span class="token punctuation">:</span> String<span class="token operator">!</span>
+<span class="token punctuation">}</span>
+</code></pre>
+      </div>
+</div><!-- /col-6 -->
+</div><!-- /row -->
+</div><!-- /container -->
+</section><!-- /header -->
+<!-- **************************************** -->
+<section class='odd'>
+<div class='container'>
+<div class='row'>
+<div class='col-12'>
+<h1 id="easy-integration"><a href="#easy-integration" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Easy Integration</h1>
+<p class='lead'>
+<p>If you're already using the reference implementation of GraphQL from Facebook then you can add hooks to your schema with ease:</p>
+</p>
+<div class='container'>
+<div class='row'>
+<div class='col-6'>
+<p><code>graphql</code>:</p>
+<div class="gatsby-highlight">
+      <pre class="language-js"><code><span class="gatsby-highlight-code-line"><span class="token keyword">const</span> MyType <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">GraphQLObjectType</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+</span>  name<span class="token punctuation">:</span> <span class="token string">'MyType'</span><span class="token punctuation">,</span>
+  fields<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    field1<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      type<span class="token punctuation">:</span> GraphQLString<span class="token punctuation">,</span>
+      <span class="token comment" spellcheck="true">// ...</span>
+</code></pre>
+      </div>
+</div><!-- /col-6 -->
+<div class='col-6'>
+<p><code>graphql-build</code>:</p>
+<div class="gatsby-highlight">
+      <pre class="language-js"><code><span class="gatsby-highlight-code-line"><span class="token keyword">const</span> MyType <span class="token operator">=</span> <span class="token function">newWithHooks</span><span class="token punctuation">(</span>GraphQLObjectType<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+</span>  name<span class="token punctuation">:</span> <span class="token string">'MyType'</span><span class="token punctuation">,</span>
+  fields<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    field1<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      type<span class="token punctuation">:</span> GraphQLString<span class="token punctuation">,</span>
+      <span class="token comment" spellcheck="true">// ...</span>
+</code></pre>
+      </div>
+</div><!-- /col-6 -->
+</div><!-- /row -->
+</div><!-- /container -->
+</section><!-- /odd -->
+<!-- **************************************** -->
+<section class='even'>
+<div class='container'>
+<div class='row'>
+<div class='col-12'>
+<h1 id="easy-integration-1"><a href="#easy-integration-1" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Easy Integration</h1>
+<p class='lead'>
+<p>If you're already using the reference implementation of GraphQL from Facebook then you can add hooks to your schema with ease:</p>
+</p>
+<div class='container'>
+<div class='row'>
+<div class='col-6'>
+<p><code>graphql</code>:</p>
+<div class="gatsby-highlight">
+      <pre class="language-js"><code><span class="gatsby-highlight-code-line"><span class="token keyword">const</span> MyType <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">GraphQLObjectType</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+</span>  name<span class="token punctuation">:</span> <span class="token string">'MyType'</span><span class="token punctuation">,</span>
+  fields<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    field1<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      type<span class="token punctuation">:</span> GraphQLString<span class="token punctuation">,</span>
+      <span class="token comment" spellcheck="true">// ...</span>
+</code></pre>
+      </div>
+</div><!-- /col-6 -->
+<div class='col-6'>
+<p><code>graphql-build</code>:</p>
+<div class="gatsby-highlight">
+      <pre class="language-js"><code><span class="gatsby-highlight-code-line"><span class="token keyword">const</span> MyType <span class="token operator">=</span> <span class="token function">newWithHooks</span><span class="token punctuation">(</span>GraphQLObjectType<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+</span>  name<span class="token punctuation">:</span> <span class="token string">'MyType'</span><span class="token punctuation">,</span>
+  fields<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    field1<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      type<span class="token punctuation">:</span> GraphQLString<span class="token punctuation">,</span>
+      <span class="token comment" spellcheck="true">// ...</span>
+</code></pre>
+      </div>
+</div><!-- /col-6 -->
+</div><!-- /row -->
+</div><!-- /container.even -->
+</div><!-- /col-12 -->
+</div><!-- /container -->
+</section><!-- /even -->
+<!-- **************************************** --></div></div></div></div></div></body></html>
