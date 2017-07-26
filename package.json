@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "graphql": "^0.10.5",
+    "graphql-build": "latest"
+  }
+}
