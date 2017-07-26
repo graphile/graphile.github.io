@@ -20,8 +20,8 @@ core-js@^2.4.0:
     ms "2.0.0"
 
 graphql-build@latest:
-  version "0.0.1-alpha11.0"
-  resolved "https://registry.yarnpkg.com/graphql-build/-/graphql-build-0.0.1-alpha11.0.tgz#5944305f326992578f6054e3dfdfc45be8802288"
+  version "0.0.1-alpha11.1"
+  resolved "https://registry.yarnpkg.com/graphql-build/-/graphql-build-0.0.1-alpha11.1.tgz#94a983a1d423eb663c99dd3ef1e416ad198eaa5b"
   dependencies:
     babel-runtime ">=6 <7"
     debug ">=2 <3"
