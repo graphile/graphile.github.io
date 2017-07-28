@@ -69,11 +69,19 @@ type Query implements Node {
 
 </details>
 
+### Plugin arguments
+
+Plugins are called with just two arguments:
+
+- `builder` - the instance of `SchemaBuilder` the plugin is being loaded against
+- `options` - the options that were passed to `buildSchema(plugins, options)` (or `getBuilder(plugins, options)`)
+
 ### Plugin actions:
 
-Whilst a plugin is being executed it can perform the following actions:
+Whilst a plugin is being executed it can perform the following actions on the
+`builder` object (its first argument):
 
-#### Register a hook
+#### `builder.hook(name, fn)`: Register a hook
 
 The plugin may add a hook by calling `builder.hook(hookName, hookFunction)`,
 for example this hook will log the name of each GraphQLObjectType that is
@@ -90,7 +98,7 @@ function GraphQLObjectTypeLogNamePlugin(builder) {
 }
 ```
 
-#### Register watcher/unwatcher
+#### `builder.registerWatcher(watcher, unwatcher)`: Add watch-mode event listeners
 
 Registers two functions: one to be called if/when schema watching begins, and
 another to be called if/when schema watching ends (to clean up). Each function
