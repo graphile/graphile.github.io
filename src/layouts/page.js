@@ -5,8 +5,6 @@ import Helmet from "react-helmet";
 
 import "prismjs/themes/prism-solarizedlight.css";
 
-import "./index.css";
-
 const Header = () =>
   <div
     style={{
