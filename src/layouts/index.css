@@ -603,6 +603,7 @@ code {
 pre code {
   background: none;
   line-height: 1.42;
+  font-variant: none;
 }
 code:before,
 code:after,
