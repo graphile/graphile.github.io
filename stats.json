@@ -1,36 +1,40 @@
 {
   "assetsByChunkName": {
     "path---docs-plugins": [
-      "path---docs-plugins-0696dad2ce5a36aa3000.js",
-      "path---docs-plugins-0696dad2ce5a36aa3000.js.map"
+      "path---docs-plugins-1969925f846177cea359.js",
+      "path---docs-plugins-1969925f846177cea359.js.map"
     ],
     "path---docs-getting-started": [
-      "path---docs-getting-started-7ead4071efa9292710d1.js",
-      "path---docs-getting-started-7ead4071efa9292710d1.js.map"
+      "path---docs-getting-started-354620d3c58e281ddc88.js",
+      "path---docs-getting-started-354620d3c58e281ddc88.js.map"
     ],
     "path---docs-hooks": [
-      "path---docs-hooks-8355b6c46401aae3ce75.js",
-      "path---docs-hooks-8355b6c46401aae3ce75.js.map"
+      "path---docs-hooks-c7cee2dade131db43ceb.js",
+      "path---docs-hooks-c7cee2dade131db43ceb.js.map"
     ],
     "path---index": [
-      "path---index-410a0739f85dbb1407ff.js",
-      "path---index-410a0739f85dbb1407ff.js.map"
+      "path---index-78099463aceb87434942.js",
+      "path---index-78099463aceb87434942.js.map"
+    ],
+    "page-component---src-templates-marketing-js": [
+      "page-component---src-templates-marketing-js-ba86976a1ee89d42027a.js",
+      "page-component---src-templates-marketing-js-ba86976a1ee89d42027a.js.map"
     ],
     "commons": [
-      "commons-09d1c0a888f75e72f2a0.js",
-      "commons-09d1c0a888f75e72f2a0.js.map"
+      "commons-a3883ed231e709df4f62.js",
+      "commons-a3883ed231e709df4f62.js.map"
     ],
     "page-component---src-templates-page-js": [
-      "page-component---src-templates-page-js-46beca77014925fec1f7.js",
-      "page-component---src-templates-page-js-46beca77014925fec1f7.js.map"
+      "page-component---src-templates-page-js-7d4123d3fbc611487b24.js",
+      "page-component---src-templates-page-js-7d4123d3fbc611487b24.js.map"
     ],
     "app": [
-      "app-2f3cc8e4d3fb6b5499ec.js",
-      "app-2f3cc8e4d3fb6b5499ec.js.map"
+      "app-fc97e0b1e5d112094418.js",
+      "app-fc97e0b1e5d112094418.js.map"
     ],
     "layout-component---index": [
-      "layout-component---index-81e8060e0aab584d37d2.js",
-      "layout-component---index-81e8060e0aab584d37d2.js.map"
+      "layout-component---index-2e6341fe1913bccea6ec.js",
+      "layout-component---index-2e6341fe1913bccea6ec.js.map"
     ]
   }
 }
