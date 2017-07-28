@@ -1,16 +1,16 @@
 ---
-layout: page
+layout: marketing
 path: /
 title: Extensible GraphQL APIs through Plugins
 ---
 
-.header.container [
+<div class='header'><div class='container'>
 
 GraphQL-Build
 =============
 
-.row [
-.col-6 [
+<div class='row'>
+<div class='col-6'>
 
 Build your schema with plugins  
 `buildSchema([...plugins])`
@@ -30,8 +30,8 @@ type Person {
 }
 ```
 
-]
-.col-6 [
+</div>
+<div class='col-6'>
 
 Transform your schema with ease  
 `buildSchema([...plugins, DeprecationFromCommentPlugin])`
@@ -48,7 +48,8 @@ type Person {
   name: String!
 }
 ```
-]
-]
 
-]
+</div>
+</div>
+
+</div></div>

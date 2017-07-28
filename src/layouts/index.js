@@ -1,64 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Link from "gatsby-link";
-import Helmet from "react-helmet";
+import Marketing from "./marketing";
+import Page from "./page";
 
 import "prismjs/themes/prism-solarizedlight.css";
 
 import "./index.css";
 
-const Header = () =>
-  <div
-    style={{
-      background: "rebeccapurple",
-      marginBottom: "1.45rem",
-    }}
-  >
-    <div
-      style={{
-        margin: "0 auto",
-        maxWidth: 960,
-        padding: "1.45rem 1.0875rem",
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: "white",
-            textDecoration: "none",
-          }}
-        >
-          Gatsby
-        </Link>
-      </h1>
-    </div>
-  </div>;
-
-const TemplateWrapper = ({ children }) =>
-  <div>
-    <Helmet
-      title="Gatsby Default Starter"
-      meta={[
-        { name: "description", content: "Sample" },
-        { name: "keywords", content: "sample, something" },
-      ]}
-    />
-    <Header />
-    <div
-      style={{
-        margin: "0 auto",
-        maxWidth: 960,
-        padding: "0px 1.0875rem 1.45rem",
-        paddingTop: 0,
-      }}
-    >
-      {children()}
-    </div>
-  </div>;
+const TemplateWrapper = props => {
+  const { location: { pathname } } = props;
+  // XXX: Hack Gatsby because it doesn't actually support `layout` yet, bizarrely
+  if (pathname === "/") {
+    return <Marketing {...props} />;
+  } else {
+    return <Page {...props} />;
+  }
+};
 
 TemplateWrapper.propTypes = {
-  children: PropTypes.func,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+  }),
 };
 
 export default TemplateWrapper;

@@ -16,6 +16,7 @@ exports.createPages = async ({ boundActionCreators, graphql }) => {
             frontmatter {
               path
               title
+              layout
             }
           }
         }
@@ -27,11 +28,12 @@ exports.createPages = async ({ boundActionCreators, graphql }) => {
     throw error;
   }
   result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-    console.dir(node);
     createPage({
       path: node.frontmatter.path,
       component: pageTemplate,
-      context: {}, // additional data can be passed via context
+      context: {
+        layout: node.frontmatter.layout,
+      },
     });
   });
 };
