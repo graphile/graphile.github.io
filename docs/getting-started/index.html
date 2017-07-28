@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+ <html lang="en"><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=5.0"/><link rel="preload" href="/page-component---src-templates-page-js-46beca77014925fec1f7.js" as="script"/><link rel="preload" href="/path---docs-getting-started-7ead4071efa9292710d1.js" as="script"/><link rel="preload" href="/layout-component---index-81e8060e0aab584d37d2.js" as="script"/><link rel="preload" href="/app-2f3cc8e4d3fb6b5499ec.js" as="script"/><link rel="preload" href="/commons-09d1c0a888f75e72f2a0.js" as="script"/><script id="webpack-manifest">
+            //<![CDATA[
+            window.webpackManifest = {"15178676390636814000":"app-2f3cc8e4d3fb6b5499ec.js","11888651905112195000":"page-component---src-templates-page-js-46beca77014925fec1f7.js","9347362237655822000":"path---index-410a0739f85dbb1407ff.js","5439424890110330000":"path---docs-getting-started-7ead4071efa9292710d1.js","3300098092675464700":"path---docs-plugins-0696dad2ce5a36aa3000.js","7614518986689938000":"path---docs-hooks-8355b6c46401aae3ce75.js","17241999800008180000":"layout-component---index-81e8060e0aab584d37d2.js"}
+            //]]>
+            </script><title data-react-helmet="true">graphql-build</title><meta data-react-helmet="true" name="description" content="TODO"/><meta data-react-helmet="true" name="keywords" content="TODO"/><style type="text/css">
+    .anchor {
+      float: left;
+      padding-right: 4px;
+      margin-left: -20px;
+    }
+    h1 .anchor svg,
+    h2 .anchor svg,
+    h3 .anchor svg,
+    h4 .anchor svg,
+    h5 .anchor svg,
+    h6 .anchor svg {
+      visibility: hidden;
+    }
+    h1:hover .anchor svg,
+    h2:hover .anchor svg,
+    h3:hover .anchor svg,
+    h4:hover .anchor svg,
+    h5:hover .anchor svg,
+    h6:hover .anchor svg {
+      visibility: visible;
+    }
+  </style><script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+      var hash = location.hash.replace('#', '')
+      if (hash !== '') {
+        var element = document.getElementById(hash)
+        if (element) {
+          var offset = element.offsetTop
+          // Wait for the browser to finish rendering before scrolling.
+          setTimeout((function() {
+            window.scrollTo(0, offset - 0)
+          }), 0)
+        }
+      }
+    })
+  </script><script>
+  !function(e,t,r){function n(){for(;d[0]&&"loaded"==d[0][f];)c=d.shift(),c[o]=!i.parentNode.insertBefore(c,i)}for(var s,a,c,d=[],i=e.scripts[0],o="onreadystatechange",f="readyState";s=r.shift();)a=e.createElement(t),"async"in i?(a.async=!1,e.head.appendChild(a)):i[f]?(d.push(a),a[o]=n):e.write("<"+t+' src="'+s+'" defer></'+t+">"),a.src=s}(document,"script",[
+  "/commons-09d1c0a888f75e72f2a0.js","/app-2f3cc8e4d3fb6b5499ec.js","/layout-component---index-81e8060e0aab584d37d2.js","/path---docs-getting-started-7ead4071efa9292710d1.js","/page-component---src-templates-page-js-46beca77014925fec1f7.js"
+])
+  </script><link rel="stylesheet" href="/styles.css"/></head><body><div id="___gatsby"><div data-reactroot="" data-reactid="1" data-react-checksum="-1595850508"><!-- react-empty: 2 --><div style="background:rebeccapurple;margin-bottom:1.45rem;" data-reactid="3"><div style="margin:0 auto;max-width:960px;padding:1.45rem 1.0875rem;" data-reactid="4"><h1 style="margin:0;" data-reactid="5"><a style="color:white;text-decoration:none;" href="/" data-reactid="6">GraphQL-Build</a></h1></div></div><div style="margin:0 auto;max-width:960px;padding:0px 1.0875rem 1.45rem;padding-top:0;" data-reactid="7"><div class="header container" data-reactid="8"><div data-reactid="9"><h2 id="getting-started"><a href="#getting-started" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Getting Started</h2>
+<h3 id="installation"><a href="#installation" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Installation</h3>
+<p>GraphQL-Build uses your local version of <code>graphql</code> to avoid conflicts, so you need to install both:</p>
+<div class="gatsby-highlight">
+      <pre class="language-bash"><code><span class="token function">npm</span> <span class="token function">install</span> --save graphql-build graphql
+</code></pre>
+      </div>
+<h3 id="building-your-schema"><a href="#building-your-schema" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Building your Schema</h3>
+<p>The <code>buildSchema</code> method will (asynchronously) build a GraphQL schema from a
+list of plugins. We ship a number of default plugins (TODO: link to
+graphql-build/defaultPlugins) that are sufficient to create a simple schema,
+like so:</p>
+<!-- source: examples/empty-schema.js -->
+<div class="gatsby-highlight">
+      <pre class="language-js"><code><span class="token keyword">const</span> <span class="token punctuation">{</span> buildSchema<span class="token punctuation">,</span> defaultPlugins <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"graphql-build"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token punctuation">{</span> printSchema <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"graphql/utilities"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">buildSchema</span><span class="token punctuation">(</span>defaultPlugins<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>schema <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">printSchema</span><span class="token punctuation">(</span>schema<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// ES2017: const schema = await buildSchema(defaultPlugins);</span>
+</code></pre>
+      </div>
+<p>This will generate a basic schema which supports the <a href="https://facebook.github.io/relay/docs/graphql-relay-specification.html">Relay <code>Node</code> interface</a>.</p>
+<div class="gatsby-highlight">
+      <pre class="language-graphql"><code><span class="token comment" spellcheck="true"># An object with a globally unique `ID`.</span>
+interface Node <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true"># A globally unique identifier. Can be used in various places throughout the system to identify this single value.</span>
+  <span class="token attr-name">id</span><span class="token punctuation">:</span> ID<span class="token operator">!</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true"># The root query type which gives access points into the data universe.</span>
+type Query implements Node <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true"># Exposes the root query type nested one level down. This is helpful for Relay 1</span>
+  <span class="token comment" spellcheck="true"># which can only query top level fields if they are in a particular form.</span>
+  <span class="token attr-name">query</span><span class="token punctuation">:</span> Query<span class="token operator">!</span>
+
+  <span class="token comment" spellcheck="true"># The root query type must be a `Node` to work well with Relay 1 mutations. This just resolves to `query`.</span>
+  <span class="token attr-name">id</span><span class="token punctuation">:</span> ID<span class="token operator">!</span>
+
+  <span class="token comment" spellcheck="true"># Fetches an object given its globally unique `ID`.</span>
+  node<span class="token punctuation">(</span>
+    <span class="token comment" spellcheck="true"># The globally unique `ID`.</span>
+    <span class="token attr-name">id</span><span class="token punctuation">:</span> ID<span class="token operator">!</span>
+  <span class="token punctuation">)</span><span class="token punctuation">:</span> Node
+<span class="token punctuation">}</span>
+</code></pre>
+      </div>
+<h4 id="building-a-schema-without-the-node-interface"><a href="#building-a-schema-without-the-node-interface" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Building a Schema without the Node interface</h4>
+<p>It's possible to build an even more minimal schema without Node support by
+omitting the <code>NodePlugin</code> plugin:</p>
+<!-- source: examples/emptier-schema.js -->
+<div class="gatsby-highlight">
+      <pre class="language-js"><code><span class="token keyword">const</span> <span class="token punctuation">{</span> buildSchema<span class="token punctuation">,</span> defaultPlugins<span class="token punctuation">,</span> NodePlugin <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"graphql-build"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token punctuation">{</span> printSchema <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"graphql/utilities"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">buildSchema</span><span class="token punctuation">(</span>
+  defaultPlugins<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>plugin <span class="token operator">=</span><span class="token operator">></span> plugin <span class="token operator">!==</span> NodePlugin<span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>schema <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">printSchema</span><span class="token punctuation">(</span>schema<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+      </div>
+<p>which generates this much simpler schema:</p>
+<div class="gatsby-highlight">
+      <pre class="language-graphql"><code><span class="token comment" spellcheck="true"># The root query type which gives access points into the data universe.</span>
+type Query <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true"># Exposes the root query type nested one level down. This is helpful for Relay 1</span>
+  <span class="token comment" spellcheck="true"># which can only query top level fields if they are in a particular form.</span>
+  <span class="token attr-name">query</span><span class="token punctuation">:</span> Query<span class="token operator">!</span>
+<span class="token punctuation">}</span>
+</code></pre>
+      </div>
+<h3 id="passing-options-to-plugins"><a href="#passing-options-to-plugins" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Passing options to plugins</h3>
+<p>The second argument to <code>buildSchema</code> is options which are made available to
+every plugin (as their second argument). The following example passes the
+<code>nodeIdFieldName</code> setting through, changing from the default <code>id</code> to <code>flibble</code>:</p>
+<!-- source: examples/empty-schema-with-options.js -->
+<div class="gatsby-highlight">
+      <pre class="language-js"><code><span class="token keyword">const</span> <span class="token punctuation">{</span> buildSchema<span class="token punctuation">,</span> defaultPlugins <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"graphql-build"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token punctuation">{</span> printSchema <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"graphql/utilities"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">buildSchema</span><span class="token punctuation">(</span>defaultPlugins<span class="token punctuation">,</span> <span class="token punctuation">{</span> nodeIdFieldName<span class="token punctuation">:</span> <span class="token string">"flibble"</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>schema <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">printSchema</span><span class="token punctuation">(</span>schema<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+      </div>
+<p>which modifies the Node interface thusly:</p>
+<div class="gatsby-highlight">
+      <pre class="language-graphql"><code>interface Node <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true"># A globally unique identifier. Can be used in various places throughout the system to identify this single value.</span>
+  <span class="token attr-name">flibble</span><span class="token punctuation">:</span> ID<span class="token operator">!</span>
+<span class="token punctuation">}</span>
+</code></pre>
+      </div>
+<h3 id="whats-next"><a href="#whats-next" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>What's next?</h3>
+<p>An empty schema's not very useful, so lets look into extending the schema with plugins:</p></div><a class="btn btn-primary btn-large" href="/docs/plugins/" data-reactid="10"><!-- react-text: 11 -->Plugins<!-- /react-text --><!-- react-text: 12 --> »<!-- /react-text --></a></div></div></div></div></body></html>

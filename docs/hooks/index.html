@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+ <html lang="en"><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=5.0"/><link rel="preload" href="/page-component---src-templates-page-js-46beca77014925fec1f7.js" as="script"/><link rel="preload" href="/path---docs-hooks-8355b6c46401aae3ce75.js" as="script"/><link rel="preload" href="/layout-component---index-81e8060e0aab584d37d2.js" as="script"/><link rel="preload" href="/app-2f3cc8e4d3fb6b5499ec.js" as="script"/><link rel="preload" href="/commons-09d1c0a888f75e72f2a0.js" as="script"/><script id="webpack-manifest">
+            //<![CDATA[
+            window.webpackManifest = {"15178676390636814000":"app-2f3cc8e4d3fb6b5499ec.js","11888651905112195000":"page-component---src-templates-page-js-46beca77014925fec1f7.js","9347362237655822000":"path---index-410a0739f85dbb1407ff.js","5439424890110330000":"path---docs-getting-started-7ead4071efa9292710d1.js","3300098092675464700":"path---docs-plugins-0696dad2ce5a36aa3000.js","7614518986689938000":"path---docs-hooks-8355b6c46401aae3ce75.js","17241999800008180000":"layout-component---index-81e8060e0aab584d37d2.js"}
+            //]]>
+            </script><title data-react-helmet="true">graphql-build</title><meta data-react-helmet="true" name="description" content="TODO"/><meta data-react-helmet="true" name="keywords" content="TODO"/><style type="text/css">
+    .anchor {
+      float: left;
+      padding-right: 4px;
+      margin-left: -20px;
+    }
+    h1 .anchor svg,
+    h2 .anchor svg,
+    h3 .anchor svg,
+    h4 .anchor svg,
+    h5 .anchor svg,
+    h6 .anchor svg {
+      visibility: hidden;
+    }
+    h1:hover .anchor svg,
+    h2:hover .anchor svg,
+    h3:hover .anchor svg,
+    h4:hover .anchor svg,
+    h5:hover .anchor svg,
+    h6:hover .anchor svg {
+      visibility: visible;
+    }
+  </style><script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+      var hash = location.hash.replace('#', '')
+      if (hash !== '') {
+        var element = document.getElementById(hash)
+        if (element) {
+          var offset = element.offsetTop
+          // Wait for the browser to finish rendering before scrolling.
+          setTimeout((function() {
+            window.scrollTo(0, offset - 0)
+          }), 0)
+        }
+      }
+    })
+  </script><script>
+  !function(e,t,r){function n(){for(;d[0]&&"loaded"==d[0][f];)c=d.shift(),c[o]=!i.parentNode.insertBefore(c,i)}for(var s,a,c,d=[],i=e.scripts[0],o="onreadystatechange",f="readyState";s=r.shift();)a=e.createElement(t),"async"in i?(a.async=!1,e.head.appendChild(a)):i[f]?(d.push(a),a[o]=n):e.write("<"+t+' src="'+s+'" defer></'+t+">"),a.src=s}(document,"script",[
+  "/commons-09d1c0a888f75e72f2a0.js","/app-2f3cc8e4d3fb6b5499ec.js","/layout-component---index-81e8060e0aab584d37d2.js","/path---docs-hooks-8355b6c46401aae3ce75.js","/page-component---src-templates-page-js-46beca77014925fec1f7.js"
+])
+  </script><link rel="stylesheet" href="/styles.css"/></head><body><div id="___gatsby"><div data-reactroot="" data-reactid="1" data-react-checksum="-1005597988"><!-- react-empty: 2 --><div style="background:rebeccapurple;margin-bottom:1.45rem;" data-reactid="3"><div style="margin:0 auto;max-width:960px;padding:1.45rem 1.0875rem;" data-reactid="4"><h1 style="margin:0;" data-reactid="5"><a style="color:white;text-decoration:none;" href="/" data-reactid="6">GraphQL-Build</a></h1></div></div><div style="margin:0 auto;max-width:960px;padding:0px 1.0875rem 1.45rem;padding-top:0;" data-reactid="7"><div class="header container" data-reactid="8"><div data-reactid="9"><h2 id="hooks"><a href="#hooks" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Hooks</h2>
+<p>The most common thing for a plugin to do is to add hooks to the builder. Hooks
+allow you to manipulate the specification that is being passed to the GraphQL
+constructors before the objects are constructed - therefore bypassing the need
+to fiddle with the private interfaces to GraphQL.</p>
+<p>Hooks are registered via a call to <code>builder.hook(hookName, hookFunction)</code>.</p>
+<p>Every <code>hookFunction</code> must synchronously return a value - either the value that it was passed
+in or a derivative of it.</p>
+<p>You can think of hooks as wrappers around the original object spec, like this:</p>
+<div class="gatsby-highlight">
+      <pre class="language-js"><code><span class="token keyword">const</span> MyType <span class="token operator">=</span> <span class="token function">newWithHooks</span><span class="token punctuation">(</span>GraphQLObjectType<span class="token punctuation">,</span> spec<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// is equivalent to:</span>
+
+<span class="token keyword">const</span> MyType <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">GraphQLObjectType</span><span class="token punctuation">(</span><span class="token function">hook3</span><span class="token punctuation">(</span><span class="token function">hook2</span><span class="token punctuation">(</span><span class="token function">hook1</span><span class="token punctuation">(</span>spec<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+      </div>
+<h3 id="hook-names"><a href="#hook-names" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Hook names</h3>
+<p>The following hooks are currently supported, but more may be added in future.
+Trying to add a hook for a hook name that does not exist will result in an
+error.</p>
+<p><a href="https://github.com/benjie/graphql-build/blob/996e28f0af68f53e264170bd4528b6500ff3ef25/packages/graphql-build/SchemaBuilder.js#L11-L59">(See hooks in the source)</a></p>
+<ul>
+<li>
+<p><code>build</code>: The build object represents the current schema build and is passed
+to all hooks, hook the 'build' event to extend this object.</p>
+</li>
+<li>
+<p><code>init</code>: The init event is triggered after <code>build</code> (which should not generate
+any GraphQL objects) and can be used to build common object types that may be
+useful later. The argument to this is an empty object and should be passed
+through unmodified (it is ignored currently).</p>
+</li>
+<li>
+<p><code>GraphQLSchema</code>: This event defines the root-level schema; hook it to add <code>query</code>,
+<code>mutation</code>, <code>subscription</code> or similar GraphQL fields.</p>
+</li>
+<li>
+<p><code>GraphQLObjectType*</code>: When creating a GraphQLObjectType via
+<code>newWithHooks</code>, we'll execute, the following hooks:</p>
+<ul>
+<li><code>GraphQLObjectType</code> to add any root-level attributes, e.g. add a description</li>
+<li><code>GraphQLObjectType:interfaces</code> to add additional interfaces to this object type</li>
+<li><code>GraphQLObjectType:fields</code> to add additional fields to this object type (is
+ran asynchronously and gets a reference to the final GraphQL Object as
+<code>Self</code> in the context)</li>
+<li><code>GraphQLObjectType:fields:field</code>: to add any root-level attributes to an
+individual field, e.g. add a description</li>
+<li><code>GraphQLObjectType:fields:field:args</code> to add arguments to an individual field</li>
+</ul>
+</li>
+<li>
+<p><code>GraphQLInputObjectType*</code>: When creating a GraphQLInputObjectType via
+<code>newWithHooks</code>, we'll execute, the following hooks:</p>
+<ul>
+<li><code>GraphQLInputObjectType</code> to add any root-level attributes, e.g. add a description</li>
+<li><code>GraphQLInputObjectType:fields</code> to add additional fields to this object type (is
+ran asynchronously and gets a reference to the final GraphQL Object as
+<code>Self</code> in the context)</li>
+<li><code>GraphQLInputObjectType:fields:field</code>: to customize an individual field from above</li>
+</ul>
+</li>
+<li>
+<p><code>GraphQLEnumType*</code>: When creating a GraphQLEnumType via <code>newWithHooks</code>,
+we'll execute, the following hooks:</p>
+<ul>
+<li><code>GraphQLEnumType</code> to add any root-level attributes, e.g. add a description</li>
+<li><code>GraphQLEnumType:values</code> to add additional values</li>
+</ul>
+</li>
+</ul>
+<h3 id="hook-arguments"><a href="#hook-arguments" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Hook arguments</h3>
+<p>The <code>hookFunction</code> that you register via <code>builder.hook(hookName, hookFunction)</code> will be called with 3 arguments:</p>
+<ol>
+<li>The input object (e.g. the spec that would be passed to the GraphQLObjectType constructor)</li>
+<li>The <code>Build</code> object (see below)</li>
+<li>The <code>Context</code> object (see below) which contains a <code>scope</code> property</li>
+</ol>
+<h4 id="input-object"><a href="#input-object" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Input object</h4>
+<p>Depending on the hook being called the input object might be an array (as in
+the case of <code>GraphQLObjectType:interfaces</code>) or an object (as in all other
+cases, currently). More specifically, the types for each hook are:</p>
+<ul>
+<li>
+<p>build - a <code>Build</code> object (see below)</p>
+</li>
+<li>
+<p>init - an opaque object, please just return it verbatim</p>
+</li>
+<li>
+<p>GraphQLSchema - <a href="http://graphql.org/graphql-js/type/#graphqlschema"><code>GraphQLSchemaConfig</code></a></p>
+</li>
+<li>
+<p>GraphQLObjectType - <a href="http://graphql.org/graphql-js/type/#graphqlobjecttype"><code>GraphQLObjectTypeConfig</code></a></p>
+</li>
+<li>
+<p>GraphQLObjectType:interfaces - <a href="http://graphql.org/graphql-js/type/#graphqlinterfacetype">array of <code>GraphQLInterfaceType</code> instances</a></p>
+</li>
+<li>
+<p>GraphQLObjectType:fields - <a href="http://graphql.org/graphql-js/type/#graphqlobjecttype"><code>GraphQLFieldConfigMap</code></a></p>
+</li>
+<li>
+<p>GraphQLObjectType:fields:field - <a href="http://graphql.org/graphql-js/type/#graphqlobjecttype"><code>GraphQLFieldConfig</code></a></p>
+</li>
+<li>
+<p>GraphQLObjectType:fields:field:args - <a href="http://graphql.org/graphql-js/type/#graphqlobjecttype"><code>GraphQLFieldConfigArgumentMap</code></a></p>
+</li>
+<li>
+<p>GraphQLInputObjectType - <a href="http://graphql.org/graphql-js/type/#graphqlinputobjecttype"><code>GraphQLInputObjectTypeConfig</code></a></p>
+</li>
+<li>
+<p>GraphQLInputObjectType:fields - <a href="http://graphql.org/graphql-js/type/#graphqlinputobjecttype"><code>GraphQLInputObjectConfigFieldMap</code></a></p>
+</li>
+<li>
+<p>GraphQLInputObjectType:fields:field - <a href="http://graphql.org/graphql-js/type/#graphqlinputobjecttype"><code>GraphQLInputObjectFieldConfig</code></a></p>
+</li>
+<li>
+<p>GraphQLEnumType - <a href="http://graphql.org/graphql-js/type/#graphqlenumtype"><code>GraphQLEnumTypeConfig</code></a></p>
+</li>
+<li>
+<p>GraphQLEnumType:values - <a href="http://graphql.org/graphql-js/type/#graphqlenumtype"><code>GraphQLEnumValueConfigMap</code></a></p>
+</li>
+</ul>
+<h4 id="build-object-build"><a href="#build-object-build" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Build object (<code>Build</code>)</h4>
+<p>The build object starts out with the following properties/methods, but plugins may extend it via the <code>build</code> hook.</p>
+<h5 id="newwithhookstype-spec-scope"><a href="#newwithhookstype-spec-scope" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>newWithHooks(type, spec, scope)</code></h5>
+<p>The bread-and-butter of GraphQL-Build, this method is how we build hooked GraphQL objects:</p>
+<div class="gatsby-highlight">
+      <pre class="language-js"><code><span class="token keyword">const</span> MyType <span class="token operator">=</span> <span class="token function">newWithHooks</span><span class="token punctuation">(</span>type<span class="token punctuation">,</span> spec<span class="token punctuation">,</span> scope<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+      </div>
+<ul>
+<li><code>type</code> is a GraphQL object type, such as <code>GraphQLEnumType</code> or <code>GraphQLInputObjectType</code></li>
+<li><code>spec</code> is a valid specification that will be passed through the relevant
+hooks before ultimately being passed to the constructor of the aforementioned
+<code>type</code> and returning an instance of that type</li>
+<li><code>scope</code> is where you can add scope information that will be available through
+the <code>scope</code> property in the context object passed to hooks (see <code>Context</code>
+below)</li>
+</ul>
+<h5 id="buildextendinput-extensions"><a href="#buildextendinput-extensions" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>build.extend(input, extensions)</code></h5>
+<p>Returns a new object by merging the properties of <code>input</code> and <code>extensions</code>
+<strong>without overwriting</strong>. If any clashes occur an error will be throw. It is
+advisable to use this instead of <code>Object.assign</code> or <code>{...input, ...extensions}</code>
+because it will warn you if you're accidentally overwriting something.</p>
+<h5 id="buildgraphql"><a href="#buildgraphql" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>build.graphql</code></h5>
+<p>Equivalent to <code>require('graphql')</code>, by using this property you don't have to
+import graphql and you're less likely to get version conflicts which are hard
+to diagnose and resolve. Use of this property over importing <code>graphql</code> yourself
+is highly recommended.</p>
+<h4 id="gettypebynametypename"><a href="#gettypebynametypename" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>getTypeByName(typeName)</code></h4>
+<p>Returns the GraphQL type associated with the given name, if it is known to the
+current build, or <code>null</code> otherwise. Objects built with <code>newWithHooks</code> are
+automatically registered, but external objects must be registered via:</p>
+<h5 id="buildaddtypetype-graphqlnamedtype"><a href="#buildaddtypetype-graphqlnamedtype" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>build.addType(type: GraphQLNamedType)</code></h5>
+<p>Registers an external (un-hooked) GraphQL type with the system so that it may
+be referenced via <code>getTypeByName()</code></p>
+<h4 id="build-object-build---advanced-propertiesmethods"><a href="#build-object-build---advanced-propertiesmethods" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Build object (<code>Build</code>) - advanced properties/methods</h4>
+<h5 id="getaliasfromresolveinforesolveinfo"><a href="#getaliasfromresolveinforesolveinfo" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>getAliasFromResolveInfo(resolveInfo)</code></h5>
+<p>Use this in your resolver to quickly retrieve the alias that this field was
+requested as.</p>
+<p>From <a href="https://github.com/postgraphql/graphql-build/tree/master/packages/graphql-parse-resolve-info#getaliasfromresolveinforesolveinfo"><code>graphql-parse-resolve-info</code></a></p>
+<p>TODO: example</p>
+<h5 id="buildresolvealias"><a href="#buildresolvealias" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>build.resolveAlias</code></h5>
+<p>Can be used in place of the <code>resolve</code> method for a field if you wish it to resolve to the alias the field was requested as (as opposed to its name).</p>
+<div class="gatsby-highlight">
+      <pre class="language-js"><code><span class="token function">resolveAlias</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span> _args<span class="token punctuation">,</span> _context<span class="token punctuation">,</span> resolveInfo<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> alias <span class="token operator">=</span> <span class="token function">getAliasFromResolveInfo</span><span class="token punctuation">(</span>resolveInfo<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> data<span class="token punctuation">[</span>alias<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+      </div>
+<h5 id="parseresolveinforesolveinfo"><a href="#parseresolveinforesolveinfo" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>parseResolveInfo(resolveInfo)</code></h5>
+<p>Can be used in your <code>resolve</code> methods to "look ahead" to determine which
+sub-fields, sub-sub-fields, etc. you need to fetch in your resolver. Great for
+performance optimisations.</p>
+<p>From <a href="https://github.com/postgraphql/graphql-build/tree/master/packages/graphql-parse-resolve-info#parseresolveinforesolveinfo"><code>graphql-parse-resolve-info</code></a></p>
+<p>TODO: example</p>
+<h5 id="generatedatafortypetype-parsedresolveinfofragment"><a href="#generatedatafortypetype-parsedresolveinfofragment" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>generateDataForType(type, parsedResolveInfoFragment)</code></h5>
+<p>For performance optimisations</p>
+<p>TODO: document</p>
+<h5 id="simplifyparsedresolveinfofragmentwithtypeparsedresolveinfofragment-graphqltype"><a href="#simplifyparsedresolveinfofragmentwithtypeparsedresolveinfofragment-graphqltype" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>simplifyParsedResolveInfoFragmentWithType(parsedResolveInfoFragment, graphQLType)</code></h5>
+<p>Simplifies the details from <code>parseResolveInfo()</code> above if you know the type you
+will be returning (useful if you're not using <code>GraphQLUnionType</code>).</p>
+<p>From <a href="https://github.com/postgraphql/graphql-build/tree/master/packages/graphql-parse-resolve-info#simplifyparsedresolveinfofragmentwithtypeparsedresolveinfofragment-returntype"><code>graphql-parse-resolve-info</code></a></p>
+<p>TODO: example</p>
+<h3 id="namespaces"><a href="#namespaces" aria-hidden="true" class="anchor"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Namespaces</h3>
+<p>Properties added to the <code>Build</code> object or set on the <code>scope</code> should be
+namespaced so that they do not conflict; for example <code>graphql-build-pg</code> uses
+the <code>pg</code> namespace: <code>pgSql</code>, <code>pgIntrospection</code>, <code>isPgTableType</code>, etc</p>
+<p>TODO: expand</p></div></div></div></div></div></body></html>
