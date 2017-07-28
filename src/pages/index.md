@@ -64,10 +64,52 @@ type Person {
 <div class='row'>
 <div class='col-12'>
 
-<h1>Something</h1>
-<p class='lead'>Text</p>
+# Easy Integration
+<p class='lead'>
 
-More text
+If you're already using the reference implementation of GraphQL from Facebook then you can add hooks to your schema with ease:
+
+</p>
+
+<div class='container'>
+<div class='row'>
+
+<div class='col-6'>
+
+`graphql`:
+
+```js
+const MyType = new GraphQLObjectType({
+  name: 'MyType',
+  fields: {
+    field1: {
+      type: GraphQLString,
+    },
+  }
+})
+```
+
+</div><!-- /col-6 -->
+<div class='col-6'>
+
+`graphql-build`:
+
+```js
+const MyType = newWithHooks(GraphQLObjectType, {
+  name: 'MyType',
+  fields: {
+    field1: {
+      type: GraphQLString,
+    },
+  }
+})
+```
+
+</div><!-- /col-6 -->
+
+</div><!-- /row -->
+</div><!-- /container -->
+
 
 
 </div><!-- /col-12 -->
