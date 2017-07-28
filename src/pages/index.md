@@ -78,7 +78,7 @@ If you're already using the reference implementation of GraphQL from Facebook th
 
 `graphql`:
 
-```js
+```js{1}
 const MyType = new GraphQLObjectType({
   name: 'MyType',
   fields: {
@@ -94,7 +94,7 @@ const MyType = new GraphQLObjectType({
 
 `graphql-build`:
 
-```js
+```js{1}
 const MyType = newWithHooks(GraphQLObjectType, {
   name: 'MyType',
   fields: {
