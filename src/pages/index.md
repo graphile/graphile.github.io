@@ -84,9 +84,7 @@ const MyType = new GraphQLObjectType({
   fields: {
     field1: {
       type: GraphQLString,
-    },
-  }
-})
+      // ...
 ```
 
 </div><!-- /col-6 -->
@@ -100,9 +98,7 @@ const MyType = newWithHooks(GraphQLObjectType, {
   fields: {
     field1: {
       type: GraphQLString,
-    },
-  }
-})
+      // ...
 ```
 
 </div><!-- /col-6 -->
