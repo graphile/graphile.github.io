@@ -1,0 +1,14 @@
+#!/bin/bash
+set -e
+set -x
+rm -rf public
+gatsby build
+rm -rf __deploy
+git clone git@github.com:graphql-build/graphql-build.github.io __deploy
+cd __deploy
+git checkout master
+rm -Rf ./*
+cp -a ../public/* ./
+git add .
+git commit -m'Deploy'
+git push origin master
