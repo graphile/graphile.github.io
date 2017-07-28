@@ -83,9 +83,10 @@ Whilst a plugin is being executed it can perform the following actions on the
 
 #### `builder.hook(name, fn)`: Register a hook
 
-The plugin may add a hook by calling `builder.hook(hookName, hookFunction)`,
-for example this hook will log the name of each GraphQLObjectType that is
-built:
+The plugin may add a hook by calling `builder.hook(hookName, hookFunction)`. 
+
+
+Example: this hook will log the name of each GraphQLObjectType that is built:
 
 ```js
 function GraphQLObjectTypeLogNamePlugin(builder) {
