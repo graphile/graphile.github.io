@@ -6,9 +6,13 @@
   "dependencies": {
     "gatsby": "^1.0.1",
     "gatsby-link": "^1.0.1",
+    "gatsby-plugin-catch-links": "^1.0.1",
     "gatsby-plugin-react-helmet": "^1.0.1",
+    "gatsby-source-filesystem": "^1.4.1",
+    "gatsby-transformer-remark": "^1.1.0",
     "graphql": "^0.10.5",
-    "graphql-build": "latest"
+    "graphql-build": "latest",
+    "remark-custom-blocks": "^1.0.1"
   },
   "keywords": [
     "gatsby"
