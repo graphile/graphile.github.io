@@ -3,8 +3,8 @@ module.exports = {
   parserOptions: {
     sourceType: "module",
   },
-  extends: ["eslint:recommended", "prettier"],
-  plugins: ["jest", "prettier", "flowtype"],
+  extends: ["eslint:recommended", "prettier", "plugin:react/recommended"],
+  plugins: ["jest", "prettier", "flowtype", "react"],
   env: {
     jest: true,
     node: true,
