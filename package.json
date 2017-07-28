@@ -38,6 +38,7 @@
     "deploy": "./scripts/deploy",
     "develop": "gatsby develop",
     "format": "prettier --trailing-comma es5 --no-semi --single-quote --write 'src/**/*.js'",
+    "start": "gatsby develop",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
