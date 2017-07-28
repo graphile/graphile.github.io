@@ -40,7 +40,7 @@ This will generate a basic schema which supports the [Relay `Node` interface](ht
 # An object with a globally unique `ID`.
 interface Node {
   # A globally unique identifier. Can be used in various places throughout the system to identify this single value.
-  nodeId: ID!
+  id: ID!
 }
 
 # The root query type which gives access points into the data universe.
@@ -50,12 +50,12 @@ type Query implements Node {
   query: Query!
 
   # The root query type must be a `Node` to work well with Relay 1 mutations. This just resolves to `query`.
-  nodeId: ID!
+  id: ID!
 
   # Fetches an object given its globally unique `ID`.
   node(
     # The globally unique `ID`.
-    nodeId: ID!
+    id: ID!
   ): Node
 }
 ```
@@ -88,6 +88,31 @@ type Query {
 }
 ```
 
+### Passing options to plugins
+
+The second argument to `buildSchema` is options which are made available to
+every plugin (as their second argument). The following example passes the
+`nodeIdFieldName` setting through, changing from the default `id` to `flibble`:
+
+<!-- source: examples/empty-schema-with-options.js -->
+```js
+const { buildSchema, defaultPlugins } = require("graphql-build");
+const { printSchema } = require("graphql/utilities");
+
+buildSchema(defaultPlugins, { nodeIdFieldName: "flibble" }).then(schema => {
+  console.log(printSchema(schema));
+});
+```
+
+which modifies the Node interface thusly:
+
+```graphql
+interface Node {
+  # A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  flibble: ID!
+}
+```
+
 ### What's next?
 
-An empty schema's not very useful, so lets look into extending the schema with a plugin:
+An empty schema's not very useful, so lets look into extending the schema with plugins:
