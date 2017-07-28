@@ -6,7 +6,10 @@ const Page = ({
 }) =>
   <div className="header container">
     <div className="row">
-      <div dangerouslySetInnerHTML={{ __html: html }} />
+      <div
+        dangerouslySetInnerHTML={{ __html: html }}
+        style={{ width: "100%" }}
+      />
     </div>
     <div className="row">
       {prev
