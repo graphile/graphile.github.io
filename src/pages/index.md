@@ -4,7 +4,8 @@ path: /
 title: Extensible GraphQL APIs through Plugins
 ---
 
-<div class='header'><div class='container'>
+<section class='header'>
+<div class='container'>
 
 GraphQL-Build
 =============
@@ -58,8 +59,12 @@ type Person {
 </div><!-- /col-6 -->
 </div><!-- /row -->
 
-</div></div><!-- /container --><!-- /header -->
+</div><!-- /container -->
+</section><!-- /header -->
 
+<!-- **************************************** -->
+
+<section class='odd'>
 <div class='container'>
 <div class='row'>
 <div class='col-12'>
@@ -105,9 +110,60 @@ const MyType = newWithHooks(GraphQLObjectType, {
 
 </div><!-- /row -->
 </div><!-- /container -->
+</section><!-- /odd -->
 
+<!-- **************************************** -->
+
+<section class='even'>
+<div class='container'>
+<div class='row'>
+<div class='col-12'>
+
+# Easy Integration
+<p class='lead'>
+
+If you're already using the reference implementation of GraphQL from Facebook then you can add hooks to your schema with ease:
+
+</p>
+
+<div class='container'>
+<div class='row'>
+
+<div class='col-6'>
+
+`graphql`:
+
+```js{1}
+const MyType = new GraphQLObjectType({
+  name: 'MyType',
+  fields: {
+    field1: {
+      type: GraphQLString,
+      // ...
+```
+
+</div><!-- /col-6 -->
+<div class='col-6'>
+
+`graphql-build`:
+
+```js{1}
+const MyType = newWithHooks(GraphQLObjectType, {
+  name: 'MyType',
+  fields: {
+    field1: {
+      type: GraphQLString,
+      // ...
+```
+
+</div><!-- /col-6 -->
+
+</div><!-- /row -->
+</div><!-- /container.even -->
 
 
 </div><!-- /col-12 -->
-</div><!-- /row -->
 </div><!-- /container -->
+</section><!-- /even -->
+
+<!-- **************************************** -->

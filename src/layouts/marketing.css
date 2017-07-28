@@ -12,7 +12,14 @@ pre code {
   border-left: 0.25em solid #f99;
 }
 
-.header {
+section {
+  padding: 2em 0;
+}
+section.header {
   background: #424;
   color: white;
+}
+
+section.even {
+  background: #fff0ff;
 }
