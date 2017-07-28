@@ -3,6 +3,7 @@ module.exports = {
     title: `GraphQL-Build`,
   },
   plugins: [
+    `gatsby-plugin-sharp`,
     `gatsby-plugin-catch-links`,
     `gatsby-plugin-react-helmet`,
     {
@@ -14,6 +15,14 @@ module.exports = {
     },
     {
       resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          "gatsby-remark-autolink-headers",
+          "gatsby-remark-images",
+          "gatsby-remark-prismjs",
+          // gatsby-typegen-remark-expo-autolink ???
+        ],
+      },
     },
   ],
 };

@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import Link from "gatsby-link";
 import Helmet from "react-helmet";
 
+import "prismjs/themes/prism-solarizedlight.css";
+
 import "./index.css";
 
 const Header = () =>
