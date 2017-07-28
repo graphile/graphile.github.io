@@ -33,7 +33,7 @@ const Header = () =>
 const Page = ({
   data: { remark: { html, frontmatter: { next, nextText, prev, prevText } } },
 }) =>
-  <div className="header container">
+  <div>
     <Helmet
       title="graphql-build"
       meta={[
