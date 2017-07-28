@@ -6,7 +6,9 @@ import "prismjs/themes/prism-solarizedlight.css";
 
 import "./marketing.css";
 
-const TemplateWrapper = ({ children }) =>
+const Marketing = ({
+  data: { remark: { html, frontmatter: { next, nextText, prev, prevText } } },
+}) =>
   <div>
     <Helmet
       title="graphql-build"
@@ -37,13 +39,27 @@ const TemplateWrapper = ({ children }) =>
         crossOrigin="anonymous"
       />
     </Helmet>
-    <div>
-      {children()}
-    </div>
+    <div dangerouslySetInnerHTML={{ __html: html }} />
   </div>;
 
-TemplateWrapper.propTypes = {
+Marketing.propTypes = {
   children: PropTypes.func,
 };
 
-export default TemplateWrapper;
+export default Marketing;
+
+export const pageQuery = graphql`
+  query MarketingPageByPath($path: String!) {
+    remark: markdownRemark(frontmatter: { path: { eq: $path } }) {
+      html
+      frontmatter {
+        path
+        title
+        next
+        nextText
+        prev
+        prevText
+      }
+    }
+  }
+`;
