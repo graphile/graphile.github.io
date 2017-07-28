@@ -4,7 +4,7 @@ import Helmet from "react-helmet";
 
 import "prismjs/themes/prism-solarizedlight.css";
 
-import "./index.css";
+import "./marketing.css";
 
 const TemplateWrapper = ({ children }) =>
   <div>

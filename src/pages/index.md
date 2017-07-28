@@ -32,7 +32,7 @@ type Person {
 }
 ```
 
-</div>
+</div><!-- /col-6 -->
 <div class='col-6'>
 
 Transform your schema with ease  
@@ -55,7 +55,21 @@ type Person {
 }
 ```
 
-</div>
-</div>
+</div><!-- /col-6 -->
+</div><!-- /row -->
 
-</div></div>
+</div></div><!-- /container --><!-- /header -->
+
+<div class='container'>
+<div class='row'>
+<div class='col-12'>
+
+<h1>Something</h1>
+<p class='lead'>Text</p>
+
+More text
+
+
+</div><!-- /col-12 -->
+</div><!-- /row -->
+</div><!-- /container -->
