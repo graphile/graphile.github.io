@@ -28,6 +28,7 @@ module.exports = {
       },
     ],
     "no-confusing-arrow": 0,
+    "no-console": 0,
     "no-else-return": 0,
     "no-underscore-dangle": 0,
     "no-unused-vars": [
