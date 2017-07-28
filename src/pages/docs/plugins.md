@@ -4,6 +4,8 @@ path: /docs/plugins/
 title: Plugins
 next: /docs/hooks/
 nextText: Hooks
+prev: /docs/getting-started/
+prevText: Getting Started
 ---
 
 ## Plugins
