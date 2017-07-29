@@ -10,7 +10,9 @@ title: Extensible GraphQL APIs through Plugins
 # Build Powerful GraphQL APIs
 
 <p class='lead'>
-GraphQL-Build provides you with a framework to build high-performance extensible GraphQL APIs by combining plugins and using advanced look-ahead features.
+GraphQL-Build provides you with a framework to build high-performance
+extensible GraphQL APIs by combining plugins and using advanced look-ahead
+features.
 </p>
 
 <div class='row'>
@@ -68,9 +70,10 @@ type Person {
 <div class='row'>
 <div class='col-12'>
 
-# Easy Integration
+# Straightforward Integration
 <p class='lead'>
-If you're already using the reference implementation of GraphQL from Facebook then you can add hooks to your schema with ease:
+If you're already using the reference implementation of GraphQL from Facebook
+then adding hooks is fairly straightforward:
 </p>
 
 <div class='container'>
@@ -122,7 +125,9 @@ const MyType = newWithHooks(GraphQLObjectType, {
 We use the reference GraphQL implementation under the hood, so you know we're spec compliant.
 </p>
 
- We do not use private APIs to manipulate the generated schema - only the public interfaces. You can use regular GraphQL objects in your generated Schema - you only need hooks for the parts you want callbacks for.
+ We do not use private APIs to manipulate the generated schema - only the
+ public interfaces. You can use regular GraphQL objects in your generated
+ Schema - you only need hooks for the parts you want callbacks for.
 </div><!-- /col-12 -->
 
 </div><!-- /row -->
@@ -142,7 +147,10 @@ We use the reference GraphQL implementation under the hood, so you know we're sp
 Automatically update your running GraphQL schema without the need to restart the server.
 </p>
 
-For example: when your underlying data structure changes your GraphQL-Build plugins can trigger a rebuild event and you'll automatically be supplied with a fresh new GraphQL schema to replace the out-of-date one - no need to restart your server!
+For example: when your underlying data structure changes your GraphQL-Build
+plugins can trigger a rebuild event and you'll automatically be supplied with a
+fresh new GraphQL schema to replace the out-of-date one - no need to restart
+your server!
 </div><!-- /col-12 -->
 
 </div><!-- /row -->
@@ -162,9 +170,13 @@ For example: when your underlying data structure changes your GraphQL-Build plug
 Say Goodbye to the N+1 problem; fewer round-trips means higher performance.
 </p>
 
-By using our lookahead tools your code can know what's coming and make sure it requests the correct fields ahead of time, leading to fewer roundtrips and higher performance.
+By using our lookahead tools your code can know what's coming and make sure it
+requests the correct fields ahead of time, leading to fewer round-trips and
+higher performance.
 
-PostGraphQL v4 utilises this functionality to enable it to serve even deeply nested requests with just one SQL query, which lead to significant speedups especially where database connection latency was above 1ms.
+PostGraphQL v4 utilises this functionality to enable it to serve even deeply
+nested requests with just one SQL query, which lead to significant speedups
+especially where database connection latency was above 1ms.
 
 </div><!-- /col-12 -->
 
