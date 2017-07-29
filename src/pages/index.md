@@ -4,7 +4,7 @@ path: /
 title: Extensible GraphQL APIs through Plugins
 ---
 
-<section class='header'>
+<header>
 <div class='container'>
 
 GraphQL-Build
@@ -60,7 +60,7 @@ type Person {
 </div><!-- /row -->
 
 </div><!-- /container -->
-</section><!-- /header -->
+</header>
 
 <!-- **************************************** -->
 
@@ -128,3 +128,8 @@ const MyType = newWithHooks(GraphQLObjectType, {
 </section><!-- /even -->
 
 <!-- **************************************** -->
+<footer>
+<div class='container'>
+Copyright &copy; Benjie Gillam 2017
+</div>
+</footer>

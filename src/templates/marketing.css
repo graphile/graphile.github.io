@@ -15,9 +15,14 @@ pre code {
 section {
   padding: 2em 0;
 }
-section.header {
+header,
+footer {
   background: #424;
   color: white;
+  padding: 3rem 0;
+}
+
+footer {
 }
 
 section.even {
