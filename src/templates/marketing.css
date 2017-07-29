@@ -1,6 +1,14 @@
 pre code {
   font-variant: none;
 }
+header,
+footer {
+  background: #424;
+  color: white;
+}
+footer {
+  padding: 3rem 0;
+}
 
 .gatsby-highlight-code-line {
   background-color: #feb;
@@ -12,19 +20,16 @@ pre code {
   border-left: 0.25em solid #f99;
 }
 
-section {
+.page-content section {
   padding: 2em 0;
 }
-header,
-footer {
+.page-content header,
+.page-content footer {
   background: #424;
   color: white;
   padding: 3rem 0;
 }
 
-footer {
-}
-
-section.even {
+.page-content section.even {
   background: #fff0f0;
 }

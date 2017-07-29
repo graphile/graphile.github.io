@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Helmet from "react-helmet";
+import SiteFooter from "../components/SiteFooter";
+import SiteHeader from "../components/SiteHeader";
 
 import "prismjs/themes/prism-solarizedlight.css";
 
@@ -39,7 +41,9 @@ const Marketing = ({
         crossOrigin="anonymous"
       />
     </Helmet>
-    <div dangerouslySetInnerHTML={{ __html: html }} />
+    <SiteHeader />
+    <div className="page-content" dangerouslySetInnerHTML={{ __html: html }} />
+    <SiteFooter />
   </div>;
 
 Marketing.propTypes = {

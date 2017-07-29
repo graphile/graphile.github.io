@@ -13,13 +13,13 @@ class Html extends React.Component {
     return (
       <html lang="en">
         <head>
+          {this.props.headComponents}
           <meta charSet="utf-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1.0 maximum-scale=5.0"
           />
-          {this.props.headComponents}
           <link rel="stylesheet" href="/styles.css" />
         </head>
         <body>

@@ -7,8 +7,11 @@ title: Extensible GraphQL APIs through Plugins
 <header>
 <div class='container'>
 
-GraphQL-Build
-=============
+# Build Powerful GraphQL APIs
+
+<p class='lead'>
+GraphQL-Build provides you with a framework to build high-performance extensible GraphQL APIs by combining plugins and using advanced look-ahead features.
+</p>
 
 <div class='row'>
 <div class='col-lg-6 col-12'>
@@ -113,7 +116,7 @@ const MyType = newWithHooks(GraphQLObjectType, {
 <div class='row'>
 <div class='col-12'>
 
-# 100% compatible
+# Fully compatible
 
 <p class='lead'>
 We use the reference GraphQL implementation under the hood, so you know we're spec compliant.
@@ -133,13 +136,59 @@ We use the reference GraphQL implementation under the hood, so you know we're sp
 <div class='row'>
 <div class='col-12'>
 
-# Schema watching built in!
+# First class schema watching
 
 <p class='lead'>
-Excellent developer experience - automatically updated schema
+Automatically update your running GraphQL schema without the need to restart the server.
 </p>
 
-E.g. when your underlying data structure changes (for example you add a database column), your GraphQL-Build plugins can trigger a rebuild event and you'll be supplied with a fresh new GraphQL schema to replace the out of date one - no need to restart your server!
+For example: when your underlying data structure changes your GraphQL-Build plugins can trigger a rebuild event and you'll automatically be supplied with a fresh new GraphQL schema to replace the out-of-date one - no need to restart your server!
+</div><!-- /col-12 -->
+
+</div><!-- /row -->
+</div><!-- /container -->
+</section><!-- /odd -->
+
+<!-- **************************************** -->
+
+<section class='even'>
+<div class='container'>
+<div class='row'>
+<div class='col-12'>
+
+# Performance baked in
+
+<p class='lead'>
+Say Goodbye to the N+1 problem; fewer round-trips means higher performance.
+</p>
+
+By using our lookahead tools your code can know what's coming and make sure it requests the correct fields ahead of time, leading to fewer roundtrips and higher performance.
+
+PostGraphQL v4 utilises this functionality to enable it to serve even deeply nested requests with just one SQL query, which lead to significant speedups especially where database connection latency was above 1ms.
+
+</div><!-- /col-12 -->
+
+</div><!-- /row -->
+</div><!-- /container -->
+</section><!-- /odd -->
+
+<!-- **************************************** -->
+
+<section class='odd'>
+<div class='container'>
+<div class='row'>
+<div class='col-12'>
+
+# Data-store independent
+
+<p class='lead'>
+Build plugins for anything that Node.js can communicate with.
+</p>
+
+We have extensive support for PostgreSQL already through the `graphql-build-pg`
+module; this performs introspection of your database schema and automatically
+builds a Relay-enabled GraphQL API from the tables it finds. Security is
+handled through PostgreSQL's GRANT system and Row Level Security features.
 </div><!-- /col-12 -->
 
 </div><!-- /row -->
@@ -176,8 +225,3 @@ main();
 </section><!-- /even -->
 
 <!-- **************************************** -->
-<footer>
-<div class='container'>
-Copyright &copy; Benjie Gillam 2017
-</div>
-</footer>
