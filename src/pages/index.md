@@ -11,7 +11,7 @@ GraphQL-Build
 =============
 
 <div class='row'>
-<div class='col-6'>
+<div class='col-lg-6 col-12'>
 
 Build your schema with plugins  
 ```js
@@ -34,7 +34,7 @@ type Person {
 ```
 
 </div><!-- /col-6 -->
-<div class='col-6'>
+<div class='col-lg-6 col-12'>
 
 Transform your schema with ease  
 ```js
@@ -79,7 +79,7 @@ If you're already using the reference implementation of GraphQL from Facebook th
 <div class='container'>
 <div class='row'>
 
-<div class='col-6'>
+<div class='col-12 col-lg-6'>
 
 `graphql`:
 
@@ -93,7 +93,7 @@ const MyType = new GraphQLObjectType({
 ```
 
 </div><!-- /col-6 -->
-<div class='col-6'>
+<div class='col-12 col-lg-6'>
 
 `graphql-build`:
 
