@@ -5,7 +5,10 @@ import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
 
 const Page = ({
-  data: { remark: { html, frontmatter: { next, nextText, prev, prevText } } },
+  data: {
+    remark: { html, frontmatter: { next, nextText, prev, prevText } },
+    nav: { edges },
+  },
 }) =>
   <div>
     <Helmet
@@ -49,23 +52,40 @@ const Page = ({
     >
       <div className="container">
         <div className="row">
-          <div
-            dangerouslySetInnerHTML={{ __html: html }}
-            style={{ width: "100%" }}
-          />
-        </div>
-        <div className="row">
-          {prev
-            ? <Link className="btn btn-secondary btn-large" to={prev}>
-                &laquo; {prevText || "Previous"}
-              </Link>
-            : null}
-          <div className="ml-auto">
-            {next
-              ? <Link className="btn btn-primary btn-large" to={next}>
-                  {nextText || "Next"} &raquo;
-                </Link>
-              : null}
+          <div className="col-12 col-md-3 push-md-9">
+            <ul className="nav flex-column">
+              {edges.map(({ node: { id, to, title } }) =>
+                <li key={id} className="nav-item">
+                  <Link className="nav-link active" to={to}>
+                    {title}
+                  </Link>
+                </li>
+              )}
+            </ul>
+          </div>
+          <div className="col-12 col-md-9 pull-md-3">
+            <div className="container">
+              <div className="row">
+                <div
+                  dangerouslySetInnerHTML={{ __html: html }}
+                  style={{ width: "100%" }}
+                />
+              </div>
+              <div className="row">
+                {prev
+                  ? <Link className="btn btn-secondary btn-large" to={prev}>
+                      &laquo; {prevText || "Previous"}
+                    </Link>
+                  : null}
+                <div className="ml-auto">
+                  {next
+                    ? <Link className="btn btn-primary btn-large" to={next}>
+                        {nextText || "Next"} &raquo;
+                      </Link>
+                    : null}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -86,6 +106,15 @@ export const pageQuery = graphql`
         nextText
         prev
         prevText
+      }
+    }
+    nav: allNavJson {
+      edges {
+        node {
+          id
+          to
+          title
+        }
       }
     }
   }

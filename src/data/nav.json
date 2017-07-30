@@ -1,0 +1,14 @@
+[
+  {
+    "to": "/docs/getting-started/",
+    "title": "Getting Started"
+  },
+  {
+    "to": "/docs/plugins/",
+    "title": "Plugins"
+  },
+  {
+    "to": "/docs/hooks/",
+    "title": "Hooks"
+  }
+]
