@@ -2,8 +2,6 @@
 layout: page
 path: /docs/hooks/
 title: Hooks
-prev: /docs/plugins/
-prevText: Plugins
 ---
 
 ## Hooks

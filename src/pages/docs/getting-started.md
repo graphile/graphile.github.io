@@ -2,8 +2,6 @@
 layout: page
 path: /docs/getting-started/
 title: Getting Started
-next: /docs/plugins/
-nextText: Plugins
 ---
 
 ## Getting Started
