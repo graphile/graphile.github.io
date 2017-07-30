@@ -1,20 +1,20 @@
 {
   "assetsByChunkName": {
     "path---docs-plugins": [
-      "path---docs-plugins-1969925f846177cea359.js",
-      "path---docs-plugins-1969925f846177cea359.js.map"
+      "path---docs-plugins-cc407b9f6581522f57ca.js",
+      "path---docs-plugins-cc407b9f6581522f57ca.js.map"
     ],
     "path---docs-getting-started": [
-      "path---docs-getting-started-354620d3c58e281ddc88.js",
-      "path---docs-getting-started-354620d3c58e281ddc88.js.map"
+      "path---docs-getting-started-84cc71c02bbbf93a965e.js",
+      "path---docs-getting-started-84cc71c02bbbf93a965e.js.map"
     ],
     "path---docs-hooks": [
-      "path---docs-hooks-c7cee2dade131db43ceb.js",
-      "path---docs-hooks-c7cee2dade131db43ceb.js.map"
+      "path---docs-hooks-289ad5492fdeac0d63ca.js",
+      "path---docs-hooks-289ad5492fdeac0d63ca.js.map"
     ],
     "path---index": [
-      "path---index-bd014d6d1f21916eb3a2.js",
-      "path---index-bd014d6d1f21916eb3a2.js.map"
+      "path---index-3af8094fe42b25f45a11.js",
+      "path---index-3af8094fe42b25f45a11.js.map"
     ],
     "page-component---src-templates-marketing-js": [
       "page-component---src-templates-marketing-js-2c369dcbe9403d1c9827.js",
@@ -25,8 +25,8 @@
       "commons-a3883ed231e709df4f62.js.map"
     ],
     "page-component---src-templates-page-js": [
-      "page-component---src-templates-page-js-7ce67c3ef26ed3fbbcf1.js",
-      "page-component---src-templates-page-js-7ce67c3ef26ed3fbbcf1.js.map"
+      "page-component---src-templates-page-js-9f8fb6d8a0e37db53e75.js",
+      "page-component---src-templates-page-js-9f8fb6d8a0e37db53e75.js.map"
     ],
     "app": [
       "app-31b8d226e80611796e78.js",
