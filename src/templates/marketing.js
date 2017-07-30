@@ -59,10 +59,6 @@ export const pageQuery = graphql`
       frontmatter {
         path
         title
-        next
-        nextText
-        prev
-        prevText
       }
     }
   }
