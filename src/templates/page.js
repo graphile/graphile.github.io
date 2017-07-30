@@ -68,7 +68,12 @@ const Page = ({
               <ul className="nav flex-column">
                 {navEdges.map(({ node: { id, to, title } }) =>
                   <li key={id} className="nav-item">
-                    <Link className="nav-link active" to={to}>
+                    <Link
+                      className={`nav-link ${location.pathname === to
+                        ? "active"
+                        : ""}`}
+                      to={to}
+                    >
                       {title}
                     </Link>
                   </li>
