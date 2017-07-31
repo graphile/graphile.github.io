@@ -1,36 +1,40 @@
 {
   "assetsByChunkName": {
     "path---docs-plugins": [
-      "path---docs-plugins-cc407b9f6581522f57ca.js",
-      "path---docs-plugins-cc407b9f6581522f57ca.js.map"
+      "path---docs-plugins-3f87080ab344392a2499.js",
+      "path---docs-plugins-3f87080ab344392a2499.js.map"
     ],
     "path---docs-getting-started": [
-      "path---docs-getting-started-84cc71c02bbbf93a965e.js",
-      "path---docs-getting-started-84cc71c02bbbf93a965e.js.map"
+      "path---docs-getting-started-ad57875eb57a552e5b47.js",
+      "path---docs-getting-started-ad57875eb57a552e5b47.js.map"
     ],
     "path---docs-hooks": [
-      "path---docs-hooks-289ad5492fdeac0d63ca.js",
-      "path---docs-hooks-289ad5492fdeac0d63ca.js.map"
+      "path---docs-hooks-612b6438d9b4912064ad.js",
+      "path---docs-hooks-612b6438d9b4912064ad.js.map"
     ],
     "path---index": [
       "path---index-3af8094fe42b25f45a11.js",
       "path---index-3af8094fe42b25f45a11.js.map"
     ],
     "page-component---src-templates-marketing-js": [
-      "page-component---src-templates-marketing-js-2c369dcbe9403d1c9827.js",
-      "page-component---src-templates-marketing-js-2c369dcbe9403d1c9827.js.map"
+      "page-component---src-templates-marketing-js-20aa6c77c025239c1a7e.js",
+      "page-component---src-templates-marketing-js-20aa6c77c025239c1a7e.js.map"
     ],
     "commons": [
       "commons-a3883ed231e709df4f62.js",
       "commons-a3883ed231e709df4f62.js.map"
     ],
     "page-component---src-templates-page-js": [
-      "page-component---src-templates-page-js-9f8fb6d8a0e37db53e75.js",
-      "page-component---src-templates-page-js-9f8fb6d8a0e37db53e75.js.map"
+      "page-component---src-templates-page-js-cd57c54e836e6b9b39f0.js",
+      "page-component---src-templates-page-js-cd57c54e836e6b9b39f0.js.map"
+    ],
+    "path---docs-look-ahead": [
+      "path---docs-look-ahead-0e732acd9dc601d04b8e.js",
+      "path---docs-look-ahead-0e732acd9dc601d04b8e.js.map"
     ],
     "app": [
-      "app-31b8d226e80611796e78.js",
-      "app-31b8d226e80611796e78.js.map"
+      "app-2a168cab47d9113bb122.js",
+      "app-2a168cab47d9113bb122.js.map"
     ],
     "layout-component---index": [
       "layout-component---index-2e6341fe1913bccea6ec.js",
