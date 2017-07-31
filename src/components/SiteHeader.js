@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "gatsby-link";
 
-export default () =>
+export default ({ location }) =>
   <header>
     <nav className="navbar navbar-toggleable-md navbar-inverse bg-inverse">
       <button
