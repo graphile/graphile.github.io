@@ -22,7 +22,22 @@ export default () =>
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item">
-            <Link className="nav-link" to="/docs/getting-started/">
+            <Link
+              className={`nav-link ${location.pathname.match(/^\/$/)
+                ? "active"
+                : ""}`}
+              to="/"
+            >
+              Home
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link
+              className={`nav-link ${location.pathname.match(/^\/docs(\/|$)/)
+                ? "active"
+                : ""}`}
+              to="/docs/getting-started/"
+            >
               Docs
             </Link>
           </li>
