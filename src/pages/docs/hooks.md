@@ -150,7 +150,6 @@ automatically registered, but external objects must be registered via:
 Registers an external (un-hooked) GraphQL type with the system so that it may
 be referenced via `getTypeByName()`
 
-#### Build object (`Build`) - advanced properties/methods
 
 ##### `getAliasFromResolveInfo(resolveInfo)`
 
@@ -172,31 +171,6 @@ resolveAlias(data, _args, _context, resolveInfo) {
 }
 ```
 
-##### `parseResolveInfo(resolveInfo)`
-
-Can be used in your `resolve` methods to "look ahead" to determine which
-sub-fields, sub-sub-fields, etc. you need to fetch in your resolver. Great for
-performance optimisations.
-
-From [`graphql-parse-resolve-info`](https://github.com/postgraphql/graphql-build/tree/master/packages/graphql-parse-resolve-info#parseresolveinforesolveinfo)
-
-TODO: example
-
-##### `generateDataForType(type, parsedResolveInfoFragment)`
-
-For performance optimisations
-
-TODO: document
-
-
-##### `simplifyParsedResolveInfoFragmentWithType(parsedResolveInfoFragment, graphQLType)`
-
-Simplifies the details from `parseResolveInfo()` above if you know the type you
-will be returning (useful if you're not using `GraphQLUnionType`).
-
-From [`graphql-parse-resolve-info`](https://github.com/postgraphql/graphql-build/tree/master/packages/graphql-parse-resolve-info#simplifyparsedresolveinfofragmentwithtypeparsedresolveinfofragment-returntype)
-
-TODO: example
 
 ### Namespaces
 

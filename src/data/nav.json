@@ -10,5 +10,9 @@
   {
     "to": "/docs/hooks/",
     "title": "Hooks"
+  },
+  {
+    "to": "/docs/look-ahead/",
+    "title": "Advanced: Look-Ahead"
   }
 ]
