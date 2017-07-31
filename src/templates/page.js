@@ -52,7 +52,7 @@ const Page = ({
           crossOrigin="anonymous"
         />
       </Helmet>
-      <SiteHeader />
+      <SiteHeader location={location} />
       <section
         style={{
           margin: "0 auto",

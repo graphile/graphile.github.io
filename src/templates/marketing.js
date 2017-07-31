@@ -10,6 +10,7 @@ import "./marketing.css";
 
 const Marketing = ({
   data: { remark: { html, frontmatter: { next, nextText, prev, prevText } } },
+  location,
 }) =>
   <div>
     <Helmet
@@ -41,7 +42,7 @@ const Marketing = ({
         crossOrigin="anonymous"
       />
     </Helmet>
-    <SiteHeader />
+    <SiteHeader location={location} />
     <div className="page-content" dangerouslySetInnerHTML={{ __html: html }} />
     <SiteFooter />
   </div>;
