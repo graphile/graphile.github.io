@@ -9,6 +9,7 @@ cd __deploy
 git checkout master
 rm -Rf ./*
 cp -a ../public/* ./
+echo 'www.graphile.com' > CNAME
 git add .
 git commit -m'Deploy'
 git push origin master
