@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /docs/plugins/
+path: /graphile-build/plugins/
 title: Plugins
 ---
 
@@ -8,7 +8,7 @@ title: Plugins
 
 ### Loading Plugins
 
-GraphQL-Build plugins are simple functions that interact with the
+Graphile-Build plugins are simple functions that interact with the
 `SchemaBuilder` (TODO: link to SchemaBuilder docs), for example adding hooks.
 When you perform `buildSchema(plugins)` we create a new SchemaBuilder instance
 and then load each of the plugins against it.
@@ -29,7 +29,7 @@ function NoopPlugin(builder) {
 which you can load into your schema like so:
 
 ```js
-const { buildSchema, defaultPlugins } = require("graphql-build");
+const { buildSchema, defaultPlugins } = require("graphile-build");
 const { printSchema } = require("graphql/utilities");
 
 buildSchema([...defaultPlugins, NoopPlugin]).then(schema => {
@@ -105,7 +105,7 @@ is passed one argument: the function to call when a change occurs
 
 Schema watching only occurs when you opt into that functionality.
 
-TODO: document further (ref: https://github.com/postgraphql/graphql-build/blob/3d5b8dd8a280397744f03fbac60319e9f782a038/packages/graphql-build/__tests__/watch.test.js#L31-L38)
+TODO: document further (ref: https://github.com/graphile/graphile-build/blob/3d5b8dd8a280397744f03fbac60319e9f782a038/packages/graphile-build/__tests__/watch.test.js#L31-L38)
 
 ```js
 builder.registerWatcher(

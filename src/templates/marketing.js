@@ -14,10 +14,17 @@ const Marketing = ({
 }) =>
   <div>
     <Helmet
-      title="graphql-build"
+      title="graphile-build"
       meta={[
-        { name: "description", content: "TODO" },
-        { name: "keywords", content: "TODO" },
+        {
+          name: "description",
+          content: "Utilities to build powerful and performant GraphQL APIs",
+        },
+        {
+          name: "keywords",
+          content:
+            "GraphQL, API, Graph, PostgreSQL, PostGraphQL, server, plugins, introspection, reflection",
+        },
       ]}
     >
       <link

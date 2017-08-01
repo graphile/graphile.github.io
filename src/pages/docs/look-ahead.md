@@ -1,15 +1,15 @@
 ---
 layout: page
-path: /docs/look-ahead/
+path: /graphile-build/look-ahead/
 title: Look Ahead
 ---
 
 ## Advanced: Look Ahead
 
 Traditionally in GraphQL APIs DataLoader is used to batch requests to minimize
-the impact of N+1 queries. DataLoader can be use with GraphQL-Build in the same
+the impact of N+1 queries. DataLoader can be use with Graphile-Build in the same
 way as it is with GraphQL. However, sometimes DataLoader isn't the best
-approach for your system, so GraphQL-Build provides a powerful Look-Ahead
+approach for your system, so Graphile-Build provides a powerful Look-Ahead
 functionality you can use to optimize your GraphQL queries. This is
 particularly well suited to environments that allow you to specify complex
 structures to be returned (such as databases or other GraphQL APIs), but is
@@ -45,7 +45,7 @@ request different sub-fields depending on the type of data that's returned from
 a field, hence `fieldsByTypeName`. If you happen to know the type that's going
 to be returned then you can simplify with the next method...
 
-From [`graphql-parse-resolve-info`](https://github.com/postgraphql/graphql-build/tree/master/packages/graphql-parse-resolve-info#parseresolveinforesolveinfo)
+From [`graphql-parse-resolve-info`](https://github.com/graphile/graphile-build/tree/master/packages/graphql-parse-resolve-info#parseresolveinforesolveinfo)
 
 TODO: example
 
@@ -57,7 +57,7 @@ type `graphQLType` and we'll return a similar object with an additional
 `fields` property that are only the fields that are compatible with
 the `graphQLType`.
 
-From [`graphql-parse-resolve-info`](https://github.com/postgraphql/graphql-build/tree/master/packages/graphql-parse-resolve-info#simplifyparsedresolveinfofragmentwithtypeparsedresolveinfofragment-returntype)
+From [`graphql-parse-resolve-info`](https://github.com/graphile/graphile-build/tree/master/packages/graphql-parse-resolve-info#simplifyparsedresolveinfofragmentwithtypeparsedresolveinfofragment-returntype)
 
 TODO: example
 

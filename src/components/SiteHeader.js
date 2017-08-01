@@ -16,7 +16,7 @@ export default ({ location }) =>
         <span className="navbar-toggler-icon" />
       </button>
       <Link to="/" className="navbar-brand">
-        GraphQL-Build
+        Graphile
       </Link>
 
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -33,12 +33,12 @@ export default ({ location }) =>
           </li>
           <li className="nav-item">
             <Link
-              className={`nav-link ${location.pathname.match(/^\/docs(\/|$)/)
+              className={`nav-link ${location.pathname.match(/^\/graphile-build(\/|$)/)
                 ? "active"
                 : ""}`}
-              to="/docs/getting-started/"
+              to="/graphile-build/getting-started/"
             >
-              Docs
+              Graphile-Build
             </Link>
           </li>
         </ul>

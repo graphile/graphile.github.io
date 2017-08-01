@@ -1,4 +1,4 @@
-const { buildSchema, defaultPlugins, NodePlugin } = require("graphql-build");
+const { buildSchema, defaultPlugins, NodePlugin } = require("graphile-build");
 const { printSchema } = require("graphql/utilities");
 
 buildSchema(

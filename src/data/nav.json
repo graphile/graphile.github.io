@@ -1,18 +1,18 @@
 [
   {
-    "to": "/docs/getting-started/",
+    "to": "/graphile-build/getting-started/",
     "title": "Getting Started"
   },
   {
-    "to": "/docs/plugins/",
+    "to": "/graphile-build/plugins/",
     "title": "Plugins"
   },
   {
-    "to": "/docs/hooks/",
+    "to": "/graphile-build/hooks/",
     "title": "Hooks"
   },
   {
-    "to": "/docs/look-ahead/",
+    "to": "/graphile-build/look-ahead/",
     "title": "Look Ahead"
   }
 ]

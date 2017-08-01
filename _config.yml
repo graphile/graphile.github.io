@@ -3,16 +3,16 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: GraphQL-Build
+title: Graphile-Build
 subtitle: Construct extensible GraphQL APIs with ease
-description: graphql-build is a tool that enable powerful extensions to your GraphQL Schema using Plugins
+description: graphile-build is a tool that enable powerful extensions to your GraphQL Schema using Plugins
 author: Benjie Gillam
 language: en
 timezone: Europe/London
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://graphql-build.github.io
+url: https://graphile-build.github.io
 root: /
 permalink: :year/:month/:title/
 permalink_defaults:

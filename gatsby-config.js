@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `GraphQL-Build`,
+    title: `Graphile-Build`,
   },
   plugins: [
     `gatsby-plugin-sharp`,

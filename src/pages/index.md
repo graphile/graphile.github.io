@@ -10,7 +10,7 @@ title: Extensible GraphQL APIs through Plugins
 # Build Powerful GraphQL APIs
 
 <p class='lead'>
-GraphQL-Build provides you with a framework to build high-performance
+Graphile-Build provides you with a framework to build high-performance
 extensible GraphQL APIs by combining plugins and using advanced look-ahead
 features.
 </p>
@@ -95,7 +95,7 @@ const MyType = new GraphQLObjectType({
 </div><!-- /col-6 -->
 <div class='col-12 col-lg-6'>
 
-`graphql-build`:
+`graphile-build`:
 
 ```js{1}
 const MyType = newWithHooks(GraphQLObjectType, {
@@ -147,7 +147,7 @@ We use the reference GraphQL implementation under the hood, so you know we're sp
 Automatically update your running GraphQL schema without the need to restart the server.
 </p>
 
-For example: when your underlying data structure changes your GraphQL-Build
+For example: when your underlying data structure changes your Graphile-Build
 plugins can trigger a rebuild event and you'll automatically be supplied with a
 fresh new GraphQL schema to replace the out-of-date one - no need to restart
 your server!
@@ -197,7 +197,7 @@ especially where database connection latency was above 1ms.
 Build plugins for anything that Node.js can communicate with.
 </p>
 
-We have extensive support for PostgreSQL already through the `graphql-build-pg`
+We have extensive support for PostgreSQL already through the `graphile-build-pg`
 module; this performs introspection of your database schema and automatically
 builds a Relay-enabled GraphQL API from the tables it finds. Security is
 handled through PostgreSQL's GRANT system and Row Level Security features.
@@ -217,7 +217,7 @@ handled through PostgreSQL's GRANT system and Row Level Security features.
 # Get started
 
 ```js
-const { buildSchema, defaultPlugins } = require("graphql-build");
+const { buildSchema, defaultPlugins } = require("graphile-build");
 const { printSchema } = require("graphql/utilities");
 
 async function main() {
@@ -229,7 +229,7 @@ main();
 ```
 
 <div class='d-flex justify-content-center'>
-<a class='btn btn-primary btn-lg' href='/docs/getting-started/'>Get started &raquo;</a>
+<a class='btn btn-primary btn-lg' href='/graphile-build/getting-started/'>Get started &raquo;</a>
 </div>
 
 </div><!-- /col-12 -->

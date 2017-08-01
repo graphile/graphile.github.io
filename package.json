@@ -26,7 +26,7 @@
     "gatsby-transformer-json": "^1.0.1",
     "gatsby-transformer-remark": "^1.1.0",
     "graphql": "^0.10.5",
-    "graphql-build": "latest",
+    "graphile-build": "latest",
     "remark-custom-blocks": "^1.0.1"
   },
   "keywords": [

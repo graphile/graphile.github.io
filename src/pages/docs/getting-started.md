@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /docs/getting-started/
+path: /graphile-build/getting-started/
 title: Getting Started
 ---
 
@@ -8,22 +8,22 @@ title: Getting Started
 
 ### Installation
 
-GraphQL-Build uses your local version of `graphql` to avoid conflicts, so you need to install both:
+Graphile-Build uses your local version of `graphql` to avoid conflicts, so you need to install both:
 
 ```bash
-npm install --save graphql-build graphql
+npm install --save graphile-build graphql
 ```
 
 ### Building your Schema
 
 The `buildSchema` method will (asynchronously) build a GraphQL schema from a
 list of plugins. We ship a number of default plugins (TODO: link to
-graphql-build/defaultPlugins) that are sufficient to create a simple schema,
+graphile-build/defaultPlugins) that are sufficient to create a simple schema,
 like so:
 
 <!-- source: examples/empty-schema.js -->
 ```js
-const { buildSchema, defaultPlugins } = require("graphql-build");
+const { buildSchema, defaultPlugins } = require("graphile-build");
 const { printSchema } = require("graphql/utilities");
 
 buildSchema(defaultPlugins).then(schema => {
@@ -65,7 +65,7 @@ omitting the `NodePlugin` plugin:
 
 <!-- source: examples/emptier-schema.js -->
 ```js
-const { buildSchema, defaultPlugins, NodePlugin } = require("graphql-build");
+const { buildSchema, defaultPlugins, NodePlugin } = require("graphile-build");
 const { printSchema } = require("graphql/utilities");
 
 buildSchema(
@@ -94,7 +94,7 @@ every plugin (as their second argument). The following example passes the
 
 <!-- source: examples/empty-schema-with-options.js -->
 ```js
-const { buildSchema, defaultPlugins } = require("graphql-build");
+const { buildSchema, defaultPlugins } = require("graphile-build");
 const { printSchema } = require("graphql/utilities");
 
 buildSchema(defaultPlugins, { nodeIdFieldName: "flibble" }).then(schema => {

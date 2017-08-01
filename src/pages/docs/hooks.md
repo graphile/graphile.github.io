@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /docs/hooks/
+path: /graphile-build/hooks/
 title: Hooks
 ---
 
@@ -32,7 +32,7 @@ The following hooks are currently supported, but more may be added in future.
 Trying to add a hook for a hook name that does not exist will result in an
 error.
 
-[(See hooks in the source)](https://github.com/benjie/graphql-build/blob/996e28f0af68f53e264170bd4528b6500ff3ef25/packages/graphql-build/SchemaBuilder.js#L11-L59)
+[(See hooks in the source)](https://github.com/benjie/graphile-build/blob/996e28f0af68f53e264170bd4528b6500ff3ef25/packages/graphile-build/SchemaBuilder.js#L11-L59)
 
 - `build`: The build object represents the current schema build and is passed
   to all hooks, hook the 'build' event to extend this object.
@@ -110,7 +110,7 @@ The build object starts out with the following properties/methods, but plugins m
 
 ##### `newWithHooks(type, spec, scope)`
 
-The bread-and-butter of GraphQL-Build, this method is how we build hooked GraphQL objects:
+The bread-and-butter of Graphile-Build, this method is how we build hooked GraphQL objects:
 
 ```js
 const MyType = newWithHooks(type, spec, scope);
@@ -156,7 +156,7 @@ be referenced via `getTypeByName()`
 Use this in your resolver to quickly retrieve the alias that this field was
 requested as.
 
-From [`graphql-parse-resolve-info`](https://github.com/postgraphql/graphql-build/tree/master/packages/graphql-parse-resolve-info#getaliasfromresolveinforesolveinfo)
+From [`graphql-parse-resolve-info`](https://github.com/graphile/graphile-build/tree/master/packages/graphql-parse-resolve-info#getaliasfromresolveinforesolveinfo)
 
 TODO: example
 
@@ -175,7 +175,7 @@ resolveAlias(data, _args, _context, resolveInfo) {
 ### Namespaces
 
 Properties added to the `Build` object or set on the `scope` should be
-namespaced so that they do not conflict; for example `graphql-build-pg` uses
+namespaced so that they do not conflict; for example `graphile-build-pg` uses
 the `pg` namespace: `pgSql`, `pgIntrospection`, `isPgTableType`, etc
 
 TODO: expand

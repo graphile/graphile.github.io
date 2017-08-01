@@ -3685,9 +3685,9 @@ graceful-fs@^4.0.0, graceful-fs@^4.1.2, graceful-fs@^4.1.3, graceful-fs@^4.1.4, 
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
 
-graphql-build@latest:
+graphile-build@latest:
   version "0.0.1-alpha11.1"
-  resolved "https://registry.yarnpkg.com/graphql-build/-/graphql-build-0.0.1-alpha11.1.tgz#94a983a1d423eb663c99dd3ef1e416ad198eaa5b"
+  resolved "https://registry.yarnpkg.com/graphile-build/-/graphile-build-0.0.1-alpha11.1.tgz#94a983a1d423eb663c99dd3ef1e416ad198eaa5b"
   dependencies:
     babel-runtime ">=6 <7"
     debug ">=2 <3"
