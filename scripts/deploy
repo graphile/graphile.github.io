@@ -4,7 +4,7 @@ set -x
 rm -rf public
 gatsby build
 rm -rf __deploy
-git clone git@github.com:graphile-build/graphile-build.github.io __deploy
+git clone git@github.com:graphile/graphile.github.io __deploy
 cd __deploy
 git checkout master
 rm -Rf ./*
