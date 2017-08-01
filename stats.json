@@ -1,16 +1,16 @@
 {
   "assetsByChunkName": {
     "path---docs-plugins": [
-      "path---docs-plugins-3f87080ab344392a2499.js",
-      "path---docs-plugins-3f87080ab344392a2499.js.map"
+      "path---docs-plugins-73e221820c7ad0f19103.js",
+      "path---docs-plugins-73e221820c7ad0f19103.js.map"
     ],
     "path---docs-getting-started": [
-      "path---docs-getting-started-ad57875eb57a552e5b47.js",
-      "path---docs-getting-started-ad57875eb57a552e5b47.js.map"
+      "path---docs-getting-started-6020f2c85d7e4b3d0104.js",
+      "path---docs-getting-started-6020f2c85d7e4b3d0104.js.map"
     ],
     "path---docs-hooks": [
-      "path---docs-hooks-612b6438d9b4912064ad.js",
-      "path---docs-hooks-612b6438d9b4912064ad.js.map"
+      "path---docs-hooks-0aa1c3971027d976dc2c.js",
+      "path---docs-hooks-0aa1c3971027d976dc2c.js.map"
     ],
     "path---index": [
       "path---index-3af8094fe42b25f45a11.js",
@@ -29,12 +29,12 @@
       "page-component---src-templates-page-js-cd57c54e836e6b9b39f0.js.map"
     ],
     "path---docs-look-ahead": [
-      "path---docs-look-ahead-0e732acd9dc601d04b8e.js",
-      "path---docs-look-ahead-0e732acd9dc601d04b8e.js.map"
+      "path---docs-look-ahead-f4eb96fd603d854627e6.js",
+      "path---docs-look-ahead-f4eb96fd603d854627e6.js.map"
     ],
     "app": [
-      "app-2a168cab47d9113bb122.js",
-      "app-2a168cab47d9113bb122.js.map"
+      "app-4ddbc7e65e978f0b6a1f.js",
+      "app-4ddbc7e65e978f0b6a1f.js.map"
     ],
     "layout-component---index": [
       "layout-component---index-2e6341fe1913bccea6ec.js",
