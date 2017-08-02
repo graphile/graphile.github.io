@@ -51,7 +51,7 @@ error.
 
 
 
-### input types
+### Input types
 
 Depending on the hook being called the input object might be an array (as in
 the case of `GraphQLObjectType:interfaces`) or an object (as in all other
