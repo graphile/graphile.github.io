@@ -106,75 +106,42 @@ cases, currently). More specifically, the types for each hook are:
 
 #### Build object (`Build`)
 
-The build object starts out with the following properties/methods, but plugins may extend it via the `build` hook.
+The build object (see [Build Object](/graphile-build/build-object/)) contains a
+number of helpers and sources of information relevant to the current build of
+the GraphQL API. If you're in watch mode then every time a new schema is
+generated a new build object will be used.
 
-##### `newWithHooks(type, spec, scope)`
+Plugins may extend the `build` object via the `build` hook. Once the `build`
+hook is complete the build object is frozen.
 
-The bread-and-butter of Graphile-Build, this method is how we build hooked GraphQL objects:
+The most commonly used methods are:
 
-```js
-const MyType = newWithHooks(type, spec, scope);
-```
+- `build.extend(obj1, obj2)` - returns a new object based on a non-destructive
+  merge of `obj1` and `obj2` (will not overwrite keys!) - normally used at the
+  return value for a hook
+- `build.graphql` - equivalent to `require('graphql')`, but helps ensure
+  GraphQL version clashes do not occur
 
-- `type` is a GraphQL object type, such as `GraphQLEnumType` or `GraphQLInputObjectType`
-- `spec` is a valid specification that will be passed through the relevant
-  hooks before ultimately being passed to the constructor of the aforementioned
-  `type` and returning an instance of that type
-- `scope` is where you can add scope information that will be available through
-  the `scope` property in the context object passed to hooks (see `Context`
-  below)
+#### Context object (`Context`)
 
+The context object (see [Context Object](/graphile-build/context-object/)) contains
+the information relevant to the current hook. Most importantly it contains the
+`scope` (an object based on the third argument passed to `newWithHooks`) but it
+also contains a number of other useful things. Here's some of the more commonly
+used ones:
 
-##### `build.extend(input, extensions)`
-
-Returns a new object by merging the properties of `input` and `extensions`
-**without overwriting**. If any clashes occur an error will be throw. It is
-advisable to use this instead of `Object.assign` or `{...input, ...extensions}`
-because it will warn you if you're accidentally overwriting something.
-
-##### `build.graphql`
-
-Equivalent to `require('graphql')`, by using this property you don't have to
-import graphql and you're less likely to get version conflicts which are hard
-to diagnose and resolve. Use of this property over importing `graphql` yourself
-is highly recommended.
-
-#### `getTypeByName(typeName)`
-
-Returns the GraphQL type associated with the given name, if it is known to the
-current build, or `null` otherwise. Objects built with `newWithHooks` are
-automatically registered, but external objects must be registered via:
-
-##### `build.addType(type: GraphQLNamedType)`
-
-Registers an external (un-hooked) GraphQL type with the system so that it may
-be referenced via `getTypeByName()`
-
-
-##### `getAliasFromResolveInfo(resolveInfo)`
-
-Use this in your resolver to quickly retrieve the alias that this field was
-requested as.
-
-From [`graphql-parse-resolve-info`](https://github.com/graphile/graphile-build/tree/master/packages/graphql-parse-resolve-info#getaliasfromresolveinforesolveinfo)
-
-TODO: example
-
-##### `build.resolveAlias`
-
-Can be used in place of the `resolve` method for a field if you wish it to resolve to the alias the field was requested as (as opposed to its name).
-
-```js
-resolveAlias(data, _args, _context, resolveInfo) {
-  const alias = getAliasFromResolveInfo(resolveInfo);
-  return data[alias];
-}
-```
-
+- `scope` - an object based on the third argument to `newWithHooks` or
+  `fieldWithHooks`; for deeper hooks (such as `GraphQLObjectType:fields:field`)
+  the scope from shallower hooks (such as `GraphQLObjectType`) are merged in.
+- `Self` - only available on hooks that are called after the object is created
+  (e.g. `GraphQLObjectType:fields`), this contains the object that has been
+  created allowing recursive references.
+- `fieldWithHooks(fieldName, spec, scope = {})` - on `GraphQLObjectType:fields`, used for adding a field if
+  you need access to the field helpers (or want to define a scope)
 
 ### Namespaces
 
-Properties added to the `Build` object or set on the `scope` should be
+Properties added to the `Build` object or set on the `Context.scope` should be
 namespaced so that they do not conflict; for example `graphile-build-pg` uses
 the `pg` namespace: `pgSql`, `pgIntrospection`, `isPgTableType`, etc
 
