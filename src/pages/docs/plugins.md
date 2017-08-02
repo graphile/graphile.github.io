@@ -80,44 +80,11 @@ Plugins are called with just two arguments:
 
 ### Plugin actions
 
-Whilst a plugin is being executed it can perform the following actions on the
-`builder` object (its first argument):
+Whilst a plugin is being executed it can perform actions on the `builder`
+object (its first argument). For a list of the functions and what they do, see
+[SchemaBuilder](/graphile-build/schema-builder/).
 
-#### Register a hook: `builder.hook(name, fn)`
+The most common actions are:
 
-The plugin may add a hook by calling `builder.hook(hookName, hookFunction)`. 
-
-
-Example: this hook will log the name of each GraphQLObjectType that is built:
-
-```js
-function GraphQLObjectTypeLogNamePlugin(builder) {
-  builder.hook('GraphQLObjectType', (spec) => {
-    console.log(
-      "A new GraphQLObjectType is being constructed with name: ",
-      spec.name
-    );
-  })
-}
-```
-
-#### Add watch-mode event listeners: `builder.registerWatcher(watcher, unwatcher)`
-
-Registers two functions: one to be called if/when schema watching begins, and
-another to be called if/when schema watching ends (to clean up). Each function
-is passed one argument: the function to call when a change occurs
-
-Schema watching only occurs when you opt into that functionality.
-
-TODO: document further (ref: https://github.com/graphile/graphile-build/blob/3d5b8dd8a280397744f03fbac60319e9f782a038/packages/graphile-build/__tests__/watch.test.js#L31-L38)
-
-```js
-builder.registerWatcher(
-  triggerRebuild => {
-    eventEmitter.on("change", triggerRebuild);
-  },
-  triggerRebuild => {
-    eventEmitter.removeListener("change", triggerRebuild);
-  }
-);
-```
+- Register a hook: `builder.hook(hookName, hookFunction)`; see [Hooks](/graphile-build/hooks/)
+- Add watch-mode event listeners: `builder.registerWatcher(watcher, unwatcher)`; see [SchemaBuilder](/graphile-build/schema-builder/)
