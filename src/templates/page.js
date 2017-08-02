@@ -4,8 +4,8 @@ import Helmet from "react-helmet";
 import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
 
-const referenceIs = trueOrFalse => ({ node: { reference } }) =>
-  !!reference === !!trueOrFalse;
+const sectionIs = desiredSection => ({ node: { section } }) =>
+  section === desiredSection;
 
 function PageList({ navs }) {
   return (
@@ -71,9 +71,9 @@ const Page = ({
           <div className="row">
             <div className="col-12 col-md-3 push-md-9">
               <h4>Guides</h4>
-              <PageList navs={navEdges.filter(referenceIs(false))} />
+              <PageList navs={navEdges.filter(sectionIs("guides"))} />
               <h4>Reference</h4>
-              <PageList navs={navEdges.filter(referenceIs(true))} />
+              <PageList navs={navEdges.filter(sectionIs("reference"))} />
             </div>
             <div className="col-12 col-md-9 pull-md-3">
               <div className="container">
@@ -124,7 +124,7 @@ export const pageQuery = graphql`
           id
           to
           title
-          reference
+          section
         }
       }
     }

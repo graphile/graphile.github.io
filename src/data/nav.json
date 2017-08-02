@@ -1,23 +1,27 @@
 [
   {
     "to": "/graphile-build/getting-started/",
-    "title": "Getting Started"
+    "title": "Getting Started",
+    "section": "guides"
   },
   {
     "to": "/graphile-build/plugins/",
-    "title": "Plugins"
+    "title": "Plugins",
+    "section": "guides"
   },
   {
     "to": "/graphile-build/hooks/",
-    "title": "Hooks"
+    "title": "Hooks",
+    "section": "guides"
   },
   {
     "to": "/graphile-build/look-ahead/",
-    "title": "Look Ahead"
+    "title": "Look Ahead",
+    "section": "guides"
   },
   {
     "to": "/graphile-build/build-object/",
     "title": "Build Object",
-    "reference": true
+    "section": "reference"
   }
 ]
