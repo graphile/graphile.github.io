@@ -7,7 +7,7 @@ import SiteHeader from "../components/SiteHeader";
 const sectionIs = desiredSection => ({ node: { section } }) =>
   section === desiredSection;
 
-function PageList({ navs }) {
+function PageList({ navs, location }) {
   return (
     <ul className="nav flex-column">
       {navs.map(({ node: { id, to, title } }) =>
@@ -71,13 +71,20 @@ const Page = ({
           <div className="row">
             <div className="col-12 col-md-3 push-md-9">
               <h4>Guides</h4>
-              <PageList navs={navEdges.filter(sectionIs("guides"))} />
+              <PageList
+                location={location}
+                navs={navEdges.filter(sectionIs("guides"))}
+              />
               <h4>Library Reference</h4>
               <PageList
+                location={location}
                 navs={navEdges.filter(sectionIs("library-reference"))}
               />
               <h4>Plugin Reference</h4>
-              <PageList navs={navEdges.filter(sectionIs("plugin-reference"))} />
+              <PageList
+                location={location}
+                navs={navEdges.filter(sectionIs("plugin-reference"))}
+              />
             </div>
             <div className="col-12 col-md-9 pull-md-3">
               <div className="container">
