@@ -26,53 +26,43 @@ const MyType = newWithHooks(GraphQLObjectType, spec);
 const MyType = new GraphQLObjectType(hook3(hook2(hook1(spec))));
 ```
 
-### Hook names
+### Which hook to attach to: `hookName`
 
-The following hooks are currently supported, but more may be added in future.
-Trying to add a hook for a hook name that does not exist will result in an
-error.
+The `hookName` that you register via `builder.hook(hookName, hookFunction)`
+must match one of the supported hooks. See [All
+Hooks](/graphile-build/all-hooks/) for a list of all the hooks we support,
+here's a brief overview of some of the more important ones:
 
-[(See hooks in the source)](https://github.com/graphile/graphile-build/blob/996e28f0af68f53e264170bd4528b6500ff3ef25/packages/graphile-build/SchemaBuilder.js#L11-L59)
+- `build`: extend the [Build object](/graphile-build/build-object/) passed to all other hooks
 
-- `build`: The build object represents the current schema build and is passed
-  to all hooks, hook the 'build' event to extend this object.
+- `init`: perform setup after `build` freezes but before building the schema starts
 
-- `init`: The init event is triggered after `build` (which should not generate
-  any GraphQL objects) and can be used to build common object types that may be
-  useful later. The argument to this is an empty object and should be passed
-  through unmodified (it is ignored currently).
+- `GraphQLSchema`: root-level schema - hook to add `query`,
+  `mutation` or `subscription` fields; called by `buildSchema(plugins, options)`
 
-- `GraphQLSchema`: This event defines the root-level schema; hook it to add `query`,
-  `mutation`, `subscription` or similar GraphQL fields.
+- When creating a `GraphQLObjectType` via
+  `newWithHooks`:
 
-- `GraphQLObjectType*`: When creating a GraphQLObjectType via
-  `newWithHooks`, we'll execute, the following hooks:
+  - `GraphQLObjectType` add/remove any root-level attributes, e.g. add a description
+  - `GraphQLObjectType:interfaces` add/remove interfaces
+  - `GraphQLObjectType:fields` add/remove fields (delayed)
+  - `GraphQLObjectType:fields:field`: manipulate individual field spec, e.g.
+    add a description
+  - `GraphQLObjectType:fields:field:args` add/remove arguments to an individual field
 
-  - `GraphQLObjectType` to add any root-level attributes, e.g. add a description
-  - `GraphQLObjectType:interfaces` to add additional interfaces to this object type
-  - `GraphQLObjectType:fields` to add additional fields to this object type (is
-    ran asynchronously and gets a reference to the final GraphQL Object as
-    `Self` in the context)
-  - `GraphQLObjectType:fields:field`: to add any root-level attributes to an
-    individual field, e.g. add a description
-  - `GraphQLObjectType:fields:field:args` to add arguments to an individual field
+- When creating a `GraphQLInputObjectType` via
+  `newWithHooks`:
 
-- `GraphQLInputObjectType*`: When creating a GraphQLInputObjectType via
-  `newWithHooks`, we'll execute, the following hooks:
+  - `GraphQLInputObjectType` add/remove root-level attributes, e.g. description
+  - `GraphQLInputObjectType:fields` add/remove additional fields to this object type (delayed)
+  - `GraphQLInputObjectType:fields:field`: customize an individual field from above
 
-  - `GraphQLInputObjectType` to add any root-level attributes, e.g. add a description
-  - `GraphQLInputObjectType:fields` to add additional fields to this object type (is
-    ran asynchronously and gets a reference to the final GraphQL Object as
-    `Self` in the context)
-  - `GraphQLInputObjectType:fields:field`: to customize an individual field from above
+- When creating a `GraphQLEnumType` via `newWithHooks`:
 
-- `GraphQLEnumType*`: When creating a GraphQLEnumType via `newWithHooks`,
-  we'll execute, the following hooks:
+  - `GraphQLEnumType` add/remove any root-level attributes, e.g. add a description
+  - `GraphQLEnumType:values` add/remove values
 
-  - `GraphQLEnumType` to add any root-level attributes, e.g. add a description
-  - `GraphQLEnumType:values` to add additional values
-
-### Hook arguments
+### What to do when that hook fires: `hookFunction`
 
 The `hookFunction` that you register via `builder.hook(hookName, hookFunction)` will be called with 3 arguments:
 
@@ -84,25 +74,8 @@ The `hookFunction` that you register via `builder.hook(hookName, hookFunction)` 
 
 Depending on the hook being called the input object might be an array (as in
 the case of `GraphQLObjectType:interfaces`) or an object (as in all other
-cases, currently). More specifically, the types for each hook are:
-
-- build - a `Build` object (see below)
-- init - an opaque object, please just return it verbatim
-
-- GraphQLSchema - [`GraphQLSchemaConfig`](http://graphql.org/graphql-js/type/#graphqlschema)
-
-- GraphQLObjectType - [`GraphQLObjectTypeConfig`](http://graphql.org/graphql-js/type/#graphqlobjecttype)
-- GraphQLObjectType:interfaces - [array of `GraphQLInterfaceType` instances](http://graphql.org/graphql-js/type/#graphqlinterfacetype)
-- GraphQLObjectType:fields - [`GraphQLFieldConfigMap`](http://graphql.org/graphql-js/type/#graphqlobjecttype)
-- GraphQLObjectType:fields:field - [`GraphQLFieldConfig`](http://graphql.org/graphql-js/type/#graphqlobjecttype)
-- GraphQLObjectType:fields:field:args - [`GraphQLFieldConfigArgumentMap`](http://graphql.org/graphql-js/type/#graphqlobjecttype)
-
-- GraphQLInputObjectType - [`GraphQLInputObjectTypeConfig`](http://graphql.org/graphql-js/type/#graphqlinputobjecttype)
-- GraphQLInputObjectType:fields - [`GraphQLInputObjectConfigFieldMap`](http://graphql.org/graphql-js/type/#graphqlinputobjecttype)
-- GraphQLInputObjectType:fields:field - [`GraphQLInputObjectFieldConfig`](http://graphql.org/graphql-js/type/#graphqlinputobjecttype)
-
-- GraphQLEnumType - [`GraphQLEnumTypeConfig`](http://graphql.org/graphql-js/type/#graphqlenumtype)
-- GraphQLEnumType:values - [`GraphQLEnumValueConfigMap`](http://graphql.org/graphql-js/type/#graphqlenumtype)
+cases, currently).  See [All Hooks](/graphile-build/all-hooks/) for a list of
+all the hooks, their input types, etc
 
 #### Build object (`Build`)
 
@@ -121,6 +94,8 @@ The most commonly used methods are:
   return value for a hook
 - `build.graphql` - equivalent to `require('graphql')`, but helps ensure
   GraphQL version clashes do not occur
+
+See [Build Object](/graphile-build/build-object/)) for the rest.
 
 #### Context object (`Context`)
 
