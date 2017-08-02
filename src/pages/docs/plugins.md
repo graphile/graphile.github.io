@@ -6,12 +6,16 @@ title: Plugins
 
 ## Plugins
 
+Almost everything in Graphile-Build is accomplished through plugins. You can
+add plugins, remove plugins, even replace the entire stack if you so desire.
+
 ### Loading Plugins
 
-Graphile-Build plugins are simple functions that interact with the
-`SchemaBuilder` (TODO: link to SchemaBuilder docs), for example adding hooks.
-When you perform `buildSchema(plugins)` we create a new SchemaBuilder instance
-and then load each of the plugins against it.
+Graphile-Build plugins are simple functions that interact with [the
+`SchemaBuilder`](/graphile-build/schema-builder/), for example adding hooks.
+When you perform [`buildSchema(plugins)`](/graphile-build/graphile-build/) we
+create a new `SchemaBuilder` instance and then load each of the plugins against
+it.
 
 The plugins are loaded in the order specified, if a plugin returns a Promise
 (e.g. an asynchronous plugin) then we will wait for that promise to resolve
@@ -71,15 +75,15 @@ type Query implements Node {
 
 Plugins are called with just two arguments:
 
-- `builder` - the instance of `SchemaBuilder` the plugin is being loaded against
-- `options` - the options that were passed to `buildSchema(plugins, options)` (or `getBuilder(plugins, options)`)
+- `builder` - the instance of [`SchemaBuilder`](/graphile-build/graphile-build/) the plugin is being loaded against
+- `options` - [the options](/graphile-build/plugin-options/) that were passed to `buildSchema(plugins, options)` (or `getBuilder(plugins, options)`)
 
-### Plugin actions:
+### Plugin actions
 
 Whilst a plugin is being executed it can perform the following actions on the
 `builder` object (its first argument):
 
-#### `builder.hook(name, fn)`: Register a hook
+#### Register a hook: `builder.hook(name, fn)`
 
 The plugin may add a hook by calling `builder.hook(hookName, hookFunction)`. 
 
@@ -97,7 +101,7 @@ function GraphQLObjectTypeLogNamePlugin(builder) {
 }
 ```
 
-#### `builder.registerWatcher(watcher, unwatcher)`: Add watch-mode event listeners
+#### Add watch-mode event listeners: `builder.registerWatcher(watcher, unwatcher)`
 
 Registers two functions: one to be called if/when schema watching begins, and
 another to be called if/when schema watching ends (to clean up). Each function
@@ -117,7 +121,3 @@ builder.registerWatcher(
   }
 );
 ```
-
-### What's next?
-
-A plugin that just does logging might not be the most useful, lets find out what hooks are available:

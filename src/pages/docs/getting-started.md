@@ -16,10 +16,10 @@ npm install --save graphile-build graphql
 
 ### Building your Schema
 
-The `buildSchema` method will (asynchronously) build a GraphQL schema from a
-list of plugins. We ship a number of default plugins (TODO: link to
-graphile-build/defaultPlugins) that are sufficient to create a simple schema,
-like so:
+The [`buildSchema`](/graphile-build/schema-builder/#buildSchema) method will (asynchronously) build a GraphQL schema from a
+list of plugins. We ship a number of [default
+plugins](/graphile-build/default-plugins/)  that are sufficient to create a
+simple schema, like so:
 
 <!-- source: examples/empty-schema.js -->
 ```js
@@ -61,7 +61,7 @@ type Query implements Node {
 #### Building a Schema without the Node interface
 
 It's possible to build an even more minimal schema without Node support by
-omitting the `NodePlugin` plugin:
+omitting the [`NodePlugin`](/graphile-build/default-plugins/#NodePlugin) plugin:
 
 <!-- source: examples/emptier-schema.js -->
 ```js
@@ -88,8 +88,9 @@ type Query {
 
 ### Passing options to plugins
 
-The second argument to `buildSchema` is options which are made available to
-every plugin (as their second argument). The following example passes the
+The second argument to `buildSchema` is [the
+options](/graphile-build/plugin-options/) which are made available to every
+plugin (as their second argument). The following example passes the
 `nodeIdFieldName` setting through, changing from the default `id` to `flibble`:
 
 <!-- source: examples/empty-schema-with-options.js -->
@@ -110,7 +111,3 @@ interface Node {
   flibble: ID!
 }
 ```
-
-### What's next?
-
-An empty schema's not very useful, so lets look into extending the schema with plugins:

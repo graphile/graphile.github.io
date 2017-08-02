@@ -20,8 +20,38 @@
     "section": "guides"
   },
   {
+    "to": "/graphile-build/graphile-build/",
+    "title": "graphile-build",
+    "section": "library-reference"
+  },
+  {
+    "to": "/graphile-build/schema-builder/",
+    "title": "SchemaBuilder",
+    "section": "library-reference"
+  },
+  {
+    "to": "/graphile-build/plugin-options/",
+    "title": "Options",
+    "section": "library-reference"
+  },
+  {
+    "to": "/graphile-build/default-plugins/",
+    "title": "Default Plugins",
+    "section": "library-reference"
+  },
+  {
+    "to": "/graphile-build/all-hooks/",
+    "title": "All Hooks",
+    "section": "plugin-reference"
+  },
+  {
     "to": "/graphile-build/build-object/",
     "title": "Build Object",
-    "section": "reference"
+    "section": "plugin-reference"
+  },
+  {
+    "to": "/graphile-build/context-object/",
+    "title": "Context Object",
+    "section": "plugin-reference"
   }
 ]
