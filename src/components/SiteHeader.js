@@ -33,7 +33,9 @@ export default ({ location }) =>
           </li>
           <li className="nav-item">
             <Link
-              className={`nav-link ${location.pathname.match(/^\/graphile-build(\/|$)/)
+              className={`nav-link ${location.pathname.match(
+                /^\/graphile-build(\/|$)/
+              )
                 ? "active"
                 : ""}`}
               to="/graphile-build/getting-started/"
@@ -42,6 +44,11 @@ export default ({ location }) =>
             </Link>
           </li>
         </ul>
+        <span className="navbar-text">
+          <a href="https://github.com/graphile/graphile-build">
+            <img src="/images/GitHub-Mark-Light-120px-plus.png" width="26" />
+          </a>
+        </span>
       </div>
     </nav>
   </header>;
