@@ -63,10 +63,211 @@ TODO: example
 
 ### Declaring meta-data associated with a field
 
-### Determining what meta-data requested subfields have specified
+When you add a field to a `GraphQLObjectType` you may specify metadata
+associated with this field.
 
-##### `generateDataForType(type, parsedResolveInfoFragment)`
+Resolved metadata in Graphile-Build (see the next section) will be an object
+with string keys and values which are an array of arbitrary JavaScript values.
+If the same metadata key was added multiple times it will simply add to the
+array.
 
-For performance optimisations
+There are three ways to declare meta-data with a field:
 
-TODO: document
+#### When initially defining the object fields
+
+Instead of passing an object to `fields`, you can pass a function. This function will be passed the methods:
+
+- `addDataGeneratorForField(fieldName, generatorFn)` - will associate the data
+  generator with the field
+
+```js{6-10,22-25}
+const MyObject = newWithHooks(
+  GraphQLObjectType,
+  {
+    name: "MyObject",
+    fields: ({ addDataGeneratorForField }) => {
+      addDataGeneratorForField("id", ({ alias }) => {
+        return {
+          map: obj => ({ [alias]: obj.ID }),
+        };
+      });
+      addDataGeneratorForField("caps", ({ alias }) => {
+        return {
+          map: obj => ({ [alias]: obj.CAPS }),
+        };
+      });
+      addDataGeneratorForField("random", ({ alias }) => {
+        return {
+          map: () => ({ [alias]: Math.floor(Math.random() * 10000) }),
+        };
+      });
+      return {
+        id: {
+          type: new GraphQLNonNull(GraphQLString),
+          resolve: resolveAlias,
+        },
+        caps: {
+          type: new GraphQLNonNull(GraphQLString),
+          resolve: resolveAlias,
+        },
+        random: {
+          type: new GraphQLNonNull(GraphQLInt),
+          resolve: resolveAlias,
+        },
+      };
+    },
+  }
+);
+```
+
+#### When creating an individual field
+
+You can use the `fieldWithHooks` helper, passing it a function:
+
+
+```js{5-15}
+const MyObject = newWithHooks(GraphQLObjectType, {
+  name: "MyObject",
+  fields: ({ fieldWithHooks }) => {
+    return {
+      id: fieldWithHooks("id", ({ addDataGenerator }) => {
+        addDataGenerator(({ alias }) => {
+          return {
+            map: obj => ({ [alias]: obj.ID }),
+          };
+        });
+        return {
+          type: new GraphQLNonNull(GraphQLString),
+          resolve: resolveAlias,
+        };
+      }),
+      caps: fieldWithHooks("caps", ({ addDataGenerator }) => {
+        addDataGenerator(({ alias }) => {
+          return {
+            map: obj => ({ [alias]: obj.CAPS }),
+          };
+        });
+        return {
+          type: new GraphQLNonNull(GraphQLString),
+          resolve: resolveAlias,
+        };
+      }),
+      random: fieldWithHooks("random", ({ addDataGenerator }) => {
+        addDataGenerator(({ alias }) => {
+          return {
+            map: () => ({ [alias]: Math.floor(Math.random() * 10000) }),
+          };
+        });
+        return {
+          type: new GraphQLNonNull(GraphQLInt),
+          resolve: resolveAlias,
+        };
+      }),
+    };
+  },
+});
+```
+
+#### In a `GraphQLObjectType:fields:field` hook
+
+Hooks can also associate metadata with a field; they are passed `addDataGenerator` on the Context argument, for example:
+
+```js{10-14}
+function MyObjectAddIdDataGeneratorPlugin(builder) {
+  builder.hook('GraphQLObjectType:fields:field', (
+    field,
+    _,
+    { fieldName, Self, addDataGenerator }
+  ) => {
+    if (Self.name !== 'MyObject' || fieldName !== 'id') {
+      return field;
+    }
+    addDataGenerator(({ alias }) => {
+      return {
+        map: obj => ({ [alias]: obj.ID }),
+      };
+    });
+    return field;
+  });
+}
+```
+
+### Recursing
+
+TODO: document this!
+
+```js{4,6}
+const MyObjectConnection = newWithHooks(GraphQLObjectType, {
+  name: "MyObjectConnection",
+  fields: ({ recurseDataGeneratorsForField }) => {
+    recurseDataGeneratorsForField("edges");
+    return {
+      edges: {
+        type: new GraphQLList(MyObjectEdge),
+      },
+    };
+  },
+});
+```
+
+### Determining the meta-data requested subfields have specified
+
+When it comes to `resolve` time we need to know what meta-data is available as
+it may influence what we do. We can only do this on a per-field (since every
+field will fetch data in a different way) so to use this we must use
+`fieldWithHooks` to get access to the `getDataFromParsedResolveInfoFragment`
+method:
+
+#### `getDataFromParsedResolveInfoFragment(parsedResolveInfoFragment, type)`
+
+Given a `parseResolveInfoFragment` and an expected return type, this will return the metadata associated with this field.
+
+```js{9,21-24,30-32}
+const Query = newWithHooks(GraphQLObjectType, {
+  name: "Query",
+  fields: ({ fieldWithHooks }) => ({
+    myConnection: fieldWithHooks(
+      "myConnection",
+      ({ addArgDataGenerator, getDataFromParsedResolveInfoFragment }) => {
+        addArgDataGenerator(function connectionFirst({ first }) {
+          if (first) {
+            return { limit: [first] };
+          }
+        });
+        return {
+          type: MyConnection
+          args: {
+            first: {
+              type: GraphQLInt,
+            },
+          },
+          resolve(data, args, context, resolveInfo) {
+            const parsedResolveInfoFragment = parseResolveInfo(resolveInfo);
+            const resolveData = getDataFromParsedResolveInfoFragment(
+              parsedResolveInfoFragment,
+              MyConnection
+            );
+
+            // For example, if this is called with (limit: 3)
+            // then we'd have:
+            //
+            // resolveData = {
+            //   limit: [
+            //     3
+            //   ]
+            // }
+
+            // TODO: generate and return connection
+          },
+        };
+      }
+    ),
+  })
+});
+```
+
+### See it for yourself
+
+Check out a working example in `fieldData` test:
+
+[https://github.com/graphile/graphile-build/blob/master/packages/graphile-build/__tests__/fieldData.test.js](https://github.com/graphile/graphile-build/blob/master/packages/graphile-build/__tests__/fieldData.test.js)
