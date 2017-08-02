@@ -14,5 +14,10 @@
   {
     "to": "/graphile-build/look-ahead/",
     "title": "Look Ahead"
+  },
+  {
+    "to": "/graphile-build/build-object/",
+    "title": "Build Object",
+    "reference": true
   }
 ]
