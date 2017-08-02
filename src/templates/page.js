@@ -5,7 +5,7 @@ import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
 
 const Page = ({
-  data: { remark: { html }, nav: { edges: navEdges } },
+  data: { remark: { html, frontmatter: { title } }, nav: { edges: navEdges } },
   location,
 }) => {
   const currentIndex = navEdges.findIndex(
@@ -24,7 +24,7 @@ const Page = ({
   return (
     <div>
       <Helmet
-        title="Graphile"
+        title={`Graphile | ${title}`}
         meta={[
           {
             name: "description",

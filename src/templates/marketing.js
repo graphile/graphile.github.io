@@ -14,11 +14,12 @@ const Marketing = ({
 }) =>
   <div>
     <Helmet
-      title="graphile-build"
+      title="Graphile | Powerful, Extensible and Performant GraphQL APIs Rapidly"
       meta={[
         {
           name: "description",
-          content: "Utilities to build powerful and performant GraphQL APIs",
+          content:
+            "Utilities to build powerful, performant and extensible GraphQL APIs rapidly",
         },
         {
           name: "keywords",
