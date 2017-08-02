@@ -1,0 +1,51 @@
+pre code {
+  font-variant: none;
+}
+header,
+footer {
+  background: #424;
+  color: white;
+}
+footer {
+  padding: 3rem 0;
+}
+
+.gatsby-highlight-code-line {
+  background-color: #feb;
+  display: block;
+  margin-right: -1em;
+  margin-left: -1em;
+  padding-right: 1em;
+  padding-left: 0.75em;
+  border-left: 0.25em solid #f99;
+}
+
+
+.template-marketing {
+  .page-content section {
+    padding: 2em 0;
+  }
+  .page-content header,
+  .page-content footer {
+    background: #424;
+    color: white;
+    padding: 3rem 0;
+  }
+
+  .page-content section.even {
+    background: #fff0f0;
+  }
+}
+
+.template-page {
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 30px;
+  }
+
+  h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
+    padding: 0;
+    color: inherit;
+    background-color: initial;
+    border-radius: initial;
+  }
+}
