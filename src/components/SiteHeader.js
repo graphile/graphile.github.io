@@ -43,6 +43,18 @@ export default ({ location }) =>
               Graphile-Build
             </Link>
           </li>
+          <li className="nav-item">
+            <Link
+              className={`nav-link ${location.pathname.match(
+                /^\/graphile-build-pg(\/|$)/
+              )
+                ? "active"
+                : ""}`}
+              to="/graphile-build-pg/introduction/"
+            >
+              Graphile-Build-PG
+            </Link>
+          </li>
         </ul>
         <span className="navbar-text">
           <a href="https://github.com/graphile/graphile-build">

@@ -28,9 +28,11 @@ const Page = ({
   data: { remark: { html, frontmatter: { title } }, nav },
   location,
 }) => {
-  const thisNav = nav.edges.find(
-    ({ node: { name } }) => name === "graphile-build"
-  ).node;
+  const [, navSection] = location.pathname.split("/");
+  const thisNavEdge = nav.edges.find(
+    ({ node: { name } }) => name === navSection
+  );
+  const thisNav = thisNavEdge.node || { pages: [], sections: [] };
   const navPages = thisNav.pages;
   const navSections = thisNav.sections || [];
   const currentIndex = navPages.findIndex(({ to }) => to === location.pathname);

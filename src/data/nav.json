@@ -75,6 +75,12 @@
   },
   {
     "name": "graphile-build-pg",
+    "sections": [
+      {
+        "id": "guides",
+        "title": "Guides"
+      }
+    ],
     "pages": [
       {
         "to": "/graphile-build-pg/introduction/",
