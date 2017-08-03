@@ -1,61 +1,75 @@
 [
   {
     "name": "graphile-build",
+    "sections": [
+      {
+        "id": "guides",
+        "title": "Guides"
+      },
+      {
+        "id": "library-reference",
+        "title": "Library Reference"
+      },
+      {
+        "id": "plugin-reference",
+        "title": "Plugin Reference"
+      }
+    ],
     "pages": [
       {
         "to": "/graphile-build/getting-started/",
         "title": "Getting Started",
-        "section": "guides"
+        "sectionId": "guides"
       },
       {
         "to": "/graphile-build/plugins/",
         "title": "Plugins",
-        "section": "guides"
+        "sectionId": "guides"
       },
       {
         "to": "/graphile-build/hooks/",
         "title": "Hooks",
-        "section": "guides"
+        "sectionId": "guides"
       },
       {
         "to": "/graphile-build/look-ahead/",
         "title": "Look Ahead",
-        "section": "guides"
+        "sectionId": "guides"
       },
       {
         "to": "/graphile-build/graphile-build/",
         "title": "graphile-build",
-        "section": "library-reference"
+        "sectionId": "library-reference"
       },
       {
         "to": "/graphile-build/schema-builder/",
         "title": "SchemaBuilder",
-        "section": "library-reference"
+        "sectionId": "library-reference"
       },
       {
         "to": "/graphile-build/plugin-options/",
         "title": "Options",
-        "section": "library-reference"
+        "sectionId": "library-reference"
       },
       {
         "to": "/graphile-build/default-plugins/",
         "title": "Default Plugins",
-        "section": "library-reference"
+        "sectionId": "library-reference"
       },
       {
         "to": "/graphile-build/all-hooks/",
         "title": "All Hooks",
-        "section": "plugin-reference"
+        "sectionId": "plugin-reference"
       },
       {
         "to": "/graphile-build/build-object/",
         "title": "Build Object",
-        "section": "plugin-reference"
+        "sectionId": "plugin-reference"
       },
       {
         "to": "/graphile-build/context-object/",
         "title": "Context Object",
-        "section": "plugin-reference"
+        "sectionId": "plugin-reference"
       }
     ]
   },
@@ -65,7 +79,7 @@
       {
         "to": "/graphile-build-pg/introduction/",
         "title": "Introduction",
-        "section": "guides"
+        "sectionId": "guides"
       }
     ]
   }

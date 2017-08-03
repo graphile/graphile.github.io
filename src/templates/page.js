@@ -4,7 +4,8 @@ import Helmet from "react-helmet";
 import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
 
-const sectionIs = desiredSection => ({ section }) => section === desiredSection;
+const sectionIs = desiredSection => ({ sectionId }) =>
+  sectionId === desiredSection;
 
 function PageList({ navs, location }) {
   return (
@@ -31,6 +32,7 @@ const Page = ({
     ({ node: { name } }) => name === "graphile-build"
   ).node;
   const navPages = thisNav.pages;
+  const navSections = thisNav.sections || [];
   const currentIndex = navPages.findIndex(({ to }) => to === location.pathname);
   let next, nextText, prev, prevText;
   if (currentIndex > 0) {
@@ -71,21 +73,17 @@ const Page = ({
         <div className="container">
           <div className="row">
             <div className="col-12 col-md-3 push-md-9">
-              <h4>Guides</h4>
-              <PageList
-                location={location}
-                navs={navPages.filter(sectionIs("guides"))}
-              />
-              <h4>Library Reference</h4>
-              <PageList
-                location={location}
-                navs={navPages.filter(sectionIs("library-reference"))}
-              />
-              <h4>Plugin Reference</h4>
-              <PageList
-                location={location}
-                navs={navPages.filter(sectionIs("plugin-reference"))}
-              />
+              {navSections.map(({ id, title }) =>
+                <div key={id}>
+                  <h4>
+                    {title}
+                  </h4>
+                  <PageList
+                    location={location}
+                    navs={navPages.filter(sectionIs(id))}
+                  />
+                </div>
+              )}
             </div>
             <div className="col-12 col-md-9 pull-md-3">
               <div className="container">
@@ -135,10 +133,14 @@ export const pageQuery = graphql`
         node {
           id
           name
+          sections {
+            id
+            title
+          }
           pages {
             to
             title
-            section
+            sectionId
           }
         }
       }
