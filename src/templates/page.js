@@ -4,14 +4,13 @@ import Helmet from "react-helmet";
 import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
 
-const sectionIs = desiredSection => ({ node: { section } }) =>
-  section === desiredSection;
+const sectionIs = desiredSection => ({ section }) => section === desiredSection;
 
 function PageList({ navs, location }) {
   return (
     <ul className="nav flex-column">
-      {navs.map(({ node: { id, to, title } }) =>
-        <li key={id} className="nav-item">
+      {navs.map(({ to, title }) =>
+        <li key={to} className="nav-item">
           <Link
             className={`nav-link ${location.pathname === to ? "active" : ""}`}
             to={to}
@@ -25,20 +24,22 @@ function PageList({ navs, location }) {
 }
 
 const Page = ({
-  data: { remark: { html, frontmatter: { title } }, nav: { edges: navEdges } },
+  data: { remark: { html, frontmatter: { title } }, nav },
   location,
 }) => {
-  const currentIndex = navEdges.findIndex(
-    ({ node: { to } }) => to === location.pathname
-  );
+  const thisNav = nav.edges.find(
+    ({ node: { name } }) => name === "graphile-build"
+  ).node;
+  const navPages = thisNav.pages;
+  const currentIndex = navPages.findIndex(({ to }) => to === location.pathname);
   let next, nextText, prev, prevText;
   if (currentIndex > 0) {
-    prev = navEdges[currentIndex - 1].node.to;
-    prevText = navEdges[currentIndex - 1].node.title;
+    prev = navPages[currentIndex - 1].to;
+    prevText = navPages[currentIndex - 1].title;
   }
-  if (currentIndex >= 0 && currentIndex < navEdges.length - 1) {
-    next = navEdges[currentIndex + 1].node.to;
-    nextText = navEdges[currentIndex + 1].node.title;
+  if (currentIndex >= 0 && currentIndex < navPages.length - 1) {
+    next = navPages[currentIndex + 1].to;
+    nextText = navPages[currentIndex + 1].title;
   }
 
   return (
@@ -73,17 +74,17 @@ const Page = ({
               <h4>Guides</h4>
               <PageList
                 location={location}
-                navs={navEdges.filter(sectionIs("guides"))}
+                navs={navPages.filter(sectionIs("guides"))}
               />
               <h4>Library Reference</h4>
               <PageList
                 location={location}
-                navs={navEdges.filter(sectionIs("library-reference"))}
+                navs={navPages.filter(sectionIs("library-reference"))}
               />
               <h4>Plugin Reference</h4>
               <PageList
                 location={location}
-                navs={navEdges.filter(sectionIs("plugin-reference"))}
+                navs={navPages.filter(sectionIs("plugin-reference"))}
               />
             </div>
             <div className="col-12 col-md-9 pull-md-3">
@@ -133,9 +134,12 @@ export const pageQuery = graphql`
       edges {
         node {
           id
-          to
-          title
-          section
+          name
+          pages {
+            to
+            title
+            section
+          }
         }
       }
     }
