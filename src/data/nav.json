@@ -86,6 +86,56 @@
         "to": "/graphile-build-pg/introduction/",
         "title": "Introduction",
         "sectionId": "guides"
+      },
+      {
+        "to": "/graphile-build-pg/usage/",
+        "title": "Usage",
+        "sectionId": "guides"
+      },
+      {
+        "to": "/graphile-build-pg/settings/",
+        "title": "Settings",
+        "sectionId": "guides"
+      },
+      {
+        "to": "/graphile-build-pg/connections/",
+        "title": "Connections",
+        "sectionId": "guides"
+      },
+      {
+        "to": "/graphile-build-pg/relations/",
+        "title": "Relations",
+        "sectionId": "guides"
+      },
+      {
+        "to": "/graphile-build-pg/crud-mutations/",
+        "title": "CRUD Mutations",
+        "sectionId": "guides"
+      },
+      {
+        "to": "/graphile-build-pg/computed-columns/",
+        "title": "Computed Columns",
+        "sectionId": "guides"
+      },
+      {
+        "to": "/graphile-build-pg/custom-queries/",
+        "title": "Custom Queries",
+        "sectionId": "guides"
+      },
+      {
+        "to": "/graphile-build-pg/custom-mutations/",
+        "title": "Custom Mutations",
+        "sectionId": "guides"
+      },
+      {
+        "to": "/graphile-build-pg/security/",
+        "title": "Security",
+        "sectionId": "guides"
+      },
+      {
+        "to": "/graphile-build-pg/introspection/",
+        "title": "Introspection",
+        "sectionId": "guides"
       }
     ]
   }
