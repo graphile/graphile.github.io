@@ -4,15 +4,15 @@
     "sections": [
       {
         "id": "guides",
-        "title": "Guides"
+        "title": "Overview"
       },
       {
         "id": "library-reference",
-        "title": "Library Reference"
+        "title": "Using the Library"
       },
       {
         "id": "plugin-reference",
-        "title": "Plugin Reference"
+        "title": "Building a Plugin"
       }
     ],
     "pages": [
@@ -57,6 +57,11 @@
         "sectionId": "library-reference"
       },
       {
+        "to": "/graphile-build/omitting-plugins/",
+        "title": "Omitting Plugins",
+        "sectionId": "guides"
+      },
+      {
         "to": "/graphile-build/all-hooks/",
         "title": "All Hooks",
         "sectionId": "plugin-reference"
@@ -70,6 +75,11 @@
         "to": "/graphile-build/context-object/",
         "title": "Context Object",
         "sectionId": "plugin-reference"
+      },
+      {
+        "to": "/graphile-build/schema-builder/",
+        "title": "SchemaBuilder",
+        "sectionId": "library-reference"
       }
     ]
   },

@@ -12,15 +12,17 @@ add plugins, remove plugins, even replace the entire stack if you so desire.
 ### Loading Plugins
 
 Graphile-Build plugins are simple functions that interact with [the
-`SchemaBuilder`](/graphile-build/schema-builder/), for example adding hooks.
-When you perform [`buildSchema(plugins)`](/graphile-build/graphile-build/) we
-create a new `SchemaBuilder` instance and then load each of the plugins against
-it.
+`SchemaBuilder`](/graphile-build/schema-builder/), most commonly by registering
+hooks.  When you perform
+[`buildSchema(plugins)`](/graphile-build/graphile-build/) we create a new
+`SchemaBuilder` instance and then load each of the plugins against it.
 
-The plugins are loaded in the order specified, if a plugin returns a Promise
+The plugins are loaded in the order specified. If a plugin returns a `Promise`
 (e.g. an asynchronous plugin) then we will wait for that promise to resolve
 before continuing to load the next plugin, otherwise we will assume the plugin
-is synchronous.
+is synchronous. This asynchronous period should be used for performing tasks
+such as introspecting a data store or fetching a file from the internet; the
+hooks themselves run synchronously and thus must not perform asynchronous work.
 
 An example of a plugin that does nothing is this no-op plugin:
 

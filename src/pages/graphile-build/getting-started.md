@@ -58,56 +58,6 @@ type Query implements Node {
 }
 ```
 
-#### Building a Schema without the Node interface
-
-It's possible to build an even more minimal schema without Node support by
-omitting the [`NodePlugin`](/graphile-build/default-plugins/#NodePlugin) plugin:
-
-<!-- source: examples/emptier-schema.js -->
-```js
-const { buildSchema, defaultPlugins, NodePlugin } = require("graphile-build");
-const { printSchema } = require("graphql/utilities");
-
-buildSchema(
-  defaultPlugins.filter(plugin => plugin !== NodePlugin)
-).then(schema => {
-  console.log(printSchema(schema));
-});
-```
-
-which generates this much simpler schema:
-
-```graphql
-# The root query type which gives access points into the data universe.
-type Query {
-  # Exposes the root query type nested one level down. This is helpful for Relay 1
-  # which can only query top level fields if they are in a particular form.
-  query: Query!
-}
-```
-
-### Passing options to plugins
-
-The second argument to `buildSchema` is [the
-options](/graphile-build/plugin-options/) which are made available to every
-plugin (as their second argument). The following example passes the
-`nodeIdFieldName` setting through, changing from the default `id` to `flibble`:
-
-<!-- source: examples/empty-schema-with-options.js -->
-```js
-const { buildSchema, defaultPlugins } = require("graphile-build");
-const { printSchema } = require("graphql/utilities");
-
-buildSchema(defaultPlugins, { nodeIdFieldName: "flibble" }).then(schema => {
-  console.log(printSchema(schema));
-});
-```
-
-which modifies the Node interface thusly:
-
-```graphql
-interface Node {
-  # A globally unique identifier. Can be used in various places throughout the system to identify this single value.
-  flibble: ID!
-}
-```
+(See [Omitting Plugins](/graphile-build/omitting-plugins/) for how to make this
+schema even simpler by omitting the Node interface, and
+[Options](/graphile-build/plugin-options/) for how to pass options to plugins.)

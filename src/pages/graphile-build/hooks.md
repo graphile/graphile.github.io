@@ -6,17 +6,11 @@ title: Hooks
 
 ## Hooks
 
-The most common thing for a plugin to do is to add hooks to the builder. Hooks
-allow you to manipulate the specification that is being passed to the GraphQL
-constructors before the objects are constructed - therefore bypassing the need
-to fiddle with the private interfaces to GraphQL.
+The most common thing for a plugin to do is to add hooks to the builder.
 
-Hooks are registered via a call to `builder.hook(hookName, hookFunction)`.
-
-Every `hookFunction` must synchronously return a value - either the value that it was passed
-in or a derivative of it.
-
-You can think of hooks as wrappers around the original object spec, like this:
+Hooks allow you to manipulate the argument (specification) that is being passed
+to the GraphQL object constructors before the objects are constructed. You can
+think of hooks as wrappers around the original object spec, like this:
 
 ```js
 const MyType = newWithHooks(GraphQLObjectType, spec);
@@ -25,6 +19,11 @@ const MyType = newWithHooks(GraphQLObjectType, spec);
 
 const MyType = new GraphQLObjectType(hook3(hook2(hook1(spec))));
 ```
+
+Hooks are registered via a call to `builder.hook(hookName, hookFunction)`.
+
+Every `hookFunction` must synchronously return a value - either the value that it was passed
+or a derivative of it (preferably immutable, but we're not strict on that).
 
 ### Which hook to attach to: `hookName`
 
@@ -38,7 +37,7 @@ here's a brief overview of some of the more important ones:
 - `init`: perform setup after `build` freezes but before building the schema starts
 
 - `GraphQLSchema`: root-level schema - hook to add `query`,
-  `mutation` or `subscription` fields; called by `buildSchema(plugins, options)`
+  `mutation` or `subscription` fields; called implicitly by `buildSchema(plugins, options)`
 
 - When creating a `GraphQLObjectType` via
   `newWithHooks`:
@@ -61,6 +60,13 @@ here's a brief overview of some of the more important ones:
 
   - `GraphQLEnumType` add/remove any root-level attributes, e.g. add a description
   - `GraphQLEnumType:values` add/remove values
+
+The "(delayed)" hooks above (and their descendents) are not called until
+*after* the object is constructed (which means they can reference the object
+itself - allowing circular references such as our `type Query { query: Query }`
+circular type); GraphQL will automatically call them when `Type.getFields()` is
+called, which may still be within the same tick - i.e. they are not fully
+asynchronous.
 
 ### What to do when that hook fires: `hookFunction`
 
