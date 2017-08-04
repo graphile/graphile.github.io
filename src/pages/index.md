@@ -245,7 +245,7 @@ main();
 
 <div class='row justify-content-center'>
 <div>
-  <h2>Questions, comments or feedback? <a href='mailto:info@graphile.com?subject=Graphile%20question%2Fcomment%2Ffeedback%3A'>info@graphile.com</a></h2>
+  <h2>Questions, comments or feedback? <a href='mailto:info@graphile.org?subject=Graphile%20question%2Fcomment%2Ffeedback%3A'>info@graphile.org</a></h2>
 </div>
 </div>
 
