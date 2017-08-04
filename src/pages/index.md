@@ -270,13 +270,13 @@ id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validat
       <div class='form-group'>
         <label for="mce-EMAIL">Email Address: </label>
         <input type="email" value="" name="EMAIL" class="required email form-control mx-sm-3" id="mce-EMAIL">
-        <div id="mce-responses" class="clear">
-          <div class="response" id="mce-error-response" style="display:none"></div>
-          <div class="response" id="mce-success-response" style="display:none"></div>
-        </div>
         <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
         <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_d103f710cf00a9273b55e8e9b_c3a9eb5c4e" tabindex="-1" value=""></div>
         <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button btn btn-primary"></div>
+      </div>
+      <div id="mce-responses" class="clear">
+        <div class="response" id="mce-error-response" style="display:none"></div>
+        <div class="response" id="mce-success-response" style="display:none"></div>
       </div>
     </div>
   </div>
