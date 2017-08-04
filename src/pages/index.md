@@ -10,9 +10,9 @@ title: Extensible GraphQL APIs through Plugins
 # Build Powerful GraphQL APIs
 
 <p class='lead'>
-Graphile-Build provides you with a framework to build high-performance
-extensible GraphQL APIs by combining plugins and using advanced look-ahead
-features.
+The Graphile suite of Node.js modules provide you with the tools to rapidly
+build high-performance extensible GraphQL APIs by combining plugins and using
+advanced look-ahead features.
 </p>
 
 <div class='row'>
@@ -21,17 +21,14 @@ features.
 Build your schema with plugins  
 ```js
 buildSchema(plugins)
+ 
 ```
 
-```graphql
+```graphql{2}
 type Person {
   # @deprecated Use 'name' instead
   # The person's first name
   firstName: String
-
-  # @deprecated Use 'name' instead
-  # The person's last name
-  lastName: String
 
   #...
 ```
@@ -41,17 +38,14 @@ type Person {
 
 Transform your schema with ease  
 ```js
-plugins.push(DeprecationFromCommentPlugin)
+buildSchema([...plugins,
+  DeprecateFromCommentPlugin])
 ```
 
-```graphql
+```graphql{3-4}
 type Person {
   # The person's first name
   firstName: String @deprecated(
-    reason: "Use 'name' instead")
-
-  # The person's last name
-  lastName: String @deprecated(
     reason: "Use 'name' instead")
 
   #...
@@ -72,8 +66,8 @@ type Person {
 
 # Straightforward Integration
 <p class='lead'>
-If you're already using the reference implementation of GraphQL from Facebook
-then adding hooks is fairly straightforward:
+If you're already building with the reference implementation of GraphQL from
+Facebook then adding hooks is fairly straightforward:
 </p>
 
 <div class='container'>
@@ -83,12 +77,11 @@ then adding hooks is fairly straightforward:
 
 `graphql`:
 
-```js{1}
-const MyType = new GraphQLObjectType({
-  name: 'MyType',
-  fields: {
-    field1: {
-      type: GraphQLString,
+```js{2}
+const MyType =
+  new GraphQLObjectType({
+    name: 'MyType',
+    fields: {
       // ...
 ```
 
@@ -97,12 +90,11 @@ const MyType = new GraphQLObjectType({
 
 `graphile-build`:
 
-```js{1}
-const MyType = newWithHooks(GraphQLObjectType, {
-  name: 'MyType',
-  fields: {
-    field1: {
-      type: GraphQLString,
+```js{2}
+const MyType =
+  newWithHooks(GraphQLObjectType, {
+    name: 'MyType',
+    fields: {
       // ...
 ```
 
@@ -117,7 +109,8 @@ const MyType = newWithHooks(GraphQLObjectType, {
 <section class='even'>
 <div class='container'>
 <div class='row'>
-<div class='col-12'>
+<div class='col-4 col-fa hidden-md-down'><i class='fa fa-handshake-o' aria-hidden="true"></i></div>
+<div class='col-12 col-lg-8'>
 
 # Fully compatible
 
@@ -125,10 +118,9 @@ const MyType = newWithHooks(GraphQLObjectType, {
 We use the reference GraphQL implementation under the hood, so you know we're spec compliant.
 </p>
 
- We do not use private APIs to manipulate the generated schema - only the
- public interfaces. You can use regular GraphQL objects in your generated
- Schema - you only need hooks for the parts you want callbacks for.
-</div><!-- /col-12 -->
+ You can use regular GraphQL objects from other libraries in your generated
+ schema - you only need to change the parts of your code that you wish to trigger hooks for.
+</div>
 
 </div><!-- /row -->
 </div><!-- /container -->
@@ -139,7 +131,7 @@ We use the reference GraphQL implementation under the hood, so you know we're sp
 <section class='odd'>
 <div class='container'>
 <div class='row'>
-<div class='col-12'>
+<div class='col-12 col-lg-8'>
 
 # First class schema watching
 
@@ -151,7 +143,8 @@ For example: when your underlying data structure changes your Graphile-Build
 plugins can trigger a rebuild event and you'll automatically be supplied with a
 fresh new GraphQL schema to replace the out-of-date one - no need to restart
 your server!
-</div><!-- /col-12 -->
+</div><!-- /col-9 -->
+<div class='col-4 col-fa hidden-md-down'><i class='fa fa-refresh' aria-hidden="true"></i></div>
 
 </div><!-- /row -->
 </div><!-- /container -->
@@ -162,7 +155,8 @@ your server!
 <section class='even'>
 <div class='container'>
 <div class='row'>
-<div class='col-12'>
+<div class='col-4 col-fa hidden-md-down'><i class='fa fa-rocket' aria-hidden="true"></i></div>
+<div class='col-12 col-lg-8'>
 
 # Performance baked in
 
@@ -189,7 +183,7 @@ especially where database connection latency was above 1ms.
 <section class='odd'>
 <div class='container'>
 <div class='row'>
-<div class='col-12'>
+<div class='col-12 col-lg-8'>
 
 # Data-store independent
 
@@ -197,11 +191,16 @@ especially where database connection latency was above 1ms.
 Build plugins for anything that Node.js can communicate with.
 </p>
 
-We have extensive support for PostgreSQL already through the `graphile-build-pg`
-module; this performs introspection of your database schema and automatically
-builds a Relay-enabled GraphQL API from the tables it finds. Security is
-handled through PostgreSQL's GRANT system and Row Level Security features.
-</div><!-- /col-12 -->
+We treat GraphQL as a first-class citizen - everything is modelled around
+GraphQL, so any backend technology is possible.
+
+We already have extensive support for PostgreSQL through the
+`graphile-build-pg` module; the plugins therein performs introspection of your
+database schema and automatically build the relevant GraphQL objects and fields
+based on the tables, columns, functions, relations that it finds in your
+database - no need to create them manually!
+</div>
+<div class='col-4 col-fa hidden-md-down'><i class='fa fa-database' aria-hidden="true"></i></div>
 
 </div><!-- /row -->
 </div><!-- /container -->
@@ -211,10 +210,10 @@ handled through PostgreSQL's GRANT system and Row Level Security features.
 
 <section class='even'>
 <div class='container'>
-<div class='row'>
-<div class='col-12'>
+<div class='row justify-content-center'>
+<div class='text-center'>
 
-# Get started
+# Quick to start
 
 ```js
 const { buildSchema, defaultPlugins } = require("graphile-build");
