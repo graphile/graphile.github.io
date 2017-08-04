@@ -7,12 +7,12 @@ title: Extensible GraphQL APIs through Plugins
 <header>
 <div class='container'>
 
-# Build Powerful GraphQL APIs
+## Powerful, Performant and Extensible GraphQL APIs
 
 <p class='lead'>
 The Graphile suite of Node.js modules provide you with the tools to rapidly
-build high-performance extensible GraphQL APIs by combining plugins and using
-advanced look-ahead features.
+generate high-performance extensible GraphQL APIs by combining plugins and
+using advanced look-ahead features.
 </p>
 
 <div class='row'>
@@ -115,7 +115,8 @@ const MyType =
 # Fully compatible
 
 <p class='lead'>
-We use the reference GraphQL implementation under the hood, so you know we're spec compliant.
+We use the <a href="http://graphql.org/graphql-js/">reference GraphQL implementation</a>
+under the hood, so you know we're spec compliant.
 </p>
 
  You can use regular GraphQL objects from other libraries in your generated
@@ -140,7 +141,7 @@ Automatically update your running GraphQL schema without the need to restart the
 </p>
 
 For example: when your underlying data structure changes your Graphile-Build
-plugins can trigger a rebuild event and you'll automatically be supplied with a
+plugins can [trigger a rebuild](/graphile-build/schema-builder/#plugin-methods) event and you'll automatically be supplied with a
 fresh new GraphQL schema to replace the out-of-date one - no need to restart
 your server!
 </div><!-- /col-9 -->
@@ -164,13 +165,15 @@ your server!
 Say Goodbye to the N+1 problem; fewer round-trips means higher performance.
 </p>
 
-By using our lookahead tools your code can know what's coming and make sure it
-requests the correct fields ahead of time, leading to fewer round-trips and
-higher performance.
+By using our [look-ahead feature](/graphile-build/look-ahead/) your code can
+know what's coming and make sure it requests the correct fields ahead of time,
+leading to fewer round-trips and higher performance.
 
-PostGraphQL v4 utilises this functionality to enable it to serve even deeply
-nested requests with just one SQL query, which lead to significant speedups
-especially where database connection latency was above 1ms.
+Version 4 of the popular
+[PostGraphQL](https://github.com/postgraphql/postgraphql) OSS project utilises
+this functionality to enable it to serve even deeply nested requests with just
+one SQL query, which lead to significant speedups especially where database
+connection latency was above 1ms.
 
 </div><!-- /col-12 -->
 
@@ -192,13 +195,14 @@ Build plugins for anything that Node.js can communicate with.
 </p>
 
 We treat GraphQL as a first-class citizen - everything is modelled around
-GraphQL, so any backend technology is possible.
+GraphQL, so any backend technology that can be expressed through GraphQL can be
+built with Graphile.
 
 We already have extensive support for PostgreSQL through the
 `graphile-build-pg` module; the plugins therein performs introspection of your
 database schema and automatically build the relevant GraphQL objects and fields
 based on the tables, columns, functions, relations that it finds in your
-database - no need to create them manually!
+database - no need to manually keep your codebase and database schema in sync!
 </div>
 <div class='col-4 col-fa hidden-md-down'><i class='fa fa-database' aria-hidden="true"></i></div>
 
