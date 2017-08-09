@@ -1,13 +1,21 @@
 pre code {
   font-variant: none;
 }
+
 header,
 footer {
-  background: #424;
-  color: white;
+  // background: #424;
+  // color: white;
 }
+
 footer {
   padding: 3rem 0;
+}
+
+a {
+  color: #E44336;
+  font-weight: 600;
+  text-decoration: none;
 }
 
 .gatsby-highlight-code-line {
@@ -22,6 +30,25 @@ footer {
 
 
 .template-marketing {
+  .hero {
+    padding-top: 20vh;
+    padding-bottom: 20vh;
+    background: #E44336;
+    color: white;
+    background-image: linear-gradient(to bottom left, #E44336 0%, #A83128 100%);
+    text-align: center;
+    // background: #171C22;
+    // color: white;
+
+    h1 {
+      color: inherit;
+    }
+  }
+
+  pre {
+    box-shadow: 0 0 50px 0px rgba(0, 0, 0, 0.16);
+  }
+
   .col-fa {
     font-size: 800%;
     display: flex;
@@ -29,29 +56,47 @@ footer {
     justify-content: center;
   }
   .page-content section {
-    padding: 2em 0;
+    padding-top: 10vh;
+    padding-bottom: 10vh;
+
+    h1,h2,p {
+      text-align: center;
+      max-width: 60%;
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
   .page-content header,
   .page-content footer {
-    background: #424;
-    color: white;
-    padding: 3rem 0;
+    // background: #424;
+    // color: white;
   }
 
   .page-content section.even {
-    background: #fff0f0;
+    background: #e2e2e6;
+  }
+
+  .page-content section.odd {
+    background: #edeef1;
   }
 }
 
-.template-page {
-  h1, h2, h3, h4, h5, h6 {
-    margin-top: 30px;
-  }
+.page-content .container {
+  max-width: 960px;
+  margin: 0 auto;
+}
 
+.template-page {
   h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
     padding: 0;
     color: inherit;
     background-color: initial;
     border-radius: initial;
   }
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 2.175rem;
+  margin-bottom: 1.275rem;
 }

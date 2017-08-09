@@ -4,12 +4,28 @@ path: /
 title: Extensible GraphQL APIs through Plugins
 ---
 
-<header>
+<!-- **************************************** -->
+
+<header class='hero'>
 <div class='container-fluid'>
+
+# Header
+
+</div><!-- /container -->
+</header>
+
+
+<!-- **************************************** -->
+
+<section class='odd'>
+<div class='container'>
+
+<div class='row'>
+<div class='col-xs-12'>
 
 ## Powerful, Performant and Extensible GraphQL APIs
 
-<p class='lead'>
+<p>
 The Graphile suite of Node.js modules provide you with the tools to rapidly
 generate high-performance extensible GraphQL APIs by combining plugins and
 using advanced look-ahead features.
@@ -51,20 +67,20 @@ type Person {
   #...
 ```
 
-</div><!-- /col-6 -->
-</div><!-- /row -->
+</div>
+</div>
+</div>
+</section>
 
-</div><!-- /container -->
-</header>
 
 <!-- **************************************** -->
 
-<section class='odd'>
+<section class='even'>
 <div class='container'>
 <div class='row'>
 <div class='col-xs-12'>
 
-# Straightforward Integration
+## Straightforward Integration
 <p class='lead'>
 If you're already building with the reference implementation of GraphQL from
 Facebook then adding hooks is fairly straightforward:
@@ -106,13 +122,13 @@ const MyType =
 
 <!-- **************************************** -->
 
-<section class='even'>
+<section class='odd'>
 <div class='container'>
 <div class='row'>
 <div class='col-4 col-fa hidden-md-down'><i class='fa fa-handshake-o' aria-hidden="true"></i></div>
 <div class='col-xs-12 col-lg-8'>
 
-# Fully compatible
+## Fully compatible
 
 <p class='lead'>
 We use the <a href="http://graphql.org/graphql-js/">reference GraphQL implementation</a>
@@ -129,12 +145,12 @@ under the hood, so you know we're spec compliant.
 
 <!-- **************************************** -->
 
-<section class='odd'>
+<section class='even'>
 <div class='container'>
 <div class='row'>
 <div class='col-xs-12 col-lg-8'>
 
-# First class schema watching
+## First class schema watching
 
 <p class='lead'>
 Automatically update your running GraphQL schema without the need to restart the server.
@@ -153,13 +169,13 @@ your server!
 
 <!-- **************************************** -->
 
-<section class='even'>
+<section class='odd'>
 <div class='container'>
 <div class='row'>
 <div class='col-4 col-fa hidden-md-down'><i class='fa fa-rocket' aria-hidden="true"></i></div>
 <div class='col-xs-12 col-lg-8'>
 
-# Performance baked in
+## Performance baked in
 
 <p class='lead'>
 Say Goodbye to the N+1 problem; fewer round-trips means higher performance.
@@ -183,12 +199,12 @@ connection latency was above 1ms.
 
 <!-- **************************************** -->
 
-<section class='odd'>
+<section class='even'>
 <div class='container'>
 <div class='row'>
 <div class='col-xs-12 col-lg-8'>
 
-# Data-store independent
+## Data-store independent
 
 <p class='lead'>
 Build plugins for anything that Node.js can communicate with.
@@ -212,12 +228,12 @@ database - no need to manually keep your codebase and database schema in sync!
 
 <!-- **************************************** -->
 
-<section class='even'>
+<section class='odd'>
 <div class='container'>
 <div class='row justify-content-center'>
 <div class='text-center col-xs-12'>
 
-# Quick to start
+## Quick to start
 
 ```js
 const { buildSchema, defaultPlugins } = require("graphile-build");
