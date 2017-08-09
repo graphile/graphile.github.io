@@ -87,7 +87,7 @@ const Page = ({
                 </div>
               )}
             </div>
-            <div className="col-12 col-md-9 pull-md-3">
+            <div className="col-xs-12 col-md-9 pull-md-3">
               <div className="container">
                 <div className="row">
                   <div

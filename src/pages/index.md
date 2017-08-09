@@ -5,7 +5,7 @@ title: Extensible GraphQL APIs through Plugins
 ---
 
 <header>
-<div class='container'>
+<div class='container-fluid'>
 
 ## Powerful, Performant and Extensible GraphQL APIs
 
@@ -16,7 +16,7 @@ using advanced look-ahead features.
 </p>
 
 <div class='row'>
-<div class='col-lg-6 col-12'>
+<div class='col-lg-6 col-xs-12'>
 
 Build your schema with plugins  
 ```js
@@ -34,7 +34,7 @@ type Person {
 ```
 
 </div><!-- /col-6 -->
-<div class='col-lg-6 col-12'>
+<div class='col-lg-6 col-xs-12'>
 
 Transform your schema with ease  
 ```js
@@ -62,7 +62,7 @@ type Person {
 <section class='odd'>
 <div class='container'>
 <div class='row'>
-<div class='col-12'>
+<div class='col-xs-12'>
 
 # Straightforward Integration
 <p class='lead'>
@@ -73,7 +73,7 @@ Facebook then adding hooks is fairly straightforward:
 <div class='container'>
 <div class='row'>
 
-<div class='col-12 col-lg-6'>
+<div class='col-xs-12 col-lg-6'>
 
 `graphql`:
 
@@ -86,7 +86,7 @@ const MyType =
 ```
 
 </div><!-- /col-6 -->
-<div class='col-12 col-lg-6'>
+<div class='col-xs-12 col-lg-6'>
 
 `graphile-build`:
 
@@ -110,7 +110,7 @@ const MyType =
 <div class='container'>
 <div class='row'>
 <div class='col-4 col-fa hidden-md-down'><i class='fa fa-handshake-o' aria-hidden="true"></i></div>
-<div class='col-12 col-lg-8'>
+<div class='col-xs-12 col-lg-8'>
 
 # Fully compatible
 
@@ -132,7 +132,7 @@ under the hood, so you know we're spec compliant.
 <section class='odd'>
 <div class='container'>
 <div class='row'>
-<div class='col-12 col-lg-8'>
+<div class='col-xs-12 col-lg-8'>
 
 # First class schema watching
 
@@ -157,7 +157,7 @@ your server!
 <div class='container'>
 <div class='row'>
 <div class='col-4 col-fa hidden-md-down'><i class='fa fa-rocket' aria-hidden="true"></i></div>
-<div class='col-12 col-lg-8'>
+<div class='col-xs-12 col-lg-8'>
 
 # Performance baked in
 
@@ -175,7 +175,7 @@ this functionality to enable it to serve even deeply nested requests with just
 one SQL query, which lead to significant speedups especially where database
 connection latency was above 1ms.
 
-</div><!-- /col-12 -->
+</div><!-- /col-xs-12 -->
 
 </div><!-- /row -->
 </div><!-- /container -->
@@ -186,7 +186,7 @@ connection latency was above 1ms.
 <section class='odd'>
 <div class='container'>
 <div class='row'>
-<div class='col-12 col-lg-8'>
+<div class='col-xs-12 col-lg-8'>
 
 # Data-store independent
 
@@ -215,7 +215,7 @@ database - no need to manually keep your codebase and database schema in sync!
 <section class='even'>
 <div class='container'>
 <div class='row justify-content-center'>
-<div class='text-center'>
+<div class='text-center col-xs-12'>
 
 # Quick to start
 
@@ -235,7 +235,7 @@ main();
 <a class='btn btn-primary btn-lg' href='/graphile-build/getting-started/'>Get started &raquo;</a>
 </div>
 
-</div><!-- /col-12 -->
+</div><!-- /col-xs-12 -->
 </div><!-- /container -->
 </section><!-- /even -->
 
@@ -244,7 +244,7 @@ main();
 <div class='container'>
 
 <div class='row justify-content-center'>
-<div>
+<div class='col-xs-12'>
   <h2>Questions, comments or feedback? <a href='mailto:info@graphile.org?subject=Graphile%20question%2Fcomment%2Ffeedback%3A'>info@graphile.org</a></h2>
 </div>
 </div>
@@ -252,7 +252,7 @@ main();
 <div style="height: 36px"></div>
 
 <div class='row justify-content-center'>
-<div class='col-12 col-md-8 text-center'>
+<div class='col-xs-12 col-md-8 text-center'>
 <!-- Begin MailChimp Signup Form -->
 <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
