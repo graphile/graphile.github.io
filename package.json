@@ -28,7 +28,11 @@
     "gatsby-transformer-remark": "^1.7.0",
     "graphile-build": "latest",
     "graphql": "^0.10.5",
-    "remark-custom-blocks": "^1.0.1"
+    "react-typography": "^0.16.1",
+    "remark-custom-blocks": "^1.0.1",
+    "typography": "^0.16.0",
+    "typography-theme-fairy-gates": "^0.15.11",
+    "typography-theme-funston": "^0.15.10"
   },
   "keywords": [
     "gatsby"
