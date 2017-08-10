@@ -7,7 +7,7 @@ title: Extensible GraphQL APIs through Plugins
 <!-- **************************************** -->
 
 <header class='hero'>
-<div class='container-fluid'>
+<div class='hero-block center'>
 
 # Tools to do GraphQL with.
 
@@ -20,19 +20,19 @@ title: Extensible GraphQL APIs through Plugins
 <!-- **************************************** -->
 
 <section>
-<div class='container'>
+<div class='container center'>
 
 <div class='row'>
 <div class='col-xs-12'>
+<div class='hero-block'>
 
 ## Powerful, Performant and Extensible GraphQL APIs
 
-<p>
 The Graphile suite of Node.js modules provide you with the tools to rapidly
 generate high-performance extensible GraphQL APIs by combining plugins and
 using advanced look-ahead features.
-</p>
 
+</div>
 <div class='row'>
 <div class='col-lg-6 col-xs-12'>
 
@@ -78,17 +78,18 @@ type Person {
 <!-- **************************************** -->
 
 <section>
-<div class='container'>
+<div class='container center'>
 <div class='row'>
 <div class='col-xs-12'>
+<div class='hero-block'>
 
 ## Straightforward Integration
-<p class='lead'>
+
 If you're already building with the reference implementation of GraphQL from
 Facebook then adding hooks is fairly straightforward:
-</p>
 
-<div class='container'>
+</div>
+<div class='container center'>
 <div class='row'>
 
 <div class='col-xs-12 col-lg-6'>
@@ -125,21 +126,21 @@ const MyType =
 <!-- **************************************** -->
 
 <section>
-<div class='container'>
+<div class='container center'>
 <div class='row'>
 <div class='col-xs-12'>
+<div class='hero-block'>
 
 ## Fully compatible
 
-<p class='lead'>
 We use the <a href="http://graphql.org/graphql-js/">reference GraphQL implementation</a>
 under the hood, so you know we're spec compliant.
-</p>
 
- You can use regular GraphQL objects from other libraries in your generated
- schema - you only need to change the parts of your code that you wish to trigger hooks for.
+You can use regular GraphQL objects from other libraries in your generated
+schema - you only need to change the parts of your code that you wish to trigger hooks for.
+
 </div>
-
+</div>
 </div><!-- /row -->
 </div><!-- /container -->
 </section>
@@ -147,20 +148,21 @@ under the hood, so you know we're spec compliant.
 <!-- **************************************** -->
 
 <section>
-<div class='container'>
+<div class='container center'>
 <div class='row'>
 <div class='col-xs-12'>
+<div class='hero-block'>
 
 ## First class schema watching
 
-<p class='lead'>
 Automatically update your running GraphQL schema without the need to restart the server.
-</p>
 
 For example: when your underlying data structure changes your Graphile-Build
 plugins can [trigger a rebuild](/graphile-build/schema-builder/#plugin-methods) event and you'll automatically be supplied with a
 fresh new GraphQL schema to replace the out-of-date one - no need to restart
 your server!
+
+</div>
 </div><!-- /col-9 -->
 
 </div><!-- /row -->
@@ -170,15 +172,14 @@ your server!
 <!-- **************************************** -->
 
 <section>
-<div class='container'>
+<div class='container center'>
 <div class='row'>
 <div class='col-xs-12'>
+<div class='hero-block'>
 
 ## Performance baked in
 
-<p class='lead'>
 Say Goodbye to the N+1 problem; fewer round-trips means higher performance.
-</p>
 
 By using our [look-ahead feature](/graphile-build/look-ahead/) your code can
 know what's coming and make sure it requests the correct fields ahead of time,
@@ -190,6 +191,7 @@ this functionality to enable it to serve even deeply nested requests with just
 one SQL query, which lead to significant speedups especially where database
 connection latency was above 1ms.
 
+</div>
 </div><!-- /col-xs-12 -->
 
 </div><!-- /row -->
@@ -199,15 +201,14 @@ connection latency was above 1ms.
 <!-- **************************************** -->
 
 <section>
-<div class='container'>
+<div class='container center'>
 <div class='row'>
 <div class='col-xs-12'>
+<div class='hero-block'>
 
 ## Data-store independent
 
-<p class='lead'>
 Build plugins for anything that Node.js can communicate with.
-</p>
 
 We treat GraphQL as a first-class citizen - everything is modelled around
 GraphQL, so any backend technology that can be expressed through GraphQL can be
@@ -218,6 +219,8 @@ We already have extensive support for PostgreSQL through the
 database schema and automatically build the relevant GraphQL objects and fields
 based on the tables, columns, functions, relations that it finds in your
 database - no need to manually keep your codebase and database schema in sync!
+
+</div>
 </div>
 
 </div><!-- /row -->
@@ -227,11 +230,15 @@ database - no need to manually keep your codebase and database schema in sync!
 <!-- **************************************** -->
 
 <section>
-<div class='container'>
+<div class='container center'>
 <div class='row justify-content-center'>
 <div class='text-center col-xs-12'>
+<div class='hero-block'>
 
 ## Quick to start
+
+</div>
+
 
 ```js
 const { buildSchema, defaultPlugins } = require("graphile-build");
@@ -246,7 +253,7 @@ main();
 ```
 
 <div class='d-flex justify-content-center'>
-<a class='btn btn-primary btn-lg' href='/graphile-build/getting-started/'>Get started &raquo;</a>
+<a class='btn btn-primary btn-lg' href='/graphile-build/getting-started/'>Get started &rarr;</a>
 </div>
 
 </div><!-- /col-xs-12 -->
@@ -259,7 +266,9 @@ main();
 
 <div class='row justify-content-center'>
 <div class='col-xs-12'>
+<div class='hero-block'>
   <h2>Questions, comments or feedback? <a href='mailto:info@graphile.org?subject=Graphile%20question%2Fcomment%2Ffeedback%3A'>info@graphile.org</a></h2>
+</div>
 </div>
 </div>
 
@@ -267,6 +276,7 @@ main();
 
 <div class='row justify-content-center'>
 <div class='col-xs-12 col-md-8 text-center'>
+<div class='hero-block'>
 <!-- Begin MailChimp Signup Form -->
 <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
@@ -297,6 +307,7 @@ id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validat
 </form>
 </div>
 <!--End mc_embed_signup-->
+</div>
 </div>
 </div>
 

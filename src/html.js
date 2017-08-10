@@ -3,6 +3,8 @@ import * as PropTypes from "prop-types";
 import { TypographyStyle, GoogleFont } from "react-typography";
 import Typography from "typography";
 import theme from "typography-theme-fairy-gates";
+theme.baseFontSize = "22px";
+theme.bodyGray = "50";
 theme.overrideStyles = () => ({
   a: {
     textShadow: "initial",
