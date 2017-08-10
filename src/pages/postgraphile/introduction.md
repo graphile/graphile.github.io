@@ -37,3 +37,13 @@ Some of the features we offer:
 - [Computed columns](/postgraphile/computed-columns/)
 - [Custom query functions](/postgraphile/custom-queries/)
 - [Custom mutation functions](/postgraphile/custom-mutations/)
+
+The easiest way to get started is with the [CLI
+interface](/postgraphile/usage-cli/); if you have `npx` installed you can try
+it out with:
+
+```
+npx postgraphile -c postgres://user:pass@localhost/mydb -a -j
+```
+
+(replacing user, pass and mydb with your PostgreSQL username, password and the name of your database)

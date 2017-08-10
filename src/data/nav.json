@@ -148,12 +148,17 @@
       },
       {
         "to": "/postgraphile/usage-cli/",
-        "title": "Usage from CLI",
+        "title": "CLI Usage",
         "sectionId": "usage"
       },
       {
         "to": "/postgraphile/usage-library/",
-        "title": "Usage as Library",
+        "title": "Library Usage",
+        "sectionId": "usage"
+      },
+      {
+        "to": "/postgraphile/usage-schema/",
+        "title": "Schema-only Usage",
         "sectionId": "usage"
       },
       {
