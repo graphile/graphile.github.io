@@ -6,122 +6,75 @@ title: Graphile-Build-PG Usage
 
 ## Usage - Schema Only
 
-:warning: This usage does NOT provide authentication/authorisation out of the box - please carefully read the rest of the article :warning:
+The PostGraphile middleware gives you a lot of excellent features for running
+your own GraphQL server. However, if you want to execute a PostGraphile query
+in Node.js without having to go through HTTP you can use some other exported
+functions that PostGraphile provides.
 
-It's recommended that you consume these plugins via the
-[`postgraphile-core`](https://github.com/graphile/graphile-build/tree/master/packages/postgraphile-core)
-module which is used internally by
-[`PostGraphQL`](https://github.com/postgraphql/postgraphql). This module is
-fairly small and exposes the following methods:
+The first function you will need is `createPostGraphQLSchema` whose purpose is
+to create your PostGraphile schema. This function is asynchronous as it will
+need to run the Postgres introspection query in your database.
 
-- `createPostGraphQLSchema(pgConfig, schemas, options)` - returns a promise to a GraphQL schema
-- `watchPostGraphQLSchema(pgConfig, schemas, options, onNewSchema)` - returns a
-  promise that returns a `release` function that you can call to stop watching;
-  the `onNewSchema` callback will be called every time a new schema is
-  generated, and it is guaranteed to be called before the promise resolves.
-
-If you prefer to use the plugins yourself it's advised that you use the
-`defaultPlugins` export from `graphile-build-pg` and then create a new array
-based on that into which you may insert or remove specific plugins. This is
-because it is ordered in a way to ensure the plugins work correctly (and we may
-still split up or restructure the plugins within it).
-
-### `defaultPlugins`
-
-An array of graphql-build plugins in the correct order to generate a
-well-thought-out GraphQL object tree based on your PostgreSQL schema. This is
-the array that `postgraphile-core` uses.
-
-### `inflections`
-
-This is a list of inflection engines, we currently have the following:
-
-- `defaultInflection` - a sensible default
-- `postGraphQLInflection` - as above, but enums get converted to `CONSTANT_CASE`
-- `postGraphQLClassicIdsInflection` - as above, but `id` attributes get renamed to `rowId` to prevent conflicts with `id` from the Relay Global Unique Object Specification.
-
-### Manual usage
+The function takes very similar arguments to [the `postgraphile`
+middleware](/postgraphile/usage-library/).
 
 ```js
-import { defaultPlugins, getBuilder } from "graphile-build";
-import {
-  defaultPlugins as pgDefaultPlugins,
-  inflections: {
-    defaultInflection,
-  },
-} from "graphile-build-pg";
+createPostGraphQLSchema(
+  process.env.DATABASE_URL || 'postgres://localhost/'
+)
+  .then(schema => { ... })
+  .catch(error => { ... })
+```
 
-async function getSchema(pgConfig = process.env.DATABASE_URL, pgSchemas = ['public'], additionalPlugins = []) {
-  return getBuilder(
-    [
-      ...defaultPlugins,
-      ...pgDefaultPlugins,
-      ...additionalPlugins
-    ],
+Now that you have your schema, in order to execute a GraphQL query you must
+supply an (authenticated) `pgClient` on the context object. The preferred way
+to do this is via the asynchronous `withPostGraphQLContext` function. The
+context object will contain a PostgreSQL client which has its own transaction
+with the correct permission levels for the associated user.
+
+```js
+const { Pool } = require('pg');
+const { graphql } = require('graphql');
+const { withPostGraphQLContext } = require('postgraphile');
+
+const myPgPool = new Pool({ ... });
+
+export async function performQuery(
+  schema,
+  query,
+  variables,
+  jwtToken,
+  operationName
+) {
+  return await withPostGraphQLContext(
     {
-      pgConfig,
-      pgSchemas,
-      pgExtendedTypes: true,
-      pgInflection: defaultInflection,
+      pgPool: myPgPool,
+      jwtToken: jwtToken,
+      jwtSecret: "...",
+      pgDefaultRole: "..."
+    },
+    async context => {
+      // Execute your GraphQL query in this function with the provided
+      // `context` object, which should NOT be used outside of this
+      // function.
+      return await graphql(
+        schema, // This is the schema we created with `createPostGraphQLSchema`.
+        query,
+        null,
+        { ...context }, // Here we use the `context` object that gets passed to this callback.
+        variables,
+        operationName
+      );
     }
   );
 }
 ```
 
-### Custom Execution
+(The `await` keywords after the `return` statements aren't required, they're just there to clarify the results are promises.)
 
-The PostGraphile middleware gives you a lot of excellent features for running your own GraphQL server. However, if you want to execute a PostGraphile query in Node.js without having to go through HTTP you can use some other exported functions that PostGraphile provides.
+#### API: `createPostGraphQLSchema(pgConfig, schemaName, options)`
 
-The first function you will need is `createPostGraphQLSchema` whose purpose is to create your PostGraphile schema. This function is asynchronous as it will need to run the Postgres introspection query in your database.
-
-The function takes very similar arguments to the `postgraphile` middleware function we discussed above:
-
-```js
-createPostGraphQLSchema('postgres://localhost:5432')
-  .then(schema => { ... })
-  .catch(error => { ... })
-```
-
-Now that you have your schema, in order to execute a GraphQL query you will need to get a PostGraphile context object with `withPostGraphQLContext`. The context object will contain a Postgres client which has its own transaction with the correct permission levels for the associated user.
-
-You will also need a Postgres pool from the [`pg-pool`][] module.
-
-`withPostGraphQLContext`, like `createPostGraphQLSchema`, will also return a promise.
-
-```js
-import { Pool } from 'pg-pool'
-import { graphql } from 'graphql'
-import { withPostGraphQLContext } from 'postgraphile'
-
-const myPgPool = new Pool({ ... })
-
-const result = await withPostGraphQLContext(
-  {
-    pgPool: myPgPool,
-    jwtToken: '...',
-    jwtSecret: '...',
-    pgDefaultRole: '...',
-  },
-  async context => {
-    // You execute your GraphQL query in this function with the provided `context` object.
-    // The `context` object will not work for a GraphQL execution outside of this function.
-    return await graphql(
-      myPostGraphQLSchema, // This is the schema we created with `createPostGraphQLSchema`.
-      query,
-      null,
-      { ...context }, // Here we use the `context` object that gets passed to this callback.
-      variables,
-      operationName,
-    )
-  },
-)
-```
-
-The exact APIs for `createPostGraphQLSchema` and `withPostGraphQLContext` are as follows.
-
-#### `createPostGraphQLSchema(pgConfig?, schemaName? = 'public', options?): Promise<GraphQLSchema>`
-
-Arguments include:
+This function takes three arguments (all are optional) and returns a promise to a GraphQLSchema object.
 
 - **`pgConfig`**: An object or string that will be passed to the [`pg`][] library and used to connect to a PostgreSQL backend. If you already have a client or pool instance, when using this function you may also pass a `pg` client or a `pg-pool` instance directly instead of a config.
 - **`schemaName`**: A string which specifies the PostgreSQL schema that PostGraphile will use to create a GraphQL schema. The default schema is the `public` schema. May be an array for multiple schemas. For users who want to run the Postgres introspection query ahead of time, you may also pass in a `PgCatalog` instance directly.
@@ -132,9 +85,20 @@ Arguments include:
   - `jwtPgTypeIdentifier`: The Postgres type identifier for the compound type which will be signed as a JWT token if ever found as the return type of a procedure. Can be of the form: `my_schema.my_type`. You may use quotes as needed: `"my-special-schema".my_type`.
   - `disableDefaultMutations`: Setting this to `true` will prevent the creation of the default mutation types & fields. Database mutation will only be possible through Postgres functions.
 
-#### `withPostGraphQLContext(options, callback): Promise<GraphQLExecutionResult>`
+#### API: `watchPostGraphQLSchema(pgConfig, schemaName, options, onNewSchema)`
 
-This function sets up a PostGraphile context, calls (and resolves) the callback function within this context, and then tears the context back down again finally resolving to the result of your function. The callback is expected to return a promise which resolves to a GraphQL execution result. The context you get as an argument to `callback` will be invalid anywhere outside of the `callback` function.
+This function is takes the same options as `createPostGraphQLSchema`; but with
+one addition: a function `onNewSchema` that is called every time a new schema
+is generated.  `onNewSchema` is guaranteed to be called before the
+`watchPostGraphQLSchema` promise resolves. It resolves to an asynchronus
+function that can be called to stop listening for schema changes. 
+
+#### API: `withPostGraphQLContext(options, callback)`
+
+This function sets up a PostGraphile context, calls (and resolves) the callback
+function within this context, and then tears the context back down again
+finally resolving to the result of your function (which should be a
+GraphQLExecutionResult from executing a `graphql()` query).
 
 - **`options`**: An object of options that are used to create the context object that gets passed into `callback`.
   - `pgPool`: A required instance of a Postgres pool from [`pg-pool`][]. A Postgres client will be connected from this pool.
@@ -143,6 +107,11 @@ This function sets up a PostGraphile context, calls (and resolves) the callback 
   - `pgDefaultRole`: The default Postgres role that will be used if no role was found in `jwtToken`. It is a best security practice to always have a value for this option even though it is optional.
   - `pgSettings`: Custom config values to set in PostgreSQL (accessed via `current_setting('my.custom.setting')`)
 - **`callback`**: The function which is called with the `context` object which was created. Whatever the return value of this function is will be the return value of `withPostGraphQLContext`.
+
+### Even lower level access
+
+If you really want to get into the nitty-gritty of what's going on, then take a
+look at the `postgraphile-core` and `graphile-build-pg` modules.
 
 [GraphQL-js]: https://www.npmjs.com/package/graphql
 [`pg-pool`]: https://www.npmjs.com/package/pg-pool
