@@ -16,6 +16,14 @@
       "path---graphile-build-hooks-a51f252aa6e3bc0154fd.js",
       "path---graphile-build-hooks-a51f252aa6e3bc0154fd.js.map"
     ],
+    "component---src-templates-marketing-js": [
+      "component---src-templates-marketing-js-ba7bfa6777fbe947e8d6.js",
+      "component---src-templates-marketing-js-ba7bfa6777fbe947e8d6.js.map"
+    ],
+    "path---": [
+      "path----557518bd178906f8d58a.js",
+      "path----557518bd178906f8d58a.js.map"
+    ],
     "path---graphile-build-build-object": [
       "path---graphile-build-build-object-7f094da2a729a52ba9a5.js",
       "path---graphile-build-build-object-7f094da2a729a52ba9a5.js.map"
@@ -36,9 +44,17 @@
       "path---graphile-build-pg-usage-89fff6a67e47b0de4363.js",
       "path---graphile-build-pg-usage-89fff6a67e47b0de4363.js.map"
     ],
+    "component---src-templates-page-js": [
+      "component---src-templates-page-js-ac1e0374903d7efcd3dd.js",
+      "component---src-templates-page-js-ac1e0374903d7efcd3dd.js.map"
+    ],
     "path---graphile-build-getting-started": [
       "path---graphile-build-getting-started-0285b8e9310ed9d7701c.js",
       "path---graphile-build-getting-started-0285b8e9310ed9d7701c.js.map"
+    ],
+    "component---src-layouts-index-js": [
+      "component---src-layouts-index-js-cebf2e143a7c6109f508.js",
+      "component---src-layouts-index-js-cebf2e143a7c6109f508.js.map"
     ],
     "path---graphile-build-default-plugins": [
       "path---graphile-build-default-plugins-bf03467d72f417aa1660.js",
@@ -64,17 +80,9 @@
       "path---graphile-build-pg-computed-columns-e31b225091310d21e8a3.js",
       "path---graphile-build-pg-computed-columns-e31b225091310d21e8a3.js.map"
     ],
-    "page-component---src-templates-marketing-js": [
-      "page-component---src-templates-marketing-js-a61fee54bf340a965e2e.js",
-      "page-component---src-templates-marketing-js-a61fee54bf340a965e2e.js.map"
-    ],
     "commons": [
-      "commons-b2b3eb6e53cc89aeda26.js",
-      "commons-b2b3eb6e53cc89aeda26.js.map"
-    ],
-    "page-component---src-templates-page-js": [
-      "page-component---src-templates-page-js-7c7ac3f6709c5c7bb323.js",
-      "page-component---src-templates-page-js-7c7ac3f6709c5c7bb323.js.map"
+      "commons-af24df79ddc393e5cf48.js",
+      "commons-af24df79ddc393e5cf48.js.map"
     ],
     "path---graphile-build-pg-custom-mutations": [
       "path---graphile-build-pg-custom-mutations-2eb2f8791797477004b6.js",
@@ -97,12 +105,8 @@
       "path---graphile-build-pg-introduction-89f6317e72faea8e9e76.js.map"
     ],
     "app": [
-      "app-d9a489cf6c787f5764be.js",
-      "app-d9a489cf6c787f5764be.js.map"
-    ],
-    "layout-component---index": [
-      "layout-component---index-6fa9b1d9bb85d2942f83.js",
-      "layout-component---index-6fa9b1d9bb85d2942f83.js.map"
+      "app-fb16cc80fedd0e5b82f2.js",
+      "app-fb16cc80fedd0e5b82f2.js.map"
     ],
     "path---graphile-build-plugin-options": [
       "path---graphile-build-plugin-options-664cd65ec2477f832992.js",
