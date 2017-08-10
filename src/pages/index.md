@@ -9,7 +9,9 @@ title: Extensible GraphQL APIs through Plugins
 <header class='hero'>
 <div class='container-fluid'>
 
-# Header
+# Tools to do GraphQL with.
+
+## Remove many of the barriers such as stuff and stuff and things.
 
 </div><!-- /container -->
 </header>
@@ -17,7 +19,7 @@ title: Extensible GraphQL APIs through Plugins
 
 <!-- **************************************** -->
 
-<section class='odd'>
+<section>
 <div class='container'>
 
 <div class='row'>
@@ -34,7 +36,7 @@ using advanced look-ahead features.
 <div class='row'>
 <div class='col-lg-6 col-xs-12'>
 
-Build your schema with plugins  
+##### Build your schema with plugins  
 ```js
 buildSchema(plugins)
  
@@ -52,7 +54,7 @@ type Person {
 </div><!-- /col-6 -->
 <div class='col-lg-6 col-xs-12'>
 
-Transform your schema with ease  
+##### Transform your schema with ease  
 ```js
 buildSchema([...plugins,
   DeprecateFromCommentPlugin])
@@ -75,7 +77,7 @@ type Person {
 
 <!-- **************************************** -->
 
-<section class='even'>
+<section>
 <div class='container'>
 <div class='row'>
 <div class='col-xs-12'>
@@ -91,7 +93,7 @@ Facebook then adding hooks is fairly straightforward:
 
 <div class='col-xs-12 col-lg-6'>
 
-`graphql`:
+##### `graphql`:
 
 ```js{2}
 const MyType =
@@ -104,7 +106,7 @@ const MyType =
 </div><!-- /col-6 -->
 <div class='col-xs-12 col-lg-6'>
 
-`graphile-build`:
+##### `graphile-build`:
 
 ```js{2}
 const MyType =
@@ -118,15 +120,14 @@ const MyType =
 
 </div><!-- /row -->
 </div><!-- /container -->
-</section><!-- /odd -->
+</section>
 
 <!-- **************************************** -->
 
-<section class='odd'>
+<section>
 <div class='container'>
 <div class='row'>
-<div class='col-4 col-fa hidden-md-down'><i class='fa fa-handshake-o' aria-hidden="true"></i></div>
-<div class='col-xs-12 col-lg-8'>
+<div class='col-xs-12'>
 
 ## Fully compatible
 
@@ -141,14 +142,14 @@ under the hood, so you know we're spec compliant.
 
 </div><!-- /row -->
 </div><!-- /container -->
-</section><!-- /even -->
+</section>
 
 <!-- **************************************** -->
 
-<section class='even'>
+<section>
 <div class='container'>
 <div class='row'>
-<div class='col-xs-12 col-lg-8'>
+<div class='col-xs-12'>
 
 ## First class schema watching
 
@@ -161,19 +162,17 @@ plugins can [trigger a rebuild](/graphile-build/schema-builder/#plugin-methods) 
 fresh new GraphQL schema to replace the out-of-date one - no need to restart
 your server!
 </div><!-- /col-9 -->
-<div class='col-4 col-fa hidden-md-down'><i class='fa fa-refresh' aria-hidden="true"></i></div>
 
 </div><!-- /row -->
 </div><!-- /container -->
-</section><!-- /odd -->
+</section>
 
 <!-- **************************************** -->
 
-<section class='odd'>
+<section>
 <div class='container'>
 <div class='row'>
-<div class='col-4 col-fa hidden-md-down'><i class='fa fa-rocket' aria-hidden="true"></i></div>
-<div class='col-xs-12 col-lg-8'>
+<div class='col-xs-12'>
 
 ## Performance baked in
 
@@ -195,14 +194,14 @@ connection latency was above 1ms.
 
 </div><!-- /row -->
 </div><!-- /container -->
-</section><!-- /odd -->
+</section>
 
 <!-- **************************************** -->
 
-<section class='even'>
+<section>
 <div class='container'>
 <div class='row'>
-<div class='col-xs-12 col-lg-8'>
+<div class='col-xs-12'>
 
 ## Data-store independent
 
@@ -220,15 +219,14 @@ database schema and automatically build the relevant GraphQL objects and fields
 based on the tables, columns, functions, relations that it finds in your
 database - no need to manually keep your codebase and database schema in sync!
 </div>
-<div class='col-4 col-fa hidden-md-down'><i class='fa fa-database' aria-hidden="true"></i></div>
 
 </div><!-- /row -->
 </div><!-- /container -->
-</section><!-- /odd -->
+</section>
 
 <!-- **************************************** -->
 
-<section class='odd'>
+<section>
 <div class='container'>
 <div class='row justify-content-center'>
 <div class='text-center col-xs-12'>
@@ -253,7 +251,7 @@ main();
 
 </div><!-- /col-xs-12 -->
 </div><!-- /container -->
-</section><!-- /even -->
+</section>
 
 
 <section class='mailinglist'>

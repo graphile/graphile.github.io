@@ -63,15 +63,7 @@ const Page = ({
         ]}
       />
       <SiteHeader location={location} />
-      <section
-        style={{
-          margin: "0 auto",
-          maxWidth: 960,
-          padding: "0px 1.0875rem 1.45rem",
-          paddingTop: 0,
-        }}
-        className="page-content"
-      >
+      <section className="page-content">
         <div className="container">
           <div className="row">
             <div className="col-12 col-md-3 push-md-9">
