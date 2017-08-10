@@ -3274,16 +3274,16 @@ functional-red-black-tree@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
 
-gatsby-link@^1.0.1:
-  version "1.6.3"
-  resolved "https://registry.yarnpkg.com/gatsby-link/-/gatsby-link-1.6.3.tgz#2c62423d21b9964fafd81ff3bf5a9db74942eea0"
+gatsby-link@^1.6.5:
+  version "1.6.5"
+  resolved "https://registry.yarnpkg.com/gatsby-link/-/gatsby-link-1.6.5.tgz#a33273bc2d8bc9cc4df194afddbd6bec91f92812"
   dependencies:
     prop-types "^15.5.8"
     ric "^1.3.0"
 
-gatsby-plugin-catch-links@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-catch-links/-/gatsby-plugin-catch-links-1.0.1.tgz#6d02e3018d167ed9f5b14b73ea80f5687e496aa6"
+gatsby-plugin-catch-links@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-catch-links/-/gatsby-plugin-catch-links-1.0.2.tgz#3ca0708d76b2ef22d5e8420cbcd9bbd4a5314ad4"
 
 gatsby-plugin-react-helmet@^1.0.1:
   version "1.0.1"
@@ -3300,9 +3300,9 @@ gatsby-plugin-sass@^1.0.1:
     sass-loader "^4.1.1"
     webpack "^1.13.3"
 
-gatsby-plugin-sharp@^1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-sharp/-/gatsby-plugin-sharp-1.5.0.tgz#e7112384c37548180feb42e850530c137189dfbf"
+gatsby-plugin-sharp@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-sharp/-/gatsby-plugin-sharp-1.6.0.tgz#430f18acd7478088b4695b85939d38d48d6acf87"
   dependencies:
     async "^2.1.2"
     bluebird "^3.5.0"
@@ -3352,15 +3352,15 @@ gatsby-source-filesystem@^1.4.1:
     pretty-bytes "^4.0.2"
     slash "^1.0.0"
 
-gatsby-transformer-json@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/gatsby-transformer-json/-/gatsby-transformer-json-1.0.1.tgz#01beeb160dc4567fccee35f71f3bb6ff0245901a"
+gatsby-transformer-json@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/gatsby-transformer-json/-/gatsby-transformer-json-1.0.2.tgz#764ef9683e43448aa015db2e2533b529a70020a9"
   dependencies:
     bluebird "^3.5.0"
 
-gatsby-transformer-remark@^1.1.0:
-  version "1.6.3"
-  resolved "https://registry.yarnpkg.com/gatsby-transformer-remark/-/gatsby-transformer-remark-1.6.3.tgz#0a00488e427aab625df8b0472fb1ed807a30e2cf"
+gatsby-transformer-remark@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/gatsby-transformer-remark/-/gatsby-transformer-remark-1.7.0.tgz#821a1fa6853e3ff1a493dfe048d907c9a900206a"
   dependencies:
     bluebird "^3.5.0"
     gray-matter "^2.1.0"
@@ -3374,9 +3374,9 @@ gatsby-transformer-remark@^1.1.0:
     unist-util-select "^1.5.0"
     unist-util-visit "^1.1.1"
 
-gatsby@^1.0.1:
-  version "1.6.3"
-  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-1.6.3.tgz#bdd8a5299826e30f87f4c58f24d95320d3505eea"
+gatsby@^1.7.2:
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-1.7.2.tgz#cc1d34ba29a81b78abe39477e7ea4c85eb8c2cee"
   dependencies:
     async "^2.1.2"
     babel-core "^6.24.1"
@@ -3463,6 +3463,7 @@ gatsby@^1.0.1:
     redux "^3.6.0"
     relay-compiler "^1.1.0"
     remote-redux-devtools "^0.5.7"
+    resolve-cwd "^2.0.0"
     sift "^3.2.6"
     slash "^1.0.0"
     socket.io "^2.0.3"
@@ -6909,7 +6910,7 @@ react-router-dom@^4.1.1:
     prop-types "^15.5.4"
     react-router "^4.1.1"
 
-react-router-scroll@ytase/react-router-scroll#build:
+"react-router-scroll@github:ytase/react-router-scroll#build":
   version "0.4.1"
   resolved "https://codeload.github.com/ytase/react-router-scroll/tar.gz/991ecddb08885e1fb80ec1e9dbf3a35844b7d4cd"
   dependencies:
@@ -7312,6 +7313,12 @@ requires-port@1.0.x, requires-port@1.x.x:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
 
+resolve-cwd@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/resolve-cwd/-/resolve-cwd-2.0.0.tgz#00a9f7387556e27038eae232caa372a6a59b665a"
+  dependencies:
+    resolve-from "^3.0.0"
+
 resolve-dir@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/resolve-dir/-/resolve-dir-0.1.1.tgz#b219259a5602fac5c5c496ad894a6e8cc430261e"
@@ -7322,6 +7329,10 @@ resolve-dir@^0.1.0:
 resolve-from@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/resolve-from/-/resolve-from-1.0.1.tgz#26cbfe935d1aeeeabb29bc3fe5aeb01e93d44226"
+
+resolve-from@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/resolve-from/-/resolve-from-3.0.0.tgz#b22c7af7d9d6881bc8b6e653335eebcb0a188748"
 
 resolve-pathname@^2.0.0:
   version "2.1.0"
