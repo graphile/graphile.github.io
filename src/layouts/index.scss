@@ -93,17 +93,10 @@ a {
   position: fixed;
   width: 100%;
   font-size: 0.8rem;
+  min-height: 2.4rem;
 }
 
-.navbar-toggler {
-  appearance: none;
-  background: transparent;
-  color: white;
-  border: 0;
-  order: 1;
-}
 
-.navbar-toggler,
 .nav-item {
   height: 2.4rem;
 }
@@ -139,28 +132,98 @@ a {
   display: none;
 }
 
-
 .navbar-toggler-icon {
   margin-right: 0.5rem;
 }
 
-@media only screen and (min-width: 600px) {
-  .navbar-toggler {
-    display: none;
+$toggleSize: 1.2rem;
+$heightIcon: $toggleSize;
+$widthLine: $heightIcon;
+$heightLine: 4px;
+$transitionTime: 0.3s;
+$rotation: 45deg;
+$translateY: ($heightIcon / 2);
+$translateX: 0;
+$lineColor: white;
+
+.navbar-toggler {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  color: white;
+  height: $toggleSize;
+  left: 1rem;
+  opacity: 0.5;
+  order: 1;
+  position: absolute;
+  width: $toggleSize;
+}
+
+.navbar-toggler,
+.navbar-crosses {
+  top: 0.5rem;
+}
+
+
+.navbar-crosses {
+  background: #333;
+  position: absolute;
+  left: 1rem;
+  pointer-events: none;
+  height: $heightIcon;
+  width: $widthLine;
+
+  .line {
+    background: $lineColor;
+    border-radius: ($heightLine / 2);
+    display: block;
+    height: $heightLine;
+    left: 0;
+    position: absolute;
+    transition: all $transitionTime;
+    width: $widthLine;
   }
+
+  .line-1 { top: 0; }
+  .line-2 { top: 50%; }
+  .line-3 { top: 100%; }
+}
+
+.navbar-toggler:checked + .nav-controls .navbar-crosses {
+  .line-1 { transform: translateY($translateY) translateX($translateX) rotate($rotation); }
+  .line-2 { opacity:0; }
+  .line-3 { transform: translateY($translateY * -1) translateX($translateX) rotate($rotation * -1); }
+}
+
+.nav-controls {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-toggler,
+.navbar-crosses {
+  display: none;
 }
 
 @media only screen and (max-width: 599px) {
-  .navbar-toggler {
+  .navbar-toggler,
+  .navbar-crosses {
     display: block;
   }
 
   .navbar-nav {
     display: none;
+    width: 100%;
   }
 
-  .navbar-toggler:focus + .navbar-nav {
+  .nav-controls {
+    margin-top: 2.4rem;
+  }
+
+  // .navbar-toggler:focus + .navbar-nav,
+  .navbar-toggler:checked + .nav-controls .navbar-nav {
     display: flex;
+    opacity: 1;
   }
 
   .navbar-nav .nav-item {
