@@ -6,9 +6,14 @@ title: Performance
 
 ## Performance
 
-A single root level query, no matter how nested, is compiled into one SQL query
-which avoids multiple round-trips to the database. For example the following
-query would be compiled into one SQL statement - no need for `DataLoader`!
+We leverage graphile-build's [look-ahead](/graphile-build/look-ahead/) features
+when resolving a GraphQL request so that a single root level query, no matter
+how nested, is compiled into just one SQL query. PostgreSQL has an excellent
+query planner which optimises and executes this query for us, avoiding the need
+for multiple round-trips to the database and thus solving the N+1 problem
+that is found in many GraphQL APIs.
+
+For example the following query would be compiled into one SQL statement:
 
 ```graphql
 {
@@ -51,7 +56,3 @@ fragment UserDetails on User {
   }
 }
 ```
-
-This is accomplished using Graphile-Build's powerful
-[look-ahead](/graphile-build/look-ahead/) features combined with PostgreSQL's
-awesomely powerful queries.
