@@ -1,8 +1,10 @@
+$gutter: 1rem;
+
 .container-fluid, section {
   margin-right: auto;
   margin-left: auto;
-  padding-right: 2rem;
-  padding-left: 2rem;
+  padding-right: ($gutter * 2);
+  padding-left: ($gutter * 2);
 }
 
 .row {
@@ -11,8 +13,8 @@
   flex: 0 1 auto;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-right: -1rem;
-  margin-left: -1rem;
+  margin-right: -$gutter;
+  margin-left: -$gutter;
 }
 
 .row.reverse {
@@ -38,8 +40,8 @@
 .col-xs-12 {
   box-sizing: border-box;
   flex: 0 0 auto;
-  padding-right: 1rem;
-  padding-left: 1rem;
+  padding-right: $gutter;
+  padding-left: $gutter;
 }
 
 .col-xs {
@@ -211,8 +213,8 @@
   .col-sm-12 {
     box-sizing: border-box;
     flex: 0 0 auto;
-    padding-right: 1rem;
-    padding-left: 1rem;
+    padding-right: $gutter;
+    padding-left: $gutter;
   }
 
   .col-sm {
@@ -386,8 +388,8 @@
   .col-md-12 {
     box-sizing: border-box;
     flex: 0 0 auto;
-    padding-right: 1rem;
-    padding-left: 1rem;
+    padding-right: $gutter;
+    padding-left: $gutter;
   }
 
   .col-md {
@@ -561,8 +563,8 @@
   .col-lg-12 {
     box-sizing: border-box;
     flex: 0 0 auto;
-    padding-right: 1rem;
-    padding-left: 1rem;
+    padding-right: $gutter;
+    padding-left: $gutter;
   }
 
   .col-lg {
@@ -718,4 +720,3 @@
     order: 1;
   }
 }
-
