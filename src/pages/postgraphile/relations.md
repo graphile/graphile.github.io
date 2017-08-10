@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /graphile-build-pg/relations/
+path: /postgraphile/relations/
 title: Relations
 ---
 

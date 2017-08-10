@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /graphile-build-pg/computed-columns/
+path: /postgraphile/computed-columns/
 title: Computed Columns
 ---
 

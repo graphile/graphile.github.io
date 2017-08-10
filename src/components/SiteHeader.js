@@ -46,13 +46,13 @@ export default ({ location }) =>
           <li className="nav-item">
             <Link
               className={`nav-link ${location.pathname.match(
-                /^\/graphile-build-pg(\/|$)/
+                /^\/postgraphile(\/|$)/
               )
                 ? "active"
                 : ""}`}
-              to="/graphile-build-pg/introduction/"
+              to="/postgraphile/introduction/"
             >
-              Graphile-Build-PG
+              PostGraphile
             </Link>
           </li>
         </ul>

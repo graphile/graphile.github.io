@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /graphile-build-pg/crud-mutations/
+path: /postgraphile/crud-mutations/
 title: CRUD Mutations
 ---
 

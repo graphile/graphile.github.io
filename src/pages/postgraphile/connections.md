@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /graphile-build-pg/connections/
+path: /postgraphile/connections/
 title: Connections
 ---
 

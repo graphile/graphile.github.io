@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /graphile-build-pg/custom-queries/
+path: /postgraphile/custom-queries/
 title: Custom Queries
 ---
 

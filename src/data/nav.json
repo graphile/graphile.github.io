@@ -84,68 +84,82 @@
     ]
   },
   {
-    "name": "graphile-build-pg",
+    "name": "postgraphile",
     "sections": [
       {
-        "id": "guides",
-        "title": "Guides"
+        "id": "overview",
+        "title": "Overview"
+      },
+      {
+        "id": "usage",
+        "title": "Usage"
       }
     ],
     "pages": [
       {
-        "to": "/graphile-build-pg/introduction/",
+        "to": "/postgraphile/introduction/",
         "title": "Introduction",
-        "sectionId": "guides"
+        "sectionId": "overview"
       },
       {
-        "to": "/graphile-build-pg/usage/",
-        "title": "Usage",
-        "sectionId": "guides"
+        "to": "/postgraphile/performance/",
+        "title": "Performance",
+        "sectionId": "overview"
       },
       {
-        "to": "/graphile-build-pg/settings/",
-        "title": "Settings",
-        "sectionId": "guides"
-      },
-      {
-        "to": "/graphile-build-pg/connections/",
+        "to": "/postgraphile/connections/",
         "title": "Connections",
-        "sectionId": "guides"
+        "sectionId": "overview"
       },
       {
-        "to": "/graphile-build-pg/relations/",
+        "to": "/postgraphile/relations/",
         "title": "Relations",
-        "sectionId": "guides"
+        "sectionId": "overview"
       },
       {
-        "to": "/graphile-build-pg/crud-mutations/",
+        "to": "/postgraphile/crud-mutations/",
         "title": "CRUD Mutations",
-        "sectionId": "guides"
+        "sectionId": "overview"
       },
       {
-        "to": "/graphile-build-pg/computed-columns/",
+        "to": "/postgraphile/computed-columns/",
         "title": "Computed Columns",
-        "sectionId": "guides"
+        "sectionId": "overview"
       },
       {
-        "to": "/graphile-build-pg/custom-queries/",
+        "to": "/postgraphile/custom-queries/",
         "title": "Custom Queries",
-        "sectionId": "guides"
+        "sectionId": "overview"
       },
       {
-        "to": "/graphile-build-pg/custom-mutations/",
+        "to": "/postgraphile/custom-mutations/",
         "title": "Custom Mutations",
-        "sectionId": "guides"
+        "sectionId": "overview"
       },
       {
-        "to": "/graphile-build-pg/security/",
+        "to": "/postgraphile/security/",
         "title": "Security",
-        "sectionId": "guides"
+        "sectionId": "overview"
       },
       {
-        "to": "/graphile-build-pg/introspection/",
+        "to": "/postgraphile/introspection/",
         "title": "Introspection",
-        "sectionId": "guides"
+        "sectionId": "overview"
+      },
+      {
+        "to": "/postgraphile/usage-cli/",
+        "title": "Usage from CLI",
+        "sectionId": "usage"
+      },
+      {
+        "to": "/postgraphile/usage-library/",
+        "title": "Usage as Library",
+        "sectionId": "usage"
+      },
+      {
+        "to": "/postgraphile/settings/",
+        "title": "Settings",
+        "sectionId": "usage"
       }
     ]
   }

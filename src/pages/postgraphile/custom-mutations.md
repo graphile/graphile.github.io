@@ -1,12 +1,12 @@
 ---
 layout: page
-path: /graphile-build-pg/custom-mutations/
+path: /postgraphile/custom-mutations/
 title: Custom Mutations
 ---
 
 ## Custom Mutations
 
-If the built in [CRUD Mutations](/graphile-build-pg/crud-mutations/) are not
+If the built in [CRUD Mutations](/postgraphile/crud-mutations/) are not
 sufficient for your purposes, you can create PostgreSQL functions that perform
 complex mutations too. For these functions the following rules apply:
 

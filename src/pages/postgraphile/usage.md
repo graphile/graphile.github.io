@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /graphile-build-pg/usage/
+path: /postgraphile/usage/
 title: Graphile-Build-PG Usage
 ---
 

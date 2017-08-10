@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /graphile-build-pg/security/
+path: /postgraphile/security/
 title: Security
 ---
 
@@ -30,14 +30,14 @@ permission is selectively granted with the use of policies.
 
 If you already have a secure database schema that implements these technologies
 to protect your data at the lowest levels then you can leverage
-`graphile-build-pg` to generate a powerful, secure and fast API in minimal
+`postgraphile` to generate a powerful, secure and fast API in minimal
 time. All you need to do is pass a pre-authenticated pgClient to the `graphql`
 resolve function.
 
 ### Example
 
 ```js{21,28-29,35-37,42}
-const { createPostGraphQLSchema } = require('graphile-build-pg');
+const { createPostGraphQLSchema } = require('postgraphile');
 const pg = require('pg');
 
 const pgPool = new pg.Pool(process.env.DATABASE_URL);
