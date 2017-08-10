@@ -10,8 +10,8 @@ const sectionIs = desiredSection => ({ sectionId }) =>
 function PageList({ navs, location }) {
   return (
     <ul className="nav flex-column">
-      {navs.map(({ to, title }) =>
-        <li key={to} className="nav-item">
+      {navs.map(({ to, title }, idx) =>
+        <li key={idx} className="nav-item">
           <Link
             className={`nav-link ${location.pathname === to ? "active" : ""}`}
             to={to}
@@ -75,8 +75,8 @@ const Page = ({
         <div className="container">
           <div className="row">
             <div className="col-12 col-md-3 push-md-9">
-              {navSections.map(({ id, title }) =>
-                <div key={id}>
+              {navSections.map(({ id, title }, idx) =>
+                <div key={idx}>
                   <h4>
                     {title}
                   </h4>
