@@ -5,10 +5,14 @@ import "prismjs/themes/prism-solarizedlight.css";
 
 import "./index.scss";
 
-const TemplateWrapper = ({ children }) =>
-  <div>
-    {children()}
-  </div>;
+const TemplateWrapper = props => {
+  const { children, ...restOfProps } = props;
+  return (
+    <div>
+      {children(restOfProps)}
+    </div>
+  );
+};
 
 TemplateWrapper.propTypes = {
   children: PropTypes.func,
