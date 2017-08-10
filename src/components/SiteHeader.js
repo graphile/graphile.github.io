@@ -40,7 +40,7 @@ export default ({ location }) =>
                 : ""}`}
               to="/graphile-build/getting-started/"
             >
-              Graphile-Build
+              graphile-build
             </Link>
           </li>
           <li className="nav-item">
@@ -52,7 +52,7 @@ export default ({ location }) =>
                 : ""}`}
               to="/graphile-build-pg/introduction/"
             >
-              Graphile-Build-PG
+              graphile-build-pg
             </Link>
           </li>
         </ul>
