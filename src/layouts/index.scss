@@ -46,6 +46,10 @@ pre {
   box-shadow: 0 0 50px 0px rgba(0, 0, 0, 0.16);
 }
 
+.gatsby-highlight {
+  margin-bottom: 1.45rem;
+}
+
 pre code {
   font-size: 0.75rem;
 }
@@ -92,12 +96,11 @@ a {
   align-items: center;
   position: fixed;
   width: 100%;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   min-height: 2.4rem;
 }
 
-
-.nav-item {
+.navbar-item {
   height: 2.4rem;
 }
 
@@ -105,9 +108,8 @@ a {
   font-size: 1.1em;
 }
 
-
 .navbar-nav,
-.nav-item {
+.navbar-item {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -117,8 +119,8 @@ a {
   display: flex;
 }
 
-.nav-item {
-  margin-right: 1rem;
+.navbar-item {
+  margin-right: 2rem;
   display: flex;
   align-items: center;
 
@@ -226,7 +228,7 @@ $lineColor: white;
     opacity: 1;
   }
 
-  .navbar-nav .nav-item {
+  .navbar-nav .navbar-item {
     display: flex;
     margin: 0 -1rem;
     padding: 0 1rem;
@@ -236,13 +238,14 @@ $lineColor: white;
     flex-direction: column;
   }
 
-  .navbar-nav .nav-item {
+  .navbar-nav .navbar-item {
     border-top: 1px solid #4d4d4d;
     background: #333;
 
     .home,
     .github {
       display: inline;
+      margin-left: 0.5rem;
     }
   }
 

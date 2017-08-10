@@ -22,7 +22,7 @@ export default ({ location }) =>
             <span className="line line-3"> </span>
           </div>
           <ul className="navbar-nav">
-            <li className="nav-item">
+            <li className="navbar-item">
               <Link
                 className={`nav-link ${location.pathname.match(/^\/$/)
                   ? "active"
@@ -33,7 +33,7 @@ export default ({ location }) =>
                 <span className="home">Home</span>
               </Link>
             </li>
-            <li className="nav-item">
+            <li className="navbar-item">
               <Link
                 className={`nav-link ${location.pathname.match(
                   /^\/graphile-build(\/|$)/
@@ -45,7 +45,7 @@ export default ({ location }) =>
                 graphile-build
               </Link>
             </li>
-            <li className="nav-item">
+            <li className="navbar-item">
               <Link
                 className={`nav-link ${location.pathname.match(
                   /^\/graphile-build-pg(\/|$)/
@@ -57,7 +57,7 @@ export default ({ location }) =>
                 graphile-build-pg
               </Link>
             </li>
-            <li className="nav-item ml-auto">
+            <li className="navbar-item ml-auto">
               <a
                 className="nav-github-link nav-link"
                 href="https://github.com/graphile/graphile-build"
