@@ -82,8 +82,120 @@ a {
   letter-spacing: 0.03em;
 }
 
+
+// ----------------------------------------
+// Nav
+
+.navbar {
+  background: #333;
+  color: white;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  font-size: 0.8rem;
+}
+
+.navbar-toggler {
+  appearance: none;
+  background: transparent;
+  color: white;
+  border: 0;
+  order: 1;
+}
+
+.navbar-toggler,
+.nav-item {
+  height: 2.4rem;
+}
+
+.nav-github-link {
+  font-size: 1.1em;
+}
+
+
+.navbar-nav,
+.nav-item {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-nav {
+  display: flex;
+}
+
+.nav-item {
+  margin-right: 1rem;
+  display: flex;
+  align-items: center;
+
+  .nav-link {
+    color: inherit;
+  }
+}
+
+.home,
+.github {
+  display: none;
+}
+
+
+.navbar-toggler-icon {
+  margin-right: 0.5rem;
+}
+
+@media only screen and (min-width: 600px) {
+  .navbar-toggler {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 599px) {
+  .navbar-toggler {
+    display: block;
+  }
+
+  .navbar-nav {
+    display: none;
+  }
+
+  .navbar-toggler:focus + .navbar-nav {
+    display: flex;
+  }
+
+  .navbar-nav .nav-item {
+    display: flex;
+    margin: 0 -1rem;
+    padding: 0 1rem;
+  }
+
+  .navbar-nav {
+    flex-direction: column;
+  }
+
+  .navbar-nav .nav-item {
+    border-top: 1px solid #4d4d4d;
+    background: #333;
+
+    .home,
+    .github {
+      display: inline;
+    }
+  }
+
+}
+
 // ----------------------------------------
 // Layout
+.ml-auto {
+  margin-left: auto;
+  display: flex;
+}
+
+.space-between {
+  display: flex;
+  justify-content: space-between;
+}
 
 .hero-block {
   max-width: 640px;
@@ -117,7 +229,7 @@ footer {
   .hero {
     align-items: center;
     background: #E44336;
-    background-image: linear-gradient(to bottom left, #E44336 0%, #A83128 100%);
+    background-image: linear-gradient(to top right, #E44336 0%, #A83128 100%);
     color: white;
     display: flex;
     flex-direction: column;
@@ -127,6 +239,7 @@ footer {
 
     h1, h2 {
       color: inherit;
+      font-weight: normal;
     }
   }
 
@@ -158,7 +271,8 @@ footer {
   }
 }
 
-.page-content .container {
+.page-content .container,
+.navbar .container {
   max-width: 1400px;
   margin: 0 auto;
 }

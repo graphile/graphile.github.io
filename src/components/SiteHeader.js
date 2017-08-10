@@ -2,25 +2,21 @@ import React from "react";
 import Link from "gatsby-link";
 
 export default ({ location }) =>
-  <header>
-    <nav className="navbar navbar-toggleable-md navbar-inverse bg-inverse">
-      <button
-        className="navbar-toggler navbar-toggler-right"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span className="navbar-toggler-icon" />
-      </button>
-      <Link to="/" className="navbar-brand">
-        Graphile
-      </Link>
-
-      <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className="navbar-nav mr-auto">
+  <header className="content">
+    <nav className="navbar">
+      <div className="container">
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon fa fa-bars" /> Menu
+        </button>
+        <ul className="navbar-nav">
           <li className="nav-item">
             <Link
               className={`nav-link ${location.pathname.match(/^\/$/)
@@ -28,7 +24,7 @@ export default ({ location }) =>
                 : ""}`}
               to="/"
             >
-              Home
+              <span className="fa fa-home" /> <span className="home">Home</span>
             </Link>
           </li>
           <li className="nav-item">
@@ -55,12 +51,16 @@ export default ({ location }) =>
               graphile-build-pg
             </Link>
           </li>
+          <li className="nav-item ml-auto">
+            <a
+              className="nav-github-link nav-link"
+              href="https://github.com/graphile/graphile-build"
+            >
+              <span className="fa fa-github" />{" "}
+              <span className="github">Github</span>
+            </a>
+          </li>
         </ul>
-        <span className="navbar-text">
-          <a href="https://github.com/graphile/graphile-build">
-            <img src="/images/GitHub-Mark-Light-120px-plus.png" width="26" />
-          </a>
-        </span>
       </div>
     </nav>
   </header>;
