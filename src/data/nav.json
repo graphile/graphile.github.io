@@ -112,6 +112,11 @@
         "sectionId": "overview"
       },
       {
+        "to": "/postgraphile/filtering/",
+        "title": "Filtering",
+        "sectionId": "overview"
+      },
+      {
         "to": "/postgraphile/relations/",
         "title": "Relations",
         "sectionId": "overview"
