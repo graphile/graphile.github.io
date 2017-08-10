@@ -160,7 +160,18 @@
         "to": "/postgraphile/usage-schema/",
         "title": "Schema-only Usage",
         "sectionId": "usage"
-      },
+      }
+    ]
+  },
+  {
+    "name": "graphile-build-pg",
+    "sections": [
+      {
+        "id": "usage",
+        "title": "Usage"
+      }
+    ],
+    "pages": [
       {
         "to": "/postgraphile/settings/",
         "title": "Settings",
