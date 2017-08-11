@@ -111,13 +111,11 @@ speedups especially where database connection latency is above 1ms.
 ## Automatically build GraphQL objects and fields through database introspection
 
 Graphile already has extensive support for PostgreSQL through the
-`graphile-build-pg` module.
-
-The `graphile-buld-pg` plugins perform introspection of your
-database schema and **automatically** build the relevant GraphQL objects and fields
-based on the tables, columns, functions, relations that it finds in your
-database - no need to manually keep your codebase and database schema in sync.
-
+`graphile-build-pg` module which performs introspection of your database schema
+and **automatically** builds the relevant GraphQL objects and fields based on
+the tables, columns, functions, relations that it finds in your database - no
+need to manually keep your codebase and database schema in sync. This is the
+core of PostGraphile.
 </div>
 </div>
 
