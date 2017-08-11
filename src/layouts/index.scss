@@ -424,6 +424,10 @@ footer {
   margin: 0 auto;
 }
 
+.gatsby-resp-image-link {
+  transform: scale(1); /* To reset the z-index so that images can appear because gatsby has z-index: -1 */
+}
+
 @media only screen and (max-width: 480px) {
   html {
     font-size: 18px;

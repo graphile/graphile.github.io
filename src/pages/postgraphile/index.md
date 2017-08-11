@@ -6,14 +6,36 @@ title: PostGraphile - full GraphQL API server in an instant from PostgreSQL data
 
 <!-- **************************************** -->
 
-<header class='hero'>
+<header class='hero simple'>
 <div class='hero-block center'>
 
-# A suite of tools for building performant pluggable GraphQL APIs.
+# PostGraphile: instant GraphQL API for PostgreSQL database
 
 </div><!-- /container -->
 </header>
 
+
+
+<!-- **************************************** -->
+
+<section>
+<div class='container center'>
+<div class='row'>
+<div class='col-xs-12'>
+<div class='hero-block'>
+
+## Solves N+1 queries issues
+
+Using graphile-build's [look-ahead](/graphile-build/look-ahead/) features a
+single root level GraphQL query, no matter how nested, can become just one SQL
+query.
+
+</div>
+</div><!-- /col-xs-12 -->
+
+</div><!-- /row -->
+</div><!-- /container -->
+</section>
 
 <!-- **************************************** -->
 
@@ -24,11 +46,40 @@ title: PostGraphile - full GraphQL API server in an instant from PostgreSQL data
 <div class='col-xs-12'>
 <div class='hero-block'>
 
-## graphile-build for pluggable GraphQL APIs
+## Customisable with SQL
 
-The Graphile suite of Node.js modules provide you with the tools to rapidly
-generate high-performance extensible GraphQL APIs by combining plugins and
-using advanced look-ahead features.
+We support [custom queries](/postgraphile/custom-queries/), [custom
+mutations](/postgraphile/custom-mutations/) and [computed
+columns](/postgraphile/computed-columns/) in your PostgreSQL
+database automatically.
+
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- **************************************** -->
+
+<section>
+<div class='container center'>
+
+<div class='row'>
+<div class='col-xs-12'>
+<div class='hero-block'>
+
+## Customisable with JS plugins
+
+The GraphQL schema PostGraphile uses is entirely built from [Graphile Build
+plugins](https://github.com/graphile/graphile-build/tree/master/packages/graphile-build-pg/src/plugins),
+you can disable any of the built in plugins to restrict the functionality or
+add additional plugins to extended or enhanced your generated schema.
+
+This allows you to add (or remove) fields, create new types, add functionality,
+replace functionality or or even tweak existing functionality (e.g. wrapping an
+existing resolver with your own higher-order function) to gain powerful control
+over your API.
 
 </div>
 <div class='row'>
@@ -74,108 +125,6 @@ type Person {
 
 <!-- **************************************** -->
 
-<section>
-<div class='container center'>
-<div class='row'>
-<div class='col-xs-12'>
-<div class='hero-block'>
-
-## graphile-build for GraphQL performance
-
-Say Goodbye to the N+1 problem; fewer round-trips means higher performance.
-
-By using our [look-ahead feature](/graphile-build/look-ahead/) your code can
-know what's coming and make sure it requests the correct fields ahead of time,
-leading to fewer round-trips and higher performance.
-
-Version 4 of the popular
-[PostGraphQL](https://github.com/postgraphql/postgraphql) project uses `graphile-build`
-to serve even deeply nested requests with just one SQL query. Result: significant
-speedups especially where database connection latency is above 1ms.
-
-</div>
-</div><!-- /col-xs-12 -->
-
-</div><!-- /row -->
-</div><!-- /container -->
-</section>
-
-<!-- **************************************** -->
-
-<section>
-<div class='container center'>
-<div class='row'>
-<div class='col-xs-12'>
-<div class='hero-block'>
-
-## Automatically build GraphQL objects and fields through database introspection
-
-Graphile already has extensive support for PostgreSQL through the
-`graphile-build-pg` module.
-
-The `graphile-buld-pg` plugins perform introspection of your
-database schema and **automatically** build the relevant GraphQL objects and fields
-based on the tables, columns, functions, relations that it finds in your
-database - no need to manually keep your codebase and database schema in sync.
-
-</div>
-</div>
-
-</div><!-- /row -->
-</div><!-- /container -->
-</section>
-
-
-<!-- **************************************** -->
-
-<section>
-<div class='container center'>
-<div class='row'>
-<div class='col-xs-12'>
-<div class='hero-block'>
-
-## Straightforward integration
-
-If you're already building with the reference implementation of GraphQL from
-Facebook then adding hooks is fairly straightforward:
-
-</div>
-<div class='container center'>
-<div class='row'>
-
-<div class='col-xs-12 col-lg-6'>
-
-##### `graphql`:
-
-```js{2}
-const MyType =
-  new GraphQLObjectType({
-    name: 'MyType',
-    fields: {
-      // ...
-```
-
-</div><!-- /col-6 -->
-<div class='col-xs-12 col-lg-6'>
-
-##### `graphile-build`:
-
-```js{2}
-const MyType =
-  newWithHooks(GraphQLObjectType, {
-    name: 'MyType',
-    fields: {
-      // ...
-```
-
-</div><!-- /col-6 -->
-
-</div><!-- /row -->
-</div><!-- /container -->
-</section>
-
-
-
 <!-- **************************************** -->
 
 <section>
@@ -202,25 +151,21 @@ schema - you only need to change the parts of your code that you wish to trigger
 
 <section>
 <div class='container center'>
+
 <div class='row'>
 <div class='col-xs-12'>
 <div class='hero-block'>
 
-## Automatically update your running GraphQL schema without the need to restart the server
+## GraphiQL with auto-generated documentation
 
-For example: when your underlying data structure changes your Graphile-Build
-plugins can [trigger a rebuild](/graphile-build/schema-builder/#plugin-methods) event and you'll automatically be supplied with a
-fresh new GraphQL schema to replace the out-of-date one - no need to restart.
-your server!
+![GraphiQL displaying allSuperheroes](./graphiql-superheroes.png)
 
 </div>
-</div><!-- /col-9 -->
+</div>
+</div>
 
-</div><!-- /row -->
-</div><!-- /container -->
+</div>
 </section>
-
-
 
 <!-- **************************************** -->
 
@@ -230,20 +175,22 @@ your server!
 <div class='col-xs-12'>
 <div class='hero-block'>
 
-## Data-store independent
+## PostgreSQL schema watching
 
-Build plugins for anything that Node.js can communicate with.
-
-Graphile treats GraphQL as a first-class citizen - everything is modelled around
-GraphQL, so any backend technology that can be expressed through GraphQL can be
-built with Graphile.
+PostGraphile has an excellent developer experience (DX) when you use the
+`--watch` CLI flag - it will automatically re-generate the GraphQL schema when
+your database changes. What's more, it will automatically reload GraphiQL's
+documentation too, so you can see your new schema features right away! No need
+to restart the server!
 
 </div>
-</div>
+</div><!-- /col-9 -->
 
 </div><!-- /row -->
 </div><!-- /container -->
 </section>
+
+
 
 <!-- **************************************** -->
 
@@ -259,15 +206,8 @@ built with Graphile.
 
 
 ```js
-const { buildSchema, defaultPlugins } = require("graphile-build");
-const { printSchema } = require("graphql/utilities");
-
-async function main() {
-  const schema = await buildSchema(defaultPlugins);
-  console.log(printSchema(schema));
-}
-
-main();
+npm install -g postgraphile
+postgraphile -c postgres://user:pass@host/dbname --schema schema_name
 ```
 
 <br />
