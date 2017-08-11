@@ -274,9 +274,23 @@ $lineColor: white;
     border-color: black;
     color: black;
   }
-
-
 }
+
+.button--outline-white {
+  background: transparent;
+  color: white;
+  border-color: white;
+
+  &:hover,
+  &:focus {
+    background: transparent;
+    border-color: white;
+    color: white;
+    opacity: 0.7;
+  }
+}
+
+
 
 .signup-field {
   background: white;
@@ -389,8 +403,8 @@ footer {
     padding-bottom: 15vh;
     padding-top: 15vh;
     &.simple {
-      padding-bottom: 1.5em;
-      padding-top: 1.5em;
+      padding-bottom: 5vh;
+      padding-top: 5vh;
     }
 
     h1, h2 {

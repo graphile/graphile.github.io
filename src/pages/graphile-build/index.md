@@ -12,7 +12,8 @@ title: Extensible GraphQL APIs through Plugins
 # Graphile Build: a library for constructing high-performance pluggable GraphQL APIs
 
 <div class='d-flex justify-content-center'>
-<a class='btn btn-primary btn-lg' href='/graphile-build/getting-started/'>Documentation &rarr;</a>
+<br />
+<a class='button button--outline-white' href='/graphile-build/getting-started/'>Documentation &rarr;</a>
 </div>
 
 </div><!-- /container -->
