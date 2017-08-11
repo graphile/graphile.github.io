@@ -353,8 +353,10 @@ footer {
 .template-marketing {
   .hero {
     align-items: center;
-    background: $graphileRed;
-    background-image: linear-gradient(to top right, $graphileRed 0%, #A83128 100%);
+    //background-image: linear-gradient(to top right, $graphileRed 0%, #A83128 100%);
+    background-color: $graphileRed;
+    background-image: radial-gradient(ellipse at center, RGBA(121,0,0,0.2) 0%, RGBA(50,0,0,0.4) 100%), url(/images/delauney.png);
+    background-size: cover, cover;
     color: white;
     display: flex;
     flex-direction: column;
