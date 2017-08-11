@@ -24,51 +24,44 @@ title: Tools to build extensible and performant GraphQL APIs
 <div class='col-xs-12'>
 <div class='hero-block'>
 
-## graphile-build for pluggable GraphQL APIs
+## PostGraphile: instant GraphQL API for PostgreSQL database
 
-The Graphile suite of Node.js modules provide you with the tools to rapidly
-generate high-performance extensible GraphQL APIs by combining plugins and
-using advanced look-ahead features.
+Auto-discovers tables, columns, relations, procedures and more; runs a
+high-performance secure GraphQL API server that adheres to best practices.
 
 </div>
 <div class='row'>
 <div class='col-lg-6 col-xs-12'>
 
-##### Build your schema with plugins
-```js
-buildSchema(plugins)
- 
-```
-
-```graphql{2}
-type Person {
-  # @deprecated Use 'name' instead
-  # The person's first name
-  firstName: String
-
-  #...
+##### Just concentrate on your database
+```sql
+CREATE TABLE app_public.superheroes (
+  id serial not null primary key,
+  name text not null
+);
+ALTER TABLE superheroes ENABLE ROW LEVEL SECURITY;
 ```
 
 </div><!-- /col-6 -->
 <div class='col-lg-6 col-xs-12'>
 
-##### Transform your schema with ease
-```js
-buildSchema([...plugins,
-  DeprecateFromCommentPlugin])
-```
-
-```graphql{3-4}
-type Person {
-  # The person's first name
-  firstName: String @deprecated(
-    reason: "Use 'name' instead")
-
-  #...
+##### Run a fully-fledged GraphQL API in one command
+```bash
+postgraphile
+  -c postgres://localhost/superheroes
+  --schema app_public
+  --watch
+  --jwt-secret "$JWT_SECRET"
 ```
 
 </div>
 </div>
+
+<div class='d-flex justify-content-center'>
+<a class='btn btn-primary btn-lg' href='/postgraphile/'>More about PostGraphile &rarr;</a>
+</div>
+
+
 </div>
 </section>
 
@@ -80,67 +73,18 @@ type Person {
 <div class='col-xs-12'>
 <div class='hero-block'>
 
-## graphile-build for GraphQL performance
+## Graphile Build: high-performance pluggable GraphQL schema tools
 
-Say Goodbye to the N+1 problem; fewer round-trips means higher performance.
-
-By using our [look-ahead feature](/graphile-build/look-ahead/) your code can
-know what's coming and make sure it requests the correct fields ahead of time,
-leading to fewer round-trips and higher performance.
-
-Version 4 of the popular
-[PostGraphQL](https://github.com/postgraphql/postgraphql) project uses `graphile-build`
-to serve even deeply nested requests with just one SQL query. Result: significant
-speedups especially where database connection latency is above 1ms.
-
-</div>
-</div><!-- /col-xs-12 -->
-
-</div><!-- /row -->
-</div><!-- /container -->
-</section>
-
-<!-- **************************************** -->
-
-<section>
-<div class='container center'>
-<div class='row'>
-<div class='col-xs-12'>
-<div class='hero-block'>
-
-## Automatically build GraphQL objects and fields through database introspection
-
-Graphile already has extensive support for PostgreSQL through the
-`graphile-build-pg` module.
-
-The `graphile-buld-pg` plugins perform introspection of your
-database schema and **automatically** build the relevant GraphQL objects and fields
-based on the tables, columns, functions, relations that it finds in your
-database - no need to manually keep your codebase and database schema in sync.
+Prefer building your GraphQL APIs by hand? By using our [look-ahead
+feature](/graphile-build/look-ahead/) your code can know what's coming and make
+sure it requests the correct fields ahead of time, leading to fewer round-trips
+and higher performance. Our [plugin architecture](/graphile-build/plugins/)
+allows you to extend or enhance your GraphQL API as your needs evolve over time,
+and use community-built plugins to increase developer productivity.
 
 </div>
 </div>
-
-</div><!-- /row -->
-</div><!-- /container -->
-</section>
-
-
-<!-- **************************************** -->
-
-<section>
-<div class='container center'>
-<div class='row'>
-<div class='col-xs-12'>
-<div class='hero-block'>
-
-## Straightforward integration
-
-If you're already building with the reference implementation of GraphQL from
-Facebook then adding hooks is fairly straightforward:
-
 </div>
-<div class='container center'>
 <div class='row'>
 
 <div class='col-xs-12 col-lg-6'>
@@ -170,114 +114,47 @@ const MyType =
 
 </div><!-- /col-6 -->
 
-</div><!-- /row -->
-</div><!-- /container -->
-</section>
-
-
-
-<!-- **************************************** -->
-
-<section>
-<div class='container center'>
-<div class='row'>
-<div class='col-xs-12'>
-<div class='hero-block'>
-
-## Fully compatible
-
-Graphile uses the <a href="http://graphql.org/graphql-js/">reference GraphQL implementation</a>
-under the hood, so you know it's spec compliant.
-
-You can use regular GraphQL objects from other libraries in your generated
-schema - you only need to change the parts of your code that you wish to trigger hooks for.
-
 </div>
-</div>
-</div><!-- /row -->
-</div><!-- /container -->
-</section>
-
-<!-- **************************************** -->
-
-<section>
-<div class='container center'>
-<div class='row'>
-<div class='col-xs-12'>
-<div class='hero-block'>
-
-## Automatically update your running GraphQL schema without the need to restart the server
-
-For example: when your underlying data structure changes your Graphile-Build
-plugins can [trigger a rebuild](/graphile-build/schema-builder/#plugin-methods) event and you'll automatically be supplied with a
-fresh new GraphQL schema to replace the out-of-date one - no need to restart.
-your server!
-
-</div>
-</div><!-- /col-9 -->
-
-</div><!-- /row -->
-</div><!-- /container -->
-</section>
-
-
-
-<!-- **************************************** -->
-
-<section>
-<div class='container center'>
-<div class='row'>
-<div class='col-xs-12'>
-<div class='hero-block'>
-
-## Data-store independent
-
-Build plugins for anything that Node.js can communicate with.
-
-Graphile treats GraphQL as a first-class citizen - everything is modelled around
-GraphQL, so any backend technology that can be expressed through GraphQL can be
-built with Graphile.
-
-</div>
-</div>
-
-</div><!-- /row -->
-</div><!-- /container -->
-</section>
-
-<!-- **************************************** -->
-
-<section>
-<div class='container center'>
-<div class='row justify-content-center'>
-<div class='text-center col-xs-12'>
-<div class='hero-block'>
-
-## Quick to start
-
-</div>
-
-
-```js
-const { buildSchema, defaultPlugins } = require("graphile-build");
-const { printSchema } = require("graphql/utilities");
-
-async function main() {
-  const schema = await buildSchema(defaultPlugins);
-  console.log(printSchema(schema));
-}
-
-main();
-```
 
 <div class='d-flex justify-content-center'>
-<a class='btn btn-primary btn-lg' href='/graphile-build/getting-started/'>Get started &rarr;</a>
+<a class='btn btn-primary btn-lg' href='/postgraphile/'>More about Graphile Build &rarr;</a>
 </div>
 
-</div><!-- /col-xs-12 -->
 </div><!-- /container -->
 </section>
 
+<!-- **************************************** -->
+
+<section>
+<div class='container center'>
+<div class='row'>
+<div class='col-xs-12'>
+<div class='hero-block'>
+
+## Fully GraphQL compatible
+
+Graphile uses the <a href="http://graphql.org/graphql-js/">reference GraphQL
+implementation</a> under the hood, so you know it's spec compliant. This also
+means you can mix it into existing GraphQL APIs, or mix existing GraphQL object
+types into it (so long as they use the reference GraphQL implementation too).
+
+PostGraphile supports GraphQL best practices, including: [cursor-based
+connection
+pagination](https://facebook.github.io/relay/graphql/connections.htm), [global
+object
+identification](https://facebook.github.io/relay/graphql/objectidentification.htm),
+and the [Relay Input Object Mutations
+Specification](https://facebook.github.io/relay/graphql/mutations.htm); plus
+it's built on Graphile Build technology so it can be expanded using Graphile
+Build plugins.
+
+</div>
+</div>
+</div><!-- /row -->
+</div><!-- /container -->
+</section>
+
+<!-- **************************************** -->
 
 <section class='mailinglist'>
 <div class='container'>
