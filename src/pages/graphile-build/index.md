@@ -69,6 +69,11 @@ type Person {
 
 </div>
 </div>
+
+<div class='d-flex justify-content-center'>
+<a class='btn btn-primary btn-lg' href='/graphile-build/getting-started/'>Get started &rarr;</a>
+</div>
+
 </div>
 </section>
 
