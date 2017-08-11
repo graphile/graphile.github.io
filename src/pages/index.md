@@ -284,33 +284,26 @@ main();
 
 <div class='row justify-content-center'>
 <div class='col-xs-12'>
-<div class='hero-block'>
-  <h2>Questions, comments or feedback? <a href='mailto:info@graphile.org?subject=Graphile%20question%2Fcomment%2Ffeedback%3A'>info@graphile.org</a></h2>
-</div>
-</div>
-</div>
+<div class='hero-block center'>
 
-<div style="height: 36px"></div>
+  ## Questions, comments or feedback? <a href='mailto:info@graphile.org?subject=Graphile%20question%2Fcomment%2Ffeedback%3A'>info@graphile.org</a></h2>
+
+</div>
+</div>
+</div>
 
 <div class='row justify-content-center'>
-<div class='col-xs-12 col-md-8 text-center'>
+<div class='col-xs-12 center'>
 <div class='hero-block'>
-<!-- Begin MailChimp Signup Form -->
-<link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css" />
-<style type="text/css">
-	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
-	/* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
-	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
-</style>
 <div>
 <form action="//graphile.us16.list-manage.com/subscribe/post?u=d103f710cf00a9273b55e8e9b&amp;id=c3a9eb5c4e" method="post"
 id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-  <div id="mc_embed_signup_scroll">
-    <h4>Subscribe to our occasional announcements newsletter</h4>
-    <p class='lead'>Keep up to date on Grapile and PostGraphQL features/changes:</p>
+  <div id="mc_embed_signup_scroll center hero-block">
+    <p>Keep up to date on Grapile and PostGraphile features/changes.
+    Subscribe to our occasional announcements newsletter:</p>
     <div class="mc-field-group form-inline justify-content-center">
       <div class='form-group'>
-        <label for="mce-EMAIL">Email Address: </label>
+        <label for="mce-EMAIL">Email address</label>
         <input type="email" value="" name="EMAIL" class="required email form-control mx-sm-3" id="mce-EMAIL">
         <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
         <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_d103f710cf00a9273b55e8e9b_c3a9eb5c4e" tabindex="-1" value=""></div>
