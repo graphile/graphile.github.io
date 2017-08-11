@@ -270,8 +270,9 @@ async function main() {
 main();
 ```
 
+<br />
 <div class='d-flex justify-content-center'>
-<a class='btn btn-primary btn-lg' href='/graphile-build/getting-started/'>Get started &rarr;</a>
+<a class='button button--outline' href='/graphile-build/getting-started/'>Get started &rarr;</a>
 </div>
 
 </div><!-- /col-xs-12 -->

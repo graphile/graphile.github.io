@@ -57,8 +57,9 @@ postgraphile
 </div>
 </div>
 
+<br />
 <div class='d-flex justify-content-center'>
-<a class='btn btn-primary btn-lg' href='/postgraphile/'>More about PostGraphile &rarr;</a>
+<a class='button button--outline' href='/postgraphile/'>More about PostGraphile &rarr;</a>
 </div>
 
 
@@ -116,8 +117,9 @@ const MyType =
 
 </div>
 
+<br />
 <div class='d-flex justify-content-center'>
-<a class='btn btn-primary btn-lg' href='/postgraphile/'>More about Graphile Build &rarr;</a>
+<a class='button button--outline' href='/postgraphile/'>More about Graphile Build &rarr;</a>
 </div>
 
 </div><!-- /container -->

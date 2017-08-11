@@ -231,37 +231,55 @@ $lineColor: white;
 }
 
 .signup-field,
-.signup-button {
+.button {
   padding: 0.5rem;
   border-radius: 5px;
   margin-bottom: 1rem;
+  border-width: 2px;
+  border-style: solid;
   appearance: none;
   outline: none;
   width: 100%;
   max-width: 24rem;
+  display: inline;
 
   &:focus {
     border-color: $graphileRed;
   }
 }
 
-.signup-button {
+.button {
   background: $graphileRed;
-  border: 0;
+  border-color: $graphileRed;
   color: white;
-  border: 2px solid $graphileRed;
   cursor: pointer;
 
   &:hover,
   &:focus {
     background: darken($graphileRed, 20);
     border-color: darken($graphileRed, 20);
+    color: white;
   }
+}
+
+.button--outline {
+  background: transparent;
+  color: $graphileRed;
+  border-color: $graphileRed;
+
+  &:hover,
+  &:focus {
+    background: transparent;
+    border-color: black;
+    color: black;
+  }
+
+
 }
 
 .signup-field {
   background: white;
-  border: 2px solid #c9c9c9;
+  border-color: #c9c9c9;
   display: block;
 
   &:focus {
