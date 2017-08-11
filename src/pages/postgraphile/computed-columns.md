@@ -6,6 +6,14 @@ title: Computed Columns
 
 ## Computed Columns
 
+Not all the data returned from PostGraphile has to be concrete data in your
+database, we also support computing data on the fly. An example of this is our
+"computed columns" feature where you can add what appears to be an extra column
+(field) to the GraphQL type that represents your table which is actually
+calculated by calling a function. We inline this function call into the
+original select statement, so there's no N+1 issues with this - it's very
+efficient.
+
 You can create PostgreSQL functions that match the following criteria to add a
 field to a table type. This field could be simple (such as `name` constructed
 from `first_name || ' ' || last_name`) or could return a composite type (e.g.
@@ -18,6 +26,8 @@ apply to the function you create:
 - must NOT return `VOID`
 - must be marked as `STABLE`
 - must be defined in the same schema as the table
+
+### Example
 
 This example creates two computed columns, one returning a simple varchar and
 the other a connection. Note that these methods could also accept additional
@@ -37,11 +47,13 @@ create table my_schema.friendships (
   primary key (user_id, target_id)
 );
 
-create function my_schema.users_name(u my_schema.users) returns varchar as $$
+create function my_schema.users_name(u my_schema.users)
+returns varchar as $$
   select u.first_name || ' ' || u.last_name;
 $$ language sql stable;
 
-create function my_schema.users_friends(u my_schema.users) returns setof my_schema.users as $$
+create function my_schema.users_friends(u my_schema.users)
+returns setof my_schema.users as $$
   select *
   from my_schema.users
   inner join my_schema.friendships
@@ -51,4 +63,3 @@ $$ language sql stable;
 ```
 
 TODO: ensure this example works
-
