@@ -59,10 +59,14 @@ pre code {
     background-color: initial;
     border-radius: initial;
     color: inherit;
-    font-size: 0.95em;
     padding: 0;
   }
 }
+
+h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
+  font-size: 0.95em;
+}
+
 
 // ----------------------------------------
 // Text
@@ -261,7 +265,7 @@ $lineColor: white;
 }
 
 .hero-block {
-  max-width: 640px;
+  max-width: 720px;
   padding: 0 1rem;
   margin: 0 auto;
 }
@@ -297,9 +301,8 @@ footer {
     color: white;
     display: flex;
     flex-direction: column;
-    padding-bottom: 20vh;
-    padding-top: 20vh;
-    text-align: center;
+    padding-bottom: 15vh;
+    padding-top: 15vh;
 
     h1, h2 {
       color: inherit;
@@ -316,8 +319,8 @@ footer {
 
   .page-content {
     section {
-      padding-top: 10vh;
-      padding-bottom: 10vh;
+      padding-top: 8vh;
+      padding-bottom: 8vh;
       background: white;
     }
 
@@ -341,12 +344,8 @@ footer {
   .template-marketing {
 
     .hero {
-      padding-top: 10vh;
-      padding-bottom: 10vh;
-
       h1 {
         font-size: 1.75rem;
-
       }
 
       h2 {
