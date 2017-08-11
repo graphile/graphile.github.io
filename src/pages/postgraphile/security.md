@@ -7,22 +7,33 @@ title: Security
 ## Security
 
 Traditionally in web application architectures the security is implemented in
-the server layer and the database is treated as a dumb store of data - people
-tend to figure that this reduces the workload on the database and thus
-increases scalability. As their application grows, they start needing other
-services to interact with the database too - which can mean that they need to
-duplicate the authentication/authorization logic in multiple places which can
-lead to discrepancies and increases the surface area for potential issues.
+the server layer and the database is treated as a simple store of data. Partly
+this was due to necessity (the security policies offered by databases such as
+PostgreSQL were simply not granular enough), and partly this was people
+figuring it would reduce the workload on the database thus increases
+scalability. However, as applications grow, they start needing more advanced
+features or additional services to interact with the database.  There's a
+couple options they have here: duplicate the authentication/authorization logic
+in multiple places (which can lead to discrepancies and increases the surface
+area for potential issues), or make sure everything goes through the original
+application layer (which then becomes both the development and performance
+bottleneck).
 
-Instead, we advise that you protect your lowest level - the data itself. By
-doing so you can be sure that no matter how many services interact with your
-database they will all be protected by the same underlying permissions logic
-which you only need to maintain in one place.
+However, this is no longer necessary since PostgreSQL introduced much more
+granular permissions in the form of [Row-Level Security (RLS)
+policies](https://www.postgresql.org/docs/9.6/static/ddl-rowsecurity.html) in
+PostgreSQL 9.5 back at the beginning of 2016. Now you can combine this with
+PostgreSQL established permissions system (based on roles) allowing your
+application to be considerably more specific about permissions: adding
+row-level permission constraints to the existing table- and column-based
+permissions.
 
-PostgreSQL already had a powerful permissions system built in with it's roles
-and grants; but in PostgreSQL 9.5 Row Level Security policies were introduced.
-These allow your application to be considerably more specific about permissions,
-moving from table- and column-based permissions to row-level permissions.
+Now that this functionality is stable and proven, we advise that you protect
+your lowest level - the data itself. By doing so you can be sure that no matter
+how many services interact with your database they will all be protected by the
+same underlying permissions logic, which you only need to maintain in one
+place. You can add as many microservices as you like, and they can talk to the
+database directly!
 
 When enabled, all rows are by default not visible to any roles (except database
 administration roles and the role who created the database/table); and
@@ -30,74 +41,112 @@ permission is selectively granted with the use of policies.
 
 If you already have a secure database schema that implements these technologies
 to protect your data at the lowest levels then you can leverage
-`postgraphile` to generate a powerful, secure and fast API in minimal
-time. All you need to do is pass a pre-authenticated pgClient to the `graphql`
-resolve function.
+`postgraphile` to generate a powerful, secure and fast API very rapidly. You
+just need to generate JWT tokens for your users, and we even help you with
+that!
 
-### Example
+### Processing JWTs
 
-```js{21,28-29,35-37,42}
-const { createPostGraphQLSchema } = require('postgraphile');
-const pg = require('pg');
+To enable the JWT functionality you must provide a `--jwt-secret` on the CLI
+(or `jwtSecret` to the library options). This will allow PostGraphile to
+authenticate incoming JWTs and set the granted claims on the database
+transaction.
 
-const pgPool = new pg.Pool(process.env.DATABASE_URL);
+You should also supply a `--default-role` which is used for requests that don't
+specify a role.
 
-async function runQuery(query, variables) {
-  const schema = await createPostGraphQLSchema(
-    process.env.DATABASE_URL,
-    ['users_schema', 'posts_schema'],
-    {
-      dynamicJson: true,
-      pgJwtSecret: process.env.JWT_SECRET,
-      pgJwtTypeIdentifier: 'users_schema.jwt_type',
-    }
-  );
+### Generating JWTs
 
-  // Fetch a postgres client from the pool
-  const pgClient = await pgPool.connect();
+PostGraphile also has support for generating JWTs easily from inside your 
+PostgreSQL schema. To do so you must name a composite type via
+`--jwt-token-identifier`, this will then be combined with the secret from
+`--jwt-secret` to generate a string JWT that the client can then consume.
 
-  // Start a transaction so we can apply settings local to the transaction
-  await pgClient.query("begin");
+### Sending JWTs to the server
 
-  try {
-    // The following statement is equivalent to (but faster than):
-    //    await pgClient.query("set local role to 'postgraphql_user'");
-    //    await pgClient.query("set local jwt.claims.user_id to '27'");
-    await pgClient.query(`select
-      set_config('role', 'postgraphql_user', true),
-      set_config('jwt.claims.user_id', '27', true)
-    `);
-    return await graphql(
-      schema,
-      query,
-      null,
-      /* CONTEXT > */ {
-        pgClient: pgClient,
-      }, /* < CONTEXT */
-      variables
-    );
-  } finally {
-    // commit the transaction (or rollback if there was an error) to clear the local settings
-    await pgClient.query("commit");
+JWTs are sent via the best practice `Authorization` header:
 
-    // Release the pgClient back to the pool.
-    await pgClient.release();
-  }
-}
-
-runQuery(
-  "query MyQuery { allPosts { nodes { id, title, author: userByAuthorId { username } } } }"
-).then(result => {
-  console.dir(result);
-  pgPool.release();
-}).catch(e => {
-  console.error(e);
-  process.exit(1);
-});
+```
+Authorization: Bearer JWT_TOKEN_HERE
 ```
 
-TODO: ensure this example works.
+e.g. with Apollo:
 
-To see how this works in a real application, check out
-[`withPostGraphQLContext` in
-PostGraphQL](https://github.com/postgraphql/postgraphql/blob/master/src/postgraphql/withPostGraphQLContext.ts)
+```js
+networkInterface.use([{
+  applyMiddleware(req, next) {
+    const token = getJWTFromSomewhere();
+    if (token) {
+      req.options.headers = _.extend(req.options.headers, {
+        authorization: `Bearer ${token}`
+      });
+    }
+    next();
+  }
+}]);
+```
+
+or with Relay:
+
+```js
+Relay.injectNetworkLayer(
+  new Relay.DefaultNetworkLayer('/graphql', {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+);
+```
+
+### How it works
+
+Your JWT token will include a number of claims, something like:
+
+```json
+{
+  "aud": "postgraphql",
+  "role": "app_user",
+  "user_id": 27
+}
+```
+
+When we verify that the JWT token is for us (via `aud: "postgraphql"`) we can
+authenticate the PostgreSQL client that is used to perform the GraphQL query.
+We do this as follows:
+
+```sql
+begin;
+set local role app_user;
+set local jwt.claims.role to 'app_user';
+set local jwt.claims.user_id to '2';
+
+-- WE PERFORM GRAPHQL QUERIES HERE
+
+commit;
+```
+
+_\* Actually to save roundtrips we perform just one query to set all configs
+via `select set_config('role', 'app_user', true), set_config('user_id', '2',
+true), ....`, but the `set local` is easier to understand)_
+
+You can then access this information via `current_setting` (the second argument
+says it's okay for the property to be missing, but **only works in PostgreSQL
+9.6+**, in previous versions you'll need to set the setting on the database to
+the empty string); for example here's a helper function:
+
+```sql
+create function current_user_id() returns integer as $$
+  select nullif(current_setting('jwt.claims.user_id', true), '')::integer;
+$$ language sql stable security definer;
+```
+
+e.g. you might have a row level policy such as:
+
+```sql
+create policy update_if_author
+  on comments
+  for update
+  using ("userId" = current_user_id())
+  with check ("userId" = current_user_id());
+```
+

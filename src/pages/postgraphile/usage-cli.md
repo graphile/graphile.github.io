@@ -50,8 +50,6 @@ There are more CLI options available to customise the GraphQL server:
   the route to mount the GraphiQL interface on. defaults to `/graphiql`
 - `-b`, `--disable-graphiql`  
   disables the GraphiQL interface. overrides the GraphiQL route option
-- `-t`, `--token <identifier>`  
-  the PostgreSQL identifier for a composite type that will be used to create tokens
 - `-o`, `--cors`  
   enable generous CORS settings. this is disabled by default, if possible use a proxy instead
 - `-a`, `--classic-ids`  
@@ -68,6 +66,8 @@ There are more CLI options available to customise the GraphQL server:
   a comma separated list of audiences your jwt token can contain. If no audience is given the audience defaults to `postgraphql`
 - `--jwt-role <string>`  
   a comma separated list of strings that create a path in the jwt from which to extract the postgres role. if none is provided it will use the key `role` on the root of the jwt.
+- `-t`, `--jwt-token-identifier <identifier>`  
+  the PostgreSQL identifier for a composite type that will be used to create JWT tokens
 - `--export-schema-json [path]`  
   enables exporting the detected schema, in JSON format, to the given location. The directories must exist already, if the file exists it will be overwritten.
 - `--export-schema-graphql [path]`  
