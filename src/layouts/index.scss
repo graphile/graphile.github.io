@@ -110,6 +110,7 @@ a {
   width: 100%;
   font-size: 0.9rem;
   min-height: 2.4rem;
+  z-index: 99999;
 }
 
 .navbar-item {
@@ -428,8 +429,8 @@ footer {
   margin: 0 auto;
 }
 
-.gatsby-resp-image-link {
-  transform: scale(1); /* To reset the z-index so that images can appear because gatsby has z-index: -1 */
+.gatsby-resp-image-wrapper[style] {
+  z-index: 0 !important;
 }
 
 @media only screen and (max-width: 480px) {
