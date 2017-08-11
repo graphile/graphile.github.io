@@ -19,10 +19,10 @@ code {
 // Some Typography.js themes do horrible
 // things with anchors
 a {
+  background: initial;
   color: initial;
   text-decoration: none;
   text-shadow: initial;
-  background: initial;
 }
 
 // ----------------------------------------
@@ -30,12 +30,12 @@ a {
 
 .gatsby-highlight-code-line {
   background-color: #feb;
-  display: block;
-  margin-right: -1em;
-  margin-left: -1em;
-  padding-right: 1em;
-  padding-left: 0.75em;
   border-left: 0.25em solid #f99;
+  display: block;
+  margin-left: -1em;
+  margin-right: -1em;
+  padding-left: 0.75em;
+  padding-right: 1em;
 }
 
 pre code {
@@ -56,11 +56,11 @@ pre code {
 
 .template-page {
   h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
-    padding: 0;
-    color: inherit;
     background-color: initial;
     border-radius: initial;
+    color: inherit;
     font-size: 0.95em;
+    padding: 0;
   }
 }
 
@@ -79,13 +79,12 @@ a {
 }
 
 .sidebar-title {
-  font-weight: normal;
-  text-transform: uppercase;
-  font-size: 0.75em;
   color: inherit;
+  font-size: 0.75em;
+  font-weight: normal;
   letter-spacing: 0.03em;
+  text-transform: uppercase;
 }
-
 
 // ----------------------------------------
 // Nav
@@ -166,7 +165,6 @@ $lineColor: white;
   top: 0.5rem;
 }
 
-
 .navbar-crosses {
   background: #333;
   position: absolute;
@@ -198,8 +196,8 @@ $lineColor: white;
 }
 
 .nav-controls {
-  display: flex;
   align-items: center;
+  display: flex;
 }
 
 .navbar-toggler,
@@ -207,7 +205,7 @@ $lineColor: white;
   display: none;
 }
 
-@media only screen and (max-width: 599px) {
+@media only screen and (max-width: 640px) {
   .navbar-toggler,
   .navbar-crosses {
     display: block;
@@ -222,7 +220,6 @@ $lineColor: white;
     margin-top: 2.4rem;
   }
 
-  // .navbar-toggler:focus + .navbar-nav,
   .navbar-toggler:checked + .nav-controls .navbar-nav {
     display: flex;
     opacity: 1;
@@ -248,14 +245,14 @@ $lineColor: white;
       margin-left: 0.5rem;
     }
   }
-
 }
 
 // ----------------------------------------
 // Layout
+
 .ml-auto {
-  margin-left: auto;
   display: flex;
+  margin-left: auto;
 }
 
 .space-between {
@@ -265,6 +262,7 @@ $lineColor: white;
 
 .hero-block {
   max-width: 640px;
+  padding: 0 1rem;
   margin: 0 auto;
 }
 
@@ -321,19 +319,11 @@ footer {
       padding-top: 10vh;
       padding-bottom: 10vh;
       background: white;
-
-      h1,h2,p {
-        // text-align: center;
-        // max-width: 60%;
-        // margin-left: auto;
-        //margin-right: auto;
-      }
     }
 
     section:nth-child(even) {
       background: #F9F9F9;
     }
-
   }
 }
 
@@ -343,5 +333,25 @@ footer {
   margin: 0 auto;
 }
 
-.main-content {
+@media only screen and (max-width: 480px) {
+  html {
+    font-size: 18px;
+  }
+
+  .template-marketing {
+
+    .hero {
+      padding-top: 10vh;
+      padding-bottom: 10vh;
+
+      h1 {
+        font-size: 1.75rem;
+
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+    }
+  }
 }
