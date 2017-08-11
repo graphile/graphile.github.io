@@ -70,6 +70,12 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
   font-size: 0.95em;
 }
 
+p code, span code {
+  background: RGBA(0,0,0,0.07);
+  border-radius: 0.3em;
+  padding: 0.05em 0.3em;
+}
+
 
 // ----------------------------------------
 // Text
@@ -347,8 +353,10 @@ footer {
 .template-marketing {
   .hero {
     align-items: center;
-    background: $graphileRed;
-    background-image: linear-gradient(to top right, $graphileRed 0%, #A83128 100%);
+    //background-image: linear-gradient(to top right, $graphileRed 0%, #A83128 100%);
+    background-color: $graphileRed;
+    background-image: radial-gradient(ellipse at center, RGBA(121,0,0,0.2) 0%, RGBA(50,0,0,0.4) 100%), url(/images/delauney.png);
+    background-size: cover, cover;
     color: white;
     display: flex;
     flex-direction: column;
