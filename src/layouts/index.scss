@@ -138,7 +138,11 @@ a {
   align-items: center;
 
   .nav-link {
-    color: inherit;
+    color: #ddd;
+    &.active {
+      color: white;
+      font-weight: bold;
+    }
   }
 }
 
