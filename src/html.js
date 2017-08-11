@@ -1,6 +1,18 @@
 import React from "react";
 import * as PropTypes from "prop-types";
-import Helmet from "react-helmet";
+import { TypographyStyle, GoogleFont } from "react-typography";
+import Typography from "typography";
+import theme from "typography-theme-fairy-gates";
+theme.baseFontSize = "22px";
+theme.bodyGray = "50";
+theme.overrideStyles = () => ({
+  a: {
+    textShadow: "initial",
+    color: "initial",
+    backgroundColor: "initial",
+  },
+});
+const typography = new Typography(theme);
 
 const propTypes = {
   headComponents: PropTypes.node.isRequired,
@@ -22,31 +34,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-NNK4X8M');`,
             }}
           />
-          <link
-            rel="stylesheet"
-            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
-            integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
-            crossOrigin="anonymous"
-          />
-          <script
-            src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
-            integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
-            crossOrigin="anonymous"
-          />
-          <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
-            integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
-            crossOrigin="anonymous"
-          />
-          <script
-            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
-            integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
-            crossOrigin="anonymous"
-          />
-          <link
-            rel="stylesheet"
-            href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-          />
+          <script src="https://use.fontawesome.com/c72bfae6f9.js" />
           {this.props.headComponents}
           <meta charSet="utf-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
@@ -54,6 +42,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             name="viewport"
             content="width=device-width, initial-scale=1.0 maximum-scale=5.0"
           />
+          <TypographyStyle typography={typography} />
+          <GoogleFont typography={typography} />
           <link rel="stylesheet" href="/styles.css" />
         </head>
         <body>

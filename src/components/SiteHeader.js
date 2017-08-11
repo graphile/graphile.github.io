@@ -2,65 +2,72 @@ import React from "react";
 import Link from "gatsby-link";
 
 export default ({ location }) =>
-  <header>
-    <nav className="navbar navbar-toggleable-md navbar-inverse bg-inverse">
-      <button
-        className="navbar-toggler navbar-toggler-right"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span className="navbar-toggler-icon" />
-      </button>
-      <Link to="/" className="navbar-brand">
-        Graphile
-      </Link>
-
-      <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <Link
-              className={`nav-link ${location.pathname.match(/^\/$/)
-                ? "active"
-                : ""}`}
-              to="/"
-            >
-              Home
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link
-              className={`nav-link ${location.pathname.match(
-                /^\/graphile-build(\/|$)/
-              )
-                ? "active"
-                : ""}`}
-              to="/graphile-build/getting-started/"
-            >
-              Graphile-Build
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link
-              className={`nav-link ${location.pathname.match(
-                /^\/postgraphile(\/|$)/
-              )
-                ? "active"
-                : ""}`}
-              to="/postgraphile/introduction/"
-            >
-              PostGraphile
-            </Link>
-          </li>
-        </ul>
-        <span className="navbar-text">
-          <a href="https://github.com/graphile/graphile-build">
-            <img src="/images/GitHub-Mark-Light-120px-plus.png" width="26" />
-          </a>
-        </span>
+  <header className="content">
+    <nav className="navbar">
+      <div className="container">
+        <input
+          className="navbar-toggler"
+          type="checkbox"
+          id="toggle"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        />
+        <div className="nav-controls">
+          <div className="navbar-crosses">
+            <span className="line line-1"> </span>
+            <span className="line line-2"> </span>
+            <span className="line line-3"> </span>
+          </div>
+          <ul className="navbar-nav">
+            <li className="navbar-item">
+              <Link
+                className={`nav-link ${location.pathname.match(/^\/$/)
+                  ? "active"
+                  : ""}`}
+                to="/"
+              >
+                <span className="fa fa-home" />{" "}
+                <span className="home">Home</span>
+              </Link>
+            </li>
+            <li className="navbar-item">
+              <Link
+                className={`nav-link ${location.pathname.match(
+                  /^\/postgraphile(\/|$)/
+                )
+                  ? "active"
+                  : ""}`}
+                to="/postgraphile/introduction/"
+              >
+                PostGraphile
+              </Link>
+            </li>
+            <li className="navbar-item">
+              <Link
+                className={`nav-link ${location.pathname.match(
+                  /^\/graphile-build(\/|$)/
+                )
+                  ? "active"
+                  : ""}`}
+                to="/graphile-build/getting-started/"
+              >
+                Graphile Build
+              </Link>
+            </li>
+            <li className="navbar-item ml-auto">
+              <a
+                className="nav-github-link nav-link"
+                href="https://github.com/graphile/graphile-build"
+              >
+                <span className="fa fa-github" />{" "}
+                <span className="github">Github</span>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
   </header>;

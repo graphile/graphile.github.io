@@ -9,7 +9,7 @@ const sectionIs = desiredSection => ({ sectionId }) =>
 
 function PageList({ navs, location }) {
   return (
-    <ul className="nav flex-column">
+    <ul className="page-list nav flex-column">
       {navs.map(({ to, title }, idx) =>
         <li key={idx} className="nav-item">
           <Link
@@ -63,50 +63,50 @@ const Page = ({
         ]}
       />
       <SiteHeader location={location} />
-      <section
-        style={{
-          margin: "0 auto",
-          maxWidth: 960,
-          padding: "0px 1.0875rem 1.45rem",
-          paddingTop: 0,
-        }}
-        className="page-content"
-      >
+      <section className="page-content">
         <div className="container">
-          <div className="row">
-            <div className="col-12 col-md-3 push-md-9">
+          <div className="row between-xs">
+            <aside className="sidebar col-xs-12 col-md-3 last-xs">
               {navSections.map(({ id, title }, idx) =>
-                <div key={idx}>
-                  <h4>
+                <section key={idx}>
+                  <h4 className="sidebar-title">
                     {title}
                   </h4>
                   <PageList
                     location={location}
                     navs={navPages.filter(sectionIs(id))}
                   />
-                </div>
+                </section>
               )}
-            </div>
-            <div className="col-12 col-md-9 pull-md-3">
-              <div className="container">
-                <div className="row">
-                  <div
-                    dangerouslySetInnerHTML={{ __html: html }}
-                    style={{ width: "100%" }}
-                  />
-                </div>
-                <div className="row">
-                  {prev
-                    ? <Link className="btn btn-secondary btn-large" to={prev}>
-                        &laquo; {prevText || "Previous"}
-                      </Link>
-                    : null}
-                  <div className="ml-auto">
-                    {next
-                      ? <Link className="btn btn-primary btn-large" to={next}>
-                          {nextText || "Next"} &raquo;
-                        </Link>
-                      : null}
+            </aside>
+            <div className="col-xs-12 col-md-9 first-xs main-content">
+              <div className="row">
+                <div
+                  className="col-xs-12"
+                  dangerouslySetInnerHTML={{ __html: html }}
+                  style={{ width: "100%" }}
+                />
+                <br />
+                <br />
+                <div className="col-xs-12">
+                  <div className="row between-xs">
+                    <div className="col-xs-6">
+                      {prev
+                        ? <Link
+                            className="btn btn-secondary btn-large"
+                            to={prev}
+                          >
+                            ← {prevText || "Previous"}
+                          </Link>
+                        : null}
+                    </div>
+                    <div className="col-xs-6 right">
+                      {next
+                        ? <Link className="btn btn-primary btn-large" to={next}>
+                            {nextText || "Next"} →
+                          </Link>
+                        : null}
+                    </div>
                   </div>
                 </div>
               </div>

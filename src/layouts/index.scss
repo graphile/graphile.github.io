@@ -1,57 +1,407 @@
+$graphileRed: #E44336;
+
+
+// ----------------------------------------
+// Typography.js overrides
+
+// Override Typography.js assumption that
+// images are block elements
+p,
+div,
+span {
+  img {
+    margin-bottom: 0;
+  }
+}
+
+// Prevent ligatures in code
+code {
+  font-feature-settings: initial;
+}
+
+// Some Typography.js themes do horrible
+// things with anchors
+a {
+  background: initial;
+  color: initial;
+  text-decoration: none;
+  text-shadow: initial;
+}
+
+// ----------------------------------------
+// Code
+
+.gatsby-highlight-code-line {
+  background-color: #feb;
+  border-left: 0.25em solid #f99;
+  display: block;
+  margin-left: -1em;
+  margin-right: -1em;
+  padding-left: 0.75em;
+  padding-right: 1em;
+}
+
 pre code {
   font-variant: none;
 }
-header,
-footer {
-  background: #424;
-  color: white;
+
+pre {
+  box-shadow: 0 0 50px 0px rgba(0, 0, 0, 0.16);
 }
+
+.gatsby-highlight {
+  margin-bottom: 1.45rem;
+}
+
+pre code {
+  font-size: 0.75rem;
+}
+
+.template-page {
+  h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
+    background-color: initial;
+    border-radius: initial;
+    color: inherit;
+    padding: 0;
+  }
+}
+
+h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
+  font-size: 0.95em;
+}
+
+
+// ----------------------------------------
+// Text
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 2.175rem;
+  margin-bottom: 1.275rem;
+}
+
+
+a {
+  color: $graphileRed;
+  text-decoration: none;
+}
+
+.sidebar-title {
+  color: inherit;
+  font-size: 0.75em;
+  font-weight: normal;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+// ----------------------------------------
+// Nav
+
+.navbar {
+  background: #333;
+  color: white;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  font-size: 0.9rem;
+  min-height: 2.4rem;
+}
+
+.navbar-item {
+  height: 2.4rem;
+}
+
+.nav-github-link {
+  font-size: 1.1em;
+}
+
+.navbar-nav,
+.navbar-item {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-nav {
+  display: flex;
+  width: 100%;
+}
+
+.navbar-item {
+  margin-right: 2rem;
+  display: flex;
+  align-items: center;
+
+  .nav-link {
+    color: inherit;
+  }
+}
+
+.home,
+.github {
+  display: none;
+}
+
+.navbar-toggler-icon {
+  margin-right: 0.5rem;
+}
+
+$toggleSize: 1.2rem;
+$heightIcon: $toggleSize;
+$widthLine: $heightIcon;
+$heightLine: 4px;
+$transitionTime: 0.3s;
+$rotation: 45deg;
+$translateY: ($heightIcon / 2);
+$translateX: 0;
+$lineColor: white;
+
+.navbar-toggler {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  color: white;
+  height: $toggleSize;
+  left: 1rem;
+  opacity: 0.5;
+  order: 1;
+  position: absolute;
+  width: $toggleSize;
+}
+
+.navbar-toggler,
+.navbar-crosses {
+  top: 0.5rem;
+}
+
+.navbar-crosses {
+  background: #333;
+  position: absolute;
+  left: 1rem;
+  pointer-events: none;
+  height: $heightIcon;
+  width: $widthLine;
+
+  .line {
+    background: $lineColor;
+    border-radius: ($heightLine / 2);
+    display: block;
+    height: $heightLine;
+    left: 0;
+    position: absolute;
+    transition: all $transitionTime;
+    width: $widthLine;
+  }
+
+  .line-1 { top: 0; }
+  .line-2 { top: 50%; }
+  .line-3 { top: 100%; }
+}
+
+.navbar-toggler:checked + .nav-controls .navbar-crosses {
+  .line-1 { transform: translateY($translateY) translateX($translateX) rotate($rotation); }
+  .line-2 { opacity:0; }
+  .line-3 { transform: translateY($translateY * -1) translateX($translateX) rotate($rotation * -1); }
+}
+
+.nav-controls {
+  align-items: center;
+  display: flex;
+}
+
+.navbar-toggler,
+.navbar-crosses {
+  display: none;
+}
+
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signup-field,
+.signup-button {
+  padding: 0.5rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  appearance: none;
+  outline: none;
+  width: 100%;
+  max-width: 24rem;
+
+  &:focus {
+    border-color: $graphileRed;
+  }
+}
+
+.signup-button {
+  background: $graphileRed;
+  border: 0;
+  color: white;
+  border: 2px solid $graphileRed;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    background: darken($graphileRed, 20);
+    border-color: darken($graphileRed, 20);
+  }
+}
+
+.signup-field {
+  background: white;
+  border: 2px solid #c9c9c9;
+  display: block;
+
+  &:focus {
+    border-color: $graphileRed;
+  }
+}
+
+
+@media only screen and (max-width: 640px) {
+  .navbar-toggler,
+  .navbar-crosses {
+    display: block;
+  }
+
+  .navbar-nav {
+    display: none;
+    width: 100%;
+  }
+
+  .nav-controls {
+    margin-top: 2.4rem;
+  }
+
+  .navbar-toggler:checked + .nav-controls .navbar-nav {
+    display: flex;
+    opacity: 1;
+  }
+
+  .navbar-nav .navbar-item {
+    display: flex;
+    margin: 0 -1rem;
+    padding: 0 1rem;
+  }
+
+  .navbar-nav {
+    flex-direction: column;
+  }
+
+  .navbar-nav .navbar-item {
+    border-top: 1px solid #4d4d4d;
+    background: #333;
+
+    .home,
+    .github {
+      display: inline;
+      margin-left: 0.5rem;
+    }
+  }
+}
+
+// ----------------------------------------
+// Layout
+
+.ml-auto {
+  display: flex;
+  margin-left: auto;
+}
+
+.space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.hero-block {
+  max-width: 720px;
+  padding: 0 1rem;
+  margin: 0 auto;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
 footer {
   padding: 3rem 0;
 }
 
-.gatsby-highlight-code-line {
-  background-color: #feb;
-  display: block;
-  margin-right: -1em;
-  margin-left: -1em;
-  padding-right: 1em;
-  padding-left: 0.75em;
-  border-left: 0.25em solid #f99;
+.page-content {
+  padding-top: 2rem;
 }
 
+.page-list {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+  font-size: 0.85em;
+}
 
 .template-marketing {
+  .hero {
+    align-items: center;
+    background: $graphileRed;
+    background-image: linear-gradient(to top right, $graphileRed 0%, #A83128 100%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 15vh;
+    padding-top: 15vh;
+
+    h1, h2 {
+      color: inherit;
+      font-weight: normal;
+    }
+  }
+
   .col-fa {
     font-size: 800%;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  .page-content section {
-    padding: 2em 0;
-  }
-  .page-content header,
-  .page-content footer {
-    background: #424;
-    color: white;
-    padding: 3rem 0;
-  }
 
-  .page-content section.even {
-    background: #fff0f0;
+  .page-content {
+    section {
+      padding-top: 8vh;
+      padding-bottom: 8vh;
+      background: white;
+    }
+
+    section:nth-child(even) {
+      background: #F9F9F9;
+    }
   }
 }
 
-.template-page {
-  h1, h2, h3, h4, h5, h6 {
-    margin-top: 30px;
+.page-content .container,
+.navbar .container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+@media only screen and (max-width: 480px) {
+  html {
+    font-size: 18px;
   }
 
-  h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
-    padding: 0;
-    color: inherit;
-    background-color: initial;
-    border-radius: initial;
+  .template-marketing {
+
+    .hero {
+      h1 {
+        font-size: 1.75rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+    }
   }
 }

@@ -4,21 +4,37 @@ path: /
 title: Extensible GraphQL APIs through Plugins
 ---
 
-<header>
-<div class='container'>
+<!-- **************************************** -->
 
-## Powerful, Performant and Extensible GraphQL APIs
+<header class='hero'>
+<div class='hero-block center'>
 
-<p class='lead'>
+# A suite of tools for building performant pluggable GraphQL APIs.
+
+</div><!-- /container -->
+</header>
+
+
+<!-- **************************************** -->
+
+<section>
+<div class='container center'>
+
+<div class='row'>
+<div class='col-xs-12'>
+<div class='hero-block'>
+
+## graphile-build for pluggable GraphQL APIs
+
 The Graphile suite of Node.js modules provide you with the tools to rapidly
 generate high-performance extensible GraphQL APIs by combining plugins and
 using advanced look-ahead features.
-</p>
 
+</div>
 <div class='row'>
-<div class='col-lg-6 col-12'>
+<div class='col-lg-6 col-xs-12'>
 
-Build your schema with plugins  
+##### Build your schema with plugins
 ```js
 buildSchema(plugins)
  
@@ -34,9 +50,9 @@ type Person {
 ```
 
 </div><!-- /col-6 -->
-<div class='col-lg-6 col-12'>
+<div class='col-lg-6 col-xs-12'>
 
-Transform your schema with ease  
+##### Transform your schema with ease
 ```js
 buildSchema([...plugins,
   DeprecateFromCommentPlugin])
@@ -51,31 +67,85 @@ type Person {
   #...
 ```
 
-</div><!-- /col-6 -->
-</div><!-- /row -->
-
-</div><!-- /container -->
-</header>
+</div>
+</div>
+</div>
+</section>
 
 <!-- **************************************** -->
 
-<section class='odd'>
-<div class='container'>
+<section>
+<div class='container center'>
 <div class='row'>
-<div class='col-12'>
+<div class='col-xs-12'>
+<div class='hero-block'>
 
-# Straightforward Integration
-<p class='lead'>
+## graphile-build for GraphQL performance
+
+Say Goodbye to the N+1 problem; fewer round-trips means higher performance.
+
+By using our [look-ahead feature](/graphile-build/look-ahead/) your code can
+know what's coming and make sure it requests the correct fields ahead of time,
+leading to fewer round-trips and higher performance.
+
+Version 4 of the popular
+[PostGraphQL](https://github.com/postgraphql/postgraphql) project uses `graphile-build`
+to serve even deeply nested requests with just one SQL query. Result: significant
+speedups especially where database connection latency is above 1ms.
+
+</div>
+</div><!-- /col-xs-12 -->
+
+</div><!-- /row -->
+</div><!-- /container -->
+</section>
+
+<!-- **************************************** -->
+
+<section>
+<div class='container center'>
+<div class='row'>
+<div class='col-xs-12'>
+<div class='hero-block'>
+
+## Automatically build GraphQL objects and fields through database introspection
+
+Graphile already has extensive support for PostgreSQL through the
+`graphile-build-pg` module.
+
+The `graphile-buld-pg` plugins perform introspection of your
+database schema and **automatically** build the relevant GraphQL objects and fields
+based on the tables, columns, functions, relations that it finds in your
+database - no need to manually keep your codebase and database schema in sync.
+
+</div>
+</div>
+
+</div><!-- /row -->
+</div><!-- /container -->
+</section>
+
+
+<!-- **************************************** -->
+
+<section>
+<div class='container center'>
+<div class='row'>
+<div class='col-xs-12'>
+<div class='hero-block'>
+
+## Straightforward integration
+
 If you're already building with the reference implementation of GraphQL from
 Facebook then adding hooks is fairly straightforward:
-</p>
 
-<div class='container'>
+</div>
+<div class='container center'>
 <div class='row'>
 
-<div class='col-12 col-lg-6'>
+<div class='col-xs-12 col-lg-6'>
 
-`graphql`:
+##### `graphql`:
 
 ```js{2}
 const MyType =
@@ -86,9 +156,9 @@ const MyType =
 ```
 
 </div><!-- /col-6 -->
-<div class='col-12 col-lg-6'>
+<div class='col-xs-12 col-lg-6'>
 
-`graphile-build`:
+##### `graphile-build`:
 
 ```js{2}
 const MyType =
@@ -102,122 +172,91 @@ const MyType =
 
 </div><!-- /row -->
 </div><!-- /container -->
-</section><!-- /odd -->
+</section>
+
+
 
 <!-- **************************************** -->
 
-<section class='even'>
-<div class='container'>
+<section>
+<div class='container center'>
 <div class='row'>
-<div class='col-4 col-fa hidden-md-down'><i class='fa fa-handshake-o' aria-hidden="true"></i></div>
-<div class='col-12 col-lg-8'>
+<div class='col-xs-12'>
+<div class='hero-block'>
 
-# Fully compatible
+## Fully compatible
 
-<p class='lead'>
-We use the <a href="http://graphql.org/graphql-js/">reference GraphQL implementation</a>
-under the hood, so you know we're spec compliant.
-</p>
+Graphile uses the <a href="http://graphql.org/graphql-js/">reference GraphQL implementation</a>
+under the hood, so you know it's spec compliant.
 
- You can use regular GraphQL objects from other libraries in your generated
- schema - you only need to change the parts of your code that you wish to trigger hooks for.
+You can use regular GraphQL objects from other libraries in your generated
+schema - you only need to change the parts of your code that you wish to trigger hooks for.
+
 </div>
-
+</div>
 </div><!-- /row -->
 </div><!-- /container -->
-</section><!-- /even -->
+</section>
 
 <!-- **************************************** -->
 
-<section class='odd'>
-<div class='container'>
+<section>
+<div class='container center'>
 <div class='row'>
-<div class='col-12 col-lg-8'>
+<div class='col-xs-12'>
+<div class='hero-block'>
 
-# First class schema watching
-
-<p class='lead'>
-Automatically update your running GraphQL schema without the need to restart the server.
-</p>
+## Automatically update your running GraphQL schema without the need to restart the server
 
 For example: when your underlying data structure changes your Graphile-Build
 plugins can [trigger a rebuild](/graphile-build/schema-builder/#plugin-methods) event and you'll automatically be supplied with a
-fresh new GraphQL schema to replace the out-of-date one - no need to restart
+fresh new GraphQL schema to replace the out-of-date one - no need to restart.
 your server!
+
+</div>
 </div><!-- /col-9 -->
-<div class='col-4 col-fa hidden-md-down'><i class='fa fa-refresh' aria-hidden="true"></i></div>
 
 </div><!-- /row -->
 </div><!-- /container -->
-</section><!-- /odd -->
+</section>
+
+
 
 <!-- **************************************** -->
 
-<section class='even'>
-<div class='container'>
+<section>
+<div class='container center'>
 <div class='row'>
-<div class='col-4 col-fa hidden-md-down'><i class='fa fa-rocket' aria-hidden="true"></i></div>
-<div class='col-12 col-lg-8'>
+<div class='col-xs-12'>
+<div class='hero-block'>
 
-# Performance baked in
+## Data-store independent
 
-<p class='lead'>
-Say Goodbye to the N+1 problem; fewer round-trips means higher performance.
-</p>
-
-By using our [look-ahead feature](/graphile-build/look-ahead/) your code can
-know what's coming and make sure it requests the correct fields ahead of time,
-leading to fewer round-trips and higher performance.
-
-Version 4 of the popular
-[PostGraphQL](https://github.com/postgraphql/postgraphql) OSS project utilises
-this functionality to enable it to serve even deeply nested requests with just
-one SQL query, which lead to significant speedups especially where database
-connection latency was above 1ms.
-
-</div><!-- /col-12 -->
-
-</div><!-- /row -->
-</div><!-- /container -->
-</section><!-- /odd -->
-
-<!-- **************************************** -->
-
-<section class='odd'>
-<div class='container'>
-<div class='row'>
-<div class='col-12 col-lg-8'>
-
-# Data-store independent
-
-<p class='lead'>
 Build plugins for anything that Node.js can communicate with.
-</p>
 
-We treat GraphQL as a first-class citizen - everything is modelled around
+Graphile treats GraphQL as a first-class citizen - everything is modelled around
 GraphQL, so any backend technology that can be expressed through GraphQL can be
 built with Graphile.
 
-We already have extensive support for PostgreSQL through the
-`graphile-build-pg` module; the plugins therein performs introspection of your
-database schema and automatically build the relevant GraphQL objects and fields
-based on the tables, columns, functions, relations that it finds in your
-database - no need to manually keep your codebase and database schema in sync!
 </div>
-<div class='col-4 col-fa hidden-md-down'><i class='fa fa-database' aria-hidden="true"></i></div>
+</div>
 
 </div><!-- /row -->
 </div><!-- /container -->
-</section><!-- /odd -->
+</section>
 
 <!-- **************************************** -->
 
-<section class='even'>
-<div class='container'>
+<section>
+<div class='container center'>
 <div class='row justify-content-center'>
-<div class='text-center'>
+<div class='text-center col-xs-12'>
+<div class='hero-block'>
 
-# Quick to start
+## Quick to start
+
+</div>
+
 
 ```js
 const { buildSchema, defaultPlugins } = require("graphile-build");
@@ -232,47 +271,60 @@ main();
 ```
 
 <div class='d-flex justify-content-center'>
-<a class='btn btn-primary btn-lg' href='/graphile-build/getting-started/'>Get started &raquo;</a>
+<a class='btn btn-primary btn-lg' href='/graphile-build/getting-started/'>Get started &rarr;</a>
 </div>
 
-</div><!-- /col-12 -->
+</div><!-- /col-xs-12 -->
 </div><!-- /container -->
-</section><!-- /even -->
+</section>
 
 
 <section class='mailinglist'>
 <div class='container'>
 
 <div class='row justify-content-center'>
-<div>
-  <h2>Questions, comments or feedback? <a href='mailto:info@graphile.org?subject=Graphile%20question%2Fcomment%2Ffeedback%3A'>info@graphile.org</a></h2>
-</div>
-</div>
+<div class='col-xs-12'>
+<div class='hero-block center'>
 
-<div style="height: 36px"></div>
+  ## Questions, comments or feedback? <a href='mailto:info@graphile.org?subject=Graphile%20question%2Fcomment%2Ffeedback%3A'>info@graphile.org</a></h2>
+
+</div>
+</div>
+</div>
 
 <div class='row justify-content-center'>
-<div class='col-12 col-md-8 text-center'>
-<!-- Begin MailChimp Signup Form -->
-<link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css" />
-<style type="text/css">
-	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
-	/* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
-	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
-</style>
+<div class='col-xs-12 center'>
+<div class='hero-block'>
 <div>
 <form action="//graphile.us16.list-manage.com/subscribe/post?u=d103f710cf00a9273b55e8e9b&amp;id=c3a9eb5c4e" method="post"
 id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-  <div id="mc_embed_signup_scroll">
-    <h4>Subscribe to our occasional announcements newsletter</h4>
-    <p class='lead'>Keep up to date on Grapile and PostGraphQL features/changes:</p>
+  <div id="mc_embed_signup_scroll center hero-block">
+    <p>Keep up to date on Grapile and PostGraphile features/changes.
+    Subscribe to our occasional announcements newsletter:</p>
     <div class="mc-field-group form-inline justify-content-center">
       <div class='form-group'>
-        <label for="mce-EMAIL">Email Address: </label>
-        <input type="email" value="" name="EMAIL" class="required email form-control mx-sm-3" id="mce-EMAIL">
+        <label for="mce-EMAIL">Email address</label>
+        <input
+          autocapitalize="off"
+          autocomplete="off"
+          autocorrect="off"
+          class="required email signup-field form-control mx-sm-3"
+          id="mce-EMAIL"
+          name="EMAIL"
+          spellcheck="false"
+          type="email"
+          value=""
+        />
         <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
         <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_d103f710cf00a9273b55e8e9b_c3a9eb5c4e" tabindex="-1" value=""></div>
-        <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button btn btn-primary"></div>
+        <input
+          class="button btn btn-primary signup-button"
+          id="mc-embedded-subscribe"
+          name="subscribe"
+          type="submit"
+          value="Subscribe"
+        />
+        </div>
       </div>
       <div id="mce-responses" class="clear">
         <div class="response" id="mce-error-response" style="display:none"></div>
@@ -283,6 +335,7 @@ id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validat
 </form>
 </div>
 <!--End mc_embed_signup-->
+</div>
 </div>
 </div>
 
