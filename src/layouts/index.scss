@@ -369,6 +369,10 @@ footer {
     flex-direction: column;
     padding-bottom: 15vh;
     padding-top: 15vh;
+    &.simple {
+      padding-bottom: 1.5em;
+      padding-top: 1.5em;
+    }
 
     h1, h2 {
       color: inherit;

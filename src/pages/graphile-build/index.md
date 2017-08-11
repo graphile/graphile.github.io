@@ -6,10 +6,10 @@ title: Extensible GraphQL APIs through Plugins
 
 <!-- **************************************** -->
 
-<header class='hero'>
+<header class='hero simple'>
 <div class='hero-block center'>
 
-# A suite of tools for building performant pluggable GraphQL APIs.
+# Graphile Build: a library for constructing high-performance pluggable GraphQL APIs
 
 </div><!-- /container -->
 </header>
@@ -24,11 +24,11 @@ title: Extensible GraphQL APIs through Plugins
 <div class='col-xs-12'>
 <div class='hero-block'>
 
-## graphile-build for pluggable GraphQL APIs
+## Graphile Build for pluggable GraphQL APIs
 
-The Graphile suite of Node.js modules provide you with the tools to rapidly
-generate high-performance extensible GraphQL APIs by combining plugins and
-using advanced look-ahead features.
+Using Graphile Build's plugin architecture you can rapidly generate
+high-performance extensible GraphQL schemas by combining plugins and leveraging
+advanced look-ahead features.
 
 </div>
 <div class='row'>
@@ -88,10 +88,9 @@ By using our [look-ahead feature](/graphile-build/look-ahead/) your code can
 know what's coming and make sure it requests the correct fields ahead of time,
 leading to fewer round-trips and higher performance.
 
-Version 4 of the popular
-[PostGraphQL](https://github.com/postgraphql/postgraphql) project uses `graphile-build`
-to serve even deeply nested requests with just one SQL query. Result: significant
-speedups especially where database connection latency is above 1ms.
+We use this functionality in [PostGraphile](/postgraphile/) to serve even
+deeply nested requests with just one SQL query. Result: significantly reduced
+query latency.
 
 </div>
 </div><!-- /col-xs-12 -->
@@ -110,12 +109,20 @@ speedups especially where database connection latency is above 1ms.
 
 ## Automatically build GraphQL objects and fields through database introspection
 
-Graphile already has extensive support for PostgreSQL through the
-`graphile-build-pg` module which performs introspection of your database schema
-and **automatically** builds the relevant GraphQL objects and fields based on
-the tables, columns, functions, relations that it finds in your database - no
-need to manually keep your codebase and database schema in sync. This is the
-core of PostGraphile.
+The core `graphile-build` library treats GraphQL as a first-class target, and
+out of the box does not discriminate between your datastore. By using plugins
+to introspect your datastore you can automatically build your GraphQL objects
+and eliminate the development work required to keep your codebase and database
+schema in sync.
+
+`graphile-build-pg` is a collection of plugins which adds extensive support for
+PostGraphQL by performing introspection of your database schema and
+**automatically** building the relevant GraphQL objects and fields based on the
+tables, columns, functions, relations that it finds. This is the core of
+[PostGraphile](/postgraphile/).
+
+You can build plugins for anything that Node.js can communicate with.
+
 </div>
 </div>
 
@@ -182,13 +189,14 @@ const MyType =
 <div class='col-xs-12'>
 <div class='hero-block'>
 
-## Fully compatible
+## Fully GraphQL compatible
 
-Graphile uses the <a href="http://graphql.org/graphql-js/">reference GraphQL implementation</a>
-under the hood, so you know it's spec compliant.
+Graphile uses the <a href="http://graphql.org/graphql-js/">reference GraphQL
+implementation</a> under the hood, so you know it's spec compliant.
 
-You can use regular GraphQL objects from other libraries in your generated
-schema - you only need to change the parts of your code that you wish to trigger hooks for.
+This also means you can mix it into existing GraphQL APIs, or mix existing
+GraphQL object types into it (so long as they use the reference GraphQL
+implementation too).
 
 </div>
 </div>
@@ -204,12 +212,13 @@ schema - you only need to change the parts of your code that you wish to trigger
 <div class='col-xs-12'>
 <div class='hero-block'>
 
-## Automatically update your running GraphQL schema without the need to restart the server
+## Automatically update your running GraphQL schema without the need to restart
 
 For example: when your underlying data structure changes your Graphile-Build
-plugins can [trigger a rebuild](/graphile-build/schema-builder/#plugin-methods) event and you'll automatically be supplied with a
-fresh new GraphQL schema to replace the out-of-date one - no need to restart.
-your server!
+plugins can [trigger a
+rebuild](/graphile-build/schema-builder/#registerwatcherwatcher-unwatcher)
+event and you'll automatically be supplied with a fresh new GraphQL schema to
+replace the out-of-date one - no need to restart your server!
 
 </div>
 </div><!-- /col-9 -->
@@ -219,29 +228,6 @@ your server!
 </section>
 
 
-
-<!-- **************************************** -->
-
-<section>
-<div class='container center'>
-<div class='row'>
-<div class='col-xs-12'>
-<div class='hero-block'>
-
-## Data-store independent
-
-Build plugins for anything that Node.js can communicate with.
-
-Graphile treats GraphQL as a first-class citizen - everything is modelled around
-GraphQL, so any backend technology that can be expressed through GraphQL can be
-built with Graphile.
-
-</div>
-</div>
-
-</div><!-- /row -->
-</div><!-- /container -->
-</section>
 
 <!-- **************************************** -->
 
@@ -297,7 +283,7 @@ main();
 <form action="//graphile.us16.list-manage.com/subscribe/post?u=d103f710cf00a9273b55e8e9b&amp;id=c3a9eb5c4e" method="post"
 id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
   <div id="mc_embed_signup_scroll center hero-block">
-    <p>Keep up to date on Grapile and PostGraphile features/changes.
+    <p>Keep up to date on Grapile Build features/changes.
     Subscribe to our occasional announcements newsletter:</p>
     <div class="mc-field-group form-inline justify-content-center">
       <div class='form-group'>
