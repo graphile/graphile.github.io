@@ -1,7 +1,7 @@
 ---
 layout: marketing
-path: /
-title: Tools to build extensible and performant GraphQL APIs
+path: /postgraphile/
+title: PostGraphile - full GraphQL API server in an instant from PostgreSQL database
 ---
 
 <!-- **************************************** -->

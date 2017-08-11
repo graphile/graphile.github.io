@@ -1,7 +1,7 @@
 ---
 layout: marketing
-path: /
-title: Tools to build extensible and performant GraphQL APIs
+path: /graphile-build/
+title: Extensible GraphQL APIs through Plugins
 ---
 
 <!-- **************************************** -->

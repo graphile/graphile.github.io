@@ -40,7 +40,7 @@ export default ({ location }) =>
                 )
                   ? "active"
                   : ""}`}
-                to="/postgraphile/introduction/"
+                to="/postgraphile/"
               >
                 PostGraphile
               </Link>
@@ -52,7 +52,7 @@ export default ({ location }) =>
                 )
                   ? "active"
                   : ""}`}
-                to="/graphile-build/getting-started/"
+                to="/graphile-build/"
               >
                 Graphile Build
               </Link>
