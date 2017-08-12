@@ -248,7 +248,7 @@ postgraphile -c postgres://user:pass@host/dbname --schema schema_name
 <div class='col-xs-12'>
 <div class='hero-block center'>
 
-  ## Questions, comments or feedback? <a href='mailto:info@graphile.org?subject=Graphile%20question%2Fcomment%2Ffeedback%3A'>info@graphile.org</a></h2>
+## Questions, comments or feedback? [info@graphile.org](mailto:info@graphile.org?subject=Graphile%20question%2Fcomment%2Ffeedback%3A)
 
 </div>
 </div>
@@ -261,8 +261,8 @@ postgraphile -c postgres://user:pass@host/dbname --schema schema_name
 <div>
 <form action="//graphile.us16.list-manage.com/subscribe/post?u=d103f710cf00a9273b55e8e9b&amp;id=c3a9eb5c4e" method="post"
 id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-  <div id="mc_embed_signup_scroll center hero-block">
-    <p>Keep up to date on Grapile and PostGraphile features/changes.
+  <div id="mc_embed_signup_scroll" class="center hero-block">
+    <p>Keep up to date on PostGraphile features/changes.
     Subscribe to our occasional announcements newsletter:</p>
     <div class="mc-field-group form-inline justify-content-center">
       <div class='form-group'>
@@ -287,7 +287,6 @@ id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validat
           type="submit"
           value="Subscribe"
         />
-        </div>
       </div>
       <div id="mce-responses" class="clear">
         <div class="response" id="mce-error-response" style="display:none"></div>

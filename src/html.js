@@ -25,6 +25,7 @@ class Html extends React.Component {
     return (
       <html lang="en">
         <head>
+          <meta charSet="utf-8" />
           <script
             dangerouslySetInnerHTML={{
               __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -36,7 +37,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           />
           <script src="https://use.fontawesome.com/c72bfae6f9.js" />
           {this.props.headComponents}
-          <meta charSet="utf-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta
             name="viewport"

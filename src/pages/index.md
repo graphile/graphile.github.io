@@ -170,7 +170,7 @@ Build plugins.
 <div class='col-xs-12'>
 <div class='hero-block center'>
 
-  ## Questions, comments or feedback? <a href='mailto:info@graphile.org?subject=Graphile%20question%2Fcomment%2Ffeedback%3A'>info@graphile.org</a></h2>
+## Questions, comments or feedback? [info@graphile.org](mailto:info@graphile.org?subject=Graphile%20question%2Fcomment%2Ffeedback%3A)
 
 </div>
 </div>
@@ -183,7 +183,7 @@ Build plugins.
 <div>
 <form action="//graphile.us16.list-manage.com/subscribe/post?u=d103f710cf00a9273b55e8e9b&amp;id=c3a9eb5c4e" method="post"
 id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-  <div id="mc_embed_signup_scroll center hero-block">
+  <div id="mc_embed_signup_scroll" class="center hero-block">
     <p>Keep up to date on Grapile and PostGraphile features/changes.
     Subscribe to our occasional announcements newsletter:</p>
     <div class="mc-field-group form-inline justify-content-center">
@@ -201,7 +201,7 @@ id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validat
           value=""
         />
         <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_d103f710cf00a9273b55e8e9b_c3a9eb5c4e" tabindex="-1" value=""></div>
+        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_d103f710cf00a9273b55e8e9b_c3a9eb5c4e" tabindex="-1" value="" /></div>
         <input
           class="button btn btn-primary signup-button"
           id="mc-embedded-subscribe"
@@ -209,7 +209,6 @@ id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validat
           type="submit"
           value="Subscribe"
         />
-        </div>
       </div>
       <div id="mce-responses" class="clear">
         <div class="response" id="mce-error-response" style="display:none"></div>
