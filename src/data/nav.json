@@ -102,6 +102,11 @@
         "sectionId": "overview"
       },
       {
+        "to": "/postgraphile/requirements/",
+        "title": "Requirements",
+        "sectionId": "overview"
+      },
+      {
         "to": "/postgraphile/performance/",
         "title": "Performance",
         "sectionId": "overview"
