@@ -234,7 +234,7 @@ postgraphile -c postgres://user:pass@host/dbname --schema schema_name
 
 <br />
 <div class='d-flex justify-content-center'>
-<a class='button button--outline' href='/graphile-build/getting-started/'>Get started &rarr;</a>
+<a class='button button--outline' href='/postgraphile/introduction/'>Get started &rarr;</a>
 </div>
 
 </div>
