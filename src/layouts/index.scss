@@ -447,6 +447,10 @@ footer {
   z-index: 0 !important;
 }
 
+.justify-content-center {
+  justify-content: center;
+}
+
 @media only screen and (max-width: 480px) {
   html {
     font-size: 18px;

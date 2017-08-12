@@ -16,7 +16,7 @@ title: Extensible GraphQL APIs through Plugins
 <a class='button button--outline-white' href='/graphile-build/getting-started/'>Documentation &rarr;</a>
 </div>
 
-</div><!-- /container -->
+</div>
 </header>
 
 
@@ -36,6 +36,9 @@ high-performance extensible GraphQL schemas by combining plugins and leveraging
 advanced look-ahead features.
 
 </div>
+</div>
+</div>
+
 <div class='row'>
 <div class='col-lg-6 col-xs-12'>
 
@@ -54,7 +57,7 @@ type Person {
   #...
 ```
 
-</div><!-- /col-6 -->
+</div>
 <div class='col-lg-6 col-xs-12'>
 
 ##### Transform your schema with ease
@@ -87,6 +90,7 @@ type Person {
 
 <section>
 <div class='container center'>
+
 <div class='row'>
 <div class='col-xs-12'>
 <div class='hero-block'>
@@ -104,16 +108,17 @@ deeply nested requests with just one SQL query. Result: significantly reduced
 query latency.
 
 </div>
-</div><!-- /col-xs-12 -->
+</div>
+</div>
 
-</div><!-- /row -->
-</div><!-- /container -->
+</div>
 </section>
 
 <!-- **************************************** -->
 
 <section>
 <div class='container center'>
+
 <div class='row'>
 <div class='col-xs-12'>
 <div class='hero-block'>
@@ -136,9 +141,9 @@ You can build plugins for anything that Node.js can communicate with.
 
 </div>
 </div>
+</div>
 
-</div><!-- /row -->
-</div><!-- /container -->
+</div>
 </section>
 
 
@@ -146,6 +151,7 @@ You can build plugins for anything that Node.js can communicate with.
 
 <section>
 <div class='container center'>
+
 <div class='row'>
 <div class='col-xs-12'>
 <div class='hero-block'>
@@ -156,9 +162,10 @@ If you're already building with the reference implementation of GraphQL from
 Facebook then adding hooks is fairly straightforward:
 
 </div>
-<div class='container center'>
-<div class='row'>
+</div>
+</div>
 
+<div class='row'>
 <div class='col-xs-12 col-lg-6'>
 
 ##### `graphql`:
@@ -184,10 +191,10 @@ const MyType =
       // ...
 ```
 
-</div><!-- /col-6 -->
+</div>
+</div>
 
-</div><!-- /row -->
-</div><!-- /container -->
+</div>
 </section>
 
 
@@ -196,6 +203,7 @@ const MyType =
 
 <section>
 <div class='container center'>
+
 <div class='row'>
 <div class='col-xs-12'>
 <div class='hero-block'>
@@ -211,14 +219,16 @@ implementation too).
 
 </div>
 </div>
-</div><!-- /row -->
-</div><!-- /container -->
+</div>
+
+</div>
 </section>
 
 <!-- **************************************** -->
 
 <section>
 <div class='container center'>
+
 <div class='row'>
 <div class='col-xs-12'>
 <div class='hero-block'>
@@ -232,10 +242,10 @@ event and you'll automatically be supplied with a fresh new GraphQL schema to
 replace the out-of-date one - no need to restart your server!
 
 </div>
-</div><!-- /col-9 -->
+</div>
+</div>
 
-</div><!-- /row -->
-</div><!-- /container -->
+</div>
 </section>
 
 
@@ -244,6 +254,7 @@ replace the out-of-date one - no need to restart your server!
 
 <section>
 <div class='container center'>
+
 <div class='row justify-content-center'>
 <div class='text-center col-xs-12'>
 <div class='hero-block'>
@@ -251,7 +262,11 @@ replace the out-of-date one - no need to restart your server!
 ## Quick to start
 
 </div>
+</div>
+</div>
 
+<div class='row justify-content-center'>
+<div class='text-center col-xs-12 col-md-9 col-lg-7'>
 
 ```js
 const { buildSchema, defaultPlugins } = require("graphile-build");
@@ -265,13 +280,15 @@ async function main() {
 main();
 ```
 
+</div>
+</div>
+
 <br />
 <div class='d-flex justify-content-center'>
 <a class='button button--outline' href='/graphile-build/getting-started/'>Get started &rarr;</a>
 </div>
 
-</div><!-- /col-xs-12 -->
-</div><!-- /container -->
+</div>
 </section>
 
 
@@ -291,6 +308,7 @@ main();
 <div class='row justify-content-center'>
 <div class='col-xs-12 center'>
 <div class='hero-block'>
+
 <div>
 <form action="//graphile.us16.list-manage.com/subscribe/post?u=d103f710cf00a9273b55e8e9b&amp;id=c3a9eb5c4e" method="post"
 id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
@@ -330,7 +348,7 @@ id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validat
   </div>
 </form>
 </div>
-<!--End mc_embed_signup-->
+
 </div>
 </div>
 </div>

@@ -17,7 +17,7 @@ title: PostGraphile - full GraphQL API server in an instant from PostgreSQL data
 </div>
 
 
-</div><!-- /container -->
+</div>
 </header>
 
 
@@ -26,6 +26,7 @@ title: PostGraphile - full GraphQL API server in an instant from PostgreSQL data
 
 <section>
 <div class='container center'>
+
 <div class='row'>
 <div class='col-xs-12'>
 <div class='hero-block'>
@@ -37,10 +38,10 @@ single root level GraphQL query, no matter how nested, can become just one SQL
 query.
 
 </div>
-</div><!-- /col-xs-12 -->
+</div>
+</div>
 
-</div><!-- /row -->
-</div><!-- /container -->
+</div>
 </section>
 
 <!-- **************************************** -->
@@ -88,6 +89,9 @@ existing resolver with your own higher-order function) to gain powerful control
 over your API.
 
 </div>
+</div>
+</div>
+
 <div class='row'>
 <div class='col-lg-6 col-xs-12'>
 
@@ -126,6 +130,7 @@ type Person {
 
 </div>
 </div>
+
 </div>
 </section>
 
@@ -135,6 +140,7 @@ type Person {
 
 <section>
 <div class='container center'>
+
 <div class='row'>
 <div class='col-xs-12'>
 <div class='hero-block'>
@@ -149,8 +155,9 @@ schema - you only need to change the parts of your code that you wish to trigger
 
 </div>
 </div>
-</div><!-- /row -->
-</div><!-- /container -->
+</div>
+
+</div>
 </section>
 
 <!-- **************************************** -->
@@ -177,6 +184,7 @@ schema - you only need to change the parts of your code that you wish to trigger
 
 <section>
 <div class='container center'>
+
 <div class='row'>
 <div class='col-xs-12'>
 <div class='hero-block'>
@@ -190,18 +198,18 @@ documentation too, so you can see your new schema features right away! No need
 to restart the server!
 
 </div>
-</div><!-- /col-9 -->
+</div>
+</div>
 
-</div><!-- /row -->
-</div><!-- /container -->
+</div>
 </section>
-
 
 
 <!-- **************************************** -->
 
 <section>
 <div class='container center'>
+
 <div class='row justify-content-center'>
 <div class='text-center col-xs-12'>
 <div class='hero-block'>
@@ -209,20 +217,27 @@ to restart the server!
 ## Quick to start
 
 </div>
+</div>
+</div>
 
+
+<div class='row justify-content-center'>
+<div class='text-center col-xs-12 col-md-9 col-lg-7'>
 
 ```js
 npm install -g postgraphile
 postgraphile -c postgres://user:pass@host/dbname --schema schema_name
 ```
 
+</div>
+</div>
+
 <br />
 <div class='d-flex justify-content-center'>
 <a class='button button--outline' href='/graphile-build/getting-started/'>Get started &rarr;</a>
 </div>
 
-</div><!-- /col-xs-12 -->
-</div><!-- /container -->
+</div>
 </section>
 
 
@@ -242,6 +257,7 @@ postgraphile -c postgres://user:pass@host/dbname --schema schema_name
 <div class='row justify-content-center'>
 <div class='col-xs-12 center'>
 <div class='hero-block'>
+
 <div>
 <form action="//graphile.us16.list-manage.com/subscribe/post?u=d103f710cf00a9273b55e8e9b&amp;id=c3a9eb5c4e" method="post"
 id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
@@ -281,7 +297,7 @@ id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validat
   </div>
 </form>
 </div>
-<!--End mc_embed_signup-->
+
 </div>
 </div>
 </div>

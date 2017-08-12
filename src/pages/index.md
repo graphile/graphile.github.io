@@ -11,7 +11,7 @@ title: Tools to build extensible and performant GraphQL APIs
 
 # A suite of tools for building performant pluggable GraphQL APIs.
 
-</div><!-- /container -->
+</div>
 </header>
 
 
@@ -30,6 +30,9 @@ Auto-discovers tables, columns, relations, procedures and more; runs a
 high-performance secure GraphQL API server that adheres to best practices.
 
 </div>
+</div>
+</div>
+
 <div class='row'>
 <div class='col-lg-6 col-xs-12'>
 
@@ -70,6 +73,7 @@ postgraphile
 
 <section>
 <div class='container center'>
+
 <div class='row'>
 <div class='col-xs-12'>
 <div class='hero-block'>
@@ -86,8 +90,8 @@ and use community-built plugins to increase developer productivity.
 </div>
 </div>
 </div>
-<div class='row'>
 
+<div class='row'>
 <div class='col-xs-12 col-lg-6'>
 
 ##### `graphql`:
@@ -100,7 +104,7 @@ const MyType =
       // ...
 ```
 
-</div><!-- /col-6 -->
+</div>
 <div class='col-xs-12 col-lg-6'>
 
 ##### `graphile-build`:
@@ -113,8 +117,7 @@ const MyType =
       // ...
 ```
 
-</div><!-- /col-6 -->
-
+</div>
 </div>
 
 <br />
@@ -122,13 +125,14 @@ const MyType =
 <a class='button button--outline' href='/postgraphile/'>More about Graphile Build &rarr;</a>
 </div>
 
-</div><!-- /container -->
+</div>
 </section>
 
 <!-- **************************************** -->
 
 <section>
 <div class='container center'>
+
 <div class='row'>
 <div class='col-xs-12'>
 <div class='hero-block'>
@@ -152,8 +156,9 @@ Build plugins.
 
 </div>
 </div>
-</div><!-- /row -->
-</div><!-- /container -->
+</div>
+
+</div>
 </section>
 
 <!-- **************************************** -->
@@ -174,6 +179,7 @@ Build plugins.
 <div class='row justify-content-center'>
 <div class='col-xs-12 center'>
 <div class='hero-block'>
+
 <div>
 <form action="//graphile.us16.list-manage.com/subscribe/post?u=d103f710cf00a9273b55e8e9b&amp;id=c3a9eb5c4e" method="post"
 id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
@@ -213,7 +219,7 @@ id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validat
   </div>
 </form>
 </div>
-<!--End mc_embed_signup-->
+
 </div>
 </div>
 </div>
