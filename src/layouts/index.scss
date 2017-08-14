@@ -375,11 +375,31 @@ $lineColor: white;
   text-align: right;
 }
 
+.italic {
+  font-style: italic;
+}
+
+
 footer {
   padding: 1rem 0;
   background-color: #F2F2F2;
-  text-align: right;
+  text-align: left;
   font-size: 0.8em;
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+  li {
+    list-style: none;
+    padding: 0.2em 0;
+    margin: 0;
+  }
+  h6 {
+    margin-bottom: 1em;
+  }
+  .row.copyright {
+    padding-top: 1em;
+  }
 }
 
 .page-content {
