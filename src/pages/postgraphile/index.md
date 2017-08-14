@@ -88,10 +88,10 @@ query.
 
 ## Customisable with SQL
 
-We support [custom queries](/postgraphile/custom-queries/), [custom
+PostGraphile supports [custom queries](/postgraphile/custom-queries/), [custom
 mutations](/postgraphile/custom-mutations/) and [computed
-columns](/postgraphile/computed-columns/) in your PostgreSQL
-database automatically.
+columns](/postgraphile/computed-columns/) in your PostgreSQL database
+automatically.
 
 </div>
 </div>
@@ -256,7 +256,7 @@ it's possible to express complex authorisation logic in simple policies; and
 because the authentication is *in your database* you can ensure nothing (not
 even companion microservices) can bypass it.
 
-We use industry standard JWT authentication, allowing for stateless
+PostGraphile uses industry standard JWT authentication, allowing for stateless
 authorisation which also works great with CORS.
 
 </div>

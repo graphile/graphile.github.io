@@ -103,9 +103,9 @@ By using our [look-ahead feature](/graphile-build/look-ahead/) your code can
 know what's coming and make sure it requests the correct fields ahead of time,
 leading to fewer round-trips and higher performance.
 
-We use this functionality in [PostGraphile](/postgraphile/) to serve even
-deeply nested requests with just one SQL query. Result: significantly reduced
-query latency.
+[PostGraphile](/postgraphile/) uses this functionality to serve even deeply
+nested requests with just one SQL query. Result: significantly reduced query
+latency.
 
 </div>
 </div>
