@@ -26,18 +26,16 @@ released in February 2017 and introduced automatic schema exporting (in both
 GraphQL and JSON formats), schema watching, and changed the default global node
 identifier from `__id` to `nodeId`.
 
-During the second quarter of 2017 [@Benjie](https://twitter.com/benjie) took
-over as the maintainer of PostGraphQL whilst Caleb transitioned to Facebook
-with a new mission: to make [Flow](https://flow.org/) the best static
-type-checker for JavaScript. Benjie's focus for PostGraphQL is performance and
-extensibility, and with that in mind...
+During the second quarter of 2017 Caleb handed the reins over to
+[@Benjie](https://twitter.com/benjie) who became the primary maintainer of
+PostGraphQL whilst Caleb transitioned to Facebook with a new mission: to make
+[Flow](https://flow.org/) the best static type-checker for JavaScript.
 
-[Version 4](https://github.com/postgraphql/postgraphql/pull/506) is a ground-up rewrite
-focussed on higher performance (solving the N+1 issue by generating as few SQL
-queries as possible) and extensibility (enabled by a new GraphQL plugin system). It
-aims is to do this whilst maintaining as much compatibility with version 3 as
-possible. Due to trademark concerns, version 4 also introduces a rename of the project
-from PostGraphQL to **PostGraphile**.
+[Version 4](https://github.com/postgraphql/postgraphql/pull/506) is a ground-up
+rewrite focussed on higher performance and greater extensibility whilst
+maintaining as much compatibility with version 3 as possible. Due to trademark
+concerns, version 4 also introduces a rename of the project from PostGraphQL to
+**PostGraphile**.
 
 But version 4 is not the end of PostGraphile's history — there's lots more to come...
 
