@@ -20,6 +20,8 @@ const propTypes = {
   postBodyComponents: PropTypes.node.isRequired,
 };
 
+const buildTimestamp = new Date().toISOString().replace(/:/g, "-");
+
 class Html extends React.Component {
   render() {
     return (
@@ -44,7 +46,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           />
           <TypographyStyle typography={typography} />
           <GoogleFont typography={typography} />
-          <link rel="stylesheet" href="/styles.css" />
+          <link
+            rel="stylesheet"
+            href={`/styles.css?t=${encodeURIComponent(buildTimestamp)}`}
+          />
         </head>
         <body>
           <noscript>
