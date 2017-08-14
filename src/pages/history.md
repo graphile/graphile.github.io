@@ -4,7 +4,7 @@ path: /history/
 title: History
 ---
 
-<section>
+<section class="history">
 <div class='container'>
 <div class='row justify-content-center'>
 <div class='col-xs-12 col-md-8'>
@@ -44,7 +44,9 @@ But version 4 is not the end of PostGraphile's history — there's lots more to 
 </div>
 </div>
 </div>
+</section>
 
+<section>
 <div class='row justify-content-center'>
 <div class='col-xs-12 center'>
 <div class='hero-block'>

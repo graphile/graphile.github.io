@@ -66,57 +66,62 @@ const Page = ({
         ]}
       />
       <SiteHeader location={location} />
-      <section className="page-content">
-        <div className="container">
-          <div className="row between-xs">
-            <aside className="sidebar col-xs-12 col-md-3 last-xs">
-              {navSections.map(({ id, title }, idx) =>
-                <section key={idx}>
-                  <h4 className="sidebar-title">
-                    {title}
-                  </h4>
-                  <PageList
-                    location={location}
-                    navs={navPages.filter(sectionIs(id))}
+      <div className="page-content">
+        <section>
+          <div className="container">
+            <div className="row between-xs">
+              <aside className="sidebar col-xs-12 col-md-3 last-xs">
+                {navSections.map(({ id, title }, idx) =>
+                  <section key={idx}>
+                    <h4 className="sidebar-title">
+                      {title}
+                    </h4>
+                    <PageList
+                      location={location}
+                      navs={navPages.filter(sectionIs(id))}
+                    />
+                  </section>
+                )}
+              </aside>
+              <div className="col-xs-12 col-md-9 first-xs main-content">
+                <div className="row">
+                  <div
+                    className="col-xs-12"
+                    dangerouslySetInnerHTML={{ __html: html }}
+                    style={{ width: "100%" }}
                   />
-                </section>
-              )}
-            </aside>
-            <div className="col-xs-12 col-md-9 first-xs main-content">
-              <div className="row">
-                <div
-                  className="col-xs-12"
-                  dangerouslySetInnerHTML={{ __html: html }}
-                  style={{ width: "100%" }}
-                />
-                <br />
-                <br />
-                <div className="col-xs-12">
-                  <div className="row between-xs">
-                    <div className="col-xs-6">
-                      {prev
-                        ? <Link
-                            className="btn btn-secondary btn-large"
-                            to={prev}
-                          >
-                            ← {prevText || "Previous"}
-                          </Link>
-                        : null}
-                    </div>
-                    <div className="col-xs-6 right">
-                      {next
-                        ? <Link className="btn btn-primary btn-large" to={next}>
-                            {nextText || "Next"} →
-                          </Link>
-                        : null}
+                  <br />
+                  <br />
+                  <div className="col-xs-12">
+                    <div className="row between-xs">
+                      <div className="col-xs-6">
+                        {prev
+                          ? <Link
+                              className="btn btn-secondary btn-large"
+                              to={prev}
+                            >
+                              ← {prevText || "Previous"}
+                            </Link>
+                          : null}
+                      </div>
+                      <div className="col-xs-6 right">
+                        {next
+                          ? <Link
+                              className="btn btn-primary btn-large"
+                              to={next}
+                            >
+                              {nextText || "Next"} →
+                            </Link>
+                          : null}
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
       <SiteFooter />
     </div>
   );
