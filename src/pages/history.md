@@ -31,11 +31,11 @@ During the second quarter of 2017 Caleb handed the reins over to
 PostGraphQL whilst Caleb transitioned to Facebook with a new mission: to make
 [Flow](https://flow.org/) the best static type-checker for JavaScript.
 
-[Version 4](https://github.com/postgraphql/postgraphql/pull/506) is a ground-up
-rewrite of the schema generation and execution functionality focussed on higher
-performance and greater extensibility whilst maintaining as much compatibility
-with version 3 as possible. Due to trademark concerns, version 4 also
-introduces a rename of the project from PostGraphQL to **PostGraphile**.
+[Version 4](https://github.com/postgraphql/postgraphql/pull/506) is a focussed
+on lower latency, higher performance and greater extensibility whilst
+maintaining as much compatibility with version 3 as possible. Due to trademark
+concerns, version 4 also introduces a rename of the project from PostGraphQL to
+**PostGraphile**.
 
 But version 4 is not the end of PostGraphile's history — there's lots more to come...
 
