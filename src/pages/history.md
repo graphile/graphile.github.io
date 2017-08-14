@@ -32,28 +32,27 @@ PostGraphQL whilst Caleb transitioned to Facebook with a new mission: to make
 [Flow](https://flow.org/) the best static type-checker for JavaScript.
 
 [Version 4](https://github.com/postgraphql/postgraphql/pull/506) is a ground-up
-rewrite focussed on higher performance and greater extensibility whilst
-maintaining as much compatibility with version 3 as possible. Due to trademark
-concerns, version 4 also introduces a rename of the project from PostGraphQL to
-**PostGraphile**.
+rewrite of the schema generation and execution functionality focussed on higher
+performance and greater extensibility whilst maintaining as much compatibility
+with version 3 as possible. Due to trademark concerns, version 4 also
+introduces a rename of the project from PostGraphQL to **PostGraphile**.
 
 But version 4 is not the end of PostGraphile's history — there's lots more to come...
 
 </div>
 </div>
-</div>
-</section>
 
-<section>
 <div class='row justify-content-center'>
 <div class='col-xs-12 center'>
-<div class='hero-block'>
+<div>
+
+### <br />
 
 <div>
 <form action="//graphile.us16.list-manage.com/subscribe/post?u=d103f710cf00a9273b55e8e9b&amp;id=c3a9eb5c4e" method="post"
 id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
   <div id="mc_embed_signup_scroll" class="center hero-block">
-    <p>Keep up to date on Graphile and PostGraphile features/changes.
+    <p>Keep up to date on Graphile and PostGraphile features/changes.<br />
     Subscribe to our occasional announcements newsletter:</p>
     <div class="mc-field-group form-inline justify-content-center">
       <div class='form-group'>
@@ -92,6 +91,12 @@ id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validat
 </div>
 </div>
 
+</div>
+</section>
+
+<section>
+<div class='container'>
+
 <div class='row justify-content-center'>
 <div class='col-xs-12'>
 <div class='hero-block center'>
@@ -101,7 +106,6 @@ id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validat
 </div>
 </div>
 </div>
-
 
 </div>
 </section>
