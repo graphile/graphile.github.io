@@ -404,7 +404,7 @@ footer {
 }
 
 .page-content {
-  padding: 2rem 0;
+  padding: 2.4rem 0 0;
 }
 
 .page-list {
@@ -438,7 +438,6 @@ footer {
     a {
       color: white;
     }
-
   }
 
   .col-fa {
@@ -455,10 +454,14 @@ footer {
       background: white;
     }
 
-    section:nth-child(even) {
+    section:nth-child(even):not(.no-highlight) {
       background: #F9F9F9;
     }
   }
+}
+
+section:last-child {
+  padding-bottom: 10vh;
 }
 
 .page-content .container,
