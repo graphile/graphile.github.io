@@ -58,6 +58,8 @@ pre code {
 }
 
 .template-page {
+  min-height: 100vh;
+
   h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
     background-color: initial;
     border-radius: initial;
@@ -461,7 +463,11 @@ footer {
 }
 
 section:last-child {
-  padding-bottom: 10vh;
+  padding-bottom: 5rem;
+}
+
+.page-content > section:first-child {
+  padding-top: 2rem;
 }
 
 .page-content .container,
