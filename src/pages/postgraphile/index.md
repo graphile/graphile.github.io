@@ -33,7 +33,7 @@ title: PostGraphile - full GraphQL API server in an instant from PostgreSQL data
 
 ## Try it now!
 
-The fastest way to get a fully GraphQL API up and running based on a PostgreSQL
+The fastest way to get a full GraphQL API up and running based on a PostgreSQL
 database schema.
 
 </div>
