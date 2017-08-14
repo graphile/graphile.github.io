@@ -32,7 +32,10 @@ const Page = ({
   const thisNavEdge = nav.edges.find(
     ({ node: { name } }) => name === navSection
   );
-  const thisNav = thisNavEdge.node || { pages: [], sections: [] };
+  const thisNav = (thisNavEdge && thisNavEdge.node) || {
+    pages: [],
+    sections: [],
+  };
   const navPages = thisNav.pages;
   const navSections = thisNav.sections || [];
   const currentIndex = navPages.findIndex(({ to }) => to === location.pathname);

@@ -375,6 +375,7 @@ $gutter: 1rem;
 
   .col-md,
   .col-md-1,
+  .col-md-1-5,
   .col-md-2,
   .col-md-3,
   .col-md-4,
@@ -401,6 +402,11 @@ $gutter: 1rem;
   .col-md-1 {
     flex-basis: 8.333%;
     max-width: 8.333%;
+  }
+
+  .col-md-1-5 {
+    flex-basis: 12.5%;
+    max-width: 12.5%;
   }
 
   .col-md-2 {

@@ -4,7 +4,7 @@ export default () =>
   <footer>
     <div className="container">
       <div className="row justify-content-center">
-        <div className="col-xs-12 col-md-1" />
+        <div className="col-xs-12 col-md-1-5" />
         <div className="col-xs-12 col-md-8">
           <div className="container">
             <div className="row">
@@ -59,13 +59,17 @@ export default () =>
           </div>
         </div>
       </div>
-      <div className="row copyright">
-        <div className="col-xs-12 right italic">
-          PostGraphile is open-source software and was originally authored as
+      <div className="row copyright justify-content-center">
+        <div className="col-xs-12 col-md-8 center italic">
+          PostGraphile and Graphile Build are Open Source Software, maintained
+          by <a href="https://twitter.com/benjie">Benjie Gillam</a>.
+          <br />
+          PostGraphile was <a href="/history/">originally authored</a> as
           PostGraphQL by{" "}
-          <a href="https://twitter.com/calebmer">Caleb Meredith</a>. This site
-          is copyright &copy;{" "}
-          <a href="https://twitter.com/benjie">Benjie Gillam</a> 2017.
+          <a href="https://twitter.com/calebmer">Caleb Meredith</a>.
+          <br />
+          <br />
+          This site is copyright &copy; Benjie Gillam 2017.
         </div>
       </div>
     </div>
