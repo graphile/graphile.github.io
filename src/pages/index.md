@@ -184,7 +184,7 @@ Build plugins.
 <form action="//graphile.us16.list-manage.com/subscribe/post?u=d103f710cf00a9273b55e8e9b&amp;id=c3a9eb5c4e" method="post"
 id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
   <div id="mc_embed_signup_scroll" class="center hero-block">
-    <p>Keep up to date on Grapile and PostGraphile features/changes.
+    <p>Keep up to date on Graphile and PostGraphile features/changes.
     Subscribe to our occasional announcements newsletter:</p>
     <div class="mc-field-group form-inline justify-content-center">
       <div class='form-group'>
