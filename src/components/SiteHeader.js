@@ -58,6 +58,7 @@ export default ({ location }) =>
               </Link>
             </li>
             <li className="navbar-item ml-auto">
+              <input id="search-box" />
               <a
                 className="nav-github-link nav-link"
                 href="https://github.com/graphile/graphile-build"

@@ -50,6 +50,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             rel="stylesheet"
             href={`/styles.css?t=${encodeURIComponent(buildTimestamp)}`}
           />
+          <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css"
+          />
         </head>
         <body>
           <noscript>
@@ -65,6 +69,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             dangerouslySetInnerHTML={{ __html: this.props.body }}
           />
           {this.props.postBodyComponents}
+          <script
+            type="text/javascript"
+            src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"
+          />
+          <script
+            type="text/javascript"
+            dangerouslySetInnerHTML={{
+              __html: `docsearch({
+apiKey: 'b8bae02e7bf22b05801b361ea00f9bf5',
+indexName: 'graphile',
+inputSelector: '#search-box',
+debug: false
+});`,
+            }}
+          />
         </body>
       </html>
     );
