@@ -19,6 +19,13 @@ class TemplateWrapper extends Component {
     this.self = el;
     el.focus();
   };
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.location.pathname !== this.props.location.pathname) {
+      setTimeout(() => {
+        if (this.self) this.self.focus();
+      }, 0);
+    }
+  }
   render() {
     const { children, ...restOfProps } = this.props;
     return (
