@@ -6,10 +6,23 @@ import "./index.scss";
 import "./flexgrid.scss";
 
 class TemplateWrapper extends Component {
+  onKeyDown = e => {
+    if (e.target === this.self && e.keyCode === 191) {
+      const el = document.getElementById("search-box");
+      if (el) {
+        el.focus();
+        e.preventDefault();
+      }
+    }
+  };
+  focus = el => {
+    this.self = el;
+    el.focus();
+  };
   render() {
     const { children, ...restOfProps } = this.props;
     return (
-      <div>
+      <div onKeyDown={this.onKeyDown} tabIndex="-1" ref={this.focus}>
         {children(restOfProps)}
       </div>
     );
