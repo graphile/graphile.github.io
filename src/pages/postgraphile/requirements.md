@@ -42,12 +42,13 @@ database itself).
 `--watch` is also only officially supported on 9.6+ (although it might work on
 9.5?)
 
+#### PostgreSQL 10
+
+PostgreSQL 10 solves a number of performance issues - the most interesting of
+which for us is a significant performance boost to Row Level Security policies!
+
 ### Operating system
 
 PostGraphile is developed on Mac OS X and tested on GNU/Linux; we would like to
 support Windows but no-one in the core team uses Windows so we need your help
 for this.
-
-### Docker
-
-TODO
