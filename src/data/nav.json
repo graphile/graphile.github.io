@@ -186,6 +186,11 @@
         "sectionId": "guides"
       },
       {
+        "to": "/postgraphile/postgresql-indexes/",
+        "title": "PostgreSQL Indexes",
+        "sectionId": "guides"
+      },
+      {
         "to": "/postgraphile/usage-cli/",
         "title": "CLI Usage",
         "sectionId": "usage"
