@@ -79,7 +79,7 @@
       {
         "to": "/graphile-build/schema-builder/",
         "title": "SchemaBuilder",
-        "sectionId": "library-reference"
+        "sectionId": "plugin-reference"
       }
     ]
   },
