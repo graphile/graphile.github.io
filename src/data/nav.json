@@ -91,6 +91,10 @@
         "title": "Overview"
       },
       {
+        "id": "guides",
+        "title": "Guides"
+      },
+      {
         "id": "usage",
         "title": "Usage"
       }
@@ -100,6 +104,11 @@
         "to": "/postgraphile/introduction/",
         "title": "Introduction",
         "sectionId": "overview"
+      },
+      {
+        "to": "/postgraphile/evaluating/",
+        "title": "Evaluating",
+        "sectionId": "guides"
       },
       {
         "to": "/postgraphile/requirements/",
