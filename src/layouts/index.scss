@@ -89,8 +89,11 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
 // Text
 
 h1, h2, h3, h4, h5, h6 {
-  margin-top: 2.175rem;
-  margin-bottom: 1.275rem;
+  margin: 0;
+  /* padding/margin hack so page scrolls to right place when using an #anchor */
+  padding-top: 3.175rem;
+  margin-top: -1rem;
+  padding-bottom: 1.275rem;
 }
 
 
