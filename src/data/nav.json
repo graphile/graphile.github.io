@@ -107,7 +107,7 @@
       },
       {
         "to": "/postgraphile/evaluating/",
-        "title": "Evaluating",
+        "title": "Evaluating for your Project",
         "sectionId": "guides"
       },
       {
@@ -164,6 +164,21 @@
         "to": "/postgraphile/introspection/",
         "title": "Introspection",
         "sectionId": "overview"
+      },
+      {
+        "to": "/postgraphile/jwt-guide/",
+        "title": "PostGraphile JWT Guide",
+        "sectionId": "guides"
+      },
+      {
+        "to": "/postgraphile/default-role/",
+        "title": "The Default Role",
+        "sectionId": "guides"
+      },
+      {
+        "to": "/postgraphile/procedures/",
+        "title": "PostgreSQL Procedures",
+        "sectionId": "guides"
       },
       {
         "to": "/postgraphile/postgresql-schema-design/",
