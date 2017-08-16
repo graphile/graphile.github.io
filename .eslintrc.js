@@ -9,6 +9,7 @@ module.exports = {
     jest: true,
     node: true,
     es6: true,
+    browser: true,
   },
   rules: {
     "prettier/prettier": [
@@ -57,5 +58,8 @@ module.exports = {
     flowtype: {
       onlyFilesWithFlowAnnotation: false,
     },
+  },
+  globals: {
+    docsearch: false,
   },
 };

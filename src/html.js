@@ -73,17 +73,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             type="text/javascript"
             src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"
           />
-          <script
-            type="text/javascript"
-            dangerouslySetInnerHTML={{
-              __html: `docsearch({
-apiKey: 'b8bae02e7bf22b05801b361ea00f9bf5',
-indexName: 'graphile',
-inputSelector: '#search-box',
-debug: false
-});`,
-            }}
-          />
         </body>
       </html>
     );
