@@ -4,25 +4,51 @@ path: /graphile-build/plugins/
 title: Plugins
 ---
 
-## Plugins
+# Plugins
 
 Almost everything in Graphile-Build is accomplished through plugins. You can
 add plugins, remove plugins, even replace the entire stack if you so desire.
 
-### Loading Plugins
+## Loading Plugins
 
-Graphile-Build plugins are simple functions that interact with [the
+Plugins are loaded when you call [`buildSchema(plugins,
+options)`](/graphile-build/graphile-build/#buildschemaplugins-options) or
+[`getBuilder(plugins,
+options)`](/graphile-build/graphile-build/#getbuilderplugins-options).  They
+may be asynchronous thus these functions return a promise; Graphile Build will
+wait for each plugin to finish loading before attempting to load the next
+plugin - so the order in which you specify the plugins may be important.
+
+Here's how you might load the default plugins:
+
+```js
+const { buildSchema, defaultPlugins } = require("graphile-build");
+const { printSchema } = require("graphql/utilities");
+
+const plugins = [
+  ...defaultPlugins,
+  // Add more plugins here!
+];
+
+buildSchema(plugins).then(schema => {
+  console.log(printSchema(schema));
+});
+```
+
+## Writing Plugins
+
+Graphile Build plugins are simple functions that interact with [the
 `SchemaBuilder`](/graphile-build/schema-builder/), most commonly by registering
-hooks.  When you perform
+hooks. When you perform
 [`buildSchema(plugins)`](/graphile-build/graphile-build/) we create a new
 `SchemaBuilder` instance and then load each of the plugins against it.
 
-The plugins are loaded in the order specified. If a plugin returns a `Promise`
-(e.g. an asynchronous plugin) then we will wait for that promise to resolve
-before continuing to load the next plugin, otherwise we will assume the plugin
-is synchronous. This asynchronous period should be used for performing tasks
-such as introspecting a data store or fetching a file from the internet; the
-hooks themselves run synchronously and thus must not perform asynchronous work.
+If a plugin returns a `Promise` (e.g. an asynchronous plugin) then we will wait
+for that promise to resolve before continuing to load the next plugin,
+otherwise we will assume the plugin is synchronous. This asynchronous period
+should be used for performing tasks such as introspecting a data store or
+fetching a file from the internet; the hooks themselves run synchronously and
+thus must not perform any asynchronous work.
 
 An example of a plugin that does nothing is this no-op plugin:
 
@@ -72,6 +98,57 @@ type Query implements Node {
 ```
 
 </details>
+
+
+### An example plugin
+
+This plugin will add a field `random(sides: Int)` to every GraphQLObjectType that is generated with hooks:
+
+```js
+// No imports required!
+
+module.exports = function MyRandomFieldPlugin(
+  builder,
+  { myDefaultMin = 1, myDefaultMax = 100 }
+) {
+  builder.hook("GraphQLObjectType:fields", (
+    fields, // input object
+    { extend, graphql: { GraphQLInt } }, // Build
+    context // Context
+  ) => {
+    return extend(fields, {
+      random: {
+        type: GraphQLInt,
+        args: {
+          sides: {
+            type: GraphQLInt,
+          },
+        },
+        resolve(_, { sides = myDefaultMax }) {
+          return (
+            Math.floor(Math.random() * (sides - myDefaultMin + 1)) + myDefaultMin
+          );
+        },
+      },
+    });
+  });
+}
+```
+
+First it registers a hook on `GraphQLObjectType:fields` which will be called
+for the `fields` property of every `GraphQLObjectType` that is constructed.
+
+The callback to this [hook](/graphile-build/hooks/) is passed the three standard options:
+
+- input object, `fields`, which is basically a [`GraphQLFieldConfigMap` from graphql-js](http://graphql.org/graphql-js/type/#graphqlobjecttype).
+- [`Build` object](/graphile-build/build-object/) (from which we're using `extend` and `graphql.GraphQLInt`
+- [`Context` object](/graphile-build/context-object/) which it is ignoring; but if we wanted to filter which objects get the `random` field added this would be what we'd use
+
+Finally we're returning a derivative of the `fields` that were input by adding
+an additonal property `field` which is a standard GraphQL field config
+`GraphQLFieldConfig` - see the [GraphQL-js
+documentation](http://graphql.org/graphql-js/type/#graphqlobjecttype).
+
 
 ### Plugin arguments
 
