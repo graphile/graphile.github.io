@@ -103,7 +103,7 @@ id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validat
 <div class='col-xs-12'>
 <div class='hero-block center'>
 
-## Questions, comments or feedback? [info@graphile.org](mailto:info@graphile.org?subject=Graphile%20question%2Fcomment%2Ffeedback%3A)
+## Questions, comments or feedback? [info@graphile.org](mailto:info@graphile.org?subject=Graphile%20question/comment/feedback:)
 
 </div>
 </div>
