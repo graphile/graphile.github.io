@@ -86,9 +86,12 @@ postgraphile --append-plugins `pwd`/add-http-bin-plugin.js -c postgres://localho
 Sometimes you might want to override what an existing field does. Due to the
 way that PostGraphile works (where the root Query field resolvers are the only
 ones who perform SQL queries) this is generally most useful at the top level.
-For example if you want to perform a certain action after a record is created
-you could wrap the create mutation:
 
+The following example modifies the 'createLink' mutation so that it performs
+some additional validation (thrown an error if the link's `title` is too short)
+and performs an action after the link has been saved. You could use a plugin
+like this to achieve many different tasks, including emailing a user after
+their account is created or logging failed authentication attempts.
 
 ```js
 function performAnotherTask(linkId) {
