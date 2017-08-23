@@ -168,3 +168,43 @@ module.exports = function CreateLinkWrapPlugin(builder) {
   );
 };
 ```
+
+### Removing things from the schema
+
+The best way to remove a class of things from the schema is simply to remove
+the plugin that adds them; for example if you no longer wanted to allow
+ordering by all the columns of a table (i.e. only allow ordering by the primary
+key) you could omit
+[PgOrderAllColumnsPlugin](https://github.com/graphile/graphile-build/blob/master/packages/graphile-build-pg/src/plugins/PgOrderAllColumnsPlugin.js).
+If you didn't want computed columns added you could omit
+[PgComputedColumnsPlugin](https://github.com/graphile/graphile-build/blob/master/packages/graphile-build-pg/src/plugins/PgComputedColumnsPlugin.js).
+
+However, sometimes you need more surgical precision, and you only want to
+remove one specific thing. To achieve this you need to add a hook to the
+thing that owns the thing you wish to remove - for example if you
+want to remove a field `bar` from an object type `Foo` you could hook
+`GraphQLObjectType:fields` and return the set of fields less the one you want
+removed.
+
+Here's an example of a plugin generator you could use to generate plugins to
+remove individual fields. You could write this much more efficiently!
+
+```js
+const omit = require("lodash/omit");
+
+function removeFieldPluginGenerator(objectName, fieldName) {
+  const fn = function(builder) {
+    builder.hook("GraphQLObjectType:fields", (fields, _, { Self }) => {
+      if (Self.name !== objectName) return fields;
+      return omit(fields, [fieldName]);
+    });
+  };
+  // For debugging:
+  fn.displayName = `RemoveFieldPlugin:${objectName}.${fieldName}`;
+  return fn;
+}
+
+const RemoveFooDotBarPlugin = removeFieldPluginGenerator("Foo", "bar");
+
+module.exports = RemoveFooDotBarPlugin;
+```
