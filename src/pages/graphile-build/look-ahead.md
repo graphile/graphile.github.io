@@ -168,6 +168,39 @@ const MyObject = newWithHooks(GraphQLObjectType, {
 });
 ```
 
+#### When processing arguments: `addArgDataGenerator`
+
+Arguments also influence what we should do, so we can use `addArgDataGenerator`
+to provide look-ahead data based on the arguments received.
+
+```js{7-12}
+const MyObject = newWithHooks(GraphQLObjectType, {
+  name: "MyObject",
+  fields: ({ fieldWithHooks }) => {
+    return {
+      connection: fieldWithHooks(
+        "connection",
+        ({ addArgDataGenerator }) => {
+          addArgDataGenerator(function connectionFirst({ first }) {
+            if (first) {
+              return { limit: [first] };
+            }
+          });
+          return {
+            type: ConnectionType,
+            args: {
+              first: {
+                type: GraphQLInt,
+              },
+            },
+          };
+        }
+      ),
+    };
+  },
+});
+```
+
 #### In a `GraphQLObjectType:fields:field` hook
 
 Hooks can also associate metadata with a field; they are passed `addDataGenerator` on the Context argument, for example:
