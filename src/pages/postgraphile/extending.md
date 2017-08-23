@@ -22,6 +22,29 @@ plugins are built on top of the [GraphQL reference JS
 implementation](http://graphql.org/graphql-js/), so it is recommended that you
 have familiarity with that before attempting to add your own plugins.
 
+### Loading additional plugins
+
+```
+postgraphile --append-plugins `pwd`/add-http-bin-plugin.js -c postgres://localhost/mydb
+```
+
+If you're using the CLI you can use option `--append-plugins` to load additonal
+plugins.  You specify a comma separated list of module specs. A module spec is
+a path to a JS file to load, optionally followed by a colon and the name of the
+export (you must omit this if the function is exported via
+`module.exports = function MyPlugin(...){...}`). E.g.
+
+- `--append-plugins my-npm-module` (requires `module.exports = function NpmPlugin(...) {...}`)
+- `--append-plugins /path/to/local/module.js:MyPlugin` (requires `exports.MyPlugin = function MyPlugin(...) {...}`)
+
+If you're using postgraphile as a library you can instead us the appendPlugins
+option which is simply an array of functions (you perform your own requiring!)
+
+Remember: multiple versions of graphql in your `node_modules` will cause
+problems; so we recommend using the `graphql` object that's available on the
+`Build` object (second argument to hooks).
+
+
 ### Adding root query/mutation fields
 
 A common request is to add additional root-level fields to your schema, for
@@ -80,6 +103,10 @@ We can then load our plugin into PostGraphile via:
 ```
 postgraphile --append-plugins `pwd`/add-http-bin-plugin.js -c postgres://localhost/mydb
 ```
+
+Note that the return types of added fields do not need to be implemented via
+Graphile Build's `newWithHooks` - you can use any GraphQL objects - but if you
+don't use `newWithHooks` then you won't be able to hook these added objects.
 
 ### Wrapping an existing resolver
 

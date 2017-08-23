@@ -76,3 +76,7 @@ There are more CLI options available to customise the GraphQL server:
   show JavaScript error stacks in the GraphQL result errors
 - `--extended-errors <string>`  
   a comma separated list of extended PostgreSQL error fields to display in the GraphQL result. Possible fields: `'hint', 'detail', 'errcode'`. Default: none
+- `--append-plugins <string>`  
+  a comma-separated list of plugins to append to the list of GraphQL schema plugins
+- `--prepend-plugins <string>`  
+  a comma-separated list of plugins to prepend to the list of GraphQL schema plugins
