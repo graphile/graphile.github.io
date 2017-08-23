@@ -14,7 +14,9 @@ class Marketing extends Component {
     setTimeout(this.mailchimpScript, 0);
   }
   mailchimpScript = () => {
-    this.setState({ mailchimp: true });
+    if (this.root.querySelector("#mc-embedded-subscribe-form")) {
+      this.setState({ mailchimp: true });
+    }
   };
   render() {
     const {
@@ -24,7 +26,12 @@ class Marketing extends Component {
       location,
     } = this.props;
     return (
-      <div className="template-marketing">
+      <div
+        className="template-marketing"
+        ref={el => {
+          this.root = el;
+        }}
+      >
         <Helmet
           title="Graphile | Powerful, Extensible and Performant GraphQL APIs Rapidly"
           meta={[

@@ -548,6 +548,47 @@ blockquote {
   color: #777;
 }
 
+header.support {
+  background-color: #F3F3F3;
+}
+
+header.support .lead h2 {
+  padding-bottom: 3.175rem;
+}
+
+.template-marketing .page-content section.even-odd-hack {
+  height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.professional-support-box,
+.community-support-box {
+  h2,
+  h3 {
+    margin-top: 0;
+    padding-top: 0;
+  }
+  .padding {
+    padding: 3rem 2rem;
+  }
+}
+
+.community-support-box {
+  background-color: #fbffbf;
+  color: rgba(0, 0, 0, 0.75);
+  h2, h3 {
+    color: #828821
+  }
+}
+
+.professional-support-box {
+  background-color: #ffd3b4;
+  h2, h3 {
+    color: #884549
+  }
+}
+
 @media only screen and (max-width: 480px) {
   html {
     font-size: 18px;

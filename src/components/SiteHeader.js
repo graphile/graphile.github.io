@@ -90,6 +90,18 @@ export default withRouter(
                       Graphile Build
                     </Link>
                   </li>
+                  <li className="navbar-item navbar-item--left">
+                    <Link
+                      className={`nav-link ${location.pathname.match(
+                        /^\/support(\/|$)/
+                      )
+                        ? "active"
+                        : ""}`}
+                      to="/support/"
+                    >
+                      Support
+                    </Link>
+                  </li>
                   <li className="navbar-item ml-auto navbar-item navbar-item--right">
                     <span className="searchbox-container">
                       <input
