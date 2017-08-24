@@ -1,18 +1,5 @@
 import React from "react";
 import * as PropTypes from "prop-types";
-import { TypographyStyle, GoogleFont } from "react-typography";
-import Typography from "typography";
-import theme from "typography-theme-fairy-gates";
-theme.baseFontSize = "20px";
-theme.bodyGray = "40";
-theme.overrideStyles = () => ({
-  a: {
-    textShadow: "initial",
-    color: "initial",
-    backgroundColor: "initial",
-  },
-});
-const typography = new Typography(theme);
 
 const propTypes = {
   headComponents: PropTypes.node.isRequired,
@@ -44,8 +31,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             name="viewport"
             content="width=device-width, initial-scale=1.0 maximum-scale=5.0"
           />
-          <TypographyStyle typography={typography} />
-          <GoogleFont typography={typography} />
           <link
             rel="stylesheet"
             href={`/styles.css?t=${encodeURIComponent(buildTimestamp)}`}
