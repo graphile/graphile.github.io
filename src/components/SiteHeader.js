@@ -34,12 +34,15 @@ export default withRouter(
     };
     render() {
       const { location } = this.props;
+      const navbarItemClassName =
+        "navbar-item items-center flex f5 fw6 hover-blue link black-70 mr2 mr3-m mr4-l dib";
+      const navLink = "nav-link white no-underline";
       return (
         <header className="content">
-          <nav className="navbar">
+          <nav className="navbar bg-dark-gray white items-center fixed w-100 f6 pa3 ph5-ns z-9999">
             <div className="container">
               <input
-                className="navbar-toggler"
+                className="navbar-toggler input-reset"
                 type="checkbox"
                 id="toggle"
                 data-toggle="collapse"
@@ -48,16 +51,16 @@ export default withRouter(
                 aria-expanded="false"
                 aria-label="Toggle navigation"
               />
-              <div className="nav-controls">
+              <div className="nav-controls nested-list-reset ">
                 <div className="navbar-crosses">
                   <span className="line line-1"> </span>
                   <span className="line line-2"> </span>
                   <span className="line line-3"> </span>
                 </div>
-                <ul className="navbar-nav">
-                  <li className="navbar-item navbar-item--left">
+                <ul className="navbar-nav flex w-100">
+                  <li className={navbarItemClassName}>
                     <Link
-                      className={`nav-link ${location.pathname.match(/^\/$/)
+                      className={`${navLink} ${location.pathname.match(/^\/$/)
                         ? "active"
                         : ""}`}
                       to="/"
@@ -66,9 +69,9 @@ export default withRouter(
                       <span className="home">Home</span>
                     </Link>
                   </li>
-                  <li className="navbar-item navbar-item--left">
+                  <li className={navbarItemClassName}>
                     <Link
-                      className={`nav-link ${location.pathname.match(
+                      className={`${navLink} ${location.pathname.match(
                         /^\/postgraphile(\/|$)/
                       )
                         ? "active"
@@ -78,9 +81,9 @@ export default withRouter(
                       PostGraphile
                     </Link>
                   </li>
-                  <li className="navbar-item navbar-item--left">
+                  <li className={navbarItemClassName}>
                     <Link
-                      className={`nav-link ${location.pathname.match(
+                      className={`${navLink} ${location.pathname.match(
                         /^\/graphile-build(\/|$)/
                       )
                         ? "active"
@@ -90,9 +93,9 @@ export default withRouter(
                       Graphile Build
                     </Link>
                   </li>
-                  <li className="navbar-item navbar-item--left">
+                  <li className={navbarItemClassName}>
                     <Link
-                      className={`nav-link ${location.pathname.match(
+                      className={`${navLink} ${location.pathname.match(
                         /^\/support(\/|$)/
                       )
                         ? "active"
@@ -102,7 +105,7 @@ export default withRouter(
                       Support
                     </Link>
                   </li>
-                  <li className="navbar-item ml-auto navbar-item navbar-item--right">
+                  <li className={navbarItemClassName}>
                     <span className="searchbox-container">
                       <input
                         id="search-box"
@@ -112,9 +115,9 @@ export default withRouter(
                       <span className="fa fa-search searchbox-search" />
                     </span>
                   </li>
-                  <li className="navbar-item navbar-item--right">
+                  <li className={navbarItemClassName}>
                     <a
-                      className="nav-github-link nav-link"
+                      className={`nav-github-link ${navLink}`}
                       href="https://github.com/graphile/graphile-build"
                     >
                       <span className="fa fa-github" />{" "}

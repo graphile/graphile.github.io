@@ -8,7 +8,7 @@ export default () =>
         <div className="col-xs-12 col-md-8">
           <div className="container">
             <div className="row">
-              <div className="col-xs-12 col-md-4">
+              <div className="col-xs-12 col-md-4 nested-list-reset ">
                 <h6>PostGraphile</h6>
                 <ul>
                   <li>
@@ -22,7 +22,7 @@ export default () =>
                   </li>
                 </ul>
               </div>
-              <div className="col-xs-12 col-md-4">
+              <div className="col-xs-12 col-md-4 nested-list-reset ">
                 <h6>Graphile Build</h6>
                 <ul>
                   <li>
@@ -38,7 +38,7 @@ export default () =>
                   </li>
                 </ul>
               </div>
-              <div className="col-xs-12 col-md-4">
+              <div className="col-xs-12 col-md-4 nested-list-reset ">
                 <h6>Community</h6>
                 <ul>
                   <li>
