@@ -1,0 +1,168 @@
+@import "./tachyons.scss";
+
+// .navbar-item {
+//   height: 2.4rem;
+// }
+
+.nav-github-link {
+  font-size: 1.1em;
+}
+
+.navbar-item {
+  .nav-link {
+    color: #ddd;
+    &.active {
+      color: white;
+      font-weight: bold;
+    }
+  }
+}
+
+.home,
+.github {
+  display: none;
+}
+
+$toggleSize: 1.2rem;
+$heightIcon: $toggleSize;
+$widthLine: $heightIcon;
+$heightLine: 4px;
+$transitionTime: 0.3s;
+$rotation: 45deg;
+$translateY: ($heightIcon / 2);
+$translateX: 0;
+$lineColor: white;
+
+.navbar-toggler {
+  background: transparent;
+  border: 0;
+  color: white;
+  height: $toggleSize;
+  left: 1rem;
+  opacity: 0.5;
+  order: 1;
+  position: absolute;
+  width: $toggleSize;
+}
+
+.navbar-toggler,
+.navbar-crosses {
+  top: 0.5rem;
+}
+
+.navbar-crosses {
+  background: #333;
+  position: absolute;
+  left: 1rem;
+  pointer-events: none;
+  height: $heightIcon;
+  width: $widthLine;
+
+  .line {
+    background: $lineColor;
+    border-radius: ($heightLine / 2);
+    display: block;
+    height: $heightLine;
+    left: 0;
+    position: absolute;
+    transition: all $transitionTime;
+    width: $widthLine;
+  }
+
+  .line-1 { top: 0; }
+  .line-2 { top: 50%; }
+  .line-3 { top: 100%; }
+}
+
+.navbar-toggler:checked + .nav-controls .navbar-crosses {
+  .line-1 { transform: translateY($translateY) translateX($translateX) rotate($rotation); }
+  .line-2 { opacity:0; }
+  .line-3 { transform: translateY($translateY * -1) translateX($translateX) rotate($rotation * -1); }
+}
+
+.nav-controls {
+  align-items: center;
+  display: flex;
+}
+
+.navbar-toggler,
+.navbar-crosses {
+  display: none;
+}
+
+#search-box {
+  padding: 0 0.7rem 0 1.7rem;
+  border-radius: 100px;
+}
+
+.searchbox-container {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
+.searchbox-search {
+  color: black;
+  opacity: 0.4;
+  margin-right: -1.6rem;
+  font-size: 1.1em;
+}
+
+
+@media only screen and (max-width: 820px) {
+  .navbar-toggler,
+  .navbar-crosses {
+    display: block;
+  }
+
+  .navbar-nav {
+    display: none;
+    width: 100%;
+  }
+
+  .nav-controls {
+    margin-top: 2.4rem;
+  }
+
+  .navbar-toggler:checked + .nav-controls .navbar-nav {
+    display: flex;
+    opacity: 1;
+  }
+
+  .navbar-nav .navbar-item {
+    display: flex;
+    margin: 0 -1rem;
+    padding: 0 1rem;
+  }
+
+  .navbar-nav {
+    flex-direction: column;
+  }
+
+  .navbar-nav .navbar-item {
+    border-top: 1px solid #4d4d4d;
+    background: #333;
+
+    .home,
+    .github {
+      display: inline;
+      margin-left: 0.5rem;
+    }
+  }
+
+  .navbar-item {
+    height: 3rem;
+  }
+
+  .searchbox-container,
+  .algolia-autocomplete,
+  #search-box {
+    margin: 0;
+    width: 100%;
+  }
+
+  #search-box {
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+  }
+}

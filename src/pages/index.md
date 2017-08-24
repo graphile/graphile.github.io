@@ -7,10 +7,18 @@ title: Tools to build extensible and performant GraphQL APIs
 <!-- **************************************** -->
 
 <header class='hero'>
-<div class='hero-block center'>
+<div class='container'>
+<div class='row'>
+<div class='col-xs-12'>
+<div class='hero-block'>
 
-# A suite of tools for building performant pluggable GraphQL APIs.
+# A suite of tools for building
 
+# performant pluggable GraphQL APIs.
+
+</div>
+</div>
+</div>
 </div>
 </header>
 
@@ -24,7 +32,9 @@ title: Tools to build extensible and performant GraphQL APIs
 <div class='col-xs-12'>
 <div class='hero-block'>
 
-## PostGraphile: instant GraphQL API for PostgreSQL database
+## PostGraphile
+
+### Instant GraphQL API for PostgreSQL database
 
 Auto-discovers tables, columns, relations, procedures and more; runs a
 high-performance secure GraphQL API server that adheres to best practices.
@@ -34,7 +44,7 @@ high-performance secure GraphQL API server that adheres to best practices.
 </div>
 
 <div class='row'>
-<div class='col-lg-6 col-xs-12'>
+<div class='col-lg-6 mb3 col-xs-12'>
 
 ##### Just concentrate on your database
 ```sql
@@ -46,7 +56,7 @@ ALTER TABLE superheroes ENABLE ROW LEVEL SECURITY;
 ```
 
 </div><!-- /col-6 -->
-<div class='col-lg-6 col-xs-12'>
+<div class='col-lg-6 mb3 col-xs-12'>
 
 ##### Run a fully-fledged GraphQL API in one command
 ```bash
@@ -78,7 +88,8 @@ postgraphile
 <div class='col-xs-12'>
 <div class='hero-block'>
 
-## Graphile Build: high-performance pluggable GraphQL schema tools
+## Graphile Build
+### High-performance pluggable GraphQL schema tools
 
 Prefer building your GraphQL APIs by hand? By using our [look-ahead
 feature](/graphile-build/look-ahead/) your code can know what's coming and make
