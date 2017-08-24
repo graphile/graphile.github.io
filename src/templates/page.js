@@ -9,9 +9,9 @@ const sectionIs = desiredSection => ({ sectionId }) =>
 
 function PageList({ navs, location }) {
   return (
-    <ul className="page-list nav flex-column">
+    <ul className="page-list nav flex-column mb5">
       {navs.map(({ to, title }, idx) =>
-        <li key={idx} className="nav-item">
+        <li key={idx} className="f6 lh-copy pv1">
           <Link
             className={`nav-link ${location.pathname === to ? "active" : ""}`}
             to={to}
@@ -73,13 +73,15 @@ const Page = ({
               <aside className="sidebar col-xs-12 col-md-3 last-xs">
                 {navSections.map(({ id, title }, idx) =>
                   <section key={idx}>
-                    <h4 className="sidebar-title">
+                    <h4 className="f6 ttu fw6 mt0 mb3 bb pb2">
                       {title}
                     </h4>
-                    <PageList
-                      location={location}
-                      navs={navPages.filter(sectionIs(id))}
-                    />
+                    <div className="nested-list-reset">
+                      <PageList
+                        location={location}
+                        navs={navPages.filter(sectionIs(id))}
+                      />
+                    </div>
                   </section>
                 )}
               </aside>
