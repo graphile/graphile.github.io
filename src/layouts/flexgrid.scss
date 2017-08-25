@@ -197,6 +197,14 @@ $gutter: 1rem;
   order: 1;
 }
 
+.tl-xs {
+  text-align: left;
+}
+
+.tc-xs {
+  text-align: center;
+}
+
 @media only screen and (min-width: 48em) {
   .col-sm,
   .col-sm-1,
@@ -368,6 +376,10 @@ $gutter: 1rem;
 
   .last-sm {
     order: 1;
+  }
+
+  .tl-sm {
+    text-align: left;
   }
 }
 
@@ -550,6 +562,10 @@ $gutter: 1rem;
   .last-md {
     order: 1;
   }
+
+  .tl-md {
+    text-align: left;
+  }
 }
 
 @media only screen and (min-width: 75em) {
@@ -724,5 +740,17 @@ $gutter: 1rem;
 
   .last-lg {
     order: 1;
+  }
+
+  .tl-lg {
+    text-align: left;
+  }
+
+  .tr-lg {
+    text-align: right;
+  }
+
+  .tc-lg {
+    text-align: center;
   }
 }
