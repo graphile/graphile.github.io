@@ -8,7 +8,7 @@ $backgroundImage: "/images/delaunay.png";
 // Globals
 
 body {
-  @extend .debug-grid;
+  // @extend .debug-grid;
   font-family: "Open Sans", Verdana, Arial, Helvetica, sans-serif;
   font-weight: normal;
 }
@@ -39,6 +39,8 @@ h6 {
 }
 
 section {
+  position: relative;
+
   h1,
   h2,
   h3 {
@@ -69,7 +71,7 @@ p {
   }
 
   ul {
-    @extend .pl0;
+    padding-left: 1.2rem
   }
 }
 
@@ -80,8 +82,7 @@ footer li {
   @extend .measure
 }
 
-.page-content a,
-footer a {
+a {
   // @extend .dark-pink;
   color: $graphileRed;
   // @extend .dim;
@@ -131,14 +132,66 @@ footer a {
   }
 }
 
+.sidebar .page-list {
+  @extend .pa0;
+}
+
 
 .template-marketing {
-  section:nth-child(even):not(.no-highlight) {
-    @extend .bg-near-white;
+  $triHeight: 20px;
+  $backgroundColor: #f4f4f4;
+
+  position: relative;
+  background: linear-gradient(85deg, #ce2323 0%, #7d2424 100%);
+
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 43%;
+    height: 100vh;
+    background-image: linear-gradient(117deg, transparent 50%, #9c2828 0);
+    background-color: transparent;
+    z-index: 0;
+    top: 0;
+    right: 0;
   }
 
-  section:last-child {
-    // padding-bottom: 5rem;
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 31%;
+    height: 100vh;
+    background-image: linear-gradient(66deg, transparent 50%, #922323 0);
+    background-color: transparent;
+    z-index: 0;
+    top: -25vh;
+    right: 0;
+  }
+
+
+  section:nth-child(even):not(.no-highlight) {
+    background-color: $backgroundColor;
+  }
+
+  .page-content {
+    position: relative;
+    z-index: 1;
+  }
+
+
+  section:after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: $triHeight 100vw $triHeight 0;
+    border-color: transparent $backgroundColor transparent transparent;
+    top: -1 * $triHeight;
+    z-index: 0;
   }
 }
 
@@ -152,20 +205,19 @@ footer a {
 
 .template-marketing {
   .hero {
-    background-color: $graphileRed;
-    background-image: radial-gradient(ellipse at center, RGBA(121,0,0,0.2) 0%, RGBA(50,0,0,0.4) 100%), url($backgroundImage);
+    // background-image: radial-gradient(ellipse at center, RGBA(121,0,0,0.2) 0%, RGBA(50,0,0,0.4) 100%), url($backgroundImage);
     //background-image: radial-gradient(ellipse at center, RGBA(255,255,255,0.8) 0%, RGBA(255,255,255,0.8) 100%), url($backgroundImage);
     //background-image: url($backgroundImage);
     @extend .cover;
     @extend .white;
     @extend .flex;
     @extend .flex-column;
-    padding-bottom: 15vh;
-    padding-top: 15vh;
+    padding-bottom: 10vh;
+    padding-top: 10vh;
 
     &.simple {
-      padding-bottom: 5vh;
-      padding-top: 5vh;
+      padding-bottom: 8vh;
+      padding-top: 8vh;
     }
 
     h2 { margin: 0; }
@@ -181,10 +233,21 @@ footer a {
   }
 }
 
-.strong-link {
+a.strong-link {
   @extend .dib;
   @extend .link;
-  @extend .dark-pink;
+  //@extend .darkpink;
+  color: $graphileRed;
+  @extend .underline-hover;
+  @extend .b;
+  @extend .ttu;
+}
+
+a.strong-link--white {
+  @extend .dib;
+  @extend .link;
+  //@extend .darkpink;
+  @extend .white;
   @extend .underline-hover;
   @extend .b;
   @extend .ttu;
@@ -273,19 +336,37 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
   @extend .mb2;
   @extend .pv2;
   @extend .ph3;
+
+  //@extend .darkpink;
+  @extend .underline-hover;
+  @extend .b;
+  @extend .ttu;
 }
 
 .button--solid {
   @extend .button-common;
   @extend .white;
-  @extend .bg-hot-pink;
+  background-color: $graphileRed;
 }
 
 .button--outline {
   @extend .button-common;
   @extend .ba;
   @extend .bw1;
-  @extend .dark-pink;
+  color: $graphileRed;
+}
+
+a.button--outline-light {
+  @extend .button-common;
+  @extend .ba;
+  @extend .bw1;
+  @extend .white;
+}
+
+a.button--solid-light {
+  @extend .button-common;
+  color: #9E1E1B;
+  @extend .bg-white;
 }
 
 
@@ -297,43 +378,6 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
 
   // ----------------------------------------
   // Code
-
-
-  // ----------------------------------------
-  // Text
-
-  h1, h2, h3, h4, h5, h6 {
-    margin: 0;
-    /* padding/margin hack so page scrolls to right place when using an #anchor */
-    padding-top: 3.175rem;
-    margin-top: -1rem;
-    padding-bottom: 1.275rem;
-  }
-
-  // ----------------------------------------
-  // Nav
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .signup-field,
-  #search-box,
-  .button {
-    border-radius: 5px;
-    border-width: 2px;
-    border-style: solid;
-    appearance: none;
-    -webkit-appearance: none;
-    outline: none;
-    display: inline;
-
-    &:focus {
-      border-color: $graphileRed;
-    }
-  }
 
 
   .signup-field,
@@ -385,22 +429,6 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
   // ----------------------------------------
   // Layout
 
-  .ml-auto {
-    display: flex;
-    margin-left: auto;
-  }
-
-  .page-content .container,
-  .navbar .container {
-    max-width: 1400px;
-    margin: 0 auto;
-  }
-
-
-  .justify-content-center {
-    justify-content: center;
-  }
-
   blockquote {
     margin-left: 0;
     padding-left: 1.15rem;
@@ -408,63 +436,5 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
     color: #777;
   }
 
-  header.support {
-    background-color: #F3F3F3;
-  }
 
-  header.support .lead h2 {
-    padding-bottom: 3.175rem;
-  }
-
-  .template-marketing .page-content section.even-odd-hack {
-    height: 0;
-    margin: 0;
-    padding: 0;
-  }
-
-  .professional-support-box,
-  .community-support-box {
-    h2,
-    h3 {
-      margin-top: 0;
-      padding-top: 0;
-    }
-    .padding {
-      padding: 3rem 2rem;
-    }
-  }
-
-  .community-support-box {
-    background-color: #fbffbf;
-    color: rgba(0, 0, 0, 0.75);
-    h2, h3 {
-      color: #828821
-    }
-  }
-
-  .professional-support-box {
-    background-color: #ffd3b4;
-    h2, h3 {
-      color: #884549
-    }
-  }
-
-  @media only screen and (max-width: 480px) {
-    html {
-      font-size: 18px;
-    }
-
-    .template-marketing {
-
-      .hero {
-        h1 {
-          font-size: 1.75rem;
-        }
-
-        h2 {
-          font-size: 1.2rem;
-        }
-      }
-    }
-  }
 }

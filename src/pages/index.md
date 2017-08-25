@@ -12,9 +12,13 @@ title: Tools to build extensible and performant GraphQL APIs
 <div class='col-xs-12'>
 <div class='hero-block'>
 
-## Tools for building performant
+# Graphile
 
-## pluggable GraphQL APIs.
+<h3>
+  Tools for building performant
+  <br />
+  pluggable GraphQL APIs.
+</h3>
 
 </div>
 </div>
@@ -44,7 +48,7 @@ high-performance secure GraphQL API server that adheres to best practices.
 </div>
 
 <div class='row'>
-<div class='col-lg-6 mb3 col-xs-12'>
+<div class='col-lg-6 mb3 col-md-9 col-xs-12'>
 
 ##### Just concentrate on your database
 ```sql
@@ -56,7 +60,8 @@ ALTER TABLE superheroes ENABLE ROW LEVEL SECURITY;
 ```
 
 </div><!-- /col-6 -->
-<div class='col-lg-6 mb3 col-xs-12'>
+<div class='col-lg-6 mb3 col-md-9 col-xs-12'>
+
 
 ##### Run a fully-fledged GraphQL API in one command
 ```bash
@@ -103,7 +108,7 @@ and use community-built plugins to increase developer productivity.
 </div>
 
 <div class='row'>
-<div class='col-xs-12 col-lg-6'>
+<div class='col-lg-6 mb3 col-md-9 col-xs-12'>
 
 ##### `graphql`
 
@@ -116,7 +121,7 @@ const MyType =
 ```
 
 </div>
-<div class='col-xs-12 col-lg-6'>
+<div class='col-lg-6 mb3 col-md-9 col-xs-12'>
 
 ##### `graphile-build`
 
@@ -131,7 +136,6 @@ const MyType =
 </div>
 </div>
 
-<br />
 <div class='flex'>
 <a class='strong-link' href='/postgraphile/'>More about Graphile Build <span class='fa fa-fw fa-long-arrow-right' /></a>
 </div>
@@ -177,7 +181,7 @@ Build plugins.
 <section class='mailinglist'>
 <div class='container'>
 
-<div class='flex justify-center'>
+<div class='row'>
 <div class='col-xs-12'>
 <div class='hero-block center'>
 
@@ -187,7 +191,7 @@ Build plugins.
 </div>
 </div>
 
-<div class='flex justify-center'>
+<div class='row'>
 <div class='col-xs-12 center'>
 <div class='hero-block'>
 

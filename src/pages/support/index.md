@@ -6,58 +6,72 @@ title: Support for PostGraphile and Graphile Build from the maintainer
 
 <!-- **************************************** -->
 
-<header class='simple support'>
+
+<header class='hero simple'>
 <div class='container'>
+<div class='row'>
+<div class='col-xs-12'>
+<div class='hero-block'>
 
-<div class='row center justify-content-center lead'>
+# Support
 
-## Graphile support options
+<h3>
+  Professional and community support services
+</h3>
 
 </div>
+</div>
+</div>
+</div>
+</header>
 
+
+<!-- **************************************** -->
+
+<section>
+<div class='container center'>
 <div class='row'>
-<div class='col-xs-12 col-md-6 community-support-box'>
-<div class='padding'>
 
-### Community Support
+<div class='col-xs-12 col-md-6'>
+
+## Community Support
 
 - Request features
 - Advice from the community
 - Report issues
 - Discuss the future of the project
 
-**[PostGraphile support](https://github.com/postgraphql/postgraphql/issues)**  
-[Graphile Build support](https://github.com/graphile/graphile-build/issues)  
+[PostGraphile support](https://github.com/postgraphql/postgraphql/issues)
+
+[Graphile Build support](https://github.com/graphile/graphile-build/issues)
+
 [Gitter chat](https://gitter.im/postgraphql/postgraphql)
 
 
 </div>
-</div>
-<div class='col-xs-12 col-md-6 professional-support-box'>
-<div class='padding'>
 
-### Professional Services and Support
+<div class='col-xs-12 col-md-6'>
+
+## Professional Services and Support
 
 - Tweak Graphile to fit your needs
 - Custom features to a deadline
 - Security and performance vetting
 - Team training / get started faster
 
-$200 / hour &nbsp;&nbsp;&nbsp; or &nbsp;&nbsp;&nbsp; $1000 / day  
-See [FAQs](/support/#faqs) below for more information  
-[Email to discuss details](mailto:benjie@graphile.org?subject=Graphile%20Custom%20Work%20or%20Support)
+$200 / hour or $1000 / day
+
+See [FAQs](/support/#faqs) below for more information
+
+
+<a class="button--outline" href="mailto:benjie@graphile.org?subject=Graphile%20Custom%20Work%20or%20Support">Email for details</a>
+
+</div>
 
 </div>
 </div>
-</div>
+</section>
 
-</div>
-</header>
-
-
-
-<!-- **************************************** -->
-<section class='even-odd-hack'></section>
 <!-- **************************************** -->
 
 <section>
@@ -81,7 +95,7 @@ tracker](https://github.com/graphile/graphile-build/issues).
 
 ### There's a typo in...
 
-We ❤️ typo fixes - and it's the easiest way for you to make your mark on the
+We ❤️  typo fixes - and it's the easiest way for you to make your mark on the
 project!  If the typo is in this website; please open a PR to [the graphile.github.io
 repository](https://github.com/graphile/graphile.github.io). If the typo is in
 one of the tools, please raise a pull request with the relevant repository (see

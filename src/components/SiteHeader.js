@@ -34,12 +34,9 @@ export default withRouter(
     };
     render() {
       const { location } = this.props;
-      const navbarItemClassName =
-        "navbar-item items-center flex f5 hover-blue link black-70 mr2 mr3-m mr4-l dib";
-      const navLink = "nav-link no-underline";
       return (
-        <header className="content">
-          <nav className="navbar bg-white items-center w-100 f6 pa3 ph5-ns z-9999">
+        <header className="header content absolute z-999 top-0 w-100">
+          <nav className="navbar">
             <div className="container">
               <input
                 className="navbar-toggler input-reset"
@@ -58,20 +55,20 @@ export default withRouter(
                   <span className="line line-3"> </span>
                 </div>
                 <ul className="navbar-nav flex w-100">
-                  <li className={navbarItemClassName}>
+                  <li className="navbar-item">
                     <Link
-                      className={`${navLink} ${location.pathname.match(/^\/$/)
+                      className={`nav-link ${location.pathname.match(/^\/$/)
                         ? "active"
                         : ""}`}
                       to="/"
                     >
-                      <span className="fa fa-home" />{" "}
+                      <span className="home-icon fa fa-home" />{" "}
                       <span className="home">Home</span>
                     </Link>
                   </li>
-                  <li className={navbarItemClassName}>
+                  <li className="navbar-item">
                     <Link
-                      className={`${navLink} ${location.pathname.match(
+                      className={`nav-link ${location.pathname.match(
                         /^\/postgraphile(\/|$)/
                       )
                         ? "active"
@@ -81,9 +78,9 @@ export default withRouter(
                       PostGraphile
                     </Link>
                   </li>
-                  <li className={navbarItemClassName}>
+                  <li className="navbar-item">
                     <Link
-                      className={`${navLink} ${location.pathname.match(
+                      className={`nav-link ${location.pathname.match(
                         /^\/graphile-build(\/|$)/
                       )
                         ? "active"
@@ -93,9 +90,9 @@ export default withRouter(
                       Graphile Build
                     </Link>
                   </li>
-                  <li className={navbarItemClassName}>
+                  <li className="navbar-item">
                     <Link
-                      className={`${navLink} ${location.pathname.match(
+                      className={`nav-link ${location.pathname.match(
                         /^\/support(\/|$)/
                       )
                         ? "active"
@@ -105,7 +102,7 @@ export default withRouter(
                       Support
                     </Link>
                   </li>
-                  <li className={navbarItemClassName}>
+                  <li className="navbar-item ml-auto navbar-item-right">
                     <span className="searchbox-container">
                       <input
                         id="search-box"
@@ -115,9 +112,9 @@ export default withRouter(
                       <span className="fa fa-search searchbox-search" />
                     </span>
                   </li>
-                  <li className={navbarItemClassName}>
+                  <li className="navbar-item navbar-item-right">
                     <a
-                      className={`nav-github-link ${navLink}`}
+                      className="nav-link nav-github-link"
                       href="https://github.com/graphile/graphile-build"
                     >
                       <span className="fa fa-github" />{" "}

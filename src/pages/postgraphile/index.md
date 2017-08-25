@@ -7,16 +7,25 @@ title: PostGraphile - full GraphQL API server in an instant from PostgreSQL data
 <!-- **************************************** -->
 
 <header class='hero simple'>
-<div class='hero-block center'>
+<div class='container'>
+<div class='row'>
+<div class='col-xs-12'>
+<div class='hero-block'>
 
-# PostGraphile: instant GraphQL API for PostgreSQL database
+# PostGraphile
 
-<div class='flex'>
+<h3>
+  Instant GraphQL API for PostgreSQL database
+</h3>
+
 <br />
-<a class='strong-link' href='/postgraphile/introduction/'>Documentation <span class='fa fa-fw fa-long-arrow-right' /></a>
+<div class='flex'>
+<a class='button--solid-light' href='/postgraphile/introduction/'>Documentation <span class='fa fa-fw fa-long-arrow-right' /></a>
 </div>
 
-
+</div>
+</div>
+</div>
 </div>
 </header>
 
@@ -27,8 +36,8 @@ title: PostGraphile - full GraphQL API server in an instant from PostgreSQL data
 <section>
 <div class='container center'>
 
-<div class='flex justify-center'>
-<div class='text-center col-xs-12'>
+<div class='row'>
+<div class='col-xs-12'>
 <div class='hero-block'>
 
 ## Try it now!
@@ -41,7 +50,7 @@ database schema.
 </div>
 
 
-<div class='flex justify-center'>
+<div class='row'>
 <div class='text-center col-xs-12 col-md-9 col-lg-7'>
 
 ```js
@@ -126,7 +135,7 @@ over your API.
 </div>
 
 <div class='row'>
-<div class='col-lg-6 col-xs-12'>
+<div class='col-lg-6 col-md-9 col-xs-12'>
 
 ##### Build your schema with plugins
 ```js
@@ -144,7 +153,7 @@ type Person {
 ```
 
 </div><!-- /col-6 -->
-<div class='col-lg-6 col-xs-12'>
+<div class='col-lg-6 col-md-9 col-xs-12'>
 
 ##### Transform your schema with ease
 ```js
@@ -270,9 +279,9 @@ authorisation which also works great with CORS.
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
-<div class='flex justify-center'>
+<div class='row'>
 <div class='text-center col-xs-12'>
 <div class='hero-block'>
 
@@ -283,7 +292,7 @@ authorisation which also works great with CORS.
 </div>
 
 
-<div class='flex justify-center'>
+<div class='row'>
 <div class='text-center col-xs-12 col-md-9 col-lg-7'>
 
 ```js
@@ -295,8 +304,10 @@ postgraphile -c postgres://user:pass@host/dbname --schema schema_name
 </div>
 
 <br />
-<div class='flex'>
+<div class='row'>
+<div class='text-center col-xs-12'>
 <a class='strong-link' href='/postgraphile/introduction/'>Get started <span class='fa fa-fw fa-long-arrow-right' /></a>
+</div>
 
 </div>
 
@@ -308,7 +319,7 @@ postgraphile -c postgres://user:pass@host/dbname --schema schema_name
 <section class='mailinglist'>
 <div class='container'>
 
-<div class='flex justify-center'>
+<div class='flex'>
 <div class='col-xs-12'>
 <div class='hero-block center'>
 
@@ -318,7 +329,7 @@ postgraphile -c postgres://user:pass@host/dbname --schema schema_name
 </div>
 </div>
 
-<div class='flex justify-center'>
+<div class='flex'>
 <div class='col-xs-12 center'>
 <div class='hero-block'>
 

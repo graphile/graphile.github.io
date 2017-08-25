@@ -7,19 +7,19 @@ title: Extensible GraphQL APIs through Plugins
 <!-- **************************************** -->
 
 <header class='hero simple'>
-<div class='hero-block center'>
+<div class='hero-block container center'>
 
 # Graphile Build
 
-<h2 class="measure">
+<h3 class="measure">
   A library for constructing
   <br />
   high-performance pluggable GraphQL APIs
 </h2>
+<br />
 
 <div class='flex'>
-<br />
-<a class='strong-link' href='/graphile-build/getting-started/'>Documentation <span class='fa fa-fw fa-long-arrow-right' /></a>
+<a class='button--solid-light' href='/graphile-build/getting-started/'>Documentation <span class='fa fa-fw fa-long-arrow-right' /></a>
 </div>
 
 </div>
@@ -46,7 +46,8 @@ advanced look-ahead features.
 </div>
 
 <div class='row'>
-<div class='col-lg-6 col-xs-12'>
+<div class='col-lg-6 col-md-9 col-xs-12'>
+
 
 ##### Build your schema with plugins
 ```js
@@ -64,7 +65,8 @@ type Person {
 ```
 
 </div>
-<div class='col-lg-6 col-xs-12'>
+<div class='col-lg-6 col-md-9 col-xs-12'>
+
 
 ##### Transform your schema with ease
 ```js
@@ -173,7 +175,7 @@ Facebook then adding hooks is fairly straightforward:
 </div>
 
 <div class='row'>
-<div class='col-xs-12 col-lg-6'>
+<div class='col-lg-6 col-md-9 col-xs-12'>
 
 ##### `graphql`
 
@@ -186,7 +188,7 @@ const MyType =
 ```
 
 </div><!-- /col-6 -->
-<div class='col-xs-12 col-lg-6'>
+<div class='col-lg-6 col-md-9 col-xs-12'>
 
 ##### `graphile-build`
 
@@ -262,8 +264,8 @@ replace the out-of-date one - no need to restart your server!
 <section>
 <div class='container center'>
 
-<div class='flex justify-center'>
-<div class='text-center col-xs-12'>
+<div class='row'>
+<div class='col-xs-12'>
 <div class='hero-block'>
 
 ## Quick to start
@@ -272,7 +274,7 @@ replace the out-of-date one - no need to restart your server!
 </div>
 </div>
 
-<div class='flex justify-center'>
+<div class='row'>
 <div class='text-center col-xs-12 col-md-9 col-lg-7'>
 
 ```js
@@ -291,8 +293,11 @@ main();
 </div>
 
 <br />
-<div class='flex'>
+
+<div class='row'>
+<div class='text-center col-xs-12 col-md-9 col-lg-7'>
 <a class='strong-link' href='/graphile-build/getting-started/'>Get started <span class='fa fa-fw fa-long-arrow-right' /></a>
+</div>
 </div>
 
 </div>
@@ -302,7 +307,7 @@ main();
 <section class='mailinglist'>
 <div class='container'>
 
-<div class='flex justify-center'>
+<div class='row'>
 <div class='col-xs-12'>
 <div class='hero-block center'>
 
@@ -312,7 +317,8 @@ main();
 </div>
 </div>
 
-<div class='flex justify-center'>
+
+<div class='row'>
 <div class='col-xs-12 center'>
 <div class='hero-block'>
 
