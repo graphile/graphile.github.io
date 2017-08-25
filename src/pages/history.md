@@ -1,5 +1,5 @@
 ---
-layout: marketing
+layout: page
 path: /history/
 title: History
 ---
