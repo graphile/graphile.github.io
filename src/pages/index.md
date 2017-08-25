@@ -44,7 +44,7 @@ high-performance secure GraphQL API server that adheres to best practices.
 </div>
 
 <div class='row'>
-<div class='col-lg-6 mb3 col-xs-12 tc-xs tr-lg'>
+<div class='col-lg-6 mb3 col-xs-12'>
 
 ##### Just concentrate on your database
 ```sql
@@ -56,7 +56,7 @@ ALTER TABLE superheroes ENABLE ROW LEVEL SECURITY;
 ```
 
 </div><!-- /col-6 -->
-<div class='col-lg-6 mb3 col-xs-12 tl-lg tc-xs'>
+<div class='col-lg-6 mb3 col-xs-12'>
 
 ##### Run a fully-fledged GraphQL API in one command
 ```bash
@@ -71,7 +71,7 @@ postgraphile
 </div>
 
 <br />
-<div class='flex justify-center'>
+<div class='flex'>
 <a class='strong-link' href='/postgraphile/'>More about PostGraphile <span class='fa fa-fw fa-long-arrow-right' /></a>
 </div>
 
@@ -103,7 +103,7 @@ and use community-built plugins to increase developer productivity.
 </div>
 
 <div class='row'>
-<div class='col-xs-12 col-lg-6 tr-lg tc-xs'>
+<div class='col-xs-12 col-lg-6'>
 
 ##### `graphql`
 
@@ -116,7 +116,7 @@ const MyType =
 ```
 
 </div>
-<div class='col-xs-12 col-lg-6 tl-lg tc-xs'>
+<div class='col-xs-12 col-lg-6'>
 
 ##### `graphile-build`
 
@@ -132,7 +132,7 @@ const MyType =
 </div>
 
 <br />
-<div class='flex justify-center'>
+<div class='flex'>
 <a class='strong-link' href='/postgraphile/'>More about Graphile Build <span class='fa fa-fw fa-long-arrow-right' /></a>
 </div>
 

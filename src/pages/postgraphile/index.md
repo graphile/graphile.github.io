@@ -11,7 +11,7 @@ title: PostGraphile - full GraphQL API server in an instant from PostgreSQL data
 
 # PostGraphile: instant GraphQL API for PostgreSQL database
 
-<div class='flex justify-center'>
+<div class='flex'>
 <br />
 <a class='strong-link' href='/postgraphile/introduction/'>Documentation <span class='fa fa-fw fa-long-arrow-right' /></a>
 </div>
@@ -295,7 +295,7 @@ postgraphile -c postgres://user:pass@host/dbname --schema schema_name
 </div>
 
 <br />
-<div class='flex justify-center'>
+<div class='flex'>
 <a class='strong-link' href='/postgraphile/introduction/'>Get started <span class='fa fa-fw fa-long-arrow-right' /></a>
 
 </div>

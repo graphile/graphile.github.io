@@ -17,7 +17,7 @@ title: Extensible GraphQL APIs through Plugins
   high-performance pluggable GraphQL APIs
 </h2>
 
-<div class='flex justify-center'>
+<div class='flex'>
 <br />
 <a class='strong-link' href='/graphile-build/getting-started/'>Documentation <span class='fa fa-fw fa-long-arrow-right' /></a>
 </div>
@@ -46,7 +46,7 @@ advanced look-ahead features.
 </div>
 
 <div class='row'>
-<div class='col-lg-6 col-xs-12 tr-lg tc-xs'>
+<div class='col-lg-6 col-xs-12'>
 
 ##### Build your schema with plugins
 ```js
@@ -64,7 +64,7 @@ type Person {
 ```
 
 </div>
-<div class='col-lg-6 col-xs-12 tl-lg tc-xs'>
+<div class='col-lg-6 col-xs-12'>
 
 ##### Transform your schema with ease
 ```js
@@ -85,7 +85,7 @@ type Person {
 </div>
 
 <br />
-<div class='flex justify-center'>
+<div class='flex'>
 <a class='strong-link' href='/graphile-build/getting-started/'>Get started <span class='fa fa-fw fa-long-arrow-right' /></a>
 
 </div>
@@ -173,7 +173,7 @@ Facebook then adding hooks is fairly straightforward:
 </div>
 
 <div class='row'>
-<div class='col-xs-12 col-lg-6 tr-lg tc-xs'>
+<div class='col-xs-12 col-lg-6'>
 
 ##### `graphql`
 
@@ -186,7 +186,7 @@ const MyType =
 ```
 
 </div><!-- /col-6 -->
-<div class='col-xs-12 col-lg-6 tl-lg tc-xs'>
+<div class='col-xs-12 col-lg-6'>
 
 ##### `graphile-build`
 
@@ -291,7 +291,7 @@ main();
 </div>
 
 <br />
-<div class='flex justify-center'>
+<div class='flex'>
 <a class='strong-link' href='/graphile-build/getting-started/'>Get started <span class='fa fa-fw fa-long-arrow-right' /></a>
 </div>
 
