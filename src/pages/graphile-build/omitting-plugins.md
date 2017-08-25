@@ -6,10 +6,12 @@ title: Omitting Plugins
 
 ## Omitting Plugins
 
+<p class="intro">
 Whilst `graphile-build` and `graphile-build-pg` come with a lot of useful
 plugins enabled by default, you might not want all of them. It's easy to
 remove one though - simply omit it from the list of plugins you pass to
-`buildSchema`, for example:
+`buildSchema`. Here's some examples:
+</p>
 
 ### Building the basic Schema without the Node interface
 

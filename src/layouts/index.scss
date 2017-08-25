@@ -2,12 +2,13 @@
 @import "./navbar.scss";
 
 $graphileRed: #E44336;
+$backgroundImage: "/images/delaunay.png";
 
 // ----------------------------------------
 // Globals
 
 body {
-  //@extend .debug-grid;
+  @extend .debug-grid;
   font-family: "Open Sans", Verdana, Arial, Helvetica, sans-serif;
   font-weight: normal;
 }
@@ -20,27 +21,30 @@ h5,
 h6 {
   @extend .helvetica;
   @extend .lh-title;
-  @extend .mt4;
+  @extend .mt3;
   @extend .measure;
-  font-weight: bold;
-
-  &:first-child {
-    @extend .mt0;
-  }
+  @extend .fw6;
 }
 
-h1,
-h2 {
+h1 {
   @extend .mb5;
 }
 
+h2,
 h3,
 h4,
 h5,
 h6 {
-  @extend .mb4;
+  @extend .mb3;
 }
 
+section {
+  h1,
+  h2,
+  h3 {
+    //@extend .measure;
+  }
+}
 
 h1 { @extend .f1; }
 h2 { @extend .f2; }
@@ -57,14 +61,44 @@ p {
   @extend .mt4;
 }
 
-.page-content ul {
-  @extend .pl4;
+.page-content {
+  section {
+    @extend .bg-white;
+    @extend .pt6;
+    @extend .pb6;
+  }
+
+  ul {
+    @extend .pl0;
+  }
 }
 
-.page-content li {
+.page-content li,
+footer li {
   @extend .lh-copy;
   @extend .mb1;
   @extend .measure
+}
+
+.page-content a,
+footer a {
+  // @extend .dark-pink;
+  color: $graphileRed;
+  // @extend .dim;
+  // @extend .link;
+  @extend .no-underline;
+  @extend .underline-hover;
+}
+
+.intro {
+  @extend .mb5;
+  @extend .avenir;
+  @extend .f4;
+  @extend .i;
+}
+
+.gatsby-resp-image-wrapper[style] {
+  z-index: 0 !important;
 }
 
 // ----------------------------------------
@@ -76,6 +110,10 @@ p {
   // @extend .pl3;
   // @extend .pr3;
   //margin: 0 auto;
+  // text-align: center;
+  @extend .flex;
+  // @extend .items-center;
+  @extend .flex-column;
 
   .title {
     @extend .ma0;
@@ -86,15 +124,15 @@ p {
   }
 }
 
-.page-content {
-  padding: 10rem 0 0;
-
+.sidebar.sidebar {
   section {
-    @extend .bg-white;
-    @extend .pt5;
-    @extend .pb5;
+    @extend .pt0;
+    @extend .pb0;
   }
+}
 
+
+.template-marketing {
   section:nth-child(even):not(.no-highlight) {
     @extend .bg-near-white;
   }
@@ -115,8 +153,9 @@ p {
 .template-marketing {
   .hero {
     background-color: $graphileRed;
-    background-image: radial-gradient(ellipse at center, RGBA(121,0,0,0.2) 0%, RGBA(50,0,0,0.4) 100%), url(/images/delauney.png);
-    background-size: cover, cover;
+    background-image: radial-gradient(ellipse at center, RGBA(121,0,0,0.2) 0%, RGBA(50,0,0,0.4) 100%), url($backgroundImage);
+    //background-image: radial-gradient(ellipse at center, RGBA(255,255,255,0.8) 0%, RGBA(255,255,255,0.8) 100%), url($backgroundImage);
+    //background-image: url($backgroundImage);
     @extend .cover;
     @extend .white;
     @extend .flex;
@@ -129,7 +168,7 @@ p {
       padding-top: 5vh;
     }
 
-    h1, h2 { margin: 0; }
+    h2 { margin: 0; }
 
     // .container {
     //   @extend .ml0;
@@ -142,6 +181,14 @@ p {
   }
 }
 
+.strong-link {
+  @extend .dib;
+  @extend .link;
+  @extend .dark-pink;
+  @extend .underline-hover;
+  @extend .b;
+  @extend .ttu;
+}
 
 // ----------------------------------------
 // Code
@@ -178,6 +225,10 @@ code {
   margin-right: -1em;
   padding-left: 0.75em;
   padding-right: 1em;
+}
+
+.gatsby-highlight {
+  @extend .mb4;
 }
 
 p,
@@ -240,16 +291,6 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
 
 // ----------------------------------------
 
-footer a,
-.page-content a {
-  @extend .fw6;
-  @extend .dark-pink;
-  // @extend .dim;
-  // @extend .link;
-  @extend .no-underline;
-  @extend .underline-hover;
-}
-
 
 .LEGACY {
 
@@ -257,9 +298,6 @@ footer a,
   // ----------------------------------------
   // Code
 
-  .gatsby-highlight {
-    margin-bottom: 1.45rem;
-  }
 
   // ----------------------------------------
   // Text
@@ -352,80 +390,12 @@ footer a,
     margin-left: auto;
   }
 
-  .space-between {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .hero-block {
-  }
-
-  .center {
-    text-align: center;
-  }
-
-  .right {
-    text-align: right;
-  }
-
-  .italic {
-    font-style: italic;
-  }
-
-
-  footer {
-    padding: 1rem 0;
-    background-color: #F2F2F2;
-    text-align: left;
-    font-size: 0.8em;
-    ul {
-      padding: 0;
-      margin: 0;
-    }
-    li {
-      list-style: none;
-      padding: 0.2em 0;
-      margin: 0;
-    }
-    h6 {
-      margin-bottom: 1em;
-    }
-    .row.copyright {
-      padding: 3em 0 2em;
-      opacity: 0.75;
-    }
-  }
-
-
-  .page-list {
-    list-style: none;
-    padding-left: 0;
-    margin-left: 0;
-    font-size: 0.85em;
-  }
-
-  .template-marketing {
-    .col-fa {
-      font-size: 800%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  }
-
-  .page-content > section:first-child {
-    padding-top: 2rem;
-  }
-
   .page-content .container,
   .navbar .container {
     max-width: 1400px;
     margin: 0 auto;
   }
 
-  .gatsby-resp-image-wrapper[style] {
-    z-index: 0 !important;
-  }
 
   .justify-content-center {
     justify-content: center;

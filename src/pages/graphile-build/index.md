@@ -9,11 +9,17 @@ title: Extensible GraphQL APIs through Plugins
 <header class='hero simple'>
 <div class='hero-block center'>
 
-# Graphile Build: a library for constructing high-performance pluggable GraphQL APIs
+# Graphile Build
 
-<div class='d-flex justify-content-center'>
+<h2 class="measure">
+  A library for constructing
+  <br />
+  high-performance pluggable GraphQL APIs
+</h2>
+
+<div class='flex justify-center'>
 <br />
-<a class='button button--outline-white' href='/graphile-build/getting-started/'>Documentation &rarr;</a>
+<a class='strong-link' href='/graphile-build/getting-started/'>Documentation <span class='fa fa-fw fa-long-arrow-right' /></a>
 </div>
 
 </div>
@@ -40,7 +46,7 @@ advanced look-ahead features.
 </div>
 
 <div class='row'>
-<div class='col-lg-6 col-xs-12'>
+<div class='col-lg-6 col-xs-12 tr-lg tc-xs'>
 
 ##### Build your schema with plugins
 ```js
@@ -58,7 +64,7 @@ type Person {
 ```
 
 </div>
-<div class='col-lg-6 col-xs-12'>
+<div class='col-lg-6 col-xs-12 tl-lg tc-xs'>
 
 ##### Transform your schema with ease
 ```js
@@ -79,8 +85,9 @@ type Person {
 </div>
 
 <br />
-<div class='d-flex justify-content-center'>
-<a class='button button--outline' href='/graphile-build/getting-started/'>Get started &rarr;</a>
+<div class='flex justify-center'>
+<a class='strong-link' href='/graphile-build/getting-started/'>Get started <span class='fa fa-fw fa-long-arrow-right' /></a>
+
 </div>
 
 </div>
@@ -166,9 +173,9 @@ Facebook then adding hooks is fairly straightforward:
 </div>
 
 <div class='row'>
-<div class='col-xs-12 col-lg-6'>
+<div class='col-xs-12 col-lg-6 tr-lg tc-xs'>
 
-##### `graphql`:
+##### `graphql`
 
 ```js{2}
 const MyType =
@@ -179,9 +186,9 @@ const MyType =
 ```
 
 </div><!-- /col-6 -->
-<div class='col-xs-12 col-lg-6'>
+<div class='col-xs-12 col-lg-6 tl-lg tc-xs'>
 
-##### `graphile-build`:
+##### `graphile-build`
 
 ```js{2}
 const MyType =
@@ -255,7 +262,7 @@ replace the out-of-date one - no need to restart your server!
 <section>
 <div class='container center'>
 
-<div class='row justify-content-center'>
+<div class='flex justify-center'>
 <div class='text-center col-xs-12'>
 <div class='hero-block'>
 
@@ -265,7 +272,7 @@ replace the out-of-date one - no need to restart your server!
 </div>
 </div>
 
-<div class='row justify-content-center'>
+<div class='flex justify-center'>
 <div class='text-center col-xs-12 col-md-9 col-lg-7'>
 
 ```js
@@ -284,8 +291,8 @@ main();
 </div>
 
 <br />
-<div class='d-flex justify-content-center'>
-<a class='button button--outline' href='/graphile-build/getting-started/'>Get started &rarr;</a>
+<div class='flex justify-center'>
+<a class='strong-link' href='/graphile-build/getting-started/'>Get started <span class='fa fa-fw fa-long-arrow-right' /></a>
 </div>
 
 </div>
@@ -295,7 +302,7 @@ main();
 <section class='mailinglist'>
 <div class='container'>
 
-<div class='row justify-content-center'>
+<div class='flex justify-center'>
 <div class='col-xs-12'>
 <div class='hero-block center'>
 
@@ -305,7 +312,7 @@ main();
 </div>
 </div>
 
-<div class='row justify-content-center'>
+<div class='flex justify-center'>
 <div class='col-xs-12 center'>
 <div class='hero-block'>
 

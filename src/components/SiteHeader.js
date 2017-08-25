@@ -35,11 +35,11 @@ export default withRouter(
     render() {
       const { location } = this.props;
       const navbarItemClassName =
-        "navbar-item items-center flex f5 fw6 hover-blue link black-70 mr2 mr3-m mr4-l dib";
-      const navLink = "nav-link white no-underline";
+        "navbar-item items-center flex f5 hover-blue link black-70 mr2 mr3-m mr4-l dib";
+      const navLink = "nav-link no-underline";
       return (
         <header className="content">
-          <nav className="navbar bg-dark-gray white items-center fixed w-100 f6 pa3 ph5-ns z-9999">
+          <nav className="navbar bg-white items-center w-100 f6 pa3 ph5-ns z-9999">
             <div className="container">
               <input
                 className="navbar-toggler input-reset"

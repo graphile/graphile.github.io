@@ -99,7 +99,7 @@ id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validat
 <section>
 <div class='container'>
 
-<div class='row justify-content-center'>
+<div class='flex justify-center'>
 <div class='col-xs-12'>
 <div class='hero-block center'>
 

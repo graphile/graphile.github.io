@@ -6,8 +6,10 @@ title: Plugins
 
 # Plugins
 
+<p class="intro">
 Almost everything in Graphile-Build is accomplished through plugins. You can
 add plugins, remove plugins, even replace the entire stack if you so desire.
+</p>
 
 ## Loading Plugins
 

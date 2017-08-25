@@ -11,9 +11,9 @@ title: PostGraphile - full GraphQL API server in an instant from PostgreSQL data
 
 # PostGraphile: instant GraphQL API for PostgreSQL database
 
-<div class='d-flex justify-content-center'>
+<div class='flex justify-center'>
 <br />
-<a class='button button--outline-white' href='/postgraphile/introduction/'>Documentation &rarr;</a>
+<a class='strong-link' href='/postgraphile/introduction/'>Documentation <span class='fa fa-fw fa-long-arrow-right' /></a>
 </div>
 
 
@@ -27,7 +27,7 @@ title: PostGraphile - full GraphQL API server in an instant from PostgreSQL data
 <section>
 <div class='container center'>
 
-<div class='row justify-content-center'>
+<div class='flex justify-center'>
 <div class='text-center col-xs-12'>
 <div class='hero-block'>
 
@@ -41,7 +41,7 @@ database schema.
 </div>
 
 
-<div class='row justify-content-center'>
+<div class='flex justify-center'>
 <div class='text-center col-xs-12 col-md-9 col-lg-7'>
 
 ```js
@@ -272,7 +272,7 @@ authorisation which also works great with CORS.
 <section>
 <div class='container center'>
 
-<div class='row justify-content-center'>
+<div class='flex justify-center'>
 <div class='text-center col-xs-12'>
 <div class='hero-block'>
 
@@ -283,7 +283,7 @@ authorisation which also works great with CORS.
 </div>
 
 
-<div class='row justify-content-center'>
+<div class='flex justify-center'>
 <div class='text-center col-xs-12 col-md-9 col-lg-7'>
 
 ```js
@@ -295,8 +295,9 @@ postgraphile -c postgres://user:pass@host/dbname --schema schema_name
 </div>
 
 <br />
-<div class='d-flex justify-content-center'>
-<a class='button button--outline' href='/postgraphile/introduction/'>Get started &rarr;</a>
+<div class='flex justify-center'>
+<a class='strong-link' href='/postgraphile/introduction/'>Get started <span class='fa fa-fw fa-long-arrow-right' /></a>
+
 </div>
 
 </div>
@@ -307,7 +308,7 @@ postgraphile -c postgres://user:pass@host/dbname --schema schema_name
 <section class='mailinglist'>
 <div class='container'>
 
-<div class='row justify-content-center'>
+<div class='flex justify-center'>
 <div class='col-xs-12'>
 <div class='hero-block center'>
 
@@ -317,7 +318,7 @@ postgraphile -c postgres://user:pass@host/dbname --schema schema_name
 </div>
 </div>
 
-<div class='row justify-content-center'>
+<div class='flex justify-center'>
 <div class='col-xs-12 center'>
 <div class='hero-block'>
 

@@ -10,9 +10,7 @@
 
 .navbar-item {
   .nav-link {
-    color: #ddd;
     &.active {
-      color: white;
       font-weight: bold;
     }
   }
@@ -31,12 +29,11 @@ $transitionTime: 0.3s;
 $rotation: 45deg;
 $translateY: ($heightIcon / 2);
 $translateX: 0;
-$lineColor: white;
+$lineColor: black;
 
 .navbar-toggler {
   background: transparent;
   border: 0;
-  color: white;
   height: $toggleSize;
   left: 1rem;
   opacity: 0.5;

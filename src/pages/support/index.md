@@ -63,9 +63,9 @@ See [FAQs](/support/#faqs) below for more information
 <section>
 <div class='container'>
 
-### FAQs
-
----
+<div class='f5 ttu fw6 mt0 mb3 bb pb2'>
+FAQs
+</div>
 
 <div class='row'>
 <div class='col-xs-12 col-md-6'>

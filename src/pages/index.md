@@ -12,9 +12,9 @@ title: Tools to build extensible and performant GraphQL APIs
 <div class='col-xs-12'>
 <div class='hero-block'>
 
-# A suite of tools for building
+## Tools for building performant
 
-# performant pluggable GraphQL APIs.
+## pluggable GraphQL APIs.
 
 </div>
 </div>
@@ -44,7 +44,7 @@ high-performance secure GraphQL API server that adheres to best practices.
 </div>
 
 <div class='row'>
-<div class='col-lg-6 mb3 col-xs-12'>
+<div class='col-lg-6 mb3 col-xs-12 tc-xs tr-lg'>
 
 ##### Just concentrate on your database
 ```sql
@@ -56,7 +56,7 @@ ALTER TABLE superheroes ENABLE ROW LEVEL SECURITY;
 ```
 
 </div><!-- /col-6 -->
-<div class='col-lg-6 mb3 col-xs-12'>
+<div class='col-lg-6 mb3 col-xs-12 tl-lg tc-xs'>
 
 ##### Run a fully-fledged GraphQL API in one command
 ```bash
@@ -71,8 +71,8 @@ postgraphile
 </div>
 
 <br />
-<div class='d-flex justify-content-center'>
-<a class='button button--outline' href='/postgraphile/'>More about PostGraphile &rarr;</a>
+<div class='flex justify-center'>
+<a class='strong-link' href='/postgraphile/'>More about PostGraphile <span class='fa fa-fw fa-long-arrow-right' /></a>
 </div>
 
 
@@ -103,9 +103,9 @@ and use community-built plugins to increase developer productivity.
 </div>
 
 <div class='row'>
-<div class='col-xs-12 col-lg-6'>
+<div class='col-xs-12 col-lg-6 tr-lg tc-xs'>
 
-##### `graphql`:
+##### `graphql`
 
 ```js{2}
 const MyType =
@@ -116,9 +116,9 @@ const MyType =
 ```
 
 </div>
-<div class='col-xs-12 col-lg-6'>
+<div class='col-xs-12 col-lg-6 tl-lg tc-xs'>
 
-##### `graphile-build`:
+##### `graphile-build`
 
 ```js{2}
 const MyType =
@@ -132,8 +132,8 @@ const MyType =
 </div>
 
 <br />
-<div class='d-flex justify-content-center'>
-<a class='button button--outline' href='/postgraphile/'>More about Graphile Build &rarr;</a>
+<div class='flex justify-center'>
+<a class='strong-link' href='/postgraphile/'>More about Graphile Build <span class='fa fa-fw fa-long-arrow-right' /></a>
 </div>
 
 </div>
@@ -177,7 +177,7 @@ Build plugins.
 <section class='mailinglist'>
 <div class='container'>
 
-<div class='row justify-content-center'>
+<div class='flex justify-center'>
 <div class='col-xs-12'>
 <div class='hero-block center'>
 
@@ -187,7 +187,7 @@ Build plugins.
 </div>
 </div>
 
-<div class='row justify-content-center'>
+<div class='flex justify-center'>
 <div class='col-xs-12 center'>
 <div class='hero-block'>
 
