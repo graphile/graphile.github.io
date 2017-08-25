@@ -70,7 +70,7 @@ const Page = ({
         <section>
           <div className="container">
             <div className="row between-xs">
-              <aside className="sidebar col-xs-12 col-md-3 last-xs">
+              <aside className="sidebar col-xs-12 col-md-3 last-xs mt3">
                 {navSections.map(({ id, title }, idx) =>
                   <section key={idx}>
                     <h4 className="f6 ttu fw6 mt0 mb3 bb pb2">
