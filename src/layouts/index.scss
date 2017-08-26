@@ -43,12 +43,6 @@ h6 {
 
 section {
   position: relative;
-
-  h1,
-  h2,
-  h3 {
-    //@extend .measure;
-  }
 }
 
 h1 {
@@ -114,10 +108,7 @@ footer li {
 }
 
 a {
-  // @extend .dark-pink;
-  color: $graphileRed;
-  // @extend .dim;
-  // @extend .link;
+  @extend .graphile-red;
   @extend .no-underline;
   @extend .underline-hover;
 }
@@ -165,7 +156,6 @@ a {
   $backgroundColor: #f4f4f4;
 
   position: relative;
-  //background: linear-gradient(85deg, #ce2323 0%, #7d2424 100%);
   background: linear-gradient(85deg, #a51b1b 0%, #7d2424 100%);
 
   &:after {
@@ -227,9 +217,6 @@ a {
 
 .template-marketing {
   .hero {
-    // background-image: radial-gradient(ellipse at center, RGBA(121,0,0,0.2) 0%, RGBA(50,0,0,0.4) 100%), url($backgroundImage);
-    //background-image: radial-gradient(ellipse at center, RGBA(255,255,255,0.8) 0%, RGBA(255,255,255,0.8) 100%), url($backgroundImage);
-    //background-image: url($backgroundImage);
     @extend .cover;
     @extend .white;
     @extend .flex;
@@ -244,11 +231,6 @@ a {
 
     h2 { margin: 0; }
 
-    // .container {
-    //   @extend .ml0;
-    //   @extend .mr0;
-    // }
-
     .container {
       @extend .w-100;
     }
@@ -258,8 +240,7 @@ a {
 a.strong-link {
   @extend .dib;
   @extend .link;
-  //@extend .darkpink;
-  color: $graphileRed;
+  @extend .graphile-red;
   @extend .underline-hover;
   @extend .b;
   @extend .ttu;
@@ -268,11 +249,17 @@ a.strong-link {
 a.strong-link--white {
   @extend .dib;
   @extend .link;
-  //@extend .darkpink;
   @extend .white;
   @extend .underline-hover;
   @extend .b;
   @extend .ttu;
+}
+
+blockquote {
+  @extend .gray;
+  @extend .ml0;
+  @extend .pl3;
+  border-left: 0.3rem solid rgba(0, 0, 0, 0.1);
 }
 
 // ----------------------------------------
@@ -289,7 +276,7 @@ pre[class*="language-"] {
   @extend .br1;
   @extend .f5-ns;
   @extend .f6;
-  line-height: 1.5;
+  @extend .lh-copy;
 }
 
 .code,
@@ -329,7 +316,6 @@ ol {
 }
 
 pre code {
-  // @extend .f7;
   font-variant: none;
   background: none;
   border-radius: initial;
@@ -345,9 +331,6 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
 }
 
 // ----------------------------------------
-
-
-// ----------------------------------------
 // Buttons
 
 .button-common {
@@ -360,8 +343,6 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
   @extend .mb2;
   @extend .pv2;
   @extend .ph3;
-
-  //@extend .darkpink;
   @extend .underline-hover;
   @extend .b;
   @extend .ttu;
@@ -377,7 +358,7 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
   @extend .button-common;
   @extend .ba;
   @extend .bw1;
-  color: $graphileRed;
+  @extend .graphile-red;
 }
 
 a.button--outline-light {
@@ -393,8 +374,8 @@ a.button--solid-light {
   @extend .bg-white;
 }
 
-
 // ----------------------------------------
+// Misc media queries
 
 @media screen and (max-width: 30em) {
   .template-marketing {
@@ -416,52 +397,13 @@ a.button--solid-light {
   }
 }
 
-
-
-
-
-
 .LEGACY {
-
-
-  // ----------------------------------------
-  // Code
-
-
   .signup-field,
   .button {
     margin-bottom: 1rem;
     padding: 0.5rem;
     max-width: 24rem;
     width: 100%;
-  }
-
-  .button {
-    background: $graphileRed;
-    border-color: $graphileRed;
-    color: white;
-    cursor: pointer;
-
-    &:hover,
-    &:focus {
-      background: darken($graphileRed, 20);
-      border-color: darken($graphileRed, 20);
-      color: white;
-    }
-  }
-
-  .button--outline-white {
-    background: transparent;
-    color: white;
-    border-color: white;
-
-    &:hover,
-    &:focus {
-      background: transparent;
-      border-color: white;
-      color: white;
-      opacity: 0.7;
-    }
   }
 
   .signup-field {
@@ -473,16 +415,4 @@ a.button--solid-light {
       border-color: $graphileRed;
     }
   }
-
-  // ----------------------------------------
-  // Layout
-
-  blockquote {
-    margin-left: 0;
-    padding-left: 1.15rem;
-    border-left: 0.3rem solid rgba(0, 0, 0, 0.1);
-    color: #777;
-  }
-
-
 }
