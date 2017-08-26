@@ -28,7 +28,7 @@ h6 {
 }
 
 h1 {
-  @extend .mb5-ns;
+  @extend .mb4-ns;
   @extend .mb3;
 }
 
@@ -39,6 +39,15 @@ h5,
 h6 {
   @extend .mb3-ns;
   @extend .mb2;
+}
+
+.hero {
+  h2,
+  h3,
+  h4,
+  h5 {
+    @extend .fw4;
+  }
 }
 
 section {
@@ -225,8 +234,8 @@ a {
     padding-top: 10vh;
 
     &.simple {
-      padding-bottom: 8vh;
-      padding-top: 8vh;
+      padding-bottom: 10vh;
+      padding-top: 10vh;
     }
 
     h2 { margin: 0; }
