@@ -3337,4 +3337,14 @@ code, .code { font-family: Consolas, monaco, monospace; }
 // ----------------------------------------
 // Custom
 
-.graphile-red { color: #e44336; }
+$graphileRed: #E44336;
+
+.graphile-red { color: $graphileRed; }
+.bg-graphile-red { background-color: $graphileRed }
+.b--graphile-red { border-color: $graphileRed }
+.b-focus--graphile-red:focus {
+  border-color: $graphileRed;
+  outline: none;
+  box-shadow: 0px 0px 3px 1px rgba(228, 67, 54, 0.45);
+};
+.no-underline-hover:hover { text-decoration: none; }
