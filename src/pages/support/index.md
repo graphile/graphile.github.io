@@ -29,7 +29,7 @@ title: Support for PostGraphile and Graphile Build from the maintainer
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 <div class='row'>
 
 <div class='col-xs-12 col-md-6'>

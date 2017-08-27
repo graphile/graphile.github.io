@@ -30,7 +30,7 @@ title: Tools to build extensible and performant GraphQL APIs
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
 <div class='row'>
 <div class='col-xs-12'>
@@ -87,7 +87,7 @@ postgraphile
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
 <div class='row'>
 <div class='col-xs-12'>
@@ -146,7 +146,7 @@ const MyType =
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
 <div class='row'>
 <div class='col-xs-12'>
@@ -183,7 +183,7 @@ Build plugins.
 
 <div class='row'>
 <div class='col-xs-12'>
-<div class='hero-block center'>
+<div class='hero-block'>
 
 ## Questions, comments or feedback? [info@graphile.org](mailto:info@graphile.org?subject=Graphile%20question/comment/feedback:)
 
@@ -192,7 +192,7 @@ Build plugins.
 </div>
 
 <div class='row'>
-<div class='col-xs-12 center'>
+<div class='col-xs-12'>
 <div class='hero-block'>
 
 <div>

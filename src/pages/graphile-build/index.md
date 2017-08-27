@@ -7,7 +7,7 @@ title: Extensible GraphQL APIs through Plugins
 <!-- **************************************** -->
 
 <header class='hero simple'>
-<div class='hero-block container center'>
+<div class='hero-block container'>
 
 # Graphile Build
 
@@ -29,7 +29,7 @@ title: Extensible GraphQL APIs through Plugins
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
 <div class='row'>
 <div class='col-xs-12'>
@@ -98,7 +98,7 @@ type Person {
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
 <div class='row'>
 <div class='col-xs-12'>
@@ -126,7 +126,7 @@ latency.
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
 <div class='row'>
 <div class='col-xs-12'>
@@ -159,7 +159,7 @@ You can build plugins for anything that Node.js can communicate with.
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
 <div class='row'>
 <div class='col-xs-12'>
@@ -211,7 +211,7 @@ const MyType =
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
 <div class='row'>
 <div class='col-xs-12'>
@@ -236,7 +236,7 @@ implementation too).
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
 <div class='row'>
 <div class='col-xs-12'>
@@ -262,7 +262,7 @@ replace the out-of-date one - no need to restart your server!
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
 <div class='row'>
 <div class='col-xs-12'>
@@ -309,7 +309,7 @@ main();
 
 <div class='row'>
 <div class='col-xs-12'>
-<div class='hero-block center'>
+<div class='hero-block'>
 
 ## Questions, comments or feedback? [info@graphile.org](mailto:info@graphile.org?subject=Graphile%20question/comment/feedback:)
 
@@ -319,7 +319,7 @@ main();
 
 
 <div class='row'>
-<div class='col-xs-12 center'>
+<div class='col-xs-12'>
 <div class='hero-block'>
 
 <div>

@@ -34,7 +34,7 @@ title: PostGraphile - full GraphQL API server in an instant from PostgreSQL data
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
 <div class='row'>
 <div class='col-xs-12'>
@@ -67,7 +67,7 @@ postgraphile -c postgres://user:pass@host/dbname --schema schema_name
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
 <div class='row'>
 <div class='col-xs-12'>
@@ -89,7 +89,7 @@ query.
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
 <div class='row'>
 <div class='col-xs-12'>
@@ -112,7 +112,7 @@ automatically.
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
 <div class='row'>
 <div class='col-xs-12'>
@@ -181,7 +181,7 @@ type Person {
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
 <div class='row'>
 <div class='col-xs-12'>
@@ -205,7 +205,7 @@ schema - you only need to change the parts of your code that you wish to trigger
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
 <div class='row'>
 <div class='col-xs-12'>
@@ -225,7 +225,7 @@ schema - you only need to change the parts of your code that you wish to trigger
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
 <div class='row'>
 <div class='col-xs-12'>
@@ -249,7 +249,7 @@ to restart the server!
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
 <div class='row'>
 <div class='col-xs-12'>
@@ -321,7 +321,7 @@ postgraphile -c postgres://user:pass@host/dbname --schema schema_name
 
 <div class='flex'>
 <div class='col-xs-12'>
-<div class='hero-block center'>
+<div class='hero-block'>
 
 ## Questions, comments or feedback? [info@graphile.org](mailto:info@graphile.org?subject=Graphile%20question/comment/feedback:)
 
@@ -330,13 +330,13 @@ postgraphile -c postgres://user:pass@host/dbname --schema schema_name
 </div>
 
 <div class='flex'>
-<div class='col-xs-12 center'>
+<div class='col-xs-12'>
 <div class='hero-block'>
 
 <div>
 <form action="//graphile.us16.list-manage.com/subscribe/post?u=d103f710cf00a9273b55e8e9b&amp;id=c3a9eb5c4e" method="post"
 id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-  <div id="mc_embed_signup_scroll" class="center hero-block">
+  <div id="mc_embed_signup_scroll" class="hero-block">
     <p>Keep up to date on PostGraphile features/changes.
     Subscribe to our occasional announcements newsletter:</p>
     <div class="mc-field-group form-inline justify-content-center">

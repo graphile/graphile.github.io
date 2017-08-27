@@ -45,7 +45,7 @@ But version 4 is not the end of PostGraphile's history — there's lots more to 
 </div>
 
 <div class='row justify-content-center'>
-<div class='col-xs-12 center'>
+<div class='col-xs-12'>
 <div>
 
 ### <br />
@@ -53,7 +53,7 @@ But version 4 is not the end of PostGraphile's history — there's lots more to 
 <div>
 <form action="//graphile.us16.list-manage.com/subscribe/post?u=d103f710cf00a9273b55e8e9b&amp;id=c3a9eb5c4e" method="post"
 id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-  <div id="mc_embed_signup_scroll" class="center hero-block">
+  <div id="mc_embed_signup_scroll" class="hero-block">
     <p>Keep up to date on Graphile and PostGraphile features/changes.<br />
     Subscribe to our occasional announcements newsletter:</p>
     <div class="mc-field-group form-inline justify-content-center">
@@ -101,7 +101,7 @@ id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validat
 
 <div class='flex'>
 <div class='col-xs-12'>
-<div class='hero-block center'>
+<div class='hero-block'>
 
 ## Questions, comments or feedback? [info@graphile.org](mailto:info@graphile.org?subject=Graphile%20question/comment/feedback:)
 
