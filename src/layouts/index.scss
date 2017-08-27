@@ -230,12 +230,12 @@ a {
     @extend .white;
     @extend .flex;
     @extend .flex-column;
-    padding-bottom: 10vh;
-    padding-top: 10vh;
+    padding-bottom: 12vh;
+    padding-top: 12vh;
 
     &.simple {
-      padding-bottom: 10vh;
-      padding-top: 10vh;
+      padding-bottom: 12vh;
+      padding-top: 12vh;
     }
 
     h2 { margin: 0; }
@@ -357,17 +357,17 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
   @extend .ttu;
 }
 
-.button--solid {
-  @extend .button-common;
-  @extend .white;
-  background-color: $graphileRed;
-}
-
 .button--outline {
   @extend .button-common;
   @extend .ba;
   @extend .bw1;
   @extend .graphile-red;
+}
+
+.button--solid {
+  @extend .button-common;
+  @extend .white;
+  background-color: $graphileRed;
 }
 
 a.button--outline-light {

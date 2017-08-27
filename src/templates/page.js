@@ -94,25 +94,21 @@ const Page = ({
                   />
                   <br />
                   <br />
-                  <div className="col-xs-12">
+                  <div className="col-xs-12 mt3 mb5">
                     <div className="row between-xs">
                       <div className="col-xs-6">
                         {prev
-                          ? <Link
-                              className="btn btn-secondary btn-large"
-                              to={prev}
-                            >
-                              ← {prevText || "Previous"}
+                          ? <Link className="" to={prev}>
+                              <span className="fa fa-fw fa-long-arrow-left" />{" "}
+                              {prevText || "Previous"}
                             </Link>
                           : null}
                       </div>
-                      <div className="col-xs-6 right">
+                      <div className="col-xs-6 tr">
                         {next
-                          ? <Link
-                              className="btn btn-primary btn-large"
-                              to={next}
-                            >
-                              {nextText || "Next"} →
+                          ? <Link className="" to={next}>
+                              {nextText || "Next"}{" "}
+                              <span className="fa fa-fw fa-long-arrow-right" />
                             </Link>
                           : null}
                       </div>
