@@ -22,7 +22,6 @@ h6 {
   @extend .helvetica;
   @extend .lh-title;
   @extend .mt3;
-  @extend .mt3;
   @extend .measure;
   @extend .fw6;
 }
@@ -340,47 +339,66 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
 }
 
 // ----------------------------------------
-// Buttons
+// Inputs
 
 .button-common {
+  @extend .b;
+  @extend .ba;
+  @extend .br2;
+  @extend .bw1;
+  @extend .dib;
+  @extend .dim;
   @extend .f6-ns;
   @extend .f7;
+  @extend .input-reset;
   @extend .link;
-  @extend .dim;
-  @extend .br2;
-  @extend .dib;
   @extend .mb2;
-  @extend .pv2;
+  @extend .no-underline-hover;
   @extend .ph3;
-  @extend .underline-hover;
-  @extend .b;
+  @extend .pointer;
+  @extend .pv2;
   @extend .ttu;
 }
 
 .button--outline {
   @extend .button-common;
-  @extend .ba;
-  @extend .bw1;
+  @extend .b--graphile-red;
   @extend .graphile-red;
 }
 
 .button--solid {
   @extend .button-common;
-  @extend .white;
-  background-color: $graphileRed;
-}
-
-a.button--outline-light {
-  @extend .button-common;
-  @extend .ba;
-  @extend .bw1;
+  @extend .b--graphile-red;
+  @extend .bg-graphile-red;
   @extend .white;
 }
 
-a.button--solid-light {
+.button--outline-light {
   @extend .button-common;
+  @extend .white;
+}
+
+.button--solid-light {
   color: #9E1E1B;
+  @extend .button-common;
+  @extend .b--white;
   @extend .bg-white;
+}
+
+.input-text {
+  @extend .ba;
+  @extend .b-focus--graphile-red;
+  @extend .br2;
+  @extend .f6-ns;
+  @extend .f7;
+  @extend .input-reset;
+  @extend .ph3;
+  @extend .pv2;
+}
+
+.label--small {
+  @extend .f6;
+  @extend .fw6;
 }
 
 // ----------------------------------------
@@ -402,26 +420,6 @@ a.button--solid-light {
     section:after {
       border-width: $triHeightSm 100vw $triHeightSm 0;
       top: -1 * $triHeightSm;
-    }
-  }
-}
-
-.LEGACY {
-  .signup-field,
-  .button {
-    margin-bottom: 1rem;
-    padding: 0.5rem;
-    max-width: 24rem;
-    width: 100%;
-  }
-
-  .signup-field {
-    background: white;
-    border-color: #c9c9c9;
-    display: block;
-
-    &:focus {
-      border-color: $graphileRed;
     }
   }
 }
