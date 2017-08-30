@@ -298,7 +298,8 @@ authorisation which also works great with CORS.
 
 ```js
 npm install -g postgraphile
-postgraphile -c postgres://user:pass@host/dbname --schema schema_name
+postgraphile -c postgres://user:pass@host/dbname \
+  --schema schema_name
 ```
 
 </div>

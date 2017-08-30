@@ -52,10 +52,10 @@ title: Support for PostGraphile and Graphile Build from the maintainer
 
 <div class='col-xs-12 col-md-6'>
 
-## Professional Services and Support
+## Professional Services
 
 - Tweak Graphile to fit your needs
-- Custom features to a deadline
+- Professional support
 - Security and performance vetting
 - Team training / get started faster
 
@@ -110,12 +110,12 @@ that it'll take longer to fix.
 ### How quickly can I expect a response?
 
 Community support, offered via GitHub, can take anywhere from minutes to months
-to get a response. In rare cases there's never a response at all. I'm very
-grateful to the community for helping each other out, improving the
-documentation and all the other work they help with.
+for a response. I'm very grateful to the community for helping each other out,
+improving the documentation and all the other work they help with.
 
-For the professional services I aim to respond to all messages by the end of
-the next working day (UK calendar); often it will be much sooner.
+If you require help on a tighter deadline, or in greater depth, you should
+engage our professional services. I aim to respond to all messages by the end
+of the next working day (UK calendar); often it will be much sooner.
 
 </div>
 <div class='col-xs-12 col-md-6'>
