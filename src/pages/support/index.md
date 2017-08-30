@@ -64,7 +64,7 @@ $200 / hour or $1000 / day
 See [FAQs](/support/#faqs) below for more information
 
 
-<a class="button--outline" href="mailto:benjie@graphile.org?subject=Graphile%20Custom%20Work%20or%20Support">Email for details</a>
+Email us at <a href="mailto:info@graphile.org?subject=Graphile%20Custom%20Work%20or%20Support">info@graphile.org</a> for details.
 
 </div>
 
@@ -95,7 +95,7 @@ tracker](https://github.com/graphile/graphile-build/issues).
 
 ### There's a typo in...
 
-We ❤️  typo fixes - and it's the easiest way for you to make your mark on the
+We ❤️ <span>&nbsp;</span>typo fixes - and it's the easiest way for you to make your mark on the
 project!  If the typo is in this website; please open a PR to [the graphile.github.io
 repository](https://github.com/graphile/graphile.github.io). If the typo is in
 one of the tools, please raise a pull request with the relevant repository (see
@@ -139,10 +139,7 @@ I do not have sufficient availability).
 
 ### Could you just add this one feature...?
 
-Sure, [get in
-touch](mailto:benjie@graphile.org?subject=Graphile%20Custom%20Work%20or%20Support)
-and I'll try and estimate the cost of implementing the feature!
-
+Sure. Get in touch at <a href="mailto:info@graphile.org?subject=Graphile%20Custom%20Work%20or%20Support">info@graphile.org</a> and we'll estimate the cost of implementing the feature!
 
 </div>
 </div>
