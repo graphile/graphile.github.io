@@ -8,13 +8,13 @@ export default () =>
           <h6>PostGraphile</h6>
           <ul>
             <li>
-              <Link to="/postgraphile/">About</Link>
-            </li>
-            <li>
               <Link to="/postgraphile/introduction/">Introduction</Link>
             </li>
             <li>
               <Link to="/postgraphile/security/">Security</Link>
+            </li>
+            <li>
+              <Link to="/postgraphile/extending/">Extending</Link>
             </li>
           </ul>
         </div>
