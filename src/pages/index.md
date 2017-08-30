@@ -7,10 +7,22 @@ title: Tools to build extensible and performant GraphQL APIs
 <!-- **************************************** -->
 
 <header class='hero'>
-<div class='hero-block center'>
+<div class='container'>
+<div class='row'>
+<div class='col-xs-12'>
+<div class='hero-block'>
 
-# A suite of tools for building performant pluggable GraphQL APIs.
+# Graphile
 
+<h3>
+  Tools for building performant
+  <br />
+  pluggable GraphQL APIs.
+</h3>
+
+</div>
+</div>
+</div>
 </div>
 </header>
 
@@ -18,13 +30,15 @@ title: Tools to build extensible and performant GraphQL APIs
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
 <div class='row'>
 <div class='col-xs-12'>
 <div class='hero-block'>
 
-## PostGraphile: instant GraphQL API for PostgreSQL database
+## PostGraphile
+
+### Instant GraphQL API for PostgreSQL database
 
 Auto-discovers tables, columns, relations, procedures and more; runs a
 high-performance secure GraphQL API server that adheres to best practices.
@@ -34,7 +48,7 @@ high-performance secure GraphQL API server that adheres to best practices.
 </div>
 
 <div class='row'>
-<div class='col-lg-6 col-xs-12'>
+<div class='col-lg-6 mb3 col-md-9 col-xs-12'>
 
 ##### Just concentrate on your database
 ```sql
@@ -46,7 +60,8 @@ ALTER TABLE superheroes ENABLE ROW LEVEL SECURITY;
 ```
 
 </div><!-- /col-6 -->
-<div class='col-lg-6 col-xs-12'>
+<div class='col-lg-6 mb3 col-md-9 col-xs-12'>
+
 
 ##### Run a fully-fledged GraphQL API in one command
 ```bash
@@ -61,8 +76,8 @@ postgraphile
 </div>
 
 <br />
-<div class='d-flex justify-content-center'>
-<a class='button button--outline' href='/postgraphile/'>More about PostGraphile &rarr;</a>
+<div class='flex'>
+<a class='strong-link' href='/postgraphile/'>More about PostGraphile <span class='fa fa-fw fa-long-arrow-right' /></a>
 </div>
 
 
@@ -72,13 +87,14 @@ postgraphile
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
 <div class='row'>
 <div class='col-xs-12'>
 <div class='hero-block'>
 
-## Graphile Build: high-performance pluggable GraphQL schema tools
+## Graphile Build
+### High-performance pluggable GraphQL schema tools
 
 Prefer building your GraphQL APIs by hand? By using our [look-ahead
 feature](/graphile-build/look-ahead/) your code can know what's coming and make
@@ -92,9 +108,9 @@ and use community-built plugins to increase developer productivity.
 </div>
 
 <div class='row'>
-<div class='col-xs-12 col-lg-6'>
+<div class='col-lg-6 mb3 col-md-9 col-xs-12'>
 
-##### `graphql`:
+##### `graphql`
 
 ```js{2}
 const MyType =
@@ -105,9 +121,9 @@ const MyType =
 ```
 
 </div>
-<div class='col-xs-12 col-lg-6'>
+<div class='col-lg-6 mb3 col-md-9 col-xs-12'>
 
-##### `graphile-build`:
+##### `graphile-build`
 
 ```js{2}
 const MyType =
@@ -120,9 +136,8 @@ const MyType =
 </div>
 </div>
 
-<br />
-<div class='d-flex justify-content-center'>
-<a class='button button--outline' href='/postgraphile/'>More about Graphile Build &rarr;</a>
+<div class='flex'>
+<a class='strong-link' href='/postgraphile/'>More about Graphile Build <span class='fa fa-fw fa-long-arrow-right' /></a>
 </div>
 
 </div>
@@ -131,7 +146,7 @@ const MyType =
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
 <div class='row'>
 <div class='col-xs-12'>
@@ -166,21 +181,16 @@ Build plugins.
 <section class='mailinglist'>
 <div class='container'>
 
-<div class='row justify-content-center'>
+<div class='row'>
 <div class='col-xs-12'>
-<div class='hero-block center'>
-
-## Questions, comments or feedback? [info@graphile.org](mailto:info@graphile.org?subject=Graphile%20question/comment/feedback:)
-
-</div>
-</div>
-</div>
-
-<div class='row justify-content-center'>
-<div class='col-xs-12 center'>
 <div class='hero-block'>
 
-<div>
+<h3>
+Questions, comments or feedback?
+<br />
+Email <a href="mailto:info@graphile.org?subject=Graphile%20question/comment/feedback:)">info@graphile.org</a>
+</h3>
+
 <form action="//graphile.us16.list-manage.com/subscribe/post?u=d103f710cf00a9273b55e8e9b&amp;id=c3a9eb5c4e" method="post"
 id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
   <div id="mc_embed_signup_scroll" class="center hero-block">
@@ -188,22 +198,24 @@ id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validat
     Subscribe to our occasional announcements newsletter:</p>
     <div class="mc-field-group form-inline justify-content-center">
       <div class='form-group'>
-        <label for="mce-EMAIL">Email address</label>
-        <input
-          autocapitalize="off"
-          autocomplete="off"
-          autocorrect="off"
-          class="required email signup-field form-control mx-sm-3"
-          id="mce-EMAIL"
-          name="EMAIL"
-          spellcheck="false"
-          type="email"
-          value=""
-        />
+        <div class="mb2">
+          <label class="label--small" for="mce-EMAIL">Email address:</label>
+        </div>
+          <input
+            autocapitalize="off"
+            autocomplete="off"
+            autocorrect="off"
+            class="input-text mb0-ns mb1"
+            id="mce-EMAIL"
+            name="EMAIL"
+            spellcheck="false"
+            type="email"
+            value=""
+          />
         <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
         <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_d103f710cf00a9273b55e8e9b_c3a9eb5c4e" tabindex="-1" value="" /></div>
         <input
-          class="button btn btn-primary signup-button"
+          class="button--solid"
           id="mc-embedded-subscribe"
           name="subscribe"
           type="submit"
@@ -217,7 +229,6 @@ id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validat
     </div>
   </div>
 </form>
-</div>
 
 </div>
 </div>

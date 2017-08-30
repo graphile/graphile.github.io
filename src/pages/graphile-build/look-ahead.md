@@ -6,6 +6,7 @@ title: Look Ahead
 
 ## Advanced: Look Ahead
 
+<p class="intro">
 Traditionally in GraphQL APIs DataLoader is used to batch requests to minimize
 the impact of N+1 queries. DataLoader can be use with Graphile-Build in the same
 way as it is with GraphQL. However, sometimes DataLoader isn't the best
@@ -14,6 +15,7 @@ functionality you can use to optimize your GraphQL queries. This is
 particularly well suited to environments that allow you to specify complex
 structures to be returned (such as databases or other GraphQL APIs), but is
 generic enough that it can be used for many use-cases.
+</p>
 
 ### Seeing which sub-fields were requested
 

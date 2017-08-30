@@ -7,16 +7,25 @@ title: PostGraphile - full GraphQL API server in an instant from PostgreSQL data
 <!-- **************************************** -->
 
 <header class='hero simple'>
-<div class='hero-block center'>
+<div class='container'>
+<div class='row'>
+<div class='col-xs-12'>
+<div class='hero-block'>
 
-# PostGraphile: instant GraphQL API for PostgreSQL database
+# PostGraphile
 
-<div class='d-flex justify-content-center'>
+<h3>
+  Instant GraphQL API for PostgreSQL database
+</h3>
+
 <br />
-<a class='button button--outline-white' href='/postgraphile/introduction/'>Documentation &rarr;</a>
+<div class='flex'>
+<a class='button--solid-light' href='/postgraphile/introduction/'>Documentation <span class='fa fa-fw fa-long-arrow-right' /></a>
 </div>
 
-
+</div>
+</div>
+</div>
 </div>
 </header>
 
@@ -25,10 +34,10 @@ title: PostGraphile - full GraphQL API server in an instant from PostgreSQL data
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
-<div class='row justify-content-center'>
-<div class='text-center col-xs-12'>
+<div class='row'>
+<div class='col-xs-12'>
 <div class='hero-block'>
 
 ## Try it now!
@@ -41,12 +50,13 @@ database schema.
 </div>
 
 
-<div class='row justify-content-center'>
+<div class='row'>
 <div class='text-center col-xs-12 col-md-9 col-lg-7'>
 
 ```js
 npm install -g postgraphile
-postgraphile -c postgres://user:pass@host/dbname --schema schema_name
+postgraphile -c postgres://user:pass@host/dbname \
+  --schema schema_name
 ```
 
 </div>
@@ -58,7 +68,7 @@ postgraphile -c postgres://user:pass@host/dbname --schema schema_name
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
 <div class='row'>
 <div class='col-xs-12'>
@@ -80,7 +90,7 @@ query.
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
 <div class='row'>
 <div class='col-xs-12'>
@@ -103,7 +113,7 @@ automatically.
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
 <div class='row'>
 <div class='col-xs-12'>
@@ -126,7 +136,7 @@ over your API.
 </div>
 
 <div class='row'>
-<div class='col-lg-6 col-xs-12'>
+<div class='col-lg-6 col-md-9 col-xs-12'>
 
 ##### Build your schema with plugins
 ```js
@@ -144,7 +154,7 @@ type Person {
 ```
 
 </div><!-- /col-6 -->
-<div class='col-lg-6 col-xs-12'>
+<div class='col-lg-6 col-md-9 col-xs-12'>
 
 ##### Transform your schema with ease
 ```js
@@ -172,7 +182,7 @@ type Person {
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
 <div class='row'>
 <div class='col-xs-12'>
@@ -196,7 +206,7 @@ schema - you only need to change the parts of your code that you wish to trigger
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
 <div class='row'>
 <div class='col-xs-12'>
@@ -216,7 +226,7 @@ schema - you only need to change the parts of your code that you wish to trigger
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
 <div class='row'>
 <div class='col-xs-12'>
@@ -240,7 +250,7 @@ to restart the server!
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
 <div class='row'>
 <div class='col-xs-12'>
@@ -270,9 +280,9 @@ authorisation which also works great with CORS.
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
-<div class='row justify-content-center'>
+<div class='row'>
 <div class='text-center col-xs-12'>
 <div class='hero-block'>
 
@@ -283,20 +293,24 @@ authorisation which also works great with CORS.
 </div>
 
 
-<div class='row justify-content-center'>
+<div class='row'>
 <div class='text-center col-xs-12 col-md-9 col-lg-7'>
 
 ```js
 npm install -g postgraphile
-postgraphile -c postgres://user:pass@host/dbname --schema schema_name
+postgraphile -c postgres://user:pass@host/dbname \
+  --schema schema_name
 ```
 
 </div>
 </div>
 
 <br />
-<div class='d-flex justify-content-center'>
-<a class='button button--outline' href='/postgraphile/introduction/'>Get started &rarr;</a>
+<div class='row'>
+<div class='text-center col-xs-12'>
+<a class='strong-link' href='/postgraphile/introduction/'>Get started <span class='fa fa-fw fa-long-arrow-right' /></a>
+</div>
+
 </div>
 
 </div>
@@ -307,44 +321,41 @@ postgraphile -c postgres://user:pass@host/dbname --schema schema_name
 <section class='mailinglist'>
 <div class='container'>
 
-<div class='row justify-content-center'>
+<div class='row'>
 <div class='col-xs-12'>
-<div class='hero-block center'>
-
-## Questions, comments or feedback? [info@graphile.org](mailto:info@graphile.org?subject=Graphile%20question/comment/feedback:)
-
-</div>
-</div>
-</div>
-
-<div class='row justify-content-center'>
-<div class='col-xs-12 center'>
 <div class='hero-block'>
 
-<div>
+<h3>
+Questions, comments or feedback?
+<br />
+Email <a href="mailto:info@graphile.org?subject=Graphile%20question/comment/feedback:)">info@graphile.org</a>
+</h3>
+
 <form action="//graphile.us16.list-manage.com/subscribe/post?u=d103f710cf00a9273b55e8e9b&amp;id=c3a9eb5c4e" method="post"
 id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
   <div id="mc_embed_signup_scroll" class="center hero-block">
-    <p>Keep up to date on PostGraphile features/changes.
+    <p>Keep up to date on Graphile and PostGraphile features/changes.
     Subscribe to our occasional announcements newsletter:</p>
     <div class="mc-field-group form-inline justify-content-center">
       <div class='form-group'>
-        <label for="mce-EMAIL">Email address</label>
-        <input
-          autocapitalize="off"
-          autocomplete="off"
-          autocorrect="off"
-          class="required email signup-field form-control mx-sm-3"
-          id="mce-EMAIL"
-          name="EMAIL"
-          spellcheck="false"
-          type="email"
-          value=""
-        />
+        <div class="mb2">
+          <label class="label--small" for="mce-EMAIL">Email address:</label>
+        </div>
+          <input
+            autocapitalize="off"
+            autocomplete="off"
+            autocorrect="off"
+            class="input-text mb0-ns mb1"
+            id="mce-EMAIL"
+            name="EMAIL"
+            spellcheck="false"
+            type="email"
+            value=""
+          />
         <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_d103f710cf00a9273b55e8e9b_c3a9eb5c4e" tabindex="-1" value=""></div>
+        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_d103f710cf00a9273b55e8e9b_c3a9eb5c4e" tabindex="-1" value="" /></div>
         <input
-          class="button btn btn-primary signup-button"
+          class="button--solid"
           id="mc-embedded-subscribe"
           name="subscribe"
           type="submit"
@@ -358,7 +369,6 @@ id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validat
     </div>
   </div>
 </form>
-</div>
 
 </div>
 </div>

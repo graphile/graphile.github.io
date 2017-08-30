@@ -7,13 +7,19 @@ title: Extensible GraphQL APIs through Plugins
 <!-- **************************************** -->
 
 <header class='hero simple'>
-<div class='hero-block center'>
+<div class='hero-block container'>
 
-# Graphile Build: a library for constructing high-performance pluggable GraphQL APIs
+# Graphile Build
 
-<div class='d-flex justify-content-center'>
+<h3 class="measure">
+  A library for constructing
+  <br />
+  high-performance pluggable GraphQL APIs
+</h2>
 <br />
-<a class='button button--outline-white' href='/graphile-build/getting-started/'>Documentation &rarr;</a>
+
+<div class='flex'>
+<a class='button--solid-light' href='/graphile-build/getting-started/'>Documentation <span class='fa fa-fw fa-long-arrow-right' /></a>
 </div>
 
 </div>
@@ -23,7 +29,7 @@ title: Extensible GraphQL APIs through Plugins
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
 <div class='row'>
 <div class='col-xs-12'>
@@ -40,7 +46,8 @@ advanced look-ahead features.
 </div>
 
 <div class='row'>
-<div class='col-lg-6 col-xs-12'>
+<div class='col-lg-6 col-md-9 col-xs-12'>
+
 
 ##### Build your schema with plugins
 ```js
@@ -58,7 +65,8 @@ type Person {
 ```
 
 </div>
-<div class='col-lg-6 col-xs-12'>
+<div class='col-lg-6 col-md-9 col-xs-12'>
+
 
 ##### Transform your schema with ease
 ```js
@@ -79,8 +87,9 @@ type Person {
 </div>
 
 <br />
-<div class='d-flex justify-content-center'>
-<a class='button button--outline' href='/graphile-build/getting-started/'>Get started &rarr;</a>
+<div class='flex'>
+<a class='strong-link' href='/graphile-build/getting-started/'>Get started <span class='fa fa-fw fa-long-arrow-right' /></a>
+
 </div>
 
 </div>
@@ -89,7 +98,7 @@ type Person {
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
 <div class='row'>
 <div class='col-xs-12'>
@@ -117,7 +126,7 @@ latency.
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
 <div class='row'>
 <div class='col-xs-12'>
@@ -150,7 +159,7 @@ You can build plugins for anything that Node.js can communicate with.
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
 <div class='row'>
 <div class='col-xs-12'>
@@ -166,9 +175,9 @@ Facebook then adding hooks is fairly straightforward:
 </div>
 
 <div class='row'>
-<div class='col-xs-12 col-lg-6'>
+<div class='col-lg-6 col-md-9 col-xs-12'>
 
-##### `graphql`:
+##### `graphql`
 
 ```js{2}
 const MyType =
@@ -179,9 +188,9 @@ const MyType =
 ```
 
 </div><!-- /col-6 -->
-<div class='col-xs-12 col-lg-6'>
+<div class='col-lg-6 col-md-9 col-xs-12'>
 
-##### `graphile-build`:
+##### `graphile-build`
 
 ```js{2}
 const MyType =
@@ -202,7 +211,7 @@ const MyType =
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
 <div class='row'>
 <div class='col-xs-12'>
@@ -227,7 +236,7 @@ implementation too).
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
 <div class='row'>
 <div class='col-xs-12'>
@@ -253,10 +262,10 @@ replace the out-of-date one - no need to restart your server!
 <!-- **************************************** -->
 
 <section>
-<div class='container center'>
+<div class='container'>
 
-<div class='row justify-content-center'>
-<div class='text-center col-xs-12'>
+<div class='row'>
+<div class='col-xs-12'>
 <div class='hero-block'>
 
 ## Quick to start
@@ -265,7 +274,7 @@ replace the out-of-date one - no need to restart your server!
 </div>
 </div>
 
-<div class='row justify-content-center'>
+<div class='row'>
 <div class='text-center col-xs-12 col-md-9 col-lg-7'>
 
 ```js
@@ -284,55 +293,57 @@ main();
 </div>
 
 <br />
-<div class='d-flex justify-content-center'>
-<a class='button button--outline' href='/graphile-build/getting-started/'>Get started &rarr;</a>
+
+<div class='row'>
+<div class='text-center col-xs-12 col-md-9 col-lg-7'>
+<a class='strong-link' href='/graphile-build/getting-started/'>Get started <span class='fa fa-fw fa-long-arrow-right' /></a>
+</div>
 </div>
 
 </div>
 </section>
 
 
+<!-- **************************************** -->
+
 <section class='mailinglist'>
 <div class='container'>
 
-<div class='row justify-content-center'>
+<div class='row'>
 <div class='col-xs-12'>
-<div class='hero-block center'>
-
-## Questions, comments or feedback? [info@graphile.org](mailto:info@graphile.org?subject=Graphile%20question/comment/feedback:)
-
-</div>
-</div>
-</div>
-
-<div class='row justify-content-center'>
-<div class='col-xs-12 center'>
 <div class='hero-block'>
 
-<div>
+<h3>
+Questions, comments or feedback?
+<br />
+Email <a href="mailto:info@graphile.org?subject=Graphile%20question/comment/feedback:)">info@graphile.org</a>
+</h3>
+
 <form action="//graphile.us16.list-manage.com/subscribe/post?u=d103f710cf00a9273b55e8e9b&amp;id=c3a9eb5c4e" method="post"
 id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
   <div id="mc_embed_signup_scroll" class="center hero-block">
-    <p>Keep up to date on Graphile Build features/changes.
+    <p>Keep up to date on Graphile and PostGraphile features/changes.
     Subscribe to our occasional announcements newsletter:</p>
     <div class="mc-field-group form-inline justify-content-center">
       <div class='form-group'>
-        <label for="mce-EMAIL">Email address</label>
-        <input
-          autocapitalize="off"
-          autocomplete="off"
-          autocorrect="off"
-          class="required email signup-field form-control mx-sm-3"
-          id="mce-EMAIL"
-          name="EMAIL"
-          spellcheck="false"
-          type="email"
-          value=""
-        />
+        <div class="mb2">
+          <label class="label--small" for="mce-EMAIL">Email address:</label>
+        </div>
+          <input
+            autocapitalize="off"
+            autocomplete="off"
+            autocorrect="off"
+            class="input-text mb0-ns mb1"
+            id="mce-EMAIL"
+            name="EMAIL"
+            spellcheck="false"
+            type="email"
+            value=""
+          />
         <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_d103f710cf00a9273b55e8e9b_c3a9eb5c4e" tabindex="-1" value=""></div>
+        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_d103f710cf00a9273b55e8e9b_c3a9eb5c4e" tabindex="-1" value="" /></div>
         <input
-          class="button btn btn-primary signup-button"
+          class="button--solid"
           id="mc-embedded-subscribe"
           name="subscribe"
           type="submit"
@@ -346,7 +357,6 @@ id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validat
     </div>
   </div>
 </form>
-</div>
 
 </div>
 </div>

@@ -9,9 +9,9 @@ const sectionIs = desiredSection => ({ sectionId }) =>
 
 function PageList({ navs, location }) {
   return (
-    <ul className="page-list nav flex-column">
+    <ul className="page-list nav flex-column mb5">
       {navs.map(({ to, title }, idx) =>
-        <li key={idx} className="nav-item">
+        <li key={idx} className="f6 lh-copy pv1">
           <Link
             className={`nav-link ${location.pathname === to ? "active" : ""}`}
             to={to}
@@ -70,16 +70,18 @@ const Page = ({
         <section>
           <div className="container">
             <div className="row between-xs">
-              <aside className="sidebar col-xs-12 col-md-3 last-xs">
+              <aside className="sidebar col-xs-12 col-md-3 last-xs mt3">
                 {navSections.map(({ id, title }, idx) =>
                   <section key={idx}>
-                    <h4 className="sidebar-title">
+                    <h4 className="f6 ttu fw6 mt0 mb3 bb pb2">
                       {title}
                     </h4>
-                    <PageList
-                      location={location}
-                      navs={navPages.filter(sectionIs(id))}
-                    />
+                    <div className="nested-list-reset">
+                      <PageList
+                        location={location}
+                        navs={navPages.filter(sectionIs(id))}
+                      />
+                    </div>
                   </section>
                 )}
               </aside>
@@ -92,25 +94,21 @@ const Page = ({
                   />
                   <br />
                   <br />
-                  <div className="col-xs-12">
+                  <div className="col-xs-12 mt3 mb5">
                     <div className="row between-xs">
                       <div className="col-xs-6">
                         {prev
-                          ? <Link
-                              className="btn btn-secondary btn-large"
-                              to={prev}
-                            >
-                              ← {prevText || "Previous"}
+                          ? <Link className="" to={prev}>
+                              <span className="fa fa-fw fa-long-arrow-left" />{" "}
+                              {prevText || "Previous"}
                             </Link>
                           : null}
                       </div>
-                      <div className="col-xs-6 right">
+                      <div className="col-xs-6 tr">
                         {next
-                          ? <Link
-                              className="btn btn-primary btn-large"
-                              to={next}
-                            >
-                              {nextText || "Next"} →
+                          ? <Link className="" to={next}>
+                              {nextText || "Next"}{" "}
+                              <span className="fa fa-fw fa-long-arrow-right" />
                             </Link>
                           : null}
                       </div>
