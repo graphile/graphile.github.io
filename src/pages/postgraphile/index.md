@@ -55,7 +55,8 @@ database schema.
 
 ```js
 npm install -g postgraphile
-postgraphile -c postgres://user:pass@host/dbname --schema schema_name
+postgraphile -c postgres://user:pass@host/dbname \
+  --schema schema_name
 ```
 
 </div>
