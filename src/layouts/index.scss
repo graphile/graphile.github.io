@@ -293,6 +293,10 @@ pre[class*="language-"] {
   @extend .code;
 }
 
+pre code {
+  font-size: 0.95em;
+}
+
 // Prevent ligatures in code
 code {
   font-feature-settings: initial;
