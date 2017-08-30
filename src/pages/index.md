@@ -222,6 +222,10 @@ id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validat
           value="Subscribe"
         />
       </div>
+      <div id="mce-responses" class="clear">
+        <div class="response" id="mce-error-response" style="display:none"></div>
+        <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>
     </div>
   </div>
 </form>

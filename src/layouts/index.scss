@@ -83,7 +83,8 @@ h6 {
   @extend .f7;
 }
 
-p {
+p,
+.response {
   @extend .f5-ns;
   @extend .f6;
   @extend .lh-copy;
@@ -130,6 +131,20 @@ a {
 
 .gatsby-resp-image-wrapper[style] {
   z-index: 0 !important;
+}
+
+#mce-success-response,
+#mce-error-response {
+  @extend .avenir;
+  @extend .i;
+}
+
+#mce-success-response {
+  @extend .green;
+}
+
+#mce-error-response {
+  @extend .red;
 }
 
 // ----------------------------------------
