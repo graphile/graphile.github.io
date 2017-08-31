@@ -58,9 +58,68 @@ specify a role.
 ### Generating JWTs
 
 PostGraphile also has support for generating JWTs easily from inside your 
-PostgreSQL schema. To do so you must name a composite type via
-`--jwt-token-identifier`, this will then be combined with the secret from
-`--jwt-secret` to generate a string JWT that the client can then consume.
+PostgreSQL schema.
+
+To do so we will take a composite type that you specify via
+`--jwt-token-identifier` and whenever a value of that type is returned from a
+PostgreSQL function we will instead sign it with your `--jwt-secret` and return
+it as a string JWT token as part of your GraphQL response payload.
+
+For example, you might define a composite type such as this in PostgreSQL:
+
+```sql
+create type my_private_schema.jwt_token(
+  role text,
+  exp integer,
+  person_id integer,
+  is_admin boolean,
+  username varchar
+);
+```
+
+Then run postgraphile as:
+
+```
+postgraphile \
+  --jwt-token-identifier my_private_schema.jwt_token \
+  --jwt-secret $JWT_SECRET \
+  -c postgres://user:pass@host/dbname \
+  -s my_public_schema
+```
+
+And finally you might add a PostgreSQL function such as:
+
+```sql
+create function my_public_schema.authenticate(
+  email text,
+  password text
+) returns forum_example.jwt_token as $$
+declare
+  account my_public_schema.person_account;
+begin
+  select a.* into account
+    from my_public_schema.person_account as a
+    where a.email = authenticate.email;
+
+  if account.password_hash = crypt(password, account.password_hash) then
+    return (
+      'person_role',
+      86400,
+      account.person_id,
+      account.is_admin,
+      account.username
+    )::my_private_schema.jwt_token;
+  else
+    return null;
+  end if;
+end;
+$$ language plpgsql strict security definer;
+```
+
+Which would give you an `authenticate` mutation with which you can extract the
+`jwtToken` from the response payload.
+
+TODO: test this!
 
 ### Sending JWTs to the server
 
