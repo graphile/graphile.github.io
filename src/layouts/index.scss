@@ -9,7 +9,7 @@ $backgroundImage: "/images/delaunay.png";
 
 body {
   // @extend .debug-grid;
-  font-family: "Open Sans", Verdana, Arial, Helvetica, sans-serif;
+  font-family: Lato, "Open Sans", Verdana, Arial, Helvetica, sans-serif;
   font-weight: normal;
 }
 
@@ -81,6 +81,11 @@ h5 {
 h6 {
   @extend .f6-ns;
   @extend .f7;
+}
+
+
+p {
+  color: #464646;
 }
 
 p,

@@ -114,10 +114,10 @@ export default withRouter(
                   </li>
                   <li className="navbar-item navbar-item-right">
                     <a
-                      className="nav-link nav-github-link"
+                      className="nav-link nav-github-link flex items-center"
                       href="https://github.com/graphile/graphile-build"
                     >
-                      <span className="fa fa-github" />{" "}
+                      <span className="f3 fa fa-github" />{" "}
                       <span className="github">Github</span>
                     </a>
                   </li>
