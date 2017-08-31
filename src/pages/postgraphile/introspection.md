@@ -12,4 +12,4 @@ available in your schemas. You provide the list of schemas to inspect via the
 
 If you're interested to see how we do this, the introspection query can be
 found [in our
-GitHub](https://github.com/graphile/graphile-build/blob/master/packages/postgraphile/res/introspection-query.sql).
+GitHub](https://github.com/graphile/graphile-build/blob/master/packages/graphile-build-pg/res/introspection-query.sql).
