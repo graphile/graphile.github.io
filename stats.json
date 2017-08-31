@@ -1,8 +1,8 @@
 {
   "assetsByChunkName": {
     "path---postgraphile-extending": [
-      "path---postgraphile-extending-74a7bf81a921a0bf4887.js",
-      "path---postgraphile-extending-74a7bf81a921a0bf4887.js.map"
+      "path---postgraphile-extending-f4531e2d5b88d9470521.js",
+      "path---postgraphile-extending-f4531e2d5b88d9470521.js.map"
     ],
     "path---postgraphile-usage-cli": [
       "path---postgraphile-usage-cli-99f89081bd68d3d84225.js",
@@ -21,8 +21,8 @@
       "path---postgraphile-filtering-f75cfd3e77eaa259bba8.js.map"
     ],
     "path---postgraphile-introspection": [
-      "path---postgraphile-introspection-8443a6755edff30e9619.js",
-      "path---postgraphile-introspection-8443a6755edff30e9619.js.map"
+      "path---postgraphile-introspection-07b5e4398f2189a2bb77.js",
+      "path---postgraphile-introspection-07b5e4398f2189a2bb77.js.map"
     ],
     "path---graphile-build-omitting-plugins": [
       "path---graphile-build-omitting-plugins-ded5eda509cf412dcea1.js",
@@ -157,8 +157,8 @@
       "path---postgraphile-introduction-1e27e7e2388254f2b77e.js.map"
     ],
     "app": [
-      "app-a0a577309f893df8b8cf.js",
-      "app-a0a577309f893df8b8cf.js.map"
+      "app-49006d3e8918ea89523b.js",
+      "app-49006d3e8918ea89523b.js.map"
     ],
     "path---postgraphile-connections": [
       "path---postgraphile-connections-71b897c11768b4352f7b.js",
