@@ -104,9 +104,11 @@ We can then load our plugin into PostGraphile via:
 postgraphile --append-plugins `pwd`/add-http-bin-plugin.js -c postgres://localhost/mydb
 ```
 
-Note that the return types of added fields do not need to be implemented via
-Graphile Build's `newWithHooks` - you can use any GraphQL objects - but if you
-don't use `newWithHooks` then you won't be able to hook these added objects.
+Note that the return types of added fields (e.g. `JSONType` above) do not need
+to be implemented via Graphile Build's
+[`newWithHooks`](/graphile-build/build-object/#newwithhookstype-spec-scope) -
+you can use standard GraphQL objects too. (However, if you do not use
+`newWithHooks` then the objects referenced cannot be extended via plugins.)
 
 ### Wrapping an existing resolver
 
