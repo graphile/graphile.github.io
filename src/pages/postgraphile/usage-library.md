@@ -82,6 +82,41 @@ The `postgraphile` middleware factory function takes three arguments, all of whi
   - `prependPlugins`: an array of [Graphile Build](/graphile-build/plugins/) plugins to load before the default plugins (you probably don't want this)
   - `replaceAllPlugins`: the full array of [Graphile Build](/graphile-build/plugins/) plugins to use for schema generation (you almost definitely don't want this!)
 
+### Exposing HTTP request data to PostgreSQL
+
+#### `pgSettings` function
+
+Using the `pgSettings` functionality mentioned above you can extend the data
+made available through `current_setting(...)` within PostgreSQL. Instead of
+passing an object you can pass a function which will be executed for each
+request, and the results merged in with the other settings PostGraphile
+automatically adds to the request.
+
+For example:
+
+```js
+export postgraphql(process.env.DATABASE_URL, schemaName, {
+  pgSettings: req => ({
+    'user.id': `${req.session.passport.user}`,
+    'http.headers.x-something': `${req.headers['x-something']}`,
+    'http.method': `${req.method}`,
+    'http.url': `${req.url}`,
+    //...
+  }),
+})
+```
+
+```sql
+create function get_x_something() returns text as $$
+  select current_setting('http.headers.x-something', true)::text;
+$$ language sql stable;
+```
+
+
+TODO: verify the above works.
+
+TODO: move this to its own article?
+
 [connect]: https://www.npmjs.com/connect
 [express]: https://www.npmjs.com/express
 [graphql/express-graphql#82]: https://github.com/graphql/express-graphql/pull/82
