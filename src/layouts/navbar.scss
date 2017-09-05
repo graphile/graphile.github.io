@@ -16,6 +16,13 @@
   @extend .bg-dark-gray;
 }
 
+.header-notice {
+  background-color: black;
+  color: #ccc;
+  font-size: 0.8em;
+  padding: 1em;
+}
+
 .navbar {
   @extend .w-100;
   @extend .bg-transparent;

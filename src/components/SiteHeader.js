@@ -35,7 +35,7 @@ export default withRouter(
     render() {
       const { location } = this.props;
       return (
-        <header className="header content absolute z-999 top-0 w-100">
+        <header className="header content absolute z-999 w-100">
           <nav className="navbar">
             <div className="container">
               <input
