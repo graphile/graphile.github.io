@@ -67,7 +67,7 @@ const Page = ({
         ]}
       />
       {isPostGraphileDocs
-        ? <div className="header-notice">
+        ? <div className="header-notice pv3 ph3 f5 lh-title bg-near-black moon-gray">
             <div className="container">
               <div className="row">
                 <div className="col-xs-12">
