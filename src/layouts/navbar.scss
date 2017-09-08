@@ -1,9 +1,5 @@
 @import "./tachyons.scss";
 
-// .navbar-item {
-//   height: 2.4rem;
-// }
-
 .github-icon {
   font-size: 1.5em;
 }
@@ -17,10 +13,6 @@
 }
 
 .header-notice {
-  background-color: black;
-  color: #ccc;
-  font-size: 0.8em;
-  padding: 1em;
 }
 
 .navbar {
@@ -30,16 +22,12 @@
 }
 
 .navbar-item {
-  @extend .navbar-item;
   @extend .items-center;
   @extend .flex;
-  @extend .f5;
   @extend .link;
   @extend .black-70;
   @extend .mr3;
   @extend .dib;
-  @extend .f7;
-  @extend .tracked;
 }
 
 .navbar-item-right {
@@ -49,6 +37,8 @@
 
 .header {
   .nav-link {
+    @extend .f7;
+    @extend .tracked;
     @extend .dim;
     @extend .no-underline;
     @extend .mr3;
