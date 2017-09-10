@@ -54,12 +54,10 @@ $$ language sql stable;
 
 create function my_schema.users_friends(u my_schema.users)
 returns setof my_schema.users as $$
-  select *
+  select users.*
   from my_schema.users
   inner join my_schema.friendships
   on (friendships.target_id = users.id)
   where friendships.user_id = u.id;
 $$ language sql stable;
 ```
-
-TODO: ensure this example works
