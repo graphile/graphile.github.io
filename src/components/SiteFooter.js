@@ -59,7 +59,8 @@ export default () =>
           <a href="https://twitter.com/calebmer">Caleb Meredith</a>.
           <br />
           <br />
-          This site is copyright &copy; Benjie Gillam 2017.
+          This site is copyright &copy; Benjie Gillam 2017. Design and logo
+          copyright &copy; Jof Arnold 2017.
         </div>
       </div>
     </div>
