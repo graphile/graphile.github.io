@@ -102,6 +102,15 @@ export default withRouter(
                       Support
                     </Link>
                   </li>
+                  <li className="navbar-item">
+                    <a
+                      className="nav-link"
+                      href="https://graphql-training.com"
+                      title="GraphQL Training in London, Europe and Remote"
+                    >
+                      GraphQL Training
+                    </a>
+                  </li>
                   <li className="navbar-item ml-auto navbar-item-right">
                     <span className="searchbox-container">
                       <input

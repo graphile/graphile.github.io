@@ -36,10 +36,10 @@ title: Support for PostGraphile and Graphile Build from the maintainer
 
 ## Community Support
 
-- Request features
-- Advice from the community
-- Report issues
-- Discuss the future of the project
+- Request features.
+- Advice from the community.
+- Report issues.
+- Discuss the future of the project.
 
 [PostGraphile support](https://github.com/postgraphql/postgraphql/issues)
 
@@ -54,10 +54,10 @@ title: Support for PostGraphile and Graphile Build from the maintainer
 
 ## Professional Services
 
-- Tweak Graphile to fit your needs
-- Professional support
-- Security and performance vetting
-- Team training / get started faster
+- Tweak Graphile to fit your needs.
+- Professional support.
+- Security and performance vetting.
+- Team and one-to-one training at [GraphQL-Training](https://graphql-training.com).
 
 $200 / hour or $1000 / day
 
