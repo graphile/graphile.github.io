@@ -137,7 +137,7 @@ const MyType =
 </div>
 
 <div class='flex'>
-<a class='strong-link' href='/postgraphile/'>More about Graphile Build <span class='fa fa-fw fa-long-arrow-right' /></a>
+<a class='strong-link' href='/graphile-build/'>More about Graphile Build <span class='fa fa-fw fa-long-arrow-right' /></a>
 </div>
 
 </div>
