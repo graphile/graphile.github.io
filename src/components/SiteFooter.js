@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "gatsby-link";
-import CodeSponsor from "./CodeSponsor";
 export default () =>
   <footer className="bg-white pv5 bt b--black f6 lh-copy">
     <div className="container">
@@ -62,11 +61,6 @@ export default () =>
           <br />
           This site is copyright &copy; Benjie Gillam 2017. Design and logo
           copyright &copy; Jof Arnold 2017.
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-xs-12">
-          <CodeSponsor />
         </div>
       </div>
     </div>
