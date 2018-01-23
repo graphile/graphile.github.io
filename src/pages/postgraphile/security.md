@@ -57,7 +57,7 @@ specify a role.
 
 ### Generating JWTs
 
-PostGraphile also has support for generating JWTs easily from inside your 
+PostGraphile also has support for generating JWTs easily from inside your
 PostgreSQL schema.
 
 To do so we will take a composite type that you specify via
@@ -184,9 +184,13 @@ set local jwt.claims.user_id to '2';
 commit;
 ```
 
-_\* Actually to save roundtrips we perform just one query to set all configs
-via `select set_config('role', 'app_user', true), set_config('user_id', '2',
-true), ....`, but the `set local` is easier to understand)_
+> _Actually, to save roundtrips we perform just one query to set all configs
+via ..._
+```sql
+select set_config('role', 'app_user', true), set_config('user_id', '2',
+true), ...
+```
+ > _... but showing `set local` is simpler to understand._
 
 You can then access this information via `current_setting` (the second argument
 says it's okay for the property to be missing, but **only works in PostgreSQL
@@ -208,4 +212,3 @@ create policy update_if_author
   using ("userId" = current_user_id())
   with check ("userId" = current_user_id());
 ```
-
