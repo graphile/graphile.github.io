@@ -16,9 +16,8 @@ found from the `defaultPlugins` export in
 [`src/index.js`](https://github.com/graphile/graphile-build/blob/master/packages/graphile-build-pg/src/index.js)
 of the `graphile-build-pg` module.
 
-You can extend PostGraphile's GraphQL schema by appending to, prepending to or
-even replacing the list of plugins used to build the schema. Graphile Build
-plugins are built on top of the [GraphQL reference JS
+You can extend PostGraphile's GraphQL schema by adding plugins before or after the default plugins. You may even opt to replace the entire list of plugins used to build the schema. 
+Graphile Build plugins are built on top of the [GraphQL reference JS
 implementation](http://graphql.org/graphql-js/), so it is recommended that you
 have familiarity with that before attempting to add your own plugins.
 
@@ -28,7 +27,7 @@ have familiarity with that before attempting to add your own plugins.
 postgraphile --append-plugins `pwd`/add-http-bin-plugin.js -c postgres://localhost/mydb
 ```
 
-If you're using the CLI you can use option `--append-plugins` to load additonal
+If you're using the CLI you can use option `--append-plugins` to load additional
 plugins.  You specify a comma separated list of module specs. A module spec is
 a path to a JS file to load, optionally followed by a colon and the name of the
 export (you must omit this if the function is exported via
@@ -37,8 +36,8 @@ export (you must omit this if the function is exported via
 - `--append-plugins my-npm-module` (requires `module.exports = function NpmPlugin(...) {...}`)
 - `--append-plugins /path/to/local/module.js:MyPlugin` (requires `exports.MyPlugin = function MyPlugin(...) {...}`)
 
-If you're using postgraphile as a library you can instead us the appendPlugins
-option which is simply an array of functions (you perform your own requiring!)
+If you're using postgraphile as a library you can instead use the appendPlugins
+option which is simply an array of functions (_you perform your own requiring_!)
 
 Remember: multiple versions of graphql in your `node_modules` will cause
 problems; so we recommend using the `graphql` object that's available on the
