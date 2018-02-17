@@ -11,6 +11,7 @@ body {
   // @extend .debug-grid;
   font-family: Lato, "Open Sans", Verdana, Arial, Helvetica, sans-serif;
   font-weight: normal;
+  overflow-x: hidden; // stop horizontal overflows
 }
 
 h1,
