@@ -81,6 +81,8 @@ The `postgraphile` middleware factory function takes three arguments, all of whi
   - `appendPlugins`: an array of [Graphile Build](/graphile-build/plugins/) plugins to load after the default plugins
   - `prependPlugins`: an array of [Graphile Build](/graphile-build/plugins/) plugins to load before the default plugins (you probably don't want this)
   - `replaceAllPlugins`: the full array of [Graphile Build](/graphile-build/plugins/) plugins to use for schema generation (you almost definitely don't want this!)
+  - `writeCache`: A file path string. Writes the GraphQL schema from the Postgres introspection to the file path.
+  - `readCache`: A file path string. Reads a GraphQL schema from the file path and will not run Postgres introspection.
 
 ### Exposing HTTP request data to PostgreSQL
 
