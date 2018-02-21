@@ -1,10 +1,10 @@
 ---
 layout: page
 path: /postgraphile/installation-guide/
-title: PostgreSQL Schema Design
+title: Installation Guide
 ---
 
-# Postgres Schema Design
+# New Title
 The Postgres database is rich with features well beyond that of any other database. However, most developers do not know the extent to which they can leverage the features in Postgres to completely express their application business logic in the database.
 
 Often developers may find themselves re-implimenting authentication and authorization in their apps, when Postgres comes with application level security features out of the box. Or perhaps developers may rewrite basic insert functions with some extra app logic where that too may be handled in the database.
@@ -24,14 +24,21 @@ First, you are going to need to make sure Postgres is installed. You can skip th
 
 If you are running on MacOS, it is highly recommended that you install and use [Postgres.app](http://postgresapp.com/). If you are on another platform, go to the [Postgres download page](https://www.postgresql.org/download/) to pick up a copy of Postgres. We recommend using a version of Postgres higher than `9.6.0` as Postgres `9.5` introduces Row Level Security (an important feature when building your business logic into the database) and `9.6` introduces `missing_ok` to the `current_setting(name, missing_ok)` function (which saves you some complexity).
 
-After that, make sure your copy of Postgres is running locally on `postgres://localhost:5432`. This is the default location for local Postgres databases and is used by many Postgres tools.
-
-In a terminal window, run `psql`. This is your most basic tool for querying your Postgres databse. By default `psql` will connect to `postgres://localhost:5432`. If you want to connect to another database, just pass that database as the first argument.
+After that, make sure your copy of Postgres is running locally on `postgres://localhost:5432` by running `psql` in a terminal. 5432 is the default port for local Postgres databases and is used by many Postgres tools.
 
 ```bash
-$ psql                                  # Connects to the default database at `postgres://localhost:5432`
+$ psql "postgres://localhost:5432"                    # Connects to the default database at `postgres://localhost:5432`
+
+psql: FATAL:  database "username" does not exist      # If you get something like this returned then Postgres is successfully installed!
+
+psql: could not connect to server: Connection refused # A refused connection shows that Postgres is not running.
+```
+
+If you want to connect to another database, just pass that database address instead:
+
+```bash
 $ psql postgres://localhost:5432/testdb # Connects to the `testdb` database at `postgres://localhost:5432`
-$ psql postgres://somehost:2345/somedb  # connects to the `somedb` database at `postgres://somehost:2345`
+$ psql postgres://somehost:2345/somedb  # Connects to the `somedb` database at `postgres://somehost:2345`
 ```
 
 Read the documentation on [Postgres connection strings](https://www.postgresql.org/docs/9.6/static/libpq-connect.html#LIBPQ-CONNSTRING) to learn more about alternative formats (including using a password).
