@@ -16,6 +16,7 @@ In this tutorial we will walk through the Postgres schema design for a forum app
 ## Table of Contents
 - [Installation](#installation)
   - [Installing Postgres](#installing-postgres)
+  - [Create a Database and Connect to it](#create-a-database)
   - [Installing PostGraphile](#installing-postgraphile)
 
 ## Installation
@@ -43,10 +44,21 @@ $ psql postgres://somehost:2345/somedb  # Connects to the `somedb` database at `
 
 Read the documentation on [Postgres connection strings](https://www.postgresql.org/docs/9.6/static/libpq-connect.html#LIBPQ-CONNSTRING) to learn more about alternative formats (including using a password).
 
-After running `psql` with your database URL, you should be in a SQL prompt:
+###Create a Database and Connect to it
+
+You'll next want to create a database. You can do this by using the terminal:
 
 ```
-psql (9.5.*)
+$ createdb mydb
+```
+
+This will create a Postgres database called "mydb". You can read more about this on the [Postgres Documentation site](https://www.postgresql.org/docs/9.6/static/tutorial-createdb.html). Now you can run `psql` with your database URL and get a SQL prompt:
+
+
+```bash
+$ psql "postgres://localhost:5432"    # Connects to the default database at `postgres://localhost:5432`
+
+psql (9.6.*)
 Type "help" for help.
 
 =#
