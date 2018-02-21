@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /postgraphile/installtion-guide/
+path: /postgraphile/installation-guide/
 title: PostgreSQL Schema Design
 ---
 
