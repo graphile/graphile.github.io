@@ -1,17 +1,13 @@
 ---
 layout: page
 path: /postgraphile/installation-guide/
-title: Installation Guide
+title: Quick Start Guide
 ---
 
-# New Title
-The Postgres database is rich with features well beyond that of any other database. However, most developers do not know the extent to which they can leverage the features in Postgres to completely express their application business logic in the database.
+# Quick Start Guide
 
-Often developers may find themselves re-implimenting authentication and authorization in their apps, when Postgres comes with application level security features out of the box. Or perhaps developers may rewrite basic insert functions with some extra app logic where that too may be handled in the database.
+In order to use PostGraphile, you'll need to have Node and Postgres installed. This quick start guide will walk you through installing these prerequisites and creating your first Postgres database in order that you can get PostGraphile up and running.
 
-This reimplementation of features that come with Postgres is not just an inefficient way to spend developer resources, but may also result in an interface that is slower than if the logic was implemented in Postgres itself. PostGraphile aims to make developers more efficient and their APIs faster by packaging the repeatable work in one open source project that encourages community contributions.
-
-In this tutorial we will walk through the Postgres schema design for a forum application with users who can login and write forum posts. While we will discuss how you can use the schema we create with PostGraphile, this article should be useful for anyone designing a Postgres schema.
 
 ## Table of Contents
   - [Install Node](#install-node)
@@ -19,8 +15,8 @@ In this tutorial we will walk through the Postgres schema design for a forum app
   - [Create a Database](#create-a-database)
   - [Install PostGraphile](#install-postgraphile)
 
-# Install Node
-You need Node installed to run PostGraphile. You can skip this section if you already have Node version `8.6` or higher installed 👍
+## Install Node
+You need Node installed to run PostGraphile. You can skip this section if you already have Node version `8.6` or higher installed.
 
 If you're using OS X or Windows, use one of the installers from the [Node.js download page](https://nodejs.org/en/download/). Make sure you select the version labelled LTS. Linux users can scroll down the page and find the version that works with their system.
 
@@ -32,10 +28,10 @@ At this point it's worth also updating the "Node Package Manager" (npm) which ca
 npm install npm@latest -g
 ```
 
-# Install Postgres
-First, you are going to need to make sure Postgres is installed. You can skip this section if you already have Postgres version `9.6.0` or higher installed 👍
+## Install Postgres
+First, you are going to need to make sure Postgres is installed. You can skip this section if you already have Postgres version `9.6.0` or higher installed.
 
-If you are running on MacOS, it is highly recommended that you install and use [Postgres.app](http://postgresapp.com/). If you are on another platform, go to the [Postgres download page](https://www.postgresql.org/download/) to pick up a copy of Postgres. We recommend using a version of Postgres higher than `9.6.0` as Postgres `9.5` introduces Row Level Security (an important feature when building your business logic into the database) and `9.6` introduces `missing_ok` to the `current_setting(name, missing_ok)` function (which saves you some complexity).
+If you are running on MacOS, it is highly recommended that you install and use [Postgres.app](http://postgresapp.com/). If you are on another platform, go to the [Postgres download page](https://www.postgresql.org/download/) to pick up a copy of Postgres. We recommend using a version of Postgres higher than `9.6.0`. You can read more about the reasoning behind this requirement [in our documentation](/postgraphile/requirements/).
 
 After that, make sure your copy of Postgres is running locally on `postgres://localhost:5432` by running `psql` in a terminal. 5432 is the default port for local Postgres databases and is used by many Postgres tools.
 
@@ -56,7 +52,7 @@ $ psql postgres://somehost:2345/somedb  # Connects to the `somedb` database at `
 
 Read the documentation on [Postgres connection strings](https://www.postgresql.org/docs/9.6/static/libpq-connect.html#LIBPQ-CONNSTRING) to learn more about alternative formats (including using a password).
 
-# Create a Database
+## Create a Database
 
 Next, create a database. You can do this by using the terminal:
 
@@ -88,7 +84,7 @@ Run the following query to make sure things are working smoothly:
 =#
 ```
 
-# Install PostGraphile
+## Install PostGraphile
 It is easy to install PostGraphile with [npm](https://docs.npmjs.com/getting-started/installing-node):
 
 ```
