@@ -33,7 +33,7 @@ npm install npm@latest -g
 ```
 
 # Install Postgres
-First, you are going to need to make sure Postgres is installed. You can skip this section if you already have Postgres installed 👍
+First, you are going to need to make sure Postgres is installed. You can skip this section if you already have Postgres version `9.6.0` or higher installed 👍
 
 If you are running on MacOS, it is highly recommended that you install and use [Postgres.app](http://postgresapp.com/). If you are on another platform, go to the [Postgres download page](https://www.postgresql.org/download/) to pick up a copy of Postgres. We recommend using a version of Postgres higher than `9.6.0` as Postgres `9.5` introduces Row Level Security (an important feature when building your business logic into the database) and `9.6` introduces `missing_ok` to the `current_setting(name, missing_ok)` function (which saves you some complexity).
 
@@ -58,7 +58,7 @@ Read the documentation on [Postgres connection strings](https://www.postgresql.o
 
 # Create a Database
 
-You'll next want to create a database. You can do this by using the terminal:
+Next, create a database. You can do this by using the terminal:
 
 ```
 $ createdb mydb
@@ -109,3 +109,12 @@ $ postgraphile -c "postgres://localhost:5432/mydb" --watch
 ```
 
 With the `--watch` flag, PostGraphile will automatically update your GraphQL API whenever the Postgres schemas you are introspecting change.
+
+Running PostGraphile will give you two endpoints:
+
+```
+  ‣ GraphQL endpoint served at http://localhost:5000/graphql
+  ‣ GraphiQL endpoint served at http://localhost:5000/graphiql
+```
+
+The second endpoint can be opened in a web browser to give you access to your database through `GraphiQL` - [a visual GraphQL explorer](https://github.com/graphql/graphiql)
