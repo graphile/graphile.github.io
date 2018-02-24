@@ -77,26 +77,23 @@ Run the following query to make sure things are working smoothly:
 ```
 
 ### Installing PostGraphile
-It’s way easier to install PostGraphile. If you have npm, you practically have PostGraphile as well.
+It is easy to install PostGraphile with [npm](https://docs.npmjs.com/getting-started/installing-node):
 
 ```
 $ npm install -g postgraphile
 ```
 
-To run PostGraphile, you’ll use the same URL that you used for `psql`:
+To run PostGraphile, you’ll use the same URL that you used for `psql` with the database name added:
 
 ```bash
-$ postgraphile                                     # Connects to the default database at `postgres://localhost:5432`
-$ postgraphile -c postgres://localhost:5432/testdb # Connects to the `testdb` database at `postgres://localhost:5432`
-$ postgraphile -c postgres://somehost:2345/somedb  # connects to the `somedb` database at `postgres://somehost:2345`
+$ postgraphile -c "postgres://localhost:5432/mydb"      # Connects to the `mydb` database at `postgres://localhost:5432`
+$ postgraphile -c "postgres://somehost:2345/somedb"     # Connects to the `somedb` database at `postgres://somehost:2345`
 ```
 
 You can also run PostGraphile with the watch flag:
 
 ```bash
-$ postgraphile --watch
+$ postgraphile -c "postgres://localhost:5432/mydb" --watch
 ```
 
-With the `--watch` flag, whenever the Postgres schemas you are introspecting change PostGraphile will automatically update your GraphQL API.
-
-Let’s go on to setting up our database schemas.
+With the `--watch` flag, PostGraphile will automatically update your GraphQL API whenever the Postgres schemas you are introspecting change.
