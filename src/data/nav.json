@@ -224,6 +224,11 @@
         "to": "/postgraphile/usage-schema/",
         "title": "Schema-only Usage",
         "sectionId": "usage"
+      },
+      {
+        "to": "/postgraphile/report-a-bug/",
+        "title": "Report a Bug",
+        "sectionId": "overview"
       }
     ]
   },
