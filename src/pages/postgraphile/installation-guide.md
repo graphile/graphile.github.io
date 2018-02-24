@@ -14,9 +14,17 @@ This reimplementation of features that come with Postgres is not just an ineffic
 In this tutorial we will walk through the Postgres schema design for a forum application with users who can login and write forum posts. While we will discuss how you can use the schema we create with PostGraphile, this article should be useful for anyone designing a Postgres schema.
 
 ## Table of Contents
-  - [Install Postgres](#installing-postgres)
+  - [Install Node](#install-node)
+  - [Install Postgres](#install-postgres)
   - [Create a Database](#create-a-database)
-  - [Install PostGraphile](#installing-postgraphile)
+  - [Install PostGraphile](#install-postgraphile)
+
+# Install Node
+You need Node installed to run PostGraphile. You can skip this section if you already have Node version `8.6` or higher installed 👍
+
+If you're using OS X or Windows, use one of the installers from the [Node.js download page](https://nodejs.org/en/download/). Make sure you select the version labelled LTS. Linux users can scroll down the page and find the version that works with their system.
+
+Once installed run `node -v` in a terminal to check your version. PostGraphile requires version `8.6` or higher.
 
 # Install Postgres
 First, you are going to need to make sure Postgres is installed. You can skip this section if you already have Postgres installed 👍
@@ -74,7 +82,7 @@ Run the following query to make sure things are working smoothly:
 =#
 ```
 
-# Installing PostGraphile
+# Install PostGraphile
 It is easy to install PostGraphile with [npm](https://docs.npmjs.com/getting-started/installing-node):
 
 ```
