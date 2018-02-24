@@ -62,6 +62,8 @@ postgraphile -c postgres://user:pass@host/dbname \
 </div>
 </div>
 
+See the [Quick Start Guide](/postgraphile/quick-start-guide/) to Postgraphile up and running
+
 </div>
 </section>
 
