@@ -101,6 +101,11 @@
     ],
     "pages": [
       {
+        "to": "/postgraphile/quick-start-guide/",
+        "title": "Quick Start Guide",
+        "sectionId": "overview"
+      },
+      {
         "to": "/postgraphile/introduction/",
         "title": "Introduction",
         "sectionId": "overview"
