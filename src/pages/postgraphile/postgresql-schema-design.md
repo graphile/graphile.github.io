@@ -13,10 +13,9 @@ This reimplementation of features that come with Postgres is not just an ineffic
 
 In this tutorial we will walk through the Postgres schema design for a forum application with users who can login and write forum posts. While we will discuss how you can use the schema we create with PostGraphile, this article should be useful for anyone designing a Postgres schema.
 
+If you haven't installed PostGraphile already, you can follow our [Quick Start Guide](/postgraphile/quick-start-guide/) to get PostGraphile up and running.
+
 ## Table of Contents
-- [Installation](#installation)
-  - [Installing Postgres](#installing-postgres)
-  - [Installing PostGraphile](#installing-postgraphile)
 - [The Basics](#the-basics)
   - [Setting Up Your Schemas](#setting-up-your-schemas)
   - [The Person Table](#the-person-table)
@@ -35,70 +34,6 @@ In this tutorial we will walk through the Postgres schema design for a forum app
   - [Grants](#grants)
   - [Row Level Security](#row-level-security)
 - [Conclusion](#conclusion)
-
-## Installation
-### Installing Postgres
-First, you are going to need to make sure Postgres is installed. You can skip this section if you already have Postgres installed 👍
-
-If you are running on MacOS, it is highly recommended that you install and use [Postgres.app](http://postgresapp.com/). If you are on another platform, go to the [Postgres download page](https://www.postgresql.org/download/) to pick up a copy of Postgres. We recommend using a version of Postgres higher than `9.6.0` as Postgres `9.5` introduces Row Level Security (an important feature when building your business logic into the database) and `9.6` introduces `missing_ok` to the `current_setting(name, missing_ok)` function (which saves you some complexity).
-
-After that, make sure your copy of Postgres is running locally on `postgres://localhost:5432`. This is the default location for local Postgres databases and is used by many Postgres tools.
-
-In a terminal window, run `psql`. This is your most basic tool for querying your Postgres databse. By default `psql` will connect to `postgres://localhost:5432`. If you want to connect to another database, just pass that database as the first argument.
-
-```bash
-$ psql                                  # Connects to the default database at `postgres://localhost:5432`
-$ psql postgres://localhost:5432/testdb # Connects to the `testdb` database at `postgres://localhost:5432`
-$ psql postgres://somehost:2345/somedb  # connects to the `somedb` database at `postgres://somehost:2345`
-```
-
-Read the documentation on [Postgres connection strings](https://www.postgresql.org/docs/9.6/static/libpq-connect.html#LIBPQ-CONNSTRING) to learn more about alternative formats (including using a password).
-
-After running `psql` with your database URL, you should be in a SQL prompt:
-
-```
-psql (9.5.*)
-Type "help" for help.
-
-=#
-```
-
-Run the following query to make sure things are working smoothly:
-
-```
-=# select 1 + 1 as two;
- two
------
-   2
-(1 row)
-
-=#
-```
-
-### Installing PostGraphile
-It’s way easier to install PostGraphile. If you have npm, you practically have PostGraphile as well.
-
-```
-$ npm install -g postgraphile
-```
-
-To run PostGraphile, you’ll use the same URL that you used for `psql`:
-
-```bash
-$ postgraphile                                     # Connects to the default database at `postgres://localhost:5432`
-$ postgraphile -c postgres://localhost:5432/testdb # Connects to the `testdb` database at `postgres://localhost:5432`
-$ postgraphile -c postgres://somehost:2345/somedb  # connects to the `somedb` database at `postgres://somehost:2345`
-```
-
-You can also run PostGraphile with the watch flag:
-
-```bash
-$ postgraphile --watch
-```
-
-With the `--watch` flag, whenever the Postgres schemas you are introspecting change PostGraphile will automatically update your GraphQL API.
-
-Let’s go on to setting up our database schemas.
 
 ## The Basics
 ### Setting Up Your Schemas
