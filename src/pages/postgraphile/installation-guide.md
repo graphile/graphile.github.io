@@ -113,4 +113,4 @@ Running PostGraphile will give you two endpoints:
   ‣ GraphiQL endpoint served at http://localhost:5000/graphiql
 ```
 
-The second endpoint can be opened in a web browser to give you access to your database through `GraphiQL` - [a visual GraphQL explorer](https://github.com/graphql/graphiql)
+The second endpoint can be opened in a web browser to give you access to your database through `GraphiQL` - [a visual GraphQL explorer](https://github.com/graphql/graphiql).
