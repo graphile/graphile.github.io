@@ -26,6 +26,12 @@ If you're using OS X or Windows, use one of the installers from the [Node.js dow
 
 Once installed run `node -v` in a terminal to check your version. PostGraphile requires version `8.6` or higher.
 
+At this point it's worth also updating the "Node Package Manager" (npm) which came bundled with Node, to make sure that you'll get the latest PostGraphile package installed later:
+
+```
+npm install npm@latest -g
+```
+
 # Install Postgres
 First, you are going to need to make sure Postgres is installed. You can skip this section if you already have Postgres installed 👍
 
