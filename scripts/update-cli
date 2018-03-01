@@ -1,0 +1,35 @@
+#!/usr/bin/env node
+
+const { execSync } = require("child_process");
+const { readFileSync, writeFileSync } = require("fs");
+
+const helpText = execSync(
+  `${__dirname}/../node_modules/.bin/postgraphile --help`,
+  { encoding: "utf8" }
+);
+
+const optionsLines = helpText
+  .match(/Options:([\s\S]+)Get started:/)[1]
+  .trim()
+  .split("\n")
+  .map(str => str.trim());
+
+const markdownBullets = optionsLines.map(line => {
+  const [, options, description] = line.match(/^(.*)\s{2,}(.*)$/);
+  return `- \`${options
+    .trim()
+    .split(/\s*,\s*/)
+    .join("`, `")}\`  \n  ${description.trim()}`;
+});
+
+const bulletText = markdownBullets.join("\n");
+
+const MARKDOWN_FILE = `${__dirname}/../src/pages/postgraphile/usage-cli.md`;
+const inputMarkdown = readFileSync(MARKDOWN_FILE, "utf8");
+
+const outputMarkdown = inputMarkdown.replace(
+  /(<!-- CLI_DOCBLOCK_BEGIN -->)[\s\S]*(<!-- CLI_DOCBLOCK_END -->)/,
+  (_, m1, m2) => `${m1}\n\n${bulletText}\n\n${m2}`
+);
+
+writeFileSync(MARKDOWN_FILE, outputMarkdown);
