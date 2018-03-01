@@ -71,14 +71,12 @@ const Page = ({
             <div className="container">
               <div className="row">
                 <div className="col-xs-12">
-                  <strong>NOTICE</strong>: PostGraphQL will be{" "}
-                  <Link to="/history">renaming to PostGraphile</Link> with the
-                  release of v4. You can replace <code>postgraphile</code> in
-                  the documentation with <code>postgraphql</code> if you&apos;re
-                  running{" "}
-                  <a href="https://github.com/postgraphql/postgraphql/pull/506">
-                    <code>postgraphql@next</code>
-                  </a>
+                  <strong>NOTICE</strong>: PostGraphQL has been <Link
+                    to="/history">renamed to PostGraphile</Link>.  If you were
+                  using <code>postgraphql@next</code> you should update to{" "}
+                  <code>postgraphile</code> instead as{" "}
+                  <code>postgraphql@next</code> will not receive any further
+                  updates.
                 </div>
               </div>
             </div>
