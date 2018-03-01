@@ -29,8 +29,6 @@ title: PostGraphile - full GraphQL API server in an instant from PostgreSQL data
 </div>
 </header>
 
-
-
 <!-- **************************************** -->
 
 <section>
@@ -49,7 +47,6 @@ database schema.
 </div>
 </div>
 
-
 <div class='row'>
 <div class='text-center col-xs-12 col-md-9 col-lg-7'>
 
@@ -62,7 +59,7 @@ postgraphile -c postgres://user:pass@host/dbname \
 </div>
 </div>
 
-See the [Quick Start Guide](/postgraphile/quick-start-guide/) to Postgraphile up and running
+See the [Quick Start Guide](/postgraphile/quick-start-guide/) to get PostGraphile up and running
 
 </div>
 </section>
@@ -141,9 +138,9 @@ over your API.
 <div class='col-lg-6 col-md-9 col-xs-12'>
 
 ##### Build your schema with plugins
+
 ```js
-buildSchema(plugins)
- 
+buildSchema(plugins);
 ```
 
 ```graphql{2}
@@ -159,9 +156,9 @@ type Person {
 <div class='col-lg-6 col-md-9 col-xs-12'>
 
 ##### Transform your schema with ease
+
 ```js
-buildSchema([...plugins,
-  DeprecateFromCommentPlugin])
+buildSchema([...plugins, DeprecateFromCommentPlugin]);
 ```
 
 ```graphql{3-4}
@@ -265,7 +262,7 @@ policies (RLS, introduced in PostgreSQL 9.5), PostGraphile leverages the
 tried-and-tested authentication baked right in to the worlds most advanced open
 source database - no more reinventing the wheel! Thanks to RLS's granularity
 it's possible to express complex authorisation logic in simple policies; and
-because the authentication is *in your database* you can ensure nothing (not
+because the authentication is _in your database_ you can ensure nothing (not
 even companion microservices) can bypass it.
 
 PostGraphile uses industry standard JWT authentication, allowing for stateless
@@ -277,7 +274,6 @@ authorisation which also works great with CORS.
 
 </div>
 </section>
-
 
 <!-- **************************************** -->
 
@@ -293,7 +289,6 @@ authorisation which also works great with CORS.
 </div>
 </div>
 </div>
-
 
 <div class='row'>
 <div class='text-center col-xs-12 col-md-9 col-lg-7'>
