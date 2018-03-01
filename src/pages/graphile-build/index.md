@@ -25,7 +25,6 @@ title: Extensible GraphQL APIs through Plugins
 </div>
 </header>
 
-
 <!-- **************************************** -->
 
 <section>
@@ -48,11 +47,10 @@ advanced look-ahead features.
 <div class='row'>
 <div class='col-lg-6 col-md-9 col-xs-12'>
 
-
 ##### Build your schema with plugins
+
 ```js
-buildSchema(plugins)
- 
+buildSchema(plugins);
 ```
 
 ```graphql{2}
@@ -67,11 +65,10 @@ type Person {
 </div>
 <div class='col-lg-6 col-md-9 col-xs-12'>
 
-
 ##### Transform your schema with ease
+
 ```js
-buildSchema([...plugins,
-  DeprecateFromCommentPlugin])
+buildSchema([...plugins, DeprecateFromCommentPlugin]);
 ```
 
 ```graphql{3-4}
@@ -114,7 +111,7 @@ leading to fewer round-trips and higher performance.
 
 [PostGraphile](/postgraphile/) uses this functionality to serve even deeply
 nested requests with just one SQL query. Result: significantly reduced query
-latency.
+latency and massive performance increase.
 
 </div>
 </div>
@@ -141,10 +138,10 @@ and eliminate the development work required to keep your codebase and database
 schema in sync.
 
 `graphile-build-pg` is a collection of plugins which adds extensive support for
-PostGraphile by performing introspection of your database schema and
-**automatically** building the relevant GraphQL objects and fields based on the
-tables, columns, functions, relations that it finds. This is the core of
-[PostGraphile](/postgraphile/).
+the popular PostgreSQL database system by performing introspection of your
+database schema and **automatically** building the relevant GraphQL objects and
+fields based on the tables, columns, functions, relations that it finds. This
+is the core of [PostGraphile](/postgraphile/).
 
 You can build plugins for anything that Node.js can communicate with.
 
@@ -154,7 +151,6 @@ You can build plugins for anything that Node.js can communicate with.
 
 </div>
 </section>
-
 
 <!-- **************************************** -->
 
@@ -206,8 +202,6 @@ const MyType =
 </div>
 </section>
 
-
-
 <!-- **************************************** -->
 
 <section>
@@ -257,8 +251,6 @@ replace the out-of-date one - no need to restart your server!
 </div>
 </section>
 
-
-
 <!-- **************************************** -->
 
 <section>
@@ -302,7 +294,6 @@ main();
 
 </div>
 </section>
-
 
 <!-- **************************************** -->
 

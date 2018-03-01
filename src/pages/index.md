@@ -26,7 +26,6 @@ title: Tools to build extensible and performant GraphQL APIs
 </div>
 </header>
 
-
 <!-- **************************************** -->
 
 <section>
@@ -51,6 +50,7 @@ high-performance secure GraphQL API server that adheres to best practices.
 <div class='col-lg-6 mb3 col-md-9 col-xs-12'>
 
 ##### Just concentrate on your database
+
 ```sql
 CREATE TABLE app_public.superheroes (
   id serial not null primary key,
@@ -62,8 +62,8 @@ ALTER TABLE superheroes ENABLE ROW LEVEL SECURITY;
 </div><!-- /col-6 -->
 <div class='col-lg-6 mb3 col-md-9 col-xs-12'>
 
-
 ##### Run a fully-fledged GraphQL API in one command
+
 ```bash
 postgraphile
   -c postgres://localhost/superheroes
@@ -80,7 +80,6 @@ postgraphile
 <a class='strong-link' href='/postgraphile/'>More about PostGraphile <span class='fa fa-fw fa-long-arrow-right' /></a>
 </div>
 
-
 </div>
 </section>
 
@@ -94,14 +93,16 @@ postgraphile
 <div class='hero-block'>
 
 ## Graphile Build
+
 ### High-performance pluggable GraphQL schema tools
 
 Prefer building your GraphQL APIs by hand? By using our [look-ahead
 feature](/graphile-build/look-ahead/) your code can know what's coming and make
-sure it requests the correct fields ahead of time, leading to fewer round-trips
-and higher performance. Our [plugin architecture](/graphile-build/plugins/)
-allows you to extend or enhance your GraphQL API as your needs evolve over time,
-and use community-built plugins to increase developer productivity.
+sure it requests the correct fields from your data source ahead of time,
+leading to fewer round-trips and higher performance. Our [plugin
+architecture](/graphile-build/plugins/) allows you to extend or enhance your
+GraphQL API as your needs evolve over time, and use community-built plugins to
+increase developer productivity.
 
 </div>
 </div>
@@ -137,7 +138,15 @@ const MyType =
 </div>
 
 <div class='flex'>
+<div>
+
+Graphile Build is the core of PostGraphile - we recommend that you get started
+with PostGraphile before you graduate to using Graphile Build directly.
+
+<a class='strong-link' href='/postgraphile/'>Start with PostGraphile <span class='fa fa-fw fa-long-arrow-right' /></a>
 <a class='strong-link' href='/graphile-build/'>More about Graphile Build <span class='fa fa-fw fa-long-arrow-right' /></a>
+
+<div>
 </div>
 
 </div>
