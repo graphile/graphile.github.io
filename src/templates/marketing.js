@@ -43,7 +43,7 @@ class Marketing extends Component {
             {
               name: "keywords",
               content:
-                "GraphQL, API, Graph, PostgreSQL, PostGraphQL, server, plugins, introspection, reflection",
+                "GraphQL, API, Graph, PostgreSQL, PostGraphile, PostGraphQL, Postgres-GraphQL, server, plugins, introspection, reflection",
             },
           ]}
         >

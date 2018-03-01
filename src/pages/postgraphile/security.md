@@ -163,13 +163,13 @@ Your JWT token will include a number of claims, something like:
 
 ```json
 {
-  "aud": "postgraphql",
+  "aud": "postgraphile",
   "role": "app_user",
   "user_id": 27
 }
 ```
 
-When we verify that the JWT token is for us (via `aud: "postgraphql"`) we can
+When we verify that the JWT token is for us (via `aud: "postgraphile"`) we can
 authenticate the PostgreSQL client that is used to perform the GraphQL query.
 We do this as follows:
 

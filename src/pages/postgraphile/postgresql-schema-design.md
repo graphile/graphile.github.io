@@ -433,40 +433,40 @@ This function will create a user and their account, but how will we log the user
 When a user logs in, we want them to make their queries using a specific PostGraphile role. Using that role we can define rules that restrict what data the user may access. So what roles do we need to define for our forum example? Remember when we were connecting to Postgres and we used a URL like `postgres://localhost:5432/mydb`? Well, when you use a connection string like that, you are logging into Postgres using your computer account’s username and no password. Say your computer account username is `buddy`, then connecting with the URL `postgres://localhost:5432/mydb`, would be the same as connecting with the URL `postgres://buddy@localhost:5432/mydb`. If you wanted to connect to your Postgres database with a password it would look like `postgres://buddy:password@localhost:5432/mydb`. When you run Postgres locally, this account will probably be the superuser. So when you run `postgraphile -c postgres://localhost:5432/mydb`, you are running PostGraphile with superuser privileges. To change that let’s create a role that PostGraphile can use to connect to our database:
 
 ```sql
-create role forum_example_postgraphql login password 'xyz';
+create role forum_example_postgraphile login password 'xyz';
 ```
 
-We create this `forum_example_postgraphql` role with the [`CREATE ROLE`](https://www.postgresql.org/docs/current/static/sql-createrole.html) command. We want to make sure our PostGraphile role can login so we specify that with the `login` option and we give the user a password of ‘xyz’ with the `password` option. Now we will start PostGraphile as such:
+We create this `forum_example_postgraphile` role with the [`CREATE ROLE`](https://www.postgresql.org/docs/current/static/sql-createrole.html) command. We want to make sure our PostGraphile role can login so we specify that with the `login` option and we give the user a password of ‘xyz’ with the `password` option. Now we will start PostGraphile as such:
 
 ```bash
-postgraphile -c postgres://forum_example_postgraphql:xyz@localhost:5432/mydb
+postgraphile -c postgres://forum_example_postgraphile:xyz@localhost:5432/mydb
 ```
 
-When a user who does not have a JWT token makes a request to Postgres, we do not want that user to have the privileges we will give to the `forum_example_postgraphql` role, so instead we will create another role.
+When a user who does not have a JWT token makes a request to Postgres, we do not want that user to have the privileges we will give to the `forum_example_postgraphile` role, so instead we will create another role.
 
 ```sql
 create role forum_example_anonymous;
-grant forum_example_anonymous to forum_example_postgraphql;
+grant forum_example_anonymous to forum_example_postgraphile;
 ```
 
-Here we use [`CREATE ROLE`](https://www.postgresql.org/docs/current/static/sql-createrole.html) again. This role cannot login so it does not have the `login` option, or a password. We also use the [`GRANT`](https://www.postgresql.org/docs/9.6/static/sql-grant.html) command to grant access to the `forum_example_anonymous` role to the `forum_example_postgraphql` role. Now, the `forum_example_postgraphql` role can control and become the `forum_example_anonymous` role. If we did not use that grant, we could not change into the `forum_example_anonymous` role in PostGraphile. Now we will start our server like so:
+Here we use [`CREATE ROLE`](https://www.postgresql.org/docs/current/static/sql-createrole.html) again. This role cannot login so it does not have the `login` option, or a password. We also use the [`GRANT`](https://www.postgresql.org/docs/9.6/static/sql-grant.html) command to grant access to the `forum_example_anonymous` role to the `forum_example_postgraphile` role. Now, the `forum_example_postgraphile` role can control and become the `forum_example_anonymous` role. If we did not use that grant, we could not change into the `forum_example_anonymous` role in PostGraphile. Now we will start our server like so:
 
 ```bash
 postgraphile \
-  --connection postgres://forum_example_postgraphql:xyz@localhost:5432/mydb \
+  --connection postgres://forum_example_postgraphile:xyz@localhost:5432/mydb \
   --default-role forum_example_anonymous
 ```
 
-There is one more role we want to create. When a user logs in we don’t want them to use the `forum_example_postgraphql` role, or the basic `forum_example_anonymous` role. So instead we will create a role that all of our logged in users will authorize with. We will call it `forum_example_person` and similarly grant it to the `forum_example_postgraphql` role.
+There is one more role we want to create. When a user logs in we don’t want them to use the `forum_example_postgraphile` role, or the basic `forum_example_anonymous` role. So instead we will create a role that all of our logged in users will authorize with. We will call it `forum_example_person` and similarly grant it to the `forum_example_postgraphile` role.
 
 ```sql
 create role forum_example_person;
-grant forum_example_person to forum_example_postgraphql;
+grant forum_example_person to forum_example_postgraphile;
 ```
 
-> **Warning:** The `forum_example_postgraphql` role will have all of the permissions of the roles granted to it. So it can do everything `forum_example_anonymous` can do and everything `forum_example_person` can do. This is why having a default role is important. We would not want an anonymous user to have admin access level because we have granted an admin role to `forum_example_postgraphql`.
+> **Warning:** The `forum_example_postgraphile` role will have all of the permissions of the roles granted to it. So it can do everything `forum_example_anonymous` can do and everything `forum_example_person` can do. This is why having a default role is important. We would not want an anonymous user to have admin access level because we have granted an admin role to `forum_example_postgraphile`.
 
-Ok, so now we have three roles. `forum_example_postgraphql`, `forum_example_anonymous`, and `forum_example_person`. We know how `forum_example_postgraphql` and `forum_example_anonymous` get used, but how do we know when a user is logged in and should be using `forum_example_person`? The answer is JSON Web Tokens.
+Ok, so now we have three roles. `forum_example_postgraphile`, `forum_example_anonymous`, and `forum_example_person`. We know how `forum_example_postgraphile` and `forum_example_anonymous` get used, but how do we know when a user is logged in and should be using `forum_example_person`? The answer is JSON Web Tokens.
 
 ### JSON Web Tokens
 PostGraphile uses [JSON Web Tokens (JWTs)](https://jwt.io/) for authorization. A JWT is just a JSON object that has been hashed and cryptographically signed to confirm the identity of its contents. So an object like:
@@ -699,7 +699,7 @@ The final argument list for starting our PostGraphile server using the CLI would
 
 ```bash
 postgraphile \
-  --connection postgres://forum_example_postgraphql:xyz@localhost:5432 \
+  --connection postgres://forum_example_postgraphile:xyz@localhost:5432 \
   --schema forum_example \
   --default-role forum_example_anonymous \
   --secret keyboard_kitten \

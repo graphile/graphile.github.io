@@ -10,7 +10,7 @@ const sectionIs = desiredSection => ({ sectionId }) =>
 function PageList({ navs, location }) {
   return (
     <ul className="page-list nav flex-column mb5">
-      {navs.map(({ to, title }, idx) =>
+      {navs.map(({ to, title }, idx) => (
         <li key={idx} className="f6 lh-copy pv1">
           <Link
             className={`nav-link ${location.pathname === to ? "active" : ""}`}
@@ -19,7 +19,7 @@ function PageList({ navs, location }) {
             {title}
           </Link>
         </li>
-      )}
+      ))}
     </ul>
   );
 }
@@ -62,37 +62,35 @@ const Page = ({
           {
             name: "keywords",
             content:
-              "GraphQL, API, Graph, PostgreSQL, PostGraphQL, server, plugins, introspection, reflection",
+              "GraphQL, API, Graph, PostgreSQL, PostGraphile, PostGraphQL, Postgres-GraphQL, server, plugins, introspection, reflection",
           },
         ]}
       />
-      {isPostGraphileDocs
-        ? <div className="header-notice pv3 ph3 f5 lh-title bg-near-black moon-gray">
-            <div className="container">
-              <div className="row">
-                <div className="col-xs-12">
-                  <strong>NOTICE</strong>: PostGraphQL has been <Link
-                    to="/history">renamed to PostGraphile</Link>.  If you were
-                  using <code>postgraphql@next</code> you should update to{" "}
-                  <code>postgraphile</code> instead as{" "}
-                  <code>postgraphql@next</code> will not receive any further
-                  updates.
-                </div>
+      {isPostGraphileDocs ? (
+        <div className="header-notice pv3 ph3 f5 lh-title bg-near-black moon-gray">
+          <div className="container">
+            <div className="row">
+              <div className="col-xs-12">
+                <strong>NOTICE</strong>: PostGraphQL has been{" "}
+                <Link to="/history">renamed to PostGraphile</Link>. If you were
+                using <code>postgraphql@next</code> you should update to{" "}
+                <code>postgraphile</code> instead as{" "}
+                <code>postgraphql@next</code> will not receive any further
+                updates.
               </div>
             </div>
           </div>
-        : null}
+        </div>
+      ) : null}
       <SiteHeader location={location} />
       <div className="page-content">
         <section>
           <div className="container">
             <div className="row between-xs">
               <aside className="sidebar col-xs-12 col-md-3 last-xs mt3">
-                {navSections.map(({ id, title }, idx) =>
+                {navSections.map(({ id, title }, idx) => (
                   <section key={idx}>
-                    <h4 className="f6 ttu fw6 mt0 mb3 bb pb2">
-                      {title}
-                    </h4>
+                    <h4 className="f6 ttu fw6 mt0 mb3 bb pb2">{title}</h4>
                     <div className="nested-list-reset">
                       <PageList
                         location={location}
@@ -100,7 +98,7 @@ const Page = ({
                       />
                     </div>
                   </section>
-                )}
+                ))}
               </aside>
               <div className="col-xs-12 col-md-9 first-xs main-content">
                 <div className="row">
@@ -114,20 +112,20 @@ const Page = ({
                   <div className="col-xs-12 mt3 mb5">
                     <div className="row between-xs">
                       <div className="col-xs-6">
-                        {prev
-                          ? <Link className="" to={prev}>
-                              <span className="fa fa-fw fa-long-arrow-left" />{" "}
-                              {prevText || "Previous"}
-                            </Link>
-                          : null}
+                        {prev ? (
+                          <Link className="" to={prev}>
+                            <span className="fa fa-fw fa-long-arrow-left" />{" "}
+                            {prevText || "Previous"}
+                          </Link>
+                        ) : null}
                       </div>
                       <div className="col-xs-6 tr">
-                        {next
-                          ? <Link className="" to={next}>
-                              {nextText || "Next"}{" "}
-                              <span className="fa fa-fw fa-long-arrow-right" />
-                            </Link>
-                          : null}
+                        {next ? (
+                          <Link className="" to={next}>
+                            {nextText || "Next"}{" "}
+                            <span className="fa fa-fw fa-long-arrow-right" />
+                          </Link>
+                        ) : null}
                       </div>
                     </div>
                   </div>

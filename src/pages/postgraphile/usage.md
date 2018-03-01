@@ -12,8 +12,8 @@ module which is used internally by
 [`PostGraphQL`](https://github.com/graphile/postgraphile). This module is
 fairly small and exposes the following methods:
 
-- `createPostGraphQLSchema(pgConfig, schemas, options)` - returns a promise to a GraphQL schema
-- `watchPostGraphQLSchema(pgConfig, schemas, options, onNewSchema)` - returns a
+- `createPostGraphileSchema(pgConfig, schemas, options)` - returns a promise to a GraphQL schema
+- `watchPostGraphileSchema(pgConfig, schemas, options, onNewSchema)` - returns a
   promise that returns a `release` function that you can call to stop watching;
   the `onNewSchema` callback will be called every time a new schema is
   generated, and it is guaranteed to be called before the promise resolves.
@@ -35,8 +35,8 @@ the array that `postgraphile-core` uses.
 This is a list of inflection engines, we currently have the following:
 
 - `defaultInflection` - a sensible default
-- `postGraphQLInflection` - as above, but enums get converted to `CONSTANT_CASE`
-- `postGraphQLClassicIdsInflection` - as above, but `id` attributes get renamed to `rowId` to prevent conflicts with `id` from the Relay Global Unique Object Specification.
+- `postGraphileInflection` - as above, but enums get converted to `CONSTANT_CASE`
+- `postGraphileClassicIdsInflection` - as above, but `id` attributes get renamed to `rowId` to prevent conflicts with `id` from the Relay Global Unique Object Specification.
 
 ### Manual usage
 
