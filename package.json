@@ -41,12 +41,13 @@
   "license": "MIT",
   "main": "n/a",
   "scripts": {
-    "build": "gatsby build",
+    "build": "./scripts/update && gatsby build",
     "deploy": "./scripts/deploy",
-    "develop": "gatsby develop",
+    "develop": "./scripts/update && gatsby develop",
     "format": "prettier --trailing-comma es5 --no-semi --single-quote --write 'src/**/*.js'",
     "start": "gatsby develop",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "update": "./scripts/update"
   },
   "devDependencies": {
     "eslint_d": "5.2.2",
