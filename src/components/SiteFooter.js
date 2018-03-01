@@ -43,7 +43,7 @@ export default () => {
                 <a href="https://github.com/graphile">GitHub</a>
               </li>
               <li>
-                <a href="https://gitter.im/postgraphql/postgraphql">
+                <a href="https://gitter.im/graphile/postgraphile">
                   Gitter chat
                 </a>
               </li>

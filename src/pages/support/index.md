@@ -41,11 +41,11 @@ title: Support for PostGraphile and Graphile Build from the maintainer
 - Report issues.
 - Discuss the future of the project.
 
-[PostGraphile support](https://github.com/postgraphql/postgraphql/issues)
+[PostGraphile support](https://github.com/graphile/postgraphile/issues)
 
 [Graphile Build support](https://github.com/graphile/graphile-build/issues)
 
-[Gitter chat](https://gitter.im/postgraphql/postgraphql)
+[Gitter chat](https://gitter.im/graphile/postgraphile)
 
 
 </div>
@@ -89,7 +89,7 @@ FAQs
 If you know which file contains the issue, please report to the repository that
 file belongs to.  If you're not sure and you're using PostGraphile then please
 report via the [PostGraphile issue
-tracker](https://github.com/postgraphql/postgraphql/issues), otherwise report
+tracker](https://github.com/graphile/postgraphile/issues), otherwise report
 on the [Graphile Build issue
 tracker](https://github.com/graphile/graphile-build/issues).
 
