@@ -97,7 +97,7 @@ automatically adds to the request.
 For example:
 
 ```js
-export postgraphql(process.env.DATABASE_URL, schemaName, {
+export postgraphile(process.env.DATABASE_URL, schemaName, {
   pgSettings: req => ({
     'user.id': `${req.session.passport.user}`,
     'http.headers.x-something': `${req.headers['x-something']}`,

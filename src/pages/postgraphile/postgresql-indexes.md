@@ -6,7 +6,7 @@ title: PostgreSQL Indexes
 
 ## Indexes
 
-This section of the docs is for people who want to use PostGraphQL but don’t
+This section of the docs is for people who want to use PostGraphile but don’t
 have much experience with PostgreSQL and want resources to help explain key
 concepts. These resources also give some crucial tips on how to optimize
 queries and keep your PostgreSQL database happy and healthy.

@@ -11,7 +11,7 @@ your own GraphQL server. However, if you want to execute a PostGraphile query
 in Node.js without having to go through HTTP you can use some other exported
 functions that PostGraphile provides.
 
-The first function you will need is `createPostGraphQLSchema` whose purpose is
+The first function you will need is `createPostGraphileSchema` whose purpose is
 to create your PostGraphile schema. This function is asynchronous as it will
 need to run the Postgres introspection query in your database.
 
@@ -19,7 +19,7 @@ The function takes very similar arguments to [the `postgraphile`
 middleware](/postgraphile/usage-library/).
 
 ```js
-createPostGraphQLSchema(
+createPostGraphileSchema(
   process.env.DATABASE_URL || 'postgres://localhost/'
 )
   .then(schema => { ... })
@@ -28,14 +28,14 @@ createPostGraphQLSchema(
 
 Now that you have your schema, in order to execute a GraphQL query you must
 supply an (authenticated) `pgClient` on the context object. The preferred way
-to do this is via the asynchronous `withPostGraphQLContext` function. The
+to do this is via the asynchronous `withPostGraphileContext` function. The
 context object will contain a PostgreSQL client which has its own transaction
 with the correct permission levels for the associated user.
 
 ```js
 const { Pool } = require('pg');
 const { graphql } = require('graphql');
-const { withPostGraphQLContext } = require('postgraphile');
+const { withPostGraphileContext } = require('postgraphile');
 
 const myPgPool = new Pool({ ... });
 
@@ -46,7 +46,7 @@ export async function performQuery(
   jwtToken,
   operationName
 ) {
-  return await withPostGraphQLContext(
+  return await withPostGraphileContext(
     {
       pgPool: myPgPool,
       jwtToken: jwtToken,
@@ -58,7 +58,7 @@ export async function performQuery(
       // `context` object, which should NOT be used outside of this
       // function.
       return await graphql(
-        schema, // This is the schema we created with `createPostGraphQLSchema`.
+        schema, // This is the schema we created with `createPostGraphileSchema`.
         query,
         null,
         { ...context }, // Here we use the `context` object that gets passed to this callback.
@@ -72,7 +72,7 @@ export async function performQuery(
 
 (The `await` keywords after the `return` statements aren't required, they're just there to clarify the results are promises.)
 
-#### API: `createPostGraphQLSchema(pgConfig, schemaName, options)`
+#### API: `createPostGraphileSchema(pgConfig, schemaName, options)`
 
 This function takes three arguments (all are optional) and returns a promise to a GraphQLSchema object.
 
@@ -85,15 +85,15 @@ This function takes three arguments (all are optional) and returns a promise to 
   - `jwtPgTypeIdentifier`: The Postgres type identifier for the compound type which will be signed as a JWT token if ever found as the return type of a procedure. Can be of the form: `my_schema.my_type`. You may use quotes as needed: `"my-special-schema".my_type`.
   - `disableDefaultMutations`: Setting this to `true` will prevent the creation of the default mutation types & fields. Database mutation will only be possible through Postgres functions.
 
-#### API: `watchPostGraphQLSchema(pgConfig, schemaName, options, onNewSchema)`
+#### API: `watchPostGraphileSchema(pgConfig, schemaName, options, onNewSchema)`
 
-This function is takes the same options as `createPostGraphQLSchema`; but with
+This function is takes the same options as `createPostGraphileSchema`; but with
 one addition: a function `onNewSchema` that is called every time a new schema
 is generated.  `onNewSchema` is guaranteed to be called before the
-`watchPostGraphQLSchema` promise resolves. It resolves to an asynchronus
+`watchPostGraphileSchema` promise resolves. It resolves to an asynchronus
 function that can be called to stop listening for schema changes. 
 
-#### API: `withPostGraphQLContext(options, callback)`
+#### API: `withPostGraphileContext(options, callback)`
 
 This function sets up a PostGraphile context, calls (and resolves) the callback
 function within this context, and then tears the context back down again
@@ -106,7 +106,7 @@ GraphQLExecutionResult from executing a `graphql()` query).
   - `jwtSecret`: The secret for your JSON web tokens. This will be used to verify the `jwtToken`.
   - `pgDefaultRole`: The default Postgres role that will be used if no role was found in `jwtToken`. It is a best security practice to always have a value for this option even though it is optional.
   - `pgSettings`: Custom config values to set in PostgreSQL (accessed via `current_setting('my.custom.setting')`)
-- **`callback`**: The function which is called with the `context` object which was created. Whatever the return value of this function is will be the return value of `withPostGraphQLContext`.
+- **`callback`**: The function which is called with the `context` object which was created. Whatever the return value of this function is will be the return value of `withPostGraphileContext`.
 
 ### Even lower level access
 

@@ -41,7 +41,7 @@ create table post (
 -- Create the function named `search_posts` with a text argument named `search`.
 create function search_posts(search text)
   -- This function will return a set of posts from the `post` table. The
-  -- `setof` part is important to PostGraphQL, check out our procedure docs to
+  -- `setof` part is important to PostGraphile, check out our procedure docs to
   -- learn why.
   returns setof post as $$
     -- Write our advanced query as a SQL query!
@@ -53,7 +53,7 @@ create function search_posts(search text)
       headline ilike ('%' || search || '%') or
       body ilike ('%' || search || '%')
   -- End the function declaring the language we used as SQL and add the
-  -- `STABLE` marker so PostGraphQL knows its a query and not a mutation.
+  -- `STABLE` marker so PostGraphile knows its a query and not a mutation.
   $$ language sql stable;
 ```
 

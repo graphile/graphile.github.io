@@ -37,13 +37,13 @@ resolve function.
 ### Example
 
 ```js{21,28-29,35-37,42}
-const { createPostGraphQLSchema } = require('postgraphile');
+const { createPostGraphileSchema } = require('postgraphile');
 const pg = require('pg');
 
 const pgPool = new pg.Pool(process.env.DATABASE_URL);
 
 async function runQuery(query, variables) {
-  const schema = await createPostGraphQLSchema(
+  const schema = await createPostGraphileSchema(
     process.env.DATABASE_URL,
     ['users_schema', 'posts_schema'],
     {
@@ -61,10 +61,10 @@ async function runQuery(query, variables) {
 
   try {
     // The following statement is equivalent to (but faster than):
-    //    await pgClient.query("set local role to 'postgraphql_user'");
+    //    await pgClient.query("set local role to 'postgraphile_user'");
     //    await pgClient.query("set local jwt.claims.user_id to '27'");
     await pgClient.query(`select
-      set_config('role', 'postgraphql_user', true),
+      set_config('role', 'postgraphile_user', true),
       set_config('jwt.claims.user_id', '27', true)
     `);
     return await graphql(
@@ -99,5 +99,5 @@ runQuery(
 TODO: ensure this example works.
 
 To see how this works in a real application, check out
-[`withPostGraphQLContext` in
-PostGraphQL](https://github.com/graphile/postgraphile/blob/master/src/postgraphql/withPostGraphQLContext.ts)
+[`withPostGraphileContext` in
+PostGraphile](https://github.com/graphile/postgraphile/blob/master/src/postgraphile/withPostGraphileContext.ts)

@@ -141,7 +141,7 @@ and eliminate the development work required to keep your codebase and database
 schema in sync.
 
 `graphile-build-pg` is a collection of plugins which adds extensive support for
-PostGraphQL by performing introspection of your database schema and
+PostGraphile by performing introspection of your database schema and
 **automatically** building the relevant GraphQL objects and fields based on the
 tables, columns, functions, relations that it finds. This is the core of
 [PostGraphile](/postgraphile/).
