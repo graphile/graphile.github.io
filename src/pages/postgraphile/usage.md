@@ -9,7 +9,7 @@ title: Graphile-Build-PG Usage
 It's recommended that you consume these plugins via the
 [`postgraphile-core`](https://github.com/graphile/graphile-build/tree/master/packages/postgraphile-core)
 module which is used internally by
-[`PostGraphQL`](https://github.com/postgraphql/postgraphql). This module is
+[`PostGraphQL`](https://github.com/graphile/postgraphile). This module is
 fairly small and exposes the following methods:
 
 - `createPostGraphQLSchema(pgConfig, schemas, options)` - returns a promise to a GraphQL schema

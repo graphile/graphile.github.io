@@ -75,5 +75,5 @@ And that’s it! You can now use this function in your GraphQL like so:
 ```
 
 [procedures]: /postgraphile/procedures/
-[forum example]: https://github.com/calebmer/postgraphql/tree/master/examples/forum
+[forum example]: https://github.com/graphile/postgraphile/tree/master/examples/forum
 [`LIKE`]: http://www.postgresql.org/docs/current/static/functions-matching.html

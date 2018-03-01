@@ -100,4 +100,4 @@ TODO: ensure this example works.
 
 To see how this works in a real application, check out
 [`withPostGraphQLContext` in
-PostGraphQL](https://github.com/postgraphql/postgraphql/blob/master/src/postgraphql/withPostGraphQLContext.ts)
+PostGraphQL](https://github.com/graphile/postgraphile/blob/master/src/postgraphql/withPostGraphQLContext.ts)
