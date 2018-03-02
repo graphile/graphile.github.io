@@ -6,7 +6,6 @@ title: Support for PostGraphile and Graphile Build from the maintainer
 
 <!-- **************************************** -->
 
-
 <header class='hero simple'>
 <div class='container'>
 <div class='row'>
@@ -25,7 +24,6 @@ title: Support for PostGraphile and Graphile Build from the maintainer
 </div>
 </header>
 
-
 <!-- **************************************** -->
 
 <section>
@@ -36,10 +34,10 @@ title: Support for PostGraphile and Graphile Build from the maintainer
 
 ## Community Support
 
-- Request features.
-- Advice from the community.
-- Report issues.
-- Discuss the future of the project.
+* Request features.
+* Advice from the community.
+* Report issues.
+* Discuss the future of the project.
 
 [PostGraphile support](https://github.com/graphile/postgraphile/issues)
 
@@ -47,22 +45,20 @@ title: Support for PostGraphile and Graphile Build from the maintainer
 
 [Gitter chat](https://gitter.im/graphile/postgraphile)
 
-
 </div>
 
 <div class='col-xs-12 col-md-6'>
 
 ## Professional Services
 
-- Tweak Graphile to fit your needs.
-- Professional support.
-- Security and performance vetting.
-- Team and one-to-one training at [GraphQL-Training](https://graphql-training.com).
+* Tweak Graphile to fit your needs.
+* Professional support.
+* Security and performance vetting.
+* Team and one-to-one training at [GraphQL-Training](https://graphql-training.com).
 
 $150 / hour for phone support, project-based pricing for feature development
 
 See [FAQs](/support/#faqs) below for more information
-
 
 Email us at <a href="mailto:info@graphile.org?subject=Graphile%20Custom%20Work%20or%20Support">info@graphile.org</a> for details.
 
@@ -87,7 +83,7 @@ FAQs
 ### Which repository do I report issues to?
 
 If you know which file contains the issue, please report to the repository that
-file belongs to.  If you're not sure and you're using PostGraphile then please
+file belongs to. If you're not sure and you're using PostGraphile then please
 report via the [PostGraphile issue
 tracker](https://github.com/graphile/postgraphile/issues), otherwise report
 on the [Graphile Build issue
@@ -96,14 +92,14 @@ tracker](https://github.com/graphile/graphile-build/issues).
 ### There's a typo in...
 
 We ❤️ <span>&nbsp;</span>typo fixes - and it's the easiest way for you to make your mark on the
-project!  If the typo is in this website; please open a PR to [the graphile.github.io
+project! If the typo is in this website; please open a PR to [the graphile.github.io
 repository](https://github.com/graphile/graphile.github.io). If the typo is in
 one of the tools, please raise a pull request with the relevant repository (see
 above).
 
 Raising a pull request is super easy - you can edit a markdown file directly
 through the GitHub interface - simply find the file in question and press the
-Edit (pencil) button and follow the instructions.  If you're not comfortable
+Edit (pencil) button and follow the instructions. If you're not comfortable
 raising a pull request, feel free to raise the edit as an issue, but be aware
 that it'll take longer to fix.
 
@@ -127,7 +123,6 @@ Gillam](https://github.com/benjie). I've been writing JavaScript for 20 years,
 PostgreSQL for 10 years and Node.js since early 2012. I've been helping people
 with their PostGraphile/PostGraphQL issues since 2016.
 
-
 ### How do the professional services work?
 
 Email me with a brief outline of what you need and I'll get back to you either
@@ -135,7 +130,6 @@ with an estimate of the cost of the work, a request for a call to discuss the
 scope of the work, some alternative solutions you may not have considered, or
 I might decline the work (for example if it's out of the scope of Graphile or
 I do not have sufficient availability).
-
 
 ### Could you just add this one feature...?
 
