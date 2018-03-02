@@ -1,0 +1,89 @@
+#!/usr/bin/env node
+
+const fetch = require('node-fetch');
+const { readFileSync, writeFileSync } = require("fs");
+
+async function main() {
+  const request = await fetch("https://raw.githubusercontent.com/graphile/postgraphile/master/src/postgraphile/postgraphile.ts");
+  const code = await request.text();
+
+  /*
+   * Yep, I'm using regexps to parse source code. This is ugly. If this offends
+   * you, feel free to submit a pull request adding AST parsing support!
+   */
+
+  const relevantCode = code
+    .match(/^type PostGraphileOptions = \{([\s\S]+?)^}/m)[1]
+    .trim()
+    .split("\n")
+    .map(str => str.trim());
+
+  let allOptions = [];
+  let comment = [];
+  let flags = [];
+  let inComment = false;
+
+  for (const line of relevantCode) {
+    if (inComment) {
+      inComment = !line.match(/\*\//);
+    } else if (line.startsWith("// ")) {
+      comment.push(line.substr(3));
+    } else if (line.startsWith("/*")) {
+      inComment = !line.match(/\*\//);
+      if (line.includes("@middlewareOnly")) {
+        flags.push("middlewareOnly");
+      }
+    } else {
+      if (comment.length > 0) {
+        const matches = line.match(/^([a-zA-Z0-9]+)\??:(.*)$/);
+        if (matches) {
+          const [, name, _type] = matches;
+          allOptions.push({
+            name,
+            comment,
+            flags,
+          });
+          comment = [];
+          flags = [];
+        }
+      }
+    }
+  }
+
+  const libraryMarkdownBullets = allOptions.map(({ name, comment }) => {
+    return `  * \`${name}\`: ${comment.join(" ")}`;
+  });
+  const schemaMarkdownBullets = allOptions
+    .filter(({ flags }) => !flags.includes("middlewareOnly"))
+    .map(({ name, comment }) => {
+      return `  * \`${name}\`: ${comment.join(" ")}`;
+    });
+
+  {
+    const MARKDOWN_FILE = `${__dirname}/../src/pages/postgraphile/usage-library.md`;
+    const inputMarkdown = readFileSync(MARKDOWN_FILE, "utf8");
+
+    const outputMarkdown = inputMarkdown.replace(
+      /(<!-- LIBRARY_DOCBLOCK_BEGIN -->)[\s\S]*(<!-- LIBRARY_DOCBLOCK_END -->)/,
+      (_, m1, m2) => `${m1}\n${libraryMarkdownBullets.join("\n")}\n\n${m2}`
+    );
+
+    writeFileSync(MARKDOWN_FILE, outputMarkdown);
+  }
+  {
+    const MARKDOWN_FILE = `${__dirname}/../src/pages/postgraphile/usage-schema.md`;
+    const inputMarkdown = readFileSync(MARKDOWN_FILE, "utf8");
+
+    const outputMarkdown = inputMarkdown.replace(
+      /(<!-- SCHEMA_DOCBLOCK_BEGIN -->)[\s\S]*(<!-- SCHEMA_DOCBLOCK_END -->)/,
+      (_, m1, m2) => `${m1}\n${schemaMarkdownBullets.join("\n")}\n\n${m2}`
+    );
+
+    writeFileSync(MARKDOWN_FILE, outputMarkdown);
+  }
+}
+
+main().then(null, error => {
+  console.error(error);
+  process.exit(1);
+});

@@ -16,7 +16,7 @@ const optionsLines = helpText
 
 const markdownBullets = optionsLines.map(line => {
   const [, options, description] = line.match(/^(.*)\s{2,}(.*)$/);
-  return `- \`${options
+  return `* \`${options
     .trim()
     .split(/\s*,\s*/)
     .join("`, `")}\`  \n  ${description.trim()}`;
