@@ -20,6 +20,7 @@ exports.createPages = async ({ boundActionCreators, graphql }) => {
               path
               title
               layout
+              is404
             }
           }
         }
@@ -27,15 +28,23 @@ exports.createPages = async ({ boundActionCreators, graphql }) => {
     }`);
   if (result.errors) {
     const error = new Error("GraphQL query failed");
+    console.error(result, {depth: 6});
     error.errors = result.errors;
     throw error;
   }
   result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+    if (node.frontmatter.is404) {
+      return;
+    }
+    if (!node.frontmatter.path) {
+      console.error("No path for ", node);
+      return;
+    }
     createPage({
       path: node.frontmatter.path,
       component: layouts[node.frontmatter.layout] || layouts.page,
       context: {
-        layout: node.frontmatter.layout,
+        layout: node.frontmatter.layout || 'page',
       },
     });
   });
