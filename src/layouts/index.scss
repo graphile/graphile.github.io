@@ -348,6 +348,14 @@ ol {
   }
 }
 
+ul,
+ol {
+  p {
+    margin: 0;
+    padding: 0;
+  }
+}
+
 pre code {
   font-variant: none;
   background: none;

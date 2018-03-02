@@ -111,11 +111,6 @@
         "sectionId": "overview"
       },
       {
-        "to": "/postgraphile/v3-migration/",
-        "title": "v3 → v4 Migration Guide",
-        "sectionId": "guides"
-      },
-      {
         "to": "/postgraphile/evaluating/",
         "title": "Evaluating for your Project",
         "sectionId": "guides"
@@ -203,6 +198,16 @@
       {
         "to": "/postgraphile/postgresql-indexes/",
         "title": "PostgreSQL Indexes",
+        "sectionId": "guides"
+      },
+      {
+        "to": "/postgraphile/v4-new-features/",
+        "title": "v4 Feature Guide",
+        "sectionId": "guides"
+      },
+      {
+        "to": "/postgraphile/v3-migration/",
+        "title": "v3 → v4 Migration Guide",
         "sectionId": "guides"
       },
       {
