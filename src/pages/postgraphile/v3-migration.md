@@ -19,9 +19,11 @@ get in touch and we'll discuss how one might go about fixing them (please read
 the below first though!)
 
 * Per-function `returns setof <table>` connection names have been removed in
-  favour of a shared connection with the tables themselves
-* What's nullable and what isn't has changed slightly
-* JWTs now have an audience of 'postgraphile'
+  favour of a shared connection with the tables themselves - only affects you
+  if you have referenced the type name in queries/fragments
+* What's nullable and what isn't has changed slightly - shouldn't cause an
+  issue in most cases
+* JWTs now have an audience of 'postgraphile' rather than 'postgraphql'
 * If you have any tables ending with `_input`, `_patch`, `Input` or `Patch`
   they will be renamed (see bottom of this article)
 
@@ -114,37 +116,37 @@ create table bar (
 
 #### New minimum requirements
 
-Problem: the system fails to start (or even install) because the requirements
+**Problem**: the system fails to start (or even install) because the requirements
 are not met.
 
-Solution: upgrade your software
+**Solution**: upgrade your software
 
 * Node.js v8.6+ required
 * PostgreSQL 9.4+ required (v9.6+ recommended)
 * GraphQL v0.9+ required
 
-Reasoning: Node.js v8 is the current active LTS, v6 will be leaving active LTS
+**Reasoning**: Node.js v8 is the current active LTS, v6 will be leaving active LTS
 status for maintenance mode in April 2018 (next month at time of writing), and
 supporting 8.6+ as the base level gives us longevity whilst also allowing us to
-leverage some of the powerful features of ES2017 and ES2018.
+leverage native support for some of the powerful features of ES2017 and ES2018.
 
 #### Type 'Json' or 'Uuid' is not recognized
 
-Problem: `Json` and `Uuid` have been renamed to `JSON` and `UUID` respectively
+**Problem**: `Json` and `Uuid` have been renamed to `JSON` and `UUID` respectively
 
-Solution: either modify your queries, or if you cannot do that then use the
+**Solution**: either modify your queries, or if you cannot do that then use the
 `--legacy-json-uuid` command line flag (or `legacyJsonUuid: true` library
 option) to change back to the old naming.
 
-Reasoning: purely correctness/aesthetic. Sorry. ☺️
+**Reasoning**: purely correctness/aesthetic. Sorry. 😅
 
-#### `orderBy` is now an array
+#### Connection `orderBy` is now an array
 
-Problem: `orderBy` in connection fields now allows an array of order
+**Problem**: `orderBy` in connection fields now allows an array of order
 specifications, so you can order by multiple things (like in SQL). However
 certain clients might have a problem with this?
 
-Solution: in most cases this should _not_ cause an issue for existing queries -
+**Solution**: in most cases this should _not_ cause an issue for existing queries -
 according to [3.1.7 in the GraphQL
 specification](http://facebook.github.io/graphql/October2016/#sec-Lists):
 
@@ -154,49 +156,51 @@ specification](http://facebook.github.io/graphql/October2016/#sec-Lists):
 
 So any spec-compliant client should **not** have an issue with this.
 
-Reasoning: people want to sort by multiple columns and since we could do it
+**Reasoning**: people want to sort by multiple columns and since we could do it
 with a non-breaking change (according to the above) we did!
 
 #### Expected 'UUID' but received 'String'
 
-Problem: 'UUID' is enabled by default
+**Problem**: 'UUID' is enabled by default
 
-Solution: raise an issue and we can add a toggle to not enable it by default
+**Solution**: raise an issue and we can add a toggle to not enable it by default
 
-Reasoning: named types are helpful
+**Reasoning**: named types are helpful
 
 #### JWTs now have audience 'postgraphile' / issuer 'postgraphile'
 
-Problem: we changed the audience with the rename of the library
+**Problem**: we changed the audience with the rename of the library
 
-Solution: if you can't update your config you can make sure your token objects
-returned in the DB have `aud: 'postgraphql', iss: 'postgraphql'`
+**Solution**: if you can't update your config you can make sure your token objects
+returned in the DB have `aud: 'postgraphql', iss: 'postgraphql'` (solution
+untested - if you used this please let [me](https://twitter.com/benjie) know
+whether it worked or not)
 
-Reasoning: we renamed the library, it'd be confusing for new users to reference
+**Reasoning**: we renamed the library, it'd be confusing for new users to reference
 the old name.
 
-#### Function connection names have changed
+#### Functions now use table connections where possible (again!)
 
-Problem: functions that return setof a table type now use the same connection
+**Problem**: functions that return setof a table type now use the same connection
 class as the tables themselves do (just like PostGraphQL v2 did)
 
-Solution: if this is a problem for you and you're unable to fix the queries,
+**Solution**: if this is a problem for you and you're unable to fix the queries,
 please do get in touch!
 
-Reasoning: performing pagination against multiple sources of the same table
+**Reasoning**: performing pagination against multiple sources of the same table
 type is much more complex if the connection types differ.
 
-Potential future solution: have the connections implement a shared interface.
+**Potential future solution**: have the connections implement a shared interface.
 
 #### Issues with nullables
 
-Problem: some things are nullable that weren't, some things aren't nullable that were.
+**Problem**: some things are nullable that weren't, some things aren't nullable that were.
 
-Solution: you can enable the `--no-setof-functions-include-nulls` CLI option
+**Solution**: you can enable the `--no-setof-functions-include-nulls` CLI option
 (or `setofFunctionsIncludeNulls: false` library option) to reduce the nullables
 in the generated schema.
 
-Reasoning:
+**Reasoning**:
 
 Functions like this can exist:
 
@@ -221,30 +225,31 @@ If you don't like the nulls everywhere, I encourage you to use the `-N` /
 non-breaking change, but disabling it **is** a breaking change - hence why it
 is not the default behaviour.
 
-#### `returns setof <scalar>` query procedures no longer have `pageInfo` nor `totalCount`
+#### Query procedures that `returns setof <scalar>` no longer have `pageInfo` nor `totalCount`
 
-Problem: as above.
+**Problem**: as heading.
 
-Solution: it's possibly to re-introduce support via a plugin - get in touch if
-you need things
+**Solution**: it's possibly to re-introduce support via a plugin - get in touch if
+you need this
 
-Reasoning: I did not feel it was particularly necessary and I've only got
-limited time to work on the project
+**Reasoning**: I did not feel it was particularly necessary and I've only got
+limited time to work on the project...
 
 #### Watch schema has changed
 
-Problem: watch schema has changed to fix issues with dropping objects
+_Note that changes to the watch schema are NOT deemed to be breaking changes._
 
-Solution: most people shouldn't be affected by this (though they might want to
+**Problem**: watch schema has changed to fix issues with dropping objects
+
+**Solution**: most people shouldn't be affected by this (though they might want to
 drop the old watch schema) because `--watch` is only intended for development
 use and the new schema should install itself just fine. But if you had to
 manually install the old watch schema, you'll need to manually install the [new
 one](https://github.com/graphile/graphile-build/blob/master/packages/graphile-build-pg/res/watch-fixtures.sql)
 in the same way
 
-Reasoning: the old schema did not detect certain `DROP` commands and so adding
+**Reasoning**: the old schema did not detect certain `DROP` commands and so adding
 stuff to your schema was fine, but removing them did not result in a refresh.
-I was unable to achieve the fix in a backwards-compatible way.
 
 ### Other changes that may affect you
 
@@ -284,7 +289,7 @@ via a simple plugin.
 `security definer` mutations that return a type from a schema that the
 requesting PostgreSQL user is not allowed to view may now result in `permission denied for schema xxxx`.
 
-Solution: don't do that 😉
+**Solution**: don't do that 😉
 
 #### Conflicting tables names - `*_input`, `*_patch`
 
