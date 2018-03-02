@@ -112,7 +112,7 @@
       },
       {
         "to": "/postgraphile/v3-migration/",
-        "title": "Migrating from PostGraphQL v3",
+        "title": "v3 → v4 Migration Guide",
         "sectionId": "guides"
       },
       {
