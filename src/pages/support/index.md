@@ -59,7 +59,7 @@ title: Support for PostGraphile and Graphile Build from the maintainer
 - Security and performance vetting.
 - Team and one-to-one training at [GraphQL-Training](https://graphql-training.com).
 
-$200 / hour or $1000 / day
+$150 / hour for phone support, project-based pricing for feature development
 
 See [FAQs](/support/#faqs) below for more information
 
