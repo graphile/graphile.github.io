@@ -111,6 +111,11 @@
         "sectionId": "overview"
       },
       {
+        "to": "/postgraphile/v3-migration/",
+        "title": "Migrating from PostGraphQL v3",
+        "sectionId": "guides"
+      },
+      {
         "to": "/postgraphile/evaluating/",
         "title": "Evaluating for your Project",
         "sectionId": "guides"
