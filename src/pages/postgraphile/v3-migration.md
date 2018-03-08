@@ -29,41 +29,27 @@ the below first though!)
 
 ### Aside: project financial status
 
-**TL;DR: just read the bold bits!**
+**_TL;DR: just read the bold bits!_**
 
-I ([Benjie](https://twitter.com/benjie)) am the primary maintainer of
-PostGraphile; I'm a [software contractor/consultant](https://jemjie.uk) by
-trade. **My work on PostGraphile is primarily self-funded** - I spend time I _could_
-be earning money from contracting _instead_ working on this project. As such the
-amount of time I can dedicate to the project is quite limited, and often feels
-very rushed.
+**My work on PostGraphile is primarily self-funded** - I take time
+off from earning money through contracting to work on PostGraphile.
 
-Recently **I started [a Patreon](https://www.patreon.com/benjie)** and I really
-appreciate the support my 10 patrons have been giving me on there - it has
-allowed me to spend more time working on PostGraphile. I would love to spend a
-LOT more time working on the project - there's so much more that this system
-could do for you (and it could do it so much faster!).
+Recently **I started [a Patreon](https://www.patreon.com/benjie)** and the
+support from these 10 lovely folk has allowed me to spend more time working on
+PostGraphile. The reason that V4 is so compatible with V3 is because of the
+support of these patrons. 🙏 I would love to spend a LOT more time working on
+the project, but to do that I need more supporters.
 
-The reason that V4 is so compatible with V3 is because of the support of these
-patrons. 🙏
+**If your business uses PostGraphile, please invest in [my
+Patreon](https://www.patreon.com/benjie)** - you'll benefit from faster fixes,
+more features, and better performance. If you need a more commercially
+justifiable way of funding the project then please **get in touch - I am
+working on a commercial support offering**. I'm also open to other forms of
+support, and of course you can [hire me](/support/) to give advice or build
+features.
 
-**If you use PostGraphile in a commercial project** please can you think of the
-value that using PostGraphile gives your business and **invest some of that value in
-[my Patreon](https://www.patreon.com/benjie)**. According to
-[CodeMentor](https://www.codementor.io/blog/cost-of-hiring-full-time-and-freelance-software-developers-1nqgg7b19d)
-a median full-time software developer in the USA has a cost to the company of
-$150k/yr (including benefits/insurance/etc); this works out to be $625 per
-working day. I'd like to think that PostGraphile saves your company at least
-a few engineer-days per year of work!
-
-If you need a more commercially justifiable way of funding the project then
-please **get in touch - I am working on a commercial support offering** which
-would give you concrete assurances in return for your financial contributions.
-I'm also open to other forms of support, and of course you can [hire
-me](/support/) to give advice or build features.
-
-Every bit of support, no matter how small, helps. Thanks for reading through my
-begging 😳, back to the migration guide...
+Every bit of support, no matter how small, helps. Thanks for reading, back to
+the migration guide...
 
 ### Deprecations
 
