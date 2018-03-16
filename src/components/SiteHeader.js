@@ -57,9 +57,9 @@ export default withRouter(
                 <ul className="navbar-nav flex w-100">
                   <li className="navbar-item">
                     <Link
-                      className={`nav-link ${location.pathname.match(/^\/$/)
-                        ? "active"
-                        : ""}`}
+                      className={`nav-link ${
+                        location.pathname.match(/^\/$/) ? "active" : ""
+                      }`}
                       to="/"
                     >
                       <span className="home-icon fa fa-home" />{" "}
@@ -68,11 +68,11 @@ export default withRouter(
                   </li>
                   <li className="navbar-item">
                     <Link
-                      className={`nav-link ${location.pathname.match(
-                        /^\/postgraphile(\/|$)/
-                      )
-                        ? "active"
-                        : ""}`}
+                      className={`nav-link ${
+                        location.pathname.match(/^\/postgraphile(\/|$)/)
+                          ? "active"
+                          : ""
+                      }`}
                       to="/postgraphile/"
                     >
                       PostGraphile
@@ -80,11 +80,11 @@ export default withRouter(
                   </li>
                   <li className="navbar-item">
                     <Link
-                      className={`nav-link ${location.pathname.match(
-                        /^\/graphile-build(\/|$)/
-                      )
-                        ? "active"
-                        : ""}`}
+                      className={`nav-link ${
+                        location.pathname.match(/^\/graphile-build(\/|$)/)
+                          ? "active"
+                          : ""
+                      }`}
                       to="/graphile-build/"
                     >
                       Graphile Build
@@ -92,11 +92,11 @@ export default withRouter(
                   </li>
                   <li className="navbar-item">
                     <Link
-                      className={`nav-link ${location.pathname.match(
-                        /^\/support(\/|$)/
-                      )
-                        ? "active"
-                        : ""}`}
+                      className={`nav-link ${
+                        location.pathname.match(/^\/support(\/|$)/)
+                          ? "active"
+                          : ""
+                      }`}
                       to="/support/"
                     >
                       Support
@@ -124,7 +124,7 @@ export default withRouter(
                   <li className="navbar-item navbar-item-right">
                     <a
                       className="nav-link nav-github-link flex items-center"
-                      href="https://github.com/graphile/graphile-build"
+                      href="https://github.com/graphile"
                     >
                       <span className="f3 fa fa-github" />{" "}
                       <span className="github">Github</span>
