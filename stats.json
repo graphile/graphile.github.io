@@ -57,8 +57,8 @@
       "path---postgraphile-v-4-new-features-7ce0e375a89ab75009af.js.map"
     ],
     "component---src-templates-marketing-js": [
-      "component---src-templates-marketing-js-3842ad12e778e1fe7110.js",
-      "component---src-templates-marketing-js-3842ad12e778e1fe7110.js.map"
+      "component---src-templates-marketing-js-23021a9ef9424090e518.js",
+      "component---src-templates-marketing-js-23021a9ef9424090e518.js.map"
     ],
     "path---": [
       "path----557518bd178906f8d58a.js",
@@ -81,8 +81,8 @@
       "path---postgraphile-v-3-migration-9a46e1e270ee65462c67.js.map"
     ],
     "component---src-templates-page-js": [
-      "component---src-templates-page-js-2afc0beefd3a360b7a68.js",
-      "component---src-templates-page-js-2afc0beefd3a360b7a68.js.map"
+      "component---src-templates-page-js-77e225def5937e05c33b.js",
+      "component---src-templates-page-js-77e225def5937e05c33b.js.map"
     ],
     "path---postgraphile-computed-columns": [
       "path---postgraphile-computed-columns-a959ed772797d1021c30.js",
@@ -171,9 +171,9 @@
       "path---postgraphile-introduction-2123ee710ab4b02aa4a5.js.map"
     ],
     "app": [
-      "app-e5cfe0f47bc9951e4017.js",
+      "app-f4bb774b4a377a1be685.js",
       "build-js-styles.css",
-      "app-e5cfe0f47bc9951e4017.js.map",
+      "app-f4bb774b4a377a1be685.js.map",
       "build-js-styles.css.map"
     ],
     "path---postgraphile-connections": [
