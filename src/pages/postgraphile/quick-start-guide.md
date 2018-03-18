@@ -102,6 +102,9 @@ To run PostGraphile, you’ll use the same URL that you used for `psql` with the
 # Connect to the `mydb` database within the PostgreSQL at localhost port 5432
 $ postgraphile -c "postgres://localhost:5432/mydb"
 
+# Connect to a database that requires SSL/TLS
+$ postgraphile -c "postgres://securehost:5432/db?ssl=1"
+
 # Connect to the `somedb` database within the PostgreSQL at somehost port 2345
 $ postgraphile -c "postgres://somehost:2345/somedb"
 ```
