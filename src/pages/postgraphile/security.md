@@ -68,7 +68,7 @@ it as a string JWT token as part of your GraphQL response payload.
 For example, you might define a composite type such as this in PostgreSQL:
 
 ```sql
-create type my_private_schema.jwt_token(
+create type my_private_schema.jwt_token as (
   role text,
   exp integer,
   person_id integer,
