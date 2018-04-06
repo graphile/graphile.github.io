@@ -104,7 +104,7 @@ begin
   if account.password_hash = crypt(password, account.password_hash) then
     return (
       'person_role',
-      86400,
+      extract(epoch from now() + interval '7 days'),
       account.person_id,
       account.is_admin,
       account.username
