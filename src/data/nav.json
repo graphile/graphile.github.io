@@ -161,6 +161,11 @@
         "sectionId": "overview"
       },
       {
+        "to": "/postgraphile/smart-comments/",
+        "title": "Smart Comments",
+        "sectionId": "overview"
+      },
+      {
         "to": "/postgraphile/security/",
         "title": "Security",
         "sectionId": "overview"
