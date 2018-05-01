@@ -12,11 +12,13 @@ If you have found a security vulnerability which shouldn't be shared publicly, p
 
 
 ## Table of Contents
-  - []()
-  - []()
+  - [Confirm your version of PostGraphile](#confirm-your-version-of-postgraphile)
+  - [Search for your problem](#search-for-your-problem)
 
 ## Confirm your version of PostGraphile
 
-```
-postgraphile --version
-```
+First, make sure you are running an up-to-date version of PostGraphile. Run `postgraphile --version` in a terminal to get your version number. You can check you have an up-to-date version by looking at the released versions listed here: [https://github.com/graphile/postgraphile/releases](https://github.com/graphile/postgraphile/releases)
+
+## Search for your problem
+
+Once you know you have a bug on an up-to-date version of Postgraphile, see if it's already been noted in our [Issue Tracker on Github](https://github.com/graphile/postgraphile/issues). 
