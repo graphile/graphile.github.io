@@ -17,7 +17,7 @@ This allows you to make easy changes to an existing schema without making breaki
 
 ## Smart rename
 
-You can add a smart comment to an entity to rename that entity. Simply create a comment referring to the entitiy in question and use `@name` followed by the new name. 
+You can add a smart comment to an entity to rename that entity. Simply create a comment referring to the entitiy in question and use `@name` followed by the new name. You will find that all the related types and fields in GraphQL will reflect the change. If they don't update immediately, then you may have forgotten to enable `--watch` mode; you can restart the server to load the changes.
 
 ### Example
 
@@ -89,7 +89,7 @@ custom mutations
 comment on function authenticate(text, text) is 
   E'@name login';
 ```
-custom mutation function result
+custom mutation function results
 ```sql
 comment on function authenticate(text, text) is 
   E'@name login\n@resultFieldName token';
