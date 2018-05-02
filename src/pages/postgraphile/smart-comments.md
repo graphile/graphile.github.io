@@ -54,22 +54,50 @@ comment on function getFlamble() is E'@name allFlambles';
 
 The following can be renamed: 
 
-Entity | Example
----|---
-tables | `comment on table post is E'@name message'`
-relations | `comment on constraint thread_author_id_fkey on thread is E'@foreignFieldName threads\n@fieldName author'`
-columns | `comment on column my_schema.my_table.my_column is E'@name alternativeColumnName'`
-
-
-
- - tables (using `comment on table post is E'@name message'`)
- - columns (`comment on column my_schema.my_table.my_column is E'@name alternativeColumnName'`)
- - relations (`comment on constraint thread_author_id_fkey on thread is E'@foreignFieldName threads\n@fieldName author'`)
- - unique-key record finder (`comment on constraint person_pkey on person is E'@fieldName findPersonById'`)
- - computed columns (`comment on function person_full_name(person) is E'@fieldName name'`)
- - custom queries (`comment on function search_posts(text) is E'@name returnPostsMatching'`)
- - custom mutations (`comment on function authenticate(text, text) is E'@name login'`)
- - custom mutation function result (`comment on function authenticate(text, text) is E'@name login\n@resultFieldName token'`)
- - types (`comment on type flibble is @name flamble'`)
+tables
+```sql
+comment on table post is 
+  E'@name message';
+```
+columns 
+```sql
+comment on column my_schema.my_table.my_column is 
+  E'@name alternativeColumnName';
+```
+ relations 
+ ```sql
+ comment on constraint thread_author_id_fkey on thread is 
+  E'@foreignFieldName threads\n@fieldName author';
+```
+unique-key record finder
+```sql
+comment on constraint person_pkey on person is 
+  E'@fieldName findPersonById;
+```
+computed columns
+```sql
+comment on function person_full_name(person) is 
+  E'@fieldName name';
+```
+custom queries
+```sql
+comment on function search_posts(text) is 
+  E'@name returnPostsMatching';
+```
+custom mutations
+```sql
+comment on function authenticate(text, text) is 
+  E'@name login';
+```
+custom mutation function result
+```sql
+comment on function authenticate(text, text) is 
+  E'@name login\n@resultFieldName token';
+```
+types
+```sql
+comment on type flibble is 
+  E'@name flamble';
+```
 
 ## Smart omit
