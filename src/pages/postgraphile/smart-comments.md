@@ -4,21 +4,72 @@ path: /postgraphile/smart-comments/
 title: Smart Comments
 ---
 
-# Smart Comments in Postgraphile
+## Smart Comments
 
-When you find a bug in PostGraphile, we want to know about it. Bug reports are an important part of making sure PostGraphile is the most reliable we can make it as even with the utmost care we cannot guarantee that it will run on every system with every configuration possible. To make the most of your reports, we have written the following guidelines. Following these pointers will make your report as valuable as possible by giving us as much information as possible so we can reproduce the issue and fix it.
+PostGraphile includes a feature which allows you to write smart comments on your tables, columns, relations, functions (and more) which are then used to alter the way the entities are exposed in the generated schema. As of version 4, smart comments can be used for renaming, and also to omit parts of the schema from being used.
 
-If you have found a security vulnerability which shouldn't be shared publicly, please use responsible disclosure and email your report to <a href="mailto:benjie@graphile.org">benjie@graphile.org</a>
+This allows you to make easy changes to an existing schema without making breaking changes. 
 
 
 ## Table of Contents
-  - [Confirm your version of PostGraphile](#confirm-your-version-of-postgraphile)
-  - [Search for your problem](#search-for-your-problem)
+  - [Smart rename](#smart-rename)
+  - [Smart omit](#smart-omit)
 
-## Confirm your version of PostGraphile
+## Smart rename
 
-First, make sure you are running an up-to-date version of PostGraphile. Run `postgraphile --version` in a terminal to get your version number. You can check you have an up-to-date version by looking at the released versions listed here: [https://github.com/graphile/postgraphile/releases](https://github.com/graphile/postgraphile/releases)
+You can add a smart comment to an entity to rename that entity. Simply create a comment referring to the entitiy in question and use `@name` followed by the new name. 
 
-## Search for your problem
+### Example
 
-Once you know you have a bug on an up-to-date version of Postgraphile, see if it's already been noted in our [Issue Tracker on Github](https://github.com/graphile/postgraphile/issues). 
+Here is a basic table, with the name changed from `original_table` to `renamed_table`:
+
+```sql
+create table original_table (
+  col1 int
+);
+
+comment on table original_table is E'@name renamed_table';
+```
+
+The column can also be renamed: 
+
+```sql
+comment on column original_table.col1 is E'@name colA';
+``` 
+
+The same can be done for types and custom queries: 
+
+```sql
+create type flibble as (f text);
+
+create function getFlamble() returns SETOF flibble as $$
+    select body from post
+$$ language sql;
+
+comment on type flibble is E'@name flamble';
+comment on function getFlamble() is E'@name allFlambles';
+```
+
+### Usage
+
+The following can be renamed: 
+
+Entity | Example
+---|---
+tables | `comment on table post is E'@name message'`
+relations | `comment on constraint thread_author_id_fkey on thread is E'@foreignFieldName threads\n@fieldName author'`
+columns | `comment on column my_schema.my_table.my_column is E'@name alternativeColumnName'`
+
+
+
+ - tables (using `comment on table post is E'@name message'`)
+ - columns (`comment on column my_schema.my_table.my_column is E'@name alternativeColumnName'`)
+ - relations (`comment on constraint thread_author_id_fkey on thread is E'@foreignFieldName threads\n@fieldName author'`)
+ - unique-key record finder (`comment on constraint person_pkey on person is E'@fieldName findPersonById'`)
+ - computed columns (`comment on function person_full_name(person) is E'@fieldName name'`)
+ - custom queries (`comment on function search_posts(text) is E'@name returnPostsMatching'`)
+ - custom mutations (`comment on function authenticate(text, text) is E'@name login'`)
+ - custom mutation function result (`comment on function authenticate(text, text) is E'@name login\n@resultFieldName token'`)
+ - types (`comment on type flibble is @name flamble'`)
+
+## Smart omit
