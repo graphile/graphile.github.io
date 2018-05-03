@@ -181,11 +181,6 @@
         "sectionId": "overview"
       },
       {
-        "to": "/postgraphile/report-bug/",
-        "title": "Report a Bug",
-        "sectionId": "overview"
-      },
-      {
         "to": "/postgraphile/jwt-guide/",
         "title": "PostGraphile JWT Guide",
         "sectionId": "guides"
