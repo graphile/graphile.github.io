@@ -19,37 +19,6 @@ This allows you to make easy changes to an existing schema without making breaki
 
 You can add a smart comment to an entity to rename that entity. Simply create a comment referring to the entitiy in question and use `@name` followed by the new name. You will find that all the related types and fields in GraphQL will reflect the change. If they don't update immediately, then you may have forgotten to enable `--watch` mode; you can restart the server to load the changes.
 
-### Example
-
-Here is a basic table, with the name changed from `original_table` to `renamed_table`:
-
-```sql
-create table original_table (
-  col1 int
-);
-
-comment on table original_table is E'@name renamed_table';
-```
-
-The column can also be renamed: 
-
-```sql
-comment on column original_table.col1 is E'@name colA';
-``` 
-
-The same can be done for types and custom queries: 
-
-```sql
-create type flibble as (f text);
-
-create function getFlamble() returns SETOF flibble as $$
-    select body from post
-$$ language sql;
-
-comment on type flibble is E'@name flamble';
-comment on function getFlamble() is E'@name allFlambles';
-```
-
 ### Usage
 
 The following can be renamed: 
@@ -99,5 +68,48 @@ types
 comment on type flibble is 
   E'@name flamble';
 ```
+
+### Example
+
+Here is a basic table, with the name changed from `original_table` to `renamed_table`:
+
+```sql
+create table original_table (
+  col1 int
+);
+
+comment on table original_table is E'@name renamed_table';
+```
+
+The column can also be renamed: 
+
+```sql
+comment on column original_table.col1 is E'@name colA';
+``` 
+
+The same can be done for types and custom queries: 
+
+```sql
+create type flibble as (f text);
+
+create function getFlamble() returns SETOF flibble as $$
+    select body from post
+$$ language sql;
+
+comment on type flibble is E'@name flamble';
+comment on function getFlamble() is E'@name allFlambles';
+```
+
+Smart comments are also reflected in GraphiQL. Here, we are querying the table `original_table` by looking at `allOriginalTables`:
+
+![GraphiQL displaying allOriginalTables](./smart-comments-rename-example1.png)
+
+Next, we add the smart comment `E'@name renamed_table'` on `original_table` and the rename is instantly reflected in GraphiQL: 
+
+![GraphiQL displaying the renamed allOriginalTables](./smart-comments-rename-example2.png)
+
+So now the query needs to use the new name for the table: 
+
+![GraphiQL displaying allRenamedTables](./smart-comments-rename-example3.png)
 
 ## Smart omit
