@@ -8,7 +8,7 @@ title: Smart Comments
 
 PostGraphile includes a feature which allows you to write smart comments on your tables, columns, relations, functions (and more) which are then used to alter the way the entities are exposed in the generated schema. As of version 4, smart comments can be used for renaming, and also to omit parts of the schema from being used.
 
-This allows you to make easy changes to an existing schema without making breaking changes. 
+This allows you to make easy changes to an existing schema without making breaking changes in the database. 
 
 
 ## Table of Contents
@@ -145,3 +145,19 @@ order	| no `orderBy` argument for `allFoos`/`foosBy...`	| cannot order by `BAR_A
 all	| no `allFoos` query	| - |	-
 many	| no `foosBy...` fields |	- |	-
 execute	| -	| -	| computed column / custom query / custom mutation is not exposed
+
+### Example
+
+On a simple table called `book` we have added a smart comment omitting the `create` operation: 
+
+```sql
+create table forum_example.book (
+  col1 int
+);
+
+comment on table forum_example.book is E'@omit create';
+```
+
+The results are immediately reflected in GraphiQL. On the left, you can see all the entires regarding the `book` table in the documentation before the smart comment was written. On the right, you can see that all the fields and mutations regarding the `create` operation have been removed.
+
+![GraphiQL displaying an omit smart comment example](./smart-comments-omit-example.png)
