@@ -117,3 +117,31 @@ So now the query needs to use the new name for the table:
 You can add a smart comment to an entity to remove that entity from your API. Simply create a comment referring to the entitiy in question and use `@omit` followed by the name of the entity and the operations you wish to omit. You will find that all the related types and fields in GraphQL will reflect the change. If they don't update immediately, then you may have forgotten to enable `--watch` mode; you can restart the server to load the changes.
 
 > **Warning:** This is not intended for implementing permissions, it's for removing things from your API that you don't need. You should back these up with database permissions if needed. 
+
+### Usage
+
+Add a comment on your entity with the following format: 
+
+```sql
+comment on table table_name is E'@omit action'; 
+```
+
+Multiple actions can be listed, as in the following example: 
+
+```sql
+comment on table table_name is E'@omit create, update';
+```
+
+We currently support the following for table `foo`, column `foo.bar` and function `qux`
+
+Omit action |	Table	| Column | Function
+---------|------|------|-------
+create |	no `createFoo` mutation	| column `bar` is not available on `createFoo` mutation |	-
+read	| table not present |	column not present in any interface |	-
+update |	no `updateFoo` or `updateFooBy*` mutations |	column `bar` is not available on `updateFoo` mutations	| -
+delete	| no `deleteFoo` or `deleteFooBy*` mutations	| - |	-
+filter	| no `condition` argument for `allFoos` / `foosBy...` |	cannot filter `allFoos`/`foosBy...` by `bar` |	prevents filtering by computed column
+order	| no `orderBy` argument for `allFoos`/`foosBy...`	| cannot order by `BAR_ASC` or `BAR_DESC` | cannot order by computed column
+all	| no `allFoos` query	| - |	-
+many	| no `foosBy...` fields |	- |	-
+execute	| -	| -	| computed column / custom query / custom mutation is not exposed
