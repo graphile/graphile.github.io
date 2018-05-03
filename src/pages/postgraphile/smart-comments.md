@@ -113,3 +113,7 @@ So now the query needs to use the new name for the table:
 ![GraphiQL displaying allRenamedTables](./smart-comments-rename-example3.png)
 
 ## Smart omit
+
+You can add a smart comment to an entity to remove that entity from your API. Simply create a comment referring to the entitiy in question and use `@omit` followed by the name of the entity and the operations you wish to omit. You will find that all the related types and fields in GraphQL will reflect the change. If they don't update immediately, then you may have forgotten to enable `--watch` mode; you can restart the server to load the changes.
+
+> **Warning:** This is not intended for implementing permissions, it's for removing things from your API that you don't need. You should back these up with database permissions if needed. 
