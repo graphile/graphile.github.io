@@ -38,7 +38,7 @@ comment on column my_schema.my_table.my_column is
  comment on constraint thread_author_id_fkey on thread is 
   E'@foreignFieldName threads\n@fieldName author';
 ```
-unique-key record finder
+unique-key record finders
 ```sql
 comment on constraint person_pkey on person is 
   E'@fieldName findPersonById;
@@ -58,7 +58,7 @@ custom mutations
 comment on function authenticate(text, text) is 
   E'@name login';
 ```
-custom mutation function results
+custom mutation function result names
 ```sql
 comment on function authenticate(text, text) is 
   E'@name login\n@resultFieldName token';
