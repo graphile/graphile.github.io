@@ -99,6 +99,27 @@ p,
   @extend .mt4-ns;
 }
 
+.full-width p {
+  max-width: none;
+}
+
+.big-table table {
+  border-spacing: 0px;
+  border-collapse: collapse;
+}
+
+.big-table th,
+.big-table td {
+  padding: 6px 20px 6px 0;
+}
+.big-table th:last-child,
+.big-table td:last-child {
+  padding: 6px 0 6px 0;
+}
+.big-table tr {
+  padding: 10px 0;
+}
+
 .page-content {
   section {
     @extend .bg-white;

@@ -6,64 +6,142 @@ title: Smart Comments
 
 ## Smart Comments
 
-PostGraphile includes a feature which allows you to write smart comments on your tables, columns, relations, functions (and more) which are then used to alter the way the entities are exposed in the generated schema. As of version 4, smart comments can be used for renaming, and also to omit parts of the schema from being used.
+You can customise your PostGraphile GraphQL schema by adding comments to tables, columns, functions, relations, etc. within your PostgreSQL database. These changes could be renaming something (via `@name newNameHere`), or omitting things from your GraphQL schema (via `@omit`), or anything else a plugin supports!
 
-This allows you to make easy changes to an existing schema without making breaking changes in the database. 
+We call this functionality "Smart Comments" and it allows you to easily customise the generated GraphQL schema without making breaking changes to your database.
 
+If you're using PostGraphile in `--watch` mode, you should be able to see in PostGraphile's GraphiQL client that the related types and fields will reflect the change almost immediately. If you're not using `--watch` then you may need to restart the server for smart comment changes to take effect.
 
-## Table of Contents
-  - [Smart rename](#smart-rename)
-  - [Smart omit](#smart-omit)
+### Table of Contents
+  - [Smart comment spec](#smart-comment-spec)
+  - [Deprecating](#deprecating)
+  - [Renaming](#renaming)
+  - [Omitting](#omitting)
 
-## Smart rename
+### Smart comment spec
 
-You can add a smart comment to an entity to rename that entity. Simply create a comment referring to the entitiy in question and use `@name` followed by the new name. You will find that all the related types and fields in GraphQL will reflect the change. If they don't update immediately, then you may have forgotten to enable `--watch` mode; you can restart the server to load the changes.
+Comments can be added to various entities within PostgreSQL; we add a special syntax to these comments that enables PostGraphile to treat them as smart comments.
 
-### Usage
+A smart comment is made up of one or more "tags" and optionally followed by the remaining comment. Tags may have a string payload (which follows a the tag and a space, and must not contain newline characters) and are separated by newlines. Tags always start with an `@` symbol and must always come before the remaining comment, hence all smart comments start with an `@` symbol. If a tag has no payload then its value will be the boolean `true`, otherwise it will be a string. If the same tag is present more than once in a smart comment then its final value will become an array of the individual values for that tag.
+
+The following text could be parsed as a smart comment (the values shown don't necessarily have any meaning):
+
+```
+@name meta
+@isImportant
+@jsonField date timestamp
+@jsonField name text
+@jsonField episode enum ONE=1 TWO=2
+This field has a load of arbitrary tags.
+```
+
+and would result in the following JSON tags object:
+
+```json
+{
+  "name": "meta",
+  "isImportant": true,
+  "jsonField": [
+    "date timestamp",
+    "name text",
+    "episode enum ONE=1 TWO=2"
+  ]
+}
+```
+
+and the description on the last line would be made available as documentation as non-smart comments are.
+
+```
+This field has a load of arbitrary tags.
+```
+
+To put newlines in smart comments we recommend the use of the [`E` "escape" string constants](https://www.postgresql.org/docs/10/static/sql-syntax-lexical.html#SQL-SYNTAX-CONSTANTS), wherein you can use `\n` for newlines. For example the text above could be added to a comment on a field via:
+
+```sql
+comment on column my_schema.my_table.my_column is
+  E'@name meta\n@isImportant\n@jsonField date timestamp\n@jsonField name text\n@jsonField episode enum ONE=1 TWO=2\nThis field has a load of arbitrary tags.';
+```
+
+There are a few smart comment tags built into PostGraphile, but support for more can be added via plugins.
+
+Note that the parser is deliberately very strict currently, we might make it more flexible in future; you might want to check out the [test suite](https://github.com/graphile/graphile-build/blob/master/packages/graphile-build-pg/__tests__/tags.test.js).
+
+### Deprecating
+
+You can deprecate a database column using the `@deprecated` tag. If you need multiple lines, you can specify the tag multiple times, one per line of output text.
+
+```sql
+comment on column my_schema.my_table.my_column is
+  E'@deprecated Use myOtherColumn instead.';
+```
+
+### Renaming
+
+You can add a smart comment to an entity to rename that entity. For tables, columns, custom types and many functions you can use the `@name` tag followed by the new name. For more complex things we use different tags, such as for foreign key constraints we have `@fieldName` and `@foreignFieldName`.
+
 
 The following can be renamed: 
 
-tables
+#### Tables
+
 ```sql
 comment on table post is 
   E'@name message';
 ```
-columns 
+
+#### Columns 
+
 ```sql
-comment on column my_schema.my_table.my_column is 
+comment on column my_table.my_column is 
   E'@name alternativeColumnName';
 ```
- relations 
- ```sql
- comment on constraint thread_author_id_fkey on thread is 
+
+#### Relations 
+
+```sql
+comment on constraint thread_author_id_fkey on thread is 
   E'@foreignFieldName threads\n@fieldName author';
 ```
-unique-key record finders
+
+#### Unique-key record finders
+
 ```sql
 comment on constraint person_pkey on person is 
-  E'@fieldName findPersonById;
+  E'@fieldName findPersonById';
 ```
-computed columns
+
+#### Computed columns
+
 ```sql
 comment on function person_full_name(person) is 
   E'@fieldName name';
 ```
-custom queries
+
+#### Custom queries
+
 ```sql
 comment on function search_posts(text) is 
   E'@name returnPostsMatching';
 ```
-custom mutations
+
+#### Custom mutations
+
 ```sql
 comment on function authenticate(text, text) is 
   E'@name login';
 ```
-custom mutation function result names
+
+#### Custom mutation function result names
+
 ```sql
+comment on function removeSomething(text) is 
+  E'@resultFieldName success';
 comment on function authenticate(text, text) is 
-  E'@name login\n@resultFieldName token';
+  E'@resultFieldName token\n@name login';
 ```
-types
+
+#### Types
+
 ```sql
 comment on type flibble is 
   E'@name flamble';
@@ -93,7 +171,7 @@ The same can be done for types and custom queries:
 create type flibble as (f text);
 
 create function getFlamble() returns SETOF flibble as $$
-    select body from post
+    select (body)::flibble from post
 $$ language sql;
 
 comment on type flibble is E'@name flamble';
@@ -102,62 +180,85 @@ comment on function getFlamble() is E'@name allFlambles';
 
 Smart comments are also reflected in GraphiQL. Here, we are querying the table `original_table` by looking at `allOriginalTables`:
 
+<div class="full-width">
+
 ![GraphiQL displaying allOriginalTables](./smart-comments-rename-example1.png)
+
+</div>
 
 Next, we add the smart comment `E'@name renamed_table'` on `original_table` and the rename is instantly reflected in GraphiQL: 
 
+<div class="full-width">
+
 ![GraphiQL displaying the renamed allOriginalTables](./smart-comments-rename-example2.png)
+
+</div>
 
 So now the query needs to use the new name for the table: 
 
+<div class="full-width">
+
 ![GraphiQL displaying allRenamedTables](./smart-comments-rename-example3.png)
 
-## Smart omit
+</div>
 
-You can add a smart comment to an entity to remove that entity from your API. Simply create a comment referring to the entitiy in question and use `@omit` followed by the name of the entity and the operations you wish to omit. You will find that all the related types and fields in GraphQL will reflect the change. If they don't update immediately, then you may have forgotten to enable `--watch` mode; you can restart the server to load the changes.
+### Omitting
 
-> **Warning:** This is not intended for implementing permissions, it's for removing things from your API that you don't need. You should back these up with database permissions if needed. 
+To remove an entity from your API, create a comment on the entity in question and use `@omit`. If you only want to omit the entity from certain operations you can list them. For example, `@omit update` on a table would prevent the table from having an update-related functionality whilst still including queries, create and delete. `@omit update` on a column would prevent the column appearing in the `Patch` type, so it cannot be updated (but can still be created) via GraphQL.
 
-### Usage
+Here's a quick-reference for the operations we currently support (you'll want to experiment with them as there wasn't space to put all the caveats in the table!):
+
+<div class='big-table'>
+
+⁣ | Action |	Table effect	| Column effect | Function effect
+--- | --- |------|------|-------
+C | **`create`** |	omit `create` mutation	| omit from `create` |	-
+R | **`read`**	| omit completely |	completely omitted |	-
+U | **`update`** |	omit `update` mutations |	omit from `update` | -
+D | **`delete`**	| omit `delete` mutations | - |	-
+F | **`filter`**	| omit `condition` arg |	omit from `condition` |	no filtering
+O | **`order`**	| omit `orderBy` arg | omit from `orderBy` | no ordering
+A | **`all`**	| no `allFoos` query	| - |	-
+M | **`many`**	| no foreign key fields |	- |	-
+X | **`execute`**	| -	| -	| function not present
+
+</div>
+
+
+> **Warning:** This functionality is not intended for implementing permissions, it's for removing things from your API that you don't need. You should back these up with database permissions if needed.
+
+#### Usage
 
 Add a comment on your entity with the following format: 
 
 ```sql
-comment on table table_name is E'@omit action'; 
+comment on table table_name is E'@omit <actions>'; 
 ```
 
-Multiple actions can be listed, as in the following example: 
+Multiple actions can be listed using commas (no spaces!), as in the following example which disables mutations on a table:
 
 ```sql
-comment on table table_name is E'@omit create, update';
+comment on table table_name is E'@omit create,update,delete';
 ```
 
-We currently support the following for table `foo`, column `foo.bar` and function `qux`
+#### Example
 
-Omit action |	Table	| Column | Function
----------|------|------|-------
-create |	no `createFoo` mutation	| column `bar` is not available on `createFoo` mutation |	-
-read	| table not present |	column not present in any interface |	-
-update |	no `updateFoo` or `updateFooBy*` mutations |	column `bar` is not available on `updateFoo` mutations	| -
-delete	| no `deleteFoo` or `deleteFooBy*` mutations	| - |	-
-filter	| no `condition` argument for `allFoos` / `foosBy...` |	cannot filter `allFoos`/`foosBy...` by `bar` |	prevents filtering by computed column
-order	| no `orderBy` argument for `allFoos`/`foosBy...`	| cannot order by `BAR_ASC` or `BAR_DESC` | cannot order by computed column
-all	| no `allFoos` query	| - |	-
-many	| no `foosBy...` fields |	- |	-
-execute	| -	| -	| computed column / custom query / custom mutation is not exposed
-
-### Example
-
-On a simple table called `book` we have added a smart comment omitting the `create` operation: 
+On a simple table called `book` we have added a smart comment omitting the `update` and `delete` operations:
 
 ```sql
 create table forum_example.book (
   col1 int
 );
 
-comment on table forum_example.book is E'@omit create';
+comment on table forum_example.book is E'@omit update,delete';
 ```
 
-The results are immediately reflected in GraphiQL. On the left, you can see all the entires regarding the `book` table in the documentation before the smart comment was written. On the right, you can see that all the fields and mutations regarding the `create` operation have been removed.
+The results are immediately reflected in GraphiQL. We can also disable `create` operations:
+
+```sql
+comment on table forum_example.book is E'@omit create,update,delete';
+```
+
+On the left, you can see the documentation for all the fields and types regarding `book` before the `create` operation was omitted. On the right, you can see the reduced fields and types once the `create` operation is omitted.
 
 ![GraphiQL displaying an omit smart comment example](./smart-comments-omit-example.png)
