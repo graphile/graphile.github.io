@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 
-const fetch = require('node-fetch');
+const fetch = require("node-fetch");
 const { readFileSync, writeFileSync } = require("fs");
 
 async function main() {
-  const request = await fetch("https://raw.githubusercontent.com/graphile/postgraphile/master/src/postgraphile/postgraphile.ts");
+  const request = await fetch(
+    "https://raw.githubusercontent.com/graphile/postgraphile/master/src/postgraphile/postgraphile.ts"
+  );
   const code = await request.text();
 
   /*
@@ -13,7 +15,7 @@ async function main() {
    */
 
   const relevantCode = code
-    .match(/^type PostGraphileOptions = \{([\s\S]+?)^}/m)[1]
+    .match(/^export type PostGraphileOptions = \{([\s\S]+?)^}/m)[1]
     .trim()
     .split("\n")
     .map(str => str.trim());
