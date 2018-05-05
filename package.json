@@ -28,7 +28,7 @@
     "gatsby-transformer-remark": "^1.7.0",
     "graphile-build": "4.0.0-alpha.1",
     "graphql": "^0.11.7",
-    "postgraphile": "4.0.0-alpha2.34-pre.6",
+    "postgraphile": "4.0.0-beta.6",
     "react-typography": "^0.16.1",
     "remark-custom-blocks": "^1.0.1",
     "typography": "^0.16.0",
