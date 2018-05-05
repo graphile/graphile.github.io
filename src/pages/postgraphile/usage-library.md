@@ -66,7 +66,7 @@ The `postgraphile` middleware factory function takes three arguments, all of whi
   * `classicIds`: Enables classic ids for Relay support. Instead of using the field name `nodeId` for globally unique ids, PostGraphile will instead use the field name `id` for its globally unique ids. This means that table `id` columns will also get renamed to `rowId`.
   * `disableDefaultMutations`: Setting this to `true` will prevent the creation of the default mutation types & fields. Database mutation will only be possible through Postgres functions.
   * `showErrorStack`: Enables adding a `stack` field to the error response.  Can be either the boolean `true` (which results in a single stack string) or the string `json` (which causes the stack to become an array with elements for each line of the stack).
-  * `handleErrors`: Enables ability to modify errors before sending them down to the client. Optionally can send down custom responses.  Must provide a middleware function that takes an array of errors, a request, and a reponse and returns an array of extended errors (`errors: Array<GraphQLError>, req: IncomingMessage, res: ServerResponse) => Array<GraphQLErrorExtended>`). `GraphQLErrorExtended` is a standard `GraphQLError` plus these three additional properties: `hint` (string), `detail` (string), and `code` (string). 
+  * `handleErrors`: Enables ability to modify errors before sending them down to the client optionally can send down custom responses
   * `extendedErrors`: Extends the error response with additional details from the Postgres error.  Can be any combination of `['hint', 'detail', 'errcode']`. Default is `[]`.
   * `appendPlugins`: an array of [Graphile Build](/graphile-build/plugins/) plugins to load after the default plugins
   * `prependPlugins`: an array of [Graphile Build](/graphile-build/plugins/) plugins to load before the default plugins (you probably don't want this)
@@ -80,6 +80,7 @@ The `postgraphile` middleware factory function takes three arguments, all of whi
   * `graphiql`: Set this to `true` to enable the GraphiQL interface.
   * `enableCors`: Enables some generous CORS settings for the GraphQL endpoint. There are some costs associated when enabling this, if at all possible try to put your API behind a reverse proxy.
   * `bodySizeLimit`: Set the maximum size of JSON bodies that can be parsed (default 100kB). The size can be given as a human-readable string, such as '200kB' or '5MB' (case insensitive).
+  * `enableQueryBatching`: [Experimental] Enable the middleware to process multiple GraphQL queries in one request
   * `jwtSecret`: The secret for your JSON web tokens. This will be used to verify tokens in the `Authorization` header, and signing JWT tokens you return in procedures.
   * `jwtVerifyOptions`: Options with which to perform JWT verification - see https://github.com/auth0/node-jsonwebtoken#jwtverifytoken-secretorpublickey-options-callback
   * `jwtRole`: A comma separated list of strings that give a path in the jwt from which to extract the postgres role. If none is provided it will use the key `role` on the root of the jwt.

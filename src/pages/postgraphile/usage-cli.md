@@ -84,6 +84,8 @@ There are more CLI options available to customise the GraphQL server:
   set the maximum size of JSON bodies that can be parsed (default 100kB) The size can be given as a human-readable string, such as '200kB' or '5MB' (case insensitive).
 * `--cluster-workers <count>`  
   [experimental] spawn <count> workers to increase throughput
+* `--enable-query-batching`  
+  [experimental] enable the server to process multiple GraphQL queries in one request
 * `-e`, `--jwt-secret <string>`  
   the secret to be used when creating and verifying JWTs. if none is provided auth will be disabled
 * `--jwt-verify-algorithms <string>`  
