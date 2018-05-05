@@ -1,12 +1,20 @@
 #!/usr/bin/env node
 
-const { execSync } = require("child_process");
-const { readFileSync, writeFileSync } = require("fs");
+const { spawnSync } = require("child_process");
+const { readFileSync, writeFileSync, existsSync } = require("fs");
 
-const helpText = execSync(
-  `${__dirname}/../node_modules/.bin/postgraphile --help`,
+const { stdout: helpText, status } = spawnSync(
+  [
+    `${__dirname}/../../graphile-build/postgraphile/postgraphile`, // Custom to Benjie's development setup
+    `${__dirname}/../node_modules/.bin/postgraphile`,
+  ].filter(existsSync)[0],
+  ["--help"],
   { encoding: "utf8" }
 );
+
+if (status !== 0) {
+  throw new Error(`postgraphile exited with non-zero status '${status}'`);
+}
 
 const optionsLines = helpText
   .match(/Options:([\s\S]+)Get started:/)[1]
