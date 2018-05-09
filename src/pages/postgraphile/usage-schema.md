@@ -11,9 +11,10 @@ your own GraphQL server. However, if you want to execute a PostGraphile query
 in Node.js without having to go through HTTP you can use some other exported
 functions that PostGraphile provides.
 
-The first function you will need is `createPostGraphileSchema` whose purpose is
-to create your PostGraphile schema. This function is asynchronous as it will
-need to run the Postgres introspection query in your database.
+The first function you will need is `createPostGraphileSchema` (or
+`watchPostGraphileSchema` if you want to get a new schema each time the
+database is updated) which creates your PostGraphile GraphQL schema by
+introspecting your database.
 
 The function takes very similar arguments to [the `postgraphile`
 middleware](/postgraphile/usage-library/).
@@ -58,10 +59,10 @@ export async function performQuery(
       // `context` object, which should NOT be used outside of this
       // function.
       return await graphql(
-        schema, // This is the schema we created with `createPostGraphileSchema`.
+        schema, // The schema from `createPostGraphileSchema`
         query,
         null,
-        { ...context }, // Here we use the `context` object that gets passed to this callback.
+        { ...context }, // You can add more to context if you like
         variables,
         operationName
       );
@@ -75,6 +76,8 @@ export async function performQuery(
 #### API: `createPostGraphileSchema(pgConfig, schemaName, options)`
 
 This function takes three arguments (all are optional) and returns a promise to a GraphQLSchema object.
+
+The returned GraphQLSchema will **not** be updated when your database changes - if you require "watch" functionality, please use `watchPostGraphileSchema` instead (see below).
 
 * **`pgConfig`**: An object or string that will be passed to the [`pg`][] library and used to connect to a PostgreSQL backend. If you already have a client or pool instance, when using this function you may also pass a `pg` client or a `pg-pool` instance directly instead of a config.
 * **`schemaName`**: A string which specifies the PostgreSQL schema that PostGraphile will use to create a GraphQL schema. The default schema is the `public` schema. May be an array for multiple schemas. For users who want to run the Postgres introspection query ahead of time, you may also pass in a `PgCatalog` instance directly.
@@ -102,9 +105,31 @@ This function takes three arguments (all are optional) and returns a promise to 
 
 This function is takes the same options as `createPostGraphileSchema`; but with
 one addition: a function `onNewSchema` that is called every time a new schema
-is generated. `onNewSchema` is guaranteed to be called before the
-`watchPostGraphileSchema` promise resolves. It resolves to an asynchronus
-function that can be called to stop listening for schema changes.
+is generated, passing the new schema as the first argument. `onNewSchema` is
+guaranteed to be called before the `watchPostGraphileSchema` promise resolves.
+It resolves to an asynchronus function that can be called to stop listening for
+schema changes.
+
+```js
+// TODO: check this works!
+async function main() {
+  let graphqlSchema;
+  const releaseWatcher = await watchPostGraphileSchema(
+    pgPool,
+    pgSchemas,
+    options,
+    (newSchema) => {
+      console.log("Generated new GraphQL schema");
+      graphqlSchema = newSchema
+    }
+  );
+  // graphqlSchema is **guaranteed** to be set here.
+
+  // ... do stuff with graphqlSchema
+
+  await releaseWatcher();
+}
+```
 
 #### API: `withPostGraphileContext(options, callback)`
 
