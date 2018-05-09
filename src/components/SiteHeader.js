@@ -106,6 +106,20 @@ export default withRouter(
                     )}
                   />
 
+                  {/* Support pages */}
+
+                  <Route
+                    exact
+                    path="/support/"
+                    render={() => (
+                      <li className="navbar-item">
+                        <Link className={"nav-link"} to="/postgraphile/">
+                          PostGraphile
+                        </Link>
+                      </li>
+                    )}
+                  />
+
                   {/* PostGraphile pages */}
 
                   <Route
@@ -243,7 +257,8 @@ export default withRouter(
                       href="https://graphql-training.com"
                       title="GraphQL Training in London, Europe and Remote"
                     >
-                      Training
+                      GraphQL Training{" "}
+                      <span className="fa fa-external-link-square" />
                     </a>
                   </li>
                   <li className="navbar-item navbar-item-right">
@@ -252,7 +267,9 @@ export default withRouter(
                       href="https://github.com/graphile"
                     >
                       <span className="f3 fa fa-github" />{" "}
-                      <span className="github">Github</span>
+                      <span className="github">
+                        Github <span className="fa fa-external-link-square" />
+                      </span>
                     </a>
                   </li>
                 </ul>
