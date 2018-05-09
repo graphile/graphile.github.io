@@ -213,7 +213,7 @@ a {
     display: block;
     position: absolute;
     width: 43%;
-    height: 100vh;
+    height: 600px; // 100vh
     background-image: linear-gradient(117deg, transparent 50%, #9c2828 0);
     background-color: transparent;
     z-index: 0;
@@ -226,11 +226,11 @@ a {
     display: block;
     position: absolute;
     width: 31%;
-    height: 100vh;
+    height: 600px; // 100vh
     background-image: linear-gradient(66deg, transparent 50%, #922323 0);
     background-color: transparent;
     z-index: 0;
-    top: -34vh;
+    top: -204px; // -34vh
     right: 0;
   }
 
@@ -262,7 +262,7 @@ a {
 }
 
 .template-page {
-  min-height: 100vh;
+  min-height: 600px; // 100vh;
 }
 
 .template-marketing {
@@ -271,12 +271,12 @@ a {
     @extend .white;
     @extend .flex;
     @extend .flex-column;
-    padding-bottom: 12vh;
-    padding-top: 12vh;
+    padding-bottom: 72px; //12vh;
+    padding-top: 72px; //12vh;
 
     &.simple {
-      padding-bottom: 12vh;
-      padding-top: 12vh;
+      padding-bottom: 72px; //12vh;
+      padding-top: 72px; //12vh;
     }
 
     h2 { margin: 0; }
@@ -512,11 +512,11 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
     background: linear-gradient(85deg, #a51b1b 0%, #7d2424 100%);
 
     &:after {
-      top: -6vh;
+      top: -36px; // -6vh;
     }
 
     &:before {
-      top: -42vh;
+      top: -252px; // -42vh;
     }
 
     $triHeightSm: 10px;
