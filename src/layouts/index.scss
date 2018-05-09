@@ -455,6 +455,55 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
   @extend .fw6;
 }
 
+.pricing-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.pricing-table td, .pricing-table th {
+  width: 25%;
+}
+.pricing-table thead th {
+  @extend .f3;
+  @extend .pb3;
+  border-bottom: 2px solid #a51b1b;
+}
+.pricing-table tbody th,
+.pricing-table tbody td {
+  @extend .pv3;
+  border-bottom: 1px solid #a51b1b;
+}
+.pricing-table tbody tr:last-child th,
+.pricing-table tbody tr:last-child td {
+  border-bottom: none;
+}
+.pricing-table tbody th,
+.pricing-table tfoot th {
+  text-align: right;
+}
+.pricing-table tbody td,
+.pricing-table tfoot td {
+  text-align: center;
+}
+.pricing-table .fa-check-circle,
+.pricing-table .fa-times-circle {
+  @extend .f3;
+}
+.pricing-table .fa-check-circle {
+  color: green;
+}
+.pricing-table .fa-times-circle {
+  color: red;
+}
+.pricing-table .note {
+  @extend .pt2;
+  color: #555;
+  display: block;
+}
+.pricing-table .button--outline,
+.pricing-table .button--solid {
+  width: 80%;
+}
+
 // ----------------------------------------
 // Misc media queries
 
