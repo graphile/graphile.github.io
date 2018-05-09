@@ -94,9 +94,15 @@ p,
   @extend .f5-ns;
   @extend .f6;
   @extend .lh-copy;
-  @extend .measure;
+  @extend .measure-wide;
   @extend .mb4-ns;
   @extend .mt4-ns;
+}
+.template-marketing {
+  p,
+  .response {
+    @extend .measure;
+  }
 }
 
 .full-width p {

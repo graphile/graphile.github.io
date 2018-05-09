@@ -100,7 +100,7 @@ const Page = ({
                   </section>
                 ))}
               </aside>
-              <div className="col-xs-12 col-md-9 first-xs main-content">
+              <div className="col-xs-12 col-md-7 col-md-offset-1 first-xs main-content">
                 <div className="row">
                   <div
                     className="col-xs-12"
