@@ -25,7 +25,7 @@ function PageList({ navs, location }) {
 }
 
 const tag = (name, label = name) =>
-  `<span class="plan-${name}">${label}</span>`;
+  `<a href='/postgraphile/pricing/'><span class="plan-${name}">${label}</span></a>`;
 function processHTML(html) {
   return html
     .replace(/\[SUPPORTER\]/g, tag("supporter"))
