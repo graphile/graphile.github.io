@@ -32,6 +32,8 @@ There are more CLI options available to customise the GraphQL server:
   output usage information
 * `-V`, `--version`  
   output the version number
+* `--plugins <string>`  
+  a list of postgraphile plugins (not Graphile-Build plugins) to load, MUST be the first option
 * `-c`, `--connection <string>`  
   the Postgres connection. if not provided it will be inferred from your environment, example: postgres://user:password@domain:port/db
 * `-s`, `--schema <string>`  
