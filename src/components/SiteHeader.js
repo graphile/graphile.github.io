@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "gatsby-link";
-import { withRouter } from "react-router-dom";
+import { withRouter, Switch, Route } from "react-router-dom";
 
 function enableSearch(history) {
   if (typeof docsearch === "undefined") {
@@ -66,51 +66,155 @@ export default withRouter(
                       <span className="home">Home</span>
                     </Link>
                   </li>
-                  <li className="navbar-item">
-                    <Link
-                      className={`nav-link ${
-                        location.pathname.match(/^\/postgraphile(\/|$)/)
-                          ? "active"
-                          : ""
-                      }`}
-                      to="/postgraphile/"
-                    >
-                      PostGraphile
-                    </Link>
-                  </li>
-                  <li className="navbar-item">
-                    <Link
-                      className={`nav-link ${
-                        location.pathname.match(/^\/graphile-build(\/|$)/)
-                          ? "active"
-                          : ""
-                      }`}
-                      to="/graphile-build/"
-                    >
-                      Graphile Build
-                    </Link>
-                  </li>
-                  <li className="navbar-item">
-                    <Link
-                      className={`nav-link ${
-                        location.pathname.match(/^\/support(\/|$)/)
-                          ? "active"
-                          : ""
-                      }`}
-                      to="/support/"
-                    >
-                      Support
-                    </Link>
-                  </li>
-                  <li className="navbar-item">
-                    <a
-                      className="nav-link"
-                      href="https://graphql-training.com"
-                      title="GraphQL Training in London, Europe and Remote"
-                    >
-                      GraphQL Training
-                    </a>
-                  </li>
+
+                  {/* HOMEPAGE */}
+
+                  <Route
+                    exact
+                    path="/"
+                    render={() => (
+                      <li className="navbar-item">
+                        <Link
+                          className={`nav-link ${
+                            location.pathname.match(/^\/postgraphile(\/|$)/)
+                              ? "active"
+                              : ""
+                          }`}
+                          to="/postgraphile/"
+                        >
+                          PostGraphile
+                        </Link>
+                      </li>
+                    )}
+                  />
+                  <Route
+                    exact
+                    path="/"
+                    render={() => (
+                      <li className="navbar-item">
+                        <Link
+                          className={`nav-link ${
+                            location.pathname.match(/^\/graphile-build(\/|$)/)
+                              ? "active"
+                              : ""
+                          }`}
+                          to="/graphile-build/"
+                        >
+                          Graphile Build
+                        </Link>
+                      </li>
+                    )}
+                  />
+
+                  {/* PostGraphile pages */}
+
+                  <Route
+                    path="/postgraphile"
+                    render={() => (
+                      <li className="navbar-item">
+                        <Link
+                          className={`nav-link ${
+                            location.pathname.match(/^\/postgraphile\/?$/)
+                              ? "active"
+                              : ""
+                          }`}
+                          to="/postgraphile/"
+                        >
+                          Overview
+                        </Link>
+                      </li>
+                    )}
+                  />
+                  <Route
+                    path="/postgraphile"
+                    render={() => (
+                      <li className="navbar-item">
+                        <Link
+                          className={`nav-link ${
+                            location.pathname.match(
+                              /^\/postgraphile\/.(?!ricing)/
+                            )
+                              ? "active"
+                              : ""
+                          }`}
+                          to="/postgraphile/introduction/"
+                        >
+                          Documentation
+                        </Link>
+                      </li>
+                    )}
+                  />
+                  <Route
+                    path="/postgraphile"
+                    render={() => (
+                      <li className="navbar-item">
+                        <Link
+                          className={`nav-link ${
+                            location.pathname.match(
+                              /^\/postgraphile\/pricing(\/|$)/
+                            )
+                              ? "active"
+                              : ""
+                          }`}
+                          to="/postgraphile/pricing/"
+                        >
+                          Pricing
+                        </Link>
+                      </li>
+                    )}
+                  />
+
+                  {/* Graphile-build pages */}
+
+                  <Route
+                    path="/graphile-build"
+                    render={() => (
+                      <li className="navbar-item">
+                        <Link
+                          className={`nav-link ${
+                            location.pathname.match(/^\/graphile-build\/?$/)
+                              ? "active"
+                              : ""
+                          }`}
+                          to="/graphile-build/"
+                        >
+                          Overview
+                        </Link>
+                      </li>
+                    )}
+                  />
+                  <Route
+                    path="/graphile-build"
+                    render={() => (
+                      <li className="navbar-item">
+                        <Link
+                          className={`nav-link ${
+                            location.pathname.match(
+                              /^\/graphile-build\/.(?!ricing)/
+                            )
+                              ? "active"
+                              : ""
+                          }`}
+                          to="/graphile-build/getting-started/"
+                        >
+                          Documentation
+                        </Link>
+                      </li>
+                    )}
+                  />
+                  <Route
+                    path="/graphile-build"
+                    render={() => (
+                      <li className="navbar-item">
+                        <Link className={"nav-link"} to="/postgraphile/">
+                          PostGraphile
+                        </Link>
+                      </li>
+                    )}
+                  />
+
+                  {/* FIN */}
+
                   <li className="navbar-item ml-auto navbar-item-right">
                     <span className="searchbox-container">
                       <input
@@ -120,6 +224,27 @@ export default withRouter(
                       />
                       <span className="fa fa-search searchbox-search" />
                     </span>
+                  </li>
+                  <li className="navbar-item navbar-item-right">
+                    <Link
+                      className={`nav-link ${
+                        location.pathname.match(/^\/support(\/|$)/)
+                          ? "active"
+                          : ""
+                      }`}
+                      to="/support/"
+                    >
+                      Services
+                    </Link>
+                  </li>
+                  <li className="navbar-item navbar-item-right">
+                    <a
+                      className="nav-link"
+                      href="https://graphql-training.com"
+                      title="GraphQL Training in London, Europe and Remote"
+                    >
+                      Training
+                    </a>
                   </li>
                   <li className="navbar-item navbar-item-right">
                     <a
