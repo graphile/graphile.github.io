@@ -122,3 +122,15 @@ There are more CLI options available to customise the GraphQL server:
   ONLY use this option if you require the v3 typenames 'Json' and 'Uuid' over 'JSON' and 'UUID'
 
 <!-- CLI_DOCBLOCK_END -->
+* `-S`, `--simple-subscriptions`  
+  [SUPPORTER] ⚡️[experimental] add simple subscription support
+* `--subscription-authorization-function [fn]`  
+  [SUPPORTER] ⚡️[experimental] PG function to call to check user is allowed to subscribe
+* `--read-only-connection <string>`  
+  [PRO] ⚡️[experimental] a PostgreSQL connection string to use for read-only queries (i.e. not mutations)
+* `--default-pagination-cap [int]`  
+  [PRO] ⚡️[experimental] Ensures all connections have first/last specified and are no large than this value (default: 50), set to -1 to disable; override via smart comment `@paginationCap 50`
+* `--graphql-depth-limit [int]`  
+  [PRO] ⚡️[experimental] Validates GraphQL queries cannot be deeper than the specified int (default: 16), set to -1 to disable
+* `--graphql-cost-limit [int]`  
+  [PRO] ⚡️[experimental] Only allows queries with a computed cost below the specified int (default: 1000), set to -1 to disable
