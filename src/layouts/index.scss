@@ -510,6 +510,26 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
   width: 80%;
 }
 
+.plan-tag {
+  background-color: lime;
+  color: white;
+  border-radius: 1em;
+  font-size: 0.75em;
+  padding: 0.2em 0.7em 0.3em;
+}
+.plan-supporter {
+  @extend .plan-tag;
+  background-color: blue;
+}
+.plan-pro {
+  @extend .plan-tag;
+  background-color: purple;
+}
+.plan-enterprise {
+  @extend .plan-tag;
+  background-color: green;
+}
+
 // ----------------------------------------
 // Misc media queries
 

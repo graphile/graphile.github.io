@@ -24,10 +24,21 @@ function PageList({ navs, location }) {
   );
 }
 
+function processHTML(html) {
+  return html
+    .replace(/\[SUPPORTER\]/g, '<span class="plan-supporter">supporter</span>')
+    .replace(/\[PRO\]/g, '<span class="plan-pro">pro</span>')
+    .replace(
+      /\[ENTERPRISE\]/g,
+      '<span class="plan-enterprise">enterprise</span>'
+    );
+}
+
 const Page = ({
-  data: { remark: { html, frontmatter: { title } }, nav },
+  data: { remark: { html: rawHTML, frontmatter: { title } }, nav },
   location,
 }) => {
+  const html = processHTML(rawHTML);
   const [, navSection] = location.pathname.split("/");
   const thisNavEdge = nav.edges.find(
     ({ node: { name } }) => name === navSection
