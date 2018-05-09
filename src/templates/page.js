@@ -24,14 +24,13 @@ function PageList({ navs, location }) {
   );
 }
 
+const tag = (name, label = name) =>
+  `<span class="plan-${name}">${label}</span>`;
 function processHTML(html) {
   return html
-    .replace(/\[SUPPORTER\]/g, '<span class="plan-supporter">supporter</span>')
-    .replace(/\[PRO\]/g, '<span class="plan-pro">pro</span>')
-    .replace(
-      /\[ENTERPRISE\]/g,
-      '<span class="plan-enterprise">enterprise</span>'
-    );
+    .replace(/\[SUPPORTER\]/g, tag("supporter"))
+    .replace(/\[PRO\]/g, tag("pro"))
+    .replace(/\[ENTERPRISE\]/g, tag("enterprise"));
 }
 
 const Page = ({
