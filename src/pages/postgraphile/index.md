@@ -51,15 +51,16 @@ database schema.
 <div class='text-center col-xs-12 col-md-9 col-lg-7'>
 
 ```js
-npm install -g postgraphile
-postgraphile -c postgres://user:pass@host/dbname \
+npx postgraphile -c postgres://user:pass@host/dbname \
   --schema schema_name
 ```
 
 </div>
 </div>
 
-See the [Quick Start Guide](/postgraphile/quick-start-guide/) to get PostGraphile up and running
+See the [Quick Start Guide](/postgraphile/quick-start-guide/) to get PostGraphile up and running.
+
+_Note: `npx` comes bundled with the latest Node.js releases._
 
 </div>
 </section>
@@ -77,7 +78,8 @@ See the [Quick Start Guide](/postgraphile/quick-start-guide/) to get PostGraphil
 
 Using graphile-build's [look-ahead](/graphile-build/look-ahead/) features a
 single root level GraphQL query, no matter how nested, can become just one SQL
-query.
+query - leading to fewer database round-trips and thus faster performance than
+alternatives including the commonly used `DataLoader`.
 
 </div>
 </div>
@@ -101,6 +103,10 @@ PostGraphile supports [custom queries](/postgraphile/custom-queries/), [custom
 mutations](/postgraphile/custom-mutations/) and [computed
 columns](/postgraphile/computed-columns/) in your PostgreSQL database
 automatically.
+
+You can also rename fields and types, or even omit them in certain
+circumstances, without leaving the database using our [smart
+comments](/postgraphile/smart-comments/) feature.
 
 </div>
 </div>
@@ -211,9 +217,13 @@ schema - you only need to change the parts of your code that you wish to trigger
 <div class='col-xs-12'>
 <div class='hero-block'>
 
-## GraphiQL with auto-generated documentation
+## PostgreSQL schema watching
 
-![GraphiQL displaying allSuperheroes](./graphiql-superheroes.png)
+PostGraphile has an excellent developer experience (DX) when you use the
+`--watch` CLI flag - it will automatically re-generate the GraphQL schema when
+your database changes. What's more, it will automatically reload GraphiQL's
+documentation too, so you can see your new schema features right away! No need
+to restart the server!
 
 </div>
 </div>
@@ -231,13 +241,16 @@ schema - you only need to change the parts of your code that you wish to trigger
 <div class='col-xs-12'>
 <div class='hero-block'>
 
-## PostgreSQL schema watching
+## GraphiQL with auto-generated documentation
 
-PostGraphile has an excellent developer experience (DX) when you use the
-`--watch` CLI flag - it will automatically re-generate the GraphQL schema when
-your database changes. What's more, it will automatically reload GraphiQL's
-documentation too, so you can see your new schema features right away! No need
-to restart the server!
+PostGraphile comes with GraphiQL built in, set to automatically update the
+documentation when your database schema changes.
+
+<div class="full-width">
+
+![GraphiQL displaying allSuperheroes](./graphiql-superheroes.png)
+
+</div>
 
 </div>
 </div>
