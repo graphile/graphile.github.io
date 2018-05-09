@@ -123,10 +123,10 @@ p,
 .page-content {
   section {
     @extend .bg-white;
-    @extend .pt6-ns;
-    @extend .pt5;
-    @extend .pb6-ns;
-    @extend .pb5;
+    @extend .pt5-ns;
+    @extend .pt4;
+    @extend .pb5-ns;
+    @extend .pb4;
   }
 
   ul {
@@ -271,12 +271,12 @@ a {
     @extend .white;
     @extend .flex;
     @extend .flex-column;
-    padding-bottom: 72px; //12vh;
     padding-top: 72px; //12vh;
+    padding-bottom: 48px; //12vh;
 
     &.simple {
-      padding-bottom: 72px; //12vh;
       padding-top: 72px; //12vh;
+      padding-bottom: 48px; //12vh;
     }
 
     h2 { margin: 0; }
