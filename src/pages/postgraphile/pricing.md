@@ -28,12 +28,14 @@ title: PostGraphile Pricing
 
 <table class='pricing-table'>
   <thead>
-    <tr>
-      <th></th>
-      <th><span className="f3 fa fa-github" /> Community</th>
-      <th>Supporter</th>
-      <th>Pro</th>
-    </tr>
+
+<tr>
+  <th></th>
+  <th><span class="f3 fa fa-github"></span> Community</th>
+  <th>Supporter</th>
+  <th>Pro</th>
+</tr>
+
   </thead>
   <tbody>
 
@@ -46,66 +48,66 @@ title: PostGraphile Pricing
 
 <tr>
   <th>Instant GraphQL API</th>
-  <td><span class='fa fa-check-circle' /></td>
-  <td><span class='fa fa-check-circle' /></td>
-  <td><span class='fa fa-check-circle' /></td>
+  <td><span class='fa fa-check-circle'></span></td>
+  <td><span class='fa fa-check-circle'></span></td>
+  <td><span class='fa fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>RLS and RBAC</th>
-  <td><span class='fa fa-check-circle' /></td>
-  <td><span class='fa fa-check-circle' /></td>
-  <td><span class='fa fa-check-circle' /></td>
+  <td><span class='fa fa-check-circle'></span></td>
+  <td><span class='fa fa-check-circle'></span></td>
+  <td><span class='fa fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Queries</th>
-  <td><span class='fa fa-check-circle' /></td>
-  <td><span class='fa fa-check-circle' /></td>
-  <td><span class='fa fa-check-circle' /></td>
+  <td><span class='fa fa-check-circle'></span></td>
+  <td><span class='fa fa-check-circle'></span></td>
+  <td><span class='fa fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Mutations</th>
-  <td><span class='fa fa-check-circle' /></td>
-  <td><span class='fa fa-check-circle' /></td>
-  <td><span class='fa fa-check-circle' /></td>
+  <td><span class='fa fa-check-circle'></span></td>
+  <td><span class='fa fa-check-circle'></span></td>
+  <td><span class='fa fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Subscriptions</th>
-  <td><span class='fa fa-times-circle' /></td>
-  <td><span class='fa fa-check-circle' /></td>
-  <td><span class='fa fa-check-circle' /></td>
+  <td><span class='fa fa-times-circle'></span></td>
+  <td><span class='fa fa-check-circle'></span></td>
+  <td><span class='fa fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Pagination limits</th>
-  <td><span class='fa fa-times-circle' /></td>
-  <td><span class='fa fa-times-circle' /></td>
-  <td><span class='fa fa-check-circle' /></td>
+  <td><span class='fa fa-times-circle'></span></td>
+  <td><span class='fa fa-times-circle'></span></td>
+  <td><span class='fa fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Queries to read-replica</th>
-  <td><span class='fa fa-times-circle' /></td>
-  <td><span class='fa fa-times-circle' /></td>
-  <td><span class='fa fa-check-circle' /></td>
+  <td><span class='fa fa-times-circle'></span></td>
+  <td><span class='fa fa-times-circle'></span></td>
+  <td><span class='fa fa-check-circle'></span></td>
 </tr>
 
 
 <tr>
   <th>Query depth limit</th>
-  <td><span class='fa fa-times-circle' /></td>
-  <td><span class='fa fa-times-circle' /></td>
-  <td><span class='fa fa-check-circle' /></td>
+  <td><span class='fa fa-times-circle'></span></td>
+  <td><span class='fa fa-times-circle'></span></td>
+  <td><span class='fa fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Query cost limit</th>
-  <td><span class='fa fa-times-circle' /></td>
-  <td><span class='fa fa-times-circle' /></td>
-  <td><span class='fa fa-check-circle' /></td>
+  <td><span class='fa fa-times-circle'></span></td>
+  <td><span class='fa fa-times-circle'></span></td>
+  <td><span class='fa fa-check-circle'></span></td>
 </tr>
 
 
@@ -144,8 +146,8 @@ title: PostGraphile Pricing
 <tr>
   <th></th>
   <td><a class='button--outline' href='/postgraphile/introduction/'>Get Started</a></td>
-  <td><a class='button--solid' href='https://store.graphile.com'>Buy <span class='fa fa-external-link-square' /></a></td>
-  <td><a class='button--solid' href='https://store.graphile.com'>Buy <span class='fa fa-external-link-square' /></a></td>
+  <td><a class='button--solid' href='https://store.graphile.com'>Buy <span class='fa fa-external-link-square'></span></a></td>
+  <td><a class='button--solid' href='https://store.graphile.com'>Buy <span class='fa fa-external-link-square'></span></a></td>
 </tr>
 
   </tfoot>
