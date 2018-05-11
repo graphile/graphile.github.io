@@ -32,8 +32,8 @@ title: PostGraphile Pricing
 <tr>
   <th></th>
   <th><span class="f3 fa fa-github"></span> Community</th>
-  <th>Supporter</th>
-  <th>Pro</th>
+  <th><span class='plan-supporter'><span class='first-letter'>s</span></span> Supporter</th>
+  <th><span class='plan-pro'><span class='first-letter'>p</span></span> Pro</th>
 </tr>
 
   </thead>

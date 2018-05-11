@@ -181,6 +181,16 @@
         "sectionId": "overview"
       },
       {
+        "to": "/postgraphile/plugins/",
+        "title": "Plugins [SUPPORTER] [PRO]",
+        "sectionId": "overview"
+      },
+      {
+        "to": "/postgraphile/subscriptions/",
+        "title": "Subscriptions [SUPPORTER]",
+        "sectionId": "overview"
+      },
+      {
         "to": "/postgraphile/jwt-guide/",
         "title": "PostGraphile JWT Guide",
         "sectionId": "guides"

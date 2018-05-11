@@ -513,9 +513,13 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
 .plan-tag {
   background-color: lime;
   color: white;
+  font-size: 0.65rem;
   border-radius: 1em;
-  font-size: 0.75em;
   padding: 0.2em 0.7em 0.3em;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1rem;
+  font-weight: normal;
 }
 .plan-supporter {
   @extend .plan-tag;
@@ -528,6 +532,11 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
 .plan-enterprise {
   @extend .plan-tag;
   background-color: green;
+}
+.sidebar {
+  .plan-tag .rest {
+    display: none;
+  }
 }
 
 // ----------------------------------------

@@ -7,6 +7,14 @@ import SiteHeader from "../components/SiteHeader";
 const sectionIs = desiredSection => ({ sectionId }) =>
   sectionId === desiredSection;
 
+const AugmentedText = ({ children }) => (
+  <span
+    dangerouslySetInnerHTML={{
+      __html: processHTML(htmlerize(children)),
+    }}
+  />
+);
+
 function PageList({ navs, location }) {
   return (
     <ul className="page-list nav flex-column mb5">
@@ -16,7 +24,7 @@ function PageList({ navs, location }) {
             className={`nav-link ${location.pathname === to ? "active" : ""}`}
             to={to}
           >
-            {title}
+            <AugmentedText>{title}</AugmentedText>
           </Link>
         </li>
       ))}
@@ -25,12 +33,24 @@ function PageList({ navs, location }) {
 }
 
 const tag = (name, label = name) =>
-  `<a href='/postgraphile/pricing/'><span class="plan-${name}">${label}</span></a>`;
+  `<a href='/postgraphile/pricing/' class="plan-${name}"><span class='first-letter'>${
+    label[0]
+  }</span><span class='rest'>${label.substr(1)}</span></a>`;
+
 function processHTML(html) {
   return html
     .replace(/\[SUPPORTER\]/g, tag("supporter"))
     .replace(/\[PRO\]/g, tag("pro"))
     .replace(/\[ENTERPRISE\]/g, tag("enterprise"));
+}
+
+function htmlerize(text) {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
 }
 
 const Page = ({
@@ -100,7 +120,9 @@ const Page = ({
               <aside className="sidebar col-xs-12 col-md-3 last-xs mt3">
                 {navSections.map(({ id, title }, idx) => (
                   <section key={idx}>
-                    <h4 className="f6 ttu fw6 mt0 mb3 bb pb2">{title}</h4>
+                    <h4 className="f6 ttu fw6 mt0 mb3 bb pb2">
+                      <AugmentedText>{title}</AugmentedText>
+                    </h4>
                     <div className="nested-list-reset">
                       <PageList
                         location={location}
