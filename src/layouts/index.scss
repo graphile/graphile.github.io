@@ -521,13 +521,15 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
   line-height: 1rem;
   font-weight: normal;
 }
+
 .plan-supporter {
   @extend .plan-tag;
-  background-color: blue;
+  background-color: #4d4dff;
 }
+
 .plan-pro {
   @extend .plan-tag;
-  background-color: purple;
+  background-color: #c511c5;
 }
 .plan-enterprise {
   @extend .plan-tag;
