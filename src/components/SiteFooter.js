@@ -1,8 +1,8 @@
 import React from "react";
 import Link from "gatsby-link";
 
-export default () => {
-  const currentYear =  new Date().getFullYear();
+const SiteFooter = () => {
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="bg-white pv5 bt b--black f6 lh-copy">
@@ -29,7 +29,9 @@ export default () => {
                 <Link to="/graphile-build/">About</Link>
               </li>
               <li>
-                <Link to="/graphile-build/getting-started/">Getting Started</Link>
+                <Link to="/graphile-build/getting-started/">
+                  Getting Started
+                </Link>
               </li>
               <li>
                 <Link to="/graphile-build/plugins/">Plugins</Link>
@@ -63,11 +65,13 @@ export default () => {
             <a href="https://twitter.com/calebmer">Caleb Meredith</a>.
             <br />
             <br />
-            This site is copyright &copy; Benjie Gillam {currentYear}. Design and logo
-            copyright &copy; Jof Arnold {currentYear}.
+            This site is copyright &copy; Benjie Gillam {currentYear}. Design
+            and logo copyright &copy; Jof Arnold {currentYear}.
           </div>
         </div>
       </div>
     </footer>
-  )
+  );
 };
+
+export default SiteFooter;
