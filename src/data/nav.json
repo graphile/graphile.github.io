@@ -191,6 +191,11 @@
         "sectionId": "overview"
       },
       {
+        "to": "/postgraphile/production/",
+        "title": "Running in Production [PRO]",
+        "sectionId": "overview"
+      },
+      {
         "to": "/postgraphile/jwt-guide/",
         "title": "PostGraphile JWT Guide",
         "sectionId": "guides"
