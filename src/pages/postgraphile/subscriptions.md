@@ -62,6 +62,24 @@ select pg_notify(
 );
 ```
 
+Resulting in this GraphQL payload:
+
+```json
+{
+  "data": {
+    "listen": {
+      "relatedNodeId": null,
+      "relatedNode": null
+      }
+    }
+  }
+}
+```
+
+Which is sufficient to know that the event _occurred_, but chances are that you
+want to know more than this...
+
+
 It's also possible to send a `Node` along with your GraphQL payload using the
 `__node__` field on the `pg_notify` body (which is interpreted as JSON). The
 `__node__` field is similar to the `nodeId` (or `id` if you use
@@ -100,6 +118,15 @@ Resulting in this GraphQL payload:
   }
 }
 ```
+
+> **NOTE**: This solution is still taking shape, so it's not yet certain how other fields
+on the NOTIFY message JSON will be exposed via GraphQL. You are advised to
+treat the content of this message JSON as if it's visible to the user, as at
+some point it may be.
+
+> **NOTE**: In PostgreSQL the channel is an "identifier" which by default is
+> limited to 63 characters. Subtracting the `postgraphile:` prefix leaves 50
+> characters for your topic name.
 
 ### Subscription security
 
