@@ -306,7 +306,7 @@ create table if not exists app_public.foo (
 create schema if not exists app_private;
 create or replace function app_private.validate_subscription(topic text)
 returns text as \$\$
- select 'Yep'::text;
+ select 'CANCEL_ALL_SUBSCRIPTIONS'::text;
 \$\$ language sql stable;
 HERE
 
@@ -339,7 +339,7 @@ psql -1X -v ON_ERROR_STOP=1 subs << HERE
      json_build_object('__node__', json_build_array('foos', v_foo.id))::text
    );
    perform pg_notify(
-     'Yep',
+     'CANCEL_ALL_SUBSCRIPTIONS',
      json_build_object()::text
    );
  end;
