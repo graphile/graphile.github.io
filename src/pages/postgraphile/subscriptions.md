@@ -206,7 +206,6 @@ module.exports = {
   options: {
     plugins: [
       "@graphile/plugin-supporter",
-      "@graphile/plugin-pro",
     ],
     connection: "postgres://localhost/subs",
     schema: ["app_public"],
