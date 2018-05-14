@@ -6,9 +6,9 @@ title: Running PostGraphile in Production
 
 ## Running PostGraphile in Production
 
-When you run PostGraphile in production you'll want to ensure that people DO SOME TWEAKS
+When you run PostGraphile in production you'll want to ensure that people
 cannot easily trigger denial of service (DOS) attacks against you. Due to the
-nature of GraphQL it's easy to construct a small query that could be very jkbkb
+nature of GraphQL it's easy to construct a small query that could be very
 expensive for the server to run, for example:
 
 ```graphql
@@ -45,8 +45,12 @@ allUsers {
 
 There's lots of techniques for protecting your server from these kinds of
 queries; the [Pro Plugin](/postgraphile/plugins) [PRO] helps you implement a
-few of them. One of the most effective techniques is the use of "persisted
-queries" as a query whitelist; this is what Facebook use in production.
+few of them. One of the most effective techniques, if you can use it, is the
+that of "persisted queries" as a query whitelist. This technique will only work
+if you control all the GraphQL clients that you wish to talk to your GraphQL
+endpoint and if they use only static queries. If you're expecting 3rd parties
+to query your API then persisted queries will not help you, and this is where
+the other techniques come in handy.
 
 The rest of this article relates to Pro Plugin's approach to addressing these
 issues.
@@ -67,7 +71,12 @@ string passed via `--connection` which will now be used only for mutations.
 (If you're using middleware, then you'll want to pass a read-only pool to the
 `readReplicaPgPool` option instead.)
 
-### Implementing pagination caps
+> NOTE: We don't currently support the multi-host syntax for this connection
+> string, but you can use a PostgreSQL proxy such a PgPool or PgBouncer between
+> PostGraphile and your database to enable connecting to multiple read
+> replicas.
+
+### Pagination caps
 
 It's unlikely that you want users to request `allUsers` and receive back
 literally all of the users in the database. More likely you want users to use
@@ -78,7 +87,8 @@ you pass will be used as the pagination cap, but you can override it on a
 table-by-table basis using [smart comments](/postgraphile/smart-comments/) - in this case the `@paginationCap` smart comment.
 
 ```sql
-comment on table users is E'@paginationCap 20\nSomeone who can log in.';
+comment on table users is
+  E'@paginationCap 20\nSomeone who can log in.';
 ```
 
 ### Limiting GraphQL query depth
@@ -124,4 +134,4 @@ bring the calculated cost down:
 
 Keep in mind this is a **very early** implementation of cost analysis, there's
 much improvement to be made. Feel free to reach out with any bad costs/queries
-so I may improve it.
+so we can improve it.
