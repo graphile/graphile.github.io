@@ -12,8 +12,8 @@ layer.  This plugin system is less mature, it's not ready for third party
 plugin developers yet, however there are a couple of first-party plugins
 that you may want to use that can be purchased on the [Graphile Store](https://store.graphile.com):
 
-- `@graphile/plugin-supporter`
-- `@graphile/plugin-pro`
+- `@graphile/plugin-supporter` [SUPPORTER]
+- `@graphile/plugin-pro` [PRO]
 
 ### Installing
 
