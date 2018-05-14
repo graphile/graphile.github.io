@@ -128,8 +128,8 @@ title: PostGraphile Pricing
 <tr>
   <th>Pricing</th>
   <td>Free</td>
-  <td>Patreon: pay what you want<span class='note'>(or $25/mo)</span></td>
-  <td>$100/mo + VAT<span class='note'>per production usage</span></td>
+  <td>Patreon: pay what you want<span class='note'>(or $25/mo + VAT)</span></td>
+  <td>$100/mo + VAT<span class='note'>per project</span></td>
 </tr>
 
 <tr>
