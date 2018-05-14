@@ -96,22 +96,6 @@ const Page = ({
           },
         ]}
       />
-      {isPostGraphileDocs ? (
-        <div className="header-notice pv3 ph3 f5 lh-title bg-near-black moon-gray">
-          <div className="container">
-            <div className="row">
-              <div className="col-xs-12">
-                <strong>NOTICE</strong>: PostGraphQL has been{" "}
-                <Link to="/history">renamed to PostGraphile</Link>. If you were
-                using <code>postgraphql@next</code> you should update to{" "}
-                <code>postgraphile</code> instead as{" "}
-                <code>postgraphql@next</code> will not receive any further
-                updates.
-              </div>
-            </div>
-          </div>
-        </div>
-      ) : null}
       <SiteHeader location={location} />
       <div className="page-content">
         <section>
