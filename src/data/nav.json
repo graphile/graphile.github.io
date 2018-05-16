@@ -196,6 +196,11 @@
         "sectionId": "overview"
       },
       {
+        "to": "/postgraphile/reserved-keywords/",
+        "title": "Reserved Keywords",
+        "sectionId": "overview"
+      },
+      {
         "to": "/postgraphile/jwt-guide/",
         "title": "PostGraphile JWT Guide",
         "sectionId": "guides"
