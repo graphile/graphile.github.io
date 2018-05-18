@@ -48,6 +48,7 @@ error.
 
   - `GraphQLEnumType` to add any root-level attributes, e.g. add a description
   - `GraphQLEnumType:values` to add additional values
+  - `GraphQLEnumType:values:value` to customize an individual value from above
 
 
 
@@ -73,4 +74,5 @@ cases, currently). More specifically, the types for each hook are:
 
 - GraphQLEnumType - [`GraphQLEnumTypeConfig`](http://graphql.org/graphql-js/type/#graphqlenumtype)
 - GraphQLEnumType:values - [`GraphQLEnumValueConfigMap`](http://graphql.org/graphql-js/type/#graphqlenumtype)
+- GraphQLEnumType:values:value - [`GraphQLEnumValueConfig`](http://graphql.org/graphql-js/type/#graphqlenumtype)
 
