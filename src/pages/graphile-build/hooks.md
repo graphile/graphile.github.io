@@ -60,6 +60,7 @@ here's a brief overview of some of the more important ones:
 
   - `GraphQLEnumType` add/remove any root-level attributes, e.g. add a description
   - `GraphQLEnumType:values` add/remove values
+  - `GraphQLEnumType:values:value` customize an individual value from above
 
 The "(delayed)" hooks above (and their descendents) are not called until
 *after* the object is constructed (which means they can reference the object
