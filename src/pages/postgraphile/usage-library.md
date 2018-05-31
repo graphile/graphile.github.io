@@ -95,6 +95,17 @@ The `postgraphile` middleware factory function takes three arguments, all of whi
 
 <!-- LIBRARY_DOCBLOCK_END -->
 
+The following options and not part of PostGraphile core, but are available from the Supporter and/or Pro plugins - see [Go Pro!](/postgraphile/pricing/) for more information.
+
+* **`options`**:
+  * `simpleSubscriptions`: [SUPPORTER] ⚡️[experimental] set this to `true` to add simple subscription support
+  * `subscriptionAuthorizationFunction [fn]` [SUPPORTER] ⚡️[experimental] set this to the name (excluding arguments/parentheses) of a PG function to call to check user is allowed to subscribe
+  * `readOnlyConnection` [PRO] ⚡️[experimental] set this to a PostgreSQL connection string to use for read-only queries (i.e. not mutations)
+  * `defaultPaginationCap` [PRO] ⚡️[experimental] integer, ensure all connections have first/last specified and are no large than this value (default: 50), set to -1 to disable; override via smart comment `@paginationCap 50`
+  * `graphqlDepthLimit` [PRO] ⚡️[experimental] integer, validate GraphQL queries are no deeper than the specified int (default: 16), set to -1 to disable
+  * `graphqlCostLimit` [PRO] ⚡️[experimental] integer, only allows queries with a computed cost below the specified int (default: 1000), set to -1 to disable
+  * `exposeGraphQLCost` [PRO] boolean, if true (default) then the calculated query cost will be exposed on the resulting payload
+
 ### Exposing HTTP request data to PostgreSQL
 
 #### `pgSettings` function
