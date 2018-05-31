@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `Graphile-Build`,
+    title: `Graphile.org`,
   },
   plugins: [
     `gatsby-plugin-sass`,
