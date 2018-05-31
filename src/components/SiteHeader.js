@@ -172,7 +172,7 @@ export default withRouter(
                           }`}
                           to="/postgraphile/pricing/"
                         >
-                          Pricing
+                          Go Pro!
                         </Link>
                       </li>
                     )}

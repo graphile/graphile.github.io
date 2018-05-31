@@ -476,6 +476,7 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
 .pricing-table tbody th,
 .pricing-table tbody td {
   @extend .pv3;
+  @extend .ph1;
   border-bottom: 1px solid #a51b1b;
 }
 .pricing-table tbody tr:last-child th,
