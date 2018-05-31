@@ -161,9 +161,9 @@
       "path---postgraphile-production-817ef8ae64447faf0fe3.js.map"
     ],
     "commons": [
-      "commons-e7373fdcf65c14d9e2ef.js",
+      "commons-7330f5fc5392b4f3643e.js",
       "build-js-styles.css",
-      "commons-e7373fdcf65c14d9e2ef.js.map",
+      "commons-7330f5fc5392b4f3643e.js.map",
       "build-js-styles.css.map"
     ],
     "path---postgraphile-default-role": [
@@ -195,9 +195,9 @@
       "path---postgraphile-introduction-7d3ec0fedae7b66ffaec.js.map"
     ],
     "app": [
-      "app-e36e84c57d5d6554a21a.js",
+      "app-263a064a81a9b902fe76.js",
       "build-js-styles.css",
-      "app-e36e84c57d5d6554a21a.js.map",
+      "app-263a064a81a9b902fe76.js.map",
       "build-js-styles.css.map"
     ],
     "path---postgraphile-connections": [
