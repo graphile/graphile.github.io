@@ -56,6 +56,8 @@ There are more CLI options available to customise the GraphQL server:
   use classic global id field name. required to support Relay 1
 * `-M`, `--disable-default-mutations`  
   disable default mutations, mutation will only be possible through Postgres functions
+* `--simple-collections [omit|both|only]`  
+  "omit" (default) - relay connections only, "only" - simple collections only (no Relay connections), "both" - both
 * `--show-error-stack`  
   show JavaScript error stacks in the GraphQL result errors
 * `--extended-errors <string>`  
@@ -88,6 +90,8 @@ There are more CLI options available to customise the GraphQL server:
   [experimental] spawn <count> workers to increase throughput
 * `--enable-query-batching`  
   [experimental] enable the server to process multiple GraphQL queries in one request
+* `--disable-query-log`  
+  disable logging queries to console
 * `-e`, `--jwt-secret <string>`  
   the secret to be used when creating and verifying JWTs. if none is provided auth will be disabled
 * `--jwt-verify-algorithms <string>`  

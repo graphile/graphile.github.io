@@ -92,6 +92,7 @@ The `postgraphile` middleware factory function takes three arguments, all of whi
   * `pgSettings`: A plain object specifying custom config values to set in the PostgreSQL transaction (accessed via `current_setting('my.custom.setting')`) or a function which will return the same (or a Promise to the same) based on the incoming web request (e.g. to extract session data)
   * `additionalGraphQLContextFromRequest`: Some graphile-build plugins may need additional information available on the `context` argument to the resolver - you can use this function to provide such information based on the incoming request - you can even use this to change the response [experimental], e.g. setting cookies
   * `pluginHook`: [experimental] Plugin hook function, enables functionality within PostGraphile to be expanded with plugins. Generate with `makePluginHook(plugins)` passing a list of plugin objects.
+  * `simpleCollections`: Should we use relay pagination, or simple collections? "omit" (default) - relay connections only, "only" - simple collections only (no Relay connections), "both" - both
 
 <!-- LIBRARY_DOCBLOCK_END -->
 

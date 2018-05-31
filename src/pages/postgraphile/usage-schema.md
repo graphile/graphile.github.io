@@ -98,6 +98,7 @@ The returned GraphQLSchema will **not** be updated when your database changes - 
   * `jwtPgTypeIdentifier`: The Postgres type identifier for the compound type which will be signed as a JWT token if ever found as the return type of a procedure. Can be of the form: `my_schema.my_type`. You may use quotes as needed: `"my-special-schema".my_type`.
   * `legacyRelations`: Some one-to-one relations were previously detected as one-to-many - should we export 'only' the old relation shapes, both new and old but mark the old ones as 'deprecated', or 'omit' the old relation shapes entirely
   * `legacyJsonUuid`: ONLY use this option if you require the v3 typenames 'Json' and 'Uuid' over 'JSON' and 'UUID'
+  * `simpleCollections`: Should we use relay pagination, or simple collections? "omit" (default) - relay connections only, "only" - simple collections only (no Relay connections), "both" - both
 
 <!-- SCHEMA_DOCBLOCK_END -->
 
