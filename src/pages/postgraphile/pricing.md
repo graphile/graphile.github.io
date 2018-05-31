@@ -249,7 +249,7 @@ that existed for the first 2 years of the project and many people are running
 it with great success in production.  No features in PostGraphile core have
 been removed or obscured, and it continues to be advanced and enhanced.
 
-Development and maintenance of community edition is ongoing, supported by
+Development and maintenance of PostGraphile core is ongoing, supported by
 contributions from the community, [professional services](/support/) contracts,
 [Patreon supporters](https://patreon.com/benjie) and sales of commercial plugin
 licenses.
