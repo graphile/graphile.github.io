@@ -122,6 +122,9 @@ There are more CLI options available to customise the GraphQL server:
   ONLY use this option if you require the v3 typenames 'Json' and 'Uuid' over 'JSON' and 'UUID'
 
 <!-- CLI_DOCBLOCK_END -->
+
+The following features and not part of PostGraphile core, but are available from the Supporter and/or Pro plugins - see [Go Pro!](/postgraphile/pricing/) for more information.
+
 * `-S`, `--simple-subscriptions`  
   [SUPPORTER] ⚡️[experimental] add simple subscription support
 * `--subscription-authorization-function [fn]`  
