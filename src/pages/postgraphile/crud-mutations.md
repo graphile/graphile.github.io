@@ -11,19 +11,60 @@ via the `--disable-default-mutations` CLI setting (or the
 `disableDefaultMutations` library setting, or the `pgDisableDefaultMutations`
 graphile-build-pg setting depending on how you're using this software).
 
-For example, for a table `superheroes`, depending on the PostGraphile settings
-you use, you might get the following mutations:
+For example, using the `person` table from the previous section, depending on
+the PostGraphile settings you use, you might get the following mutations:
 
-- createSuperhero - Creates a single `Superhero`.
-- updateSuperhero - Updates a single `Superhero` using its globally unique id and a patch.
-- updateSuperheroByRowId - Updates a single `Superhero` using its row id and a patch.
-- deleteSuperhero - Deletes a single `Superhero` using its globally unique id.
-- deleteSuperheroByRowId - Deletes a single `Superhero` using its row id.
+- createPerson - Creates a single `Person`.
+- updatePerson - Updates a single `Person` using its globally unique id and a patch.
+- updatePersonById - Updates a single `Person` using a unique key and a patch.
+- updatePersonByEmail - Updates a single `Person` using a unique key and a patch.
+- deletePerson - Deletes a single Person using its globally unique id.
+- deletePersonById - Deletes a single `Person` using a unique key.
+- deletePersonByEmail - Deletes a single `Person` using a unique key.
+
+The `update` and `delete` mutations are created only if the table contains a
+`primary key` column.
 
 You also get the following query fields:
 
-- superhero - Returns a single `Superhero` using its globally unique `ID`.
-- superheroByRowId - Returns a single `Superhero` using its database row ID.
-- allSuperheroes - Returns a [connection](/postgraphile/connection/) enabling pagination through all (visible) superheroes.
+- person - Returns a single `Person` using its globally unique `ID`.
+- personById - Reads a single `Person` using its globally unique `ID`.
+- personByEmail - Reads a single `Person` using its globally unique `ID`.
+- allPeople - Returns a [connection](/postgraphile/connections/) enabling
+  pagination through a set of (visible) `Person`.
 
-TODO: add example
+### Examples
+
+```graphql
+# Create a Person and get back details of the record we created
+mutation {
+  createPerson(input: {person: {id: 1, name: "Bilbo Baggins", email: "bilbo@theshire.com"}}) {
+    person {
+      id
+      name
+      email
+      createdAt
+    }
+  }
+}
+
+# Update Bilbo using the person.id primary key
+mutation {
+  updatePersonById(input: {id: 1, personPatch: {about: "An adventurous hobbit"}}) {
+    person {
+      id
+      name
+      email
+      about
+      createdAt
+    }
+  }
+}
+
+# Delete Bilbo using the unique person.email column and return the mutation ID
+mutation {
+  deletePersonByEmail(input: {email: "bilbo@theshire.com"}) {
+    deletedPersonId
+  }
+}
+```
