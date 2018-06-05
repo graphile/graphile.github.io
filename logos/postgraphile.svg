@@ -44,19 +44,15 @@ polygon {
   stroke: transparent
 }
 .face polygon.tusk,
-.face polygon.stroke-only {
-  stroke: black;
-  stroke-width: 12;
+.face polygon.stroke-only,
+.heart-outline {
+  stroke: #082744;
+  stroke-width: 8;
   stroke-linejoin: round;
 }
-.face polygon.stroke-only {
-  fill: transparent;
-}
+.face polygon.stroke-only,
 .heart-outline {
   fill: transparent;
-  stroke: black;
-  stroke-width: 12;
-  stroke-linejoin: round;
 }
 </style>
 
