@@ -1,0 +1,103 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="1200" height="1200" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<!--
+
+This file is Copyright © 2018 Benjie Gillam. All rights reserved.
+
+-->
+<style>
+polygon {
+  stroke-width: 1;
+  shape-rendering: geometricPrecision;
+}
+.seg1 {
+  fill: #468bcc;
+  stroke: #468bcc;
+}
+.seg2 {
+  fill: #4ba8ff;
+  stroke: #4ba8ff;
+}
+.seg3 {
+  fill: #166ebf;
+  stroke: #166ebf;
+}
+.seg4 {
+  fill: #0b457f;
+  stroke: #0b457f;
+}
+.seg5 {
+  fill: #0c3861;
+  stroke: #0c3861;
+}
+
+.face polygon.eye {
+  fill: #ffffff;
+  stroke: #ffffff;
+}
+.face polygon.tusk {
+  stroke: #000000;
+  fill: #ffffff;
+}
+.face polygon.no-stroke {
+  stroke: transparent
+}
+.face polygon.tusk,
+.face polygon.stroke-only {
+  stroke: black;
+  stroke-width: 8;
+  stroke-linejoin: round;
+}
+.face polygon.stroke-only {
+  fill: transparent;
+}
+.heart-outline {
+  fill: transparent;
+  stroke: black;
+  stroke-width: 8;
+  stroke-linejoin: round;
+}
+</style>
+
+  <desc>Graphile logo</desc>
+  <g class='ears'>
+    <polygon points="25,360 260,25 715,615" class="seg2" />
+    <polygon points="260,25 600,130 715,615" class="seg1" />
+    <polygon points="600,130 940,25 715,615" class="seg1" />
+    <polygon points="940,25 1175,360 715,615" class="seg2" />
+    <polygon points="1175,360 1100,615 715,615" class="seg1" />
+    <polygon points="1100,615 600,1055 715,615" class="seg1" />
+    <polygon points="600,1055 100,615 715,615" class="seg1" />
+    <polygon points="100,615 25,360 715,615" class="seg1" />
+
+    <polygon points="25,360 260,25 260,25 600,130 600,130 940,25 940,25 1175,360 1175,360 1100,615 1100,615 600,1055 600,1055 100,615 100,615 25,360" class="heart-outline" />
+
+  </g>
+
+  <g class='face'>
+
+    <polygon points="490,96 710,96 875,300 600,450 325,300" class="seg2 forehead-left" />
+    <polygon points="710,96 875,300 600,450" class="seg3 forehead-right no-stroke" />
+    <polygon points="490,96 710,96 600,450" class="seg1 forehead-top" />
+
+    <polygon points="875,300 875,725 600,450" class="seg4 right-eye-area no-stroke" />
+    <polygon points="600,450 325,725 325,300" class="seg1 left-eye-area no-stroke" />
+
+    <polygon points="375,715 460,795 345,925" class="tusk left-tusk" />
+    <polygon points="825,715 740,795 855,925" class="tusk right-tusk" />
+
+    <polygon points="325,725 490,835 490,1075 600,1130 710,1075 710,835 875,725 600,450" class="seg3 face-bottom no-stroke" />
+    <polygon points="600,1130 710,1075 710,835 875,725 600,450" class="seg5 face-bottom-right no-stroke" />
+    <polygon points="490,835 490,1075 600,1130 600,450" class="seg2 no-stroke trunk-highlight-left" />
+    <polygon points="600,1130 710,1075 710,835 600,450" class="seg3 no-stroke trunk-highlight-right" />
+
+    <polygon points="425,425 505,445 465,485" class="eye left-eye" />
+    <polygon points="775,425 695,445 735,485" class="eye right-eye" />
+
+    <polygon points="490,96 710,96 875,300 875,725 710,835 710,1075 600,1130 490,1075 490,835 325,725 325,300" class="entire-face stroke-only" />
+
+  </g>
+
+
+</svg>
