@@ -24,7 +24,7 @@ Comments can be added to various entities within PostgreSQL; we add a special sy
 
 A smart comment is made up of one or more "tags" and optionally followed by the remaining comment. Tags may have a string payload (which follows a the tag and a space, and must not contain newline characters) and are separated by newlines. Tags always start with an `@` symbol and must always come before the remaining comment, hence all smart comments start with an `@` symbol. If a tag has no payload then its value will be the boolean `true`, otherwise it will be a string. If the same tag is present more than once in a smart comment then its final value will become an array of the individual values for that tag.
 
-The following text could be parsed as a smart comment (the values shown don't necessarily have any meaning):
+The following text could be parsed as a smart comment (**the smart comment values shown are examples only, and don't have any meaning**):
 
 ```
 @name meta
