@@ -46,7 +46,7 @@ polygon {
 .face polygon.tusk,
 .face polygon.stroke-only {
   stroke: black;
-  stroke-width: 8;
+  stroke-width: 12;
   stroke-linejoin: round;
 }
 .face polygon.stroke-only {
@@ -55,12 +55,12 @@ polygon {
 .heart-outline {
   fill: transparent;
   stroke: black;
-  stroke-width: 8;
+  stroke-width: 12;
   stroke-linejoin: round;
 }
 </style>
 
-  <desc>Graphile logo</desc>
+  <desc>PostGraphile logo</desc>
   <g class='ears'>
     <polygon points="25,360 260,25 715,615" class="seg2" />
     <polygon points="260,25 600,130 715,615" class="seg1" />
@@ -71,7 +71,7 @@ polygon {
     <polygon points="600,1055 100,615 715,615" class="seg1" />
     <polygon points="100,615 25,360 715,615" class="seg1" />
 
-    <polygon points="25,360 260,25 260,25 600,130 600,130 940,25 940,25 1175,360 1175,360 1100,615 1100,615 600,1055 600,1055 100,615 100,615 25,360" class="heart-outline" />
+    <!-- polygon points="25,360 260,25 260,25 600,130 600,130 940,25 940,25 1175,360 1175,360 1100,615 1100,615 600,1055 600,1055 100,615 100,615 25,360" class="heart-outline" / -->
 
   </g>
 
@@ -84,20 +84,19 @@ polygon {
     <polygon points="875,300 875,725 600,450" class="seg4 right-eye-area no-stroke" />
     <polygon points="600,450 325,725 325,300" class="seg1 left-eye-area no-stroke" />
 
-    <polygon points="375,715 460,795 345,925" class="tusk left-tusk" />
-    <polygon points="825,715 740,795 855,925" class="tusk right-tusk" />
+    <polygon points="375,740 460,795 325,900" class="tusk left-tusk" />
+    <polygon points="825,740 740,795 875,900" class="tusk right-tusk" />
 
     <polygon points="325,725 490,835 490,1075 600,1130 710,1075 710,835 875,725 600,450" class="seg3 face-bottom no-stroke" />
     <polygon points="600,1130 710,1075 710,835 875,725 600,450" class="seg5 face-bottom-right no-stroke" />
     <polygon points="490,835 490,1075 600,1130 600,450" class="seg2 no-stroke trunk-highlight-left" />
     <polygon points="600,1130 710,1075 710,835 600,450" class="seg3 no-stroke trunk-highlight-right" />
 
-    <polygon points="425,425 505,445 465,485" class="eye left-eye" />
-    <polygon points="775,425 695,445 735,485" class="eye right-eye" />
+    <polygon points="385,415 515,455 385,505" class="eye left-eye" />
+    <polygon points="815,415 685,455 815,505" class="eye right-eye" />
 
     <polygon points="490,96 710,96 875,300 875,725 710,835 710,1075 600,1130 490,1075 490,835 325,725 325,300" class="entire-face stroke-only" />
 
   </g>
-
 
 </svg>
