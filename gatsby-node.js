@@ -6,12 +6,12 @@ exports.createPages = async ({ boundActionCreators, graphql }) => {
   const layouts = {
     page: path.resolve(`src/templates/page.js`),
     marketing: path.resolve(`src/templates/marketing.js`),
+    home: path.resolve(`src/templates/home.js`),
   };
 
-  const result = await graphql(`{
-      allMarkdownRemark(
-        limit: 1000
-      ) {
+  const result = await graphql(`
+    {
+      allMarkdownRemark(limit: 1000) {
         edges {
           node {
             id
@@ -25,10 +25,11 @@ exports.createPages = async ({ boundActionCreators, graphql }) => {
           }
         }
       }
-    }`);
+    }
+  `);
   if (result.errors) {
     const error = new Error("GraphQL query failed");
-    console.error(result, {depth: 6});
+    console.error(result, { depth: 6 });
     error.errors = result.errors;
     throw error;
   }
@@ -44,7 +45,7 @@ exports.createPages = async ({ boundActionCreators, graphql }) => {
       path: node.frontmatter.path,
       component: layouts[node.frontmatter.layout] || layouts.page,
       context: {
-        layout: node.frontmatter.layout || 'page',
+        layout: node.frontmatter.layout || "page",
       },
     });
   });

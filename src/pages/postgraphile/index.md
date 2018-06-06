@@ -388,3 +388,36 @@ id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validat
 </section>
 
 <!-- **************************************** -->
+
+<section>
+<div class='container'>
+
+<div class='row'>
+<div class='col-xs-12'>
+<div class='hero-block'>
+
+## Fully GraphQL compatible
+
+Graphile uses the <a href="http://graphql.org/graphql-js/">reference GraphQL
+implementation</a> under the hood, so you know it's spec compliant. This also
+means you can mix it into existing GraphQL APIs, or mix existing GraphQL object
+types into it (so long as they use the reference GraphQL implementation too).
+
+PostGraphile supports GraphQL best practices, including: [cursor-based
+connection
+pagination](https://facebook.github.io/relay/graphql/connections.htm), [global
+object
+identification](https://facebook.github.io/relay/graphql/objectidentification.htm),
+and the [Relay Input Object Mutations
+Specification](https://facebook.github.io/relay/graphql/mutations.htm); plus
+it's built on Graphile Build technology so it can be expanded using Graphile
+Build plugins.
+
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- **************************************** -->

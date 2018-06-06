@@ -444,6 +444,7 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
   @extend .b--graphile-red;
   @extend .graphile-red;
   .postgraphile & {
+    @extend .button-common;
     @extend .b--postgraphile-blue;
     @extend .postgraphile-blue;
   }
@@ -455,8 +456,10 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
   @extend .bg-graphile-red;
   @extend .white;
   .postgraphile & {
+    @extend .button-common;
     @extend .b--postgraphile-blue;
     @extend .bg-postgraphile-blue;
+    @extend .white;
   }
 }
 
@@ -592,4 +595,59 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
       top: -1 * $triHeightSm;
     }
   }
+}
+
+.template-home {
+  .top-section {
+    @extend .template-marketing;
+    &:after {
+      background-image: linear-gradient(112deg, transparent 50%, #284c9c 0);
+      top: auto;
+      bottom: 0;
+
+    }
+    color: white;
+    p {
+      color: white;
+    }
+    .content {
+      position: relative;
+      z-index: 1;
+      min-height: 600px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      .logo {
+        flex: 1 0 15rem;
+        margin: 0 1rem;
+        min-height: 15rem;
+        background-image: url("../../logos/postgraphile.optimized.svg");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+      }
+      .text {
+        flex: 1 0 20rem;
+        max-width: 100%;
+      }
+    }
+  }
+  .bottom-section .page-content {
+    min-height: 33vh;
+    display: flex;
+    flex-direction: row;
+  }
+}
+@media (max-width: 700px) {
+.template-home {
+  .top-section.postgraphile {
+    &:after {
+      background-image: linear-gradient(108deg, transparent 50%, #284c9c 0);
+      width: 200px;
+      height: 600px;
+    }
+  }
+}
 }
