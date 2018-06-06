@@ -55,7 +55,7 @@ class Home extends Component {
           ]}
         />
         <section className="top-section postgraphile">
-          <div className="content">
+          <div className="box-content">
             <div className="logo" />
             <div className="text">
               <h2>PostGraphile</h2>
@@ -85,12 +85,59 @@ class Home extends Component {
             </div>
           </div>
         </section>
-        <section className="bottom-section">
-          <div
-            className="page-content"
-            dangerouslySetInnerHTML={{ __html: html }}
-          />
-        </section>
+        <div className="bottom-section">
+          <section className="box graphile">
+            <div className="box-content">
+              <div className="logo" />
+              <div className="text">
+                <h3>Graphile-Build</h3>
+                <h4>High-performance pluggable GraphQL schema tools</h4>
+                <p>
+                  Prefer building your GraphQL APIs by hand? Using our{" "}
+                  <a href="/graphile-build/look-ahead/">look-ahead feature</a>{" "}
+                  your code can know what's coming leading to fewer round-trips
+                  and higher performance. Our{" "}
+                  <a href="/graphile-build/plugins/">plugin architecture</a>{" "}
+                  allows you to extend or enhance your GraphQL API as your needs
+                  evolve.
+                </p>
+              </div>
+            </div>
+            <div className="cta">
+              <a className="button--solid" href="/graphile-build/">
+                More about Graphile-Build{" "}
+                <span className="fa fa-fw fa-long-arrow-right" />
+              </a>
+            </div>
+          </section>
+          <section className="box training">
+            <div className="box-content">
+              <div className="logo" />
+              <div className="text">
+                <h3>GraphQL Training</h3>
+                <h4>
+                  GraphQL and PostGraphile training in London, Berlin and
+                  Europe.
+                </h4>
+                <p>
+                  By adopting GraphQL in your business you can innovate faster
+                  and deliver better web experiences leading to increase
+                  conversions, fewer lost sales due to bugs and higher search
+                  engine ratings. Let us show you how.
+                </p>
+              </div>
+            </div>
+            <div className="cta">
+              <a
+                className="button--solid"
+                href="https://www.graphql-training.com/"
+              >
+                More about GraphQL Training{" "}
+                <span className="fa fa-fw fa-long-arrow-right" />
+              </a>
+            </div>
+          </section>
+        </div>
         <SiteFooter />
       </div>
     );
