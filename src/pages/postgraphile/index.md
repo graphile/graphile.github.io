@@ -35,7 +35,7 @@ title: PostGraphile - full GraphQL API server in an instant from PostgreSQL data
 <div class='container'>
 
 <div class='row'>
-<div class='col-xs-12'>
+<div class='text-center col-xs-12 col-md-9 col-lg-7 order-1'>
 <div class='hero-block'>
 
 ## Try it now!
@@ -43,24 +43,22 @@ title: PostGraphile - full GraphQL API server in an instant from PostgreSQL data
 The fastest way to get a full GraphQL API up and running based on a PostgreSQL
 database schema.
 
-</div>
-</div>
-</div>
-
-<div class='row'>
-<div class='text-center col-xs-12 col-md-9 col-lg-7'>
 
 ```js
 npx postgraphile -c postgres://user:pass@host/dbname \
   --schema schema_name
 ```
 
-</div>
-</div>
-
 See the [Quick Start Guide](/postgraphile/quick-start-guide/) to get PostGraphile up and running.
 
 _Note: `npx` comes bundled with the latest Node.js releases._
+
+
+</div>
+</div>
+<div class='text-center col-xs-12 col-md-3 col-lg-5 postgraphile-logo-bg order-0 order-2-ns'>
+</div>
+</div>
 
 </div>
 </section>

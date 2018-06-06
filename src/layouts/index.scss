@@ -687,13 +687,21 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
   }
 }
 @media (max-width: 700px) {
-.template-home {
-  .top-section.postgraphile {
-    &:after {
-      background-image: linear-gradient(108deg, transparent 50%, #284c9c 0);
-      width: 200px;
-      height: 600px;
+  .template-home {
+    .top-section.postgraphile {
+      &:after {
+        background-image: linear-gradient(108deg, transparent 50%, #284c9c 0);
+        width: 200px;
+        height: 600px;
+      }
     }
   }
 }
+
+.postgraphile-logo-bg {
+  background-image: url("../../logos/postgraphile.optimized.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: 50% 20%;
+  min-height: 240px;
 }
