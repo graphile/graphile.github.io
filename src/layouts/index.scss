@@ -96,8 +96,8 @@ p,
   @extend .f6;
   @extend .lh-copy;
   @extend .measure-wide;
-  @extend .mb4-ns;
-  @extend .mt4-ns;
+  @extend .mb3-ns;
+  @extend .mt3-ns;
 }
 .template-marketing {
   p,
@@ -626,12 +626,12 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
       z-index: 1;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 2rem 1rem 1rem;
+      padding: 3rem 1rem 1rem;
       display: flex;
       flex-wrap: wrap;
       .logo {
         flex: 1 0 10rem;
-        margin: 0 1rem;
+        margin: 0 2rem;
         min-height: 10rem;
         background-size: contain;
         background-repeat: no-repeat;
@@ -652,10 +652,10 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
     }
     .graphile {
       //background: linear-gradient(85deg, #a51b1b 0%, #7d2424 100%);
-      background: linear-gradient(85deg, #f4bdbd 0%, #eec4c4 100%);
+      background: linear-gradient(135deg, #f8eeee 0%, #eec4c4 100%);
     }
     .training {
-      background: linear-gradient(85deg, #bad9f7 0%, #bcdaf5 100%);
+      background: linear-gradient(135deg, #ddeffd 0%, #bcdaf5 100%);
     }
     .graphile .logo {
       background-image: url("../../logos/graphile.optimized.svg");

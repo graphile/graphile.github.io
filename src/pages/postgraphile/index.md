@@ -78,8 +78,10 @@ _Note: `npx` comes bundled with the latest Node.js releases._
 
 Using graphile-build's [look-ahead](/graphile-build/look-ahead/) features a
 single root level GraphQL query, no matter how nested, can become just one SQL
-query - leading to fewer database round-trips and thus faster performance than
-alternatives including the commonly used `DataLoader`.
+query - leading to fewer database round-trips and thus blazingly fast
+performance - typically much greater than that you'd get using `DataLoader`.
+
+[Read more about PostGraphile's stunning performance](/postgraphile/performance/)
 
 </div>
 </div>
@@ -184,8 +186,6 @@ type Person {
 
 <!-- **************************************** -->
 
-<!-- **************************************** -->
-
 <section>
 <div class='container'>
 
@@ -193,13 +193,19 @@ type Person {
 <div class='col-xs-12'>
 <div class='hero-block'>
 
-## Fully compatible
+## Fully GraphQL compatible
 
-Graphile uses the <a href="http://graphql.org/graphql-js/">reference GraphQL implementation</a>
-under the hood, so you know it's spec compliant.
+PostGraphile and Graphile-Build use the [reference GraphQL
+implementation](http://graphql.org/graphql-js/) under the hood, so you know
+they're spec compliant.
 
-You can use regular GraphQL objects from other libraries in your generated
-schema - you only need to change the parts of your code that you wish to trigger hooks for.
+PostGraphile supports GraphQL best practices, including: [cursor-based
+connection
+pagination](https://facebook.github.io/relay/graphql/connections.htm), [global
+object
+identification](https://facebook.github.io/relay/graphql/objectidentification.htm),
+and the [Relay Input Object Mutations
+Specification](https://facebook.github.io/relay/graphql/mutations.htm).
 
 </div>
 </div>
@@ -207,7 +213,6 @@ schema - you only need to change the parts of your code that you wish to trigger
 
 </div>
 </section>
-
 <!-- **************************************** -->
 
 <section>
@@ -379,39 +384,6 @@ id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validat
     </div>
   </div>
 </form>
-
-</div>
-</div>
-</div>
-
-</div>
-</section>
-
-<!-- **************************************** -->
-
-<section>
-<div class='container'>
-
-<div class='row'>
-<div class='col-xs-12'>
-<div class='hero-block'>
-
-## Fully GraphQL compatible
-
-Graphile uses the <a href="http://graphql.org/graphql-js/">reference GraphQL
-implementation</a> under the hood, so you know it's spec compliant. This also
-means you can mix it into existing GraphQL APIs, or mix existing GraphQL object
-types into it (so long as they use the reference GraphQL implementation too).
-
-PostGraphile supports GraphQL best practices, including: [cursor-based
-connection
-pagination](https://facebook.github.io/relay/graphql/connections.htm), [global
-object
-identification](https://facebook.github.io/relay/graphql/objectidentification.htm),
-and the [Relay Input Object Mutations
-Specification](https://facebook.github.io/relay/graphql/mutations.htm); plus
-it's built on Graphile Build technology so it can be expanded using Graphile
-Build plugins.
 
 </div>
 </div>
