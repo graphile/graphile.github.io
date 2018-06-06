@@ -74,14 +74,19 @@ class Home extends Component {
                 established and trusted Role-Based Access Control (RBAC) and
                 Row-Level Security (RLS) features.
               </p>
-              <p>Run it now with one command (requires Node.js 8.6+):</p>
+              <p>Run it now with one command:</p>
               <code>
-                <pre>
+                <pre className="mb0">
                   {unindent`\
                   npx postgraphile -c postgres://localhost/mydb\
                   `}
                 </pre>
               </code>
+              <p className="mt0">
+                <small>
+                  <em>Requires Node.js 8.6+</em>
+                </small>
+              </p>
               <Link className="button--solid" to="/postgraphile/">
                 More about PostGraphile{" "}
                 <span className="fa fa-fw fa-long-arrow-right" />
