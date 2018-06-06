@@ -192,7 +192,7 @@
       },
       {
         "to": "/postgraphile/production/",
-        "title": "Running in Production [PRO]",
+        "title": "Running in Production",
         "sectionId": "overview"
       },
       {

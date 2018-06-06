@@ -53,7 +53,9 @@ to query your API then persisted queries will not help you, and this is where
 the other techniques come in handy.
 
 The rest of this article relates to Pro Plugin's approach to addressing these
-issues.
+issues. Note that many of these techniques can be implemented outside of
+PostGraphile (without the need for the Pro Plugin), for example in an express
+middleware in front of it or a nginx or similar reverse proxy.
 
 ### Sending queries to read replicas
 
