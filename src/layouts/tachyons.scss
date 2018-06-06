@@ -3347,4 +3347,16 @@ $graphileRed: #E44336;
   outline: none;
   box-shadow: 0px 0px 3px 1px rgba(228, 67, 54, 0.45);
 };
+
+$postgraphileBlue: #2D80D3;
+
+.postgraphile-blue { color: $postgraphileBlue; }
+.bg-postgraphile-blue { background-color: $postgraphileBlue }
+.b--postgraphile-blue { border-color: $postgraphileBlue }
+.b-focus--postgraphile-blue:focus {
+  border-color: $postgraphileBlue;
+  outline: none;
+  box-shadow: 0px 0px 3px 1px rgba(228, 67, 54, 0.45);
+};
+
 .no-underline-hover:hover { text-decoration: none; }

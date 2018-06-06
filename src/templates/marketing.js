@@ -27,7 +27,9 @@ class Marketing extends Component {
     } = this.props;
     return (
       <div
-        className="template-marketing"
+        className={`template-marketing ${
+          location.pathname.match(/^\/postgraphile(\/|$)/) ? "postgraphile" : ""
+        }`}
         ref={el => {
           this.root = el;
         }}
@@ -47,19 +49,21 @@ class Marketing extends Component {
             },
           ]}
         >
-          {this.state.mailchimp &&
+          {this.state.mailchimp && (
             <script
               type="text/javascript"
               defer
               src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"
-            />}
-          {this.state.mailchimp &&
+            />
+          )}
+          {this.state.mailchimp && (
             <script
               type="text/javascript"
               dangerouslySetInnerHTML={{
                 __html: `(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='BIRTHDAY';ftypes[3]='birthday';}(jQuery));var $mcj = jQuery.noConflict(true);`,
               }}
-            />}
+            />
+          )}
         </Helmet>
         <SiteHeader location={location} />
         <div

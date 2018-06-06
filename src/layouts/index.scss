@@ -2,6 +2,7 @@
 @import "./navbar.scss";
 
 $graphileRed: #E44336;
+$postgraphileBlue: #2D80D3;
 $backgroundImage: "/images/delaunay.png";
 
 // ----------------------------------------
@@ -153,6 +154,9 @@ a {
   @extend .graphile-red;
   @extend .no-underline;
   @extend .underline-hover;
+  .postgraphile & {
+    @extend .postgraphile-blue;
+  }
 }
 
 .intro {
@@ -261,6 +265,18 @@ a {
     top: -1 * $triHeight;
     z-index: 0;
   }
+
+  &.postgraphile {
+    background: linear-gradient(85deg, #0e457d 0%, #0e385e 100%);
+
+    &:after {
+      background-image: linear-gradient(117deg, transparent 50%, #284c9c 0);
+    }
+
+    &:before {
+      background-image: linear-gradient(66deg, transparent 50%, #233b92 0);
+    }
+  }
 }
 
 .container {
@@ -300,6 +316,9 @@ a.strong-link {
   @extend .underline-hover;
   @extend .b;
   @extend .ttu;
+  .postgraphile & {
+    @extend .postgraphile-blue;
+  }
 }
 
 a.strong-link--white {
@@ -424,6 +443,10 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
   @extend .button-common;
   @extend .b--graphile-red;
   @extend .graphile-red;
+  .postgraphile & {
+    @extend .b--postgraphile-blue;
+    @extend .postgraphile-blue;
+  }
 }
 
 .button--solid {
@@ -431,6 +454,10 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
   @extend .b--graphile-red;
   @extend .bg-graphile-red;
   @extend .white;
+  .postgraphile & {
+    @extend .b--postgraphile-blue;
+    @extend .bg-postgraphile-blue;
+  }
 }
 
 .button--outline-light {
@@ -454,6 +481,9 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
   @extend .input-reset;
   @extend .ph3;
   @extend .pv2;
+  .postgraphile & {
+    @extend .b-focus--postgraphile-blue;
+  }
 }
 
 .label--small {
@@ -523,16 +553,16 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
   font-weight: normal;
 }
 
-.plan-supporter {
+.template-page .plan-supporter {
   @extend .plan-tag;
   background-color: #4d4dff;
 }
 
-.plan-pro {
+.template-page .plan-pro {
   @extend .plan-tag;
   background-color: #c511c5;
 }
-.plan-enterprise {
+.template-page .plan-enterprise {
   @extend .plan-tag;
   background-color: green;
 }
@@ -547,7 +577,6 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
 
 @media screen and (max-width: 30em) {
   .template-marketing {
-    background: linear-gradient(85deg, #a51b1b 0%, #7d2424 100%);
 
     &:after {
       top: -36px; // -6vh;

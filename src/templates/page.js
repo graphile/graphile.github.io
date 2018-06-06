@@ -81,9 +81,13 @@ const Page = ({
   const isPostGraphileDocs = navSection === "postgraphile";
 
   return (
-    <div className="template-page">
+    <div
+      className={`template-page ${
+        location.pathname.match(/^\/postgraphile(\/|$)/) ? "postgraphile" : ""
+      }`}
+    >
       <Helmet
-        title={`Graphile | ${title}`}
+        title={`${isPostGraphileDocs ? "PostGraphile" : "Graphile"} | ${title}`}
         meta={[
           {
             name: "description",
