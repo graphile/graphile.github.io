@@ -66,7 +66,8 @@ const SiteFooter = () => {
             <br />
             <br />
             This site is copyright &copy; Benjie Gillam {currentYear}. Design
-            and logo copyright &copy; Benjie Gillam and Jof Arnold {currentYear}.
+            and logos copyright &copy; Benjie Gillam and Jof Arnold{" "}
+            {currentYear}.
           </div>
         </div>
       </div>
