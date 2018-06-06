@@ -28,9 +28,11 @@
     "gatsby-transformer-remark": "^1.7.0",
     "graphile-build": "4.0.0-alpha.1",
     "graphql": "^0.11.7",
+    "juice": "4.3.1",
     "postgraphile": "4.0.0-beta.6",
     "react-typography": "^0.16.1",
     "remark-custom-blocks": "^1.0.1",
+    "svgo": "1.0.5",
     "typography": "^0.16.0",
     "typography-theme-fairy-gates": "^0.15.11",
     "typography-theme-funston": "^0.15.10"

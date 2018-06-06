@@ -7,7 +7,7 @@ This file is Copyright © 2018 Benjie Gillam. All rights reserved.
 
 -->
 <style type="text/css">
-polygon {
+* {
   stroke-width: 1;
   shape-rendering: geometricPrecision;
 }
@@ -32,27 +32,29 @@ polygon {
   stroke: #0c3861;
 }
 
-.face polygon.eye {
+.face .eye {
   fill: #ffffff;
   stroke: #ffffff;
 }
-.face polygon.tusk {
+.face .tusk {
   stroke: #000000;
   fill: #ffffff;
 }
-.face polygon.no-stroke {
-  stroke: transparent
+.face .no-stroke {
+  stroke: transparent;
+  stroke-opacity: 0;
 }
-.face polygon.tusk,
-.face polygon.stroke-only,
+.face .tusk,
+.face .stroke-only,
 .heart-outline {
   stroke: #082744;
   stroke-width: 8;
   stroke-linejoin: round;
 }
-.face polygon.stroke-only,
+.face .stroke-only,
 .heart-outline {
   fill: transparent;
+  fill-opacity: 0;
 }
 </style>
 
