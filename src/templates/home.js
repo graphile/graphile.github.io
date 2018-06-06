@@ -130,10 +130,7 @@ class Home extends Component {
               <a href="https://www.graphql-training.com" className="logo" />
               <div className="text">
                 <h3>GraphQL Training</h3>
-                <h4>
-                  GraphQL and PostGraphile training in London, Berlin and
-                  Europe.
-                </h4>
+                <h4>GraphQL and PostGraphile training in UK and Europe.</h4>
                 <p>
                   By adopting GraphQL in your business you can innovate faster
                   and deliver better web experiences leading to increase
