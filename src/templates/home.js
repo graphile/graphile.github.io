@@ -59,11 +59,11 @@ class Home extends Component {
           <div className="box-content">
             <Link to="/postgraphile/" className="logo" />
             <div className="text">
-              <h2>
+              <h1 className="mb3">
                 <Link className="inherit-color" to="/postgraphile/">
                   PostGraphile
                 </Link>
-              </h2>
+              </h1>
               <h3>
                 Instant, secure and fast GraphQL API for your Postgres database
               </h3>
@@ -74,12 +74,11 @@ class Home extends Component {
                 established and trusted Role-Based Access Control (RBAC) and
                 Row-Level Security (RLS) features.
               </p>
+              <p>Run it now with one command (requires Node.js 8.6+):</p>
               <code>
                 <pre>
                   {unindent`\
-                  npx postgraphile --connection \\
-                    postgres://localhost/mydb \\
-                    --watch
+                  npx postgraphile -c postgres://localhost/mydb\
                   `}
                 </pre>
               </code>
