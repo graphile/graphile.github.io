@@ -15,6 +15,20 @@ that you may want to use that can be purchased on the [Graphile Store](https://s
 - `@graphile/plugin-supporter` [SUPPORTER]
 - `@graphile/plugin-pro` [PRO]
 
+_TODO: update this when the plugin interface is more mature._
+
+### Wait, I have to pay?
+
+The vast majority of PostGraphile is open source; and there's no intention to
+make a previously open-source part of PostGraphile closed source. However,
+development on a project like this is time-consuming and complex; these
+commercial plugins help to make development on PostGraphile more sustainable by
+providing a financial backing for it. You can absolutely run PostGraphile in
+production without these features, and many people do (just ask in our [gitter
+chat](https://gitter.im/graphile/postgraphile)).
+
+For more information, see the bottom of the [Go Pro!](/postgraphile/pricing/) page.
+
 ### Installing
 
 You can install first-party plugins with `yarn add` or `npm install` using the
