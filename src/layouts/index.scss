@@ -686,7 +686,7 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
     flex: 1 0 0;
   }
 }
-@media (max-width: 700px) {
+@media screen and (max-width: 700px) {
   .template-home {
     .top-section.postgraphile {
       &:after {
@@ -704,4 +704,7 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
   background-repeat: no-repeat;
   background-position: 50% 20%;
   min-height: 240px;
+}
+a.inherit-color {
+  color: inherit;
 }

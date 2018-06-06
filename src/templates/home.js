@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Helmet from "react-helmet";
 import SiteFooter from "../components/SiteFooter";
+import Link from "gatsby-link";
 
 function unindent(strings, ...vars) {
   if (vars.length) {
@@ -56,9 +57,13 @@ class Home extends Component {
         />
         <section className="top-section postgraphile">
           <div className="box-content">
-            <div className="logo" />
+            <Link to="/postgraphile/" className="logo" />
             <div className="text">
-              <h2>PostGraphile</h2>
+              <h2>
+                <Link className="inherit-color" to="/postgraphile/">
+                  PostGraphile
+                </Link>
+              </h2>
               <h3>
                 Instant, secure and fast GraphQL API for your Postgres database
               </h3>
@@ -78,41 +83,47 @@ class Home extends Component {
                   `}
                 </pre>
               </code>
-              <a className="button--solid" href="/postgraphile/">
+              <Link className="button--solid" to="/postgraphile/">
                 More about PostGraphile{" "}
                 <span className="fa fa-fw fa-long-arrow-right" />
-              </a>
+              </Link>
             </div>
           </div>
         </section>
         <div className="bottom-section">
           <section className="box graphile">
             <div className="box-content">
-              <div className="logo" />
+              <Link to="/graphile-build/" className="logo" />
               <div className="text">
-                <h3>Graphile-Build</h3>
+                <h3>
+                  <Link to="/graphile-build/" className="inherit-color">
+                    Graphile-Build
+                  </Link>
+                </h3>
                 <h4>High-performance pluggable GraphQL schema tools</h4>
                 <p>
                   Prefer building your GraphQL APIs by hand? Using our{" "}
-                  <a href="/graphile-build/look-ahead/">look-ahead feature</a>{" "}
+                  <Link to="/graphile-build/look-ahead/">
+                    look-ahead feature
+                  </Link>{" "}
                   your code can know what's coming leading to fewer round-trips
                   and higher performance. Our{" "}
-                  <a href="/graphile-build/plugins/">plugin architecture</a>{" "}
+                  <Link to="/graphile-build/plugins/">plugin architecture</Link>{" "}
                   allows you to extend or enhance your GraphQL API as your needs
                   evolve.
                 </p>
               </div>
             </div>
             <div className="cta">
-              <a className="button--solid" href="/graphile-build/">
+              <Link className="button--solid" to="/graphile-build/">
                 More about Graphile-Build{" "}
                 <span className="fa fa-fw fa-long-arrow-right" />
-              </a>
+              </Link>
             </div>
           </section>
           <section className="box training">
             <div className="box-content">
-              <div className="logo" />
+              <a href="https://www.graphql-training.com" className="logo" />
               <div className="text">
                 <h3>GraphQL Training</h3>
                 <h4>
