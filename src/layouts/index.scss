@@ -550,7 +550,7 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
 
 .plan-tag {
   background-color: lime;
-  color: white;
+  color: white !important;
   font-size: 0.65rem;
   border-radius: 1em;
   padding: 0.2em 0.7em 0.3em;
@@ -560,16 +560,16 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
   font-weight: normal;
 }
 
-.template-page .plan-supporter {
+.plan-supporter {
   @extend .plan-tag;
   background-color: #4d4dff;
 }
 
-.template-page .plan-pro {
+.plan-pro {
   @extend .plan-tag;
   background-color: #c511c5;
 }
-.template-page .plan-enterprise {
+.plan-enterprise {
   @extend .plan-tag;
   background-color: green;
 }
