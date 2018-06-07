@@ -514,6 +514,8 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
 .pricing-table tbody td {
   @extend .pv3;
   @extend .ph1;
+}
+.pricing-table tbody tr {
   border-bottom: 1px solid #a51b1b;
 }
 .pricing-table tbody tr:last-child th,
@@ -546,6 +548,49 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
 .pricing-table .button--outline,
 .pricing-table .button--solid {
   width: 80%;
+}
+
+@media screen and (max-width: 36em) {
+  .pricing-table {
+    thead {
+      display: none;
+    }
+    tbody, thead, tfoot {
+      td, th, tr {
+        display: block;
+        width: auto;
+        text-align: center;
+      }
+    }
+    tbody, tfoot {
+      tr {
+        padding: 1rem 0.5rem;
+      }
+      td, th {
+        padding: 0;
+        margin: 0.5rem 0 0 0;
+        position: relative;
+        padding-left: 40%;
+      }
+      td::before {
+        content: 'Placeholder';
+        position: absolute;
+        left: 0.5rem;
+        top: 0;
+        font-variant: small-caps;
+        font-size: 1.2em;
+      }
+      td:nth-of-type(1)::before {
+        content: 'Core';
+      }
+      td:nth-of-type(2)::before {
+        content: 'Supporter';
+      }
+      td:nth-of-type(3)::before {
+        content: 'Pro';
+      }
+    }
+  }
 }
 
 .plan-tag {
