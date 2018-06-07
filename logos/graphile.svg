@@ -8,7 +8,7 @@ This file is Copyright © 2018 Benjie Gillam. All rights reserved.
 -->
 <style type="text/css">
 polygon {
-  stroke-width: 1;
+  stroke-width: 0;
   shape-rendering: geometricPrecision;
 }
 .seg1 {
@@ -40,13 +40,14 @@ polygon {
 </style>
 
   <desc>Graphile logo</desc>
-  <polygon points="25,360 260,25 715,615" class="seg2" />
-  <polygon points="260,25 600,130 715,615" class="seg1" />
-  <polygon points="600,130 940,25 715,615" class="seg2" />
-  <polygon points="940,25 1175,360 715,615" class="seg3" />
-  <polygon points="1175,360 1100,615 715,615" class="seg4" />
-  <polygon points="1100,615 600,1055 715,615" class="seg5" />
-  <polygon points="600,1055 100,615 715,615" class="seg4" />
+  <polygon points="100,615 25,360 260,25 715,615" class="seg3" />
+  <polygon points="25,360 260,25 600,130 715,615" class="seg2" />
+  <polygon points="260,25 600,130 940,25 715,615" class="seg1" />
+  <polygon points="600,130 940,25 1175,360 715,615" class="seg2" />
+  <polygon points="940,25 1175,360 1100,615 715,615" class="seg3" />
+  <polygon points="1175,360 1100,615 600,1055 715,615" class="seg4" />
+  <polygon points="1100,615 600,1055 100,615 715,615" class="seg5" />
+  <polygon points="600,1055 100,615 25,360 715,615" class="seg4" />
   <polygon points="100,615 25,360 715,615" class="seg3" />
 
   <!-- polygon points="25,360 260,25 260,25 600,130 600,130 940,25 940,25 1175,360 1175,360 1100,615 1100,615 600,1055 600,1055 100,615 100,615 25,360" class="heart-outline" / -->
