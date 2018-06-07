@@ -34,8 +34,8 @@ title: PostGraphile - full GraphQL API server in an instant from PostgreSQL data
 <section>
 <div class='container'>
 
-<div class='row'>
-<div class='text-center col-xs-12 col-md-9 col-lg-7 order-1'>
+<div class='row flex-wrap-reverse'>
+<div class='text-center col-xs-12 col-md-9 col-lg-7'>
 <div class='hero-block'>
 
 ## Try it now!
@@ -56,7 +56,7 @@ _Note: `npx` comes bundled with the latest Node.js releases._
 
 </div>
 </div>
-<div class='text-center col-xs-12 col-md-3 col-lg-5 postgraphile-logo-bg order-0 order-2-ns'>
+<div class='text-center col-xs-12 col-md-3 col-lg-5 postgraphile-logo-bg'>
 </div>
 </div>
 

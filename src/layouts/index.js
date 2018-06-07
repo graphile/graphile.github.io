@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import "prismjs/themes/prism-solarizedlight.css";
-import "./index.scss";
 import "./flexgrid.scss";
+import "./index.scss";
 
 class TemplateWrapper extends Component {
   onKeyDown = e => {
