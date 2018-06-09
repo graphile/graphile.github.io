@@ -29,27 +29,11 @@ the below first though!)
 
 ### Aside: project financial status
 
-**_TL;DR: just read the bold bits!_**
-
-**My work on PostGraphile is primarily self-funded** - I take time
-off from earning money through contracting to work on PostGraphile.
-
-Recently **I started [a Patreon](https://www.patreon.com/benjie)** and the
-support from these 10 lovely folk has allowed me to spend more time working on
-PostGraphile. The reason that V4 is so compatible with V3 is because of the
-support of these patrons. 🙏 I would love to spend a LOT more time working on
-the project, but to do that I need more supporters.
-
 **If your business uses PostGraphile, please invest in [my
 Patreon](https://www.patreon.com/benjie)** - you'll benefit from faster fixes,
 more features, and better performance. If you need a more commercially
-justifiable way of funding the project then please **get in touch - I am
-working on a commercial support offering**. I'm also open to other forms of
-support, and of course you can [hire me](/support/) to give advice or build
-features.
-
-Every bit of support, no matter how small, helps. Thanks for reading, back to
-the migration guide...
+justifiable way of funding the project then please [get in
+touch](mailto:benjie@graphile.org?subject=PostGraphile).
 
 ### Deprecations
 
