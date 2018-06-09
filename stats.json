@@ -89,8 +89,8 @@
       "path---postgraphile-pricing-fb5b71367e166dd79812.js.map"
     ],
     "path---postgraphile-v-3-migration": [
-      "path---postgraphile-v-3-migration-17e08b41e8b9d4d027a7.js",
-      "path---postgraphile-v-3-migration-17e08b41e8b9d4d027a7.js.map"
+      "path---postgraphile-v-3-migration-fe1dc69499e51b9db1b7.js",
+      "path---postgraphile-v-3-migration-fe1dc69499e51b9db1b7.js.map"
     ],
     "component---src-templates-page-js": [
       "component---src-templates-page-js-e8492acfbe7760674006.js",
@@ -195,9 +195,9 @@
       "path---postgraphile-introduction-9c4e41d5dc5408d8db48.js.map"
     ],
     "app": [
-      "app-b57a5e33ad387078cb46.js",
+      "app-a71f4d5a1e2312b9fee6.js",
       "build-js-styles.css",
-      "app-b57a5e33ad387078cb46.js.map",
+      "app-a71f4d5a1e2312b9fee6.js.map",
       "build-js-styles.css.map"
     ],
     "path---postgraphile-connections": [
