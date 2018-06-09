@@ -61,8 +61,8 @@
       "path---graphile-build-hooks-247cb76b20a594f717d8.js.map"
     ],
     "path---postgraphile-v-4-new-features": [
-      "path---postgraphile-v-4-new-features-86f5544b170aee078362.js",
-      "path---postgraphile-v-4-new-features-86f5544b170aee078362.js.map"
+      "path---postgraphile-v-4-new-features-e96f52db15500262b3ba.js",
+      "path---postgraphile-v-4-new-features-e96f52db15500262b3ba.js.map"
     ],
     "component---src-templates-marketing-js": [
       "component---src-templates-marketing-js-6a89c0cb7acb3a3a3f95.js",
@@ -195,9 +195,9 @@
       "path---postgraphile-introduction-9c4e41d5dc5408d8db48.js.map"
     ],
     "app": [
-      "app-a71f4d5a1e2312b9fee6.js",
+      "app-61dca5fde6447231a1a9.js",
       "build-js-styles.css",
-      "app-a71f4d5a1e2312b9fee6.js.map",
+      "app-61dca5fde6447231a1a9.js.map",
       "build-js-styles.css.map"
     ],
     "path---postgraphile-connections": [
