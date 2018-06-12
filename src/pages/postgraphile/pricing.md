@@ -41,8 +41,8 @@ title: PostGraphile Pro!
   <th><span class='plan-pro'><span class='first-letter'>p</span></span> Pro</th>
 </tr>
 
-  </thead>
-  <tbody>
+</thead>
+<tbody>
 
 <tr>
   <th>Audience</th>
@@ -153,25 +153,25 @@ title: PostGraphile Pro!
   <th>Simple GraphQL Subscriptions</th>
   <td><span class='fa fa-times-circle'></span></td>
   <td><span class='fa fa-check-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
+  <td><sup style="visibility: hidden">&nbsp;†</sup><span class='fa fa-check-circle'></span><sup>&nbsp;†</sup></td>
 </tr>
 
 <tr>
-  <th>GraphQL query cost estimation and limit</th>
-  <td><span class='fa fa-times-circle'></span></td>
-  <td><span class='fa fa-times-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
-</tr>
-
-<tr>
-  <th>Enforce limits on pagination</th>
+  <th>Integrated<sup>‡</sup> GraphQL query cost limit</th>
   <td><span class='fa fa-times-circle'></span></td>
   <td><span class='fa fa-times-circle'></span></td>
   <td><span class='fa fa-check-circle'></span></td>
 </tr>
 
 <tr>
-  <th>Limit depth of GraphQL queries</th>
+  <th>Integrated<sup>‡</sup> limits on pagination</th>
+  <td><span class='fa fa-times-circle'></span></td>
+  <td><span class='fa fa-times-circle'></span></td>
+  <td><span class='fa fa-check-circle'></span></td>
+</tr>
+
+<tr>
+  <th>Integrated<sup>‡</sup> GraphQL query depth limits</th>
   <td><span class='fa fa-times-circle'></span></td>
   <td><span class='fa fa-times-circle'></span></td>
   <td><span class='fa fa-check-circle'></span></td>
@@ -179,7 +179,7 @@ title: PostGraphile Pro!
 
 
 <tr>
-  <th>Scale by directing queries to read replicas</th>
+  <th>Facility to scale via read replicas</th>
   <td><span class='fa fa-times-circle'></span></td>
   <td><span class='fa fa-times-circle'></span></td>
   <td><span class='fa fa-check-circle'></span></td>
@@ -228,7 +228,8 @@ title: PostGraphile Pro!
 
 </table>
 
-###### NB: The Pro plugin does not include the Supporter plugin features directly, but all plans that enable access to the Pro plugin also include access to the Supporter plugin so you can use both plugins at the same time to get all features.
+##### <sup>†</sup> The Pro plugin does not include the Supporter plugin features directly, but all plans that enable access to the Pro plugin also include access to the Supporter plugin so you can use both plugins at the same time to get all features.
+##### <sup>‡</sup> These features integrate deeply with PostGraphile and have been optimised for its nuances by the maintainer of the project. If you wish to build and maintain protections yourself rather than using the Pro plugin, refer to [Running in Production](/postgraphile/production/) for information on how you might go about doing this. Purchasing the Pro plugin helps fund ongoing development and maintenance on the open source core of PostGraphile.
 
 </div>
 </div>

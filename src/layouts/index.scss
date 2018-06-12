@@ -27,6 +27,9 @@ h6 {
   @extend .measure;
   @extend .fw6;
 }
+th {
+  @extend .helvetica;
+}
 
 h1 {
   @extend .mb4-ns;
