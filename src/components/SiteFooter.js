@@ -68,6 +68,13 @@ const SiteFooter = () => {
             This site is copyright &copy; Benjie Gillam {currentYear}. Design
             and logos copyright &copy; Benjie Gillam and Jof Arnold{" "}
             {currentYear}.
+            <br />
+            <br />
+            Corrections and contributions to this website are gratefully
+            received via{" "}
+            <a href="https://github.com/graphile/graphile.github.io">
+              its GitHub repository
+            </a>.
           </div>
         </div>
       </div>
