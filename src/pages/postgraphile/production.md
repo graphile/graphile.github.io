@@ -44,20 +44,96 @@ allUsers {
 ```
 
 There's lots of techniques for protecting your server from these kinds of
-queries; the [Pro Plugin](/postgraphile/plugins) [PRO] helps you implement a
-few of them. One of the most effective techniques, if you can use it, is the
-that of "persisted queries" as a query whitelist. This technique will only work
-if you control all the GraphQL clients that you wish to talk to your GraphQL
-endpoint and if they use only static queries. If you're expecting 3rd parties
-to query your API then persisted queries will not help you, and this is where
-the other techniques come in handy.
+queries; a great introduction to this subject is [this blog
+post](https://dev-blog.apollodata.com/securing-your-graphql-api-from-malicious-queries-16130a324a6b)
+from Apollo.
+
+### Simple: Query Whitelist
+
+If you do not intend to open your API up to third parties to run arbitrary
+queries against then using persisted queries as a query whitelist to protect
+your GraphQL endpoint is a good solution. This technique ensures that only the
+queries you use in your own applications can be executed on the server (but you
+can of course change the variables).
+
+This technique has a few caveats:
+
+- Your API will only accept queries that you've approved, so it's not suitable if you want third parties to run arbitrary queries
+- You must be able to generate a unique ID from each query; e.g. a hash
+- You must use "static GraphQL queries" - that is the queries must be known at build time of your application/webpage, and only the variables fed to those queries can change at run-time
+- You must have a way of sharing these queries between the application and the server
+- You must be careful not to use variables in dangerous places; for example don't write `allUsers(first: $myVar)` as a malicious attacker could set `$myVar` to 2147483647 in order to cause your server to process as much data as possible.
+
+PostGraphile currently doesn't have this functionality built in, but it's
+fairly easy to add it when using PostGraphile as an express middleware, a
+simple implementation might look like this:
+
+```js{9-18}
+const postgraphile = require('postgraphile');
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+app.use(bodyParser.json());
+
+/**** BEGINNING OF CUSTOMIZATION ****/
+const persistedQueries = require('./persistedQueries.json');
+
+app.use('/graphql', async (req, res, next) => {
+  // TODO: validate req.body is of the right form
+  req.body.query =
+    {}.hasOwnProperty.call(persistedQueries, req.body.id)
+      ? persistedQueries[req.body.id]
+      : null;
+  next();
+});
+/**** END OF CUSTOMIZATION *** */
+
+app.use(postgraphile());
+
+app.listen(5000);
+```
+
+i.e. a simple middleware mounted before postgraphile that manipulates the request body.
+
+I personally use my forks of Apollo's `persistgraphql` tools to help me manage
+the persisted queries themselves:
+
+- https://github.com/benjie/persistgraphql
+- https://github.com/benjie/persistgraphql-webpack-plugin
+
+These forks generate hashes rather than numbers; which make the persisted
+queries consistent across multiple builds and applications (website, mobile,
+browser plugin, ...).
+
+**NOTE**: even if you're using persisted queries, it can be wise to implement
+the advanced protections as it enables you to catch unnecessarily expensive
+queries before you start facing performance bottlenecks down the line.
+
+
+### Advanced
+
+Using a query whitelist puts the decision in the hands of your engineers
+whether a particular query should be accepted or not. Sometimes this isn't
+enough - it could be that your engineers need guidance to help them avoid
+common pit-falls (e.g. forgetting to put limits on collections they query), or
+it could be that you wish arbitrary third parties to be able to send queries to
+your API without the queries being pre-approved and without the risk of
+bringing your servers to their knees.
+
+**You are highly encouraged to purchase the [Pro Plugin [PRO]](/postgraphile/pricing/),
+which implements these protections in a deeply integrated and PostGraphile
+optimised way, and has the added benefit of helping sustain development and
+maintenance on the project.**
+
 
 The rest of this article relates to Pro Plugin's approach to addressing these
-issues. Note that many of these techniques can be implemented outside of
-PostGraphile (without the need for the Pro Plugin), for example in an express
-middleware in front of it or a nginx or similar reverse proxy.
+issues, though there are hints on how you might go about solving the issues for
+yourself. Many of these techniques can be implemented outside of PostGraphile,
+for example in an express middleware or a nginx reverse proxy between
+PostGraphile and the client.
 
-### Sending queries to read replicas
+#### Sending queries to read replicas
 
 Probably the most important thing regarding scalability is making sure that your
 master database doesn't bow under the pressure of all the clients talking to it.
@@ -71,14 +147,14 @@ separate connection string to use for queries, to compliment the connection
 string passed via `--connection` which will now be used only for mutations.
 
 (If you're using middleware, then you'll want to pass a read-only pool to the
-`readReplicaPgPool` option instead.)
+`readReplicaPgPool`[PRO] option instead.)
 
 > NOTE: We don't currently support the multi-host syntax for this connection
 > string, but you can use a PostgreSQL proxy such a PgPool or PgBouncer between
 > PostGraphile and your database to enable connecting to multiple read
 > replicas.
 
-### Pagination caps
+#### Pagination caps
 
 It's unlikely that you want users to request `allUsers` and receive back
 literally all of the users in the database. More likely you want users to use
@@ -86,14 +162,14 @@ cursor-based pagination over this connection with `first` / `after`. The Pro
 Plugin introduces the `--default-pagination-cap [int]` [PRO] option which
 enables you to enforce a pagination cap on all connections. Whatever number
 you pass will be used as the pagination cap, but you can override it on a
-table-by-table basis using [smart comments](/postgraphile/smart-comments/) - in this case the `@paginationCap` smart comment.
+table-by-table basis using [smart comments](/postgraphile/smart-comments/) - in this case the `@paginationCap`[PRO] smart comment.
 
 ```sql
 comment on table users is
   E'@paginationCap 20\nSomeone who can log in.';
 ```
 
-### Limiting GraphQL query depth
+#### Limiting GraphQL query depth
 
 Most GraphQL queries tend to be only a few levels deep, queries like the deep
 one at the top of this article are generally not required. You may use
@@ -101,7 +177,7 @@ one at the top of this article are generally not required. You may use
 that hit PostGraphile - any deeper than this will be discarded during query
 validation.
 
-### [EXPERIMENTAL] GraphQL cost limit
+#### [EXPERIMENTAL] GraphQL cost limit
 
 The most powerful way of preventing DOS is to limit the cost of GraphQL queries
 that may be executed against your GraphQL server. The Pro Plugin contains a
