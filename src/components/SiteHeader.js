@@ -264,7 +264,13 @@ export default withRouter(
                   <li className="navbar-item navbar-item-right">
                     <a
                       className="nav-link nav-github-link flex items-center"
-                      href="https://github.com/graphile"
+                      href={
+                        location.pathname.match(/^\/postgraphile(\/|$)/)
+                          ? "https://github.com/graphile/postgraphile"
+                          : location.pathname.match(/^\/graphile-build(\/|$)/)
+                            ? "https://github.com/graphile/graphile-build"
+                            : "https://github.com/graphile"
+                      }
                     >
                       <span className="f3 fa fa-github" />{" "}
                       <span className="github">
