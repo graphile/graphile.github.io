@@ -72,6 +72,55 @@ _Note: `npx` comes bundled with the latest Node.js releases._
 <div class='col-xs-12'>
 <div class='hero-block'>
 
+## Client-facing GraphQL server
+
+PostGraphile is designed to serve GraphQL queries directly from clients such as
+webpages or mobile apps, leveraging the security features built in to
+PostgreSQL. Used this way, backend developers can focus solely on specifying
+the data schema, business logic and permissions using trusted and familiar
+PostgreSQL - PostGraphile handles making that available as a GraphQL API.
+
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- **************************************** -->
+
+<section>
+<div class='container'>
+
+<div class='row'>
+<div class='col-xs-12'>
+<div class='hero-block'>
+
+## Simple infrastructure
+
+A typical PostGraphile server architecture consists of your PostgreSQL database
+server and a single Node.js process. There's no containers or other complex setup
+required in the default stack.
+
+When it comes time to scale, it's easy to scale horizontally using additional
+servers - PostGraphile is stateless by default.
+
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- **************************************** -->
+
+<section>
+<div class='container'>
+
+<div class='row'>
+<div class='col-xs-12'>
+<div class='hero-block'>
+
 ## Solves N+1 queries issues
 
 Using graphile-build's [look-ahead](/graphile-build/look-ahead/) features a
@@ -99,14 +148,15 @@ performance - typically much greater than that you'd get using `DataLoader`.
 
 ## Customisable with SQL
 
-PostGraphile supports [custom queries](/postgraphile/custom-queries/), [custom
+PostGraphile has first-class support for your SQL functions, automatically
+exporting them as [custom queries](/postgraphile/custom-queries/), [custom
 mutations](/postgraphile/custom-mutations/) and [computed
-columns](/postgraphile/computed-columns/) in your PostgreSQL database
-automatically.
+columns](/postgraphile/computed-columns/) as appropriate.
 
-You can also rename fields and types, or even omit them in certain
-circumstances, without leaving the database using our [smart
-comments](/postgraphile/smart-comments/) feature.
+You can further customise the generated schema with our [smart
+comments](/postgraphile/smart-comments/) feature (which allows renaming and
+removing columns, tables, relations and functions with a straight-forward
+syntax using PostgreSQL's built in `COMMENT` facility).
 
 </div>
 </div>
@@ -274,15 +324,18 @@ documentation when your database schema changes.
 ## Secure
 
 Using PostgreSQL's Role-Based Access Control (RBAC) and Row-Level Security
-policies (RLS, introduced in PostgreSQL 9.5), PostGraphile leverages the
-tried-and-tested authentication baked right in to the worlds most advanced open
-source database - no more reinventing the wheel! Thanks to RLS's granularity
-it's possible to express complex authorisation logic in simple policies; and
-because the authentication is _in your database_ you can ensure nothing (not
-even companion microservices) can bypass it.
+policies (RLS), PostGraphile leverages the tried-and-tested authentication
+baked right in to the worlds most advanced open source database - no more
+reinventing the wheel! Thanks to RLS's granularity it's possible to express
+complex authorisation logic in simple policies; and because the authentication
+is _in your database_ you can ensure nothing (not even companion microservices)
+can bypass it.
 
 PostGraphile uses industry standard JWT authentication, allowing for stateless
-authorisation which also works great with CORS.
+authentication which also works great with CORS. When used as a middleware it
+can use any HTTP authentication method that Node.js supports, via the
+[pgSettings](http://graphile.meh/postgraphile/usage-library/#exposing-http-request-data-to-postgresql)
+function. (A favourite is to use Passport.js for social login.)
 
 </div>
 </div>
@@ -290,6 +343,32 @@ authorisation which also works great with CORS.
 
 </div>
 </section>
+
+<!-- **************************************** -->
+
+<section>
+<div class='container'>
+
+<div class='row'>
+<div class='col-xs-12'>
+<div class='hero-block'>
+
+## Flexible
+
+If you prefer, PostGraphile can be used as a lightning-fast back-end to an
+alternative client-facing GraphQL schema that might be built using techniques
+such as "GraphQL schema stitching" or "GraphQL bindings".
+
+If you don't need the GraphQL schema served over HTTP you can simply use the
+schema directly.
+
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
 
 <!-- **************************************** -->
 
