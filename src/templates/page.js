@@ -7,10 +7,10 @@ import SiteHeader from "../components/SiteHeader";
 const sectionIs = desiredSection => ({ sectionId }) =>
   sectionId === desiredSection;
 
-const AugmentedText = ({ children }) => (
+const AugmentedText = ({ children, noLink }) => (
   <span
     dangerouslySetInnerHTML={{
-      __html: processHTML(htmlerize(children)),
+      __html: processHTML(htmlerize(children), noLink),
     }}
   />
 );
@@ -32,16 +32,20 @@ function PageList({ navs, location }) {
   );
 }
 
-const tag = (name, label = name) =>
-  `<a href='/postgraphile/pricing/' class="plan-${name}"><span class='first-letter'>${
+const tag = (name, label = name, noLink = false) =>
+  `<${
+    noLink ? "span" : "a href='/postgraphile/pricing/'"
+  } class="plan-${name}"><span class='first-letter'>${
     label[0]
-  }</span><span class='rest'>${label.substr(1)}</span></a>`;
+  }</span><span class='rest'>${label.substr(1)}</span></${
+    noLink ? "span" : "a"
+  }>`;
 
-function processHTML(html) {
+function processHTML(html, noLink) {
   return html
-    .replace(/\[SUPPORTER\]/g, tag("supporter"))
-    .replace(/\[PRO\]/g, tag("pro"))
-    .replace(/\[ENTERPRISE\]/g, tag("enterprise"));
+    .replace(/\[SUPPORTER\]/g, tag("supporter", "supporter", noLink))
+    .replace(/\[PRO\]/g, tag("pro", "pro", noLink))
+    .replace(/\[ENTERPRISE\]/g, tag("enterprise", "enterprise", noLink));
 }
 
 function htmlerize(text) {
@@ -135,14 +139,22 @@ const Page = ({
                         {prev ? (
                           <Link className="" to={prev}>
                             <span className="fa fa-fw fa-long-arrow-left" />{" "}
-                            {prevText || "Previous"}
+                            {prevText ? (
+                              <AugmentedText noLink>{prevText}</AugmentedText>
+                            ) : (
+                              "Previous"
+                            )}
                           </Link>
                         ) : null}
                       </div>
                       <div className="col-xs-6 tr">
                         {next ? (
                           <Link className="" to={next}>
-                            {nextText || "Next"}{" "}
+                            {nextText ? (
+                              <AugmentedText noLink>{nextText}</AugmentedText>
+                            ) : (
+                              "Next"
+                            )}{" "}
                             <span className="fa fa-fw fa-long-arrow-right" />
                           </Link>
                         ) : null}
