@@ -765,3 +765,9 @@ a.inherit-color {
   color: inherit;
 }
 .flex-wrap-reverse { -ms-flex-wrap: wrap-reverse; flex-wrap: wrap-reverse; }
+
+#___gatsby {
+  &:focus, &>div:focus {
+    outline: none;
+  }
+}
