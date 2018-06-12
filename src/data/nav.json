@@ -201,6 +201,11 @@
         "sectionId": "overview"
       },
       {
+        "to": "/postgraphile/debugging/",
+        "title": "Debugging",
+        "sectionId": "overview"
+      },
+      {
         "to": "/postgraphile/jwt-guide/",
         "title": "PostGraphile JWT Guide",
         "sectionId": "guides"
