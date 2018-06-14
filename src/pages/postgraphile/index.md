@@ -40,8 +40,8 @@ title: PostGraphile - full GraphQL API server in an instant from PostgreSQL data
 
 ## Try it now!
 
-The fastest way to get a full GraphQL API up and running based on a PostgreSQL
-database schema.
+The fastest way to get a full client-facing GraphQL API up and running from
+a PostgreSQL database schema.
 
 
 ```js
@@ -51,7 +51,9 @@ npx postgraphile -c postgres://user:pass@host/dbname \
 
 See the [Quick Start Guide](/postgraphile/quick-start-guide/) to get PostGraphile up and running.
 
-_Note: `npx` comes bundled with the latest Node.js releases._
+_**Note**:  Run with latest Node LTS v8+. No installation required
+(npx comes with node performs a temporary install).  Connection string is of the format:
+`postgres://pg_user:pg_pass@pg_host:pg_port/pg_db`
 
 
 </div>
