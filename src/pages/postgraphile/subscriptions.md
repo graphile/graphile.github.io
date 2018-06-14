@@ -4,13 +4,21 @@ path: /postgraphile/subscriptions/
 title: GraphQL Subscriptions
 ---
 
-## GraphQL Subscriptions [SUPPORTER]
+## GraphQL Subscriptions
 
-Using the [Supporter Plugin](/postgraphile/plugins) PostGraphile
-gains a simple subscriptions ability.
+PostGraphile Core doesn't yet have subscriptions support built in. There is
+much talk about what a GraphQL subscriptions solution might look like in 
+[issue #92](https://github.com/graphile/postgraphile/issues/92).
 
-To enable this, use the `--simple-subscriptions` CLI flag (or
-`simpleSubscriptions: true` middleware option).
+Patreon backers (and those who have purchased the Pro plugin) may try out an
+early simple subscriptions feature via the [Supporter
+Plugin](/postgraphile/plugins/). We'd love to hear your feedback on this
+implementation. The rest of this article details how to use this feature.
+
+## Simple Subscriptions [SUPPORTER]
+
+To enable simple subscriptions support, use the `--simple-subscriptions` CLI
+flag (or `simpleSubscriptions: true` middleware option).
 
 This will expose a `listen` subscription field that can be used for generic
 subscriptions to a named topic which can be triggered using PostgreSQL's built
@@ -142,7 +150,7 @@ allowed to subscribe to the relevant topic. The function must accept one text
 argument `topic` and must return a string or raise an exception (note: the `topic`
 argument WILL be sent including the `postgraphile:` prefix).
 
-The function will probably take the following form:
+A typical implementation will look like this:
 
 
 ```sql
