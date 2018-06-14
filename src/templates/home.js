@@ -68,11 +68,16 @@ class Home extends Component {
                 Instant, secure and fast GraphQL API for your Postgres database
               </h3>
               <p>
-                Map your existing database (including tables, columns,
-                relations, procedures and more) into a GraphQL API server with
-                just one command. Secure your data with PostgreSQL's well
-                established and trusted Role-Based Access Control (RBAC) and
-                Row-Level Security (RLS) features.
+                Builds and serves a client-facing GraphQL API by introspecting
+                your existing database (tables, columns, relations, procedures
+                and more); works with Apollo, Relay Modern and most other
+                GraphQL clients.
+              </p>
+              <p>
+                Get started connecting to an existing database with just
+                one command; use PostgreSQL's well established and trusted
+                Role-Based Access Control (RBAC) and Row-Level Security (RLS)
+                features to secure access to your data.
               </p>
               <p>Run it now with one command:</p>
               <code>
@@ -84,7 +89,12 @@ class Home extends Component {
               </code>
               <p className="mt0">
                 <small>
-                  <em>Requires Node.js 8.6+</em>
+                  <em>
+                    Requires Node.js 8.6+. No installation required (npx
+                    performs a temporary install). Connection string is of the
+                    format:
+                    <code>postgres://pg_user:pg_pass@pg_host:pg_port/pg_db</code>
+                  </em>
                 </small>
               </p>
               <Link className="button--solid" to="/postgraphile/">
