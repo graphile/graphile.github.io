@@ -289,6 +289,23 @@ a {
 
 .template-page {
   min-height: 600px; // 100vh;
+  $backgroundColor: #f4f4f4;
+  $triHeight: 20px;
+  .mailinglist {
+    background-color: $backgroundColor;
+  }
+  .mailinglist:after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: $triHeight 100vw $triHeight 0;
+    border-color: transparent $backgroundColor transparent transparent;
+    top: -1 * $triHeight;
+    z-index: 0;
+  }
 }
 
 .template-marketing {
