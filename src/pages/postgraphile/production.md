@@ -1,10 +1,10 @@
 ---
 layout: page
 path: /postgraphile/production/
-title: Running PostGraphile in Production
+title: Production Considerations
 ---
 
-## Running PostGraphile in Production
+## Production Considerations
 
 When you run PostGraphile in production you'll want to ensure that people
 cannot easily trigger denial of service (DOS) attacks against you. Due to the

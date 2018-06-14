@@ -1,18 +1,22 @@
 ---
 layout: page
 path: /postgraphile/plugins/
-title: Plugins
+title: PostGraphile Server Plugins
 ---
 
-## Plugins
+## PostGraphile Server Plugins
 
-In addition to the Graphile-Build plugin system which builds the GraphQL schema
-in PostGraphile, PostGraphile also has a plugin system for the CLI and web
-layer.  This plugin system is less mature, it's not ready for third party
-plugin developers yet, however there are a couple of first-party plugins
-that you may want to use that can be purchased on the [Graphile Store](https://store.graphile.com):
+*NOTE: This page relates to changing how the PostGraphile server works. If you're instead looking to change the generated GraphQL schema (e.g. to add fields), see [Schema Plugins](/postgraphile/extending/).*
 
-- `@graphile/plugin-supporter` [SUPPORTER]
+In addition to the [Graphile-Build plugin system](/postgraphile/extending/)
+which builds the GraphQL schema in PostGraphile, PostGraphile also has a plugin
+system for the CLI and web layer.  This plugin system is less mature, it's not
+ready for third party plugin developers yet, however there are a couple of
+first-party plugins that you may want to use that can be purchased on the
+[Graphile Store](https://store.graphile.com):
+
+- `@graphile/plugin-supporter` [SUPPORTER]  
+  (pay what you want, from $1/mo+)
 - `@graphile/plugin-pro` [PRO]
 
 _TODO: update this when the plugin interface is more mature._

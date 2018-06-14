@@ -1,10 +1,14 @@
 ---
 layout: page
 path: /postgraphile/extending/
-title: Extending PostGraphile
+title: GraphQL Schema Plugins
 ---
 
-## Extending PostGraphile
+## GraphQL Schema Plugins
+
+*NOTE: This page relates to changing your GraphQL schema. If you're instead looking to change how the web layer of PostGraphile works (e.g. for validating web requests), see [Server Plugins](/postgraphile/plugins/).*
+
+*NOTE: if you're looking for an easy way to remove/rename things, check out [smart comments](/postgraphile/smart-comments/).*
 
 PostGraphile's schema generator is built from a number of [Graphile Build plugins](/graphile-build/plugins/). The plugins can be found here:
 
@@ -23,8 +27,16 @@ have familiarity with that before attempting to add your own plugins.
 
 ### Loading additional plugins
 
-```
-postgraphile --append-plugins `pwd`/add-http-bin-plugin.js -c postgres://localhost/mydb
+```bash
+# For a local file:
+postgraphile \
+  --append-plugins `pwd`/add-http-bin-plugin.js \
+  -c postgres://localhost/mydb
+
+# Or, for an npm plugin:
+postgraphile \
+  --append-plugins postgraphile-plugin-connection-filter \
+  -c postgres://localhost/mydb
 ```
 
 If you're using the CLI you can use option `--append-plugins` to load additional
@@ -199,7 +211,9 @@ module.exports = function CreateLinkWrapPlugin(builder) {
 
 ### Removing things from the schema
 
-The best way to remove a class of things from the schema is simply to remove
+**If you're looking for an easy way to remove a few things, check out [smart
+comments](/postgraphile/smart-comments/).**
+If you want to remove a class of things from the schema then you can remove
 the plugin that adds them; for example if you no longer wanted to allow
 ordering by all the columns of a table (i.e. only allow ordering by the primary
 key) you could omit
@@ -208,14 +222,16 @@ If you didn't want computed columns added you could omit
 [PgComputedColumnsPlugin](https://github.com/graphile/graphile-build/blob/master/packages/graphile-build-pg/src/plugins/PgComputedColumnsPlugin.js).
 
 However, sometimes you need more surgical precision, and you only want to
-remove one specific thing. To achieve this you need to add a hook to the
+remove one specific type of thing. To achieve this you need to add a hook to the
 thing that owns the thing you wish to remove - for example if you
 want to remove a field `bar` from an object type `Foo` you could hook
 `GraphQLObjectType:fields` and return the set of fields less the one you want
-removed.
+removed. 
 
 Here's an example of a plugin generator you could use to generate plugins to
-remove individual fields. You could write this much more efficiently!
+remove individual fields. This is just to demonstrate how a plugin to do this
+might work, [smart comments](/postgraphile/smart-comments/) are likely a better
+approach.
 
 ```js
 const omit = require("lodash/omit");

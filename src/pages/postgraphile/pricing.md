@@ -12,9 +12,9 @@ title: PostGraphile Pro!
 
 # Get PostGraphile Pro!
 
-#### PostGraphile core is open source software under the MIT license.  Supporter and Pro are commercial plugins which enhance PostGraphile with additional features and help fund development and maintenance on PostGraphile.
+#### PostGraphile core is open source software under the MIT license.  Supporter and Pro are commercial plugins which enhance PostGraphile with additional features and help fund development and maintenance on PostGraphile Core.
 
-##### See below the pricing table for more information.
+##### See the FAQ below the pricing table for more information.
 
 </div>
 </div>

@@ -177,12 +177,12 @@
       },
       {
         "to": "/postgraphile/extending/",
-        "title": "Extending PostGraphile",
+        "title": "Schema Plugins",
         "sectionId": "overview"
       },
       {
         "to": "/postgraphile/plugins/",
-        "title": "Plugins [SUPPORTER] [PRO]",
+        "title": "Server Plugins",
         "sectionId": "overview"
       },
       {
@@ -192,7 +192,7 @@
       },
       {
         "to": "/postgraphile/production/",
-        "title": "Running in Production",
+        "title": "Production Considerations",
         "sectionId": "overview"
       },
       {
