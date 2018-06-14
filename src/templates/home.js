@@ -65,7 +65,7 @@ class Home extends Component {
                 </Link>
               </h1>
               <h3>
-                Instant, secure and fast GraphQL API for your Postgres database
+                Instant, secure and fast GraphQL API for Postgres
               </h3>
               <h4>
                 Builds and serves a client-facing GraphQL API by inspecting
@@ -73,11 +73,10 @@ class Home extends Component {
                 procedures and more). No GraphQL coding necessary!
               </h4>
               <p>
-                Get started connecting to an existing database with just one
-                command; use PostgreSQL's well established and trusted
-                Role-Based Access Control (RBAC) and Row-Level Security (RLS)
-                features to secure access to your data. Works with Apollo,
-                Relay Modern and most other GraphQL clients.
+                Works with Apollo, Relay Modern and most other GraphQL clients.
+                Enforce user permissions at the data level using PostgreSQL's
+                well established, granular and trusted Role-Based Access
+                Control (RBAC) and Row-Level Security (RLS) features.
               </p>
               <p>Run it now with one command:</p>
               <code>
