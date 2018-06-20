@@ -15,5 +15,5 @@ filters are being discussed.
 
 One of the PostGraphile community members, Matt Bretl, maintains a filter
 plugin with many advanced filtering capabilities, located at
-[https://github.com/graphile-contrib/postgraphile-plugin-connection-filter](https://github.com/graphile-contrib/postgraphile-plugin-connection-filter)
-- you might like to check it out.
+[https://github.com/graphile-contrib/postgraphile-plugin-connection-filter](https://github.com/graphile-contrib/postgraphile-plugin-connection-filter);
+you might like to check it out.
