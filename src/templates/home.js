@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Helmet from "react-helmet";
 import SiteFooter from "../components/SiteFooter";
 import Link from "gatsby-link";
+import { MailingList } from "../components/ContactAndMailingList";
 
 function unindent(strings, ...vars) {
   if (vars.length) {
@@ -100,6 +101,7 @@ class Home extends Component {
                 More about PostGraphile{" "}
                 <span className="fa fa-fw fa-long-arrow-right" />
               </Link>
+              <MailingList />
               <div className="mb4" />
             </div>
           </div>
