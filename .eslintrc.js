@@ -3,8 +3,8 @@ module.exports = {
   parserOptions: {
     sourceType: "module",
   },
-  extends: ["eslint:recommended", "prettier"],
-  plugins: ["prettier"],
+  extends: ["eslint:recommended", "plugin:react/recommended", "prettier"],
+  plugins: ["prettier", "graphql", "react"],
   env: {
     node: true,
     es6: true,
