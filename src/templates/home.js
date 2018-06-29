@@ -64,19 +64,17 @@ class Home extends Component {
                   PostGraphile
                 </Link>
               </h1>
-              <h3>
-                Instant, secure and fast GraphQL API for Postgres
-              </h3>
+              <h3>Instant, secure and fast GraphQL API for Postgres</h3>
               <h4>
-                Builds and serves a client-facing GraphQL API by inspecting
-                your existing database (tables, columns, relations, views,
-                procedures and more). No GraphQL coding necessary!
+                Builds and serves a client-facing GraphQL API by inspecting your
+                existing database (tables, columns, relations, views, procedures
+                and more). No GraphQL coding necessary!
               </h4>
               <p>
                 Works with Apollo, Relay Modern and most other GraphQL clients.
                 Enforce user permissions at the data level using PostgreSQL's
-                well established, granular and trusted Role-Based Access
-                Control (RBAC) and Row-Level Security (RLS) features.
+                well established, granular and trusted Role-Based Access Control
+                (RBAC) and Row-Level Security (RLS) features.
               </p>
               <p>Run it now with one command:</p>
               <code>
@@ -92,7 +90,9 @@ class Home extends Component {
                     Requires Node.js 8.6+. No installation required (npx
                     performs a temporary install). Connection string is of the
                     format:
-                    <code>postgres://pg_user:pg_pass@pg_host:pg_port/pg_db</code>
+                    <code>
+                      postgres://pg_user:pg_pass@pg_host:pg_port/pg_db
+                    </code>
                   </em>
                 </small>
               </p>
@@ -100,6 +100,7 @@ class Home extends Component {
                 More about PostGraphile{" "}
                 <span className="fa fa-fw fa-long-arrow-right" />
               </Link>
+              <div className="mb4" />
             </div>
           </div>
         </section>
