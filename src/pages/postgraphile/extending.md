@@ -90,7 +90,7 @@ The `sqlBuilder` has a number of methods which affect the query which will be ge
 - `select(() => sqlFragment, alias)`; e.g. ``sqlBuilder.select(() => build.pgSql.fragment`gen_random_uuid()`, '__my_random_uuid')`` - it's advised to start your alias with two underscores to prevent it clashing with any potential columns exposed as GraphQL fields.
 
 
-```js
+```js{7-36}
 const { postgraphile } = require("postgraphile");
 const { makeExtendSchemaPlugin, gql } = require("graphile-utils");
 const express = require("express");
@@ -144,7 +144,7 @@ you can also use this system to define mutations or to call out to external
 services. For example, you might want to add a custom `registerUser` mutation
 which inserts the new user into the database and also sends them an email:
 
-```js
+```js{17,23-91}
 const MyRegisterUserMutationPlugin =
 makeExtendSchemaPlugin(build => {
   const { pgSql: sql } = build;

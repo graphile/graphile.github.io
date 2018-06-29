@@ -400,6 +400,14 @@ code {
   padding-left: 0.75em;
   padding-right: 1em;
 }
+.gatsby-highlight-code-line .gatsby-highlight-code-line {
+  /* Work around bug in gatsby code lines */
+  display: inline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+}
 
 .gatsby-highlight {
   @extend .mb4;
