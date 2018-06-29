@@ -38,7 +38,7 @@ const SiteFooter = () => {
               </li>
             </ul>
           </div>
-          <div className="col-xs-12 col-md-4 nested-list-reset">
+          <div className="col-xs-12 col-md-2 nested-list-reset">
             <h6>Community</h6>
             <ul>
               <li>
@@ -55,14 +55,19 @@ const SiteFooter = () => {
               </li>
             </ul>
           </div>
-          <div className="col-xs-12 col-md-4">
+          <div className="col-xs-12 col-md-offset-1 col-md-5">
             <h6>About</h6>
-            PostGraphile and Graphile Build are Open Source Software, maintained
-            by <a href="https://twitter.com/benjie">Benjie Gillam</a>.
+            PostGraphile and Graphile Build are Open Source Software, developed
+            and maintained by <a href="https://twitter.com/benjie">@Benjie</a>
+            with the help of the community.
             <br />
-            PostGraphile was <a href="/history/">originally authored</a> as
-            PostGraphQL by{" "}
-            <a href="https://twitter.com/calebmer">Caleb Meredith</a>.
+            <br />
+            You can support the projects via{" "}
+            <a href="https://www.patreon.com/benjie" target="_blank">
+              Patreon
+            </a>, by <Link to="/postgraphile/pricing/">going Pro</Link>, or by
+            paying for <Link to="/support/">Professional Services</Link>. Your
+            support is gratefully received 🙏
             <br />
             <br />
             This site is copyright &copy; Benjie Gillam {currentYear}. Design
@@ -75,6 +80,11 @@ const SiteFooter = () => {
             <a href="https://github.com/graphile/graphile.github.io">
               its GitHub repository
             </a>.
+            <br />
+            <br />
+            PostGraphile was <a href="/history/">originally authored</a> as
+            PostGraphQL by{" "}
+            <a href="https://twitter.com/calebmer">Caleb Meredith</a>.
           </div>
         </div>
       </div>

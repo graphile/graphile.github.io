@@ -56,7 +56,13 @@ title: Support for PostGraphile and Graphile Build from the maintainer
 * Security and performance vetting.
 * Team and one-to-one training at [GraphQL-Training](https://graphql-training.com).
 
-$150 / hour for phone support, project-based pricing for feature development
+Consultancy services (advice, code review, training, support, debugging) can be
+purchased in blocks of a few hours. Development will typically involve a
+discovery period followed by a quote for the work.
+
+Discounts are available at our discretion for contributors, sponsors, larger
+blocks or tasks, pre-revenue start ups, not-for-profits and people from
+under-represented groups.
 
 See [FAQs](/support/#faqs) below for more information
 

@@ -201,16 +201,16 @@ title: PostGraphile Pro!
 
 <tr>
   <th>Pricing</th>
-  <td>Free</td>
-  <td>Patreon: pay what you want<span class='note'>(or 💳 $25/mo + VAT)</span></td>
-  <td>💳 $100/mo + VAT<span class='note'>per project</span></td>
+  <td><strong>Free</strong><span class='note'>Patreon appreciated</span></td>
+  <td><strong>Pay what you can</strong><span class='note'>via Patreon, min $1/mo</span></td>
+  <td>$100/mo + VAT<span class='note'>per project</span></td>
 </tr>
 
 <tr>
   <th>Purchase</th>
   <td>&mdash;</td>
-  <td>Patreon or 💳 Credit Card</td>
-  <td>💳 Credit Card or Invoice</td>
+  <td>Patreon or Credit Card</td>
+  <td>Credit Card or Invoice</td>
 </tr>
 
 
