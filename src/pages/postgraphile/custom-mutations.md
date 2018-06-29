@@ -63,7 +63,7 @@ CREATE TYPE my_function_return_type AS (
 
 and then change your function to `RETURNS SETOF my_function_return_type`.
 
-### Custom Mutation Graphile Plugins
+### Graphile Plugins
 
 If you prefer adding mutations on the JavaScript side, you can use
 `ExtendSchemaPlugin` from `graphile-utils`; see [Schema
