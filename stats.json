@@ -1,8 +1,8 @@
 {
   "assetsByChunkName": {
     "path---postgraphile-extending": [
-      "path---postgraphile-extending-11a4abb1e80712f7abb3.js",
-      "path---postgraphile-extending-11a4abb1e80712f7abb3.js.map"
+      "path---postgraphile-extending-92bd7527647b180ba51c.js",
+      "path---postgraphile-extending-92bd7527647b180ba51c.js.map"
     ],
     "path---postgraphile-usage-cli": [
       "path---postgraphile-usage-cli-abea7c7e68bb82c21146.js",
@@ -199,9 +199,9 @@
       "path---postgraphile-introduction-dcf0a41c7c5bb537bcc6.js.map"
     ],
     "app": [
-      "app-8d3575648bf36dace6ea.js",
+      "app-46678293c6d67e47250d.js",
       "build-js-styles.css",
-      "app-8d3575648bf36dace6ea.js.map",
+      "app-46678293c6d67e47250d.js.map",
       "build-js-styles.css.map"
     ],
     "path---postgraphile-connections": [
