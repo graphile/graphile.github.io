@@ -175,7 +175,8 @@ makeExtendSchemaPlugin(build => {
           { selectGraphQLResultFromTable }
         ) => {
           const { pgClient } = context;
-          await pgClient.query("BEGIN");
+          // Start a sub-transaction
+          await pgClient.query("SAVEPOINT graphql_mutation");
           try {
             // Our custom logic to register the user:
             const { rows: [user] } = await pgClient.query(
@@ -218,7 +219,7 @@ makeExtendSchemaPlugin(build => {
             );
 
             // Success! Write the user to the database.
-            await pgClient.query("COMMIT");
+            await pgClient.query("RELEASE SAVEPOINT graphql_mutation");
 
             // We pass the fetched result via the
             // `user` field to match the
@@ -232,7 +233,7 @@ makeExtendSchemaPlugin(build => {
           } catch (e) {
             // Oh noes! If at first you don't succeed,
             // destroy all evidence you ever tried.
-            await pgClient.query("ROLLBACK");
+            await pgClient.query("ROLLBACK TO SAVEPOINT graphql_mutation");
             throw e;
           }
         },
