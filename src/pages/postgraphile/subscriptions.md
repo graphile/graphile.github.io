@@ -17,6 +17,72 @@ implementation. The rest of this article details how to use this feature.
 
 ## Simple Subscriptions [SUPPORTER]
 
+### Enabling with an Express app
+
+With the CLI use `--simple-subscriptions` to enable the subscriptions support.
+
+With the library version you need to do slightly more work because, in Node,
+websockets follow a separate path than your normal express/koa application
+does.
+
+Primarily you must create a `rawHTTPServer`, mount your express `app` in it,
+and then add subscription support to the raw server via the
+`enhanceHttpServerWithSubscriptions` function.
+
+We emulate part of the express stack, so if you require sessions you can pass
+additional connect/express middlewares (sorry, we don't support Koa middlewares
+here at this time) via the options `enhanceHttpServerWithSubscriptions`.
+
+Here's an example:
+
+```js
+const express = require("express");
+const { createServer } = require("http");
+const {
+  default: PostGraphileSupporter,
+  enhanceHttpServerWithSubscriptions,
+} = require("@graphile/plugin-supporter");
+
+const app = express();
+const rawHTTPServer = createServer(app);
+
+const postgraphileMiddleware = postgraphile(
+  databaseUrl,
+  "app_public",
+  { simpleSubscriptions: true }
+);
+app.use(postgraphileMiddleware);
+
+enhanceHttpServerWithSubscriptions(
+  rawHTTPServer,
+  postgraphileMiddleware,
+  {
+    middlewares: [
+      // Add whatever middlewares you need here, note that
+      // they should only manipulate properties on req/res,
+      // they must not sent response data. e.g.:
+      //
+      //   require('express-session')(),
+      //   require('passport').initialize(),
+      //   require('passport').session(),
+    ]
+  }
+);
+
+rawHTTPServer.listen(
+  parseInt(process.env.PORT, 10) || 3000
+);
+```
+
+The `enhanceHttpServerWithSubscriptions` takes three arguments:
+
+1. the raw HTTP server from `require('http').createServer()`
+2. the postgraphile middleware (this should be the *same* middleware that you mount into your Express app)
+3. options, where you can optionally pass `middlewares` to enable `pgSettings(req) {...}` access to session-based things
+
+
+### Using
+
 To enable simple subscriptions support, use the `--simple-subscriptions` CLI
 flag (or `simpleSubscriptions: true` middleware option).
 
