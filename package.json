@@ -32,7 +32,7 @@
     "graphile-build": "4.0.0-alpha.1",
     "graphql": "^0.11.7",
     "juice": "4.3.1",
-    "postgraphile": "4.0.0-beta.6",
+    "postgraphile": "4.0.0-rc.2",
     "react-typography": "^0.16.1",
     "remark-custom-blocks": "^1.0.1",
     "svgo": "1.0.5",
