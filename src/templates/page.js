@@ -127,11 +127,19 @@ const Page = ({
               </aside>
               <div className="col-xs-12 col-md-9 first-xs main-content">
                 <div className="row">
-                  <div
-                    className="col-xs-12"
-                    dangerouslySetInnerHTML={{ __html: html }}
-                    style={{ width: "100%" }}
-                  />
+                  <div className="col-xs-12" style={{ width: "100%" }}>
+                    <div className="edit-this-page">
+                      <a
+                        href={`https://github.com/graphile/graphile.github.io/edit/develop/src/pages${location.pathname.substr(
+                          0,
+                          location.pathname.length - 1
+                        )}.md`}
+                      >
+                        📝 Edit this page
+                      </a>
+                    </div>
+                    <div dangerouslySetInnerHTML={{ __html: html }} />
+                  </div>
                   <br />
                   <br />
                   <div className="col-xs-12 mt3 mb5">

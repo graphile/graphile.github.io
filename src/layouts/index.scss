@@ -581,6 +581,12 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
   width: 80%;
 }
 
+.edit-this-page {
+  @extend .f6;
+  float: right;
+  margin: 0.5rem;
+}
+
 @media screen and (max-width: 36em) {
   .pricing-table {
     thead {
