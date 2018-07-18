@@ -23,6 +23,7 @@ Schema extension plugins for PostGraphile:
 - [postgraphile-plugin-connection-filter](https://github.com/graphile-contrib/postgraphile-plugin-connection-filter) - adds a `filter:` arg to connections that offers a more powerful alternative to the built in filtering operations
 - [postgraphile-plugin-nested-mutatations](https://github.com/mlipscombe/postgraphile-plugin-nested-mutations) - enables a single mutation to create/update many related records
 - [graphile-upsert-plugin](https://github.com/einarjegorov/graphile-upsert-plugin/blob/master/index.js) - adds upsert mutations
+- [@graphile-contrib/pg-simplify-inflector](https://github.com/graphile-contrib/pg-simplify-inflector) - simplifies field names by automatically removing `ByFooIdAndBarId`-style suffixes.
 - [postgraphile-plugin-derived-field](https://github.com/mattbretl/postgraphile-plugin-derived-field) -  provides an interface for adding derived fields 
 - [postgraphile-plugin-upload-field](https://github.com/mattbretl/postgraphile-plugin-upload-field) -  enables file uploads (see `postgraphile-upload-example` below)
 - [event-phile](https://github.com/stlbucket/event-phile) - "capture designated function calls as re-playable events"
