@@ -654,6 +654,7 @@ img { max-width: 100%; }
 */
 .dn { display: none; }
 .di { display: inline; }
+.df { display: flex; }
 .db { display: block; }
 .dib { display: inline-block; }
 .dit { display: inline-table; }
@@ -2163,6 +2164,7 @@ code, .code { font-family: Consolas, monaco, monospace; }
  .cn-ns { clear: none; }
  .dn-ns { display: none; }
  .di-ns { display: inline; }
+ .df-ns { display: flex; }
  .db-ns { display: block; }
  .dib-ns { display: inline-block; }
  .dit-ns { display: inline-table; }
@@ -3001,6 +3003,7 @@ code, .code { font-family: Consolas, monaco, monospace; }
  .cn-l { clear: none; }
  .dn-l { display: none; }
  .di-l { display: inline; }
+ .df-l { display: flex; }
  .db-l { display: block; }
  .dib-l { display: inline-block; }
  .dit-l { display: inline-table; }

@@ -251,7 +251,7 @@ export default withRouter(
                       Services
                     </Link>
                   </li>
-                  <li className="navbar-item navbar-item-right">
+                  <li className="navbar-item navbar-item-right hide-when-small">
                     <a
                       className="nav-link"
                       href="https://graphql-training.com"
