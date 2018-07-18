@@ -97,6 +97,10 @@
       {
         "id": "usage",
         "title": "Usage"
+      },
+      {
+        "id": "community",
+        "title": "Community"
       }
     ],
     "pages": [
@@ -254,6 +258,21 @@
         "to": "/postgraphile/usage-schema/",
         "title": "Schema-only Usage",
         "sectionId": "usage"
+      },
+      {
+        "to": "/postgraphile/community-plugins/",
+        "title": "Community Plugins",
+        "sectionId": "community"
+      },
+      {
+        "to": "/postgraphile/community-chat/",
+        "title": "Community Chat",
+        "sectionId": "community"
+      },
+      {
+        "to": "/postgraphile/code-of-conduct/",
+        "title": "Code of Conduct",
+        "sectionId": "community"
       }
     ]
   },
