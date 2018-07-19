@@ -104,6 +104,8 @@ async function main() {
     const directories = fs
       .readdirSync(queryPath)
       .filter(dir => fs.statSync(`${queryPath}/${dir}`).isDirectory());
+    const menuHTML = [];
+    const codeHTML = [];
     for (const dir of directories) {
       const dirPath = `${queryPath}/${dir}`;
       const outPath = `${__dirname}/../src/examples/${dir}`;
@@ -111,8 +113,10 @@ async function main() {
       const queries = fs
         .readdirSync(dirPath)
         .filter(f => f.match(/^[^.].*\.graphql$/));
+      const submenuHTML = [];
       for (const queryFilename of queries) {
         const queryFilePath = `${dirPath}/${queryFilename}`;
+        const id = `${dir}__${queryFilename}`;
         const query = fs.readFileSync(queryFilePath, "utf8");
         const { data, errors } = await withPostGraphileContext(
           {
@@ -132,13 +136,37 @@ async function main() {
           queryFilePath + ".json",
           JSON.stringify(data)
         );
-        fs.writeFileSync(`${outPath}/${queryFilename}`, prettyQuery);
+        fs.writeFileSync(`${outPath}/${queryFilename}.txt`, prettyQuery);
         fs.writeFileSync(
-          `${outPath}/${queryFilename.replace(/graphql$/, "json")}`,
+          `${outPath}/${queryFilename.replace(/graphql$/, "json")}.txt`,
           prettyData
         );
+        submenuHTML.push(`<li>${queryFilename}</li>`);
+        codeHTML.push("<div class='example-graphql' id='${id}'>");
+        codeHTML.push(
+          `<div className='example-graphql-query'><pre><code>${prettyQuery}</code></pre></div>`
+        );
+        codeHTML.push(
+          `<div className='example-graphql-result'><pre><code>${prettyData}</code></pre></div>`
+        );
+        codeHTML.push("</div>");
       }
+      menuHTML.push(`<li>${dir}<ul>${submenuHTML.join("\n")}</ul></li>`);
     }
+    const fileContent = `\
+---
+layout: page
+path: /postgraphile/examples/
+title: PostGraphile examples
+---
+
+<ul>${menuHTML.join("\n")}</ul>
+${codeHTML.join("\n")}
+`;
+    fs.writeFileSync(
+      `${__dirname}/../src/pages/postgraphile/examples.md`,
+      fileContent
+    );
   } finally {
     pgPool.end();
   }

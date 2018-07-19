@@ -110,6 +110,11 @@
         "sectionId": "overview"
       },
       {
+        "to": "/postgraphile/examples/",
+        "title": "Examples",
+        "sectionId": "overview"
+      },
+      {
         "to": "/postgraphile/quick-start-guide/",
         "title": "Quick Start Guide",
         "sectionId": "overview"

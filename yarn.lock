@@ -4365,6 +4365,10 @@ gatsby-source-filesystem@^1.4.1:
     slash "^1.0.0"
     valid-url "^1.0.9"
 
+gatsby-transformer-code@0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/gatsby-transformer-code/-/gatsby-transformer-code-0.1.0.tgz#8cef659d17bd5148f52846292f440d10782919df"
+
 gatsby-transformer-json@^1.0.2:
   version "1.0.17"
   resolved "https://registry.yarnpkg.com/gatsby-transformer-json/-/gatsby-transformer-json-1.0.17.tgz#b2cb8a4eb935322e577608523d4439bbb40c569f"

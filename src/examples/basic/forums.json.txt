@@ -9,9 +9,9 @@
         "description":
           "A forum all about cats and how fluffy they are and how they completely ignore their owners unless there is food. Or yarn.",
         "createdAt":
-          "2018-07-19T15:12:21.378132+00:00",
+          "2018-07-19T16:15:19.020597+00:00",
         "updatedAt":
-          "2018-07-19T15:12:21.378132+00:00"
+          "2018-07-19T16:15:19.020597+00:00"
       },
       {
         "nodeId": "WyJmb3J1bXMiLDJd",
@@ -20,9 +20,9 @@
         "name": "Dog Life",
         "description": "",
         "createdAt":
-          "2018-07-19T15:12:21.378132+00:00",
+          "2018-07-19T16:15:19.020597+00:00",
         "updatedAt":
-          "2018-07-19T15:12:21.378132+00:00"
+          "2018-07-19T16:15:19.020597+00:00"
       },
       {
         "nodeId": "WyJmb3J1bXMiLDNd",
@@ -31,9 +31,9 @@
         "name": "Slug Life",
         "description": "",
         "createdAt":
-          "2018-07-19T15:12:21.378132+00:00",
+          "2018-07-19T16:15:19.020597+00:00",
         "updatedAt":
-          "2018-07-19T15:12:21.378132+00:00"
+          "2018-07-19T16:15:19.020597+00:00"
       }
     ]
   }
