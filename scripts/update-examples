@@ -3,12 +3,22 @@
 const fs = require("fs");
 const pg = require("pg");
 const fetch = require("node-fetch");
+const prettier = require("prettier");
 const { graphql, parse } = require("graphql");
 const child_process = require("child_process");
 const {
   createPostGraphileSchema,
   withPostGraphileContext,
 } = require("postgraphile");
+
+async function prettify(filepath, content) {
+  const options = await prettier.resolveConfig(filepath);
+  return prettier.format(content, {
+    ...options,
+    printWidth: 50,
+    filepath,
+  });
+}
 
 async function spawn(command, args, options = {}, stdin = null) {
   return new Promise((resolve, reject) => {
@@ -65,17 +75,20 @@ async function psql(flags, sql) {
 }
 
 async function main() {
-  const request = await fetch(
+  const schemaSql = await (await fetch(
     "https://raw.githubusercontent.com/graphile/examples/master/data/schema.sql"
-  );
-  const sql = await request.text();
+  )).text();
+  const dataSql = await (await fetch(
+    "https://raw.githubusercontent.com/graphile/examples/master/db/999_data.sql"
+  )).text();
   try {
     await spawn("dropdb", ["graphile_org_demo"]);
   } catch (e) {
     /* non-existence is fine */
   }
   await spawn("createdb", ["-O", "graphiledemo", "graphile_org_demo"]);
-  await psql(["graphile_org_demo"], sql);
+  await psql(["graphile_org_demo"], schemaSql);
+  await psql(["graphile_org_demo"], dataSql);
   const pgPool = new pg.Pool({
     connectionString: "postgres://localhost/graphile_org_demo",
   });
@@ -93,6 +106,8 @@ async function main() {
       .filter(dir => fs.statSync(`${queryPath}/${dir}`).isDirectory());
     for (const dir of directories) {
       const dirPath = `${queryPath}/${dir}`;
+      const outPath = `${__dirname}/../src/examples/${dir}`;
+      await spawn("mkdir", ["-p", outPath]);
       const queries = fs
         .readdirSync(dirPath)
         .filter(f => f.match(/^[^.].*\.graphql$/));
@@ -100,14 +115,28 @@ async function main() {
         const queryFilePath = `${dirPath}/${queryFilename}`;
         const query = fs.readFileSync(queryFilePath, "utf8");
         const { data, errors } = await withPostGraphileContext(
-          { pgPool, pgSettings: { "jwt.claims.user_id": 1 } },
+          {
+            pgPool,
+            pgSettings: {
+              role: "graphiledemo_visitor",
+              "jwt.claims.user_id": 1,
+            },
+          },
           context => graphql(postgraphileSchema, query, null, context)
         );
         if (errors && errors.length) {
           throw new Error("Errors occurred!" + String(errors));
         }
-        console.log(query);
-        console.log(data);
+        const prettyQuery = await prettify(queryFilePath, query);
+        const prettyData = await prettify(
+          queryFilePath + ".json",
+          JSON.stringify(data)
+        );
+        fs.writeFileSync(`${outPath}/${queryFilename}`, prettyQuery);
+        fs.writeFileSync(
+          `${outPath}/${queryFilename.replace(/graphql$/, "json")}`,
+          prettyData
+        );
       }
     }
   } finally {

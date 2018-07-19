@@ -1,0 +1,40 @@
+{
+  "allForums": {
+    "nodes": [
+      {
+        "nodeId": "WyJmb3J1bXMiLDFd",
+        "id": 1,
+        "slug": "cat-life",
+        "name": "Cat Life",
+        "description":
+          "A forum all about cats and how fluffy they are and how they completely ignore their owners unless there is food. Or yarn.",
+        "createdAt":
+          "2018-07-19T15:12:21.378132+00:00",
+        "updatedAt":
+          "2018-07-19T15:12:21.378132+00:00"
+      },
+      {
+        "nodeId": "WyJmb3J1bXMiLDJd",
+        "id": 2,
+        "slug": "dog-life",
+        "name": "Dog Life",
+        "description": "",
+        "createdAt":
+          "2018-07-19T15:12:21.378132+00:00",
+        "updatedAt":
+          "2018-07-19T15:12:21.378132+00:00"
+      },
+      {
+        "nodeId": "WyJmb3J1bXMiLDNd",
+        "id": 3,
+        "slug": "slug-life",
+        "name": "Slug Life",
+        "description": "",
+        "createdAt":
+          "2018-07-19T15:12:21.378132+00:00",
+        "updatedAt":
+          "2018-07-19T15:12:21.378132+00:00"
+      }
+    ]
+  }
+}

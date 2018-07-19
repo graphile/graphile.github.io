@@ -1,0 +1,11 @@
+{
+  forumBySlug(slug: "slug-life") {
+    nodeId
+    id
+    slug
+    name
+    description
+    createdAt
+    updatedAt
+  }
+}
