@@ -54,6 +54,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "update": "./scripts/update"
   },
+  "resolutions": {
+    "graphql": "0.11.x"
+  },
   "devDependencies": {
     "eslint_d": "5.2.2",
     "node-fetch": "^1.7.2",
