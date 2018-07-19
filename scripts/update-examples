@@ -104,16 +104,21 @@ async function main() {
     const directories = fs
       .readdirSync(queryPath)
       .filter(dir => fs.statSync(`${queryPath}/${dir}`).isDirectory());
-    const menuHTML = [];
-    const codeHTML = [];
+
+    const examples = [];
+
     for (const dir of directories) {
+      const example = {
+        title: dir,
+        examples: [],
+      };
+      examples.push(example);
       const dirPath = `${queryPath}/${dir}`;
       const outPath = `${__dirname}/../src/examples/${dir}`;
       await spawn("mkdir", ["-p", outPath]);
       const queries = fs
         .readdirSync(dirPath)
         .filter(f => f.match(/^[^.].*\.graphql$/));
-      const submenuHTML = [];
       for (const queryFilename of queries) {
         const queryFilePath = `${dirPath}/${queryFilename}`;
         const id = `${dir}__${queryFilename}`;
@@ -136,36 +141,16 @@ async function main() {
           queryFilePath + ".json",
           JSON.stringify(data)
         );
-        fs.writeFileSync(`${outPath}/${queryFilename}.txt`, prettyQuery);
-        fs.writeFileSync(
-          `${outPath}/${queryFilename.replace(/graphql$/, "json")}.txt`,
-          prettyData
-        );
-        submenuHTML.push(`<li>${queryFilename}</li>`);
-        codeHTML.push("<div class='example-graphql' id='${id}'>");
-        codeHTML.push(
-          `<div className='example-graphql-query'><pre><code>${prettyQuery}</code></pre></div>`
-        );
-        codeHTML.push(
-          `<div className='example-graphql-result'><pre><code>${prettyData}</code></pre></div>`
-        );
-        codeHTML.push("</div>");
+        example.examples.push({
+          title: queryFilename,
+          query: prettyQuery,
+          result: prettyData,
+        });
       }
-      menuHTML.push(`<li>${dir}<ul>${submenuHTML.join("\n")}</ul></li>`);
     }
-    const fileContent = `\
----
-layout: page
-path: /postgraphile/examples/
-title: PostGraphile examples
----
-
-<ul>${menuHTML.join("\n")}</ul>
-${codeHTML.join("\n")}
-`;
     fs.writeFileSync(
-      `${__dirname}/../src/pages/postgraphile/examples.md`,
-      fileContent
+      `${__dirname}/../src/data/examples.json`,
+      JSON.stringify(examples)
     );
   } finally {
     pgPool.end();
