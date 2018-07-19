@@ -17,20 +17,31 @@ export default class ExamplesViewer extends React.Component {
     const selectedExample =
       examples[this.state.selected || 0].examples[this.state.subSelected || 0];
     return (
-      <div>
-        <div className="sections">
-          <ul>
+      <div className="flex">
+        <div>
+          <ul className="list">
             {examples.map(({ title, examples: subexamples }, i) => (
-              <li key={title} className={isRootSelected(i) ? "selected" : ""}>
-                <span onClick={this.select(i)}>{title}</span>
+              <li key={title}>
+                {isRootSelected(i) ? "▼" : "▶"}{" "}
+                <span
+                  onClick={this.select(i)}
+                  className={isRootSelected(i) ? "b black" : "b black-60"}
+                >
+                  {title}
+                </span>
                 {isRootSelected(i) ? (
-                  <ul>
+                  <ul className="list">
                     {subexamples.map(({ title: subtitle }, j) => (
-                      <li
-                        key={subtitle}
-                        className={isSubSelected(i, j) ? "selected" : ""}
-                      >
-                        <span onClick={this.select(i, j)}>{subtitle}</span>
+                      <li key={subtitle}>
+                        {isSubSelected(i, j) ? "●" : "○"}{" "}
+                        <span
+                          onClick={this.select(i, j)}
+                          className={
+                            isSubSelected(i, j) ? "b black" : "b black-60"
+                          }
+                        >
+                          {subtitle}
+                        </span>
                       </li>
                     ))}
                   </ul>
@@ -39,7 +50,7 @@ export default class ExamplesViewer extends React.Component {
             ))}
           </ul>
         </div>
-        <div className="content">
+        <div className="flex">
           <div>
             <pre>
               <code>{selectedExample.query}</code>
