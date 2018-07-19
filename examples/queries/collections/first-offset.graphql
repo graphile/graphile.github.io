@@ -1,0 +1,9 @@
+{
+  allForums(first: 1, offset: 1) {
+    nodes {
+      nodeId
+      id
+      name
+    }
+  }
+}

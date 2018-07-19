@@ -3,6 +3,7 @@ import Link from "gatsby-link";
 import Helmet from "react-helmet";
 import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
+import ExamplesViewer from "../components/ExamplesViewer";
 import ContactAndMailingList from "../components/ContactAndMailingList";
 
 const sectionIs = desiredSection => ({ sectionId }) =>
@@ -59,7 +60,11 @@ function htmlerize(text) {
 }
 
 const Page = ({
-  data: { remark: { html: rawHTML, frontmatter: { title } }, nav },
+  data: {
+    remark: { html: rawHTML, frontmatter: { title, showExamples } },
+    nav,
+    examples,
+  },
   location,
 }) => {
   const html = processHTML(rawHTML);
@@ -141,6 +146,7 @@ const Page = ({
                     <div dangerouslySetInnerHTML={{ __html: html }} />
                   </div>
                   <br />
+                  {showExamples && <ExamplesViewer examples={examples} />}
                   <br />
                   <div className="col-xs-12 mt3 mb5">
                     <div className="row between-xs">
@@ -192,6 +198,7 @@ export const pageQuery = graphql`
       frontmatter {
         path
         title
+        showExamples
       }
     }
     nav: allNavJson {
@@ -207,6 +214,19 @@ export const pageQuery = graphql`
             to
             title
             sectionId
+          }
+        }
+      }
+    }
+    examples: allExamplesJson {
+      edges {
+        node {
+          id
+          title
+          examples {
+            title
+            query
+            result
           }
         }
       }

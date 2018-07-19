@@ -1,1 +1,32 @@
-[{"title":"basic","examples":[{"title":"forum-by-slug.graphql","query":"{\n  forumBySlug(slug: \"slug-life\") {\n    nodeId\n    id\n    slug\n    name\n    description\n    createdAt\n    updatedAt\n  }\n}\n","result":"{\n  \"forumBySlug\": {\n    \"nodeId\": \"WyJmb3J1bXMiLDNd\",\n    \"id\": 3,\n    \"slug\": \"slug-life\",\n    \"name\": \"Slug Life\",\n    \"description\": \"\",\n    \"createdAt\":\n      \"2018-07-19T16:24:27.79508+00:00\",\n    \"updatedAt\": \"2018-07-19T16:24:27.79508+00:00\"\n  }\n}\n"},{"title":"forums.graphql","query":"{\n  allForums {\n    nodes {\n      nodeId\n      id\n      slug\n      name\n      description\n      createdAt\n      updatedAt\n    }\n  }\n}\n","result":"{\n  \"allForums\": {\n    \"nodes\": [\n      {\n        \"nodeId\": \"WyJmb3J1bXMiLDFd\",\n        \"id\": 1,\n        \"slug\": \"cat-life\",\n        \"name\": \"Cat Life\",\n        \"description\":\n          \"A forum all about cats and how fluffy they are and how they completely ignore their owners unless there is food. Or yarn.\",\n        \"createdAt\":\n          \"2018-07-19T16:24:27.79508+00:00\",\n        \"updatedAt\":\n          \"2018-07-19T16:24:27.79508+00:00\"\n      },\n      {\n        \"nodeId\": \"WyJmb3J1bXMiLDJd\",\n        \"id\": 2,\n        \"slug\": \"dog-life\",\n        \"name\": \"Dog Life\",\n        \"description\": \"\",\n        \"createdAt\":\n          \"2018-07-19T16:24:27.79508+00:00\",\n        \"updatedAt\":\n          \"2018-07-19T16:24:27.79508+00:00\"\n      },\n      {\n        \"nodeId\": \"WyJmb3J1bXMiLDNd\",\n        \"id\": 3,\n        \"slug\": \"slug-life\",\n        \"name\": \"Slug Life\",\n        \"description\": \"\",\n        \"createdAt\":\n          \"2018-07-19T16:24:27.79508+00:00\",\n        \"updatedAt\":\n          \"2018-07-19T16:24:27.79508+00:00\"\n      }\n    ]\n  }\n}\n"}]}]
+[
+  {
+    "title": "basic",
+    "examples": [
+      {
+        "title": "forum-by-slug.graphql",
+        "query": "{\n  forumBySlug(slug: \"slug-life\") {\n    nodeId\n    id\n    slug\n    name\n    description\n    createdAt\n    updatedAt\n  }\n}\n",
+        "result": "{\n  \"forumBySlug\": {\n    \"nodeId\": \"WyJmb3J1bXMiLDNd\",\n    \"id\": 3,\n    \"slug\": \"slug-life\",\n    \"name\": \"Slug Life\",\n    \"description\": \"\",\n    \"createdAt\":\n      \"2018-07-19T16:45:55.331044+00:00\",\n    \"updatedAt\":\n      \"2018-07-19T16:45:55.331044+00:00\"\n  }\n}\n"
+      },
+      {
+        "title": "forums.graphql",
+        "query": "{\n  allForums {\n    nodes {\n      nodeId\n      id\n      slug\n      name\n      description\n      createdAt\n      updatedAt\n    }\n  }\n}\n",
+        "result": "{\n  \"allForums\": {\n    \"nodes\": [\n      {\n        \"nodeId\": \"WyJmb3J1bXMiLDFd\",\n        \"id\": 1,\n        \"slug\": \"cat-life\",\n        \"name\": \"Cat Life\",\n        \"description\":\n          \"A forum all about cats and how fluffy they are and how they completely ignore their owners unless there is food. Or yarn.\",\n        \"createdAt\":\n          \"2018-07-19T16:45:55.331044+00:00\",\n        \"updatedAt\":\n          \"2018-07-19T16:45:55.331044+00:00\"\n      },\n      {\n        \"nodeId\": \"WyJmb3J1bXMiLDJd\",\n        \"id\": 2,\n        \"slug\": \"dog-life\",\n        \"name\": \"Dog Life\",\n        \"description\": \"\",\n        \"createdAt\":\n          \"2018-07-19T16:45:55.331044+00:00\",\n        \"updatedAt\":\n          \"2018-07-19T16:45:55.331044+00:00\"\n      },\n      {\n        \"nodeId\": \"WyJmb3J1bXMiLDNd\",\n        \"id\": 3,\n        \"slug\": \"slug-life\",\n        \"name\": \"Slug Life\",\n        \"description\": \"\",\n        \"createdAt\":\n          \"2018-07-19T16:45:55.331044+00:00\",\n        \"updatedAt\":\n          \"2018-07-19T16:45:55.331044+00:00\"\n      }\n    ]\n  }\n}\n"
+      }
+    ]
+  },
+  {
+    "title": "collections",
+    "examples": [
+      {
+        "title": "first-offset.graphql",
+        "query": "{\n  allForums(first: 1, offset: 1) {\n    nodes {\n      nodeId\n      id\n      name\n    }\n  }\n}\n",
+        "result": "{\n  \"allForums\": {\n    \"nodes\": [\n      {\n        \"nodeId\": \"WyJmb3J1bXMiLDJd\",\n        \"id\": 2,\n        \"name\": \"Dog Life\"\n      }\n    ]\n  }\n}\n"
+      },
+      {
+        "title": "relation-condition.graphql",
+        "query": "{\n  forumBySlug(slug: \"cat-life\") {\n    nodeId\n    id\n    name\n    topics(condition: { userId: 1 }) {\n      nodes {\n        nodeId\n        id\n        title\n      }\n    }\n  }\n}\n",
+        "result": "{\n  \"forumBySlug\": {\n    \"nodeId\": \"WyJmb3J1bXMiLDFd\",\n    \"id\": 1,\n    \"name\": \"Cat Life\",\n    \"topics\": {\n      \"nodes\": [\n        {\n          \"nodeId\": \"WyJ0b3BpY3MiLDFd\",\n          \"id\": 1,\n          \"title\": \"cats cats cats\"\n        },\n        {\n          \"nodeId\": \"WyJ0b3BpY3MiLDJd\",\n          \"id\": 2,\n          \"title\": \"snooze life\"\n        },\n        {\n          \"nodeId\": \"WyJ0b3BpY3MiLDNd\",\n          \"id\": 3,\n          \"title\": \"too hot\"\n        }\n      ]\n    }\n  }\n}\n"
+      }
+    ]
+  }
+]

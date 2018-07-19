@@ -10,6 +10,7 @@ const {
   createPostGraphileSchema,
   withPostGraphileContext,
 } = require("postgraphile");
+const PgSimplifyInflectorPlugin = require("@graphile-contrib/pg-simplify-inflector");
 
 async function prettify(filepath, content) {
   const options = await prettier.resolveConfig(filepath);
@@ -98,6 +99,7 @@ async function main() {
       ["app_public"],
       {
         dynamicJson: true,
+        appendPlugins: [PgSimplifyInflectorPlugin],
       }
     );
     const queryPath = `${__dirname}/../examples/queries`;
@@ -150,7 +152,7 @@ async function main() {
     }
     fs.writeFileSync(
       `${__dirname}/../src/data/examples.json`,
-      JSON.stringify(examples)
+      JSON.stringify(examples, null, 2)
     );
   } finally {
     pgPool.end();
