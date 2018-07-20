@@ -23,6 +23,8 @@ following:
 - must NOT return `VOID`
 - must be marked as `STABLE`
 - must be defined in one of the introspected schemas
+- must not be VARIADIC
+- must not use IN / OUT / INOUT arguments
 
 #### Example
 

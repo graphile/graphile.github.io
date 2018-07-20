@@ -18,6 +18,8 @@ functions the following rules apply:
 - must return a **named** type - we do not currently support anonymous types; can return `VOID`
 - must be marked as `VOLATILE` (which is the default)
 - must be defined in one of the introspected schemas
+- must not be VARIADIC
+- must not use IN / OUT / INOUT arguments
 
 Here's an example of a custom mutation, which will generate the graphql `acceptTeamInvite(teamId: Int!)` mutation:
 

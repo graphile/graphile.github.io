@@ -26,6 +26,8 @@ apply to the function you create:
 - must NOT return `VOID`
 - must be marked as `STABLE`
 - must be defined in the same schema as the table
+- must not be VARIADIC
+- must not use IN / OUT / INOUT arguments
 
 ### Example
 
