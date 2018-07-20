@@ -470,6 +470,9 @@ pre code {
 pre {
   box-shadow: 0 0 50px 0px rgba(0, 0, 0, 0.16);
 }
+pre.no-shadow {
+  box-shadow: none;
+}
 
 h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
   font-size: 0.95em;

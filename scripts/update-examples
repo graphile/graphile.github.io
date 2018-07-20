@@ -26,7 +26,7 @@ async function prettify(filepath, content) {
   const options = await prettier.resolveConfig(filepath);
   return prettier.format(content, {
     ...options,
-    printWidth: 50,
+    printWidth: 38,
     filepath,
   });
 }
