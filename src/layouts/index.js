@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import "prismjs";
 import "prismjs/themes/prism-solarizedlight.css";
+import "prismjs/components/prism-json";
+import "prismjs/components/prism-graphql";
 import "./flexgrid.scss";
 import "./index.scss";
 
