@@ -32,9 +32,9 @@ export default class ExamplesViewer extends React.Component {
                   {isRootSelected(i) ? "▾" : "▸"} {title}
                 </span>
                 {isRootSelected(i) ? (
-                  <ul className="list pl2 pl4-ns">
+                  <ul className="list pl2 pl3-ns">
                     {subexamples.map(({ title: subtitle }, j) => (
-                      <li key={subtitle} className="f6">
+                      <li key={subtitle} className="f6 pl1-ns">
                         <span
                           onClick={this.select(i, j)}
                           className={
