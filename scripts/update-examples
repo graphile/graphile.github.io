@@ -1,16 +1,26 @@
 #!/usr/bin/env node
 
+/* eslint-disable no-console */
+
 const fs = require("fs");
 const pg = require("pg");
 const fetch = require("node-fetch");
 const prettier = require("prettier");
-const { graphql, parse } = require("graphql");
+const { graphql } = require("graphql");
 const child_process = require("child_process");
 const {
   createPostGraphileSchema,
   withPostGraphileContext,
 } = require("postgraphile");
 const PgSimplifyInflectorPlugin = require("@graphile-contrib/pg-simplify-inflector");
+const lowerCase = require("lodash/lowerCase");
+
+function upperFirst(str) {
+  return str[0].toUpperCase() + str.substr(1);
+}
+function filenameToTitle(str) {
+  return upperFirst(lowerCase(str.replace(/^[0-9]+_/, "")));
+}
 
 async function prettify(filepath, content) {
   const options = await prettier.resolveConfig(filepath);
@@ -105,13 +115,15 @@ async function main() {
     const queryPath = `${__dirname}/../examples/queries`;
     const directories = fs
       .readdirSync(queryPath)
-      .filter(dir => fs.statSync(`${queryPath}/${dir}`).isDirectory());
+      .filter(dir => fs.statSync(`${queryPath}/${dir}`).isDirectory())
+      .sort();
 
     const examples = [];
 
     for (const dir of directories) {
+      const titleFromFile = null;
       const example = {
-        title: dir,
+        title: titleFromFile || filenameToTitle(dir),
         examples: [],
       };
       examples.push(example);
@@ -120,7 +132,8 @@ async function main() {
       await spawn("mkdir", ["-p", outPath]);
       const queries = fs
         .readdirSync(dirPath)
-        .filter(f => f.match(/^[^.].*\.graphql$/));
+        .filter(f => f.match(/^[^.].*\.graphql$/))
+        .sort();
       for (const queryFilename of queries) {
         const queryFilePath = `${dirPath}/${queryFilename}`;
         const id = `${dir}__${queryFilename}`;
@@ -144,7 +157,7 @@ async function main() {
           JSON.stringify(data)
         );
         example.examples.push({
-          title: queryFilename.replace(/\.graphql$/, ""),
+          title: filenameToTitle(queryFilename.replace(/\.graphql$/, "")),
           query: prettyQuery,
           result: prettyData,
         });

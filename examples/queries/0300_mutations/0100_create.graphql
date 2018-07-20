@@ -1,0 +1,19 @@
+mutation {
+  createTopic(
+    input: {
+      topic: {
+        forumId: 1
+        title: "My question relates to mutations..."
+        body: "How do you write them?"
+      }
+    }
+  ) {
+    topic {
+      nodeId
+      id
+      forumId
+      title
+      body
+    }
+  }
+}

@@ -1,0 +1,13 @@
+mutation {
+  updateTopicById(
+    input: { id: 1, topicPatch: { title: "My (edited) title" } }
+  ) {
+    topic {
+      nodeId
+      id
+      title
+      body
+      userId
+    }
+  }
+}
