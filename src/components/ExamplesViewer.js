@@ -22,7 +22,7 @@ export default class ExamplesViewer extends React.Component {
         <div className="w-25 bg-white-20 h-100 pa0 ma0 white w5">
           <ul className="list h-100 ma0 pa2">
             {examples.map(({ title, examples: subexamples }, i) => (
-              <li key={title} className="ma0 pa0">
+              <li key={title} className="ma0 pa0 f6">
                 {isRootSelected(i) ? "▾" : "▸"}{" "}
                 <span
                   onClick={this.select(i)}
@@ -49,19 +49,19 @@ export default class ExamplesViewer extends React.Component {
             ))}
           </ul>
         </div>
-        <div className="w-75 flex">
-          <div className="w-50 h-100 flex-auto">
+        <div className="w-75 flex flex-column flex-row-l">
+          <div className="w-100 w-50-l h-50 h-100-l flex-auto">
             <PrismCode
               component="pre"
-              className="f6 pa1 bt bb br0 b--black h-100 overflow-auto language-graphql"
+              className="f7 pa1 bl bt br bn-l bt-l bb-l br0 b--black h-100 overflow-auto language-graphql"
             >
               {selectedExample.query}
             </PrismCode>
           </div>
-          <div className="w-50 h-100 flex-auto overflow-auto">
+          <div className="w-100 w-50-l h-50 h-100-l flex-auto overflow-auto">
             <PrismCode
               component="pre"
-              className="f6 pa1 ba br0 b--black h-100 flex-auto language-json"
+              className="f7 pa1 ba br0 b--black h-100 flex-auto language-json"
             >
               {selectedExample.result}
             </PrismCode>

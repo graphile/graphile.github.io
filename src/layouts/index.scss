@@ -185,7 +185,13 @@ footer li {
   @extend .f6;
   @extend .lh-copy;
   @extend .mb1;
-  @extend .measure
+  @extend .measure;
+  &.f6 {
+    @extend .f6;
+  }
+  &.f7 {
+    @extend .f7;
+  }
 }
 
 a {
