@@ -20,25 +20,29 @@ export default class ExamplesViewer extends React.Component {
     return (
       <div className="flex bg-black h6 w-100">
         <div className="w-25 bg-white-20 h-100 pa0 ma0 white w5">
-          <ul className="list h-100 ma0 pa2">
+          <ul className="list h-100 ma0 pa1 pa2-ns">
             {examples.map(({ title, examples: subexamples }, i) => (
-              <li key={title} className="ma0 pa0 f6">
-                {isRootSelected(i) ? "▾" : "▸"}{" "}
+              <li key={title} className="ma0 pa0">
                 <span
                   onClick={this.select(i)}
-                  className={isRootSelected(i) ? "white" : "white-60"}
+                  className={
+                    "f7 f6-ns " + (isRootSelected(i) ? "white" : "white-60")
+                  }
                 >
-                  {title}
+                  {isRootSelected(i) ? "▾" : "▸"} {title}
                 </span>
                 {isRootSelected(i) ? (
-                  <ul className="list">
+                  <ul className="list pl2 pl4-ns">
                     {subexamples.map(({ title: subtitle }, j) => (
                       <li key={subtitle} className="f6">
-                        {/*isSubSelected(i, j) ? "●" : "○"}{" "*/}
                         <span
                           onClick={this.select(i, j)}
-                          className={isSubSelected(i, j) ? "white" : "white-60"}
+                          className={
+                            "f7 f6-ns " +
+                            (isSubSelected(i, j) ? "white" : "white-60")
+                          }
                         >
+                          {/*isSubSelected(i, j) ? "●" : "○"}{" "*/}
                           {subtitle}
                         </span>
                       </li>
