@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@graphile-contrib/pg-simplify-inflector@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@graphile-contrib/pg-simplify-inflector/-/pg-simplify-inflector-1.0.0.tgz#7c197e366d078fb3b6be8dd4278dd653e46b6a90"
+"@graphile-contrib/pg-simplify-inflector@2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@graphile-contrib/pg-simplify-inflector/-/pg-simplify-inflector-2.0.0.tgz#03d7c81a492160ec0d1c92c1a01468c12d3cb880"
 
 "@types/configstore@^2.1.1":
   version "2.1.1"

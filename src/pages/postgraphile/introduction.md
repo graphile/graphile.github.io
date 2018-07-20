@@ -12,6 +12,11 @@ performant GraphQL API from a PostgreSQL schema in seconds; saving you
 weeks if not months of development time.
 </p>
 
+_If you are new to GraphQL then I recommend you read through the official
+introduction to GraphQL [here](https://graphql.org/learn/) before continuing
+through the PostGraphile documentation._
+
+
 If you already use PostgreSQL then you understand the value that a strongly
 typed and well defined schema can bring to application development, and GraphQL
 is the perfect match for this technology when it comes to making your data

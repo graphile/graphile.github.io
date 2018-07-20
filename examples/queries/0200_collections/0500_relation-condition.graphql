@@ -3,7 +3,7 @@
     nodeId
     id
     name
-    topics(condition: { userId: 1 }) {
+    topics(condition: { authorId: 1 }) {
       nodes {
         nodeId
         id

@@ -149,7 +149,10 @@ async function main() {
           context => graphql(postgraphileSchema, query, null, context)
         );
         if (errors && errors.length) {
-          throw new Error("Errors occurred!" + String(errors));
+          throw new Error(
+            `Errors occurred whilst processing ${queryFilePath}!\n` +
+              String(errors)
+          );
         }
         const prettyQuery = await prettify(queryFilePath, query);
         const prettyData = await prettify(

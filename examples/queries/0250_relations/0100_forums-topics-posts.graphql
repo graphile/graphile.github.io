@@ -1,0 +1,27 @@
+{
+  forumById(id: 1) {
+    name
+    topics(first: 1, orderBy: [CREATED_AT_ASC]) {
+      nodes {
+        id
+        title
+        bodySummary
+        author {
+          id
+          username
+        }
+        createdAt
+        posts(first: 1, orderBy: [ID_DESC]) {
+          nodes {
+            id
+            author {
+              id
+              username
+            }
+            body
+          }
+        }
+      }
+    }
+  }
+}
