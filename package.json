@@ -55,7 +55,8 @@
     "format": "prettier --trailing-comma es5 --no-semi --single-quote --write 'src/**/*.js'",
     "start": "gatsby develop",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "update": "./scripts/update"
+    "update": "./scripts/update",
+    "watch:examples": "nodemon -x './scripts/update-examples' -w examples/queries -e graphql"
   },
   "resolutions": {
     "graphql": "0.11.x"
@@ -63,6 +64,7 @@
   "devDependencies": {
     "eslint_d": "5.2.2",
     "node-fetch": "^1.7.2",
+    "nodemon": "1.18.3",
     "prettier": "1.11.1"
   }
 }
