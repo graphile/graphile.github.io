@@ -138,11 +138,30 @@ p,
     @extend .pb5-ns;
     @extend .pb4;
   }
-
-  ul {
-    padding-left: 1.2rem
-  }
 }
+
+pre[class*="language-"].br0 {
+  border-radius: 0;
+}
+pre[class*="language-"].pa0 {
+  padding: 0;
+}
+pre[class*="language-"].pa1 {
+  padding: 0.25rem;
+}
+pre[class*="language-"].pa2 {
+  padding: 0.5rem;
+}
+pre[class*="language-"].pa3 {
+  padding: 1rem;
+}
+pre[class*="language-"].f1 { font-size: 3rem; }
+pre[class*="language-"].f2 { font-size: 2.25rem; }
+pre[class*="language-"].f3 { font-size: 1.5rem; }
+pre[class*="language-"].f4 { font-size: 1.25rem; }
+pre[class*="language-"].f5 { font-size: 1rem; }
+pre[class*="language-"].f6 { font-size: .875rem; }
+pre[class*="language-"].f7 { font-size: .75rem; }
 
 .page-content li,
 footer li {
@@ -150,7 +169,13 @@ footer li {
   @extend .f6;
   @extend .lh-copy;
   @extend .mb1;
-  @extend .measure
+  @extend .measure;
+  &.f6 {
+    @extend .f6;
+  }
+  &.f7 {
+    @extend .f7;
+  }
 }
 
 a {
@@ -444,6 +469,9 @@ pre code {
 
 pre {
   box-shadow: 0 0 50px 0px rgba(0, 0, 0, 0.16);
+}
+pre.no-shadow {
+  box-shadow: none;
 }
 
 h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {

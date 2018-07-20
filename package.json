@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
+    "@graphile-contrib/pg-simplify-inflector": "2.0.0",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^7.2.3",
     "babel-preset-env": "^1.6.0",
@@ -33,6 +34,8 @@
     "graphql": "^0.11.7",
     "juice": "4.3.1",
     "postgraphile": "4.0.0-rc.2",
+    "prismjs": "1.15.0",
+    "react-prism": "4.3.2",
     "react-typography": "^0.16.1",
     "remark-custom-blocks": "^1.0.1",
     "svgo": "1.0.5",
@@ -52,11 +55,16 @@
     "format": "prettier --trailing-comma es5 --no-semi --single-quote --write 'src/**/*.js'",
     "start": "gatsby develop",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "update": "./scripts/update"
+    "update": "./scripts/update",
+    "watch:examples": "nodemon -x './scripts/update-examples' -w examples/queries -e graphql"
+  },
+  "resolutions": {
+    "graphql": "0.11.x"
   },
   "devDependencies": {
     "eslint_d": "5.2.2",
     "node-fetch": "^1.7.2",
+    "nodemon": "1.18.3",
     "prettier": "1.11.1"
   }
 }

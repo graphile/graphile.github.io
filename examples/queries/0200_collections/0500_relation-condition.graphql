@@ -1,0 +1,14 @@
+{
+  forumBySlug(slug: "cat-life") {
+    nodeId
+    id
+    name
+    topics(condition: { authorId: 1 }) {
+      nodes {
+        nodeId
+        id
+        title
+      }
+    }
+  }
+}
