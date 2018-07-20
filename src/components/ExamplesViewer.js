@@ -26,7 +26,7 @@ export default class ExamplesViewer extends React.Component {
                 <span
                   onClick={this.select(i)}
                   className={
-                    "f7 f6-ns " + (isRootSelected(i) ? "white" : "white-60")
+                    "f7 f6-ns pointer " + (isRootSelected(i) ? "white" : "white-60")
                   }
                 >
                   {isRootSelected(i) ? "▾" : "▸"} {title}
@@ -38,7 +38,7 @@ export default class ExamplesViewer extends React.Component {
                         <span
                           onClick={this.select(i, j)}
                           className={
-                            "f7 f6-ns " +
+                            "f7 f6-ns pointer " +
                             (isSubSelected(i, j) ? "white" : "white-60")
                           }
                         >
