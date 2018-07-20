@@ -5,12 +5,12 @@
       {
         "title": "Forums",
         "query": "{\n  allForums {\n    nodes {\n      nodeId\n      id\n      slug\n      name\n      description\n      createdAt\n      updatedAt\n    }\n  }\n}\n",
-        "result": "{\n  \"allForums\": {\n    \"nodes\": [\n      {\n        \"nodeId\": \"WyJmb3J1bXMiLDFd\",\n        \"id\": 1,\n        \"slug\": \"cat-life\",\n        \"name\": \"Cat Life\",\n        \"description\":\n          \"A forum all about cats and how fluffy they are and how they completely ignore their owners unless there is food. Or yarn.\",\n        \"createdAt\":\n          \"2018-07-20T11:48:42.669845+00:00\",\n        \"updatedAt\":\n          \"2018-07-20T11:48:42.669845+00:00\"\n      },\n      {\n        \"nodeId\": \"WyJmb3J1bXMiLDJd\",\n        \"id\": 2,\n        \"slug\": \"dog-life\",\n        \"name\": \"Dog Life\",\n        \"description\": \"\",\n        \"createdAt\":\n          \"2018-07-20T11:48:42.669845+00:00\",\n        \"updatedAt\":\n          \"2018-07-20T11:48:42.669845+00:00\"\n      },\n      {\n        \"nodeId\": \"WyJmb3J1bXMiLDNd\",\n        \"id\": 3,\n        \"slug\": \"slug-life\",\n        \"name\": \"Slug Life\",\n        \"description\": \"\",\n        \"createdAt\":\n          \"2018-07-20T11:48:42.669845+00:00\",\n        \"updatedAt\":\n          \"2018-07-20T11:48:42.669845+00:00\"\n      }\n    ]\n  }\n}\n"
+        "result": "{\n  \"allForums\": {\n    \"nodes\": [\n      {\n        \"nodeId\": \"WyJmb3J1bXMiLDFd\",\n        \"id\": 1,\n        \"slug\": \"cat-life\",\n        \"name\": \"Cat Life\",\n        \"description\":\n          \"A forum all about cats and how fluffy they are and how they completely ignore their owners unless there is food. Or yarn.\",\n        \"createdAt\":\n          \"2018-07-20T13:29:53.795421+00:00\",\n        \"updatedAt\":\n          \"2018-07-20T13:29:53.795421+00:00\"\n      },\n      {\n        \"nodeId\": \"WyJmb3J1bXMiLDJd\",\n        \"id\": 2,\n        \"slug\": \"dog-life\",\n        \"name\": \"Dog Life\",\n        \"description\": \"\",\n        \"createdAt\":\n          \"2018-07-20T13:29:53.795421+00:00\",\n        \"updatedAt\":\n          \"2018-07-20T13:29:53.795421+00:00\"\n      },\n      {\n        \"nodeId\": \"WyJmb3J1bXMiLDNd\",\n        \"id\": 3,\n        \"slug\": \"slug-life\",\n        \"name\": \"Slug Life\",\n        \"description\": \"\",\n        \"createdAt\":\n          \"2018-07-20T13:29:53.795421+00:00\",\n        \"updatedAt\":\n          \"2018-07-20T13:29:53.795421+00:00\"\n      }\n    ]\n  }\n}\n"
       },
       {
         "title": "Forum by slug",
         "query": "{\n  forumBySlug(slug: \"slug-life\") {\n    nodeId\n    id\n    slug\n    name\n    description\n    createdAt\n    updatedAt\n  }\n}\n",
-        "result": "{\n  \"forumBySlug\": {\n    \"nodeId\": \"WyJmb3J1bXMiLDNd\",\n    \"id\": 3,\n    \"slug\": \"slug-life\",\n    \"name\": \"Slug Life\",\n    \"description\": \"\",\n    \"createdAt\":\n      \"2018-07-20T11:48:42.669845+00:00\",\n    \"updatedAt\":\n      \"2018-07-20T11:48:42.669845+00:00\"\n  }\n}\n"
+        "result": "{\n  \"forumBySlug\": {\n    \"nodeId\": \"WyJmb3J1bXMiLDNd\",\n    \"id\": 3,\n    \"slug\": \"slug-life\",\n    \"name\": \"Slug Life\",\n    \"description\": \"\",\n    \"createdAt\":\n      \"2018-07-20T13:29:53.795421+00:00\",\n    \"updatedAt\":\n      \"2018-07-20T13:29:53.795421+00:00\"\n  }\n}\n"
       }
     ]
   },
@@ -25,7 +25,7 @@
       {
         "title": "Relation condition",
         "query": "{\n  forumBySlug(slug: \"cat-life\") {\n    nodeId\n    id\n    name\n    topics(condition: { userId: 1 }) {\n      nodes {\n        nodeId\n        id\n        title\n      }\n    }\n  }\n}\n",
-        "result": "{\n  \"forumBySlug\": {\n    \"nodeId\": \"WyJmb3J1bXMiLDFd\",\n    \"id\": 1,\n    \"name\": \"Cat Life\",\n    \"topics\": {\n      \"nodes\": [\n        {\n          \"nodeId\": \"WyJ0b3BpY3MiLDFd\",\n          \"id\": 1,\n          \"title\": \"cats cats cats\"\n        },\n        {\n          \"nodeId\": \"WyJ0b3BpY3MiLDJd\",\n          \"id\": 2,\n          \"title\": \"snooze life\"\n        },\n        {\n          \"nodeId\": \"WyJ0b3BpY3MiLDNd\",\n          \"id\": 3,\n          \"title\": \"too hot\"\n        }\n      ]\n    }\n  }\n}\n"
+        "result": "{\n  \"forumBySlug\": {\n    \"nodeId\": \"WyJmb3J1bXMiLDFd\",\n    \"id\": 1,\n    \"name\": \"Cat Life\",\n    \"topics\": {\n      \"nodes\": [\n        {\n          \"nodeId\":\n            \"WyJ0b3BpY3MiLDFd\",\n          \"id\": 1,\n          \"title\": \"cats cats cats\"\n        },\n        {\n          \"nodeId\":\n            \"WyJ0b3BpY3MiLDJd\",\n          \"id\": 2,\n          \"title\": \"snooze life\"\n        },\n        {\n          \"nodeId\":\n            \"WyJ0b3BpY3MiLDNd\",\n          \"id\": 3,\n          \"title\": \"too hot\"\n        }\n      ]\n    }\n  }\n}\n"
       }
     ]
   },
@@ -39,13 +39,13 @@
       },
       {
         "title": "Update",
-        "query": "mutation {\n  updateTopicById(\n    input: {\n      id: 1\n      topicPatch: { title: \"My (edited) title\" }\n    }\n  ) {\n    topic {\n      nodeId\n      id\n      title\n      body\n      userId\n    }\n  }\n}\n",
+        "query": "mutation {\n  updateTopicById(\n    input: {\n      id: 1\n      topicPatch: {\n        title: \"My (edited) title\"\n      }\n    }\n  ) {\n    topic {\n      nodeId\n      id\n      title\n      body\n      userId\n    }\n  }\n}\n",
         "result": "{\n  \"updateTopicById\": {\n    \"topic\": {\n      \"nodeId\": \"WyJ0b3BpY3MiLDFd\",\n      \"id\": 1,\n      \"title\": \"My (edited) title\",\n      \"body\":\n        \"lets discuss cats because theyre totally cool\",\n      \"userId\": 1\n    }\n  }\n}\n"
       },
       {
         "title": "Delete",
         "query": "mutation {\n  deleteTopicById(input: { id: 1 }) {\n    deletedTopicId\n  }\n}\n",
-        "result": "{\n  \"deleteTopicById\": {\n    \"deletedTopicId\": \"WyJ0b3BpY3MiLDFd\"\n  }\n}\n"
+        "result": "{\n  \"deleteTopicById\": {\n    \"deletedTopicId\":\n      \"WyJ0b3BpY3MiLDFd\"\n  }\n}\n"
       }
     ]
   },
@@ -54,8 +54,33 @@
     "examples": [
       {
         "title": "Current user",
-        "query": "{\n  currentUser {\n    nodeId\n    id\n    username\n  }\n}\n\n# Added to the GraphQL schema via\n# this SQL:\n#\n#   create function current_user()\n#   language sql\n#   stable\n#   set search_path from current\n#   returns app_public.users as $$\n#     select users.*\n#     from app_public.users\n#     where id = current_user_id();\n#   $$;\n",
+        "query": "{\n  currentUser {\n    nodeId\n    id\n    username\n  }\n}\n\n# Added to the GraphQL schema via\n# this SQL:\n#\n#   create function current_user()\n#   returns app_public.users\n#   language sql stable\n#   as $$\n#     select users.*\n#     from app_public.users\n#     where id = current_user_id();\n#   $$;\n",
         "result": "{\n  \"currentUser\": {\n    \"nodeId\": \"WyJ1c2VycyIsMV0=\",\n    \"id\": 1,\n    \"username\": \"user\"\n  }\n}\n"
+      }
+    ]
+  },
+  {
+    "title": "Custom mutations",
+    "examples": [
+      {
+        "title": "Forgot password",
+        "query": "mutation {\n  forgotPassword(\n    input: {\n      email: \"user@example.com\"\n    }\n  ) {\n    success\n  }\n}\n\n# Generated with SQL like this:\n#\n#  create function forgot_password(email text)\n#  returns boolean\n#  language plpgsql volatile\n#  as $$\n#    ...\n#  $$;\n#\n#  -- Optionally rename the result field:\n#  comment on function\n#    forgot_password(email text)\n#    is '@resultFieldName success';\n",
+        "result": "{\n  \"forgotPassword\": {\n    \"success\": true\n  }\n}\n"
+      }
+    ]
+  },
+  {
+    "title": "Computed columns",
+    "examples": [
+      {
+        "title": "Topic summary",
+        "query": "{\n  topicById(id: 2) {\n    body\n    bodySummary\n  }\n}\n\n# Generated by SQL like:\n#\n#  create function app_public.topics_body_summary(\n#    t app_public.topics,\n#    max_length int = 30\n#  )\n#  returns text\n#  language sql stable\n#  as $$\n#    select case\n#      when length(t.body) > max_length\n#      then left(t.body, max_length - 3)\n#             || '...'\n#      else t.body\n#      end;\n#  $$;\n",
+        "result": "{\n  \"topicById\": {\n    \"body\":\n      \"do you find your cat just sleeps everywhere\",\n    \"bodySummary\":\n      \"do you find your cat just s...\"\n  }\n}\n"
+      },
+      {
+        "title": "Topic summary custom",
+        "query": "{\n  topicById(id: 2) {\n    body\n    bodySummary(maxLength: 20)\n  }\n}\n\n# Generated by SQL like:\n#\n#  create function app_public.topics_body_summary(\n#    t app_public.topics,\n#    max_length int = 30\n#  )\n#  returns text\n#  language sql stable\n#  as $$\n#    select case\n#      when length(t.body) > max_length\n#      then left(t.body, max_length - 3)\n#             || '...'\n#      else t.body\n#      end;\n#  $$;\n",
+        "result": "{\n  \"topicById\": {\n    \"body\":\n      \"do you find your cat just sleeps everywhere\",\n    \"bodySummary\":\n      \"do you find your ...\"\n  }\n}\n"
       }
     ]
   }
