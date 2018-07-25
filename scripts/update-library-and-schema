@@ -5,7 +5,7 @@ const { readFileSync, writeFileSync } = require("fs");
 
 async function main() {
   const request = await fetch(
-    "https://raw.githubusercontent.com/graphile/postgraphile/master/src/postgraphile/postgraphile.ts"
+    "https://raw.githubusercontent.com/graphile/postgraphile/master/src/interfaces.ts"
   );
   const code = await request.text();
 
@@ -15,7 +15,7 @@ async function main() {
    */
 
   const relevantCode = code
-    .match(/^export type PostGraphileOptions = \{([\s\S]+?)^}/m)[1]
+    .match(/^export interface PostGraphileOptions \{([\s\S]+?)^};?$/m)[1]
     .trim()
     .split("\n")
     .map(str => str.trim());
