@@ -95,6 +95,7 @@ The `postgraphile` middleware factory function takes three arguments, all of whi
   * `additionalGraphQLContextFromRequest`: Some graphile-build plugins may need additional information available on the `context` argument to the resolver - you can use this function to provide such information based on the incoming request - you can even use this to change the response [experimental], e.g. setting cookies
   * `pluginHook`: [experimental] Plugin hook function, enables functionality within PostGraphile to be expanded with plugins. Generate with `makePluginHook(plugins)` passing a list of plugin objects.
   * `simpleCollections`: Should we use relay pagination, or simple collections? "omit" (default) - relay connections only, "only" (not recommended) - simple collections only (no Relay connections), "both" - both
+  * `queryCacheMaxSize`: Max query cache size in MBs of queries. Default, 50MB
 
 <!-- LIBRARY_DOCBLOCK_END -->
 

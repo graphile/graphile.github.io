@@ -88,6 +88,8 @@ There are more CLI options available to customise the GraphQL server:
   enable generous CORS settings; disabled by default, if possible use a proxy instead
 * `-l`, `--body-size-limit <string>`  
   set the maximum size of JSON bodies that can be parsed (default 100kB) The size can be given as a human-readable string, such as '200kB' or '5MB' (case insensitive).
+* `--timeout <number>`  
+  set the timeout value in milliseconds for sockets
 * `--cluster-workers <count>`  
   [experimental] spawn <count> workers to increase throughput
 * `--enable-query-batching`  
