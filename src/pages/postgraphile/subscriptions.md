@@ -20,20 +20,52 @@ implementation. The rest of this article details how to use this feature.
 ### Enabling with an Express app
 
 With the CLI use `--simple-subscriptions` to enable the subscriptions support.
-
-With the library version you need to do slightly more work because, in Node,
-websockets follow a separate path than your normal express/koa application
-does.
-
-Primarily you must create a `rawHTTPServer`, mount your express `app` in it,
-and then add subscription support to the raw server via the
-`enhanceHttpServerWithSubscriptions` function.
+With the library version use `simpleSubscriptions: true`.
 
 We emulate part of the express stack, so if you require sessions you can pass
 additional connect/express middlewares (sorry, we don't support Koa middlewares
 here at this time) via the options `enhanceHttpServerWithSubscriptions`.
 
 Here's an example:
+
+```js
+const express = require("express");
+const {
+  default: PostGraphileSupporter,
+} = require("@graphile/plugin-supporter");
+
+const app = express();
+
+const postgraphileOptions = {
+  simpleSubscriptions: true,
+  websocketMiddlewares: [
+    // Add whatever middlewares you need here, note that
+    // they should only manipulate properties on req/res,
+    // they must not sent response data. e.g.:
+    //
+    //   require('express-session')(),
+    //   require('passport').initialize(),
+    //   require('passport').session(),
+  ],
+};
+
+app.use(postgraphile(
+  databaseUrl,
+  "app_public",
+  postgraphileOptions,
+));
+
+app.listen(
+  parseInt(process.env.PORT, 10) || 3000
+);
+```
+
+#### Advanced setup
+
+If you need websockets to be listened for before your first HTTP request comes
+in (most people don't need this) then you must create a `rawHTTPServer`, mount
+your express `app` in it, and then add subscription support to the raw server
+via the `enhanceHttpServerWithSubscriptions` function, as shown below:
 
 ```js
 const express = require("express");
@@ -46,27 +78,31 @@ const {
 const app = express();
 const rawHTTPServer = createServer(app);
 
+const postgraphileOptions = {
+  simpleSubscriptions: true,
+  websocketMiddlewares: [
+    // Add whatever middlewares you need here, note that
+    // they should only manipulate properties on req/res,
+    // they must not sent response data. e.g.:
+    //
+    //   require('express-session')(),
+    //   require('passport').initialize(),
+    //   require('passport').session(),
+  ],
+};
+
 const postgraphileMiddleware = postgraphile(
   databaseUrl,
   "app_public",
-  { simpleSubscriptions: true }
+  postgraphileOptions,
 );
+
 app.use(postgraphileMiddleware);
 
 enhanceHttpServerWithSubscriptions(
   rawHTTPServer,
   postgraphileMiddleware,
-  {
-    middlewares: [
-      // Add whatever middlewares you need here, note that
-      // they should only manipulate properties on req/res,
-      // they must not sent response data. e.g.:
-      //
-      //   require('express-session')(),
-      //   require('passport').initialize(),
-      //   require('passport').session(),
-    ]
-  }
+  postgraphileOptions,
 );
 
 rawHTTPServer.listen(
