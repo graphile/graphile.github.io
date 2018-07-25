@@ -41,7 +41,14 @@ being sure to set the relevant [DEBUG](https://github.com/visionmedia/debug)
 environmental variable first. For example:
 
 ```bash
+#Linux
 export DEBUG="postgraphile:postgres"
+
+# Windows Console
+set DEBUG=postgraphile:postgres & <script start>
+
+# Windows PowerShell
+$env:DEBUG = "postgraphile:postgres"; <script start>
 ```
 
 Note that this works with PostGraphile CLI and also when using PostGraphile as an express middleware.
@@ -49,9 +56,20 @@ Note that this works with PostGraphile CLI and also when using PostGraphile as a
 To find details of any errors thrown whilst executing SQL, use:
 
 ```bash
+#Linux
 export DEBUG="postgraphile:postgres,postgraphile:postgres:error"
-# or:
+  # or:
 export DEBUG="postgraphile:postgres*"
+
+#Windows Console
+set DEBUG=postgraphile:postgres,postgraphile:postgres:error & <script start>
+  #or
+set DEBUG=postgraphile:postgres* & <script start>
+
+#PowerShell
+$env:DEBUG = "postgraphile:postgres,postgraphile:postgres:error"; <script start>
+  #or
+$env:DEBUG = "postgraphile:postgres*"; <script start>
 ```
 
 
@@ -73,8 +91,15 @@ We use a lot of DEBUG envvars for different parts of the system. Here's some of 
 To enable these DEBUG modes, join them with commas when setting a DEBUG envvar, then run PostGraphile or your Node.js server in the same terminal:
 
 ```bash
+#Linux
 export DEBUG="postgraphile:graphql,postgraphile:request,postgraphile:postgres*"
 postgraphile -c postgres://...
+
+#Windows Console
+set DEBUG=postgraphile:graphql,postgraphile:request,postgraphile:postgres* & postgraphile -c postgres://...
+
+#PowerShell
+$env:DEBUG = "postgraphile:graphql,postgraphile:request,postgraphile:postgres*"; postgraphile -c postgres://...
 ```
 
 ### Advanced: getting your hands dirty
