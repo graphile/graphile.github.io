@@ -166,8 +166,8 @@ type is much more complex if the connection types differ.
 
 **Problem**: some things are nullable that weren't, some things aren't nullable that were.
 
-**Solution**: you can enable the `--no-setof-functions-include-nulls` CLI option
-(or `setofFunctionsIncludeNulls: false` library option) to reduce the nullables
+**Solution**: you can enable the `--no-setof-functions-contain-nulls` CLI option
+(or `setofFunctionsContainNulls: false` library option) to reduce the nullables
 in the generated schema.
 
 **Reasoning**:
@@ -191,7 +191,7 @@ connections for functions as for tables - as such these connections now have to
 support that the entries within them are nullable.
 
 If you don't like the nulls everywhere, I encourage you to use the `-N` /
-`--no-setof-functions-include-nulls` option mentioned above. Enabling this is a
+`--no-setof-functions-contain-nulls` option mentioned above. Enabling this is a
 non-breaking change, but disabling it **is** a breaking change - hence why it
 is not the default behaviour.
 
