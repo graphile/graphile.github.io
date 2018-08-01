@@ -140,9 +140,21 @@ create function get_x_something() returns text as $$
 $$ language sql stable;
 ```
 
-Everything returned by pgSettings is applied to the current session with ```set_config($key, $value, true)```
+Everything returned by `pgSettings` is applied to the current session with
+`set_config($key, $value, true)`; note that `set_config` only supports string
+values so it is best to only feed `pgSettings` string values (we'll convert other
+values using the `String` constructor function, which may not have the effect
+you intend.
 
-Internal Postgres settings (keys without periods) can be changed directly such as 'role':
+You can use `pgSettings` to define variables that your Postgres
+functions/policies depend on, or to tweak internal Postgres settings. When
+adding variables for your own usage, the keys **must** contain either one or
+two period (`.`) characters, and the prefix (the bit before the first period)
+must not be used by any Postgres extension. Variables without periods will be
+interpreted as internal Postgres settings, such as `role`, and will be applied
+by Postgres. All settings are automatically reset when the transaction
+completes. Here's an example of switching the user into the Postgres 'visitor'
+role, and applying the application setting `jwt.claims.user_id`:
 
 ```js
 export postgraphile(process.env.DATABASE_URL, schemaName, {
@@ -155,7 +167,15 @@ export postgraphile(process.env.DATABASE_URL, schemaName, {
 ```
 
 ```sql
-select current_user; -- returns visitor
+CREATE FUNCTION get_current_user() RETURNS TEXT AS $$
+  SELECT current_user;
+$$ LANGUAGE SQL STABLE;
+```
+
+```graphql
+{
+  getCurrentUser # returns visitor
+}
 ```
 
 TODO: verify the above works.
