@@ -33,7 +33,44 @@ GraphiQL. Is it producing the same issue? Note that we currently do not support
 setting headers in GraphiQL (although it is set to use `Credentials:
 same-origin` which is helpful if you're using cookie-based sessions).
 
-### Step 3: viewing the generated SQL
+### Step 3: increase PostGraphile's logging
+
+Note that the errors are sent through to the GraphQL client (they're not
+output on the server by default) so you'll need to reproduce this from your
+client so you can see the output (or use a network inspector such as
+WireShark if modifying the client is not an option). If you're using
+PostGraphile as a library then you can use `handleErrors` to output the error
+details on the server side (and to manipulate them before they're returned to
+the client).
+
+You probably don't want this level of debugging on production as the results
+are sent to the client and it may leak implementation details you wish to
+keep private.
+
+Use the following CLI options with PostGraphile:
+
+- `--show-error-stack`
+- `--extended-errors hint,detail,errcode` (other options available [here](https://github.com/brianc/node-postgres/blob/7de137f9f88611b8fcae5539aa90b6037133f1f1/lib/connection.js#L565-L580))
+- or 
+```
+--extended-errors severity,code,detail,hint,positon,internalPosition,internalQuery,where,schema,table,column,dataType,constraint,file,line,routine
+```
+
+or for the library:
+
+- `showErrorStack: true`
+- `extendedErrors: ['hint', 'detail', 'errcode']` (other options available [here](https://github.com/brianc/node-postgres/blob/7de137f9f88611b8fcae5539aa90b6037133f1f1/lib/connection.js#L565-L580))
+- or
+```
+extendedErrors: ['severity', 'code', 'detail', 'hint', 'positon', 'internalPosition', 'internalQuery', 'where', 'schema', 'table', 'column', 'dataType', 'constraint', 'file', 'line', 'routine']
+```
+- or use a custom `handleErrors` function to explore even more details about
+  the errors (or to log them server side), note this overrides the above
+  options. You might be interested in the `originalError` property on the
+  GraphQLErrors you're handed.
+
+
+### Step 4: viewing the generated SQL
 
 Assuming that the error is coming from within the database, you can see what
 SQL statements PostGraphile is generating. To do so, restart PostGraphile,
