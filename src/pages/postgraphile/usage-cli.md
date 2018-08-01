@@ -16,11 +16,13 @@ npm install -g postgraphile
 
 This will make the `postgraphile` command available. You can then run:
 
-```
+```bash
 postgraphile -c postgres://localhost/mydb -s public -a -j
 ```
 
 where `-c` is the connection string (defaults to postgres://localhost/), `-s` is the schema name (defaults to "public"), `-a` enables Relay support and `-j` enables dynamic JSON.
+
+PostGraphile also reads options from a `.postgraphilerc.js` file from the current working directory.
 
 ### CLI options
 
@@ -30,21 +32,21 @@ There are more CLI options available to customise the GraphQL server:
 
 * `-V`, `--version`  
   output the version number
-* `--plugins <string>`  
+* `--plugins <string>`
   a list of postgraphile plugins (not Graphile-Build plugins) to load, MUST be the first option
-* `-c`, `--connection <string>`  
+* `-c`, `--connection <string>`
   the Postgres connection. if not provided it will be inferred from your environment, example: postgres://user:password@domain:port/db
-* `-s`, `--schema <string>`  
+* `-s`, `--schema <string>`
   a Postgres schema to be introspected. Use commas to define multiple schemas
-* `-w`, `--watch`  
+* `-w`, `--watch`
   watches the Postgres schema for changes and reruns introspection if a change was detected
-* `-n`, `--host <string>`  
+* `-n`, `--host <string>`
   the hostname to be used. Defaults to `localhost`
-* `-p`, `--port <number>`  
+* `-p`, `--port <number>`
   the port to be used. Defaults to 5000
-* `-m`, `--max-pool-size <number>`  
+* `-m`, `--max-pool-size <number>`
   the maximum number of clients to keep in the Postgres pool. defaults to 10
-* `-r`, `--default-role <string>`  
+* `-r`, `--default-role <string>`
   the default Postgres role to use when a request is made. supercedes the role used to connect to the database
 * `-j`, `--dynamic-json`  
   [RECOMMENDED] enable dynamic JSON in GraphQL inputs and outputs. PostGraphile uses stringified JSON by default
@@ -52,9 +54,9 @@ There are more CLI options available to customise the GraphQL server:
   [RECOMMENDED] if none of your `RETURNS SETOF compound_type` functions mix NULLs with the results then you may enable this to reduce the nullables in the GraphQL schema
 * `-a`, `--classic-ids`  
   use classic global id field name. required to support Relay 1
-* `-M`, `--disable-default-mutations`  
+* `-M`, `--disable-default-mutations`
   disable default mutations, mutation will only be possible through Postgres functions
-* `--simple-collections [omit|both|only]`  
+* `--simple-collections [omit|both|only]`
   "omit" (default) - relay connections only, "only" - simple collections only (no Relay connections), "both" - both
 * `--no-ignore-rbac`  
   [RECOMMENDED] set this to excludes fields, queries and mutations that the user isn't permitted to access; this will be the default in v5
@@ -66,23 +68,23 @@ There are more CLI options available to customise the GraphQL server:
   a comma separated list of extended Postgres error fields to display in the GraphQL result. Recommended in development: 'hint,detail,errcode'. Default: none
 * `--append-plugins <string>`  
   a comma-separated list of plugins to append to the list of GraphQL schema plugins
-* `--prepend-plugins <string>`  
+* `--prepend-plugins <string>`
   a comma-separated list of plugins to prepend to the list of GraphQL schema plugins
-* `--read-cache <path>`  
+* `--read-cache <path>`
   [experimental] reads cached values from local cache file to improve startup time (you may want to do this in production)
-* `--write-cache <path>`  
+* `--write-cache <path>`
   [experimental] writes computed values to local cache file so startup can be faster (do this during the build phase)
-* `--export-schema-json <path>`  
+* `--export-schema-json <path>`
   enables exporting the detected schema, in JSON format, to the given location. The directories must exist already, if the file exists it will be overwritten.
-* `--export-schema-graphql <path>`  
+* `--export-schema-graphql <path>`
   enables exporting the detected schema, in GraphQL schema format, to the given location. The directories must exist already, if the file exists it will be overwritten.
-* `-X`, `--no-server`  
+* `-X`, `--no-server`
   [experimental] for when you just want to use --write-cache or --export-schema-* and not actually run a server (e.g. CI)
-* `-q`, `--graphql <path>`  
+* `-q`, `--graphql <path>`
   the route to mount the GraphQL server on. defaults to `/graphql`
-* `-i`, `--graphiql <path>`  
+* `-i`, `--graphiql <path>`
   the route to mount the GraphiQL interface on. defaults to `/graphiql`
-* `-b`, `--disable-graphiql`  
+* `-b`, `--disable-graphiql`
   disables the GraphiQL interface. overrides the GraphiQL route option
 * `-o`, `--cors`  
   enable generous CORS settings; disabled by default, if possible use a proxy instead
@@ -92,33 +94,33 @@ There are more CLI options available to customise the GraphQL server:
   set the timeout value in milliseconds for sockets
 * `--cluster-workers <count>`  
   [experimental] spawn <count> workers to increase throughput
-* `--enable-query-batching`  
+* `--enable-query-batching`
   [experimental] enable the server to process multiple GraphQL queries in one request
 * `--disable-query-log`  
   disable logging queries to console (recommended in production)
 * `-e`, `--jwt-secret <string>`  
   the secret to be used when creating and verifying JWTs. if none is provided auth will be disabled
-* `--jwt-verify-algorithms <string>`  
+* `--jwt-verify-algorithms <string>`
   a comma separated list of the names of the allowed jwt token algorithms
 * `-A`, `--jwt-verify-audience <string>`  
   a comma separated list of JWT audiences that will be accepted; defaults to 'postgraphile'. To disable audience verification, set to ''.
 * `--jwt-verify-clock-tolerance <number>`  
   number of seconds to tolerate when checking the nbf and exp claims, to deal with small clock differences among different servers
-* `--jwt-verify-id <string>`  
+* `--jwt-verify-id <string>`
   the name of the allowed jwt token id
-* `--jwt-verify-ignore-expiration`  
+* `--jwt-verify-ignore-expiration`
   if `true` do not validate the expiration of the token defaults to `false`
-* `--jwt-verify-ignore-not-before`  
+* `--jwt-verify-ignore-not-before`
   if `true` do not validate the notBefore of the token defaults to `false`
-* `--jwt-verify-issuer <string>`  
+* `--jwt-verify-issuer <string>`
   a comma separated list of the names of the allowed jwt token issuer
-* `--jwt-verify-subject <string>`  
+* `--jwt-verify-subject <string>`
   the name of the allowed jwt token subject
-* `--jwt-role <string>`  
+* `--jwt-role <string>`
   a comma seperated list of strings that create a path in the jwt from which to extract the postgres role. if none is provided it will use the key `role` on the root of the jwt.
-* `-t`, `--jwt-token-identifier <identifier>`  
+* `-t`, `--jwt-token-identifier <identifier>`
   the Postgres identifier for a composite type that will be used to create JWT tokens
-* `--token <identifier>`  
+* `--token <identifier>`
   DEPRECATED: use --jwt-token-identifier instead
 * `--secret <string>`  
   DEPRECATED: Use --jwt-secret instead
@@ -126,7 +128,7 @@ There are more CLI options available to customise the GraphQL server:
   DEPRECATED Use --jwt-verify-audience instead
 * `--legacy-relations <omit|deprecated|only>`  
   some one-to-one relations were previously detected as one-to-many - should we export 'only' the old relation shapes, both new and old but mark the old ones as 'deprecated', or 'omit' the old relation shapes entirely
-* `--legacy-json-uuid`  
+* `--legacy-json-uuid`
   ONLY use this option if you require the v3 typenames 'Json' and 'Uuid' over 'JSON' and 'UUID'
 * `-h`, `--help`  
   output usage information
@@ -135,15 +137,32 @@ There are more CLI options available to customise the GraphQL server:
 
 The following features and not part of PostGraphile core, but are available from the Supporter and/or Pro plugins - see [Go Pro!](/postgraphile/pricing/) for more information.
 
-* `-S`, `--simple-subscriptions`  
+* `-S`, `--simple-subscriptions`
   [SUPPORTER] ⚡️[experimental] add simple subscription support
-* `--subscription-authorization-function [fn]`  
+* `--subscription-authorization-function [fn]`
   [SUPPORTER] ⚡️[experimental] PG function to call to check user is allowed to subscribe
-* `--read-only-connection <string>`  
+* `--read-only-connection <string>`
   [PRO] ⚡️[experimental] a PostgreSQL connection string to use for read-only queries (i.e. not mutations)
-* `--default-pagination-cap [int]`  
+* `--default-pagination-cap [int]`
   [PRO] ⚡️[experimental] Ensures all connections have first/last specified and are no large than this value (default: 50), set to -1 to disable; override via smart comment `@paginationCap 50`
-* `--graphql-depth-limit [int]`  
+* `--graphql-depth-limit [int]`
   [PRO] ⚡️[experimental] Validates GraphQL queries cannot be deeper than the specified int (default: 16), set to -1 to disable
-* `--graphql-cost-limit [int]`  
+* `--graphql-cost-limit [int]`
   [PRO] ⚡️[experimental] Only allows queries with a computed cost below the specified int (default: 1000), set to -1 to disable
+
+### RC file options
+
+The CLI options can also be specified in a `.postgraphilerc.js` file in the current working directory. Any command line comma separated options (eg. `schema`) must be entered as Javascript arrays.
+
+```javascript
+module.exports = {
+  options: {
+    connection: 'postgres://api_user:api_password@localhost:5432/api_development',
+    schema: ['myApp', 'myAppPrivate'],
+    jwtSecret: 'myJwtSecret',
+    defaultRole: 'myapp_anonymous',
+    jwtTokenIdentifier: 'myApp.jwt_token',
+    watch: true
+  }
+};
+```
