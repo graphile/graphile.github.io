@@ -72,7 +72,6 @@ $env:DEBUG = "postgraphile:postgres,postgraphile:postgres:error"; <script start>
 $env:DEBUG = "postgraphile:postgres*"; <script start>
 ```
 
-
 ### DEBUG envvars
 
 We use a lot of DEBUG envvars for different parts of the system. Here's some of the ones you might care about:
