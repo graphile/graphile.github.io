@@ -140,6 +140,24 @@ create function get_x_something() returns text as $$
 $$ language sql stable;
 ```
 
+Everything returned by pgSettings is applied to the current session with ```set_config($key, $value, true)```
+
+Internal Postgres settings (keys without periods) can be changed directly such as 'role':
+
+```js
+export postgraphile(process.env.DATABASE_URL, schemaName, {
+  pgSettings: req => ({
+    'role': 'visitor',
+    'jwt.claims.user_id': `${req.user.id}`,
+    //...
+  }),
+})
+```
+
+```sql
+select current_user; -- returns visitor
+```
+
 TODO: verify the above works.
 
 TODO: move this to its own article?
