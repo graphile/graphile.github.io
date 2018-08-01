@@ -16,6 +16,9 @@ bottom).
 
 #### Performance: goodbye N+1 queries!
 
+**NOTE**: performance of super simple queries in v4 has improved even further
+since these figures were detailed!
+
 The performance of PostGraphile has massively increased over PostGraphQL v3;
 and the memory usage has decreased too! If you run your database and
 PostGraphile on different servers then you should find query times are improved
@@ -93,6 +96,14 @@ a much requested feature!
 
 As part of the performance work, we now select only the fields we need (and we also inline computed columns, in case you're interested!). As such, if you have column-level SELECT grants you may find that this works with PostGraphile now. Note, however, that I do not recommend using these - instead I recommend splitting your concerns into multiple tables and use the one-to-one relationship feature to link them.
 
+#### Simple collections
+
+PostGraphile has long supported Relay-compatible connections, but it now
+supports simple list-based collections too. They're disabled by default, but
+you can enable both interfaces with `--simple-collections both` or use the
+simpler interface exclusively with `--simple-collections only`.
+
+
 #### One-to-one relationships
 
 If you have tables like this:
@@ -151,11 +162,21 @@ People have been running PostGraphile on AWS Lambda and similar environments, an
 
 If you want to improve things even further, you should consider bundling your server dependencies into one JS file with something like `webpack` so that Node spends less time looking at the filesystem!
 
+#### Omitting things
+
+If there's something (a column, table, function, filter, relation) that you
+don't want to express to GraphQL you can now remove it using our [smart
+comments](/postgraphile/smart-comments/) feature. This feature will likely
+be improved over the coming months, so let us know what you think!
+
 #### Naming things
 
-You no longer have to trust us to come up with the best names for your fields. You can override all the names by supplying your own inflector. The interface around this is still coming to fruition, but the functionality is there!
-
-https://github.com/graphile/graphile-build/blob/master/packages/graphile-build-pg/src/inflections.js
+You no longer have to trust us to come up with the best names for your fields.
+You can override individual fields using our [smart
+comments](/postgraphile/smart-comments/) feature, or override the names that we
+auto-generate by using a plugin to overwrite [our
+inflector](https://github.com/graphile/graphile-build/blob/8505f3e32f10c4e1297691f288d187517ec97fb9/packages/graphile-build-pg/src/plugins/PgBasicsPlugin.js#L57-L441)
+with your own.
 
 #### Better support, better errors
 

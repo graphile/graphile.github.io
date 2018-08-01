@@ -97,12 +97,21 @@
       {
         "id": "usage",
         "title": "Usage"
+      },
+      {
+        "id": "community",
+        "title": "Community"
       }
     ],
     "pages": [
       {
         "to": "/postgraphile/introduction/",
         "title": "Introduction",
+        "sectionId": "overview"
+      },
+      {
+        "to": "/postgraphile/examples/",
+        "title": "Examples",
         "sectionId": "overview"
       },
       {
@@ -177,27 +186,32 @@
       },
       {
         "to": "/postgraphile/extending/",
-        "title": "Extending PostGraphile",
+        "title": "Schema Plugins",
         "sectionId": "overview"
       },
       {
         "to": "/postgraphile/plugins/",
-        "title": "Plugins [SUPPORTER] [PRO]",
+        "title": "Server Plugins",
         "sectionId": "overview"
       },
       {
         "to": "/postgraphile/subscriptions/",
-        "title": "Subscriptions [SUPPORTER]",
+        "title": "Subscriptions",
         "sectionId": "overview"
       },
       {
         "to": "/postgraphile/production/",
-        "title": "Running in Production [PRO]",
+        "title": "Production Considerations",
         "sectionId": "overview"
       },
       {
         "to": "/postgraphile/reserved-keywords/",
         "title": "Reserved Keywords",
+        "sectionId": "overview"
+      },
+      {
+        "to": "/postgraphile/debugging/",
+        "title": "Debugging",
         "sectionId": "overview"
       },
       {
@@ -249,6 +263,21 @@
         "to": "/postgraphile/usage-schema/",
         "title": "Schema-only Usage",
         "sectionId": "usage"
+      },
+      {
+        "to": "/postgraphile/community-plugins/",
+        "title": "Community Plugins",
+        "sectionId": "community"
+      },
+      {
+        "to": "/postgraphile/community-chat/",
+        "title": "Community Chat",
+        "sectionId": "community"
+      },
+      {
+        "to": "/postgraphile/code-of-conduct/",
+        "title": "Code of Conduct",
+        "sectionId": "community"
       }
     ]
   },

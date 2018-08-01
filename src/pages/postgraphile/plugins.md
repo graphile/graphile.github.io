@@ -1,19 +1,37 @@
 ---
 layout: page
 path: /postgraphile/plugins/
-title: Plugins
+title: PostGraphile Server Plugins
 ---
 
-## Plugins
+## PostGraphile Server Plugins
 
-In addition to the Graphile-Build plugin system which builds the GraphQL schema
-in PostGraphile, PostGraphile also has a plugin system for the CLI and web
-layer.  This plugin system is less mature, it's not ready for third party
-plugin developers yet, however there are a couple of first-party plugins
-that you may want to use that can be purchased on the [Graphile Store](https://store.graphile.com):
+*NOTE: This page relates to changing how the PostGraphile server works. If you're instead looking to change the generated GraphQL schema (e.g. to add fields), see [Schema Plugins](/postgraphile/extending/).*
 
-- `@graphile/plugin-supporter` [SUPPORTER]
+In addition to the [Graphile-Build plugin system](/postgraphile/extending/)
+which builds the GraphQL schema in PostGraphile, PostGraphile also has a plugin
+system for the CLI and web layer.  This plugin system is less mature, it's not
+ready for third party plugin developers yet, however there are a couple of
+first-party plugins that you may want to use that can be purchased on the
+[Graphile Store](https://store.graphile.com):
+
+- `@graphile/plugin-supporter` [SUPPORTER]  
+  (pay what you want, from $1/mo+)
 - `@graphile/plugin-pro` [PRO]
+
+_TODO: update this when the plugin interface is more mature._
+
+### Wait, I have to pay?
+
+The vast majority of PostGraphile is open source; and there's no intention to
+make a previously open-source part of PostGraphile closed source. However,
+development on a project like this is time-consuming and complex; these
+commercial plugins help to make development on PostGraphile more sustainable by
+providing a financial backing for it. You can absolutely run PostGraphile in
+production without these features, and many people do (just ask in our [gitter
+chat](https://gitter.im/graphile/postgraphile)).
+
+For more information, see the bottom of the [Go Pro!](/postgraphile/pricing/) page.
 
 ### Installing
 

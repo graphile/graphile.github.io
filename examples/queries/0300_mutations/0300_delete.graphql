@@ -1,0 +1,5 @@
+mutation {
+  deleteTopicById(input: { id: 1 }) {
+    deletedTopicId
+  }
+}

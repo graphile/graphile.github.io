@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import "prismjs";
 import "prismjs/themes/prism-solarizedlight.css";
-import "./index.scss";
+import "prismjs/components/prism-json";
+import "prismjs/components/prism-graphql";
 import "./flexgrid.scss";
+import "./index.scss";
 
 class TemplateWrapper extends Component {
   onKeyDown = e => {
@@ -17,7 +20,9 @@ class TemplateWrapper extends Component {
   };
   focus = el => {
     this.self = el;
-    el.focus();
+    if (el) {
+      el.focus();
+    }
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps.location.pathname !== this.props.location.pathname) {

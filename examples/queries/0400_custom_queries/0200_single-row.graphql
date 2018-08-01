@@ -1,0 +1,19 @@
+{
+  currentUser {
+    nodeId
+    id
+    username
+  }
+}
+
+# Added to the GraphQL schema via
+# this SQL:
+#
+#   create function current_user()
+#   returns app_public.users
+#   language sql stable
+#   as $$
+#     select users.*
+#     from app_public.users
+#     where id = current_user_id();
+#   $$;

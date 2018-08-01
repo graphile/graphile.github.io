@@ -29,27 +29,11 @@ the below first though!)
 
 ### Aside: project financial status
 
-**_TL;DR: just read the bold bits!_**
-
-**My work on PostGraphile is primarily self-funded** - I take time
-off from earning money through contracting to work on PostGraphile.
-
-Recently **I started [a Patreon](https://www.patreon.com/benjie)** and the
-support from these 10 lovely folk has allowed me to spend more time working on
-PostGraphile. The reason that V4 is so compatible with V3 is because of the
-support of these patrons. 🙏 I would love to spend a LOT more time working on
-the project, but to do that I need more supporters.
-
 **If your business uses PostGraphile, please invest in [my
 Patreon](https://www.patreon.com/benjie)** - you'll benefit from faster fixes,
 more features, and better performance. If you need a more commercially
-justifiable way of funding the project then please **get in touch - I am
-working on a commercial support offering**. I'm also open to other forms of
-support, and of course you can [hire me](/support/) to give advice or build
-features.
-
-Every bit of support, no matter how small, helps. Thanks for reading, back to
-the migration guide...
+justifiable way of funding the project then please [get in
+touch](mailto:benjie@graphile.org?subject=PostGraphile).
 
 ### Deprecations
 
@@ -182,8 +166,8 @@ type is much more complex if the connection types differ.
 
 **Problem**: some things are nullable that weren't, some things aren't nullable that were.
 
-**Solution**: you can enable the `--no-setof-functions-include-nulls` CLI option
-(or `setofFunctionsIncludeNulls: false` library option) to reduce the nullables
+**Solution**: you can enable the `--no-setof-functions-contain-nulls` CLI option
+(or `setofFunctionsContainNulls: false` library option) to reduce the nullables
 in the generated schema.
 
 **Reasoning**:
@@ -207,7 +191,7 @@ connections for functions as for tables - as such these connections now have to
 support that the entries within them are nullable.
 
 If you don't like the nulls everywhere, I encourage you to use the `-N` /
-`--no-setof-functions-include-nulls` option mentioned above. Enabling this is a
+`--no-setof-functions-contain-nulls` option mentioned above. Enabling this is a
 non-breaking change, but disabling it **is** a breaking change - hence why it
 is not the default behaviour.
 

@@ -4,13 +4,123 @@ path: /postgraphile/subscriptions/
 title: GraphQL Subscriptions
 ---
 
-## GraphQL Subscriptions [SUPPORTER]
+## GraphQL Subscriptions
 
-Using the [Supporter Plugin](/postgraphile/plugins) PostGraphile
-gains a simple subscriptions ability.
+PostGraphile Core doesn't yet have subscriptions support built in. There is
+much talk about what a GraphQL subscriptions solution might look like in 
+[issue #92](https://github.com/graphile/postgraphile/issues/92).
 
-To enable this, use the `--simple-subscriptions` CLI flag (or
-`simpleSubscriptions: true` middleware option).
+Patreon backers (and those who have purchased the Pro plugin) may try out an
+early simple subscriptions feature via the [Supporter
+Plugin](/postgraphile/plugins/). We'd love to hear your feedback on this
+implementation. The rest of this article details how to use this feature.
+
+## Simple Subscriptions [SUPPORTER]
+
+### Enabling with an Express app
+
+With the CLI use `--simple-subscriptions` to enable the subscriptions support.
+With the library version use `simpleSubscriptions: true`.
+
+We emulate part of the express stack, so if you require sessions you can pass
+additional connect/express middlewares (sorry, we don't support Koa middlewares
+here at this time) via the options `enhanceHttpServerWithSubscriptions`.
+
+Here's an example:
+
+```js
+const express = require("express");
+const {
+  default: PostGraphileSupporter,
+} = require("@graphile/plugin-supporter");
+
+const app = express();
+
+const postgraphileOptions = {
+  simpleSubscriptions: true,
+  websocketMiddlewares: [
+    // Add whatever middlewares you need here, note that
+    // they should only manipulate properties on req/res,
+    // they must not sent response data. e.g.:
+    //
+    //   require('express-session')(),
+    //   require('passport').initialize(),
+    //   require('passport').session(),
+  ],
+};
+
+app.use(postgraphile(
+  databaseUrl,
+  "app_public",
+  postgraphileOptions,
+));
+
+app.listen(
+  parseInt(process.env.PORT, 10) || 3000
+);
+```
+
+#### Advanced setup
+
+If you need websockets to be listened for before your first HTTP request comes
+in (most people don't need this) then you must create a `rawHTTPServer`, mount
+your express `app` in it, and then add subscription support to the raw server
+via the `enhanceHttpServerWithSubscriptions` function, as shown below:
+
+```js
+const express = require("express");
+const { createServer } = require("http");
+const {
+  default: PostGraphileSupporter,
+  enhanceHttpServerWithSubscriptions,
+} = require("@graphile/plugin-supporter");
+
+const app = express();
+const rawHTTPServer = createServer(app);
+
+const postgraphileOptions = {
+  simpleSubscriptions: true,
+  websocketMiddlewares: [
+    // Add whatever middlewares you need here, note that
+    // they should only manipulate properties on req/res,
+    // they must not sent response data. e.g.:
+    //
+    //   require('express-session')(),
+    //   require('passport').initialize(),
+    //   require('passport').session(),
+  ],
+};
+
+const postgraphileMiddleware = postgraphile(
+  databaseUrl,
+  "app_public",
+  postgraphileOptions,
+);
+
+app.use(postgraphileMiddleware);
+
+enhanceHttpServerWithSubscriptions(
+  rawHTTPServer,
+  postgraphileMiddleware,
+  postgraphileOptions,
+);
+
+rawHTTPServer.listen(
+  parseInt(process.env.PORT, 10) || 3000
+);
+```
+
+The `enhanceHttpServerWithSubscriptions` takes three arguments:
+
+1. the raw HTTP server from `require('http').createServer()`
+2. the postgraphile middleware (this should be the *same* middleware that you mount into your Express app)
+3. options, where you can optionally pass `middlewares` to enable `pgSettings(req) {...}` access to session-based things
+
+
+### Using
+
+To enable simple subscriptions support, use the `--simple-subscriptions` CLI
+flag (or `simpleSubscriptions: true` middleware option).
 
 This will expose a `listen` subscription field that can be used for generic
 subscriptions to a named topic which can be triggered using PostgreSQL's built
@@ -142,7 +252,7 @@ allowed to subscribe to the relevant topic. The function must accept one text
 argument `topic` and must return a string or raise an exception (note: the `topic`
 argument WILL be sent including the `postgraphile:` prefix).
 
-The function will probably take the following form:
+A typical implementation will look like this:
 
 
 ```sql

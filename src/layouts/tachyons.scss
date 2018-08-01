@@ -246,6 +246,15 @@ html, body, div, article, section, main, footer, header, form, fieldset, legend,
 pre, code, a, h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, dt, dd, textarea, table,
 td, th, tr, input[type="email"], input[type="number"], input[type="password"],
 input[type="tel"], input[type="text"], input[type="url"], .border-box { box-sizing: border-box; }
+
+
+
+ul {
+  padding-left: 1.2rem;
+}
+
+
+
 /*
 
    ASPECT RATIOS
@@ -654,6 +663,7 @@ img { max-width: 100%; }
 */
 .dn { display: none; }
 .di { display: inline; }
+.df { display: flex; }
 .db { display: block; }
 .dib { display: inline-block; }
 .dit { display: inline-table; }
@@ -869,6 +879,7 @@ code, .code { font-family: Consolas, monaco, monospace; }
 .h3 { height: 4rem; }
 .h4 { height: 8rem; }
 .h5 { height: 16rem; }
+.h6 { height: 32rem; }
 /* Height Percentages - Based off of height of parent */
 .h-25 { height: 25%; }
 .h-50 { height: 50%; }
@@ -1795,11 +1806,11 @@ code, .code { font-family: Consolas, monaco, monospace; }
 
 */
 /* Measure is limited to ~66 characters */
-.measure { max-width: 30em; }
+.measure { /*max-width: 30em;*/ }
 /* Measure is limited to ~80 characters */
-.measure-wide { max-width: 34em; }
+.measure-wide { /*max-width: 34em;*/ }
 /* Measure is limited to ~45 characters */
-.measure-narrow { max-width: 20em; }
+.measure-narrow { /*max-width: 20em;*/ }
 /* Book paragraph style - paragraphs are indented with no vertical spacing. */
 .indent { text-indent: 1em; margin-top: 0; margin-bottom: 0; }
 .small-caps { font-variant: small-caps; }
@@ -2163,6 +2174,7 @@ code, .code { font-family: Consolas, monaco, monospace; }
  .cn-ns { clear: none; }
  .dn-ns { display: none; }
  .di-ns { display: inline; }
+ .df-ns { display: flex; }
  .db-ns { display: block; }
  .dib-ns { display: inline-block; }
  .dit-ns { display: inline-table; }
@@ -2938,12 +2950,12 @@ code, .code { font-family: Consolas, monaco, monospace; }
  .outline-l { outline: 1px solid; }
  .outline-transparent-l { outline: 1px solid transparent; }
  .outline-0-l { outline: 0; }
+ .bn-l { border-style: none; border-width: 0; }
  .ba-l { border-style: solid; border-width: 1px; }
  .bt-l { border-top-style: solid; border-top-width: 1px; }
  .br-l { border-right-style: solid; border-right-width: 1px; }
  .bb-l { border-bottom-style: solid; border-bottom-width: 1px; }
  .bl-l { border-left-style: solid; border-left-width: 1px; }
- .bn-l { border-style: none; border-width: 0; }
  .br0-l { border-radius: 0; }
  .br1-l { border-radius: .125rem; }
  .br2-l { border-radius: .25rem; }
@@ -3001,6 +3013,7 @@ code, .code { font-family: Consolas, monaco, monospace; }
  .cn-l { clear: none; }
  .dn-l { display: none; }
  .di-l { display: inline; }
+ .df-l { display: flex; }
  .db-l { display: block; }
  .dib-l { display: inline-block; }
  .dit-l { display: inline-table; }
@@ -3347,4 +3360,16 @@ $graphileRed: #E44336;
   outline: none;
   box-shadow: 0px 0px 3px 1px rgba(228, 67, 54, 0.45);
 };
+
+$postgraphileBlue: #2D80D3;
+
+.postgraphile-blue { color: $postgraphileBlue; }
+.bg-postgraphile-blue { background-color: $postgraphileBlue }
+.b--postgraphile-blue { border-color: $postgraphileBlue }
+.b-focus--postgraphile-blue:focus {
+  border-color: $postgraphileBlue;
+  outline: none;
+  box-shadow: 0px 0px 3px 1px rgba(228, 67, 54, 0.45);
+};
+
 .no-underline-hover:hover { text-decoration: none; }

@@ -6,6 +6,11 @@ title: Custom Queries
 
 ## Custom Queries
 
+If the autodetected PostgreSQL relations aren't sufficient for your purposes,
+there's options for adding custom queries to your GraphQL schema.
+
+### Custom Query SQL Procedures
+
 Like [computed columns](/postgraphile/computed-columns/), you can also add
 root-level Query fields by creating a [PostgreSQL function][procedures]. The arguments to
 these functions will be exposed via GraphQL also - named arguments are
@@ -18,8 +23,10 @@ following:
 - must NOT return `VOID`
 - must be marked as `STABLE`
 - must be defined in one of the introspected schemas
+- must not be VARIADIC
+- must not use IN / OUT / INOUT arguments
 
-### Example
+#### Example
 
 So let’s write a search query for our [forum example][] using the PostgreSQL
 [`LIKE`][] operator (we’ll actually use `ILIKE` because it is case
@@ -73,6 +80,19 @@ And that’s it! You can now use this function in your GraphQL like so:
   }
 }
 ```
+
+### Graphile Plugins
+
+If you prefer adding to your schema on the JavaScript side, you can use
+`ExtendSchemaPlugin` from `graphile-utils`; see [Schema
+Plugins](/postgraphile/extending/) for more information.
+
+### GraphQL Schema Stitching
+
+You can also stitch multiple GraphQL schemas together, you can read more about
+doing this with PostGraphile here: [Authenticated and Stitched Schemas with
+PostGraphile, Passport and
+Stripe](https://medium.com/@sastraxi/authenticated-and-stitched-schemas-with-postgraphile-passport-and-stripe-a51490a858a2).
 
 [procedures]: /postgraphile/procedures/
 [forum example]: https://github.com/graphile/postgraphile/tree/master/examples/forum

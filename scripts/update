@@ -3,3 +3,4 @@ set -e -x
 cd "$(dirname "$0")"
 ./update-cli
 ./update-library-and-schema
+./update-examples

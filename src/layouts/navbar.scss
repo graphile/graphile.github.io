@@ -167,6 +167,10 @@ $lineColor: white;
   display: none;
 }
 
+.navbar-nav .navbar-item.hide-when-small {
+  display: flex;
+}
+
 // ----------------------------------------
 // Media
 
@@ -224,5 +228,11 @@ $lineColor: white;
   #search-box {
     padding-top: 0.2rem;
     padding-bottom: 0.2rem;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .navbar-nav .navbar-item.hide-when-small {
+    display: none;
   }
 }

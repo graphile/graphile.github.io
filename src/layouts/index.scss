@@ -2,6 +2,7 @@
 @import "./navbar.scss";
 
 $graphileRed: #E44336;
+$postgraphileBlue: #2D80D3;
 $backgroundImage: "/images/delaunay.png";
 
 // ----------------------------------------
@@ -25,6 +26,9 @@ h6 {
   @extend .mt3;
   @extend .measure;
   @extend .fw6;
+}
+th {
+  @extend .helvetica;
 }
 
 h1 {
@@ -95,8 +99,8 @@ p,
   @extend .f6;
   @extend .lh-copy;
   @extend .measure-wide;
-  @extend .mb4-ns;
-  @extend .mt4-ns;
+  @extend .mb3-ns;
+  @extend .mt3-ns;
 }
 .template-marketing {
   p,
@@ -134,11 +138,30 @@ p,
     @extend .pb5-ns;
     @extend .pb4;
   }
-
-  ul {
-    padding-left: 1.2rem
-  }
 }
+
+pre[class*="language-"].br0 {
+  border-radius: 0;
+}
+pre[class*="language-"].pa0 {
+  padding: 0;
+}
+pre[class*="language-"].pa1 {
+  padding: 0.25rem;
+}
+pre[class*="language-"].pa2 {
+  padding: 0.5rem;
+}
+pre[class*="language-"].pa3 {
+  padding: 1rem;
+}
+pre[class*="language-"].f1 { font-size: 3rem; }
+pre[class*="language-"].f2 { font-size: 2.25rem; }
+pre[class*="language-"].f3 { font-size: 1.5rem; }
+pre[class*="language-"].f4 { font-size: 1.25rem; }
+pre[class*="language-"].f5 { font-size: 1rem; }
+pre[class*="language-"].f6 { font-size: .875rem; }
+pre[class*="language-"].f7 { font-size: .75rem; }
 
 .page-content li,
 footer li {
@@ -146,13 +169,23 @@ footer li {
   @extend .f6;
   @extend .lh-copy;
   @extend .mb1;
-  @extend .measure
+  @extend .measure;
+  &.f6 {
+    @extend .f6;
+  }
+  &.f7 {
+    @extend .f7;
+  }
 }
 
 a {
   @extend .graphile-red;
   @extend .no-underline;
   @extend .underline-hover;
+  .postgraphile &,
+  .training & {
+    @extend .postgraphile-blue;
+  }
 }
 
 .intro {
@@ -207,37 +240,40 @@ a {
 }
 
 
+.template-marketing-hero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(85deg, #a51b1b 0%, #7d2424 100%);
+
+  &:before, &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 200%;
+    z-index: 0;
+    top: 0;
+    left: 70%;
+  }
+  &:before {
+    transform: translate(0, -50%) rotate(-27deg);
+    background: #922323;
+  }
+  &:after {
+    transform: translate(0, 0) rotate(27deg);
+    background: #9c2828;
+  }
+}
+
 .template-marketing {
   $triHeight: 20px;
   $backgroundColor: #f4f4f4;
 
-  position: relative;
-  background: linear-gradient(85deg, #a51b1b 0%, #7d2424 100%);
-
-  &:after {
-    content: '';
-    display: block;
-    position: absolute;
-    width: 43%;
-    height: 600px; // 100vh
-    background-image: linear-gradient(117deg, transparent 50%, #9c2828 0);
-    background-color: transparent;
-    z-index: 0;
-    top: 0;
-    right: 0;
-  }
-
-  &:before {
-    content: '';
-    display: block;
-    position: absolute;
-    width: 31%;
-    height: 600px; // 100vh
-    background-image: linear-gradient(66deg, transparent 50%, #922323 0);
-    background-color: transparent;
-    z-index: 0;
-    top: -204px; // -34vh
-    right: 0;
+  .hero {
+    @extend .template-marketing-hero;
+    > .container {
+      z-index: 1;
+    }
   }
 
   section:nth-child(even):not(.no-highlight) {
@@ -261,14 +297,43 @@ a {
     top: -1 * $triHeight;
     z-index: 0;
   }
+
+  &.postgraphile .hero {
+    background: linear-gradient(85deg, #0e457d 0%, #0e385e 100%);
+
+    &:after {
+      background: #0e4c86;
+    }
+
+    &:before {
+      background: #0c457e;
+    }
+  }
 }
 
 .container {
-  @extend .mw8;
+  @extend .mw9;
 }
 
 .template-page {
   min-height: 600px; // 100vh;
+  $backgroundColor: #f4f4f4;
+  $triHeight: 20px;
+  .mailinglist {
+    background-color: $backgroundColor;
+  }
+  .mailinglist:after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: $triHeight 100vw $triHeight 0;
+    border-color: transparent $backgroundColor transparent transparent;
+    top: -1 * $triHeight;
+    z-index: 0;
+  }
 }
 
 .template-marketing {
@@ -300,6 +365,10 @@ a.strong-link {
   @extend .underline-hover;
   @extend .b;
   @extend .ttu;
+  .postgraphile &,
+  .training & {
+    @extend .postgraphile-blue;
+  }
 }
 
 a.strong-link--white {
@@ -359,6 +428,14 @@ code {
   padding-left: 0.75em;
   padding-right: 1em;
 }
+.gatsby-highlight-code-line .gatsby-highlight-code-line {
+  /* Work around bug in gatsby code lines */
+  display: inline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+}
 
 .gatsby-highlight {
   @extend .mb4;
@@ -393,6 +470,9 @@ pre code {
 pre {
   box-shadow: 0 0 50px 0px rgba(0, 0, 0, 0.16);
 }
+pre.no-shadow {
+  box-shadow: none;
+}
 
 h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
   font-size: 0.95em;
@@ -424,6 +504,12 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
   @extend .button-common;
   @extend .b--graphile-red;
   @extend .graphile-red;
+  .postgraphile &,
+  .training & {
+    @extend .button-common;
+    @extend .b--postgraphile-blue;
+    @extend .postgraphile-blue;
+  }
 }
 
 .button--solid {
@@ -431,6 +517,13 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
   @extend .b--graphile-red;
   @extend .bg-graphile-red;
   @extend .white;
+  .postgraphile &,
+  .training & {
+    @extend .button-common;
+    @extend .b--postgraphile-blue;
+    @extend .bg-postgraphile-blue;
+    @extend .white;
+  }
 }
 
 .button--outline-light {
@@ -454,6 +547,9 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
   @extend .input-reset;
   @extend .ph3;
   @extend .pv2;
+  .postgraphile & {
+    @extend .b-focus--postgraphile-blue;
+  }
 }
 
 .label--small {
@@ -477,6 +573,8 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
 .pricing-table tbody td {
   @extend .pv3;
   @extend .ph1;
+}
+.pricing-table tbody tr {
   border-bottom: 1px solid #a51b1b;
 }
 .pricing-table tbody tr:last-child th,
@@ -511,9 +609,58 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
   width: 80%;
 }
 
+.edit-this-page {
+  @extend .f6;
+  float: right;
+  margin: 0.5rem;
+}
+
+@media screen and (max-width: 36em) {
+  .pricing-table {
+    thead {
+      display: none;
+    }
+    tbody, thead, tfoot {
+      td, th, tr {
+        display: block;
+        width: auto;
+        text-align: center;
+      }
+    }
+    tbody, tfoot {
+      tr {
+        padding: 1rem 0.5rem;
+      }
+      td, th {
+        padding: 0;
+        margin: 0.5rem 0 0 0;
+        position: relative;
+        padding-left: 40%;
+      }
+      td::before {
+        content: 'Placeholder';
+        position: absolute;
+        left: 0.5rem;
+        top: 0;
+        font-variant: small-caps;
+        font-size: 1.2em;
+      }
+      td:nth-of-type(1)::before {
+        content: 'Core';
+      }
+      td:nth-of-type(2)::before {
+        content: 'Supporter';
+      }
+      td:nth-of-type(3)::before {
+        content: 'Pro';
+      }
+    }
+  }
+}
+
 .plan-tag {
   background-color: lime;
-  color: white;
+  color: white !important;
   font-size: 0.65rem;
   border-radius: 1em;
   padding: 0.2em 0.7em 0.3em;
@@ -545,22 +692,170 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
 // ----------------------------------------
 // Misc media queries
 
-@media screen and (max-width: 30em) {
-  .template-marketing {
-    background: linear-gradient(85deg, #a51b1b 0%, #7d2424 100%);
-
+@media screen and (max-width: 50em) {
+  .template-home .top-section {
+    &:after, &:before {
+      left: 50%;
+    }
+  }
+  .template-marketing-hero {
     &:after {
-      top: -36px; // -6vh;
+      transform: translate(0, 0) rotate(20deg);
     }
-
     &:before {
-      top: -252px; // -42vh;
+      transform: translate(0, -50%) rotate(-20deg);
     }
+  }
+}
 
+@media screen and (max-width: 30em) {
+  .template-home .top-section {
+    &:after, &:before {
+      left: 50%;
+    }
+  }
+  .template-marketing-hero {
+    &:after {
+      transform: translate(0, 0) rotate(15deg);
+    }
+    &:before {
+      transform: translate(0, -50%) rotate(-15deg);
+    }
+  }
+
+  .template-marketing {
     $triHeightSm: 10px;
     section:after {
       border-width: $triHeightSm 100vw $triHeightSm 0;
       top: -1 * $triHeightSm;
     }
+  }
+}
+
+.template-home {
+  pre {
+    padding: 0.5rem 1rem;
+    background-color: rgba(0,0,0,0.3);
+    border-radius: 7px;
+    white-space: pre-wrap;
+    padding-left: 1.7rem;
+    text-indent: -1.2rem;
+  }
+  .top-section {
+    @extend .template-marketing-hero;
+    background: linear-gradient(85deg, #0e457d 0%, #0e385e 100%);
+    &:before {
+      background: #0c457e;
+    }
+    &:after {
+      background: #0e4c86;
+    }
+    color: white;
+    p {
+      color: white;
+    }
+  }
+  .top-section {
+    .box-content {
+      min-height: 600px;
+    }
+  }
+  .top-section, .bottom-section {
+    .box-content {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 1rem 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      .logo {
+        flex: 1 0 10rem;
+        margin: 0 2rem;
+        min-height: 10rem;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: 50% 0%;
+      }
+      .text {
+        flex: 1 0 18rem;
+        max-width: 100%;
+      }
+    }
+    &.postgraphile .text {
+      flex: 1 0 20rem;
+    }
+    &.postgraphile .logo {
+      flex: 1 0 15rem;
+      min-height: 15rem;
+      background-image: url("../../logos/postgraphile.optimized.svg");
+    }
+    .graphile {
+      //background: linear-gradient(85deg, #a51b1b 0%, #7d2424 100%);
+      background: linear-gradient(135deg, #f8eeee 0%, #eec4c4 100%);
+    }
+    .training {
+      background: linear-gradient(135deg, #ddeffd 0%, #bcdaf5 100%);
+    }
+    .graphile .logo {
+      background-image: url("../../logos/graphile.optimized.svg");
+    }
+    .training .logo {
+      background-image: url("https://www.graphql-training.com/images/brain-medium.png");
+    }
+  }
+  .bottom-section {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    .box {
+      display: flex;
+      flex-direction: column;
+      min-width: 300px;
+    }
+    .box-content {
+      max-width: 640px;
+      flex: 1 0 auto;
+    }
+    .cta {
+      text-align: center;
+      padding: 0 0 2rem 0;
+    }
+  }
+  .bottom-section .box {
+    flex: 1 0 0;
+  }
+}
+@media screen and (max-width: 700px) {
+  .template-home {
+    .top-section.postgraphile {
+      &:after {
+      }
+    }
+  }
+}
+
+.postgraphile-logo-bg {
+  background-image: url("../../logos/postgraphile.optimized.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: 50% 20%;
+  min-height: 240px;
+}
+.graphile-logo-bg {
+  background-image: url("../../logos/graphile.optimized.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: 50% 20%;
+  min-height: 240px;
+}
+a.inherit-color {
+  color: inherit;
+}
+.flex-wrap-reverse { -ms-flex-wrap: wrap-reverse; flex-wrap: wrap-reverse; }
+
+#___gatsby {
+  &:focus, &>div:focus {
+    outline: none;
   }
 }

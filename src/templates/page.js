@@ -3,14 +3,16 @@ import Link from "gatsby-link";
 import Helmet from "react-helmet";
 import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
+import ExamplesViewer from "../components/ExamplesViewer";
+import ContactAndMailingList from "../components/ContactAndMailingList";
 
 const sectionIs = desiredSection => ({ sectionId }) =>
   sectionId === desiredSection;
 
-const AugmentedText = ({ children }) => (
+const AugmentedText = ({ children, noLink }) => (
   <span
     dangerouslySetInnerHTML={{
-      __html: processHTML(htmlerize(children)),
+      __html: processHTML(htmlerize(children), noLink),
     }}
   />
 );
@@ -32,16 +34,20 @@ function PageList({ navs, location }) {
   );
 }
 
-const tag = (name, label = name) =>
-  `<a href='/postgraphile/pricing/' class="plan-${name}"><span class='first-letter'>${
+const tag = (name, label = name, noLink = false) =>
+  `<${
+    noLink ? "span" : "a href='/postgraphile/pricing/'"
+  } class="plan-${name}"><span class='first-letter'>${
     label[0]
-  }</span><span class='rest'>${label.substr(1)}</span></a>`;
+  }</span><span class='rest'>${label.substr(1)}</span></${
+    noLink ? "span" : "a"
+  }>`;
 
-function processHTML(html) {
+function processHTML(html, noLink) {
   return html
-    .replace(/\[SUPPORTER\]/g, tag("supporter"))
-    .replace(/\[PRO\]/g, tag("pro"))
-    .replace(/\[ENTERPRISE\]/g, tag("enterprise"));
+    .replace(/\[SUPPORTER\]/g, tag("supporter", "supporter", noLink))
+    .replace(/\[PRO\]/g, tag("pro", "pro", noLink))
+    .replace(/\[ENTERPRISE\]/g, tag("enterprise", "enterprise", noLink));
 }
 
 function htmlerize(text) {
@@ -54,7 +60,11 @@ function htmlerize(text) {
 }
 
 const Page = ({
-  data: { remark: { html: rawHTML, frontmatter: { title } }, nav },
+  data: {
+    remark: { html: rawHTML, frontmatter: { title, showExamples } },
+    nav,
+    examples,
+  },
   location,
 }) => {
   const html = processHTML(rawHTML);
@@ -81,9 +91,13 @@ const Page = ({
   const isPostGraphileDocs = navSection === "postgraphile";
 
   return (
-    <div className="template-page">
+    <div
+      className={`template-page ${
+        location.pathname.match(/^\/postgraphile(\/|$)/) ? "postgraphile" : ""
+      }`}
+    >
       <Helmet
-        title={`Graphile | ${title}`}
+        title={`${isPostGraphileDocs ? "PostGraphile" : "Graphile"} | ${title}`}
         meta={[
           {
             name: "description",
@@ -116,14 +130,23 @@ const Page = ({
                   </section>
                 ))}
               </aside>
-              <div className="col-xs-12 col-md-7 col-md-offset-1 first-xs main-content">
+              <div className="col-xs-12 col-md-9 first-xs main-content">
                 <div className="row">
-                  <div
-                    className="col-xs-12"
-                    dangerouslySetInnerHTML={{ __html: html }}
-                    style={{ width: "100%" }}
-                  />
+                  <div className="col-xs-12" style={{ width: "100%" }}>
+                    <div className="edit-this-page">
+                      <a
+                        href={`https://github.com/graphile/graphile.github.io/edit/develop/src/pages${location.pathname.substr(
+                          0,
+                          location.pathname.length - 1
+                        )}.md`}
+                      >
+                        📝 Edit this page
+                      </a>
+                    </div>
+                    <div dangerouslySetInnerHTML={{ __html: html }} />
+                  </div>
                   <br />
+                  {showExamples && <ExamplesViewer examples={examples} />}
                   <br />
                   <div className="col-xs-12 mt3 mb5">
                     <div className="row between-xs">
@@ -131,14 +154,22 @@ const Page = ({
                         {prev ? (
                           <Link className="" to={prev}>
                             <span className="fa fa-fw fa-long-arrow-left" />{" "}
-                            {prevText || "Previous"}
+                            {prevText ? (
+                              <AugmentedText noLink>{prevText}</AugmentedText>
+                            ) : (
+                              "Previous"
+                            )}
                           </Link>
                         ) : null}
                       </div>
                       <div className="col-xs-6 tr">
                         {next ? (
                           <Link className="" to={next}>
-                            {nextText || "Next"}{" "}
+                            {nextText ? (
+                              <AugmentedText noLink>{nextText}</AugmentedText>
+                            ) : (
+                              "Next"
+                            )}{" "}
                             <span className="fa fa-fw fa-long-arrow-right" />
                           </Link>
                         ) : null}
@@ -150,6 +181,8 @@ const Page = ({
             </div>
           </div>
         </section>
+
+        <ContactAndMailingList />
       </div>
       <SiteFooter />
     </div>
@@ -165,6 +198,7 @@ export const pageQuery = graphql`
       frontmatter {
         path
         title
+        showExamples
       }
     }
     nav: allNavJson {
@@ -180,6 +214,19 @@ export const pageQuery = graphql`
             to
             title
             sectionId
+          }
+        }
+      }
+    }
+    examples: allExamplesJson {
+      edges {
+        node {
+          id
+          title
+          examples {
+            title
+            query
+            result
           }
         }
       }

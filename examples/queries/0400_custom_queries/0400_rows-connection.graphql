@@ -1,0 +1,21 @@
+{
+  forumsAboutCats {
+    nodes {
+      nodeId
+      id
+      name
+      slug
+    }
+  }
+}
+
+# Created from SQL like:
+#
+#  create function app_public.forums_about_cats()
+#  returns setof app_public.forums
+#  language sql stable
+#  as $$
+#    select *
+#    from app_public.forums
+#    where slug like 'cat-%';
+#  $$;

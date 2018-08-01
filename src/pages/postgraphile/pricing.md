@@ -12,9 +12,9 @@ title: PostGraphile Pro!
 
 # Get PostGraphile Pro!
 
-#### PostGraphile core is open source software under the MIT license.  Supporter and Pro are commercial plugins which enhance PostGraphile with additional features and help fund development and maintenance on PostGraphile.
+#### PostGraphile core is open source software under the MIT license.  Supporter and Pro are commercial plugins which enhance PostGraphile with additional features and help fund development and maintenance on PostGraphile Core.
 
-##### See below the pricing table for more information.
+##### See the FAQ below the pricing table for more information.
 
 </div>
 </div>
@@ -41,8 +41,8 @@ title: PostGraphile Pro!
   <th><span class='plan-pro'><span class='first-letter'>p</span></span> Pro</th>
 </tr>
 
-  </thead>
-  <tbody>
+</thead>
+<tbody>
 
 <tr>
   <th>Audience</th>
@@ -153,25 +153,25 @@ title: PostGraphile Pro!
   <th>Simple GraphQL Subscriptions</th>
   <td><span class='fa fa-times-circle'></span></td>
   <td><span class='fa fa-check-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
+  <td><sup style="visibility: hidden">&nbsp;†</sup><span class='fa fa-check-circle'></span><sup>&nbsp;†</sup></td>
 </tr>
 
 <tr>
-  <th>GraphQL query cost estimation and limit</th>
-  <td><span class='fa fa-times-circle'></span></td>
-  <td><span class='fa fa-times-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
-</tr>
-
-<tr>
-  <th>Enforce limits on pagination</th>
+  <th>Integrated<sup>‡</sup> GraphQL query cost limit</th>
   <td><span class='fa fa-times-circle'></span></td>
   <td><span class='fa fa-times-circle'></span></td>
   <td><span class='fa fa-check-circle'></span></td>
 </tr>
 
 <tr>
-  <th>Limit depth of GraphQL queries</th>
+  <th>Integrated<sup>‡</sup> limits on pagination</th>
+  <td><span class='fa fa-times-circle'></span></td>
+  <td><span class='fa fa-times-circle'></span></td>
+  <td><span class='fa fa-check-circle'></span></td>
+</tr>
+
+<tr>
+  <th>Integrated<sup>‡</sup> GraphQL query depth limits</th>
   <td><span class='fa fa-times-circle'></span></td>
   <td><span class='fa fa-times-circle'></span></td>
   <td><span class='fa fa-check-circle'></span></td>
@@ -179,7 +179,7 @@ title: PostGraphile Pro!
 
 
 <tr>
-  <th>Scale by directing queries to read replicas</th>
+  <th>Facility to scale via read replicas</th>
   <td><span class='fa fa-times-circle'></span></td>
   <td><span class='fa fa-times-circle'></span></td>
   <td><span class='fa fa-check-circle'></span></td>
@@ -201,16 +201,16 @@ title: PostGraphile Pro!
 
 <tr>
   <th>Pricing</th>
-  <td>Free</td>
-  <td>Patreon: pay what you want<span class='note'>(or 💳 $25/mo + VAT)</span></td>
-  <td>💳 $100/mo + VAT<span class='note'>per project</span></td>
+  <td><strong>Free</strong><span class='note'>Patreon appreciated</span></td>
+  <td><strong>Pay what you can</strong><span class='note'>via Patreon, min $1/mo</span></td>
+  <td>$100/mo + VAT<span class='note'>per project</span></td>
 </tr>
 
 <tr>
   <th>Purchase</th>
   <td>&mdash;</td>
-  <td>Patreon or 💳 Credit Card</td>
-  <td>💳 Credit Card or Invoice</td>
+  <td>Patreon or Credit Card</td>
+  <td>Credit Card or Invoice</td>
 </tr>
 
 
@@ -228,7 +228,8 @@ title: PostGraphile Pro!
 
 </table>
 
-###### NB: The Pro plugin does not include the Supporter plugin features directly, but all plans that enable access to the Pro plugin also include access to the Supporter plugin so you can use both plugins at the same time to get all features.
+##### <sup>†</sup> The Pro plugin does not include the Supporter plugin features directly, but all plans that enable access to the Pro plugin also include access to the Supporter plugin so you can use both plugins at the same time to get all features.
+##### <sup>‡</sup> These features integrate deeply with PostGraphile and have been optimised for its nuances by the maintainer of the project. If you wish to build and maintain protections yourself rather than using the Pro plugin, refer to [Running in Production](/postgraphile/production/) for information on how you might go about doing this. Purchasing the Pro plugin helps fund ongoing development and maintenance on the open source core of PostGraphile.
 
 </div>
 </div>
@@ -287,3 +288,66 @@ be happy to help!
 </div>
 </div>
 </section>
+
+<!-- **************************************** -->
+
+<section class='mailinglist'>
+<div class='container'>
+
+<div class='row'>
+<div class='col-xs-12'>
+<div class='hero-block'>
+
+<h3>
+Questions, comments or feedback?
+<br />
+Email <a href="mailto:info@graphile.org?subject=Pricing%20question/comment/feedback:)">info@graphile.org</a>
+</h3>
+
+<form action="//graphile.us16.list-manage.com/subscribe/post?u=d103f710cf00a9273b55e8e9b&amp;id=c3a9eb5c4e" method="post"
+id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+  <div id="mc_embed_signup_scroll" class="center hero-block">
+    <p>Keep up to date on Graphile and PostGraphile features/changes.
+    Subscribe to our occasional announcements newsletter:</p>
+    <div class="mc-field-group form-inline justify-content-center">
+      <div class='form-group'>
+        <div class="mb2">
+          <label class="label--small" for="mce-EMAIL">Email address:</label>
+        </div>
+          <input
+            autocapitalize="off"
+            autocomplete="off"
+            autocorrect="off"
+            class="input-text mb0-ns mb1"
+            id="mce-EMAIL"
+            name="EMAIL"
+            spellcheck="false"
+            type="email"
+            value=""
+          />
+        <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_d103f710cf00a9273b55e8e9b_c3a9eb5c4e" tabindex="-1" value="" /></div>
+        <input
+          class="button--solid"
+          id="mc-embedded-subscribe"
+          name="subscribe"
+          type="submit"
+          value="Subscribe"
+        />
+      </div>
+      <div id="mce-responses" class="clear">
+        <div class="response" id="mce-error-response" style="display:none"></div>
+        <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>
+    </div>
+  </div>
+</form>
+
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- **************************************** -->

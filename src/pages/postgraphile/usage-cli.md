@@ -30,9 +30,7 @@ There are more CLI options available to customise the GraphQL server:
 
 <!-- CLI_DOCBLOCK_BEGIN -->
 
-* `-h`, `--help`
-  output usage information
-* `-V`, `--version`
+* `-V`, `--version`  
   output the version number
 * `--plugins <string>`
   a list of postgraphile plugins (not Graphile-Build plugins) to load, MUST be the first option
@@ -50,21 +48,25 @@ There are more CLI options available to customise the GraphQL server:
   the maximum number of clients to keep in the Postgres pool. defaults to 10
 * `-r`, `--default-role <string>`
   the default Postgres role to use when a request is made. supercedes the role used to connect to the database
-* `-j`, `--dynamic-json`
-  enable dynamic JSON in GraphQL inputs and outputs. uses stringified JSON by default
-* `-N`, `--no-setof-functions-contain-nulls`
-  if none of your `RETURNS SETOF compound_type` functions mix NULLs with the results then you may enable this to reduce the nullables in the GraphQL schema
-* `-a`, `--classic-ids`
+* `-j`, `--dynamic-json`  
+  [RECOMMENDED] enable dynamic JSON in GraphQL inputs and outputs. PostGraphile uses stringified JSON by default
+* `-N`, `--no-setof-functions-contain-nulls`  
+  [RECOMMENDED] if none of your `RETURNS SETOF compound_type` functions mix NULLs with the results then you may enable this to reduce the nullables in the GraphQL schema
+* `-a`, `--classic-ids`  
   use classic global id field name. required to support Relay 1
 * `-M`, `--disable-default-mutations`
   disable default mutations, mutation will only be possible through Postgres functions
 * `--simple-collections [omit|both|only]`
   "omit" (default) - relay connections only, "only" - simple collections only (no Relay connections), "both" - both
-* `--show-error-stack`
-  show JavaScript error stacks in the GraphQL result errors
-* `--extended-errors <string>`
-  a comma separated list of extended Postgres error fields to display in the GraphQL result. Example: 'hint,detail,errcode'. Default: none
-* `--append-plugins <string>`
+* `--no-ignore-rbac`  
+  [RECOMMENDED] set this to excludes fields, queries and mutations that the user isn't permitted to access; this will be the default in v5
+* `--include-extension-resources`  
+  by default, tables and functions that come from extensions are excluded; use this flag to include them (not recommended)
+* `--show-error-stack`  
+  show JavaScript error stacks in the GraphQL result errors (recommended in development)
+* `--extended-errors <string>`  
+  a comma separated list of extended Postgres error fields to display in the GraphQL result. Recommended in development: 'hint,detail,errcode'. Default: none
+* `--append-plugins <string>`  
   a comma-separated list of plugins to append to the list of GraphQL schema plugins
 * `--prepend-plugins <string>`
   a comma-separated list of plugins to prepend to the list of GraphQL schema plugins
@@ -84,23 +86,25 @@ There are more CLI options available to customise the GraphQL server:
   the route to mount the GraphiQL interface on. defaults to `/graphiql`
 * `-b`, `--disable-graphiql`
   disables the GraphiQL interface. overrides the GraphiQL route option
-* `-o`, `--cors`
-  enable generous CORS settings. this is disabled by default, if possible use a proxy instead
-* `-l`, `--body-size-limit <string>`
+* `-o`, `--cors`  
+  enable generous CORS settings; disabled by default, if possible use a proxy instead
+* `-l`, `--body-size-limit <string>`  
   set the maximum size of JSON bodies that can be parsed (default 100kB) The size can be given as a human-readable string, such as '200kB' or '5MB' (case insensitive).
-* `--cluster-workers <count>`
+* `--timeout <number>`  
+  set the timeout value in milliseconds for sockets
+* `--cluster-workers <count>`  
   [experimental] spawn <count> workers to increase throughput
 * `--enable-query-batching`
   [experimental] enable the server to process multiple GraphQL queries in one request
-* `--disable-query-log`
-  disable logging queries to console
-* `-e`, `--jwt-secret <string>`
+* `--disable-query-log`  
+  disable logging queries to console (recommended in production)
+* `-e`, `--jwt-secret <string>`  
   the secret to be used when creating and verifying JWTs. if none is provided auth will be disabled
 * `--jwt-verify-algorithms <string>`
   a comma separated list of the names of the allowed jwt token algorithms
-* `-A`, `--jwt-verify-audience <string>`
-  a comma separated list of audiences your jwt token can contain. If no audience is given the audience defaults to `postgraphile`
-* `--jwt-verify-clock-tolerance <number>`
+* `-A`, `--jwt-verify-audience <string>`  
+  a comma separated list of JWT audiences that will be accepted; defaults to 'postgraphile'. To disable audience verification, set to ''.
+* `--jwt-verify-clock-tolerance <number>`  
   number of seconds to tolerate when checking the nbf and exp claims, to deal with small clock differences among different servers
 * `--jwt-verify-id <string>`
   the name of the allowed jwt token id
@@ -118,14 +122,16 @@ There are more CLI options available to customise the GraphQL server:
   the Postgres identifier for a composite type that will be used to create JWT tokens
 * `--token <identifier>`
   DEPRECATED: use --jwt-token-identifier instead
-* `--secret <string>`
-  DEPRECATED: Use jwt-secret instead
-* `--jwt-audiences <string>`
-  DEPRECATED Use jwt-verify-audience instead
-* `--legacy-relations <omit|deprecated|only>`
+* `--secret <string>`  
+  DEPRECATED: Use --jwt-secret instead
+* `--jwt-audiences <string>`  
+  DEPRECATED Use --jwt-verify-audience instead
+* `--legacy-relations <omit|deprecated|only>`  
   some one-to-one relations were previously detected as one-to-many - should we export 'only' the old relation shapes, both new and old but mark the old ones as 'deprecated', or 'omit' the old relation shapes entirely
 * `--legacy-json-uuid`
   ONLY use this option if you require the v3 typenames 'Json' and 'Uuid' over 'JSON' and 'UUID'
+* `-h`, `--help`  
+  output usage information
 
 <!-- CLI_DOCBLOCK_END -->
 

@@ -1,0 +1,13 @@
+{
+  allForums {
+    nodes {
+      nodeId
+      id
+      slug
+      name
+      description
+      createdAt
+      updatedAt
+    }
+  }
+}
