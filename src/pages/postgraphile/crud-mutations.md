@@ -29,7 +29,7 @@ You also get the following query fields:
 
 - person - Returns a single `Person` using its globally unique `ID`.
 - personById - Reads a single `Person` using its globally unique `ID`.
-- personByEmail - Reads a single `Person` using its globally unique `ID`.
+- personByEmail - Reads a single `Person` using its unique `email`.
 - allPeople - Returns a [connection](/postgraphile/connections/) enabling
   pagination through a set of (visible) `Person`.
 
