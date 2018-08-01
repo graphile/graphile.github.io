@@ -6,8 +6,6 @@
       slug
       name
       description
-      createdAt
-      updatedAt
     }
   }
 }

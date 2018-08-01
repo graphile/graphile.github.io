@@ -10,7 +10,6 @@
           id
           username
         }
-        createdAt
         posts(first: 1, orderBy: [ID_DESC]) {
           nodes {
             id
