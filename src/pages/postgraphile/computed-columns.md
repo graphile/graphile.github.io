@@ -20,14 +20,12 @@ from `first_name || ' ' || last_name`) or could return a composite type (e.g.
 database row) or even a whole connection. For this to work, the following rules
 apply to the function you create:
 
+- [Common PostGraphile function restrictions](/postgraphile/function-restrictions/)
 - name must begin with the name of the table it applies to, followed by an underscore (`_`)
 - first argument must be the table type
-- must return a named type - we do not currently support anonymous types
 - must NOT return `VOID`
 - must be marked as `STABLE`
 - must be defined in the same schema as the table
-- must not be VARIADIC
-- must not use IN / OUT / INOUT arguments
 
 ### Example
 

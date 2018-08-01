@@ -15,11 +15,9 @@ your GraphQL schema.
 You can create PostgreSQL functions that perform complex mutations. For these
 functions the following rules apply:
 
-- must return a **named** type - we do not currently support anonymous types; can return `VOID`
+- [Common PostGraphile function restrictions](/postgraphile/function-restrictions/)
 - must be marked as `VOLATILE` (which is the default)
 - must be defined in one of the introspected schemas
-- must not be VARIADIC
-- must not use IN / OUT / INOUT arguments
 
 Here's an example of a custom mutation, which will generate the graphql `acceptTeamInvite(teamId: Int!)` mutation:
 
