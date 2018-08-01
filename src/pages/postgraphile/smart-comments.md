@@ -227,13 +227,15 @@ X | **`execute`**	| -	| -	| function not present
 > **Warning:** This functionality is not intended for implementing permissions, it's for removing things from your API that you don't need. You should back these up with database permissions if needed.
 
 #### Unique-key record finders
-To exclude Unique-key record finders (_e.g._ `photoByUrl` or `personById`) from your GraphQL schema, add an `@omit` comment on the constraint
+
+To exclude Unique-key record finders (_e.g._ `photoByUrl` or `personById`) from
+the root Query type of your GraphQL schema, add an `@omit` comment on the
+constraint:
 
 ```sql
 comment on constraint person_pkey on person is 
   E'@omit';
 ```
->**Note:** Only `@omit` alone does the desired job. Listing any operation(s) (`create`, `filter`, `many`...) will yield no results.
 
 #### Usage
 
