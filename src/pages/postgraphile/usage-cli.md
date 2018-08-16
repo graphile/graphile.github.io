@@ -39,7 +39,7 @@ There are more CLI options available to customise the GraphQL server:
 * `-s`, `--schema <string>`  
   a Postgres schema to be introspected. Use commas to define multiple schemas
 * `-w`, `--watch`  
-  watches the Postgres schema for changes and reruns introspection if a change was detected
+  automatically updates your GraphQL schema when your database schema changes (NOTE: requires DB superuser to install `postgraphile_watch` schema)
 * `-n`, `--host <string>`  
   the hostname to be used. Defaults to `localhost`
 * `-p`, `--port <number>`  
@@ -89,7 +89,7 @@ There are more CLI options available to customise the GraphQL server:
 * `-o`, `--cors`  
   enable generous CORS settings; disabled by default, if possible use a proxy instead
 * `-l`, `--body-size-limit <string>`  
-  set the maximum size of JSON bodies that can be parsed (default 100kB) The size can be given as a human-readable string, such as '200kB' or '5MB' (case insensitive).
+  set the maximum size of the HTTP request body that can be parsed (default 100kB). The size can be given as a human-readable string, such as '200kB' or '5MB' (case insensitive).
 * `--timeout <number>`  
   set the timeout value in milliseconds for sockets
 * `--cluster-workers <count>`  
