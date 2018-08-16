@@ -13,6 +13,44 @@ We recommend using the latest LTS version of Node.js (version 8.9.4 at time of
 writing) and PostgreSQL (version 10.2 at time of writing), but we have limited
 support for older versions.
 
+### Your PostgreSQL database
+
+These aren't exactly "requirements", but they will impact your PostGraphile
+experience.
+
+* **Use primary keys**: if you don't have primary keys on your tables then they
+  won't get the `nodeId` globally unique identifier interface. Further if you
+  don't have unique indexes then you won't be able to use update/delete
+  mutations.
+* **Use foreign keys**: we infer relations between tables using
+  [foreign key constraints](https://www.postgresql.org/docs/10/static/ddl-constraints.html#DDL-CONSTRAINTS-FK);
+  if you don't use these constraints then we won't know there's a relationship
+  between the tables. There are plugins to get around this (using smart
+  comments) but it's highly recommended that you use PostgreSQL's built in
+  relations support.
+* **Don't use column-based SELECT grants**: column-based grants work well for
+  `INSERT` and `UPDATE` (especially when combined with `--no-ignore-rbac`!),
+  but they don't make sense for `DELETE` and they cause issues when used with
+  `SELECT`. Quite a few things in PostGraphile depend on full-table `SELECT`
+  grants; if you don't want to use full-table grants then you will need to
+  disable the default mutations and use custom mutations instead (because we
+  use `RETURNING *` on the mutations), you may also have to miss out on
+  computed columns (because we pass the entire row object to the function,
+  though these typically still work if you're using `LANGUAGE sql` rather than
+  `LANGUAGE plpgsql`/etc). It's recommended that you instead split your tables
+  on permission boundaries and use one-to-one relations to join them together
+  again - this also makes writing your RBAC/RLS policies simpler. If you want
+  to omit a column entirely then you can use the
+  [`@omit` smart comment](/postgraphile/smart-comments/#omitting).
+* **Function restrictions**: we have pretty good support for PostgreSQL
+  functions, but there's some
+  [common function restrictions](http://graphile.meh/postgraphile/function-restrictions/)
+  you should check out.
+
+On top of this standard PostgreSQL best practices apply: use indexes carefully
+for performance, use constraints to ensure your data is valid and consistent,
+use triggers to take an action when something happens, etc.
+
 ### Node.js
 
 From v4 onwards, PostGraphile requires Node.js version 8.6+ which provides
@@ -56,6 +94,14 @@ which for us is a significant performance boost to Row Level Security policies!
 
 We don't have support right now for many of the new features in PostgreSQL 10
 that are not compatible with PostgreSQL 9.6.
+
+#### PostgreSQL 11 [not supported yet]
+
+They removed a column from the system catalogues which breaks our introspection
+query. We need to build a system for issuing different introspection queries
+based on the database version.
+
+[Track the issue here.](https://github.com/graphile/postgraphile/issues/796)
 
 ### Operating system
 
