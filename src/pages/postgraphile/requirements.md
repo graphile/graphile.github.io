@@ -44,7 +44,7 @@ experience.
   [`@omit` smart comment](/postgraphile/smart-comments/#omitting).
 * **Function restrictions**: we have pretty good support for PostgreSQL
   functions, but there's some
-  [common function restrictions](http://graphile.meh/postgraphile/function-restrictions/)
+  [common function restrictions](/postgraphile/function-restrictions/)
   you should check out.
 
 On top of this standard PostgreSQL best practices apply: use indexes carefully

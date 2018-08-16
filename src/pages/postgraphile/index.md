@@ -43,7 +43,6 @@ title: PostGraphile - full GraphQL API server in an instant from PostgreSQL data
 The fastest way to get a full client-facing GraphQL API up and running from
 a PostgreSQL database schema.
 
-
 ```js
 npx postgraphile -c postgres://user:pass@host/dbname \
   --schema schema_name
@@ -51,8 +50,8 @@ npx postgraphile -c postgres://user:pass@host/dbname \
 
 See the [Quick Start Guide](/postgraphile/quick-start-guide/) to get PostGraphile up and running.
 
-_**Note**:  Run with latest Node LTS v8+. No installation required
-(npx comes with node performs a temporary install).  Connection string is of the format:
+\_**Note**: Run with latest Node LTS v8+. No installation required
+(npx comes with node performs a temporary install). Connection string is of the format:
 `postgres://pg_user:pg_pass@pg_host:pg_port/pg_db`
 
 <form action="//graphile.us16.list-manage.com/subscribe/post?u=d103f710cf00a9273b55e8e9b&amp;id=c3a9eb5c4e" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="novalidate">
@@ -358,7 +357,7 @@ can bypass it.
 PostGraphile uses industry standard JWT authentication, allowing for stateless
 authentication which also works great with CORS. When used as a middleware it
 can use any HTTP authentication method that Node.js supports, via the
-[pgSettings](http://graphile.meh/postgraphile/usage-library/#exposing-http-request-data-to-postgresql)
+[pgSettings](/postgraphile/usage-library/#exposing-http-request-data-to-postgresql)
 function. (A favourite is to use Passport.js for social login.)
 
 </div>
@@ -392,7 +391,6 @@ schema directly.
 
 </div>
 </section>
-
 
 <!-- **************************************** -->
 
