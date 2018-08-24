@@ -12,9 +12,9 @@ title: PostGraphile Pro!
 
 # Get PostGraphile Pro!
 
-#### PostGraphile core is open source software under the MIT license.  Supporter and Pro are commercial plugins which enhance PostGraphile with additional features and help fund development and maintenance on PostGraphile Core.
+#### PostGraphile core is open source software under the MIT license. Supporter and Pro are commercial plugins which enhance PostGraphile with additional features and help fund development and maintenance on PostGraphile Core.
 
-##### See the FAQ below the pricing table for more information.
+##### See below the pricing table for more information.
 
 </div>
 </div>
@@ -23,7 +23,6 @@ title: PostGraphile Pro!
 </header>
 
 <!-- **************************************** -->
-
 
 <section>
 <div class='container'>
@@ -177,7 +176,6 @@ title: PostGraphile Pro!
   <td><span class='fa fa-check-circle'></span></td>
 </tr>
 
-
 <tr>
   <th>Facility to scale via read replicas</th>
   <td><span class='fa fa-times-circle'></span></td>
@@ -202,7 +200,7 @@ title: PostGraphile Pro!
 <tr>
   <th>Pricing</th>
   <td><strong>Free</strong><span class='note'>Patreon appreciated</span></td>
-  <td><strong>Pay what you can</strong><span class='note'>via Patreon, min $1/mo</span></td>
+  <td><strong>Pay what you can</strong><sup>§</sup><span class='note'>via Patreon, min $1/mo</span></td>
   <td>$100/mo + VAT<span class='note'>per project</span></td>
 </tr>
 
@@ -212,7 +210,6 @@ title: PostGraphile Pro!
   <td>Patreon or Credit Card</td>
   <td>Credit Card or Invoice</td>
 </tr>
-
 
   </tbody>
   <tfoot>
@@ -228,8 +225,13 @@ title: PostGraphile Pro!
 
 </table>
 
-##### <sup>†</sup> The Pro plugin does not include the Supporter plugin features directly, but all plans that enable access to the Pro plugin also include access to the Supporter plugin so you can use both plugins at the same time to get all features.
-##### <sup>‡</sup> These features integrate deeply with PostGraphile and have been optimised for its nuances by the maintainer of the project. If you wish to build and maintain protections yourself rather than using the Pro plugin, refer to [Running in Production](/postgraphile/production/) for information on how you might go about doing this. Purchasing the Pro plugin helps fund ongoing development and maintenance on the open source core of PostGraphile.
+##### <sup>†</sup> Access to Supporter plugin is included with Pro plugin access.
+
+##### <sup>‡</sup> These features integrate deeply with PostGraphile and have been optimised for its nuances by the maintainer. If you wish to build and maintain protections yourself rather than using the Pro plugin, refer to [Running in Production](/postgraphile/production/) for information on how you might go about doing this. Purchasing the Pro plugin helps fund ongoing development and maintenance on the open source PostGraphile.
+
+##### <sup>§</sup> You do not need to select a Patreon tier, instead you may opt to select "Custom" and enter a number you're comfortable with.
+
+Questions, comments or feedback? Email <a href="mailto:info@graphile.org?subject=Pricing%20question/comment/feedback:)">info@graphile.org</a>
 
 </div>
 </div>
@@ -247,7 +249,7 @@ title: PostGraphile Pro!
 
 PostGraphile core is sufficient for many peoples needs; it's the only version
 that existed for the first 2 years of the project and many people are running
-it with great success in production.  No features in PostGraphile core have
+it with great success in production. No features in PostGraphile core have
 been removed or obscured, and it continues to be advanced and enhanced.
 
 Development and maintenance of PostGraphile core is ongoing, supported by
@@ -266,13 +268,12 @@ development via [Patreon](https://patreon.com/benjie).
 The Pro plugin contains features that are particularly useful to businesses
 wishing to scale their solution out using database read-replicas or protect the
 generated GraphQL API from expensive queries which may be issued by untrusted
-third parties.  (Typically if the intended clients to your GraphQL API are
+third parties. (Typically if the intended clients to your GraphQL API are
 first-party only then you would use a GraphQL query whitelist (e.g. persisted
 queries) for this purpose; although the Pro features can still be helpful to
 dissuade your developers from building expensive queries!)
 
-
-### Commercial plugins fund development on PostGraphile
+### Commercial plugins help fund development on PostGraphile
 
 Maintaining an OSS project is very (very!) time-intensive. Giving this
 maintenance work a solid commercial backing benefits hobbyist and commercial
