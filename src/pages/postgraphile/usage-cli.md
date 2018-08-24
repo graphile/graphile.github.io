@@ -35,7 +35,7 @@ There are more CLI options available to customise the GraphQL server:
 * `--plugins <string>`  
   a list of postgraphile plugins (not Graphile-Build plugins) to load, MUST be the first option
 * `-c`, `--connection <string>`  
-  the Postgres connection. if not provided it will be inferred from your environment, example: postgres://user:password@domain:port/db
+  the PostgreSQL database name or connection string (if omitted, inferred from environmental variables). Examples: 'db', 'postgres:///db', 'postgres://user:password@domain:port/db?ssl=1'
 * `-s`, `--schema <string>`  
   a Postgres schema to be introspected. Use commas to define multiple schemas
 * `-w`, `--watch`  
