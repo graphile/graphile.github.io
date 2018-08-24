@@ -6,9 +6,9 @@ title: GraphQL Schema Plugins
 
 ## GraphQL Schema Plugins
 
-*NOTE: This page relates to changing your GraphQL schema. If you're instead looking to change how the web layer of PostGraphile works (e.g. for validating web requests), see [Server Plugins](/postgraphile/plugins/).*
+_NOTE: This page relates to changing your GraphQL schema. If you're instead looking to change how the web layer of PostGraphile works (e.g. for validating web requests), see [Server Plugins](/postgraphile/plugins/)._
 
-*NOTE: if you're looking for an easy way to remove/rename things, check out [smart comments](/postgraphile/smart-comments/).*
+_NOTE: if you're looking for an easy way to remove/rename things, check out [smart comments](/postgraphile/smart-comments/)._
 
 PostGraphile's schema generator is built from a number of [Graphile Build
 plugins](/graphile-build/plugins/). You can write your own plugins (see below),
@@ -47,9 +47,9 @@ module.exports = MySchemaExtensionPlugin;
 ```
 
 And would be added to your PostGraphile instance via
-- CLI: ``--append-plugins `pwd`/MySchemaExtensionPlugin.js``
-- Library: `appendPlugins: [require('./MySchemaExtensionPlugin')]`
 
+* CLI: `` --append-plugins `pwd`/MySchemaExtensionPlugin.js ``
+* Library: `appendPlugins: [require('./MySchemaExtensionPlugin')]`
 
 The `build` argument to the makeExtendSchemaPlugin callback contains lots of
 information and helpers defined by various plugins, most importantly it
@@ -59,10 +59,10 @@ is just an instance of [pg-sql2](https://www.npmjs.com/package/pg-sql2)).
 
 The callback should return an object with two keys:
 
-- `typeDefs`: a graphql AST generated with the `gql` helper from
+* `typeDefs`: a graphql AST generated with the `gql` helper from
   `graphile-utils` (note this is NOT from the `graphql-tag` library, ours works
   in a slightly different way).
-- `resolvers`: an object that's keyed by the GraphQL type names of types
+* `resolvers`: an object that's keyed by the GraphQL type names of types
   defined (or extended) in `typeDefs`, the values of which are objects keyed by
   the field names with values that are resolver functions.
 
@@ -83,12 +83,11 @@ adding `where` clauses, `limit`s, etc.
 
 The `sqlBuilder` has a number of methods which affect the query which will be generated. The main ones you're like to want are:
 
-- `where(sqlFragment)`; e.g. ``sqlBuilder.where(build.pgSql.fragment`is_admin is true`)``
-- `orderBy(() => sqlFragment, ascending)`; e.g. ``sqlBuilder.orderBy(() => build.pgSql.fragment`created_at`, false)``
-- `limit(number)`; e.g. `sqlBuilder.limit(1)`
-- `offset(number)`; e.g. `sqlBuilder.offset(1)`
-- `select(() => sqlFragment, alias)`; e.g. ``sqlBuilder.select(() => build.pgSql.fragment`gen_random_uuid()`, '__my_random_uuid')`` - it's advised to start your alias with two underscores to prevent it clashing with any potential columns exposed as GraphQL fields.
-
+* `where(sqlFragment)`; e.g. `` sqlBuilder.where(build.pgSql.fragment`is_admin is true`) ``
+* `orderBy(() => sqlFragment, ascending)`; e.g. `` sqlBuilder.orderBy(() => build.pgSql.fragment`created_at`, false) ``
+* `limit(number)`; e.g. `sqlBuilder.limit(1)`
+* `offset(number)`; e.g. `sqlBuilder.offset(1)`
+* `select(() => sqlFragment, alias)`; e.g. `` sqlBuilder.select(() => build.pgSql.fragment`gen_random_uuid()`, '__my_random_uuid') `` - it's advised to start your alias with two underscores to prevent it clashing with any potential columns exposed as GraphQL fields.
 
 ```js{7-36}
 const { postgraphile } = require("postgraphile");
@@ -158,6 +157,7 @@ makeExtendSchemaPlugin(build => {
 
       type RegisterUserPayload {
         user: User @recurseDataGenerators
+        query: Query
       }
 
       extend type Mutation {
@@ -229,6 +229,7 @@ makeExtendSchemaPlugin(build => {
             // fields.
             return {
               user: row,
+              query: build.$$isQuery,
             };
           } catch (e) {
             // Oh noes! If at first you don't succeed,
@@ -248,7 +249,6 @@ as if the RegisterUserPayload didn't exist and instead the `user` field was
 returned by the mutation directly. This is because we often add other fields to
 mutation payloads, such as `query` for the root Query type.
 
-
 ### Loading additional plugins
 
 ```bash
@@ -264,13 +264,13 @@ postgraphile \
 ```
 
 If you're using the CLI you can use option `--append-plugins` to load additional
-plugins.  You specify a comma separated list of module specs. A module spec is
+plugins. You specify a comma separated list of module specs. A module spec is
 a path to a JS file to load, optionally followed by a colon and the name of the
 export (you must omit this if the function is exported via
 `module.exports = function MyPlugin(...){...}`). E.g.
 
-- `--append-plugins my-npm-module` (requires `module.exports = function NpmPlugin(...) {...}`)
-- `--append-plugins /path/to/local/module.js:MyPlugin` (requires `exports.MyPlugin = function MyPlugin(...) {...}`)
+* `--append-plugins my-npm-module` (requires `module.exports = function NpmPlugin(...) {...}`)
+* `--append-plugins /path/to/local/module.js:MyPlugin` (requires `exports.MyPlugin = function MyPlugin(...) {...}`)
 
 If you're using postgraphile as a library you can instead use the appendPlugins
 option which is simply an array of functions (_you perform your own requiring_!)
@@ -278,7 +278,6 @@ option which is simply an array of functions (_you perform your own requiring_!)
 Remember: multiple versions of graphql in your `node_modules` will cause
 problems; so we recommend using the `graphql` object that's available on the
 `Build` object (second argument to hooks).
-
 
 ### Writing your own plugins
 
@@ -299,7 +298,6 @@ used to build the schema. Graphile Build plugins are built on top of the
 recommended that you have familiarity with that before attempting to write your
 own plugins.
 
-
 ### Adding root query/mutation fields
 
 A common request is to add additional root-level fields to your schema, for
@@ -311,41 +309,38 @@ example to integrate external services. To do this we must add a
 const fetch = require("node-fetch");
 
 function AddHttpBinPlugin(builder, { pgExtendedTypes }) {
-  builder.hook(
-    "GraphQLObjectType:fields",
-    (
-      fields, // Input object - the fields for this GraphQLObjectType
-      { extend, getTypeByName }, // Build object - handy utils
-      { scope: { isRootQuery } } // Context object - used for filtering
-    ) => {
-      if (!isRootQuery) {
-        // This isn't the object we want to modify:
-        // return the input object unmodified
-        return fields;
-      }
-
-      // We don't want to introduce a new JSON type as that will clash,
-      // so let's find the JSON type that other fields use:
-      const JSONType = getTypeByName("JSON");
-
-      return extend(fields, {
-        httpBinHeaders: {
-          type: JSONType,
-          async resolve() {
-            const response = await fetch("https://httpbin.org/headers");
-            if (pgExtendedTypes) {
-              // This setting is enabled through postgraphile's
-              // `--dynamic-json` option, if enabled return JSON:
-              return response.json();
-            } else {
-              // If Dynamic JSON is not enabled, we want a JSON string instead
-              return response.text();
-            }
-          },
-        },
-      });
+  builder.hook("GraphQLObjectType:fields", (
+    fields, // Input object - the fields for this GraphQLObjectType
+    { extend, getTypeByName }, // Build object - handy utils
+    { scope: { isRootQuery } } // Context object - used for filtering
+  ) => {
+    if (!isRootQuery) {
+      // This isn't the object we want to modify:
+      // return the input object unmodified
+      return fields;
     }
-  );
+
+    // We don't want to introduce a new JSON type as that will clash,
+    // so let's find the JSON type that other fields use:
+    const JSONType = getTypeByName("JSON");
+
+    return extend(fields, {
+      httpBinHeaders: {
+        type: JSONType,
+        async resolve() {
+          const response = await fetch("https://httpbin.org/headers");
+          if (pgExtendedTypes) {
+            // This setting is enabled through postgraphile's
+            // `--dynamic-json` option, if enabled return JSON:
+            return response.json();
+          } else {
+            // If Dynamic JSON is not enabled, we want a JSON string instead
+            return response.text();
+          }
+        }
+      }
+    });
+  });
 }
 
 module.exports = AddHttpBinPlugin;
@@ -410,7 +405,7 @@ module.exports = function CreateLinkWrapPlugin(builder) {
             // And give it this name in the result data:
             "__createdRecordId"
           );
-        },
+        }
       }));
 
       // It's possible that `resolve` isn't specified on a field, so in that case
@@ -446,7 +441,7 @@ module.exports = function CreateLinkWrapPlugin(builder) {
 
           // Finally return the result.
           return oldResolveResult;
-        },
+        }
       };
     }
   );
@@ -470,7 +465,7 @@ remove one specific type of thing. To achieve this you need to add a hook to the
 thing that owns the thing you wish to remove - for example if you
 want to remove a field `bar` from an object type `Foo` you could hook
 `GraphQLObjectType:fields` and return the set of fields less the one you want
-removed. 
+removed.
 
 Here's an example of a plugin generator you could use to generate plugins to
 remove individual fields. This is just to demonstrate how a plugin to do this
