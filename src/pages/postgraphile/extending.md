@@ -74,14 +74,26 @@ ours work in a similar way.
 Note that the resolve functions defined in `resolvers` will be sent the
 standard 4 GraphQL resolve arguments (`parent`, `args`, `context`,
 `resolveInfo`); but in addition they will be passed a 5th argument that
-contains graphile-specific helpers. One such helper is
-`selectGraphQLResultFromTable`, which inspects the incoming GraphQL query and
-automatically pulls down the relevant rows from the database (including nested
-relations) - which you can then return from the resolver. You can use the
-`sqlBuilder` object to customise the generated query, changing the order,
-adding `where` clauses, `limit`s, etc.
+contains graphile-specific helpers.
 
-The `sqlBuilder` has a number of methods which affect the query which will be generated. The main ones you're like to want are:
+##### The `selectGraphQLResultFromTable` helper
+
+The `selectGraphQLResultFromTable` function is vital if you want to return data
+from the database from your new GraphQL field. It is responsible for hooking into
+the query look-ahead features of `graphile-build` to inspect the incoming GraphQL
+query and pull down the relevant data from the database
+(including nested relations). You are then expected to return the result of this
+fetch via your resolver. You can use the `sqlBuilder` object to customise the
+generated query, changing the order, adding `where` clauses, `limit`s, etc.
+Note that if you do not wish to return the data directly, you can use the
+`@recurseDataGenerators` directive on the intermediary field, see the example
+below.
+
+The `sqlBuilder` uses an SQL AST constructed via
+[`pg-sql2` methods](https://github.com/graphile/pg-sql2/blob/master/README.md)
+to dynamically create powerful SQL queries without risking SQL injection
+attacks. The `sqlBuilder` has a number of methods which affect the query which
+will be generated. The main ones you're likely to want are:
 
 * `where(sqlFragment)`; e.g. `` sqlBuilder.where(build.pgSql.fragment`is_admin is true`) ``
 * `orderBy(() => sqlFragment, ascending)`; e.g. `` sqlBuilder.orderBy(() => build.pgSql.fragment`created_at`, false) ``
@@ -113,6 +125,8 @@ const MyRandomUserPlugin = makeExtendSchemaPlugin(build => {
           resolveInfo,
           { selectGraphQLResultFromTable }
         ) => {
+          // Remember: selectGraphQLResultFromTable is where the PostGraphile
+          // look-ahead magic happens!
           const rows = await selectGraphQLResultFromTable(
             sql.fragment`app_public.users`,
             (tableAlias, sqlBuilder) => {
@@ -193,7 +207,11 @@ makeExtendSchemaPlugin(build => {
 
             // Now we fetch the result that the GraphQL
             // client requested, using the new user
-            // account as the source of the data.
+            // account as the source of the data. You
+            // should always use
+            // `selectGraphQLResultFromTable` if you
+            // return database data from your custom
+            // field.
             const [row] =
               await selectGraphQLResultFromTable(
                 sql.fragment`app_public.users`,
