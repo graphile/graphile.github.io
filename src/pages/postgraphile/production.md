@@ -4,7 +4,32 @@ path: /postgraphile/production/
 title: Production Considerations
 ---
 
-## Production Considerations
+## Database Access Considerations
+
+PostGraphile is just a node app / middleware, so you can deploy it to any
+number of places: Heroku, Now.sh, a VM, a container such as Docker, or of
+course onto bare metal. Typically you won't run PostGraphile on the same
+hardware/container/VM as the database, so PostGraphile needs to be able to
+connect to your database without you putting your DB at risk.
+
+A standard way of doing this is to put the DB behind a firewall. However,
+if you're using a system like Heroku or Now.sh you probably can't do that,
+so instead you must make your DB accessible to the internet. When doing so
+here are a few things we recommend:
+
+1.  Only allow connections over SSL (`force_ssl` setting)
+2.  Use a secure username (not `root`, `admin`, `postgres`, etc which are all fairly commonly used)
+3.  Use a super secure password; you can use a command like this to generate one:
+    `openssl rand -base64 30 | tr '+/' '-_'`
+4.  Use a non-standard port for your PostgreSQL server if you can (pick a random port number)
+5.  Use a hard-to-guess hostname, and never reveal the hostname to anyone who doesn't need to know it
+6.  If possible, limit the IP addresses that can connect to your DB to be those of your hosting provider.
+
+Heroku have some instructions on making RDS available for use under Heroku
+which should also work for Now.sh or any other service:
+https://devcenter.heroku.com/articles/amazon-rds
+
+## Denial of Service Considerations
 
 When you run PostGraphile in production you'll want to ensure that people
 cannot easily trigger denial of service (DOS) attacks against you. Due to the
@@ -48,7 +73,12 @@ queries; a great introduction to this subject is [this blog
 post](https://dev-blog.apollodata.com/securing-your-graphql-api-from-malicious-queries-16130a324a6b)
 from Apollo.
 
-### Simple: Query Whitelist
+These techniques should be used in conjunction with common HTTP protection
+methods such as rate limiting which are typically better implemented at a
+separate layer; for example you could use [Cloudflare rate
+limiting](https://www.cloudflare.com/rate-limiting/) for this.
+
+### Simple: Query Whitelist ("persisted queries")
 
 If you do not intend to open your API up to third parties to run arbitrary
 queries against then using persisted queries as a query whitelist to protect
@@ -58,11 +88,11 @@ can of course change the variables).
 
 This technique has a few caveats:
 
-- Your API will only accept queries that you've approved, so it's not suitable if you want third parties to run arbitrary queries
-- You must be able to generate a unique ID from each query; e.g. a hash
-- You must use "static GraphQL queries" - that is the queries must be known at build time of your application/webpage, and only the variables fed to those queries can change at run-time
-- You must have a way of sharing these queries between the application and the server
-- You must be careful not to use variables in dangerous places; for example don't write `allUsers(first: $myVar)` as a malicious attacker could set `$myVar` to 2147483647 in order to cause your server to process as much data as possible.
+* Your API will only accept queries that you've approved, so it's not suitable if you want third parties to run arbitrary queries
+* You must be able to generate a unique ID from each query; e.g. a hash
+* You must use "static GraphQL queries" - that is the queries must be known at build time of your application/webpage, and only the variables fed to those queries can change at run-time
+* You must have a way of sharing these queries between the application and the server
+* You must be careful not to use variables in dangerous places; for example don't write `allUsers(first: $myVar)` as a malicious attacker could set `$myVar` to 2147483647 in order to cause your server to process as much data as possible.
 
 PostGraphile currently doesn't have this functionality built in, but it's
 fairly easy to add it when using PostGraphile as an express middleware, a
@@ -99,8 +129,8 @@ i.e. a simple middleware mounted before postgraphile that manipulates the reques
 I personally use my forks of Apollo's `persistgraphql` tools to help me manage
 the persisted queries themselves:
 
-- https://github.com/benjie/persistgraphql
-- https://github.com/benjie/persistgraphql-webpack-plugin
+* https://github.com/benjie/persistgraphql
+* https://github.com/benjie/persistgraphql-webpack-plugin
 
 These forks generate hashes rather than numbers; which make the persisted
 queries consistent across multiple builds and applications (website, mobile,
@@ -109,7 +139,6 @@ browser plugin, ...).
 **NOTE**: even if you're using persisted queries, it can be wise to implement
 the advanced protections as it enables you to catch unnecessarily expensive
 queries before you start facing performance bottlenecks down the line.
-
 
 ### Advanced
 
@@ -125,7 +154,6 @@ bringing your servers to their knees.
 which implements these protections in a deeply integrated and PostGraphile
 optimised way, and has the added benefit of helping sustain development and
 maintenance on the project.**
-
 
 The rest of this article relates to Pro Plugin's approach to addressing these
 issues, though there are hints on how you might go about solving the issues for
