@@ -48,8 +48,8 @@ async function runQuery(query, variables) {
     ['users_schema', 'posts_schema'],
     {
       dynamicJson: true,
-      pgJwtSecret: process.env.JWT_SECRET,
-      pgJwtTypeIdentifier: 'users_schema.jwt_type',
+      jwtSecret: process.env.JWT_SECRET,
+      jwtPgTypeIdentifier: 'users_schema.jwt_type',
     }
   );
 
