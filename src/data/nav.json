@@ -101,6 +101,10 @@
       {
         "id": "community",
         "title": "Community"
+      },
+      {
+        "id": "faq",
+        "title": "FAQ"
       }
     ],
     "pages": [
@@ -278,6 +282,11 @@
         "to": "/postgraphile/code-of-conduct/",
         "title": "Code of Conduct",
         "sectionId": "community"
+      },
+      {
+        "to": "/postgraphile/why-nullable/",
+        "title": "Why is it nullable?",
+        "sectionId": "faq"
       }
     ]
   },
