@@ -1,72 +1,72 @@
 {
   "assetsByChunkName": {
     "path---postgraphile-extending": [
-      "path---postgraphile-extending-785637a925c29d589f26.js",
-      "path---postgraphile-extending-785637a925c29d589f26.js.map"
+      "path---postgraphile-extending-3533d6ec3e6c383dd103.js",
+      "path---postgraphile-extending-3533d6ec3e6c383dd103.js.map"
     ],
     "path---postgraphile-usage-cli": [
-      "path---postgraphile-usage-cli-853c7ac1a4e7093f2f4d.js",
-      "path---postgraphile-usage-cli-853c7ac1a4e7093f2f4d.js.map"
+      "path---postgraphile-usage-cli-b5f79684c5ceba3f62cd.js",
+      "path---postgraphile-usage-cli-b5f79684c5ceba3f62cd.js.map"
     ],
     "path---graphile-build-graphile-build": [
-      "path---graphile-build-graphile-build-44eb39da2080ad9ea99c.js",
-      "path---graphile-build-graphile-build-44eb39da2080ad9ea99c.js.map"
+      "path---graphile-build-graphile-build-1a8bd4a44af198ae6024.js",
+      "path---graphile-build-graphile-build-1a8bd4a44af198ae6024.js.map"
     ],
     "path---postgraphile-postgresql-schema-design": [
-      "path---postgraphile-postgresql-schema-design-cc6714d44f85a225b63e.js",
-      "path---postgraphile-postgresql-schema-design-cc6714d44f85a225b63e.js.map"
+      "path---postgraphile-postgresql-schema-design-9f9a7d115f487ed57bc4.js",
+      "path---postgraphile-postgresql-schema-design-9f9a7d115f487ed57bc4.js.map"
     ],
     "path---postgraphile-quick-start-guide": [
-      "path---postgraphile-quick-start-guide-5b8ddaf999030021da08.js",
-      "path---postgraphile-quick-start-guide-5b8ddaf999030021da08.js.map"
+      "path---postgraphile-quick-start-guide-bf127442ba652f9c6f22.js",
+      "path---postgraphile-quick-start-guide-bf127442ba652f9c6f22.js.map"
     ],
     "path---postgraphile-smart-comments": [
-      "path---postgraphile-smart-comments-53648471b5418778fdcb.js",
-      "path---postgraphile-smart-comments-53648471b5418778fdcb.js.map"
+      "path---postgraphile-smart-comments-3aa4a7cbe4cc279279bb.js",
+      "path---postgraphile-smart-comments-3aa4a7cbe4cc279279bb.js.map"
     ],
     "path---postgraphile-filtering": [
-      "path---postgraphile-filtering-94698e1072bfe311977a.js",
-      "path---postgraphile-filtering-94698e1072bfe311977a.js.map"
+      "path---postgraphile-filtering-b9c720d028913a740d36.js",
+      "path---postgraphile-filtering-b9c720d028913a740d36.js.map"
     ],
     "path---postgraphile-introspection": [
-      "path---postgraphile-introspection-4092078038be23233fab.js",
-      "path---postgraphile-introspection-4092078038be23233fab.js.map"
+      "path---postgraphile-introspection-020566e5e2620db3d203.js",
+      "path---postgraphile-introspection-020566e5e2620db3d203.js.map"
     ],
     "path---postgraphile-plugins": [
-      "path---postgraphile-plugins-387f4da27120bb4b85de.js",
-      "path---postgraphile-plugins-387f4da27120bb4b85de.js.map"
+      "path---postgraphile-plugins-eacd99baf68c0d35c83b.js",
+      "path---postgraphile-plugins-eacd99baf68c0d35c83b.js.map"
     ],
     "path---graphile-build-omitting-plugins": [
-      "path---graphile-build-omitting-plugins-9245543f1a3e79128867.js",
-      "path---graphile-build-omitting-plugins-9245543f1a3e79128867.js.map"
+      "path---graphile-build-omitting-plugins-0d645ab0048ab7dc1851.js",
+      "path---graphile-build-omitting-plugins-0d645ab0048ab7dc1851.js.map"
     ],
     "path---postgraphile-postgresql-indexes": [
-      "path---postgraphile-postgresql-indexes-6a9013633b34b64b9b25.js",
-      "path---postgraphile-postgresql-indexes-6a9013633b34b64b9b25.js.map"
+      "path---postgraphile-postgresql-indexes-3337d190012a7d3090fc.js",
+      "path---postgraphile-postgresql-indexes-3337d190012a7d3090fc.js.map"
     ],
     "path---history": [
-      "path---history-7db5bcff50c96a985103.js",
-      "path---history-7db5bcff50c96a985103.js.map"
+      "path---history-254639ae91205f9feae5.js",
+      "path---history-254639ae91205f9feae5.js.map"
     ],
     "path---postgraphile-evaluating": [
-      "path---postgraphile-evaluating-f1dd8039043604fc8269.js",
-      "path---postgraphile-evaluating-f1dd8039043604fc8269.js.map"
+      "path---postgraphile-evaluating-085e3d2bba4a23e2a821.js",
+      "path---postgraphile-evaluating-085e3d2bba4a23e2a821.js.map"
     ],
     "path---postgraphile": [
       "path---postgraphile-8176f65eccf83167cc34.js",
       "path---postgraphile-8176f65eccf83167cc34.js.map"
     ],
     "path---graphile-build-hooks": [
-      "path---graphile-build-hooks-cf341892f29b358d8bf1.js",
-      "path---graphile-build-hooks-cf341892f29b358d8bf1.js.map"
+      "path---graphile-build-hooks-e0dad25cceff5876bcc9.js",
+      "path---graphile-build-hooks-e0dad25cceff5876bcc9.js.map"
     ],
     "path---postgraphile-v-4-new-features": [
-      "path---postgraphile-v-4-new-features-940db2ee322f63dc2ad5.js",
-      "path---postgraphile-v-4-new-features-940db2ee322f63dc2ad5.js.map"
+      "path---postgraphile-v-4-new-features-a0f39ca27eae44c260ff.js",
+      "path---postgraphile-v-4-new-features-a0f39ca27eae44c260ff.js.map"
     ],
     "path---postgraphile-debugging": [
-      "path---postgraphile-debugging-0fca84c7f913d149a0d9.js",
-      "path---postgraphile-debugging-0fca84c7f913d149a0d9.js.map"
+      "path---postgraphile-debugging-873d7caebeab98e4050d.js",
+      "path---postgraphile-debugging-873d7caebeab98e4050d.js.map"
     ],
     "component---src-templates-marketing-js": [
       "component---src-templates-marketing-js-9f9607cc4787f4dfabcf.js",
@@ -77,80 +77,80 @@
       "path----557518bd178906f8d58a.js.map"
     ],
     "path---graphile-build-build-object": [
-      "path---graphile-build-build-object-1a3a87d1108a0cf9b352.js",
-      "path---graphile-build-build-object-1a3a87d1108a0cf9b352.js.map"
+      "path---graphile-build-build-object-3c5b7ac1d0350f3fa6cb.js",
+      "path---graphile-build-build-object-3c5b7ac1d0350f3fa6cb.js.map"
     ],
     "path---graphile-build-context-object": [
-      "path---graphile-build-context-object-cbb8609afc3dcb552c4c.js",
-      "path---graphile-build-context-object-cbb8609afc3dcb552c4c.js.map"
+      "path---graphile-build-context-object-d345ac465384564b9978.js",
+      "path---graphile-build-context-object-d345ac465384564b9978.js.map"
     ],
     "path---graphile-build-look-ahead": [
-      "path---graphile-build-look-ahead-b1133da3ebdb6bbf2af3.js",
-      "path---graphile-build-look-ahead-b1133da3ebdb6bbf2af3.js.map"
+      "path---graphile-build-look-ahead-95dd9f38b9e6afeb3613.js",
+      "path---graphile-build-look-ahead-95dd9f38b9e6afeb3613.js.map"
     ],
     "path---postgraphile-pricing": [
       "path---postgraphile-pricing-72d7e46231e8d1d715be.js",
       "path---postgraphile-pricing-72d7e46231e8d1d715be.js.map"
     ],
     "path---postgraphile-v-3-migration": [
-      "path---postgraphile-v-3-migration-2673784bfb2364a2642e.js",
-      "path---postgraphile-v-3-migration-2673784bfb2364a2642e.js.map"
+      "path---postgraphile-v-3-migration-f0e2ac812be3c2049980.js",
+      "path---postgraphile-v-3-migration-f0e2ac812be3c2049980.js.map"
     ],
     "component---src-templates-page-js": [
       "component---src-templates-page-js-47ad1cc6d98dad93e89c.js",
       "component---src-templates-page-js-47ad1cc6d98dad93e89c.js.map"
     ],
     "path---postgraphile-computed-columns": [
-      "path---postgraphile-computed-columns-212f2d30e396e145aff8.js",
-      "path---postgraphile-computed-columns-212f2d30e396e145aff8.js.map"
+      "path---postgraphile-computed-columns-529954110d6df2338b44.js",
+      "path---postgraphile-computed-columns-529954110d6df2338b44.js.map"
     ],
     "path---postgraphile-function-restrictions": [
-      "path---postgraphile-function-restrictions-c970f3e73d990d6bdae8.js",
-      "path---postgraphile-function-restrictions-c970f3e73d990d6bdae8.js.map"
+      "path---postgraphile-function-restrictions-2d9f669592068b5497ec.js",
+      "path---postgraphile-function-restrictions-2d9f669592068b5497ec.js.map"
     ],
     "path---graphile-build": [
       "path---graphile-build-2db41d1ba8e5671d3014.js",
       "path---graphile-build-2db41d1ba8e5671d3014.js.map"
     ],
     "path---graphile-build-getting-started": [
-      "path---graphile-build-getting-started-41e46a7d649d0514297d.js",
-      "path---graphile-build-getting-started-41e46a7d649d0514297d.js.map"
+      "path---graphile-build-getting-started-c617c40a8597aeac3ef1.js",
+      "path---graphile-build-getting-started-c617c40a8597aeac3ef1.js.map"
     ],
     "path---postgraphile-subscriptions": [
-      "path---postgraphile-subscriptions-7ded8560a2b94121e909.js",
-      "path---postgraphile-subscriptions-7ded8560a2b94121e909.js.map"
+      "path---postgraphile-subscriptions-1104721f201effeeae25.js",
+      "path---postgraphile-subscriptions-1104721f201effeeae25.js.map"
     ],
     "component---src-layouts-index-js": [
       "component---src-layouts-index-js-53c26317295bc637138f.js",
       "component---src-layouts-index-js-53c26317295bc637138f.js.map"
     ],
     "path---postgraphile-community-chat": [
-      "path---postgraphile-community-chat-713e2454adc53503b03b.js",
-      "path---postgraphile-community-chat-713e2454adc53503b03b.js.map"
+      "path---postgraphile-community-chat-a61686ee319d0b2d333d.js",
+      "path---postgraphile-community-chat-a61686ee319d0b2d333d.js.map"
     ],
     "path---graphile-build-default-plugins": [
-      "path---graphile-build-default-plugins-c8f254a766c4d5bbb9dc.js",
-      "path---graphile-build-default-plugins-c8f254a766c4d5bbb9dc.js.map"
+      "path---graphile-build-default-plugins-89ffcefc7f0dd231e6b6.js",
+      "path---graphile-build-default-plugins-89ffcefc7f0dd231e6b6.js.map"
     ],
     "path---postgraphile-reserved-keywords": [
-      "path---postgraphile-reserved-keywords-1aa1771d27febb7d08d2.js",
-      "path---postgraphile-reserved-keywords-1aa1771d27febb7d08d2.js.map"
+      "path---postgraphile-reserved-keywords-8c879244dc4170a9c0e2.js",
+      "path---postgraphile-reserved-keywords-8c879244dc4170a9c0e2.js.map"
     ],
     "path---graphile-build-all-hooks": [
-      "path---graphile-build-all-hooks-4c271ea88131a0771c24.js",
-      "path---graphile-build-all-hooks-4c271ea88131a0771c24.js.map"
+      "path---graphile-build-all-hooks-d42ec0e183cd9df9acff.js",
+      "path---graphile-build-all-hooks-d42ec0e183cd9df9acff.js.map"
     ],
     "path---postgraphile-settings": [
-      "path---postgraphile-settings-549d948e1176f09a502a.js",
-      "path---postgraphile-settings-549d948e1176f09a502a.js.map"
+      "path---postgraphile-settings-e46c642d9b9122d392de.js",
+      "path---postgraphile-settings-e46c642d9b9122d392de.js.map"
     ],
     "path---graphile-build-plugins": [
-      "path---graphile-build-plugins-879d185b228d63269982.js",
-      "path---graphile-build-plugins-879d185b228d63269982.js.map"
+      "path---graphile-build-plugins-5b015beab7d4d2b9bf28.js",
+      "path---graphile-build-plugins-5b015beab7d4d2b9bf28.js.map"
     ],
     "path---postgraphile-relations": [
-      "path---postgraphile-relations-f99e2eedb0601b4caaa4.js",
-      "path---postgraphile-relations-f99e2eedb0601b4caaa4.js.map"
+      "path---postgraphile-relations-a3a4b44a34dacaebbe72.js",
+      "path---postgraphile-relations-a3a4b44a34dacaebbe72.js.map"
     ],
     "path---support": [
       "path---support-3d1d219a638e5f6326b3.js",
@@ -161,16 +161,20 @@
       "path---index-04361dfa1e873f59fc7b.js.map"
     ],
     "path---postgraphile-security": [
-      "path---postgraphile-security-32afbd3ce3037cba51c5.js",
-      "path---postgraphile-security-32afbd3ce3037cba51c5.js.map"
+      "path---postgraphile-security-6e0cc22714a3d87cf9c2.js",
+      "path---postgraphile-security-6e0cc22714a3d87cf9c2.js.map"
     ],
     "path---postgraphile-usage-library": [
-      "path---postgraphile-usage-library-c33e188a873c2f9d18ec.js",
-      "path---postgraphile-usage-library-c33e188a873c2f9d18ec.js.map"
+      "path---postgraphile-usage-library-f526f48296d0aef2bfd5.js",
+      "path---postgraphile-usage-library-f526f48296d0aef2bfd5.js.map"
+    ],
+    "path---postgraphile-why-nullable": [
+      "path---postgraphile-why-nullable-88b2d09e24e3e11c04d1.js",
+      "path---postgraphile-why-nullable-88b2d09e24e3e11c04d1.js.map"
     ],
     "path---postgraphile-production": [
-      "path---postgraphile-production-e9ff8c8e9621ab50e26a.js",
-      "path---postgraphile-production-e9ff8c8e9621ab50e26a.js.map"
+      "path---postgraphile-production-006602399ebdac031a80.js",
+      "path---postgraphile-production-006602399ebdac031a80.js.map"
     ],
     "commons": [
       "commons-3596aa1ab404ed60101f.js",
@@ -179,86 +183,86 @@
       "build-js-styles.css.map"
     ],
     "path---postgraphile-default-role": [
-      "path---postgraphile-default-role-6dfcd479aaad7d5a3d3e.js",
-      "path---postgraphile-default-role-6dfcd479aaad7d5a3d3e.js.map"
+      "path---postgraphile-default-role-079a76a7f8e5e1dde46f.js",
+      "path---postgraphile-default-role-079a76a7f8e5e1dde46f.js.map"
     ],
     "path---postgraphile-requirements": [
-      "path---postgraphile-requirements-1b968d2f6d4bd8210991.js",
-      "path---postgraphile-requirements-1b968d2f6d4bd8210991.js.map"
+      "path---postgraphile-requirements-50139fdc32b6e1766e96.js",
+      "path---postgraphile-requirements-50139fdc32b6e1766e96.js.map"
     ],
     "path---graphile-build-pg-security": [
-      "path---graphile-build-pg-security-097788bd5f9ec4664d18.js",
-      "path---graphile-build-pg-security-097788bd5f9ec4664d18.js.map"
+      "path---graphile-build-pg-security-b63aab82e305b024f6e0.js",
+      "path---graphile-build-pg-security-b63aab82e305b024f6e0.js.map"
     ],
     "path---postgraphile-custom-mutations": [
-      "path---postgraphile-custom-mutations-78551dadc1792b99085d.js",
-      "path---postgraphile-custom-mutations-78551dadc1792b99085d.js.map"
+      "path---postgraphile-custom-mutations-f1bff4fde89c16512388.js",
+      "path---postgraphile-custom-mutations-f1bff4fde89c16512388.js.map"
     ],
     "path---postgraphile-community-plugins": [
-      "path---postgraphile-community-plugins-0ff3701f03f424960156.js",
-      "path---postgraphile-community-plugins-0ff3701f03f424960156.js.map"
+      "path---postgraphile-community-plugins-7c2984f6e9c5b53c8c47.js",
+      "path---postgraphile-community-plugins-7c2984f6e9c5b53c8c47.js.map"
     ],
     "path---postgraphile-jwt-guide": [
-      "path---postgraphile-jwt-guide-016be651b21e1d88d75d.js",
-      "path---postgraphile-jwt-guide-016be651b21e1d88d75d.js.map"
+      "path---postgraphile-jwt-guide-71fba0214b53e5aab862.js",
+      "path---postgraphile-jwt-guide-71fba0214b53e5aab862.js.map"
     ],
     "path---postgraphile-crud-mutations": [
-      "path---postgraphile-crud-mutations-cb4e594fb0b55c041206.js",
-      "path---postgraphile-crud-mutations-cb4e594fb0b55c041206.js.map"
+      "path---postgraphile-crud-mutations-ae093fe9f3c67f6eab65.js",
+      "path---postgraphile-crud-mutations-ae093fe9f3c67f6eab65.js.map"
     ],
     "path---postgraphile-introduction": [
-      "path---postgraphile-introduction-66533151d49c8e4bd7ae.js",
-      "path---postgraphile-introduction-66533151d49c8e4bd7ae.js.map"
+      "path---postgraphile-introduction-2f28cddc92d6994b62d1.js",
+      "path---postgraphile-introduction-2f28cddc92d6994b62d1.js.map"
     ],
     "app": [
-      "app-123fd257576b3e7df7cc.js",
+      "app-eb265f0928a0eddb517e.js",
       "build-js-styles.css",
-      "app-123fd257576b3e7df7cc.js.map",
+      "app-eb265f0928a0eddb517e.js.map",
       "build-js-styles.css.map"
     ],
     "path---postgraphile-code-of-conduct": [
-      "path---postgraphile-code-of-conduct-da6741f4c0c8a10ddb1a.js",
-      "path---postgraphile-code-of-conduct-da6741f4c0c8a10ddb1a.js.map"
+      "path---postgraphile-code-of-conduct-9cb48cda46385cb232bf.js",
+      "path---postgraphile-code-of-conduct-9cb48cda46385cb232bf.js.map"
     ],
     "path---postgraphile-examples": [
-      "path---postgraphile-examples-9e5a7bc6df657b801776.js",
-      "path---postgraphile-examples-9e5a7bc6df657b801776.js.map"
+      "path---postgraphile-examples-9e176cdc0aec655b85fc.js",
+      "path---postgraphile-examples-9e176cdc0aec655b85fc.js.map"
     ],
     "path---postgraphile-connections": [
-      "path---postgraphile-connections-f0e45c16c0aacf5e0698.js",
-      "path---postgraphile-connections-f0e45c16c0aacf5e0698.js.map"
+      "path---postgraphile-connections-b595110bc7382118ab0d.js",
+      "path---postgraphile-connections-b595110bc7382118ab0d.js.map"
     ],
     "path---postgraphile-performance": [
-      "path---postgraphile-performance-75b8fe5c06705c3fb952.js",
-      "path---postgraphile-performance-75b8fe5c06705c3fb952.js.map"
+      "path---postgraphile-performance-c7e3ebd6918ce74f5b19.js",
+      "path---postgraphile-performance-c7e3ebd6918ce74f5b19.js.map"
     ],
     "path---postgraphile-usage": [
-      "path---postgraphile-usage-fe13bb3953e645110dcc.js",
-      "path---postgraphile-usage-fe13bb3953e645110dcc.js.map"
+      "path---postgraphile-usage-e25612d731f2e6a0ddbd.js",
+      "path---postgraphile-usage-e25612d731f2e6a0ddbd.js.map"
     ],
     "path---postgraphile-procedures": [
-      "path---postgraphile-procedures-78a0ca046da81a498efd.js",
-      "path---postgraphile-procedures-78a0ca046da81a498efd.js.map"
+      "path---postgraphile-procedures-8666267a4534c5fd002d.js",
+      "path---postgraphile-procedures-8666267a4534c5fd002d.js.map"
     ],
     "path---postgraphile-custom-queries": [
-      "path---postgraphile-custom-queries-a014c81569f73c05a5ce.js",
-      "path---postgraphile-custom-queries-a014c81569f73c05a5ce.js.map"
+      "path---postgraphile-custom-queries-6bc44d8ddfa994b1cd28.js",
+      "path---postgraphile-custom-queries-6bc44d8ddfa994b1cd28.js.map"
     ],
     "component---src-templates-home-js": [
       "component---src-templates-home-js-408d6540d13e20da37b8.js",
       "component---src-templates-home-js-408d6540d13e20da37b8.js.map"
     ],
     "path---postgraphile-usage-schema": [
-      "path---postgraphile-usage-schema-11d5edd8b93747eff3f9.js",
-      "path---postgraphile-usage-schema-11d5edd8b93747eff3f9.js.map"
+      "path---postgraphile-usage-schema-facc14d9f4f66d4c0eb5.js",
+      "path---postgraphile-usage-schema-facc14d9f4f66d4c0eb5.js.map"
     ],
     "path---graphile-build-plugin-options": [
-      "path---graphile-build-plugin-options-00ae6d74d9f70a6195a3.js",
-      "path---graphile-build-plugin-options-00ae6d74d9f70a6195a3.js.map"
+      "path---graphile-build-plugin-options-0304edfd69c6638fad3d.js",
+      "path---graphile-build-plugin-options-0304edfd69c6638fad3d.js.map"
     ],
     "path---graphile-build-schema-builder": [
-      "path---graphile-build-schema-builder-6933a3538c7fe5c61961.js",
-      "path---graphile-build-schema-builder-6933a3538c7fe5c61961.js.map"
+      "path---graphile-build-schema-builder-eca85ec51c943e21220a.js",
+      "path---graphile-build-schema-builder-eca85ec51c943e21220a.js.map"
     ]
   }
 }
