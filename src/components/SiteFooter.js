@@ -58,8 +58,10 @@ const SiteFooter = () => {
           <div className="col-xs-12 col-md-offset-1 col-md-5">
             <h6>About</h6>
             PostGraphile and Graphile Build are Open Source Software, developed
-            and maintained by <a href="https://twitter.com/benjie">@Benjie</a>
-            &nbsp;with the help of the community.
+            and maintained by <a href="https://twitter.com/benjie">
+              @Benjie
+            </a>{" "}
+            with the help of the community.
             <br />
             <br />
             You can support the projects via{" "}

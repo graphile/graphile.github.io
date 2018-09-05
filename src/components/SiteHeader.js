@@ -226,7 +226,38 @@ export default withRouter(
                       </li>
                     )}
                   />
+                  {/* Press pages */}
 
+                  <Route
+                    path="/press"
+                    render={() => (
+                      <li className="navbar-item">
+                        <Link
+                          className={`nav-link ${
+                            location.pathname.match(/^\/press\/?$/)
+                              ? "active"
+                              : ""
+                          }`}
+                          to="/press/"
+                        >
+                          Overview
+                        </Link>
+                      </li>
+                    )}
+                  />
+                  <Route
+                    path="/press/"
+                    render={() => (
+                      <li className="navbar-item">
+                        <Link
+                          className={"nav-link"}
+                          to="/press/postgraphile-version-4/"
+                        >
+                          Latest
+                        </Link>
+                      </li>
+                    )}
+                  />
                   {/* FIN */}
 
                   <li className="navbar-item ml-auto navbar-item-right">

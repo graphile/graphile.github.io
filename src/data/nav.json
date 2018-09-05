@@ -1,5 +1,45 @@
 [
   {
+    "name": "press",
+    "sections": [
+      {
+        "id": "main",
+        "title": "Postgraphile Version 4"
+      },
+      {
+        "id": "about",
+        "title": "About"
+      }
+    ],
+    "pages": [
+      {
+        "to": "/press/postgraphile-version-4/",
+        "title": "Version 4 is released",
+        "sectionId": "main"
+      },
+      {
+        "to": "/postgraphile/v4-new-features/",
+        "title": "Version 4 feaure guide",
+        "sectionId": "main"
+      },
+      {
+        "to": "/postgraphile/v3-migration/",
+        "title": "Version 4 migration guide",
+        "sectionId": "main"
+      },
+      {
+        "to": "/press/postgraphile",
+        "title": "Postgraphile logo",
+        "sectionId": "about"
+      },
+      {
+        "to": "/press/about",
+        "title": "About Benjie",
+        "sectionId": "about"
+      }
+    ]
+  },
+  {
     "name": "graphile-build",
     "sections": [
       {
