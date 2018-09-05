@@ -59,11 +59,15 @@ const SiteFooter = () => {
             <h6>About</h6>
             PostGraphile and Graphile Build are Open Source Software, developed
             and maintained by <a href="https://twitter.com/benjie">@Benjie</a>
-            with the help of the community.
+            &nbsp;with the help of the community.
             <br />
             <br />
             You can support the projects via{" "}
-            <a href="https://www.patreon.com/benjie" target="_blank">
+            <a
+              href="https://www.patreon.com/benjie"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Patreon
             </a>, by <Link to="/postgraphile/pricing/">going Pro</Link>, or by
             paying for <Link to="/support/">Professional Services</Link>. Your
