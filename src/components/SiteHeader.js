@@ -226,19 +226,19 @@ export default withRouter(
                       </li>
                     )}
                   />
-                  {/* Press pages */}
+                  {/* News pages */}
 
                   <Route
-                    path="/press"
+                    path="/news"
                     render={() => (
                       <li className="navbar-item">
                         <Link
                           className={`nav-link ${
-                            location.pathname.match(/^\/press\/?$/)
+                            location.pathname.match(/^\/news\/?$/)
                               ? "active"
                               : ""
                           }`}
-                          to="/press/"
+                          to="/news/"
                         >
                           Overview
                         </Link>
@@ -246,12 +246,12 @@ export default withRouter(
                     )}
                   />
                   <Route
-                    path="/press/"
+                    path="/news/"
                     render={() => (
                       <li className="navbar-item">
                         <Link
                           className={"nav-link"}
-                          to="/press/postgraphile-version-4/"
+                          to="/news/postgraphile-version-4/"
                         >
                           Latest
                         </Link>

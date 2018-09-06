@@ -28,7 +28,7 @@ class Marketing extends Component {
     return (
       <div
         className={`template-marketing ${
-          location.pathname.match(/^\/(postgraphile|press)(\/|$)/)
+          location.pathname.match(/^\/(postgraphile|news)(\/|$)/)
             ? "postgraphile"
             : ""
         }`}

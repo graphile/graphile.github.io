@@ -1,7 +1,7 @@
 ---
 layout: marketing
-path: /press/
-title: Press
+path: /news/
+title: News
 ---
 
 <!-- **************************************** -->
@@ -35,7 +35,7 @@ title: Press
 
 ## Postgraphile version 4 is here! 
 
-Version 4 is finally out! Huzzah! [Here is a massive press release we've written.](/press/new-release)
+Version 4 is finally out! Huzzah! [Here is a massive press release we've written.](/news/new-release)
 
 </div>
 </div>
@@ -69,6 +69,6 @@ Despite the fact that PostGraphile v4 has rewritten the entire GraphQL schema ge
 
 
 Here's like a menu thing
-[Link to PR photos and logos](/press/newpaage)
+[Link to PR photos and logos](/news/newpaage)
 [Link to history](/history/)
 [Link to Patreon](https://www.patreon.com/Benjie)

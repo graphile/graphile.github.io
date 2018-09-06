@@ -13,7 +13,7 @@
     ],
     "pages": [
       {
-        "to": "/press/postgraphile-version-4/",
+        "to": "/news/postgraphile-version-4/",
         "title": "Version 4 is released",
         "sectionId": "main"
       },
@@ -28,12 +28,12 @@
         "sectionId": "main"
       },
       {
-        "to": "/press/postgraphile",
+        "to": "/news/postgraphile",
         "title": "Postgraphile logo",
         "sectionId": "about"
       },
       {
-        "to": "/press/about",
+        "to": "/news/about",
         "title": "About Benjie",
         "sectionId": "about"
       }
