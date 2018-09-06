@@ -44,31 +44,25 @@ Version 4 is finally out! Huzzah! [Here is a massive press release we've written
 </div>
 </section>
 
-<section>
-<div class='container'>
-
-## V4 feature guide
-
-Goodbye N+1 queries! Plug-ins, plug-ins, plug-ins! Order order! [Read about the version 4 features in detail](/postgraphile/v4-new-features/)
-
-
-</div>
-</section>
+<!-- **************************************** -->
 
 <section>
 <div class='container'>
 
-## V4 migration guide
+## Posgraphile Performance is greatly improved
 
-Despite the fact that PostGraphile v4 has rewritten the entire GraphQL schema generation from scratch it is still broadly compatible with version 3. There is a short list of breaking changes and the way one-to-one backward relations are handled has changed so please [read the migration guide](/postgraphile/v3-migration/) if you are updating from version 3.
+ PostGraphile was already highly performant for complex GraphQL queries, but the next release is faster still, and now it’s great at the very simple queries found in Prisma’s benchmarks too! [read more about Postgraphile's fantastic performance](/news/performance).
 
 </div>
 </section>
 
 <!-- **************************************** -->
 
+<section>
+<div class='container'>
 
-Here's like a menu thing
-[Link to PR photos and logos](/news/newpaage)
-[Link to history](/history/)
-[Link to Patreon](https://www.patreon.com/Benjie)
+## Postgraphile around the web
+
+Should we put some kind of social validation here?
+</div>
+</section>
