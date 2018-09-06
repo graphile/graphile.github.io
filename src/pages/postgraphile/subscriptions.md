@@ -7,7 +7,7 @@ title: GraphQL Subscriptions
 ## GraphQL Subscriptions
 
 PostGraphile Core doesn't yet have subscriptions support built in. There is
-much talk about what a GraphQL subscriptions solution might look like in 
+much talk about what a GraphQL subscriptions solution might look like in
 [issue #92](https://github.com/graphile/postgraphile/issues/92).
 
 Patreon backers (and those who have purchased the Pro plugin) may try out an
@@ -29,14 +29,18 @@ here at this time) via the options `enhanceHttpServerWithSubscriptions`.
 Here's an example:
 
 ```js
-const express = require("express");
+const { postgraphile, makePluginHook } = require("postgraphile");
 const {
-  default: PostGraphileSupporter,
+  default: PostGraphileSupporter
 } = require("@graphile/plugin-supporter");
+const express = require("express");
+
+const pluginHook = makePluginHook([PostGraphileSupporter]);
 
 const app = express();
 
 const postgraphileOptions = {
+  pluginHook,
   simpleSubscriptions: true,
   websocketMiddlewares: [
     // Add whatever middlewares you need here, note that
@@ -46,18 +50,12 @@ const postgraphileOptions = {
     //   require('express-session')(),
     //   require('passport').initialize(),
     //   require('passport').session(),
-  ],
+  ]
 };
 
-app.use(postgraphile(
-  databaseUrl,
-  "app_public",
-  postgraphileOptions,
-));
+app.use(postgraphile(databaseUrl, "app_public", postgraphileOptions));
 
-app.listen(
-  parseInt(process.env.PORT, 10) || 3000
-);
+app.listen(parseInt(process.env.PORT, 10) || 3000);
 ```
 
 #### Advanced setup
@@ -68,17 +66,21 @@ your express `app` in it, and then add subscription support to the raw server
 via the `enhanceHttpServerWithSubscriptions` function, as shown below:
 
 ```js
-const express = require("express");
-const { createServer } = require("http");
+const { postgraphile, makePluginHook } = require("postgraphile");
 const {
   default: PostGraphileSupporter,
-  enhanceHttpServerWithSubscriptions,
+  enhanceHttpServerWithSubscriptions
 } = require("@graphile/plugin-supporter");
+const { createServer } = require("http");
+const express = require("express");
+
+const pluginHook = makePluginHook([PostGraphileSupporter]);
 
 const app = express();
 const rawHTTPServer = createServer(app);
 
 const postgraphileOptions = {
+  pluginHook,
   simpleSubscriptions: true,
   websocketMiddlewares: [
     // Add whatever middlewares you need here, note that
@@ -88,13 +90,13 @@ const postgraphileOptions = {
     //   require('express-session')(),
     //   require('passport').initialize(),
     //   require('passport').session(),
-  ],
+  ]
 };
 
 const postgraphileMiddleware = postgraphile(
   databaseUrl,
   "app_public",
-  postgraphileOptions,
+  postgraphileOptions
 );
 
 app.use(postgraphileMiddleware);
@@ -102,20 +104,17 @@ app.use(postgraphileMiddleware);
 enhanceHttpServerWithSubscriptions(
   rawHTTPServer,
   postgraphileMiddleware,
-  postgraphileOptions,
+  postgraphileOptions
 );
 
-rawHTTPServer.listen(
-  parseInt(process.env.PORT, 10) || 3000
-);
+rawHTTPServer.listen(parseInt(process.env.PORT, 10) || 3000);
 ```
 
 The `enhanceHttpServerWithSubscriptions` takes three arguments:
 
-1. the raw HTTP server from `require('http').createServer()`
-2. the postgraphile middleware (this should be the *same* middleware that you mount into your Express app)
-3. options, where you can optionally pass `middlewares` to enable `pgSettings(req) {...}` access to session-based things
-
+1.  the raw HTTP server from `require('http').createServer()`
+2.  the postgraphile middleware (this should be the _same_ middleware that you mount into your Express app)
+3.  options, where you can optionally pass `middlewares` to enable `pgSettings(req) {...}` access to session-based things
 
 ### Using
 
@@ -189,7 +188,6 @@ Resulting in this GraphQL payload:
 Which is sufficient to know that the event _occurred_, but chances are that you
 want to know more than this...
 
-
 It's also possible to send a `Node` along with your GraphQL payload using the
 `__node__` field on the `pg_notify` body (which is interpreted as JSON). The
 `__node__` field is similar to the `nodeId` (or `id` if you use
@@ -198,7 +196,7 @@ before it gets stringified and base64 encoded. (The reason for this is that
 Postgres' JSON functions leave some optional spaces in, so when they are base64
 encoded the strings do not match.)
 
-Assuming that you have a table of the form 
+Assuming that you have a table of the form
 `foos(id serial primary key, title text, ...)` you can add the `__node__` field
 as follows and the record with id=32 will be made available as the `relatedNode`
 in the GraphQL subscription payload:
@@ -230,9 +228,9 @@ Resulting in this GraphQL payload:
 ```
 
 > **NOTE**: This solution is still taking shape, so it's not yet certain how other fields
-on the NOTIFY message JSON will be exposed via GraphQL. You are advised to
-treat the content of this message JSON as if it's visible to the user, as at
-some point it may be.
+> on the NOTIFY message JSON will be exposed via GraphQL. You are advised to
+> treat the content of this message JSON as if it's visible to the user, as at
+> some point it may be.
 
 > **NOTE**: In PostgreSQL the channel is an "identifier" which by default is
 > limited to 63 characters. Subtracting the `postgraphile:` prefix leaves 50
@@ -254,7 +252,6 @@ argument WILL be sent including the `postgraphile:` prefix).
 
 A typical implementation will look like this:
 
-
 ```sql
 CREATE FUNCTION
   app_hidden.validate_subscription(topic text)
@@ -270,13 +267,13 @@ END;
 $$ LANGUAGE plpgsql VOLATILE SECURITY DEFINER;
 ```
 
-You must define this function with your custom security logic.  To use this
+You must define this function with your custom security logic. To use this
 function you'd pass the CLI flag:
 `--subscription-authorization-function app_private.validate_subscription`
 
 The text value returned is used to tell the system when to cancel the
 subscription - if you don't need this functionality then you may return a
-_static_ unique value, e.g.  generate a random UUID (manually) and then return
+_static_ unique value, e.g. generate a random UUID (manually) and then return
 this same UUID over and over from your function, e.g.:
 
 ```sql
@@ -303,9 +300,8 @@ subject type and identifier - e.g. 'channel:123'. If you do this then your
 function could determine which subject the user is attempting to subscribe to,
 check the user has access to that subject, and finally return a PostgreSQL
 topic that will be published to in the event the user is kicked from the
-channel, e.g.  `'channel:123:kick:987'` (assuming '987' is the id
+channel, e.g. `'channel:123:kick:987'` (assuming '987' is the id
 of the current user).
-
 
 ### Example walk-through
 
@@ -314,13 +310,11 @@ First, set up a `.postgraphilerc.js` containing the following:
 ```js
 module.exports = {
   options: {
-    plugins: [
-      "@graphile/plugin-supporter",
-    ],
+    plugins: ["@graphile/plugin-supporter"],
     connection: "postgres://localhost/subs",
     schema: ["app_public"],
-    simpleSubscriptions: true,
-  },
+    simpleSubscriptions: true
+  }
 };
 ```
 
@@ -355,21 +349,20 @@ perform the following subscription:
 
 ```graphql
 subscription {
- listen(topic:"hello") {
-   relatedNodeId
-   relatedNode {
-     nodeId
-     ... on Foo {
-       id
-       title
-     }
-   }
- }
+  listen(topic: "hello") {
+    relatedNodeId
+    relatedNode {
+      nodeId
+      ... on Foo {
+        id
+        title
+      }
+    }
+  }
 }
 ```
 
 You are not expecting an immediate result; first you have to trigger the event. To do so, back in your `psql` session in terminal 2, execute:
-
 
 ```sql
 insert into app_public.foo (title) values ('Howdy!') returning *;
@@ -387,7 +380,6 @@ select pg_notify(
 You should find that the event has been received by the client and the 'Howdy!'
 node has come through. You can run the above a few more times, or experiment a
 bit by changing the values if you like.
-
 
 Finally to cancel the subscription, execute the following SQL:
 
