@@ -240,7 +240,7 @@ export default withRouter(
                           }`}
                           to="/news/"
                         >
-                          Overview
+                          Latest Announcements
                         </Link>
                       </li>
                     )}
@@ -253,7 +253,7 @@ export default withRouter(
                           className={"nav-link"}
                           to="/news/postgraphile-version-4/"
                         >
-                          Latest
+                          Archive
                         </Link>
                       </li>
                     )}

@@ -12,10 +12,10 @@ title: News
 <div class='col-xs-12'>
 <div class='hero-block'>
 
-# Graphile News
+# Graphile Announcements
 
 <h3>
-  The latest news on Postgraphile releases, plus special promotions and such
+  The latest news on Postgraphile and Graphile-Build
 </h3>
 
 </div>
@@ -35,9 +35,13 @@ title: News
 
 ## Postgraphile version 4 is here! 
 
-Version 4 is finally out! Huzzah! [Here is a massive press release we've written.](/news/new-release)
+Version 4 is finally out! More performant, more extensible and more customisable than ever before. This release takes Postgraphile up to be the forerunner in GraphQL API layers.
+
+[Read more about the fastet ever Postgraphile Version](/news/postgraphile-version-4)
 
 </div>
+</div>
+<div class='text-center col-xs-12 col-md-3 col-lg-5 postgraphile-logo-bg'>
 </div>
 </div>
 
@@ -48,10 +52,22 @@ Version 4 is finally out! Huzzah! [Here is a massive press release we've written
 
 <section>
 <div class='container'>
+<div class='hero-block'>
+<div class='row flex-wrap-reverse'>
+
+<div class='text-center col-xs-12 col-md-3 col-lg-5 postgraphile-graphs-barchart-bg'>
+</div>
+
+<div class='text-center col-xs-12 col-md-9 col-lg-7'>
 
 ## Posgraphile Performance is greatly improved
 
- PostGraphile was already highly performant for complex GraphQL queries, but the next release is faster still, and now it’s great at the very simple queries found in Prisma’s benchmarks too! [read more about Postgraphile's fantastic performance](/news/performance).
+ PostGraphile was already highly performant for complex GraphQL queries, but the next release is faster still, and now it’s great at the very simple queries found in Prisma’s benchmarks too! [read more about Postgraphile's fantastic performance](/news/postgraphile-version-4-performance/).
+
+
+</div>
+</div>
+</div>
 
 </div>
 </section>
