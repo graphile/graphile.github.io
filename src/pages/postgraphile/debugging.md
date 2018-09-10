@@ -80,34 +80,37 @@ environmental variable first. For example:
 ```bash
 # Bash (Linux, macOS, etc)
 export DEBUG="postgraphile:postgres"
-postgraphile -c ...
+postgraphile -c postgres://...
 
 # Windows Console
-set DEBUG=postgraphile:postgres & postgraphile -c ...
+set DEBUG=postgraphile:postgres & postgraphile -c postgres://...
 
 # Windows PowerShell
-$env:DEBUG='postgraphile:postgres'; postgraphile -c ...
+$env:DEBUG='postgraphile:postgres'; postgraphile -c postgres://...
 ```
 
-Note that this works with PostGraphile CLI and also when using PostGraphile as an express middleware.
+Note that this works with PostGraphile CLI and also when using PostGraphile as
+an express middleware (in which case replace the `postgraphile -c postgres://...` command with your own server startup command).
 
 To find details of any errors thrown whilst executing SQL, use:
 
 ```bash
-#Linux
+# Bash (Linux, macOS, etc)
 export DEBUG="postgraphile:postgres,postgraphile:postgres:error"
+postgraphile -c postgres://...
   # or:
 export DEBUG="postgraphile:postgres*"
+postgraphile -c postgres://...
 
-#Windows Console
-set DEBUG=postgraphile:postgres,postgraphile:postgres:error & <script start>
+# Windows Console
+set DEBUG=postgraphile:postgres,postgraphile:postgres:error & postgraphile -c postgres://...
   #or
-set DEBUG=postgraphile:postgres* & <script start>
+set DEBUG=postgraphile:postgres* & postgraphile -c postgres://...
 
-#PowerShell
-$env:DEBUG = "postgraphile:postgres,postgraphile:postgres:error"; <script start>
+# Windows PowerShell
+$env:DEBUG = "postgraphile:postgres,postgraphile:postgres:error"; postgraphile -c postgres://...
   #or
-$env:DEBUG = "postgraphile:postgres*"; <script start>
+$env:DEBUG = "postgraphile:postgres*"; postgraphile -c postgres://...
 ```
 
 ### DEBUG envvars
@@ -128,14 +131,14 @@ We use a lot of DEBUG envvars for different parts of the system. Here's some of 
 To enable these DEBUG modes, join them with commas when setting a DEBUG envvar, then run PostGraphile or your Node.js server in the same terminal:
 
 ```bash
-#Linux
+# Bash (Linux, macOS, etc)
 export DEBUG="postgraphile:graphql,postgraphile:request,postgraphile:postgres*"
 postgraphile -c postgres://...
 
-#Windows Console
+# Windows Console
 set DEBUG=postgraphile:graphql,postgraphile:request,postgraphile:postgres* & postgraphile -c postgres://...
 
-#PowerShell
+# Windows PowerShell
 $env:DEBUG = "postgraphile:graphql,postgraphile:request,postgraphile:postgres*"; postgraphile -c postgres://...
 ```
 
@@ -150,12 +153,12 @@ and step through code execution.
 2.  Select 'Open dedicated DevTools for Node', a new devtools window should open - don't close this!
 3.  Run your server or PostGraphile via Node.js directly, in `--inspect` mode, e.g.:
 
-```
+```bash
 # For globally installed PostGraphile:
-node --inspect `which postgraphile`
+node --inspect `which postgraphile` -c postgres://...
 
 # or for locally installed PostGraphile:
-node --inspect node_modules/.bin/postgraphile
+node --inspect node_modules/.bin/postgraphile -c postgres://...
 
 # or, if you have your own Node.js app in `server.js`:
 node --inspect server.js
