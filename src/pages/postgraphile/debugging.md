@@ -78,7 +78,7 @@ being sure to set the relevant [DEBUG](https://github.com/visionmedia/debug)
 environmental variable first. For example:
 
 ```bash
-#Linux
+# Bash (Linux, macOS, etc)
 export DEBUG="postgraphile:postgres"
 postgraphile -c ...
 
