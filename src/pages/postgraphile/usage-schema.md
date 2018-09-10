@@ -94,6 +94,7 @@ The returned GraphQLSchema will **not** be updated when your database changes - 
   * `appendPlugins`: An array of [Graphile Build](/graphile-build/plugins/) plugins to load after the default plugins.
   * `prependPlugins`: An array of [Graphile Build](/graphile-build/plugins/) plugins to load before the default plugins (you probably don't want this).
   * `replaceAllPlugins`: The full array of [Graphile Build](/graphile-build/plugins/) plugins to use for schema generation (you almost definitely don't want this!).
+  * `skipPlugins`: An array of [Graphile Build](/graphile-build/plugins/) plugins to skip.
   * `readCache`: A file path string. Reads cached values from local cache file to improve startup time (you may want to do this in production).
   * `writeCache`: A file path string. Writes computed values to local cache file so startup can be faster (do this during the build phase).
   * `jwtSecret`: The secret for your JSON web tokens. This will be used to verify tokens in the `Authorization` header, and signing JWT tokens you return in procedures.

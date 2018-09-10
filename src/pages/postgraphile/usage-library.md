@@ -73,6 +73,7 @@ The `postgraphile` middleware factory function takes three arguments, all of whi
   * `appendPlugins`: An array of [Graphile Build](/graphile-build/plugins/) plugins to load after the default plugins.
   * `prependPlugins`: An array of [Graphile Build](/graphile-build/plugins/) plugins to load before the default plugins (you probably don't want this).
   * `replaceAllPlugins`: The full array of [Graphile Build](/graphile-build/plugins/) plugins to use for schema generation (you almost definitely don't want this!).
+  * `skipPlugins`: An array of [Graphile Build](/graphile-build/plugins/) plugins to skip.
   * `readCache`: A file path string. Reads cached values from local cache file to improve startup time (you may want to do this in production).
   * `writeCache`: A file path string. Writes computed values to local cache file so startup can be faster (do this during the build phase).
   * `exportJsonSchemaPath`: Enables saving the detected schema, in JSON format, to the given location. The directories must exist already, if the file exists it will be overwritten.
