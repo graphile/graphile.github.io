@@ -15,7 +15,7 @@ title: News
 # Graphile Announcements
 
 <h3>
-  The latest news on Postgraphile and Graphile-Build
+  The latest news on Postgraphile and the Graphile suite
 </h3>
 
 </div>
@@ -33,11 +33,11 @@ title: News
 <div class='text-center col-xs-12 col-md-9 col-lg-7'>
 <div class='hero-block'>
 
-## Postgraphile version 4 is here! 
+## Postgraphile version 4 is here
 
-Version 4 is finally out! More performant, more extensible and more customisable than ever before. This release takes Postgraphile up to be the forerunner in GraphQL API layers.
+Version 4 has launched! More performant, more extensible and more customisable than ever before. This release takes Postgraphile up to be the forerunner in GraphQL API layers.
 
-[Read more about the fastet ever Postgraphile Version](/news/postgraphile-version-4)
+[Read more about the latest Postgraphile Version here](/news/postgraphile-version-4)
 
 </div>
 </div>
@@ -60,9 +60,11 @@ Version 4 is finally out! More performant, more extensible and more customisable
 
 <div class='text-center col-xs-12 col-md-9 col-lg-7'>
 
-## Postgraphile Performance is greatly improved
+## Postgraphile is faster than ever
 
- PostGraphile was already highly performant for complex GraphQL queries, but the next release is faster still, and now it’s great at the very simple queries found in Prisma’s benchmarks too! [read more about Postgraphile's fantastic performance](/news/postgraphile-version-4-performance/).
+ PostGraphile was already highly performant for complex GraphQL queries, but the release of Verion 4 brings speed and performance to a new level. 
+ 
+ [Read more about Postgraphile's fantastic performance](/news/postgraphile-version-4-performance/).
 
 
 </div>
