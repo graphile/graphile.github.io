@@ -36,7 +36,7 @@ For more information, see the bottom of the [Go Pro!](/postgraphile/pricing/) pa
 ### Installing
 
 You can install first-party plugins with `yarn add` or `npm install` using the
-`https://...:...@git.graphile.com/.../postgraphile-supporter.git` URL from
+`git+https://...:...@git.graphile.com/.../postgraphile-supporter.git` URL from
 https://store.graphile.com. Remember: **you must keep this URL confidential**.
 
 ### Enabling via CLI flag
