@@ -6,18 +6,18 @@ title: PostGraphile Server Plugins
 
 ## PostGraphile Server Plugins
 
-*NOTE: This page relates to changing how the PostGraphile server works. If you're instead looking to change the generated GraphQL schema (e.g. to add fields), see [Schema Plugins](/postgraphile/extending/).*
+_NOTE: This page relates to changing how the PostGraphile server works. If you're instead looking to change the generated GraphQL schema (e.g. to add fields), see [Schema Plugins](/postgraphile/extending/)._
 
 In addition to the [Graphile-Build plugin system](/postgraphile/extending/)
 which builds the GraphQL schema in PostGraphile, PostGraphile also has a plugin
-system for the CLI and web layer.  This plugin system is less mature, it's not
+system for the CLI and web layer. This plugin system is less mature, it's not
 ready for third party plugin developers yet, however there are a couple of
 first-party plugins that you may want to use that can be purchased on the
 [Graphile Store](https://store.graphile.com):
 
-- `@graphile/plugin-supporter` [SUPPORTER]  
+* `@graphile/plugin-supporter` [SUPPORTER]  
   (pay what you want, from $1/mo+)
-- `@graphile/plugin-pro` [PRO]
+* `@graphile/plugin-pro` [PRO]
 
 _TODO: update this when the plugin interface is more mature._
 
@@ -60,14 +60,11 @@ If you're using the CLI version, plugins can also be enabled via
 ```js
 module.exports = {
   options: {
-    plugins: [
-      "@graphile/plugin-supporter",
-      "@graphile/plugin-pro",
-    ],
+    plugins: ["@graphile/plugin-supporter", "@graphile/plugin-pro"],
     connection: "postgres://localhost/my_db",
-    schema: ["app_public"],
+    schema: ["app_public"]
     // ...
-  },
+  }
 };
 ```
 
@@ -79,42 +76,31 @@ is a slightly more involved process:
 To include the dependencies, for straight Node.js 8 you want:
 
 ```js
-const { postgraphile, makePluginHook } =
-  require("postgraphile");
-const { default: PostGraphileSupporter } =
-  require("@graphile/plugin-supporter");
-const { default: PostGraphilePro } =
-  require("@graphile/plugin-pro");
+const { postgraphile, makePluginHook } = require("postgraphile");
+const {
+  default: PostGraphileSupporter
+} = require("@graphile/plugin-supporter");
+const { default: PostGraphilePro } = require("@graphile/plugin-pro");
 ```
 
 If you're using ES2015 Modules (ESM) then try this:
 
 ```js
-import { postgraphile, makePluginHook }
-  from "postgraphile";
-import PostGraphileSupporter
-  from "@graphile/plugin-supporter";
-import PostGraphilePro
-  from "@graphile/plugin-pro";
+import { postgraphile, makePluginHook } from "postgraphile";
+import PostGraphileSupporter from "@graphile/plugin-supporter";
+import PostGraphilePro from "@graphile/plugin-pro";
 ```
 
 Then you enable the plugins by passing a `pluginHook` via the PostGraphile
 options, you can construct this using `makePluginHook` as such:
 
 ```js
-const pluginHook = makePluginHook([
-  PostGraphileSupporter,
-  PostGraphilePro,
-]);
+const pluginHook = makePluginHook([PostGraphileSupporter, PostGraphilePro]);
 
-const postGraphileMiddleware = postgraphile(
-  databaseUrl,
-  "app_public",
-  {
-    pluginHook,
-    // ...
-  }
-);
+const postGraphileMiddleware = postgraphile(databaseUrl, "app_public", {
+  pluginHook
+  // ...
+});
 
 app.use(postGraphileMiddleware);
 ```
