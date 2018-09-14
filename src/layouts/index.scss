@@ -877,12 +877,27 @@ h6 code {
   }
 }
 
-.postgraphile-graphs-barchart-bg {
-  background-image: url("../../public/images/requests-per-second.png");
+.postgraphile-graphs-requests-per-secoond, .postgraphile-graphs-memory-usage, .postgraphile-graphs-average-latency, .postgraphile-graphs-average-latency-label {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: 50% 20%;
   min-height: 240px;
+}
+
+.postgraphile-graphs-average-latency {
+  background-image: url("../../static/images/v4-average-latency.png");
+}
+
+.postgraphile-graphs-average-latency-label {
+  background-image: url("../../static/images/v4-average-latency-with-label.png");
+}
+
+.postgraphile-graphs-requests-per-secoond {
+  background-image: url("../../static/images/v4-requests-per-second.png");
+}
+
+.postgraphile-graphs-memory-usage {
+  background-image: url("../../static/images/v4-memory-usage.png");
 }
 
 .postgraphile-logo-bg {

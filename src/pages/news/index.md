@@ -35,7 +35,7 @@ title: News
 
 ## Postgraphile version 4 is here
 
-Version 4 has launched! More performant, more extensible and more customisable than ever before. This release takes Postgraphile up to be the forerunner in GraphQL API layers.
+Version 4 has launched! More performant, more extensible and more customisable than ever before. This release takes Postgraphile up to be the forerunner in GraphQL Engines.
 
 [Read more about the latest Postgraphile Version here](/news/postgraphile-version-4)
 
