@@ -76,6 +76,87 @@ standard 4 GraphQL resolve arguments (`parent`, `args`, `context`,
 `resolveInfo`); but in addition they will be passed a 5th argument that
 contains graphile-specific helpers.
 
+##### Reading database column values
+
+When extending a schema, it's often because you want to expose data from Node.js
+that would be difficult too difficult (or impossible) to access from PostgreSQL.
+When defining a field on an existing table-backed type defined by Postgraphile,
+it's useful to access data from the underlying table in the resolver.
+
+To do this you can use the `@requires(columns: […])` field directive to declare
+the data dependencies of your resolver. This guarantees that when the resolver
+is executed, the data is immediately available.
+
+Here's an example to illustrate.
+
+In the database you have a `product` table (imagine an online store), that
+Postgraphile will include in the GraphQL schema by creating a type `Product`
+with fields `id`, `name`, `price_in_us_cents`.
+
+```sql
+create table product (
+  id uuid not null primary key,
+  name text not null,
+  price_in_us_cents integer not null
+);
+```
+
+This would result in the following GraphQL type:
+
+```graphql
+type Product {
+  id: UUID!
+  name: String!
+  priceInUsCents Int!
+}
+```
+
+However imagine you're selling internationally, and you want to expose the price
+in other currencies directly from the `Product` type itself. This kind of
+functionality is trivial to perform in Node.js (e.g. by making a REST call to a
+foreign exchange service over the internet) but might be a struggle from with
+PostgreSQL.
+
+```js{8-29}
+const { postgraphile } = require("postgraphile");
+const { makeExtendSchemaPlugin, gql } = require("graphile-utils");
+const { convertUsdToAud } = require("ficticious-npm-library");
+const express = require("express");
+
+const app = new express();
+
+const MyForeignExchangePlugin = makeExtendSchemaPlugin(build => {
+  const { pgSql: sql } = build;
+  return {
+    typeDefs: gql`
+      extend type Product {
+        priceInAuCents: Int! @requires(columns: ["price_in_us_cents"])
+      }
+    `,
+    resolvers: {
+      Product: {
+        priceInAuCents: async (
+          query
+        ) => {
+          // Note that the columns are converted to fields, so the case changes
+          // from `price_in_us_cents` to `priceInUsCents`
+          const { priceInUsCents } = query;
+          return await convertUsdToAud(priceInUsCents);
+        },
+      },
+    },
+  };
+});
+
+app.use(
+  postgraphile(process.env.DATABASE_URL, ["app_public"], {
+    graphiql: true,
+    appendPlugins: [MyForeignExchangePlugin],
+  })
+);
+app.listen(3030);
+```
+
 ##### The `selectGraphQLResultFromTable` helper
 
 The `selectGraphQLResultFromTable` function is vital if you want to return data
