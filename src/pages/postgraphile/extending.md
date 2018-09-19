@@ -186,7 +186,7 @@ const { postgraphile } = require("postgraphile");
 const { makeExtendSchemaPlugin, gql } = require("graphile-utils");
 const express = require("express");
 
-const app = new express();
+const app = express();
 
 const MyRandomUserPlugin = makeExtendSchemaPlugin(build => {
   const { pgSql: sql } = build;
