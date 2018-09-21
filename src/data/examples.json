@@ -49,7 +49,7 @@
       },
       {
         "title": "Update",
-        "query": "mutation {\n  updateTopicById(\n    input: {\n      id: 1\n      topicPatch: {\n        title: \"My (edited) title\"\n      }\n    }\n  ) {\n    topic {\n      nodeId\n      id\n      title\n      body\n    }\n  }\n}\n",
+        "query": "mutation {\n  updateTopicById(\n    input: {\n      id: 1\n      topicPatch: {\n        title: \"My (edited) title\"\n      }\n    }\n  ) {\n    topic {\n      nodeId\n      id\n      title\n      body\n    }\n  }\n}\n\n# Works for a table like:\n#\n#   create table app_public.topics (\n#     id serial primary key,\n#     forum_id integer NOT NULL references app_public.forums on delete cascade,\n#     title text NOT NULL,\n#     body text DEFAULT ''::text NOT NULL\n#   );\n",
         "result": "{\n  \"updateTopicById\": {\n    \"topic\": {\n      \"nodeId\": \"WyJ0b3BpY3MiLDFd\",\n      \"id\": 1,\n      \"title\": \"My (edited) title\",\n      \"body\":\n        \"lets discuss cats because theyre totally cool\"\n    }\n  }\n}\n"
       },
       {

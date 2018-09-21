@@ -10,3 +10,12 @@ mutation {
     }
   }
 }
+
+# Works for a table like:
+#
+#   create table app_public.topics (
+#     id serial primary key,
+#     forum_id integer NOT NULL references app_public.forums on delete cascade,
+#     title text NOT NULL,
+#     body text DEFAULT ''::text NOT NULL
+#   );
