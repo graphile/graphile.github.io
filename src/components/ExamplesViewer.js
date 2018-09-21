@@ -1,12 +1,56 @@
 import React from "react";
 import PrismCode from "react-prism";
 
+const slugify = str => str.replace(/[^A-Za-z0-9-.]+/g, "_");
+
 export default class ExamplesViewer extends React.Component {
-  state = {
-    selected: null,
-    subSelected: null,
-  };
+  constructor(props) {
+    super(props);
+
+    let selected = null;
+    let subSelected = null;
+    if (typeof window !== "undefined" && window.location) {
+      if (window.location.hash) {
+        const hash = window.location.hash.replace(/^#+/, "");
+        const parts = hash.split("__");
+        if (parts.length >= 2) {
+          const { examples: { edges } } = props;
+          const examples = edges.map(({ node }) => node);
+          const selectedExampleIdx = examples.findIndex(
+            e => slugify(e.title) === parts[0]
+          );
+          if (selectedExampleIdx >= 0) {
+            const selectedSubexampleIdx = examples[
+              selectedExampleIdx
+            ].examples.findIndex(e => slugify(e.title) === parts[1]);
+            selected = selectedExampleIdx;
+            subSelected =
+              selectedSubexampleIdx >= 0 ? selectedSubexampleIdx : 0;
+          }
+        }
+      }
+    }
+    this.state = {
+      selected,
+      subSelected,
+    };
+  }
+
   select = (i, j) => e => {
+    const { examples: { edges } } = this.props;
+    const examples = edges.map(({ node }) => node);
+    const selectedTitle = examples[i || 0] ? examples[i || 0].title : null;
+    const selectedSubtitle =
+      examples[i] && examples[i].examples[j || 0]
+        ? examples[i].examples[j || 0].title
+        : null;
+
+    if (selectedTitle && selectedSubtitle && typeof window !== "undefined") {
+      window.location.hash = `${slugify(selectedTitle)}__${slugify(
+        selectedSubtitle
+      )}`;
+    }
+
     this.setState({ selected: i, subSelected: j || 0 });
   };
   render() {
@@ -26,7 +70,8 @@ export default class ExamplesViewer extends React.Component {
                 <span
                   onClick={this.select(i)}
                   className={
-                    "f7 f6-ns pointer " + (isRootSelected(i) ? "white" : "white-60")
+                    "f7 f6-ns pointer " +
+                    (isRootSelected(i) ? "white" : "white-60")
                   }
                 >
                   {isRootSelected(i) ? "▾" : "▸"} {title}
