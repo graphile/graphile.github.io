@@ -254,6 +254,11 @@
         "sectionId": "guides"
       },
       {
+        "to": "/postgraphile/testing-jest/",
+        "title": "Testing with Jest",
+        "sectionId": "guides"
+      },
+      {
         "to": "/postgraphile/usage-cli/",
         "title": "CLI Usage",
         "sectionId": "usage"

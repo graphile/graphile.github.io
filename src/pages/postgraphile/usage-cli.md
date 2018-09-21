@@ -70,6 +70,8 @@ There are more CLI options available to customise the GraphQL server:
   a comma-separated list of plugins to append to the list of GraphQL schema plugins
 * `--prepend-plugins <string>`  
   a comma-separated list of plugins to prepend to the list of GraphQL schema plugins
+* `--skip-plugins <string>`  
+  a comma-separated list of plugins to skip
 * `--read-cache <path>`  
   [experimental] reads cached values from local cache file to improve startup time (you may want to do this in production)
 * `--write-cache <path>`  
