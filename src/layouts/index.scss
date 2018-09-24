@@ -1,8 +1,8 @@
 @import "./tachyons.scss";
 @import "./navbar.scss";
 
-$graphileRed: #E44336;
-$postgraphileBlue: #2D80D3;
+$graphileRed: #e44336;
+$postgraphileBlue: #2d80d3;
 $backgroundImage: "/images/delaunay.png";
 
 // ----------------------------------------
@@ -71,7 +71,6 @@ h2 {
 h3 {
   @extend .f3-ns;
   @extend .f4;
-
 }
 h4 {
   @extend .f4-ns;
@@ -87,7 +86,6 @@ h6 {
   @extend .f6-ns;
   @extend .f7;
 }
-
 
 p {
   color: #464646;
@@ -159,13 +157,27 @@ pre[class*="language-"].pa2 {
 pre[class*="language-"].pa3 {
   padding: 1rem;
 }
-pre[class*="language-"].f1 { font-size: 3rem; }
-pre[class*="language-"].f2 { font-size: 2.25rem; }
-pre[class*="language-"].f3 { font-size: 1.5rem; }
-pre[class*="language-"].f4 { font-size: 1.25rem; }
-pre[class*="language-"].f5 { font-size: 1rem; }
-pre[class*="language-"].f6 { font-size: .875rem; }
-pre[class*="language-"].f7 { font-size: .75rem; }
+pre[class*="language-"].f1 {
+  font-size: 3rem;
+}
+pre[class*="language-"].f2 {
+  font-size: 2.25rem;
+}
+pre[class*="language-"].f3 {
+  font-size: 1.5rem;
+}
+pre[class*="language-"].f4 {
+  font-size: 1.25rem;
+}
+pre[class*="language-"].f5 {
+  font-size: 1rem;
+}
+pre[class*="language-"].f6 {
+  font-size: 0.875rem;
+}
+pre[class*="language-"].f7 {
+  font-size: 0.75rem;
+}
 
 .page-content li,
 footer li {
@@ -257,8 +269,9 @@ aside ul.page-list ul.page-list {
   overflow: hidden;
   background: linear-gradient(85deg, #a51b1b 0%, #7d2424 100%);
 
-  &:before, &:after {
-    content: '';
+  &:before,
+  &:after {
+    content: "";
     display: block;
     position: absolute;
     width: 100%;
@@ -298,7 +311,7 @@ aside ul.page-list ul.page-list {
   }
 
   section:after {
-    content: '';
+    content: "";
     display: block;
     position: absolute;
     width: 0;
@@ -335,7 +348,7 @@ aside ul.page-list ul.page-list {
     background-color: $backgroundColor;
   }
   .mailinglist:after {
-    content: '';
+    content: "";
     display: block;
     position: absolute;
     width: 0;
@@ -362,7 +375,9 @@ aside ul.page-list ul.page-list {
       padding-bottom: 48px; //12vh;
     }
 
-    h2 { margin: 0; }
+    h2 {
+      margin: 0;
+    }
 
     .container {
       @extend .w-100;
@@ -458,7 +473,7 @@ span,
 ul,
 ol {
   code {
-    background: RGBA(0,0,0,0.07);
+    background: RGBA(0, 0, 0, 0.07);
     border-radius: 0.3em;
     padding: 0.05em 0.3em;
   }
@@ -486,7 +501,12 @@ pre.no-shadow {
   box-shadow: none;
 }
 
-h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
   font-size: 0.95em;
 }
 
@@ -544,7 +564,7 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
 }
 
 .button--solid-light {
-  color: #9E1E1B;
+  color: #9e1e1b;
   @extend .button-common;
   @extend .b--white;
   @extend .bg-white;
@@ -573,7 +593,8 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
   width: 100%;
   border-collapse: collapse;
 }
-.pricing-table td, .pricing-table th {
+.pricing-table td,
+.pricing-table th {
   width: 25%;
 }
 .pricing-table thead th {
@@ -632,25 +653,31 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
     thead {
       display: none;
     }
-    tbody, thead, tfoot {
-      td, th, tr {
+    tbody,
+    thead,
+    tfoot {
+      td,
+      th,
+      tr {
         display: block;
         width: auto;
         text-align: center;
       }
     }
-    tbody, tfoot {
+    tbody,
+    tfoot {
       tr {
         padding: 1rem 0.5rem;
       }
-      td, th {
+      td,
+      th {
         padding: 0;
         margin: 0.5rem 0 0 0;
         position: relative;
         padding-left: 40%;
       }
       td::before {
-        content: 'Placeholder';
+        content: "Placeholder";
         position: absolute;
         left: 0.5rem;
         top: 0;
@@ -658,13 +685,13 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
         font-size: 1.2em;
       }
       td:nth-of-type(1)::before {
-        content: 'Core';
+        content: "Core";
       }
       td:nth-of-type(2)::before {
-        content: 'Supporter';
+        content: "Supporter";
       }
       td:nth-of-type(3)::before {
-        content: 'Pro';
+        content: "Pro";
       }
     }
   }
@@ -706,7 +733,8 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
 
 @media screen and (max-width: 50em) {
   .template-home .top-section {
-    &:after, &:before {
+    &:after,
+    &:before {
       left: 50%;
     }
   }
@@ -722,7 +750,8 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
 
 @media screen and (max-width: 30em) {
   .template-home .top-section {
-    &:after, &:before {
+    &:after,
+    &:before {
       left: 50%;
     }
   }
@@ -747,7 +776,7 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
 .template-home {
   pre {
     padding: 0.5rem 1rem;
-    background-color: rgba(0,0,0,0.3);
+    background-color: rgba(0, 0, 0, 0.3);
     border-radius: 7px;
     white-space: pre-wrap;
     padding-left: 1.7rem;
@@ -772,7 +801,8 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
       min-height: 600px;
     }
   }
-  .top-section, .bottom-section {
+  .top-section,
+  .bottom-section {
     .box-content {
       position: relative;
       z-index: 1;
@@ -864,10 +894,14 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
 a.inherit-color {
   color: inherit;
 }
-.flex-wrap-reverse { -ms-flex-wrap: wrap-reverse; flex-wrap: wrap-reverse; }
+.flex-wrap-reverse {
+  -ms-flex-wrap: wrap-reverse;
+  flex-wrap: wrap-reverse;
+}
 
 #___gatsby {
-  &:focus, &>div:focus {
+  &:focus,
+  & > div:focus {
     outline: none;
   }
 }
