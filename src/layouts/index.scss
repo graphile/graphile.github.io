@@ -235,8 +235,12 @@ a {
   }
 }
 
-.sidebar .page-list {
+aside .page-list {
   @extend .pa0;
+  a.active {
+    color: black;
+    text-decoration: underline;
+  }
 }
 
 
