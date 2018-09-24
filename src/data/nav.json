@@ -154,40 +154,51 @@
         "subpages": []
       },
       {
-        "to": "/postgraphile/performance/",
-        "title": "Performance",
-        "sectionId": "overview",
-        "subpages": []
+        "to": "/postgraphile/namespaces/",
+        "title": "Namespaces",
+        "sectionId": "basics"
+      },
+      {
+        "to": "/postgraphile/inflection/",
+        "title": "Inflection",
+        "sectionId": "basics"
       },
       {
         "to": "/postgraphile/tables/",
         "title": "Tables",
         "sectionId": "basics",
-        "subpages": []
-      },
-      {
-        "to": "/postgraphile/relations/",
-        "title": "Relations",
-        "sectionId": "basics",
-        "subpages": []
-      },
-      {
-        "to": "/postgraphile/connections/",
-        "title": "Connections",
-        "sectionId": "basics",
-        "subpages": []
-      },
-      {
-        "to": "/postgraphile/filtering/",
-        "title": "GraphQL: Filtering",
-        "sectionId": "basics",
-        "subpages": []
-      },
-      {
-        "to": "/postgraphile/crud-mutations/",
-        "title": "CRUD Mutations",
-        "sectionId": "basics",
-        "subpages": []
+        "subpages": [
+          {
+            "to": "/postgraphile/relations/",
+            "title": "Relations",
+            "sectionId": "basics",
+            "subpages": []
+          },
+          {
+            "to": "/postgraphile/connections/",
+            "title": "Connections",
+            "sectionId": "basics",
+            "subpages": []
+          },
+          {
+            "to": "/postgraphile/filtering/",
+            "title": "Filtering",
+            "sectionId": "basics",
+            "subpages": []
+          },
+          {
+            "to": "/postgraphile/crud-mutations/",
+            "title": "CRUD Mutations",
+            "sectionId": "basics",
+            "subpages": []
+          },
+          {
+            "to": "/postgraphile/node-id/",
+            "title": "nodeId / id",
+            "sectionId": "basics",
+            "subpages": []
+          }
+        ]
       },
       {
         "to": "/postgraphile/computed-columns/",
@@ -350,6 +361,12 @@
         "to": "/postgraphile/code-of-conduct/",
         "title": "Code of Conduct",
         "sectionId": "community",
+        "subpages": []
+      },
+      {
+        "to": "/postgraphile/performance/",
+        "title": "Performance",
+        "sectionId": "overview",
         "subpages": []
       },
       {

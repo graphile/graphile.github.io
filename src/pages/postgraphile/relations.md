@@ -9,14 +9,13 @@ title: Relations
 We automatically discover relations between tables by inspecting their foreign
 keys, and use this to build relations into the generated GraphQL schema.
 
-We can detect one-to-many and many-to-one relations. One-to-one and
-many-to-many relations are exposed in the same way but do not always give the
-best API currently.
+We can detect one-to-one, one-to-many and many-to-one relations. We don't currently have built in support for many-to-many shortcut relationships, but you can still traverse the many-to-many relationship via the join table.
 
 It's also possible to add constraints on one-to-many relations such as [filtering
 with a condition](/postgraphile/filtering/).
 
 ### Example database schema
+
 ```sql
 create schema a;
 create schema c;
@@ -34,7 +33,7 @@ create table a.post (
   headline text not null,
   body text,
   -- `references` 👇  sets up the foreign key relation
-  author_id int4 references c.person(id) 
+  author_id int4 references c.person(id)
 );
 ```
 

@@ -14,8 +14,12 @@ This is seen as a GraphQL best practice.
 
 The enhancements that we apply on top of Relay's connection spec include:
 
-- `totalCount` - the total number of records matching the query (excluding cursor/limit/offset constraints)
-- `nodes` - just the nodes (no `edge` wrapper) useful if you don't need the cursor for every entry and want a simple data structure
-- `pageInfo.startCursor` and `pageInfo.endCursor` - useful for pagination if you use `nodes { ... }` rather than `edges { cursor, node { ... } }`
+* `totalCount` - the total number of records matching the query (excluding cursor/limit/offset constraints)
+* `nodes` - just the nodes (no `edge` wrapper) useful if you don't need the cursor for every entry and want a simple data structure
+* `pageInfo.startCursor` and `pageInfo.endCursor` - useful for pagination if you use `nodes { ... }` rather than `edges { cursor, node { ... } }`
 
 It's also possible to filter connections using [conditions](/postgraphile/filtering/).
+
+If you prefer a simpler list interface over GraphQL connections then you
+can enable that using our [`--simple-collections [omit|both|only]`
+option](/postgraphile/usage-cli/).
