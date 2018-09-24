@@ -108,10 +108,6 @@
         "title": "Basics"
       },
       {
-        "id": "intermediate",
-        "title": "Intermediate"
-      },
-      {
         "id": "customising",
         "title": "Customising"
       },
@@ -201,27 +197,40 @@
         ]
       },
       {
-        "to": "/postgraphile/computed-columns/",
-        "title": "Computed Columns",
+        "to": "/postgraphile/functions/",
+        "title": "Functions",
         "sectionId": "basics",
-        "subpages": []
-      },
-      {
-        "to": "/postgraphile/custom-queries/",
-        "title": "Custom Queries",
-        "sectionId": "basics",
-        "subpages": []
-      },
-      {
-        "to": "/postgraphile/custom-mutations/",
-        "title": "Custom Mutations",
-        "sectionId": "basics",
-        "subpages": []
+        "subpages": [
+          {
+            "to": "/postgraphile/computed-columns/",
+            "title": "Computed Columns",
+            "sectionId": "basics",
+            "subpages": []
+          },
+          {
+            "to": "/postgraphile/custom-queries/",
+            "title": "Custom Queries",
+            "sectionId": "basics",
+            "subpages": []
+          },
+          {
+            "to": "/postgraphile/custom-mutations/",
+            "title": "Custom Mutations",
+            "sectionId": "basics",
+            "subpages": []
+          },
+          {
+            "to": "/postgraphile/function-restrictions/",
+            "title": "Function Restrictions",
+            "sectionId": "basics",
+            "subpages": []
+          }
+        ]
       },
       {
         "to": "/postgraphile/smart-comments/",
         "title": "Smart Comments",
-        "sectionId": "basics",
+        "sectionId": "customising",
         "subpages": []
       },
       {
@@ -233,19 +242,19 @@
       {
         "to": "/postgraphile/introspection/",
         "title": "Introspection",
-        "sectionId": "basics",
+        "sectionId": "faq",
         "subpages": []
       },
       {
         "to": "/postgraphile/extending/",
         "title": "Schema Plugins",
-        "sectionId": "basics",
+        "sectionId": "customising",
         "subpages": []
       },
       {
         "to": "/postgraphile/plugins/",
         "title": "Server Plugins",
-        "sectionId": "basics",
+        "sectionId": "customising",
         "subpages": []
       },
       {
@@ -257,7 +266,7 @@
       {
         "to": "/postgraphile/production/",
         "title": "Production Considerations",
-        "sectionId": "basics",
+        "sectionId": "guides",
         "subpages": []
       },
       {

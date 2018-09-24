@@ -6,12 +6,14 @@ title: PostGraphile Function Restrictions
 
 ## Function Restrictions
 
-PostGraphile doesn't support all functions yet; here's some common
-restrictions that effect Custom Queries, Custom Mutations and Computed
-Columns, and how to work around the restrictions.
+PostGraphile doesn't support all PostgreSQL functions yet (though there's [a
+PR almost complete](https://github.com/graphile/graphile-engine/pull/296) to
+add much broader support!); here's some common restrictions that effect
+Custom Queries, Custom Mutations and Computed Columns, and how to work around
+the restrictions.
 
-If you'd like to help lift these restrictions, the place to start would be
-[`makeProcField`](https://github.com/graphile/graphile-build/blob/69d7b1cbe48ea5f50e3121916e7b1e12d1c70008/packages/graphile-build-pg/src/plugins/makeProcField.js)
+~~If you'd like to help lift these restrictions, the place to start would be
+[`makeProcField`](https://github.com/graphile/graphile-build/blob/69d7b1cbe48ea5f50e3121916e7b1e12d1c70008/packages/graphile-build-pg/src/plugins/makeProcField.js)~~
 
 ### Must return a named type
 
@@ -20,7 +22,6 @@ we do not currently construct a dynamic type specific to the function so
 we do not support "anonymous" or "inline" types.
 
 Here's some examples of functions that are not supported, and how to solve it:
-
 
 ```sql
 # NOT SUPPORTED:
