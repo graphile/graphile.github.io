@@ -38,5 +38,6 @@ module.exports = {
     "no-restricted-syntax": 0,
     "no-await-in-loop": 0,
     camelcase: 0,
+    "react/prop-types": 0,
   },
 };
