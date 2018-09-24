@@ -138,6 +138,10 @@ p,
     @extend .pb5-ns;
     @extend .pb4;
   }
+  aside section {
+    @extend .pt4;
+    @extend .pb0;
+  }
 }
 
 pre[class*="language-"].br0 {
@@ -243,6 +247,10 @@ aside .page-list {
   }
 }
 
+aside ul.page-list ul.page-list {
+  margin-top: 0.25rem;
+  margin-left: 1rem;
+}
 
 .template-marketing-hero {
   position: relative;

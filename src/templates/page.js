@@ -17,10 +17,10 @@ const AugmentedText = ({ children, noLink }) => (
   />
 );
 
-function PageList({ navs, location }) {
+function PageList({ pages, location }) {
   return (
-    <ul className="page-list nav flex-column mb5">
-      {navs.map(({ to, title }, idx) => (
+    <ul className="page-list nav flex-column">
+      {pages.map(({ to, title, subpages }, idx) => (
         <li key={idx} className="f6 lh-copy pv1">
           <Link
             className={`nav-link ${location.pathname === to ? "active" : ""}`}
@@ -28,11 +28,29 @@ function PageList({ navs, location }) {
           >
             <AugmentedText>{title}</AugmentedText>
           </Link>
+          {subpages && subpages.length ? (
+            <PageList pages={subpages} location={location} />
+          ) : null}
         </li>
       ))}
     </ul>
   );
 }
+
+const Nav = ({ sections, pages, location }) => (
+  <aside>
+    {sections.map(({ id, title }, idx) => (
+      <section key={idx}>
+        <h4 className="f6 ttu fw6 mt0 mb3 bb pb2">
+          <AugmentedText>{title}</AugmentedText>
+        </h4>
+        <div className="nested-list-reset">
+          <PageList location={location} pages={pages.filter(sectionIs(id))} />
+        </div>
+      </section>
+    ))}
+  </aside>
+);
 
 const tag = (name, label = name, noLink = false) =>
   `<${
@@ -115,21 +133,11 @@ const Page = ({
         <section>
           <div className="container">
             <div className="row between-xs">
-              <aside className="sidebar col-xs-12 col-md-3 last-xs mt3">
-                {navSections.map(({ id, title }, idx) => (
-                  <section key={idx}>
-                    <h4 className="f6 ttu fw6 mt0 mb3 bb pb2">
-                      <AugmentedText>{title}</AugmentedText>
-                    </h4>
-                    <div className="nested-list-reset">
-                      <PageList
-                        location={location}
-                        navs={navPages.filter(sectionIs(id))}
-                      />
-                    </div>
-                  </section>
-                ))}
-              </aside>
+              <Nav
+                sections={navSections}
+                pages={navPages}
+                location={location}
+              />
               <div className="col-xs-12 col-md-9 first-xs main-content">
                 <div className="row">
                   <div className="col-xs-12" style={{ width: "100%" }}>
@@ -214,6 +222,11 @@ export const pageQuery = graphql`
             to
             title
             sectionId
+            subpages {
+              to
+              title
+              sectionId
+            }
           }
         }
       }

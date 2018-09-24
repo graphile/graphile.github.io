@@ -19,67 +19,80 @@
       {
         "to": "/graphile-build/getting-started/",
         "title": "Getting Started",
-        "sectionId": "guides"
+        "sectionId": "guides",
+        "subpages": []
       },
       {
         "to": "/graphile-build/plugins/",
         "title": "Plugins",
-        "sectionId": "guides"
+        "sectionId": "guides",
+        "subpages": []
       },
       {
         "to": "/graphile-build/hooks/",
         "title": "Hooks",
-        "sectionId": "guides"
+        "sectionId": "guides",
+        "subpages": []
       },
       {
         "to": "/graphile-build/look-ahead/",
         "title": "Look Ahead",
-        "sectionId": "guides"
+        "sectionId": "guides",
+        "subpages": []
       },
       {
         "to": "/graphile-build/graphile-build/",
         "title": "graphile-build",
-        "sectionId": "library-reference"
+        "sectionId": "library-reference",
+        "subpages": []
       },
       {
         "to": "/graphile-build/schema-builder/",
         "title": "SchemaBuilder",
-        "sectionId": "library-reference"
+        "sectionId": "library-reference",
+        "subpages": []
       },
       {
         "to": "/graphile-build/plugin-options/",
         "title": "Options",
-        "sectionId": "library-reference"
+        "sectionId": "library-reference",
+        "subpages": []
       },
       {
         "to": "/graphile-build/default-plugins/",
         "title": "Default Plugins",
-        "sectionId": "library-reference"
+        "sectionId": "library-reference",
+        "subpages": []
       },
       {
         "to": "/graphile-build/omitting-plugins/",
         "title": "Omitting Plugins",
-        "sectionId": "guides"
+        "sectionId": "guides",
+        "subpages": []
       },
       {
         "to": "/graphile-build/all-hooks/",
         "title": "All Hooks",
-        "sectionId": "plugin-reference"
+        "sectionId": "plugin-reference",
+        "subpages": []
       },
       {
         "to": "/graphile-build/build-object/",
         "title": "Build Object",
-        "sectionId": "plugin-reference"
+        "sectionId": "plugin-reference",
+        "subpages": []
       },
       {
         "to": "/graphile-build/context-object/",
         "title": "Context Object",
-        "sectionId": "plugin-reference"
+        "sectionId": "plugin-reference",
+        "subpages": []
       },
       {
         "to": "/graphile-build/schema-builder/",
         "title": "SchemaBuilder",
-        "sectionId": "plugin-reference"
+        "sectionId": "plugin-reference",
+        "subpages": []
       }
     ]
   },
@@ -91,12 +104,20 @@
         "title": "Overview"
       },
       {
-        "id": "guides",
-        "title": "Guides"
+        "id": "basics",
+        "title": "Basics"
       },
       {
-        "id": "usage",
-        "title": "Usage"
+        "id": "intermediate",
+        "title": "Intermediate"
+      },
+      {
+        "id": "customising",
+        "title": "Customising"
+      },
+      {
+        "id": "guides",
+        "title": "Guides"
       },
       {
         "id": "community",
@@ -111,187 +132,237 @@
       {
         "to": "/postgraphile/introduction/",
         "title": "Introduction",
-        "sectionId": "overview"
+        "sectionId": "overview",
+        "subpages": []
       },
       {
         "to": "/postgraphile/examples/",
-        "title": "Examples",
-        "sectionId": "overview"
+        "title": "EXAMPLES",
+        "sectionId": "overview",
+        "subpages": []
       },
       {
         "to": "/postgraphile/quick-start-guide/",
         "title": "Quick Start Guide",
-        "sectionId": "overview"
+        "sectionId": "basics",
+        "subpages": []
       },
       {
         "to": "/postgraphile/evaluating/",
         "title": "Evaluating for your Project",
-        "sectionId": "guides"
-      },
-      {
-        "to": "/postgraphile/requirements/",
-        "title": "Requirements",
-        "sectionId": "overview"
+        "sectionId": "guides",
+        "subpages": []
       },
       {
         "to": "/postgraphile/performance/",
         "title": "Performance",
-        "sectionId": "overview"
+        "sectionId": "overview",
+        "subpages": []
       },
       {
-        "to": "/postgraphile/connections/",
-        "title": "Connections",
-        "sectionId": "overview"
-      },
-      {
-        "to": "/postgraphile/filtering/",
-        "title": "Filtering",
-        "sectionId": "overview"
+        "to": "/postgraphile/tables/",
+        "title": "Tables",
+        "sectionId": "basics",
+        "subpages": []
       },
       {
         "to": "/postgraphile/relations/",
         "title": "Relations",
-        "sectionId": "overview"
+        "sectionId": "basics",
+        "subpages": []
+      },
+      {
+        "to": "/postgraphile/connections/",
+        "title": "Connections",
+        "sectionId": "basics",
+        "subpages": []
+      },
+      {
+        "to": "/postgraphile/filtering/",
+        "title": "GraphQL: Filtering",
+        "sectionId": "basics",
+        "subpages": []
       },
       {
         "to": "/postgraphile/crud-mutations/",
         "title": "CRUD Mutations",
-        "sectionId": "overview"
+        "sectionId": "basics",
+        "subpages": []
       },
       {
         "to": "/postgraphile/computed-columns/",
         "title": "Computed Columns",
-        "sectionId": "overview"
+        "sectionId": "basics",
+        "subpages": []
       },
       {
         "to": "/postgraphile/custom-queries/",
         "title": "Custom Queries",
-        "sectionId": "overview"
+        "sectionId": "basics",
+        "subpages": []
       },
       {
         "to": "/postgraphile/custom-mutations/",
         "title": "Custom Mutations",
-        "sectionId": "overview"
+        "sectionId": "basics",
+        "subpages": []
       },
       {
         "to": "/postgraphile/smart-comments/",
         "title": "Smart Comments",
-        "sectionId": "overview"
+        "sectionId": "basics",
+        "subpages": []
       },
       {
         "to": "/postgraphile/security/",
         "title": "Security",
-        "sectionId": "overview"
+        "sectionId": "basics",
+        "subpages": []
       },
       {
         "to": "/postgraphile/introspection/",
         "title": "Introspection",
-        "sectionId": "overview"
+        "sectionId": "basics",
+        "subpages": []
       },
       {
         "to": "/postgraphile/extending/",
         "title": "Schema Plugins",
-        "sectionId": "overview"
+        "sectionId": "basics",
+        "subpages": []
       },
       {
         "to": "/postgraphile/plugins/",
         "title": "Server Plugins",
-        "sectionId": "overview"
+        "sectionId": "basics",
+        "subpages": []
       },
       {
         "to": "/postgraphile/subscriptions/",
         "title": "Subscriptions",
-        "sectionId": "overview"
+        "sectionId": "basics",
+        "subpages": []
       },
       {
         "to": "/postgraphile/production/",
         "title": "Production Considerations",
-        "sectionId": "overview"
+        "sectionId": "basics",
+        "subpages": []
       },
       {
         "to": "/postgraphile/reserved-keywords/",
         "title": "Reserved Keywords",
-        "sectionId": "overview"
+        "sectionId": "basics",
+        "subpages": []
       },
       {
         "to": "/postgraphile/debugging/",
         "title": "Debugging",
-        "sectionId": "overview"
+        "sectionId": "basics",
+        "subpages": []
       },
       {
         "to": "/postgraphile/jwt-guide/",
         "title": "PostGraphile JWT Guide",
-        "sectionId": "guides"
+        "sectionId": "guides",
+        "subpages": []
       },
       {
         "to": "/postgraphile/default-role/",
         "title": "The Default Role",
-        "sectionId": "guides"
+        "sectionId": "guides",
+        "subpages": []
       },
       {
         "to": "/postgraphile/procedures/",
         "title": "PostgreSQL Procedures",
-        "sectionId": "guides"
+        "sectionId": "guides",
+        "subpages": []
       },
       {
         "to": "/postgraphile/postgresql-schema-design/",
         "title": "PostgreSQL Schema Design",
-        "sectionId": "guides"
+        "sectionId": "guides",
+        "subpages": []
       },
       {
         "to": "/postgraphile/postgresql-indexes/",
         "title": "PostgreSQL Indexes",
-        "sectionId": "guides"
+        "sectionId": "guides",
+        "subpages": []
       },
       {
         "to": "/postgraphile/v4-new-features/",
         "title": "v4 Feature Guide",
-        "sectionId": "guides"
+        "sectionId": "guides",
+        "subpages": []
       },
       {
         "to": "/postgraphile/v3-migration/",
         "title": "v3 → v4 Migration Guide",
-        "sectionId": "guides"
+        "sectionId": "guides",
+        "subpages": []
       },
       {
         "to": "/postgraphile/testing-jest/",
         "title": "Testing with Jest",
-        "sectionId": "guides"
+        "sectionId": "guides",
+        "subpages": []
       },
       {
-        "to": "/postgraphile/usage-cli/",
-        "title": "CLI Usage",
-        "sectionId": "usage"
-      },
-      {
-        "to": "/postgraphile/usage-library/",
-        "title": "Library Usage",
-        "sectionId": "usage"
-      },
-      {
-        "to": "/postgraphile/usage-schema/",
-        "title": "Schema-only Usage",
-        "sectionId": "usage"
+        "to": "/postgraphile/usage/",
+        "title": "Usage",
+        "sectionId": "overview",
+        "subpages": [
+          {
+            "to": "/postgraphile/usage-cli/",
+            "title": "CLI Usage",
+            "sectionId": "overview",
+            "subpages": []
+          },
+          {
+            "to": "/postgraphile/usage-library/",
+            "title": "Library Usage",
+            "sectionId": "overview",
+            "subpages": []
+          },
+          {
+            "to": "/postgraphile/usage-schema/",
+            "title": "Schema-only Usage",
+            "sectionId": "overview",
+            "subpages": []
+          }
+        ]
       },
       {
         "to": "/postgraphile/community-plugins/",
         "title": "Community Plugins",
-        "sectionId": "community"
+        "sectionId": "community",
+        "subpages": []
       },
       {
         "to": "/postgraphile/community-chat/",
         "title": "Community Chat",
-        "sectionId": "community"
+        "sectionId": "community",
+        "subpages": []
       },
       {
         "to": "/postgraphile/code-of-conduct/",
         "title": "Code of Conduct",
-        "sectionId": "community"
+        "sectionId": "community",
+        "subpages": []
+      },
+      {
+        "to": "/postgraphile/requirements/",
+        "title": "Requirements",
+        "sectionId": "overview",
+        "subpages": []
       },
       {
         "to": "/postgraphile/why-nullable/",
         "title": "Why is it nullable?",
-        "sectionId": "faq"
+        "sectionId": "faq",
+        "subpages": []
       }
     ]
   },
@@ -299,7 +370,7 @@
     "name": "graphile-build-pg",
     "sections": [
       {
-        "id": "usage",
+        "id": "overview",
         "title": "Usage"
       }
     ],
@@ -307,7 +378,8 @@
       {
         "to": "/postgraphile/settings/",
         "title": "Settings",
-        "sectionId": "usage"
+        "sectionId": "overview",
+        "subpages": []
       }
     ]
   }
