@@ -1,67 +1,49 @@
 ---
 layout: page
 path: /postgraphile/usage/
-title: Graphile-Build-PG Usage
+title: PostGraphile Usage
 ---
 
 ## Usage
 
-It's recommended that you consume these plugins via the
-[`postgraphile-core`](https://github.com/graphile/graphile-build/tree/master/packages/postgraphile-core)
-module which is used internally by
-[`PostGraphQL`](https://github.com/graphile/postgraphile). This module is
-fairly small and exposes the following methods:
+PostGraphile is formed of three layers.
 
-- `createPostGraphileSchema(pgConfig, schemas, options)` - returns a promise to a GraphQL schema
-- `watchPostGraphileSchema(pgConfig, schemas, options, onNewSchema)` - returns a
-  promise that returns a `release` function that you can call to stop watching;
-  the `onNewSchema` callback will be called every time a new schema is
-  generated, and it is guaranteed to be called before the promise resolves.
+At the very top we have the [**PostGraphile CLI**](/postgraphile/usage-cli/).
+This layer is the most user-friendly, and is responsible for accepting common
+options from the command line, spinning up a HTTP server (or a cluster of
+them, or none at all depending on what options you're using) and mounting the
+PostGraphile middleware (see next). **Most users should start with this
+layer, many users use it successfully in production, and it's where we
+recommend you start.**
 
-If you prefer to use the plugins yourself it's advised that you use the
-`defaultPlugins` export from `graphile-build-pg` and then create a new array
-based on that into which you may insert or remove specific plugins. This is
-because it is ordered in a way to ensure the plugins work correctly (and we may
-still split up or restructure the plugins within it).
+The PostGraphile CLI wraps the [**PostGraphile middleware**
+("library")](/postgraphile/usage-library/). This middleware is suitable for
+mounting in Node.js HTTP, Connect, Express or Koa applications. This layer is
+responsible for receiving, deciphering and validating the GraphQL HTTP
+request from the user according to the options supplied, configuring a PG
+client with the relevant settings, and then sending the query on to the
+GraphQL schema to be resolved. **About 70% of PostGraphile users end up using
+this layer in their applications**; reasons to use this over the CLI include
+the ability to add Express middlewares before PostGraphile (e.g. to perform
+rate limiting, sessions, authentication and other concerns) and the ability
+to take greater control over the PostGraphile system.
 
-### `defaultPlugins`
+Deepest down is the [**PostGraphile GraphQL schema**
+("schema-only")](/postgraphile/usage-schema/) itself which contains all the
+types, fields and resolvers. (The schema is constructed dynamically, so
+cannot be written to disk.) Most users will never use this level.
 
-An array of graphql-build plugins in the correct order to generate a
-well-thought-out GraphQL object tree based on your PostgreSQL schema. This is
-the array that `postgraphile-core` uses.
+The deeper you go in the stack, the more complex your setup code will be, but
+the more powerful your integration can be. We're always trying to expose as
+much power as is reasonable through the CLI, but it's not sensible to make
+every possible thing a CLI option - if you need that level of customisation
+then you should opt for the middleware.
 
-### `inflections`
+We recommend that you start with the PostGraphile CLI and then move to the
+PostGraphile library if you need deeper integration with Node.js.
 
-This is a list of inflection engines, we currently have the following:
+Which layer would you like to read more about?
 
-- `defaultInflection` - a sensible default
-- `postGraphileInflection` - as above, but enums get converted to `CONSTANT_CASE`
-- `postGraphileClassicIdsInflection` - as above, but `id` attributes get renamed to `rowId` to prevent conflicts with `id` from the Relay Global Unique Object Specification.
-
-### Manual usage
-
-```js
-import { defaultPlugins, getBuilder } from "graphile-build";
-import {
-  defaultPlugins as pgDefaultPlugins,
-  inflections: {
-    defaultInflection,
-  },
-} from "graphile-build-pg";
-
-async function getSchema(pgConfig = process.env.DATABASE_URL, pgSchemas = ['public'], additionalPlugins = []) {
-  return getBuilder(
-    [
-      ...defaultPlugins,
-      ...pgDefaultPlugins,
-      ...additionalPlugins
-    ],
-    {
-      pgConfig,
-      pgSchemas,
-      pgExtendedTypes: true,
-      pgInflection: defaultInflection,
-    }
-  );
-}
-```
+* [**CLI**](/postgraphile/usage-cli/)
+* [**Middleware** ("library")](/postgraphile/usage-library/)
+* [**GraphQL schema** ("schema-only")](/postgraphile/usage-schema/)
