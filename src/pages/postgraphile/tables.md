@@ -25,6 +25,30 @@ CREATE TABLE app_public.users (
 ```
 
 ### Read
+<!--!RUN
+dropdb test
+createdb test
+psql -1X test <<HERE
+CREATE EXTENSION IF NOT EXISTS citext;
+CREATE SCHEMA app_public;
+
+CREATE TABLE app_public.organizations (
+  id serial primary key
+);
+
+CREATE TABLE app_public.users (
+  id serial PRIMARY KEY,
+  username citext NOT NULL unique,
+  name text NOT NULL,
+  organization_id int NOT NULL
+    REFERENCES app_public.organizations ON DELETE CASCADE,
+  is_admin boolean NOT NULL DEFAULT false,
+  created_at timestamptz NOT NULL DEFAULT now(),
+  updated_at timestamptz NOT NULL DEFAULT now()
+);
+HERE
+npx postgraphile -c 'test' -s 'app_public' --no-server --export-schema-graphql postgraphile-tables-1.graphql
+-->
 
 If the `SELECT` permission is granted for the table or any of its columns\* (or if we're ignoring RBAC, as we do by default), then:
 

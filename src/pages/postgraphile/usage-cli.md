@@ -81,7 +81,7 @@ There are more CLI options available to customise the GraphQL server:
 * `--export-schema-graphql <path>`  
   enables exporting the detected schema, in GraphQL schema format, to the given location. The directories must exist already, if the file exists it will be overwritten.
 * `-X`, `--no-server`  
-  [experimental] for when you just want to use --write-cache or --export-schema-\* and not actually run a server (e.g. CI)
+  [experimental] for when you just want to use --write-cache or --export-schema-* and not actually run a server (e.g. CI)
 * `-q`, `--graphql <path>`  
   the route to mount the GraphQL server on. defaults to `/graphql`
 * `-i`, `--graphiql <path>`  
