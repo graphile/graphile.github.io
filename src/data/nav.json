@@ -138,15 +138,47 @@
         "subpages": []
       },
       {
-        "to": "/postgraphile/quick-start-guide/",
-        "title": "Quick Start Guide",
-        "sectionId": "basics",
+        "to": "/postgraphile/usage/",
+        "title": "Usage",
+        "sectionId": "overview",
+        "subpages": [
+          {
+            "to": "/postgraphile/usage-cli/",
+            "title": "CLI Usage",
+            "sectionId": "overview",
+            "subpages": []
+          },
+          {
+            "to": "/postgraphile/usage-library/",
+            "title": "Library Usage",
+            "sectionId": "overview",
+            "subpages": []
+          },
+          {
+            "to": "/postgraphile/usage-schema/",
+            "title": "Schema-only Usage",
+            "sectionId": "overview",
+            "subpages": []
+          }
+        ]
+      },
+      {
+        "to": "/postgraphile/performance/",
+        "title": "Performance",
+        "sectionId": "overview",
         "subpages": []
       },
       {
-        "to": "/postgraphile/evaluating/",
-        "title": "Evaluating for your Project",
-        "sectionId": "guides",
+        "to": "/postgraphile/requirements/",
+        "title": "Requirements",
+        "sectionId": "overview",
+        "subpages": []
+      },
+
+      {
+        "to": "/postgraphile/quick-start-guide/",
+        "title": "Quick Start Guide",
+        "sectionId": "basics",
         "subpages": []
       },
       {
@@ -228,21 +260,34 @@
         ]
       },
       {
-        "to": "/postgraphile/smart-comments/",
-        "title": "Smart Comments",
-        "sectionId": "customising",
-        "subpages": []
-      },
-      {
         "to": "/postgraphile/security/",
         "title": "Security",
         "sectionId": "basics",
         "subpages": []
       },
       {
-        "to": "/postgraphile/introspection/",
-        "title": "Introspection",
-        "sectionId": "faq",
+        "to": "/postgraphile/subscriptions/",
+        "title": "Subscriptions",
+        "sectionId": "basics",
+        "subpages": []
+      },
+      {
+        "to": "/postgraphile/reserved-keywords/",
+        "title": "Reserved Keywords",
+        "sectionId": "basics",
+        "subpages": []
+      },
+      {
+        "to": "/postgraphile/debugging/",
+        "title": "Debugging",
+        "sectionId": "basics",
+        "subpages": []
+      },
+
+      {
+        "to": "/postgraphile/smart-comments/",
+        "title": "Smart Comments",
+        "sectionId": "customising",
         "subpages": []
       },
       {
@@ -257,28 +302,17 @@
         "sectionId": "customising",
         "subpages": []
       },
+
       {
-        "to": "/postgraphile/subscriptions/",
-        "title": "Subscriptions",
-        "sectionId": "basics",
+        "to": "/postgraphile/evaluating/",
+        "title": "Evaluating for your Project",
+        "sectionId": "guides",
         "subpages": []
       },
       {
         "to": "/postgraphile/production/",
         "title": "Production Considerations",
         "sectionId": "guides",
-        "subpages": []
-      },
-      {
-        "to": "/postgraphile/reserved-keywords/",
-        "title": "Reserved Keywords",
-        "sectionId": "basics",
-        "subpages": []
-      },
-      {
-        "to": "/postgraphile/debugging/",
-        "title": "Debugging",
-        "sectionId": "basics",
         "subpages": []
       },
       {
@@ -329,31 +363,20 @@
         "sectionId": "guides",
         "subpages": []
       },
+
       {
-        "to": "/postgraphile/usage/",
-        "title": "Usage",
-        "sectionId": "overview",
-        "subpages": [
-          {
-            "to": "/postgraphile/usage-cli/",
-            "title": "CLI Usage",
-            "sectionId": "overview",
-            "subpages": []
-          },
-          {
-            "to": "/postgraphile/usage-library/",
-            "title": "Library Usage",
-            "sectionId": "overview",
-            "subpages": []
-          },
-          {
-            "to": "/postgraphile/usage-schema/",
-            "title": "Schema-only Usage",
-            "sectionId": "overview",
-            "subpages": []
-          }
-        ]
+        "to": "/postgraphile/introspection/",
+        "title": "Introspection",
+        "sectionId": "faq",
+        "subpages": []
       },
+      {
+        "to": "/postgraphile/why-nullable/",
+        "title": "Why is it nullable?",
+        "sectionId": "faq",
+        "subpages": []
+      },
+
       {
         "to": "/postgraphile/community-plugins/",
         "title": "Community Plugins",
@@ -370,24 +393,6 @@
         "to": "/postgraphile/code-of-conduct/",
         "title": "Code of Conduct",
         "sectionId": "community",
-        "subpages": []
-      },
-      {
-        "to": "/postgraphile/performance/",
-        "title": "Performance",
-        "sectionId": "overview",
-        "subpages": []
-      },
-      {
-        "to": "/postgraphile/requirements/",
-        "title": "Requirements",
-        "sectionId": "overview",
-        "subpages": []
-      },
-      {
-        "to": "/postgraphile/why-nullable/",
-        "title": "Why is it nullable?",
-        "sectionId": "faq",
         "subpages": []
       }
     ]
