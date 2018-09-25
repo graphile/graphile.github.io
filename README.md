@@ -1,16 +1,13 @@
-The https://graphile.org/ website for PostGraphile and Graphile Build
-=====================================================================
+# The https://graphile.org/ website for PostGraphile and Graphile Build
 
-Building
---------
+## Building
 
 ```bash
 yarn install --force # Because we sometimes get issues with sharp
 yarn run develop
 ```
 
-Troubleshooting
----------------
+## Troubleshooting
 
 Gatsby sometimes goes wrong/gets confused. First port of call is to kill it,
 then clear the `.cache` and `public` folders:

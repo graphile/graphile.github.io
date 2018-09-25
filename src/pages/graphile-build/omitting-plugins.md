@@ -20,15 +20,16 @@ specification support by omitting the
 [`NodePlugin`](/graphile-build/default-plugins/#NodePlugin) plugin:
 
 <!-- source: examples/emptier-schema.js -->
+
 ```js
 const { buildSchema, defaultPlugins, NodePlugin } = require("graphile-build");
 const { printSchema } = require("graphql/utilities");
 
-buildSchema(
-  defaultPlugins.filter(plugin => plugin !== NodePlugin)
-).then(schema => {
-  console.log(printSchema(schema));
-});
+buildSchema(defaultPlugins.filter(plugin => plugin !== NodePlugin)).then(
+  schema => {
+    console.log(printSchema(schema));
+  }
+);
 ```
 
 which generates this much simpler schema:

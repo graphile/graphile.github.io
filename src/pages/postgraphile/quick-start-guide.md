@@ -8,22 +8,23 @@ title: Quick Start Guide
 
 This quick start guide will walk you through spinning up your first PostGraphile server, including installing the prerequisites such as Node and PostgreSQL.
 
-
 ## Table of Contents
-  - [Install Node](#install-node)
-  - [Install PostgreSQL](#install-postgresql)
-  - [Create a Database](#create-a-database)
-  - [Install PostGraphile](#install-postgraphile)
+
+* [Install Node](#install-node)
+* [Install PostgreSQL](#install-postgresql)
+* [Create a Database](#create-a-database)
+* [Install PostGraphile](#install-postgraphile)
 
 ## Install Node
+
 You need to be running Node.js v8.6 or higher to run PostGraphile. You can check your current version of Node by running `node --version`. If you're running a recent version you can skip this section.
 
 There's many ways of installing node; if you're on macOS you might prefer installing with [homebrew](https://brew.sh/) via `brew install node`; if you're on a unix-based system you might like to use [`nvm`](https://github.com/creationix/nvm). Failing these, if you're using OS X or Windows, use one of the installers from the [Node.js download page](https://nodejs.org/en/download/). Make sure you select the version labelled LTS. Linux users can scroll down the page and find the version that works with their system.
 
 Once installed run `node -v` in a terminal to check your version.
 
-
 ## Install PostgreSQL
+
 We need a PostgreSQL database to connect to. You can skip this section if you already have PostgreSQL version `9.6.0` or higher installed.
 
 PostgreSQL does not need to be installed on the same machine, but you'll have a better development experience if it is. Try and minimise database connection latency! If you do not use a local PostgreSQL server then you'll need to modify the commands that follow to account for this.
@@ -67,7 +68,6 @@ $ createdb mydb
 
 This will create a PostgreSQL database called "mydb". You can read more about this on the [PostgreSQL Documentation site](https://www.postgresql.org/docs/9.6/static/tutorial-createdb.html). Now you can run `psql` with your database URL and get a SQL prompt:
 
-
 ```bash
 $ psql "postgres://localhost:5432/mydb"
 
@@ -90,6 +90,7 @@ Run the following query to make sure things are working smoothly:
 ```
 
 ## Install PostGraphile
+
 It is easy to install PostGraphile with [npm](https://docs.npmjs.com/getting-started/installing-node):
 
 ```

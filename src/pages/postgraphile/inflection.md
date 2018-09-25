@@ -37,7 +37,7 @@ const { makeAddInflectorsPlugin } = require("graphile-utils");
 module.exports = makeAddInflectorsPlugin({
   patchType(typeName: string) {
     return this.upperCamelCase(`${typeName}-change-set`);
-  }
+  },
 });
 ```
 

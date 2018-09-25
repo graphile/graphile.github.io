@@ -49,11 +49,11 @@ still can’t get over the one-to-one nature of PostGraphile consider the
 following arguments why putting your business logic in PostgreSQL is a good
 idea:
 
-1. PostgreSQL already has a powerful [user management system][user-management] with fine grained [row level security][row-level-security]. A custom API would mean you have to build your own user management and security.
-2. PostgreSQL allows you to hide implementation details with [views][pg-views] of your data. Simple views can even be [auto-updatable][pg-udpatable-views]. This provides you with the same freedom and flexibility as you might want from a custom API except more performant.
-3. PostgreSQL gives you automatic relations with the `REFERENCES` constraint and PostGraphile automatically detects them. With a custom API, you’d need to hardcode these relationships.
-4. For what it’s worth, you can write in your favorite scripting language in PostgreSQL including [JavaScript][js-in-pg] and [Ruby][ruby-in-pg].
-5. And if you don’t want to write your code inside PostgreSQL, you could also use PostgreSQL’s [`NOTIFY`][pg-notify] feature to fire events to a listening Ruby or [JavaScript][node-pg-notify] microservice can listen and respond to PostgreSQL events (this could include email transactions and event reporting); or add a plugin via Graphile Build to wrap or even replace a PostGraphile resolver.
+1.  PostgreSQL already has a powerful [user management system][user-management] with fine grained [row level security][row-level-security]. A custom API would mean you have to build your own user management and security.
+2.  PostgreSQL allows you to hide implementation details with [views][pg-views] of your data. Simple views can even be [auto-updatable][pg-udpatable-views]. This provides you with the same freedom and flexibility as you might want from a custom API except more performant.
+3.  PostgreSQL gives you automatic relations with the `REFERENCES` constraint and PostGraphile automatically detects them. With a custom API, you’d need to hardcode these relationships.
+4.  For what it’s worth, you can write in your favorite scripting language in PostgreSQL including [JavaScript][js-in-pg] and [Ruby][ruby-in-pg].
+5.  And if you don’t want to write your code inside PostgreSQL, you could also use PostgreSQL’s [`NOTIFY`][pg-notify] feature to fire events to a listening Ruby or [JavaScript][node-pg-notify] microservice can listen and respond to PostgreSQL events (this could include email transactions and event reporting); or add a plugin via Graphile Build to wrap or even replace a PostGraphile resolver.
 
 Still worried about a certain aspect of a schema driven API? Open an issue, we're confident we can convince you otherwise 😉
 

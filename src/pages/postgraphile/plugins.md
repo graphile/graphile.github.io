@@ -62,9 +62,9 @@ module.exports = {
   options: {
     plugins: ["@graphile/plugin-supporter", "@graphile/plugin-pro"],
     connection: "postgres://localhost/my_db",
-    schema: ["app_public"]
+    schema: ["app_public"],
     // ...
-  }
+  },
 };
 ```
 
@@ -78,7 +78,7 @@ To include the dependencies, for straight Node.js 8 you want:
 ```js
 const { postgraphile, makePluginHook } = require("postgraphile");
 const {
-  default: PostGraphileSupporter
+  default: PostGraphileSupporter,
 } = require("@graphile/plugin-supporter");
 const { default: PostGraphilePro } = require("@graphile/plugin-pro");
 ```
@@ -98,7 +98,7 @@ options, you can construct this using `makePluginHook` as such:
 const pluginHook = makePluginHook([PostGraphileSupporter, PostGraphilePro]);
 
 const postGraphileMiddleware = postgraphile(databaseUrl, "app_public", {
-  pluginHook
+  pluginHook,
   // ...
 });
 

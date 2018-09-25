@@ -20,21 +20,21 @@ load plugins.
 
 Schema extension plugins for PostGraphile:
 
-- [postgraphile-plugin-connection-filter](https://github.com/graphile-contrib/postgraphile-plugin-connection-filter) - adds a `filter:` arg to connections that offers a more powerful alternative to the built in filtering operations
-- [postgraphile-plugin-custom-filter](https://github.com/RoadRunnerEngineering/postgraphile-plugin-custom-filter) - adds a `customFilter:` arg to connections that offers user defined filters on any conditions, as long as they can be fit into a `where`
-- [postgraphile-plugin-nested-mutatations](https://github.com/mlipscombe/postgraphile-plugin-nested-mutations) - enables a single mutation to create/update many related records
-- [graphile-upsert-plugin](https://github.com/einarjegorov/graphile-upsert-plugin/blob/master/index.js) - adds upsert mutations
-- [@graphile-contrib/pg-simplify-inflector](https://github.com/graphile-contrib/pg-simplify-inflector) - simplifies field names by automatically removing `ByFooIdAndBarId`-style suffixes.
-- [postgraphile-plugin-derived-field](https://github.com/mattbretl/postgraphile-plugin-derived-field) -  provides an interface for adding derived fields 
-- [postgraphile-plugin-upload-field](https://github.com/mattbretl/postgraphile-plugin-upload-field) -  enables file uploads (see `postgraphile-upload-example` below)
-- [event-phile](https://github.com/stlbucket/event-phile) - "capture designated function calls as re-playable events"
-- [postgraphile-plugin-connection-multi-tenant](https://github.com/deden/postgraphile-plugin-connection-multi-tenant) - "Filtering Connections in PostGraphile by Tenants"
-- [graphile-build-postgis](https://github.com/singingwolfboy/graphile-build-postgis) - PostGIS support (WIP)
-- [postgraphile-pm2-status](https://github.com/stlbucket/phile-starter/blob/master/api/src/graphile-extensions/pm2Status.js) - expose pm2 process status thru a query
-Examples of using these plugins:
+* [postgraphile-plugin-connection-filter](https://github.com/graphile-contrib/postgraphile-plugin-connection-filter) - adds a `filter:` arg to connections that offers a more powerful alternative to the built in filtering operations
+* [postgraphile-plugin-custom-filter](https://github.com/RoadRunnerEngineering/postgraphile-plugin-custom-filter) - adds a `customFilter:` arg to connections that offers user defined filters on any conditions, as long as they can be fit into a `where`
+* [postgraphile-plugin-nested-mutatations](https://github.com/mlipscombe/postgraphile-plugin-nested-mutations) - enables a single mutation to create/update many related records
+* [graphile-upsert-plugin](https://github.com/einarjegorov/graphile-upsert-plugin/blob/master/index.js) - adds upsert mutations
+* [@graphile-contrib/pg-simplify-inflector](https://github.com/graphile-contrib/pg-simplify-inflector) - simplifies field names by automatically removing `ByFooIdAndBarId`-style suffixes.
+* [postgraphile-plugin-derived-field](https://github.com/mattbretl/postgraphile-plugin-derived-field) - provides an interface for adding derived fields
+* [postgraphile-plugin-upload-field](https://github.com/mattbretl/postgraphile-plugin-upload-field) - enables file uploads (see `postgraphile-upload-example` below)
+* [event-phile](https://github.com/stlbucket/event-phile) - "capture designated function calls as re-playable events"
+* [postgraphile-plugin-connection-multi-tenant](https://github.com/deden/postgraphile-plugin-connection-multi-tenant) - "Filtering Connections in PostGraphile by Tenants"
+* [graphile-build-postgis](https://github.com/singingwolfboy/graphile-build-postgis) - PostGIS support (WIP)
+* [postgraphile-pm2-status](https://github.com/stlbucket/phile-starter/blob/master/api/src/graphile-extensions/pm2Status.js) - expose pm2 process status thru a query
+  Examples of using these plugins:
 
-- [postgraphile-upload-example](https://github.com/mattbretl/postgraphile-upload-example) - demonstrates how to add file upload support to PostGraphile using the GraphQL Multipart Request Spec.
+* [postgraphile-upload-example](https://github.com/mattbretl/postgraphile-upload-example) - demonstrates how to add file upload support to PostGraphile using the GraphQL Multipart Request Spec.
 
 These extensions extend PostGraphile in different ways:
 
-- [hapi-postgraphile](https://github.com/mshick/hapi-postgraphile) - add PostGraphile to your HAPI application
+* [hapi-postgraphile](https://github.com/mshick/hapi-postgraphile) - add PostGraphile to your HAPI application

@@ -435,8 +435,8 @@ function AddHttpBinPlugin(builder, { pgExtendedTypes }) {
             // If Dynamic JSON is not enabled, we want a JSON string instead
             return response.text();
           }
-        }
-      }
+        },
+      },
     });
   });
 }
@@ -503,7 +503,7 @@ module.exports = function CreateLinkWrapPlugin(builder) {
             // And give it this name in the result data:
             "__createdRecordId"
           );
-        }
+        },
       }));
 
       // It's possible that `resolve` isn't specified on a field, so in that case
@@ -539,7 +539,7 @@ module.exports = function CreateLinkWrapPlugin(builder) {
 
           // Finally return the result.
           return oldResolveResult;
-        }
+        },
       };
     }
   );

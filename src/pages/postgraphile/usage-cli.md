@@ -81,7 +81,7 @@ There are more CLI options available to customise the GraphQL server:
 * `--export-schema-graphql <path>`  
   enables exporting the detected schema, in GraphQL schema format, to the given location. The directories must exist already, if the file exists it will be overwritten.
 * `-X`, `--no-server`  
-  [experimental] for when you just want to use --write-cache or --export-schema-* and not actually run a server (e.g. CI)
+  [experimental] for when you just want to use --write-cache or --export-schema-\* and not actually run a server (e.g. CI)
 * `-q`, `--graphql <path>`  
   the route to mount the GraphQL server on. defaults to `/graphql`
 * `-i`, `--graphiql <path>`  
@@ -159,12 +159,13 @@ The CLI options can also be specified in a `.postgraphilerc.js` file in the curr
 ```javascript
 module.exports = {
   options: {
-    connection: 'postgres://api_user:api_password@localhost:5432/api_development',
-    schema: ['myApp', 'myAppPrivate'],
-    jwtSecret: 'myJwtSecret',
-    defaultRole: 'myapp_anonymous',
-    jwtTokenIdentifier: 'myApp.jwt_token',
-    watch: true
-  }
+    connection:
+      "postgres://api_user:api_password@localhost:5432/api_development",
+    schema: ["myApp", "myAppPrivate"],
+    jwtSecret: "myJwtSecret",
+    defaultRole: "myapp_anonymous",
+    jwtTokenIdentifier: "myApp.jwt_token",
+    watch: true,
+  },
 };
 ```

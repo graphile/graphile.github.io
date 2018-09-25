@@ -18,11 +18,11 @@ preferred, if your arguments are not named we will assign them an
 auto-generated name such as `arg1`. The rules that apply to these are the
 following:
 
-- [Common PostGraphile function restrictions](/postgraphile/function-restrictions/)
-- if the function accepts arguments, the first argument must NOT be a table type (see computed columns above)
-- must NOT return `VOID`
-- must be marked as `STABLE`
-- must be defined in one of the introspected schemas
+* [Common PostGraphile function restrictions](/postgraphile/function-restrictions/)
+* if the function accepts arguments, the first argument must NOT be a table type (see computed columns above)
+* must NOT return `VOID`
+* must be marked as `STABLE`
+* must be defined in one of the introspected schemas
 
 #### Example
 
@@ -94,4 +94,4 @@ Stripe](https://medium.com/@sastraxi/authenticated-and-stitched-schemas-with-pos
 
 [procedures]: /postgraphile/procedures/
 [forum example]: https://github.com/graphile/postgraphile/tree/master/examples/forum
-[`LIKE`]: http://www.postgresql.org/docs/current/static/functions-matching.html
+[`like`]: http://www.postgresql.org/docs/current/static/functions-matching.html

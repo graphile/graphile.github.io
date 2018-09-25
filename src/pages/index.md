@@ -78,4 +78,3 @@ with PostGraphile before you graduate to using Graphile Build directly.
 <section>
 GraphQL training, pro services, etc
 </section>
-

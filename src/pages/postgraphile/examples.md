@@ -24,5 +24,3 @@ plugin to simplify the field names over the defaults. You can use this via
 yarn add postgraphile @graphile-contrib/pg-simplify-inflector
 yarn postgraphile --append-plugins @graphile-contrib/pg-simplify-inflector
 ```
-
-

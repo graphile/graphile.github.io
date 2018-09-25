@@ -15,9 +15,9 @@ your GraphQL schema.
 You can create PostgreSQL functions that perform complex mutations. For these
 functions the following rules apply:
 
-- [Common PostGraphile function restrictions](/postgraphile/function-restrictions/)
-- must be marked as `VOLATILE` (which is the default)
-- must be defined in one of the introspected schemas
+* [Common PostGraphile function restrictions](/postgraphile/function-restrictions/)
+* must be marked as `VOLATILE` (which is the default)
+* must be defined in one of the introspected schemas
 
 Here's an example of a custom mutation, which will generate the graphql `acceptTeamInvite(teamId: Int!)` mutation:
 
@@ -36,22 +36,21 @@ $$ LANGUAGE sql VOLATILE STRICT SECURITY DEFINER;
 
 Notes on the above function:
 
-- `STRICT` is optional, it means that if any of the arguments are null then the
+* `STRICT` is optional, it means that if any of the arguments are null then the
   mutation will not be called (and will thus return null with no error).
-- `SECURITY INVOKER` is the default, it means the function will run with the
+* `SECURITY INVOKER` is the default, it means the function will run with the
   _security_ of the person who _invoked_ the function
-- `SECURITY DEFINER` means that the function will run with the _security_ of
+* `SECURITY DEFINER` means that the function will run with the _security_ of
   the person who _defined_ the function, typically the database owner - this
   means that the function may bypass RLS, RBAC and other security concerns. Be
   careful when using `SECURITY DEFINER` - think of it like `sudo`!
-- we use `LANGUAGE sql` here, but you can use `LANGUAGE plpgsql` if you need
+* we use `LANGUAGE sql` here, but you can use `LANGUAGE plpgsql` if you need
   variables or looping or if blocks or similar concerns; or if you want to
   write in a more familiar language you can use `LANGUAGE plv8` (JavaScript,
   requires extension), or one of the built in `LANGUAGE` options such as
   Python, Perl or Tcl
 
-A note on **named types**: if you have a function that `RETURNS SETOF table(a
-int, b text)` then PostGraphile will not pick it up. This is easy to fix, just
+A note on **named types**: if you have a function that `RETURNS SETOF table(a int, b text)` then PostGraphile will not pick it up. This is easy to fix, just
 define a named type:
 
 ```sql

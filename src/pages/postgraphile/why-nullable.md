@@ -198,7 +198,7 @@ module.exports = function NonNullRelationsPlugin(builder) {
     }
     return {
       ...field,
-      type: new build.graphql.GraphQLNonNull(field.type)
+      type: new build.graphql.GraphQLNonNull(field.type),
     };
   });
 };

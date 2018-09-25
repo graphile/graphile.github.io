@@ -31,7 +31,7 @@ Here's an example:
 ```js
 const { postgraphile, makePluginHook } = require("postgraphile");
 const {
-  default: PostGraphileSupporter
+  default: PostGraphileSupporter,
 } = require("@graphile/plugin-supporter");
 const express = require("express");
 
@@ -50,7 +50,7 @@ const postgraphileOptions = {
     //   require('express-session')(),
     //   require('passport').initialize(),
     //   require('passport').session(),
-  ]
+  ],
 };
 
 app.use(postgraphile(databaseUrl, "app_public", postgraphileOptions));
@@ -69,7 +69,7 @@ via the `enhanceHttpServerWithSubscriptions` function, as shown below:
 const { postgraphile, makePluginHook } = require("postgraphile");
 const {
   default: PostGraphileSupporter,
-  enhanceHttpServerWithSubscriptions
+  enhanceHttpServerWithSubscriptions,
 } = require("@graphile/plugin-supporter");
 const { createServer } = require("http");
 const express = require("express");
@@ -90,7 +90,7 @@ const postgraphileOptions = {
     //   require('express-session')(),
     //   require('passport').initialize(),
     //   require('passport').session(),
-  ]
+  ],
 };
 
 const postgraphileMiddleware = postgraphile(
@@ -313,8 +313,8 @@ module.exports = {
     plugins: ["@graphile/plugin-supporter"],
     connection: "postgres://localhost/subs",
     schema: ["app_public"],
-    simpleSubscriptions: true
-  }
+    simpleSubscriptions: true,
+  },
 };
 ```
 

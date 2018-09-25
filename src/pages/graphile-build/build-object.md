@@ -21,14 +21,13 @@ The bread-and-butter of Graphile-Build, this method is how we build hooked Graph
 const MyType = newWithHooks(type, spec, scope);
 ```
 
-- `type` is a GraphQL object type, such as `GraphQLEnumType` or `GraphQLInputObjectType`
-- `spec` is a valid specification that will be passed through the relevant
+* `type` is a GraphQL object type, such as `GraphQLEnumType` or `GraphQLInputObjectType`
+* `spec` is a valid specification that will be passed through the relevant
   hooks before ultimately being passed to the constructor of the aforementioned
   `type` and returning an instance of that type
-- `scope` is where you can add scope information that will be available through
+* `scope` is where you can add scope information that will be available through
   the `scope` property in the context object passed to hooks (see `Context`
   below)
-
 
 ## `extend(input, extensions)`
 
@@ -55,7 +54,6 @@ automatically registered, but external objects must be registered via:
 Registers an external (un-hooked) GraphQL type with the system so that it may
 be referenced via `getTypeByName()`
 
-
 ## `getAliasFromResolveInfo(resolveInfo)`
 
 Use this in your resolver to quickly retrieve the alias that this field was
@@ -75,4 +73,3 @@ resolveAlias(data, _args, _context, resolveInfo) {
   return data[alias];
 }
 ```
-

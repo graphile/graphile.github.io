@@ -158,7 +158,7 @@ the transaction.  </summary>
 const pg = require("pg");
 const {
   createPostGraphileSchema,
-  withPostGraphileContext
+  withPostGraphileContext,
 } = require("postgraphile");
 const { graphql } = require("graphql");
 const MockReq = require("mock-req");
@@ -214,7 +214,7 @@ let ctx;
 
 exports.setup = async () => {
   const rootPgPool = new pg.Pool({
-    connectionString: process.env.TEST_ROOT_DATABASE_URL
+    connectionString: process.env.TEST_ROOT_DATABASE_URL,
   });
 
   const options = postgraphileOptions();
@@ -228,7 +228,7 @@ exports.setup = async () => {
   ctx = {
     rootPgPool,
     options,
-    schema
+    schema,
   };
 };
 
@@ -259,9 +259,9 @@ exports.runGraphQLQuery = async function runGraphQLQuery(
     method: "POST",
     headers: {
       Accept: "application/json",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    ...reqOptions
+    ...reqOptions,
   });
 
   const { pgSettings: pgSettingsGenerator } = options;
@@ -274,7 +274,7 @@ exports.runGraphQLQuery = async function runGraphQLQuery(
     {
       ...options,
       pgPool: rootPgPool,
-      pgSettings
+      pgSettings,
     },
     async context => {
       /* BEGIN: pgClient REPLACEMENT */
@@ -324,7 +324,7 @@ exports.runGraphQLQuery = async function runGraphQLQuery(
           null,
           {
             ...context,
-            pgClient: replacementPgClient
+            pgClient: replacementPgClient,
           },
           variables
         );
@@ -337,11 +337,11 @@ exports.runGraphQLQuery = async function runGraphQLQuery(
             const e = {
               message: rawErr.message,
               locations: rawErr.locations,
-              path: rawErr.path
+              path: rawErr.path,
             };
             Object.defineProperty(e, "originalError", {
               value: rawErr.originalError,
-              enumerable: false
+              enumerable: false,
             });
 
             if (e.originalError) {

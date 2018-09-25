@@ -12,7 +12,7 @@ this was due to necessity (the security policies offered by databases such as
 PostgreSQL were simply not granular enough), and partly this was people
 figuring it would reduce the workload on the database thus increases
 scalability. However, as applications grow, they start needing more advanced
-features or additional services to interact with the database.  There's a
+features or additional services to interact with the database. There's a
 couple options they have here: duplicate the authentication/authorization logic
 in multiple places (which can lead to discrepancies and increases the surface
 area for potential issues), or make sure everything goes through the original
@@ -132,27 +132,29 @@ Authorization: Bearer JWT_TOKEN_HERE
 e.g. with Apollo:
 
 ```js
-networkInterface.use([{
-  applyMiddleware(req, next) {
-    const token = getJWTFromSomewhere();
-    if (token) {
-      req.options.headers = _.extend(req.options.headers, {
-        authorization: `Bearer ${token}`
-      });
-    }
-    next();
-  }
-}]);
+networkInterface.use([
+  {
+    applyMiddleware(req, next) {
+      const token = getJWTFromSomewhere();
+      if (token) {
+        req.options.headers = _.extend(req.options.headers, {
+          authorization: `Bearer ${token}`,
+        });
+      }
+      next();
+    },
+  },
+]);
 ```
 
 or with Relay:
 
 ```js
 Relay.injectNetworkLayer(
-  new Relay.DefaultNetworkLayer('/graphql', {
+  new Relay.DefaultNetworkLayer("/graphql", {
     headers: {
-      Authorization: `Bearer ${token}`
-    }
+      Authorization: `Bearer ${token}`,
+    },
   })
 );
 ```
@@ -185,12 +187,14 @@ commit;
 ```
 
 > _Actually, to save roundtrips we perform just one query to set all configs
-via ..._
+> via ..._
+
 ```sql
 select set_config('role', 'app_user', true), set_config('user_id', '2',
 true), ...
 ```
- > _... but showing `set local` is simpler to understand._
+
+> _... but showing `set local` is simpler to understand._
 
 You can then access this information via `current_setting` (the second argument
 says it's okay for the property to be missing, but **only works in PostgreSQL

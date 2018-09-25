@@ -13,10 +13,8 @@ add plugins, remove plugins, even replace the entire stack if you so desire.
 
 ## Loading Plugins
 
-Plugins are loaded when you call [`buildSchema(plugins,
-options)`](/graphile-build/graphile-build/#buildschemaplugins-options) or
-[`getBuilder(plugins,
-options)`](/graphile-build/graphile-build/#getbuilderplugins-options).  They
+Plugins are loaded when you call [`buildSchema(plugins, options)`](/graphile-build/graphile-build/#buildschemaplugins-options) or
+[`getBuilder(plugins, options)`](/graphile-build/graphile-build/#getbuilderplugins-options). They
 may be asynchronous thus these functions return a promise; Graphile Build will
 wait for each plugin to finish loading before attempting to load the next
 plugin - so the order in which you specify the plugins may be important.
@@ -101,7 +99,6 @@ type Query implements Node {
 
 </details>
 
-
 ### An example plugin
 
 This plugin will add a field `random(sides: Int)` to every GraphQLObjectType that is generated with hooks:
@@ -128,13 +125,14 @@ module.exports = function MyRandomFieldPlugin(
         },
         resolve(_, { sides = myDefaultMax }) {
           return (
-            Math.floor(Math.random() * (sides - myDefaultMin + 1)) + myDefaultMin
+            Math.floor(Math.random() * (sides - myDefaultMin + 1)) +
+            myDefaultMin
           );
         },
       },
     });
   });
-}
+};
 ```
 
 First it registers a hook on `GraphQLObjectType:fields` which will be called
@@ -142,22 +140,21 @@ for the `fields` property of every `GraphQLObjectType` that is constructed.
 
 The callback to this [hook](/graphile-build/hooks/) is passed the three standard options:
 
-- input object, `fields`, which is basically a [`GraphQLFieldConfigMap` from graphql-js](http://graphql.org/graphql-js/type/#graphqlobjecttype).
-- [`Build` object](/graphile-build/build-object/) (from which we're using `extend` and `graphql.GraphQLInt`
-- [`Context` object](/graphile-build/context-object/) which it is ignoring; but if we wanted to filter which objects get the `random` field added this would be what we'd use
+* input object, `fields`, which is basically a [`GraphQLFieldConfigMap` from graphql-js](http://graphql.org/graphql-js/type/#graphqlobjecttype).
+* [`Build` object](/graphile-build/build-object/) (from which we're using `extend` and `graphql.GraphQLInt`
+* [`Context` object](/graphile-build/context-object/) which it is ignoring; but if we wanted to filter which objects get the `random` field added this would be what we'd use
 
 Finally we're returning a derivative of the `fields` that were input by adding
 an additonal property `field` which is a standard GraphQL field config
 `GraphQLFieldConfig` - see the [GraphQL-js
 documentation](http://graphql.org/graphql-js/type/#graphqlobjecttype).
 
-
 ### Plugin arguments
 
 Plugins are called with just two arguments:
 
-- `builder` - the instance of [`SchemaBuilder`](/graphile-build/graphile-build/) the plugin is being loaded against
-- `options` - [the options](/graphile-build/plugin-options/) that were passed to `buildSchema(plugins, options)` (or `getBuilder(plugins, options)`)
+* `builder` - the instance of [`SchemaBuilder`](/graphile-build/graphile-build/) the plugin is being loaded against
+* `options` - [the options](/graphile-build/plugin-options/) that were passed to `buildSchema(plugins, options)` (or `getBuilder(plugins, options)`)
 
 ### Plugin actions
 
@@ -167,5 +164,5 @@ object (its first argument). For a list of the functions and what they do, see
 
 The most common actions are:
 
-- Register a hook: `builder.hook(hookName, hookFunction)`; see [Hooks](/graphile-build/hooks/)
-- Add watch-mode event listeners: `builder.registerWatcher(watcher, unwatcher)`; see [SchemaBuilder](/graphile-build/schema-builder/)
+* Register a hook: `builder.hook(hookName, hookFunction)`; see [Hooks](/graphile-build/hooks/)
+* Add watch-mode event listeners: `builder.registerWatcher(watcher, unwatcher)`; see [SchemaBuilder](/graphile-build/schema-builder/)

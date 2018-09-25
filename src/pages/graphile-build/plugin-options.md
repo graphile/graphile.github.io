@@ -14,7 +14,7 @@ plugin (as their second argument).
 
 The following options apply to the default plugins:
 
-- `nodeIdFieldName` - defaults to `id` which might clash with your other
+* `nodeIdFieldName` - defaults to `id` which might clash with your other
   fields. It is not recommended to change it, but you might consider `nodeId`
   instead. (Use of `__id` is discouraged because GraphQL wants to deprecate
   non-introspection fields that begin with `__`)
@@ -27,6 +27,7 @@ The following example passes the
 `nodeIdFieldName` setting through, changing from the default `id` to `flibble`:
 
 <!-- source: examples/empty-schema-with-options.js -->
+
 ```js
 const { buildSchema, defaultPlugins } = require("graphile-build");
 const { printSchema } = require("graphql/utilities");
@@ -44,4 +45,3 @@ interface Node {
   flibble: ID!
 }
 ```
-

@@ -23,10 +23,10 @@ The [`resolve` method in
 GraphQL](http://graphql.org/graphql-js/type/#graphqlobjecttype) is actually
 called with 4 arguments:
 
-- source - the data provided by the parent field
-- args - the arguments passed to the field in the query
-- context - the context object used throughout the resolvers
-- resolveInfo - an instance of GraphQLResolveInfo
+* source - the data provided by the parent field
+* args - the arguments passed to the field in the query
+* context - the context object used throughout the resolvers
+* resolveInfo - an instance of GraphQLResolveInfo
 
 This 4th argument is the one we're interested in because it contains a number
 of goodies. But some of these are hard to digest, so we give you some helpers...
@@ -36,11 +36,11 @@ of goodies. But some of these are hard to digest, so we give you some helpers...
 Will take the AST from the GraphQLResolveInfo and extract from it a nested
 object consisting of:
 
-- name - the name of the current field
-- alias - the alias the current field was requested as
-- args - the arguments passed to the field in the query
-- fieldsByTypeName - the sub-fields that were requested on the current object
-	broken down by the names of the GraphQL types that could be returned.
+* name - the name of the current field
+* alias - the alias the current field was requested as
+* args - the arguments passed to the field in the query
+* fieldsByTypeName - the sub-fields that were requested on the current object
+  broken down by the names of the GraphQL types that could be returned.
 
 Because GraphQL supports Union and other complex types, it's possible to
 request different sub-fields depending on the type of data that's returned from
@@ -79,7 +79,7 @@ There are three ways to declare meta-data with a field:
 
 Instead of passing an object to `fields`, you can pass a function. This function will be passed the methods:
 
-- `addDataGeneratorForField(fieldName, generatorFn)` - will associate the data
+* `addDataGeneratorForField(fieldName, generatorFn)` - will associate the data
   generator with the field
 
 ```js{6-10,22-25}
@@ -125,7 +125,6 @@ const MyObject = newWithHooks(
 #### When creating an individual field
 
 You can use the `fieldWithHooks` helper, passing it a function:
-
 
 ```js{5-15}
 const MyObject = newWithHooks(GraphQLObjectType, {
@@ -305,4 +304,4 @@ const Query = newWithHooks(GraphQLObjectType, {
 
 Check out a working example in `fieldData` test:
 
-[https://github.com/graphile/graphile-build/blob/master/packages/graphile-build/__tests__/fieldData.test.js](https://github.com/graphile/graphile-build/blob/master/packages/graphile-build/__tests__/fieldData.test.js)
+[https://github.com/graphile/graphile-build/blob/master/packages/graphile-build/**tests**/fieldData.test.js](https://github.com/graphile/graphile-build/blob/master/packages/graphile-build/__tests__/fieldData.test.js)

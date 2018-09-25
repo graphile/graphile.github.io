@@ -103,7 +103,6 @@ supports simple list-based collections too. They're disabled by default, but
 you can enable both interfaces with `--simple-collections both` or use the
 simpler interface exclusively with `--simple-collections only`.
 
-
 #### One-to-one relationships
 
 If you have tables like this:

@@ -12,15 +12,15 @@ positive environment.
 
 This covers:
 
-- The source code
-- Commit messages
-- Issues on GitHub
-- Pull requests on GitHub
-- Any project wikis
-- Any and all documentation
-- Our online chat
-- Our official social media accounts
-- Anywhere you're representing the Graphile project
+* The source code
+* Commit messages
+* Issues on GitHub
+* Pull requests on GitHub
+* Any project wikis
+* Any and all documentation
+* Our online chat
+* Our official social media accounts
+* Anywhere you're representing the Graphile project
 
 <div class='graphile-logo-bg'></div>
 

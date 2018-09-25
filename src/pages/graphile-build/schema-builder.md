@@ -35,7 +35,7 @@ This synchronous function returns a (possibly cached) up-to-date
 class SchemaBuilder {
   // ...
   buildSchema() {
-    const build = this.createBuild()
+    const build = this.createBuild();
     return build.newWithHooks(GraphQLSchema, {}, { isSchema: true });
   }
 }
@@ -60,12 +60,12 @@ Example: this hook will log the name of each GraphQLObjectType that is built:
 
 ```js
 function GraphQLObjectTypeLogNamePlugin(builder) {
-  builder.hook('GraphQLObjectType', (spec) => {
+  builder.hook("GraphQLObjectType", spec => {
     console.log(
       "A new GraphQLObjectType is being constructed with name: ",
       spec.name
     );
-  })
+  });
 }
 ```
 

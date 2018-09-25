@@ -24,19 +24,18 @@ Defines the `Query` object and hooks `GraphQLSchema` to add it in. To hook this,
 
 ```js
 function MyPlugin(builder) {
-  builder.hook('GraphQLObjectType', (
-    spec,
-    { extend },
-    { scope: { isRootQuery } }
-  ) => {
-    if (!isRootQuery) {
-      return spec;
-    }
+  builder.hook(
+    "GraphQLObjectType",
+    (spec, { extend }, { scope: { isRootQuery } }) => {
+      if (!isRootQuery) {
+        return spec;
+      }
 
-    return extend(spec, {
-      //... Add new query fields here
-    });
-  })
+      return extend(spec, {
+        //... Add new query fields here
+      });
+    }
+  );
 }
 ```
 
@@ -46,19 +45,18 @@ Defines the `Mutation` object and hooks `GraphQLSchema` to add it in. Will only 
 
 ```js
 function MyPlugin(builder) {
-  builder.hook('GraphQLObjectType', (
-    spec,
-    { extend },
-    { scope: { isRootMutation } }
-  ) => {
-    if (!isRootMutation) {
-      return spec;
-    }
+  builder.hook(
+    "GraphQLObjectType",
+    (spec, { extend }, { scope: { isRootMutation } }) => {
+      if (!isRootMutation) {
+        return spec;
+      }
 
-    return extend(spec, {
-      //... Add new mutation fields here
-    });
-  })
+      return extend(spec, {
+        //... Add new mutation fields here
+      });
+    }
+  );
 }
 ```
 

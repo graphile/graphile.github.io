@@ -63,7 +63,6 @@ Available on hooks `GraphQLObjectType:fields` and
 (for example if you need to call `addDataGenerator(...)`). If you don't call
 this, it will be called for you at a later time.
 
-
 ```js{5,9-19}
 builder.hook("GraphQLInputObjectType:fields",
   (

@@ -13,10 +13,11 @@ We call this functionality "Smart Comments" and it allows you to easily customis
 If you're using PostGraphile in `--watch` mode, you should be able to see in PostGraphile's GraphiQL client that the related types and fields will reflect the change almost immediately. If you're not using `--watch` then you may need to restart the server for smart comment changes to take effect.
 
 ### Table of Contents
-  - [Smart comment spec](#smart-comment-spec)
-  - [Deprecating](#deprecating)
-  - [Renaming](#renaming)
-  - [Omitting](#omitting)
+
+* [Smart comment spec](#smart-comment-spec)
+* [Deprecating](#deprecating)
+* [Renaming](#renaming)
+* [Omitting](#omitting)
 
 ### Smart comment spec
 
@@ -41,11 +42,7 @@ and would result in the following JSON tags object:
 {
   "name": "meta",
   "isImportant": true,
-  "jsonField": [
-    "date timestamp",
-    "name text",
-    "episode enum ONE=1 TWO=2"
-  ]
+  "jsonField": ["date timestamp", "name text", "episode enum ONE=1 TWO=2"]
 }
 ```
 
@@ -79,71 +76,70 @@ comment on column my_schema.my_table.my_column is
 
 You can add a smart comment to an entity to rename that entity. For tables, columns, custom types and many functions you can use the `@name` tag followed by the new name. For more complex things we use different tags, such as for foreign key constraints we have `@fieldName` and `@foreignFieldName`.
 
-
-The following can be renamed: 
+The following can be renamed:
 
 #### Tables
 
 ```sql
-comment on table post is 
+comment on table post is
   E'@name message';
 ```
 
-#### Columns 
+#### Columns
 
 ```sql
-comment on column my_table.my_column is 
+comment on column my_table.my_column is
   E'@name alternativeColumnName';
 ```
 
-#### Relations 
+#### Relations
 
 ```sql
-comment on constraint thread_author_id_fkey on thread is 
+comment on constraint thread_author_id_fkey on thread is
   E'@foreignFieldName threads\n@fieldName author';
 ```
 
 #### Unique-key record finders
 
 ```sql
-comment on constraint person_pkey on person is 
+comment on constraint person_pkey on person is
   E'@fieldName findPersonById';
 ```
 
 #### Computed columns
 
 ```sql
-comment on function person_full_name(person) is 
+comment on function person_full_name(person) is
   E'@fieldName name';
 ```
 
 #### Custom queries
 
 ```sql
-comment on function search_posts(text) is 
+comment on function search_posts(text) is
   E'@name returnPostsMatching';
 ```
 
 #### Custom mutations
 
 ```sql
-comment on function authenticate(text, text) is 
+comment on function authenticate(text, text) is
   E'@name login';
 ```
 
 #### Custom mutation function result names
 
 ```sql
-comment on function removeSomething(text) is 
+comment on function removeSomething(text) is
   E'@resultFieldName success';
-comment on function authenticate(text, text) is 
+comment on function authenticate(text, text) is
   E'@resultFieldName token\n@name login';
 ```
 
 #### Types
 
 ```sql
-comment on type flibble is 
+comment on type flibble is
   E'@name flamble';
 ```
 
@@ -159,13 +155,13 @@ create table original_table (
 comment on table original_table is E'@name renamed_table';
 ```
 
-The column can also be renamed: 
+The column can also be renamed:
 
 ```sql
 comment on column original_table.col1 is E'@name colA';
-``` 
+```
 
-The same can be done for types and custom queries: 
+The same can be done for types and custom queries:
 
 ```sql
 create type flibble as (f text);
@@ -186,7 +182,7 @@ Smart comments are also reflected in GraphiQL. Here, we are querying the table `
 
 </div>
 
-Next, we add the smart comment `E'@name renamed_table'` on `original_table` and the rename is instantly reflected in GraphiQL: 
+Next, we add the smart comment `E'@name renamed_table'` on `original_table` and the rename is instantly reflected in GraphiQL:
 
 <div class="full-width">
 
@@ -194,7 +190,7 @@ Next, we add the smart comment `E'@name renamed_table'` on `original_table` and 
 
 </div>
 
-So now the query needs to use the new name for the table: 
+So now the query needs to use the new name for the table:
 
 <div class="full-width">
 
@@ -210,17 +206,17 @@ Here's a quick-reference for the operations we currently support (you'll want to
 
 <div class='big-table'>
 
-⁣ | Action |	Table effect	| Column effect | Function effect
---- | --- |------|------|-------
-C | **`create`** |	omit `create` mutation	| omit from `create` |	-
-R | **`read`**	| omit completely |	completely omitted |	-
-U | **`update`** |	omit `update` mutations |	omit from `update` | -
-D | **`delete`**	| omit `delete` mutations | - |	-
-F | **`filter`**	| omit `condition` arg |	omit from `condition` |	no filtering
-O | **`order`**	| omit `orderBy` arg | omit from `orderBy` | no ordering
-A | **`all`**	| no `allFoos` query	| - |	-
-M | **`many`**	| no foreign key fields |	- |	-
-X | **`execute`**	| -	| -	| function not present
+| ⁣   | Action        | Table effect            | Column effect         | Function effect      |
+| --- | ------------- | ----------------------- | --------------------- | -------------------- |
+| C   | **`create`**  | omit `create` mutation  | omit from `create`    | -                    |
+| R   | **`read`**    | omit completely         | completely omitted    | -                    |
+| U   | **`update`**  | omit `update` mutations | omit from `update`    | -                    |
+| D   | **`delete`**  | omit `delete` mutations | -                     | -                    |
+| F   | **`filter`**  | omit `condition` arg    | omit from `condition` | no filtering         |
+| O   | **`order`**   | omit `orderBy` arg      | omit from `orderBy`   | no ordering          |
+| A   | **`all`**     | no `allFoos` query      | -                     | -                    |
+| M   | **`many`**    | no foreign key fields   | -                     | -                    |
+| X   | **`execute`** | -                       | -                     | function not present |
 
 </div>
 
@@ -233,16 +229,16 @@ the root Query type of your GraphQL schema, add an `@omit` comment on the
 constraint:
 
 ```sql
-comment on constraint person_pkey on person is 
+comment on constraint person_pkey on person is
   E'@omit';
 ```
 
 #### Usage
 
-Add a comment on your entity with the following format: 
+Add a comment on your entity with the following format:
 
 ```sql
-comment on table table_name is E'@omit <actions>'; 
+comment on table table_name is E'@omit <actions>';
 ```
 
 Multiple actions can be listed using commas (no spaces!), as in the following example which disables mutations on a table:

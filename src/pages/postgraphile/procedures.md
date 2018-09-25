@@ -5,30 +5,33 @@ title: Procedures
 ---
 
 # Procedures
+
 Procedures in PostgreSQL are very important to understand in order to make the most powerful PostGraphile server you can. Procedures allow you to define business logic in the database in SQL or one of many other scripting languages. Often putting your business logic in the database will be more performant as PostgreSQL is already finely tuned to be highly performant and scale for data intensive uses.
 
 There are a few ways procedures in PostGraphile can be used. All of these will be covered in their own section.
 
-1. As [mutations](#mutation-procedures).
-2. As [queries](#query-procedures).
-3. As [connections](#connection-procedures) (list of nodes, like `postNodes`).
-4. As [computed columns](#computed-columns).
+1.  As [mutations](#mutation-procedures).
+2.  As [queries](#query-procedures).
+3.  As [connections](#connection-procedures) (list of nodes, like `postNodes`).
+4.  As [computed columns](#computed-columns).
 
 For an example of what procedures look like, see the [forum example SQL schema][].
 
-[forum example SQL schema]: https://github.com/graphile/postgraphile/blob/master/examples/forum/schema.sql
+[forum example sql schema]: https://github.com/graphile/postgraphile/blob/master/examples/forum/schema.sql
 
 ## Recommended Reading
-- PostgreSQL [`CREATE FUNCTION`][] documentation for actually creating procedures.
-- PostgreSQL [`CREATE TRIGGER`][] documentation.
-- StackOverflow answer describing [computed columns in PostgreSQL][].
 
-[`CREATE FUNCTION`]: http://www.postgresql.org/docs/current/static/sql-createfunction.html
-[`CREATE TRIGGER`]: http://www.postgresql.org/docs/current/static/sql-createtrigger.html
-[computed columns in PostgreSQL]: http://stackoverflow.com/a/11166268/1568890
+* PostgreSQL [`CREATE FUNCTION`][] documentation for actually creating procedures.
+* PostgreSQL [`CREATE TRIGGER`][] documentation.
+* StackOverflow answer describing [computed columns in PostgreSQL][].
+
+[`create function`]: http://www.postgresql.org/docs/current/static/sql-createfunction.html
+[`create trigger`]: http://www.postgresql.org/docs/current/static/sql-createtrigger.html
+[computed columns in postgresql]: http://stackoverflow.com/a/11166268/1568890
 
 ## Scripting Languages
-Procedures in PostgreSQL require you to use a scripting language. The two most common procedure languages for PostgreSQL are SQL and [PL/pgSQL][PL/pgSQL]. SQL is probably the easiest to use as you are most likely already familiar with it. PL/pgSQL is PostgreSQL’s custom scripting language which is fairly easy to find plenty of StackOverflow and other resources on with a few search engine queries. You’ll need to learn PL/pgSQL if you want to write any triggers, because SQL can’t be used for triggers. But again, don’t worry, you can definitely make awesome applications without knowing PL/pgSQL as well as other languages you are familiar with as long as you defer to the internet.
+
+Procedures in PostgreSQL require you to use a scripting language. The two most common procedure languages for PostgreSQL are SQL and [PL/pgSQL][pl/pgsql]. SQL is probably the easiest to use as you are most likely already familiar with it. PL/pgSQL is PostgreSQL’s custom scripting language which is fairly easy to find plenty of StackOverflow and other resources on with a few search engine queries. You’ll need to learn PL/pgSQL if you want to write any triggers, because SQL can’t be used for triggers. But again, don’t worry, you can definitely make awesome applications without knowing PL/pgSQL as well as other languages you are familiar with as long as you defer to the internet.
 
 A simple procedure written with SQL looks like this:
 
@@ -48,10 +51,10 @@ end;
 $$ language plpgsql immutable strict;
 ```
 
-If you don’t want to use PL/pgSQL or SQL, many popular scripting languages can be used *inside* PostgreSQL to write your procedures! You can see a few of these projects here:
+If you don’t want to use PL/pgSQL or SQL, many popular scripting languages can be used _inside_ PostgreSQL to write your procedures! You can see a few of these projects here:
 
-- [JavaScript (plv8)][]
-- [Ruby (plruby)][]
+* [JavaScript (plv8)][]
+* [Ruby (plruby)][]
 
 A procedure defined using JavaScript (for example) would look like:
 
@@ -71,12 +74,13 @@ create function plv8_test(keys text[], vals text[]) returns text as $$
 $$ language plv8 immutable strict;
 ```
 
-[PL/pgSQL]: http://www.postgresql.org/docs/current/static/plpgsql.html
-[JavaScript (plv8)]: https://github.com/plv8/plv8
-[Ruby (plruby)]: https://github.com/knu/postgresql-plruby
+[pl/pgsql]: http://www.postgresql.org/docs/current/static/plpgsql.html
+[javascript (plv8)]: https://github.com/plv8/plv8
+[ruby (plruby)]: https://github.com/knu/postgresql-plruby
 
 ## Named Arguments
-PostgreSQL allows you to mix named and positional (unnamed) arguments for your procedures. However, GraphQL will *only* allow named arguments. So if you don’t name an argument, PostGraphile will give it a name like `arg1`, `arg2`, `arg3`, and so on. An example of a function with unnamed arguments is as follows:
+
+PostgreSQL allows you to mix named and positional (unnamed) arguments for your procedures. However, GraphQL will _only_ allow named arguments. So if you don’t name an argument, PostGraphile will give it a name like `arg1`, `arg2`, `arg3`, and so on. An example of a function with unnamed arguments is as follows:
 
 ```sql
 create function add(int, int) returns int as $$
@@ -93,6 +97,7 @@ $$ language sql immutable strict;
 ```
 
 ## Mutation Procedures
+
 By default, a procedure is “volatile” and PostGraphile will treat it as a mutation. So for example, a procedure defined as:
 
 ```sql
@@ -126,6 +131,7 @@ mutation {
 Always look at the documentation in GraphiQL to find all the parameters you may use!
 
 ## Query Procedures
+
 Similar to how you use `VOLATILE` to specify a mutative procedure, a query procedure can be specified using `IMMUTABLE` or `STABLE` identifiers. For example:
 
 ```sql
@@ -168,6 +174,7 @@ To query such a procedure in PostGraphile you would do the following:
 ```
 
 ## Connection Procedures
+
 A connection query can be made from any function that returns a `setof` with a table type. This feature is also significant in that it gives you the ability to create complex queries over a set of data. Queries that connections (like `personNodes`) in PostGraphile do not support.
 
 To create a function that returns a connection, use the following SQL:
@@ -202,6 +209,7 @@ For more information on constructing advanced queries, read [this article][advan
 [advanced-queries]: https://github.com/graphile/postgraphile/blob/master/docs/advanced-queries.md
 
 ## Computed Columns
+
 PostGraphile also provides support for computed columns. In order to define a computed column, just write a function that is `STABLE` or `IMMUTABLE`, has a table in your schema as its first argument, and the name starts with the table’s name. For example:
 
 ```sql
@@ -225,10 +233,10 @@ To query these in the PostGraphile schema, its pretty intuitive:
 }
 ```
 
-* * *
+---
 
 For ideas on how to use procedures in PostGraphile, remember to check out the [forum example SQL schema][]!
 
-[forum example SQL schema]: https://github.com/graphile/postgraphile/blob/master/examples/forum/schema.sql
+[forum example sql schema]: https://github.com/graphile/postgraphile/blob/master/examples/forum/schema.sql
 
 _This example was originally written by [Caleb Meredith](https://twitter.com/calebmer)._
