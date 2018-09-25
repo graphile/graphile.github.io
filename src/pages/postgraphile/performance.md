@@ -24,7 +24,7 @@ For a more complex 3-level query, it can handle about 1450 requests per second:
 
 ```graphql
 query albums_tracks_genre_some {
-  allAlbumsList(condition: {artistId: 127}) {
+  allAlbumsList(condition: { artistId: 127 }) {
     artistId
     title
     tracksByAlbumIdList {
@@ -44,7 +44,7 @@ percentile latency:
 
 ```graphql
 query prisma_deeplyNested {
-  allAlbumsList(condition: {artistId: 127}) {
+  allAlbumsList(condition: { artistId: 127 }) {
     albumId
     title
     tracksByAlbumIdList {
@@ -69,7 +69,6 @@ query prisma_deeplyNested {
   }
 }
 ```
-
 
 To read about how PostGraphile's performance compares to that of Prisma, and
 how to validate the results for yourself, check out [this
@@ -135,14 +134,14 @@ Chances are that any performance issues you have are coming from your database
 schema, so standard PostgreSQL optimisation techniques apply. Here's a few
 things you might want to try:
 
-- Throw more RAM at your database server
-- Make sure your database server is using an SSD
-- Make sure you have added the correct type of database indexes in the correct places (references, filters, order-by)
-- Note: making a column a reference to a foreign key does **not** add an index to that column, so for example `User.postsByAuthorId` will be slow unless you've manually added an index to `posts.author_id`
-- `VACUUM` your database tables
-- Check your RLS policies aren't too expensive, consider optimising them
-- Optimise your computed column functions
-- Consider `security definer` on functions to bypass RLS (but make sure you add your own auth checks!)
-- Use the envvar `DEBUG=graphile-build-pg:sql` to show the SQL statements that are being executed; e.g. `DEBUG=graphile-build-pg:sql postgraphile -c postgres://localhost/mydb`
+* Throw more RAM at your database server
+* Make sure your database server is using an SSD
+* Make sure you have added the correct type of database indexes in the correct places (references, filters, order-by)
+* Note: making a column a reference to a foreign key does **not** add an index to that column, so for example `User.postsByAuthorId` will be slow unless you've manually added an index to `posts.author_id`
+* `VACUUM` your database tables
+* Check your RLS policies aren't too expensive, consider optimising them
+* Optimise your computed column functions
+* Consider `security definer` on functions to bypass RLS (but make sure you add your own auth checks!)
+* Use the envvar `DEBUG=graphile-build-pg:sql` to show the SQL statements that are being executed; e.g. `DEBUG=graphile-build-pg:sql postgraphile -c postgres://localhost/mydb`
 
 If you need help optimising your PostgreSQL database or PostGraphile API, please [get in touch](/support/).
