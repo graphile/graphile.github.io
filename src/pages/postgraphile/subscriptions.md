@@ -311,7 +311,7 @@ First, set up a `.postgraphilerc.js` containing the following:
 module.exports = {
   options: {
     plugins: ["@graphile/plugin-supporter"],
-    connection: "postgres://localhost/subs",
+    connection: "postgres:///subs",
     schema: ["app_public"],
     simpleSubscriptions: true,
   },

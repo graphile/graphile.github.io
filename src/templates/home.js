@@ -81,7 +81,7 @@ class Home extends Component {
               <code>
                 <pre className="mb0">
                   {unindent`\
-                  npx postgraphile -c postgres://localhost/mydb\
+                  npx postgraphile -c postgres:///mydb\
                   `}
                 </pre>
               </code>

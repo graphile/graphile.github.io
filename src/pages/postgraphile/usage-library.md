@@ -34,7 +34,7 @@ const { postgraphile } = require("postgraphile");
 
 const app = express();
 
-app.use(postgraphile(process.env.DATABASE_URL || "postgres://localhost/"));
+app.use(postgraphile(process.env.DATABASE_URL || "postgres:///"));
 
 app.listen(process.env.PORT || 3000);
 ```
@@ -46,9 +46,7 @@ const http = require("http");
 const { postgraphile } = require("postgraphile");
 
 http
-  .createServer(
-    postgraphile(process.env.DATABASE_URL || "postgres://localhost/")
-  )
+  .createServer(postgraphile(process.env.DATABASE_URL || "postgres:///"))
   .listen(process.env.PORT || 3000);
 ```
 

@@ -21,7 +21,7 @@ middleware](/postgraphile/usage-library/).
 
 ```js
 createPostGraphileSchema(
-  process.env.DATABASE_URL || 'postgres://localhost/'
+  process.env.DATABASE_URL || 'postgres:///'
 )
   .then(schema => { ... })
   .catch(error => { ... })

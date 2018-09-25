@@ -142,6 +142,6 @@ things you might want to try:
 * Check your RLS policies aren't too expensive, consider optimising them
 * Optimise your computed column functions
 * Consider `security definer` on functions to bypass RLS (but make sure you add your own auth checks!)
-* Use the envvar `DEBUG=graphile-build-pg:sql` to show the SQL statements that are being executed; e.g. `DEBUG=graphile-build-pg:sql postgraphile -c postgres://localhost/mydb`
+* Use the envvar `DEBUG=graphile-build-pg:sql` to show the SQL statements that are being executed; e.g. `DEBUG=graphile-build-pg:sql postgraphile -c postgres:///mydb`
 
 If you need help optimising your PostgreSQL database or PostGraphile API, please [get in touch](/support/).

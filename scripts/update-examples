@@ -101,7 +101,7 @@ async function main() {
   await psql(["graphile_org_demo"], schemaSql);
   await psql(["graphile_org_demo"], dataSql);
   const pgPool = new pg.Pool({
-    connectionString: "postgres://localhost/graphile_org_demo",
+    connectionString: "postgres:///graphile_org_demo",
   });
   try {
     const postgraphileSchema = await createPostGraphileSchema(

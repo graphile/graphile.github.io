@@ -49,7 +49,7 @@ separation:
 ```
 postgraphile --plugins \
   @graphile/plugin-supporter,@graphile/plugin-pro \
-  -c postgres://localhost/my_db
+  -c postgres:///my_db
 ```
 
 ### Enabling via `.postgraphilerc.js`
@@ -61,7 +61,7 @@ If you're using the CLI version, plugins can also be enabled via
 module.exports = {
   options: {
     plugins: ["@graphile/plugin-supporter", "@graphile/plugin-pro"],
-    connection: "postgres://localhost/my_db",
+    connection: "postgres:///my_db",
     schema: ["app_public"],
     // ...
   },

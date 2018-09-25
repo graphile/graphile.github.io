@@ -140,7 +140,7 @@ exports.postgraphileOptions = postgraphileOptions;
 
 app.use(
   postgraphile(
-    process.env.DATABASE_URL || "postgres://localhost/",
+    process.env.DATABASE_URL || "postgres:///",
     ["app_public"],
     postgraphileOptions()
   )

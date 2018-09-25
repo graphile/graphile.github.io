@@ -353,12 +353,12 @@ mutation payloads, such as `query` for the root Query type.
 # For a local file:
 postgraphile \
   --append-plugins `pwd`/add-http-bin-plugin.js \
-  -c postgres://localhost/mydb
+  -c postgres:///mydb
 
 # Or, for an npm plugin:
 postgraphile \
   --append-plugins postgraphile-plugin-connection-filter \
-  -c postgres://localhost/mydb
+  -c postgres:///mydb
 ```
 
 If you're using the CLI you can use option `--append-plugins` to load additional
@@ -449,7 +449,7 @@ module.exports = AddHttpBinPlugin;
 We can then load our plugin into PostGraphile via:
 
 ```
-postgraphile --append-plugins `pwd`/add-http-bin-plugin.js -c postgres://localhost/mydb
+postgraphile --append-plugins `pwd`/add-http-bin-plugin.js -c postgres:///mydb
 ```
 
 Note that the return types of added fields (e.g. `JSONType` above) do not need

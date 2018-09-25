@@ -444,7 +444,7 @@ This function will create a user and their account, but how will we log the user
 
 ### Postgres Roles
 
-When a user logs in, we want them to make their queries using a specific PostGraphile role. Using that role we can define rules that restrict what data the user may access. So what roles do we need to define for our forum example? Remember when we were connecting to Postgres and we used a URL like `postgres://localhost:5432/mydb`? Well, when you use a connection string like that, you are logging into Postgres using your computer account’s username and no password. Say your computer account username is `buddy`, then connecting with the URL `postgres://localhost:5432/mydb`, would be the same as connecting with the URL `postgres://buddy@localhost:5432/mydb`. If you wanted to connect to your Postgres database with a password it would look like `postgres://buddy:password@localhost:5432/mydb`. When you run Postgres locally, this account will probably be the superuser. So when you run `postgraphile -c postgres://localhost:5432/mydb`, you are running PostGraphile with superuser privileges. To change that let’s create a role that PostGraphile can use to connect to our database:
+When a user logs in, we want them to make their queries using a specific PostGraphile role. Using that role we can define rules that restrict what data the user may access. So what roles do we need to define for our forum example? Remember when we were connecting to Postgres and we used a URL like `postgres:///mydb`? Well, when you use a connection string like that, you are logging into Postgres using your computer account’s username and no password. Say your computer account username is `buddy`, then connecting with the URL `postgres:///mydb`, would be the same as connecting with the URL `postgres://buddy@localhost/mydb` or even specifying the port explicitly: `postgres://buddy@localhost:5432/mydb`. If you wanted to connect to your Postgres database with a password it would look like `postgres://buddy:password@localhost/mydb`. When you run Postgres locally, this account will probably be the superuser. So when you run `postgraphile -c postgres:///mydb`, you are running PostGraphile with superuser privileges. To change that let’s create a role that PostGraphile can use to connect to our database:
 
 ```sql
 create role forum_example_postgraphile login password 'xyz';
@@ -453,7 +453,7 @@ create role forum_example_postgraphile login password 'xyz';
 We create this `forum_example_postgraphile` role with the [`CREATE ROLE`](https://www.postgresql.org/docs/current/static/sql-createrole.html) command. We want to make sure our PostGraphile role can login so we specify that with the `login` option and we give the user a password of ‘xyz’ with the `password` option. Now we will start PostGraphile as such:
 
 ```bash
-postgraphile -c postgres://forum_example_postgraphile:xyz@localhost:5432/mydb
+postgraphile -c postgres://forum_example_postgraphile:xyz@localhost/mydb
 ```
 
 When a user who does not have a JWT token makes a request to Postgres, we do not want that user to have the privileges we will give to the `forum_example_postgraphile` role, so instead we will create another role.
@@ -467,7 +467,7 @@ Here we use [`CREATE ROLE`](https://www.postgresql.org/docs/current/static/sql-c
 
 ```bash
 postgraphile \
-  --connection postgres://forum_example_postgraphile:xyz@localhost:5432/mydb \
+  --connection postgres://forum_example_postgraphile:xyz@localhost/mydb \
   --default-role forum_example_anonymous
 ```
 
@@ -718,7 +718,7 @@ The final argument list for starting our PostGraphile server using the CLI would
 
 ```bash
 postgraphile \
-  --connection postgres://forum_example_postgraphile:xyz@localhost:5432 \
+  --connection postgres://forum_example_postgraphile:xyz@localhost \
   --schema forum_example \
   --default-role forum_example_anonymous \
   --secret keyboard_kitten \

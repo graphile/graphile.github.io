@@ -17,10 +17,10 @@ npm install -g postgraphile
 This will make the `postgraphile` command available. You can then run:
 
 ```bash
-postgraphile -c postgres://localhost/mydb -s public -a -j
+postgraphile -c postgres:///mydb -s public -a -j
 ```
 
-where `-c` is the connection string (defaults to postgres://localhost/), `-s` is the schema name (defaults to "public"), `-a` enables Relay support and `-j` enables dynamic JSON.
+where `-c` is the connection string (defaults to `postgres:///`), `-s` is the schema name (defaults to "public"), `-a` enables Relay support and `-j` enables dynamic JSON.
 
 PostGraphile also reads options from a `.postgraphilerc.js` file from the current working directory.
 
@@ -159,8 +159,7 @@ The CLI options can also be specified in a `.postgraphilerc.js` file in the curr
 ```javascript
 module.exports = {
   options: {
-    connection:
-      "postgres://api_user:api_password@localhost:5432/api_development",
+    connection: "postgres://api_user:api_password@localhost/api_development",
     schema: ["myApp", "myAppPrivate"],
     jwtSecret: "myJwtSecret",
     defaultRole: "myapp_anonymous",

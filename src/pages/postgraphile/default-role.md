@@ -32,14 +32,14 @@ create role editor;
 create role editor nologin;
 ```
 
-“Logging in” just means we can use the role when authenticating in the PostgreSQL authentication section of the connection string. So with the above roles you could start a PostgreSQL connection with `postgres://admin@localhost:5432/mydb`, but not `postgres://editor@localhost:5432/mydb`.
+“Logging in” just means we can use the role when authenticating in the PostgreSQL authentication section of the connection string. So with the above roles you could start a PostgreSQL connection with `postgres://admin@localhost/mydb`, but not `postgres://editor@localhost/mydb`.
 
 ## Roles in PostGraphile
 
 So how does this apply to PostGraphile? PostGraphile requires you to have at least one user (role that can log in) when connecting to the server. That role will be specified in your connection string and will from here on out be referred to as the `auth_user`. You’d connect with your `auth_user` as follows:
 
 ```bash
-postgraphile -c postgres://auth_user@localhost:5432/mydb
+postgraphile -c postgres://auth_user@localhost/mydb
 ```
 
 The `auth_user` will have all the priveleges PostGraphile might need.
@@ -53,7 +53,7 @@ After that you could also specify more roles like a `user_role` which should be 
 In order to configure an default role just do the following:
 
 ```bash
-postgraphile -c postgres://auth_user@localhost:5432/mydb --default-role default_role
+postgraphile -c postgres://auth_user@localhost/mydb --default-role default_role
 ```
 
 _This article was originally written by [Caleb Meredith](https://twitter.com/calebmer)._
