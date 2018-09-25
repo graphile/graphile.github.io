@@ -7,11 +7,13 @@ title: PostGraphile Requirements
 ## Requirements
 
 PostGraphile is packaged as a Node.js module, you can install it with `npm` or
-`yarn` (depending on your preference) - we recommend `yarn`.
+`yarn` (depending on your preference) - users tend to have fewer issues with
+`yarn`, so we recommend it.
 
-We recommend using the latest LTS version of Node.js (version 8.9.4 at time of
-writing) and PostgreSQL (version 10.2 at time of writing), but we have limited
-support for older versions.
+We recommend using the latest LTS version of Node.js (version 8.12.0 at time of
+writing) and PostgreSQL (version 10.5 at time of writing), but we have limited
+support for older versions. Using newer released versions should work fine (we
+don't recommend using with alpha/beta versions though).
 
 ### Your PostgreSQL database
 
@@ -47,7 +49,7 @@ experience.
   [common function restrictions](/postgraphile/function-restrictions/)
   you should check out.
 * **Use unique constraints** rather than unique indexes when appropriate: we
-  use unique constraints to create mutations such as updateUserByUsername; note
+  use unique constraints to create mutations such as `updateUserByUsername`; note
   that "PostgreSQL automatically creates a unique index when a unique
   constraint or primary key is defined for a table." -- [PG
   docs](https://www.postgresql.org/docs/10/static/indexes-unique.html)
@@ -56,20 +58,16 @@ On top of this standard PostgreSQL best practices apply: use indexes carefully
 for performance, use constraints to ensure your data is valid and consistent,
 use triggers to take an action when something happens, etc.
 
-### Node.js
+### Node.js: use the LTS
 
-From v4 onwards, PostGraphile requires Node.js version 8.6+ which provides
+From PostGraphile v4 onwards, PostGraphile requires Node.js version 8.6+ which provides
 native support for `async`/`await` and supports many of the ES2017 and ES2018
 features.
 
-_(If you absolutely must run PostGraphile on a lower version of Node.js then
-this is possibly via transpiling the source code via Babel and packaging it up
-using something like `webpack` - get in touch if this is something you need)_
-
-### PostgreSQL
+### PostgreSQL: use latest
 
 For best results we recommend you use the latest stable release of PostgreSQL
-(v10.2 at time of writing), however it should run well on 9.6 or higher and
+(v10.5 at time of writing), however it should run well on 9.6 or higher and
 anything that breaks v9.6 support will be deemed a breaking change. The
 absolute earliest version it will run well against is v9.4, however we do not
 support this version officially - we strongly recommend you upgrade.
@@ -97,19 +95,17 @@ database itself).
 PostgreSQL 10 solves a number of performance issues - the most interesting of
 which for us is a significant performance boost to Row Level Security policies!
 
-We don't have support right now for many of the new features in PostgreSQL 10
-that are not compatible with PostgreSQL 9.6.
+Introduces ["identity
+columns"](https://blog.2ndquadrant.com/postgresql-10-identity-columns/) which
+we have preliminary support for.
 
-#### PostgreSQL 11 [not supported yet]
+#### PostgreSQL 11 [not officially supported yet]
 
-They removed a column from the system catalogues which breaks our introspection
-query. We need to build a system for issuing different introspection queries
-based on the database version.
-
-[Track the issue here.](https://github.com/graphile/postgraphile/issues/796)
+Seems to work, we don't have support for any PG11 specific features yet though.
 
 ### Operating system
 
-PostGraphile is developed on Mac OS X and tested on GNU/Linux; we would like to
-support Windows but no-one in the core team uses Windows so we need your help
-for this.
+PostGraphile is developed on Mac OS X and tested on GNU/Linux. It works on
+Windows and we would like to officially support Windows but no-one in the core
+team uses Windows so we need your help for this. Please get in touch if this
+is something you'd like to help with.

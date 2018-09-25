@@ -19,9 +19,9 @@ This quick start guide will walk you through spinning up your first PostGraphile
 
 You need to be running Node.js v8.6 or higher to run PostGraphile. You can check your current version of Node by running `node --version`. If you're running a recent version you can skip this section.
 
-There's many ways of installing node; if you're on macOS you might prefer installing with [homebrew](https://brew.sh/) via `brew install node`; if you're on a unix-based system you might like to use [`nvm`](https://github.com/creationix/nvm). Failing these, if you're using OS X or Windows, use one of the installers from the [Node.js download page](https://nodejs.org/en/download/). Make sure you select the version labelled LTS. Linux users can scroll down the page and find the version that works with their system.
+There's many ways of installing node; if you're on macOS you might prefer installing with [homebrew](https://brew.sh/) via `brew install node`; if you're on a unix-based system you might like to [use the `nvm` tool](https://github.com/creationix/nvm). Failing these, if you're using OS X or Windows, use one of the installers from the [Node.js download page](https://nodejs.org/en/download/). Make sure you select the version labelled LTS. Linux users can scroll down the page and find the version that works with their system.
 
-Once installed run `node -v` in a terminal to check your version.
+Once installed run `node -v` in a terminal to check your version. It must be 8.6.0 or higher.
 
 ## Install PostgreSQL
 
@@ -31,12 +31,12 @@ PostgreSQL does not need to be installed on the same machine, but you'll have a 
 
 If you are running on macOS, it is recommended that you install and use [PostgreSQL.app](http://postgresapp.com/). If you are on another platform, go to the [PostgreSQL download page](https://www.postgresql.org/download/) to pick up a copy of PostgreSQL. We recommend using a version of PostgreSQL higher than `9.6.0`. You can read more about the reasoning behind this requirement [in our documentation](/postgraphile/requirements/).
 
-After that, make sure your copy of PostgreSQL is running locally on `postgres://localhost:5432` by running `psql` in a terminal. 5432 is the default port for local PostgreSQL databases and is used by many PostgreSQL tools (since this is the default you can omit this from the connection string if you like)
+After that, make sure your copy of PostgreSQL is running locally by running `psql postgres:///` in a terminal (the three slashes is deliberate - we're deliberately not specifying a host so it uses the defaults of hostname: localhost, port: 5432).
 
 If you get something like this returned then PostgreSQL is successfully installed:
 
 ```bash
-$ psql "postgres://localhost:5432"
+$ psql "postgres:///"
 
 psql: FATAL:  database "username" does not exist
 ```
@@ -44,7 +44,7 @@ psql: FATAL:  database "username" does not exist
 however, if you receive a "Connection refused" error then that indicates your PostgreSQL server is not running, or not reachable:
 
 ```bash
-$ psql "postgres://localhost:5432"
+$ psql "postgres:///"
 
 psql: could not connect to server: Connection refused
 ```
@@ -52,8 +52,8 @@ psql: could not connect to server: Connection refused
 If you want to connect to a different database within PostgreSQL, just add the database name to the end of the connection string:
 
 ```bash
-$ psql postgres://localhost:5432/testdb # Connects to the `testdb` database at `postgres://localhost:5432`
-$ psql postgres://somehost:2345/somedb  # Connects to the `somedb` database at `postgres://somehost:2345`
+$ psql postgres:///testdb # Connects to the `testdb` database on your local machine
+$ psql "postgres://user:password@somehost:2345/somedb"  # Connects to the `somedb` database at `postgres://somehost:2345` using login with `user` and `password`
 ```
 
 Read the documentation on [PostgreSQL connection strings](https://www.postgresql.org/docs/9.6/static/libpq-connect.html#LIBPQ-CONNSTRING) to learn more about alternative formats (including using a password).
@@ -69,7 +69,7 @@ $ createdb mydb
 This will create a PostgreSQL database called "mydb". You can read more about this on the [PostgreSQL Documentation site](https://www.postgresql.org/docs/9.6/static/tutorial-createdb.html). Now you can run `psql` with your database URL and get a SQL prompt:
 
 ```bash
-$ psql "postgres://localhost:5432/mydb"
+$ psql "postgres:///mydb"
 
 psql (9.6.*)
 Type "help" for help.
@@ -100,8 +100,8 @@ $ npm install -g postgraphile
 To run PostGraphile, you’ll use the same URL that you used for `psql` with the database name added:
 
 ```bash
-# Connect to the `mydb` database within the PostgreSQL at localhost port 5432
-$ postgraphile -c "postgres://localhost:5432/mydb"
+# Connect to the `mydb` database within the local PostgreSQL server
+$ postgraphile -c "postgres:///mydb"
 
 # Connect to a database that requires SSL/TLS
 $ postgraphile -c "postgres://securehost:5432/db?ssl=1"
@@ -113,7 +113,7 @@ $ postgraphile -c "postgres://somehost:2345/somedb"
 You can also run PostGraphile with the watch flag:
 
 ```bash
-$ postgraphile -c "postgres://localhost:5432/mydb" --watch
+$ postgraphile -c "postgres:///mydb" --watch
 ```
 
 With the `--watch` flag, PostGraphile will automatically update your GraphQL API whenever the PostgreSQL schemas you are introspecting change.
