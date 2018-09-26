@@ -18,7 +18,7 @@ Benjie has rebuilt the core of PostGraphile entirely, with a strong focus on per
 
 
 <div class="flex flex-row flex-wrap">
-<div class='text-center col-xs-12 col-md-3 col-lg-5 postgraphile-graphs-requests-per-secoond'></div>
+<div class='text-center col-xs-12 col-md-3 col-lg-5 postgraphile-graphs-requests-per-second'></div>
 <div class='text-center col-xs-12 col-md-3 col-lg-5 postgraphile-graphs-average-latency-label'></div>
 </div>
 

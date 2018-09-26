@@ -877,7 +877,7 @@ h6 code {
   }
 }
 
-.postgraphile-graphs-requests-per-secoond, .postgraphile-graphs-memory-usage, .postgraphile-graphs-average-latency, .postgraphile-graphs-average-latency-label {
+.postgraphile-graphs-requests-per-second, .postgraphile-graphs-memory-usage, .postgraphile-graphs-average-latency, .postgraphile-graphs-average-latency-label {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: 50% 20%;
@@ -892,7 +892,7 @@ h6 code {
   background-image: url("../../static/images/v4-average-latency-with-label.png");
 }
 
-.postgraphile-graphs-requests-per-secoond {
+.postgraphile-graphs-requests-per-second {
   background-image: url("../../static/images/v4-requests-per-second.png");
 }
 
