@@ -17,9 +17,9 @@ cause issues, so assume the list below includes singulars and plurals too. The
 same goes for **snake_case** vs **camelCase** since PostGraphile automatically
 converts between these for you.
 
-* [Table] _"query"_, _"mutation"_, _"subscription"_ - conflict with the root-level `Query`, `Mutation` and `Subscription` GraphQL types.
-* [Table, Function] _"node"_ - conflicts with the GraphQL root `node(...)` interface.
-* [Column, Argument] _"order_by"_ / _"orderBy"_ - Used by PostGraphile for ordering, may cause issues when declared as a function argument or table column.
-* [Column] _"primary_key"_ - we automatically add orderBy: PRIMARY_KEY_ASC to ordering, if you have a column called `primary_key` then this value will be generated twice and cause issues.
+* [Table] `query`, `mutation`, `subscription` - conflict with the root-level `Query`, `Mutation` and `Subscription` GraphQL types.
+* [Table, Function] `node` - conflicts with the GraphQL root `node(...)` interface.
+* [Column, Argument] `order_by` / `orderBy` - Used by PostGraphile for ordering, may cause issues when declared as a function argument or table column.
+* [Column] `primary_key` - we automatically add `orderBy: PRIMARY_KEY_ASC` to ordering, if you have a column called `primary_key` then this value will be generated twice and cause issues.
 
-There are other potential conflicts too, if you discover more conflicts then please consider sending a PR to this page!
+There are other potential conflicts too, if you discover more conflicts then please consider using the "Edit this page" link above to suggest some changes!
