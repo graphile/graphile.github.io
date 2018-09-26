@@ -259,6 +259,12 @@
         ]
       },
       {
+        "to": "/postgraphile/postgresql-indexes/",
+        "title": "PostgreSQL Indexes",
+        "sectionId": "basics",
+        "subpages": []
+      },
+      {
         "to": "/postgraphile/security/",
         "title": "Security",
         "sectionId": "basics",
@@ -326,6 +332,12 @@
         "subpages": []
       },
       {
+        "to": "/postgraphile/postgresql-schema-design/",
+        "title": "PostgreSQL Schema Design",
+        "sectionId": "guides",
+        "subpages": []
+      },
+      {
         "to": "/postgraphile/production/",
         "title": "Production Considerations",
         "sectionId": "guides",
@@ -340,18 +352,6 @@
       {
         "to": "/postgraphile/default-role/",
         "title": "The Default Role",
-        "sectionId": "guides",
-        "subpages": []
-      },
-      {
-        "to": "/postgraphile/postgresql-schema-design/",
-        "title": "PostgreSQL Schema Design",
-        "sectionId": "guides",
-        "subpages": []
-      },
-      {
-        "to": "/postgraphile/postgresql-indexes/",
-        "title": "PostgreSQL Indexes",
         "sectionId": "guides",
         "subpages": []
       },
