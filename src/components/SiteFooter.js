@@ -45,8 +45,8 @@ const SiteFooter = () => {
                 <a href="https://github.com/graphile">GitHub</a>
               </li>
               <li>
-                <a href="https://gitter.im/graphile/postgraphile">
-                  Gitter chat
+                <a href="http://discord.gg/graphile">
+                  Chat (discord)
                 </a>
               </li>
               <li>

@@ -41,9 +41,9 @@ title: Support for PostGraphile and Graphile Build from the maintainer
 
 [PostGraphile support](https://github.com/graphile/postgraphile/issues)
 
-[Graphile Build support](https://github.com/graphile/graphile-build/issues)
+[Graphile Engine support](https://github.com/graphile/graphile-build/issues)
 
-[Gitter chat](https://gitter.im/graphile/postgraphile)
+[Discord chat](http://discord.gg/graphile)
 
 </div>
 

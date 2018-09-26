@@ -6,9 +6,9 @@ title: PostGraphile chat
 
 ## PostGraphile Chat
 
-We have a fairly active chat room on gitter:
+We have a fairly active chat room on Discord:
 
-https://gitter.im/graphile/postgraphile
+http://discord.gg/graphile
 
 This is a good place to get help, or to be involved in discussions on upcoming
 features in PostGraphile.
