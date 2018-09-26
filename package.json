@@ -43,9 +43,7 @@
     "typography-theme-fairy-gates": "^0.15.11",
     "typography-theme-funston": "^0.15.10"
   },
-  "keywords": [
-    "gatsby"
-  ],
+  "keywords": ["gatsby"],
   "license": "MIT",
   "main": "n/a",
   "scripts": {
@@ -54,7 +52,7 @@
     "develop": "./scripts/update && gatsby develop",
     "format": "prettier --write 'src/**/*.js' '**/*.md'",
     "start": "gatsby develop",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node link-check.js",
     "update": "./scripts/update",
     "watch:examples": "nodemon -x './scripts/update-examples' -w examples/queries -e graphql"
   },
