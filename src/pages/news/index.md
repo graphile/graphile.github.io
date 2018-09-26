@@ -52,32 +52,6 @@ Version 4 has launched! More performant, more extensible and more customisable t
 
 <section>
 <div class='container'>
-<div class='hero-block'>
-<div class='row flex-wrap-reverse'>
-
-<div class='text-center col-xs-12 col-md-3 col-lg-5 postgraphile-graphs-barchart-bg'>
-</div>
-
-<div class='text-center col-xs-12 col-md-9 col-lg-7'>
-
-## Postgraphile is faster than ever
-
- PostGraphile was already highly performant for complex GraphQL queries, but the release of Verion 4 brings speed and performance to a new level. 
- 
- [Read more about Postgraphile's fantastic performance](/news/postgraphile-version-4-performance/).
-
-
-</div>
-</div>
-</div>
-
-</div>
-</section>
-
-<!-- **************************************** -->
-
-<section>
-<div class='container'>
 
 ## See what people are saying
 
