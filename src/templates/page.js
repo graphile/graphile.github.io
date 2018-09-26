@@ -38,7 +38,7 @@ function PageList({ pages, location }) {
 }
 
 const Nav = ({ sections, pages, location }) => (
-  <aside>
+  <aside className="sidebar col-xs-12 col-md-3 last-xs mt3">
     {sections.map(({ id, title }, idx) => (
       <section key={idx}>
         <h4 className="f6 ttu fw6 mt0 mb3 bb pb2">
