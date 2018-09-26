@@ -4,7 +4,7 @@
     "sections": [
       {
         "id": "main",
-        "title": "Postgraphile Version 4"
+        "title": "Archive"
       },
       {
         "id": "about",
@@ -15,16 +15,6 @@
       {
         "to": "/news/postgraphile-version-4/",
         "title": "Version 4 is released",
-        "sectionId": "main"
-      },
-      {
-        "to": "/postgraphile/v4-new-features/",
-        "title": "Version 4 feaure guide",
-        "sectionId": "main"
-      },
-      {
-        "to": "/postgraphile/v3-migration/",
-        "title": "Version 4 migration guide",
         "sectionId": "main"
       },
       {
