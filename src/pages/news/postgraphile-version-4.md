@@ -27,13 +27,10 @@ Benjie has rebuilt the core of PostGraphile entirely, with a strong focus on per
 
 * __Version 4 is highly customisable__
 
-Postgraphile version 4 introuces "Smart Comments" enabling the user to control the generated graphQL schema without modifying the underlying database tables and columns. Operations include renaming types and fields, controlling the circumstances a column will be exposed and even handling deprecation gracefully.
+Version 4 enables the user to customise and streamline their GraphQL schema. It now filters functionality from PostgreSQL extensions by default, enables the user to remove or renaming certain features with "smart comments", and it's also introduced the capability of limiting what is exposed in the GraphQL schema based on the PostgreSQL permissions. This makes for a much simplified generated schema which the user fully controls.
 
-PG v 4 now inspects the database permissions, meaning that tables and columns that are not granted to the user are not exposed for example, if you have a table with five coloumns but only two of them are updateable, then only those two columns are exposed via the update mutation. 
+The new smart comments function enables the developer to customise their GraphQL schema as they see fit. By adding smart comments, the developer can easily perform operations such as renaming columns without modifying the underlying database. Current operations include renaming types and fields, controlling the circumstances a column will be exposed and even handling deprecation gracefully. This functionality is set up such that it can be extended in the future through the use of the new community plug-in system.
 
-The user can now customise their PostGraphile GraphQL schema by adding comments to entitles such as tables, columns, functions and relations within their PostgreSQL database. PostGraphile calls this functionality "Smart Comments" and it allows the user to easily customise the generated GraphQL schema without making breaking changes to your database.
-
-These changes could be renaming something, omitting things from the GraphQL schema, or anything else the new plugin system supports. This new system also makes deprecating entites in the schema trivally easy.
 
 [Read more about the new smart comments system](/postgraphile/smart-comments/)
   
