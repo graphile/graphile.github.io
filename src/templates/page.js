@@ -148,7 +148,7 @@ const Page = ({
                           location.pathname.length - 1
                         )}.md`}
                       >
-                        📝 Edit this page
+                        📝 Suggest improvements to this page
                       </a>
                     </div>
                     <div dangerouslySetInnerHTML={{ __html: html }} />
