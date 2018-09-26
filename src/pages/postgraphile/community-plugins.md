@@ -14,9 +14,8 @@ by the community and is not an endorsement by the project.
 If you have written a PostGraphile plugin (or have found one that is not listed
 here), then please feel free to add it, you can [edit this page in GitHub](https://github.com/graphile/graphile.github.io/edit/develop/src/pages/postgraphile/community-plugins.md).
 
-See the [CLI](https://www.graphile.org/postgraphile/usage-cli/) or
-[library](https://www.graphile.org/postgraphile/usage-library/) docs for how to
-load plugins.
+See the [CLI](/postgraphile/usage-cli/) or
+[library](/postgraphile/usage-library/) docs for how to load plugins.
 
 Schema extension plugins for PostGraphile:
 

@@ -64,7 +64,7 @@ type Query implements Node {
 
 \* Remember these fields can be simplified by loading the `@graphile-contrib/pg-simplify-inflector` plugin.
 
-Read more about [relations](/postgraphile/relations/), [connections](/postgraphile/connections/), [filtering](/postgraphile/filtering/) and [CRUD Mutations](/postgraphile/crud-mutations).
+Read more about [relations](/postgraphile/relations/), [connections](/postgraphile/connections/), [filtering](/postgraphile/filtering/) and [CRUD Mutations](/postgraphile/crud-mutations/).
 
 ### Permissions
 

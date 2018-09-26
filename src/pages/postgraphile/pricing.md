@@ -260,7 +260,7 @@ licenses.
 ### PostGraphile Supporter and Pro are commercial plugins
 
 The Supporter and Pro plugins enhance PostGraphile with additional features and
-are loaded through the standard [plugin interface](/postgraphile/plugins).
+are loaded through the standard [plugin interface](/postgraphile/plugins/).
 
 The Supporter plugin is a reward for people who support PostGraphile's
 development via [Patreon](https://patreon.com/benjie).

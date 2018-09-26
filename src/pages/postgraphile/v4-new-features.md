@@ -202,10 +202,9 @@ simpler interface exclusively with `--simple-collections only`.
 ### GraphQL query batching
 
 With the `--enable-query-batching` option for [the
-CLI](https://www.graphile.org/postgraphile/usage-cli/); or
-`enableQueryBatching: true` for the
-[library](https://www.graphile.org/postgraphile/usage-library/) you can
-enable our experimental Query Batching support.
+CLI](/postgraphile/usage-cli/); or `enableQueryBatching: true` for the
+[library](/postgraphile/usage-library/) you can enable our experimental Query
+Batching support.
 
 Your GraphQL client will need query batching support to make use of
 this (non-batched queries still work fine).
