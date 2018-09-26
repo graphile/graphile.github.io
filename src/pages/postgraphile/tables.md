@@ -16,6 +16,7 @@ CREATE TABLE app_public.users (
   id serial PRIMARY KEY,
   username citext NOT NULL unique,
   name text NOT NULL,
+  about text,
   organization_id int NOT NULL
     REFERENCES app_public.organizations ON DELETE CASCADE,
   is_admin boolean NOT NULL DEFAULT false,
@@ -24,7 +25,61 @@ CREATE TABLE app_public.users (
 );
 ```
 
-### Read
+For a table like this, PostGraphile will:
+
+- Create a GraphQL type, `User`, for the table, named in UpperCamelCase & singularized ([inflector: `tableType`](https://github.com/graphile/graphile-engine/blob/f332cb11fc32c7b50428c8d19d88121ead00d95d/packages/graphile-build-pg/src/plugins/PgBasicsPlugin.js#L485-L487)).
+  - Add fields to this type for the columns (e.g. `id`, `username`, `about`, `organizationId`, `isAdmin`, `createdAt`, `updatedAt`), named in camelCase ([inflector:
+    `tableType`](https://github.com/graphile/graphile-engine/blob/f332cb11fc32c7b50428c8d19d88121ead00d95d/packages/graphile-build-pg/src/plugins/PgBasicsPlugin.js#L488-L490)).
+  - Add a `nodeId` [globally unique identifier](/postgraphile/node-id/) field if the table has a primary key.
+  - Add [fields for the relevant relations](/postgraphile/relations/) (e.g. `organizationByOrganizationId`\*).
+- Add to related table types:
+  - Reverse [relations for each forward relation](/postgraphile/relations/)
+  (e.g. `Organization.usersByOrganizationId`\*).
+- Add to the root `Query` type:
+<!--
+```graphql
+type Query implements Node {
+  allUsers(
+    first: Int
+    last: Int
+    offset: Int
+    before: Cursor
+    after: Cursor
+    orderBy: [UsersOrderBy!] = [PRIMARY_KEY_ASC]
+    condition: UserCondition
+  ): UsersConnection
+
+  userById(id: Int!): User
+
+  userByUsername(username: String!): User
+
+  user(nodeId: ID!): User
+}
+```
+-->
+  - An `allUsers` [connection](/postgraphile/connections/) field with pagination, filtering, and ordering (inflector: `allRows`)
+  - A number of `userByKey(key: ...)` fields (e.g. `userById`, `userByUsername`), one for each of the unique constraints on the table (inflector: `rowByUniqueKeys`)
+  - A `foo(nodeId: ID!)` field to get the row by its `nodeId`
+- Add [CRUD Mutations](/postgraphile/crud-mutations/) to the root `Mutation` type
+
+\* Remember these fields can be simplified by loading the `@graphile-contrib/pg-simplify-inflector` plugin.
+
+Read more about [relations](/postgraphile/relations/), [connections](/postgraphile/connections/), [filtering](/postgraphile/filtering/) and [CRUD Mutations](/postgraphile/crud-mutations).
+
+### Permissions
+
+If you're using `--no-ignore-rbac` or `ignoreRBAC: false` (highly
+recommended) then PostGraphile will only expose the tables/columns/fields you
+have access to. For example if you perform `GRANT UPDATE (username, name) ON
+users TO graphql_visitor;` then the `updateUser` mutations will only accept
+`username` and `name` fields - the other columns will not be present.
+
+\* **_NOTE: We strongly [advise against](/postgraphile/requirements/) using
+column-based `SELECT` grants with PostGraphile. Instead, split your
+permission concerns into separate tables and join them with one-to-one
+relations._**
+
+
 <!--!RUN
 dropdb test
 createdb test
@@ -49,47 +104,3 @@ CREATE TABLE app_public.users (
 HERE
 npx postgraphile -c 'test' -s 'app_public' --no-server --export-schema-graphql postgraphile-tables-1.graphql
 -->
-
-If the `SELECT` permission is granted for the table or any of its columns\* (or if we're ignoring RBAC, as we do by default), then:
-
-**Tables** becomes a GraphQL type, named in UpperCamelCase & singularized ([inflector: `tableType`](https://github.com/graphile/graphile-engine/blob/f332cb11fc32c7b50428c8d19d88121ead00d95d/packages/graphile-build-pg/src/plugins/PgBasicsPlugin.js#L485-L487)).
-
-**Columns** become GraphQL fields of the relevant GraphQL type, named in
-camelCase ([inflector:
-`tableType`](https://github.com/graphile/graphile-engine/blob/f332cb11fc32c7b50428c8d19d88121ead00d95d/packages/graphile-build-pg/src/plugins/PgBasicsPlugin.js#L488-L490)).
-
-**Tables** expose an `allFoos` [connection](/postgraphile/connections/) field on the root Query type.
-
-**Relations** (foreign key constraints, like the `REFERENCES` above) are exposed as GraphQL fields using a camelCase
-combination of the target type and the source fields (inflectors:
-`singleRelationByKeys`, `singleRelationByKeysBackwards`, and
-`manyRelationByKeys`). Unique constraints expose a GraphQL table type directly, non-unique constraints expose a [connection](/postgraphile/connections/). Read more about [relations](/postgraphile/relations/).
-
-**Unique indexes** (including the **primary key**) are expose as individual
-getter fields on the root Query type (inflector: `rowByUniqueKeys`) which
-resolve to a GraphQL table type. This works for both single-key and multi-key
-unique constraints (but _not_ partial indexes at this time).
-
-\* **_NOTE: We strongly [advise against](/postgraphile/requirements/) using column-based `SELECT` grants with PostGraphile. Instead, split your permission concerns into separate tables and join them with one-to-one relations._**
-
-### Create
-
-If the `INSERT` permission is granted for the table or any of its columns (or if we're ignoring RBAC, as we do by default), then:
-
-**Tables** get a `createFoo` mutation added to the root Mutation type, along with the associated input and payload types. [Click for an example](/postgraphile/examples/#Mutations__Create).
-
-### Update
-
-If the `UPDATE` permission is granted for the table or any of its columns (or if we're ignoring RBAC, as we do by default), then:
-
-**Tables with a primary key** get an `updateFoo` mutation (which gets passed the [Globally Unique Identifier](/postgraphile/node-id/)) added to the root Mutation type, along with the associated input and payload types.
-
-Every **unique index** (including the **primary key**) of a table gets an `updateFooByKeys` mutation (which gets passed the relevant keys) added to the root Mutation type, along with the associated input and payload types. [Click for an example](/postgraphile/examples/#Mutations__Update).
-
-### Delete
-
-If the `DELETE` permission is granted for the table (or if we're ignoring RBAC, as we do by default), then:
-
-**Tables with a primary key** get a `deleteFoo` mutation (which gets passed the [Globally Unique Identifier](/postgraphile/node-id/)) added to the root Mutation type, along with the associated payload types.
-
-Every **unique index** (including the **primary key**) of a table gets an `deleteFooByKeys` mutation (which gets passed the relevant keys) added to the root Mutation type, along with the associated payload types. [Click for an example](/postgraphile/examples/#Mutations__Delete).

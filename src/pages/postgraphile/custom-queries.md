@@ -95,3 +95,27 @@ Stripe](https://medium.com/@sastraxi/authenticated-and-stitched-schemas-with-pos
 [procedures]: /postgraphile/procedures/
 [forum example]: https://github.com/graphile/postgraphile/tree/master/examples/forum
 [`like`]: http://www.postgresql.org/docs/current/static/functions-matching.html
+
+
+### Advice
+
+Though it may be tempting to expose huge collections via a function, it's
+important to be aware that, when paginating across a function, only
+`LIMIT/OFFSET` pagination can be used. (For convenience and consistency we
+expose cursor pagination over functions, but internally this is just mapped
+to `LIMIT`/`OFFSET` pagination.) Because of this, and because functions are
+seen as a "black box" by PostgreSQL, if you try and paginate to, say, the
+100,000th record then PostgreSQL will literally have to execute the function
+until all 100,000 records have been generated, and this is often expensive.
+
+One way to solve this is to have your function apply its own internal limits
+and filters which can be exposed as GraphQL field arguments - if you reduce
+the amount of data that the function can produce (e.g. to 100 rows) then it
+reduces the potential cost of having this function in your schema.
+
+**Disclaimer**: the information in this advice section is not 100%
+true, for example PostgreSQL can "see through" some `SQL` functions and has a
+highly intelligent query planner. If you're an expert on PostgreSQL then you
+should ignore this advice and go with your own understanding, it's only
+intended to help beginners from shooting themselves in the foot
+performance-wise.

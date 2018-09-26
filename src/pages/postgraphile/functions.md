@@ -6,7 +6,8 @@ title: Functions
 
 ## PostgreSQL Functions
 
-You can use PostgreSQL functions to add extra fields to your GraphQL schema.
+One of the easiest ways to add more capabilities to your PostGraphile schema
+is with PostgreSQL functions. The three main methods are:
 
 * [Computed Columns](/postgraphile/computed-columns/) enable you to add a computed field to a table type
 * [Custom Queries](/postgraphile/custom-queries/) enable you to add a root level Query field which can return a scalar, list, custom type, table row or even a table connection
