@@ -6,38 +6,15 @@ title: PostGraphile Version 4 is released
 
 ## PostGraphile Launches Version 4
 
-__A more performant, extensible and customisable GraphQL layer for PostgreSQL__
-__The original GraphQL API for Postgres now vastly more performant, customisable and exensible__
+__The original GraphQL API for Postgres: now vastly more performant, customisable and exensible than ever before__
 
+After a year of development and testing, Benjie Gillam is pleased to announce the release of PostGraphile version 4 - the most customisable and extensible automatic GraphQL API for PostgreSQL yet. PostGraphile - previously known as PostGraphQL -  has been re-written from the ground up with a strong focus on performance, best practices and flexibility.
 
-After a year of development and testing, Benjie Gillam is pleased to announce the release of PostGraphile v4 - the most customisable and extensible automatic GraphQL API for PostgreSQL. PostGraphile (previously known as PostGraphQL) has been re-written from the ground up with a strong focus on performance, best practices.
-
-Benjie Gillam (@Benjie) is pleased to announce the release of PostGraphile Version 4, taking PostGraphile up to be the forerunner in GraphQL engines.
-
-Developers can get started with PostGraphile with just one command. 
-
-Postgraphile exposes the powerful next gen features of PostgreSQL enableing developers to specify their data shcema and business logic (without having to learn new tooling) use their existing database business logic and dont have to learn new tooling
-
-Postgraphile is flexible - you can use it with new or existing databases. No need to learn new tooling, Postgraphile exposes the powerful ... 
-
-Don't learn Postgraphile learn Postgres
-
-With Postgraphile, developers dont need to learn or trust another set of tooling and interfaces, instead they can leverage their existing PostgreS knowledge to build a secure and highly performant GraphQL API
-
-PostGraphile is the fastest way to get a GraphQL API from a PostgreSQL database, allowing backend developers to focus on the important parts - data schema and business logic. - PostGraphile handles making that available as a high-performance, low-latency GraphQL API; and now it is more performant, exetensible and customisable than ever before. 
-
-Benjie Gillam (@Benjie) is pleased to announce the release of PostGraphile Version 4, taking PostGraphile up to be the forerunner in GraphQL engines. PostGraphile is the fastest way to get a GraphQL API from a PostgreSQL database, allowing backend developers to focus on the important parts - data schema and business logic. - PostGraphile handles making that available as a high-performance, low-latency GraphQL API; and now it is more performant, exetensible and customisable than ever before. 
-
-using trusted and familiar PostgreSQL 
-
-Postgraphile encourages developers to embrace the powerful features of Postgres, the most adanvced open source database, rather than trust and learn a new set of tools and interfaces
-
+PostGraphile exposes the powerful next generation features of PostgreSQL, enabling developers to use their existing Postgres knowledge to build a secure and highly performant GraphQL API with just one command line. PostGraphile encourages developers to embrace the powerful features of Postgres, the most advanced open source database, rather than trust and learn a new set of tools and interfaces.
 
 * __PostGraphile Version 4 is highly performant__
 
-Benjie has rebuilt the core of PostGraphile entirely, with a strong focus on performance; enabled via the invention of Graphile Engine. 
-
-Unlike other solutions, Postgraphile is able to look at the GraphQL query holistically and find the most efficient way of executing it. This has led to 17x the request throughput with latency reduced by 94% and peak memory usage reduced by 92% as compared to Version 3.
+Benjie has rebuilt the core of PostGraphile entirely, with a strong focus on performance. Unlike other solutions, PostGraphile is able to look at the GraphQL query holistically and find the most efficient way of executing it. This has lead to a large increase in the request throughput, and a 94% decrease in latency. Peak memory usage has also reduced by 92% as compared to Version 3. This all leads to a much improved time for API requests, leaving the developer with a much faster application overall.
 
 
 <div class="flex flex-row flex-wrap">
