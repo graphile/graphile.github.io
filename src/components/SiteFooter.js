@@ -45,9 +45,7 @@ const SiteFooter = () => {
                 <a href="https://github.com/graphile">GitHub</a>
               </li>
               <li>
-                <a href="http://discord.gg/graphile">
-                  Chat (discord)
-                </a>
+                <a href="http://discord.gg/graphile">Chat (discord)</a>
               </li>
               <li>
                 <a href="https://twitter.com/benjie">Twitter</a>
@@ -57,8 +55,10 @@ const SiteFooter = () => {
           </div>
           <div className="col-xs-12 col-md-offset-1 col-md-5">
             <h6>About</h6>
-            PostGraphile and Graphile Engine are Open Source Software, developed
-            and maintained by <a href="https://twitter.com/benjie">@Benjie</a>
+            PostGraphile and Graphile Build are Open Source Software, developed
+            and maintained by <a href="https://twitter.com/benjie">
+              @Benjie
+            </a>{" "}
             with the help of the community.
             <br />
             <br />
