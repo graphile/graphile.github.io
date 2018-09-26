@@ -47,7 +47,7 @@ request different sub-fields depending on the type of data that's returned from
 a field, hence `fieldsByTypeName`. If you happen to know the type that's going
 to be returned then you can simplify with the next method...
 
-From [`graphql-parse-resolve-info`](https://github.com/graphile/graphile-build/tree/master/packages/graphql-parse-resolve-info#parseresolveinforesolveinfo)
+From [`graphql-parse-resolve-info`](https://github.com/graphile/graphile-engine/tree/master/packages/graphql-parse-resolve-info#parseresolveinforesolveinfo)
 
 <!-- TODO: example -->
 
@@ -59,7 +59,7 @@ type `graphQLType` and we'll return a similar object with an additional
 `fields` property that are only the fields that are compatible with
 the `graphQLType`.
 
-From [`graphql-parse-resolve-info`](https://github.com/graphile/graphile-build/tree/master/packages/graphql-parse-resolve-info#simplifyparsedresolveinfofragmentwithtypeparsedresolveinfofragment-returntype)
+From [`graphql-parse-resolve-info`](https://github.com/graphile/graphile-engine/tree/master/packages/graphql-parse-resolve-info#simplifyparsedresolveinfofragmentwithtypeparsedresolveinfofragment-returntype)
 
 <!-- TODO: example -->
 
@@ -304,4 +304,4 @@ const Query = newWithHooks(GraphQLObjectType, {
 
 Check out a working example in `fieldData` test:
 
-[https://github.com/graphile/graphile-build/blob/master/packages/graphile-build/**tests**/fieldData.test.js](https://github.com/graphile/graphile-build/blob/master/packages/graphile-build/__tests__/fieldData.test.js)
+[https://github.com/graphile/graphile-engine/blob/master/packages/graphile-build/**tests**/fieldData.test.js](https://github.com/graphile/graphile-engine/blob/master/packages/graphile-build/__tests__/fieldData.test.js)

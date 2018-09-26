@@ -200,7 +200,7 @@ syntax using PostgreSQL's built in `COMMENT` facility).
 ## Customisable with JS plugins
 
 The GraphQL schema PostGraphile uses is entirely built from [Graphile Engine
-plugins](https://github.com/graphile/graphile-build/tree/master/packages/graphile-build-pg/src/plugins),
+plugins](https://github.com/graphile/graphile-engine/tree/master/packages/graphile-build-pg/src/plugins),
 you can disable any of the built in plugins to restrict the functionality or
 add additional plugins to extended or enhanced your generated schema.
 

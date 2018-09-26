@@ -59,7 +59,7 @@ be referenced via `getTypeByName()`
 Use this in your resolver to quickly retrieve the alias that this field was
 requested as.
 
-From [`graphql-parse-resolve-info`](https://github.com/graphile/graphile-build/tree/master/packages/graphql-parse-resolve-info#getaliasfromresolveinforesolveinfo)
+From [`graphql-parse-resolve-info`](https://github.com/graphile/graphile-engine/tree/master/packages/graphql-parse-resolve-info#getaliasfromresolveinforesolveinfo)
 
 <!-- TODO: example -->
 

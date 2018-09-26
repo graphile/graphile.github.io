@@ -268,7 +268,7 @@ export default withRouter(
                         location.pathname.match(/^\/postgraphile(\/|$)/)
                           ? "https://github.com/graphile/postgraphile"
                           : location.pathname.match(/^\/graphile-build(\/|$)/)
-                            ? "https://github.com/graphile/graphile-build"
+                            ? "https://github.com/graphile/graphile-engine"
                             : "https://github.com/graphile"
                       }
                     >

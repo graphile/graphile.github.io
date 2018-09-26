@@ -13,7 +13,7 @@ Custom Queries, Custom Mutations and Computed Columns, and how to work around
 the restrictions.
 
 ~~If you'd like to help lift these restrictions, the place to start would be
-[`makeProcField`](https://github.com/graphile/graphile-build/blob/69d7b1cbe48ea5f50e3121916e7b1e12d1c70008/packages/graphile-build-pg/src/plugins/makeProcField.js)~~
+[`makeProcField`](https://github.com/graphile/graphile-engine/blob/69d7b1cbe48ea5f50e3121916e7b1e12d1c70008/packages/graphile-build-pg/src/plugins/makeProcField.js)~~
 
 ### Must return a named type
 

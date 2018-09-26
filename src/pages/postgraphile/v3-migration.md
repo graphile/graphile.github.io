@@ -218,7 +218,7 @@ _Note that changes to the watch schema are NOT deemed to be breaking changes._
 drop the old watch schema) because `--watch` is only intended for development
 use and the new schema should install itself just fine. But if you had to
 manually install the old watch schema, you'll need to manually install the [new
-one](https://github.com/graphile/graphile-build/blob/master/packages/graphile-build-pg/res/watch-fixtures.sql)
+one](https://github.com/graphile/graphile-engine/blob/master/packages/graphile-build-pg/res/watch-fixtures.sql)
 in the same way
 
 **Reasoning**: the old schema did not detect certain `DROP` commands and so
