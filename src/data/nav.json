@@ -374,18 +374,6 @@
         "subpages": []
       },
       {
-        "to": "/postgraphile/introspection/",
-        "title": "Introspection",
-        "sectionId": "faq",
-        "subpages": []
-      },
-      {
-        "to": "/postgraphile/why-nullable/",
-        "title": "Why is it nullable?",
-        "sectionId": "faq",
-        "subpages": []
-      },
-      {
         "to": "/postgraphile/community-plugins/",
         "title": "Community Plugins",
         "sectionId": "community",
@@ -401,6 +389,18 @@
         "to": "/postgraphile/code-of-conduct/",
         "title": "Code of Conduct",
         "sectionId": "community",
+        "subpages": []
+      },
+      {
+        "to": "/postgraphile/introspection/",
+        "title": "Introspection?",
+        "sectionId": "faq",
+        "subpages": []
+      },
+      {
+        "to": "/postgraphile/why-nullable/",
+        "title": "Why is it nullable?",
+        "sectionId": "faq",
         "subpages": []
       }
     ]
