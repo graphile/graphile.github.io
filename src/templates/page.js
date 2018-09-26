@@ -17,9 +17,9 @@ const AugmentedText = ({ children, noLink }) => (
   />
 );
 
-function PageList({ pages, location }) {
+function PageList({ pages, location, depth = 0 }) {
   return (
-    <ul className="page-list nav flex-column">
+    <ul className={`page-list nav flex-column ${depth === 0 ? 'mb5' : null}`}>
       {pages.map(({ to, title, subpages }, idx) => (
         <li key={idx} className="f6 lh-copy pv1">
           <Link
@@ -29,7 +29,7 @@ function PageList({ pages, location }) {
             <AugmentedText>{title}</AugmentedText>
           </Link>
           {subpages && subpages.length ? (
-            <PageList pages={subpages} location={location} />
+            <PageList pages={subpages} location={location} depth={depth + 1} />
           ) : null}
         </li>
       ))}
