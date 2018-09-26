@@ -6,20 +6,42 @@ title: Custom Mutations
 
 ## Custom Mutations
 
-If the built in [CRUD Mutations](/postgraphile/crud-mutations/) are not
-sufficient for your purposes, there's options for adding custom mutations to
-your GraphQL schema.
+PostGraphile automatically generates [CRUD
+Mutations](/postgraphile/crud-mutations/) for you; but it's rare that these
+will cover all your needs - and many people just disable them outright.
+Custom mutations enable you to write exactly the business logic you need with
+access to all of your data all wrapped up in a PostgreSQL function. You can
+even bypass the RLS and GRANT checks, should you so choose, by tagging your
+function as `SECURITY DEFINER` - but be very careful when you do so!
 
-### Custom Mutation SQL Procedures
+To create a function that PostGraphile will recognise as a custom mutation,
+it must obey the following rules:
 
-You can create PostgreSQL functions that perform complex mutations. For these
-functions the following rules apply:
-
-* [Common PostGraphile function restrictions](/postgraphile/function-restrictions/)
-* must be marked as `VOLATILE` (which is the default)
+* adhere to [common PostGraphile function restrictions](/postgraphile/function-restrictions/)
+* must be marked as `VOLATILE` (which is the default for PostgreSQL functions)
 * must be defined in one of the introspected schemas
 
-Here's an example of a custom mutation, which will generate the graphql `acceptTeamInvite(teamId: Int!)` mutation:
+Functions matching these requirements will be represented in GraphQL in a way that is compatible with the [Relay Input Object Mutations Specification](https://facebook.github.io/relay/graphql/mutations.htm). For example the function
+
+```sql
+CREATE FUNCTION my_function(a int, b int) RETURNS text AS $$ … $$ LANGUAGE sql VOLATILE;
+```
+
+could be called from GraphQL like this:
+
+```graphql
+mutation {
+  myFunction(input: { a: 1, b: 2 }) {
+    text
+  }
+}
+```
+
+Look at the documentation in GraphiQL to find the parameters you may use!
+
+### Example
+
+Here's an example of a custom mutation, which will generate the graphql `acceptTeamInvite` mutation:
 
 ```sql
 CREATE FUNCTION app_public.accept_team_invite(team_id integer)
@@ -37,7 +59,8 @@ $$ LANGUAGE sql VOLATILE STRICT SECURITY DEFINER;
 Notes on the above function:
 
 * `STRICT` is optional, it means that if any of the arguments are null then the
-  mutation will not be called (and will thus return null with no error).
+  mutation will not be called (and will thus return null with no error) - this
+  allows us to mark `teamId` as a required argument.
 * `SECURITY INVOKER` is the default, it means the function will run with the
   _security_ of the person who _invoked_ the function
 * `SECURITY DEFINER` means that the function will run with the _security_ of
@@ -50,8 +73,12 @@ Notes on the above function:
   requires extension), or one of the built in `LANGUAGE` options such as
   Python, Perl or Tcl
 
-A note on **named types**: if you have a function that `RETURNS SETOF table(a int, b text)` then PostGraphile will not pick it up. This is easy to fix, just
-define a named type:
+A note on **named types**: if you have a function that `RETURNS SETOF table(a
+int, b text)` then PostGraphile will not _currently_ pick it up due to the
+[common PostGraphile function
+restrictions](/postgraphile/function-restrictions/). Work is underway to lift
+these restrictions, but it's easy to work around for now - just define a
+named type:
 
 ```sql
 CREATE TYPE my_function_return_type AS (
@@ -62,6 +89,7 @@ CREATE TYPE my_function_return_type AS (
 
 and then change your function to `RETURNS SETOF my_function_return_type`.
 
+<!--
 ### Graphile Plugins
 
 If you prefer adding mutations on the JavaScript side, you can use
@@ -74,3 +102,5 @@ You can also stitch multiple GraphQL schemas together, you can read more about
 doing this with PostGraphile here: [Authenticated and Stitched Schemas with
 PostGraphile, Passport and
 Stripe](https://medium.com/@sastraxi/authenticated-and-stitched-schemas-with-postgraphile-passport-and-stripe-a51490a858a2).
+
+-->

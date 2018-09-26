@@ -328,12 +328,6 @@
         "subpages": []
       },
       {
-        "to": "/postgraphile/procedures/",
-        "title": "PostgreSQL Procedures",
-        "sectionId": "guides",
-        "subpages": []
-      },
-      {
         "to": "/postgraphile/postgresql-schema-design/",
         "title": "PostgreSQL Schema Design",
         "sectionId": "guides",

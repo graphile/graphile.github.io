@@ -23,8 +23,28 @@ it must obey the following rules:
 * name must begin with the name of the table it applies to, followed by an underscore (`_`)
 * first argument must be the table type
 * must NOT return `VOID`
-* must be marked as `STABLE` (or `IMMUTABLE`)
+* must be marked as `STABLE` (or `IMMUTABLE`, though that tends to be less common)
 * must be defined in the same PostgreSQL schema as the table
+
+For example, assuming a table called `person` exists, the function:
+
+```sql
+CREATE FUNCTION person_full_name(person person) RETURNS text AS $$
+  SELECT person.given_name || ' ' || person.family_name
+$$ LANGUAGE sql STABLE;
+```
+
+Will create a computed column for your table named `person`, which can be queried like this:
+
+```graphql{5}
+{
+  person(id: …) {
+    # nodeId, id, ...
+
+    fullName # A computed column, but the client doesn’t even know!
+  }
+}
+```
 
 ### Example
 
@@ -72,3 +92,7 @@ create function my_schema.users_greet(
   select greeting || ', ' || u.first_name || ' ' || u.last_name || '!';
 $$ language sql stable strict;
 ```
+
+### Advice
+
+See the advice in [the Custom Queries article](/postgraphile/custom-queries/#advice).
