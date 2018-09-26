@@ -174,7 +174,6 @@
         "sectionId": "overview",
         "subpages": []
       },
-
       {
         "to": "/postgraphile/quick-start-guide/",
         "title": "Quick Start Guide",
@@ -283,7 +282,6 @@
         "sectionId": "basics",
         "subpages": []
       },
-
       {
         "to": "/postgraphile/smart-comments/",
         "title": "Smart Comments",
@@ -294,7 +292,26 @@
         "to": "/postgraphile/extending/",
         "title": "Schema Plugins",
         "sectionId": "customising",
-        "subpages": []
+        "subpages": [
+          {
+            "to": "/postgraphile/make-extend-schema-plugin/",
+            "title": "makeExtendSchemaPlugin",
+            "sectionId": "customising",
+            "subpages": []
+          },
+          {
+            "to": "/postgraphile/make-add-inflectors-plugin/",
+            "title": "makeAddInflectorsPlugin",
+            "sectionId": "customising",
+            "subpages": []
+          },
+          {
+            "to": "/postgraphile/extending-raw/",
+            "title": "Graphile Engine",
+            "sectionId": "customising",
+            "subpages": []
+          }
+        ]
       },
       {
         "to": "/postgraphile/plugins/",
@@ -302,7 +319,6 @@
         "sectionId": "customising",
         "subpages": []
       },
-
       {
         "to": "/postgraphile/evaluating/",
         "title": "Evaluating for your Project",
@@ -357,7 +373,6 @@
         "sectionId": "guides",
         "subpages": []
       },
-
       {
         "to": "/postgraphile/introspection/",
         "title": "Introspection",
@@ -370,7 +385,6 @@
         "sectionId": "faq",
         "subpages": []
       },
-
       {
         "to": "/postgraphile/community-plugins/",
         "title": "Community Plugins",
