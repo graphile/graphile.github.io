@@ -6,13 +6,15 @@ title: PostGraphile Server Plugins
 
 ## PostGraphile Server Plugins
 
-_NOTE: This page relates to changing how the PostGraphile server works. If you're instead looking to change the generated GraphQL schema (e.g. to add fields), see [Schema Plugins](/postgraphile/extending/)._
+_NOTE: This page relates to changing how the PostGraphile HTTP server and CLI
+work. If you're instead looking to change the generated GraphQL schema (e.g.
+to add fields or types), see [Schema Plugins](/postgraphile/extending/)._
 
-In addition to the [Graphile-Build plugin system](/postgraphile/extending/)
+In addition to the [Graphile Engine plugin system](/postgraphile/extending/)
 which builds the GraphQL schema in PostGraphile, PostGraphile also has a plugin
 system for the CLI and web layer. This plugin system is less mature, it's not
-ready for third party plugin developers yet, however there are a couple of
-first-party plugins that you may want to use that can be purchased on the
+quite ready for third party plugin developers yet, however there are a couple
+of first-party plugins that you may want to use that can be purchased on the
 [Graphile Store](https://store.graphile.com):
 
 * `@graphile/plugin-supporter` [SUPPORTER]  
@@ -21,17 +23,28 @@ first-party plugins that you may want to use that can be purchased on the
 
 <!-- _TODO: update this when the plugin interface is more mature._ -->
 
-### Wait, I have to pay?
+### PostGraphile is Open Source
 
-The vast majority of PostGraphile is open source; and there's no intention to
-make a previously open-source part of PostGraphile closed source. However,
-development on a project like this is time-consuming and complex; these
-commercial plugins help to make development on PostGraphile more sustainable by
-providing a financial backing for it. You can absolutely run PostGraphile in
-production without these features, and many people do (just ask in our [gitter
-chat](https://gitter.im/graphile/postgraphile)).
+**PostGraphile is open source; there's no intention to make any previously
+open-source part of PostGraphile closed source.**
 
-For more information, see the bottom of the [Go Pro!](/postgraphile/pricing/) page.
+Development and maintenance on a project like this is time-consuming; for it
+to be something that you can rely on for years to come there needs to be a
+way of making this work sustainable. Support, consulting and running a SaaS
+are three possible ways of financially supporting a project like this, but
+they all take large amounts of time away from working on the project itself.
+We wanted to go a different way with PostGraphile, a way that directly funds
+development on the softare. Our generous
+[Patreon](https://www.patreon.com/benjie) supporters provide the bulk of our
+income, with a little more coming in from sales of commercial plugins.
+
+It's important to note that you can absolutely run PostGraphile in production
+without these plugins, and many people do (just ask in our [
+chat](http://discord.gg/graphile)). We even detail how to go about solving
+these problems for yourself in the docs and the GitHub issues.
+
+For more information, see the FAQ at the bottom of the [Go
+Pro!](/postgraphile/pricing/) page.
 
 ### Installing
 
