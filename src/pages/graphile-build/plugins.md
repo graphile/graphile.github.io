@@ -7,7 +7,7 @@ title: Plugins
 # Plugins
 
 <p class="intro">
-Almost everything in Graphile-Build is accomplished through plugins. You can
+Almost everything in Graphile Engine is accomplished through plugins. You can
 add plugins, remove plugins, even replace the entire stack if you so desire.
 </p>
 
@@ -15,7 +15,7 @@ add plugins, remove plugins, even replace the entire stack if you so desire.
 
 Plugins are loaded when you call [`buildSchema(plugins, options)`](/graphile-build/graphile-build/#buildschemaplugins-options) or
 [`getBuilder(plugins, options)`](/graphile-build/graphile-build/#getbuilderplugins-options). They
-may be asynchronous thus these functions return a promise; Graphile Build will
+may be asynchronous thus these functions return a promise; Graphile Engine will
 wait for each plugin to finish loading before attempting to load the next
 plugin - so the order in which you specify the plugins may be important.
 
@@ -37,7 +37,7 @@ buildSchema(plugins).then(schema => {
 
 ## Writing Plugins
 
-Graphile Build plugins are simple functions that interact with [the
+Graphile Engine plugins are simple functions that interact with [the
 `SchemaBuilder`](/graphile-build/schema-builder/), most commonly by registering
 hooks. When you perform
 [`buildSchema(plugins)`](/graphile-build/graphile-build/) we create a new

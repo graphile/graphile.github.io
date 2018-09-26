@@ -36,7 +36,7 @@ PostgreSQL schema, allowing you to take your schema (and all your data) to
 whatever solution you build next, and being confident that it was well
 designed - hand rolled by you! GraphQL itself provides a simple and clear
 deprecation path if you want to start using different fields. And of course
-with Graphile Build plugins you can extend (or remove) functionality as you
+with Graphile Engine plugins you can extend (or remove) functionality as you
 wish.
 
 Further, you can migrate away from PostGraphile bit by bit by placing a

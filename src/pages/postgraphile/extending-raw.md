@@ -19,7 +19,7 @@ of the `graphile-build-pg` module.
 
 You can extend PostGraphile's GraphQL schema by adding plugins before or after
 the default plugins. You may even opt to replace the entire list of plugins
-used to build the schema. Graphile Build plugins are built on top of the
+used to build the schema. Graphile Engine plugins are built on top of the
 [GraphQL reference JS implementation](http://graphql.org/graphql-js/), so it is
 recommended that you have familiarity with that before attempting to write your
 own plugins.
@@ -81,7 +81,7 @@ postgraphile --append-plugins `pwd`/add-http-bin-plugin.js -c postgres:///mydb
 ```
 
 Note that the return types of added fields (e.g. `JSONType` above) do not need
-to be implemented via Graphile Build's
+to be implemented via Graphile Engine's
 [`newWithHooks`](/graphile-build/build-object/#newwithhookstype-spec-scope) -
 you can use standard GraphQL objects too. (However, if you do not use
 `newWithHooks` then the objects referenced cannot be extended via plugins.)

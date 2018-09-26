@@ -7,7 +7,7 @@ title: graphile-utils makeExtendSchemaPlugin
 ## graphile-utils makeExtendSchemaPlugin
 
 The `graphile-utils` module contains some helpers for extending your
-PostGraphile (or Graphile Build) GraphQL schema without having to understand
+PostGraphile (or Graphile Engine) GraphQL schema without having to understand
 the complex plugin system.
 
 The main one you'll care about to start with is `makeExtendSchemaPlugin`.

@@ -8,7 +8,7 @@ title: Getting Started
 
 ### Installation
 
-Graphile-Build uses your local version of `graphql` to avoid conflicts, so you need to install both:
+graphile-build uses your local version of `graphql` to avoid conflicts, so you need to install both:
 
 ```bash
 npm install --save graphile-build graphql

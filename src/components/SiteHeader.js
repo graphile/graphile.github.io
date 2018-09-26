@@ -100,7 +100,7 @@ export default withRouter(
                           }`}
                           to="/graphile-build/"
                         >
-                          Graphile Build
+                          Graphile Engine
                         </Link>
                       </li>
                     )}

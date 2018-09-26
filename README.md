@@ -1,4 +1,4 @@
-# The https://graphile.org/ website for PostGraphile and Graphile Build
+# The https://graphile.org/ website for PostGraphile and Graphile Engine
 
 ## Building
 

@@ -1,7 +1,7 @@
 ---
 layout: marketing
 path: /support/
-title: Support for PostGraphile and Graphile Build from the maintainer
+title: Support for PostGraphile and Graphile Engine from the maintainer
 ---
 
 <!-- **************************************** -->
@@ -92,7 +92,7 @@ If you know which file contains the issue, please report to the repository that
 file belongs to. If you're not sure and you're using PostGraphile then please
 report via the [PostGraphile issue
 tracker](https://github.com/graphile/postgraphile/issues), otherwise report
-on the [Graphile Build issue
+on the [Graphile Engine issue
 tracker](https://github.com/graphile/graphile-build/issues). For security vulnerabilities please email <a href="mailto:benjie@graphile.org?subject=PostGraphile%20Security%20Vulnerability">benjie@graphile.org</a> with the details.
 
 You can visit [Reporting an issue]() for more information on how to do this, along with a bug reporting template.

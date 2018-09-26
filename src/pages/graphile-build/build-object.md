@@ -15,7 +15,7 @@ The following properties/methods are available on the initial build object
 
 ## `newWithHooks(type, spec, scope)`
 
-The bread-and-butter of Graphile-Build, this method is how we build hooked GraphQL objects:
+The bread-and-butter of Graphile Engine, this method is how we build hooked GraphQL objects:
 
 ```js
 const MyType = newWithHooks(type, spec, scope);
