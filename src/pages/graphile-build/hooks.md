@@ -127,4 +127,4 @@ Properties added to the `Build` object or set on the `Context.scope` should be
 namespaced so that they do not conflict; for example `postgraphile` uses
 the `pg` namespace: `pgSql`, `pgIntrospection`, `isPgTableType`, etc
 
-TODO: expand
+<!-- TODO: expand -->

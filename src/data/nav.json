@@ -401,7 +401,7 @@
     ],
     "pages": [
       {
-        "to": "/postgraphile/settings/",
+        "to": "/graphile-build-pg/settings/",
         "title": "Settings",
         "sectionId": "overview",
         "subpages": []

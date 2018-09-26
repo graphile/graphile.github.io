@@ -19,7 +19,7 @@ first-party plugins that you may want to use that can be purchased on the
   (pay what you want, from $1/mo+)
 * `@graphile/plugin-pro` [PRO]
 
-_TODO: update this when the plugin interface is more mature._
+<!-- _TODO: update this when the plugin interface is more mature._ -->
 
 ### Wait, I have to pay?
 

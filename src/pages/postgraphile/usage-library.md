@@ -177,9 +177,9 @@ $$ LANGUAGE SQL STABLE;
 }
 ```
 
-TODO: verify the above works.
+<!-- TODO: verify the above works. -->
 
-TODO: move this to its own article?
+<!-- TODO: move this to its own article? -->
 
 [connect]: https://www.npmjs.com/connect
 [express]: https://www.npmjs.com/express

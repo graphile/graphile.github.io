@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /postgraphile/settings/
+path: /graphile-build-pg/settings/
 title: Settings
 ---
 

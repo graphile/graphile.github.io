@@ -49,7 +49,7 @@ to be returned then you can simplify with the next method...
 
 From [`graphql-parse-resolve-info`](https://github.com/graphile/graphile-build/tree/master/packages/graphql-parse-resolve-info#parseresolveinforesolveinfo)
 
-TODO: example
+<!-- TODO: example -->
 
 ##### `simplifyParsedResolveInfoFragmentWithType(parsedResolveInfoFragment, graphQLType)`
 
@@ -61,7 +61,7 @@ the `graphQLType`.
 
 From [`graphql-parse-resolve-info`](https://github.com/graphile/graphile-build/tree/master/packages/graphql-parse-resolve-info#simplifyparsedresolveinfofragmentwithtypeparsedresolveinfofragment-returntype)
 
-TODO: example
+<!-- TODO: example -->
 
 ### Declaring meta-data associated with a field
 
@@ -228,7 +228,7 @@ function MyObjectAddIdDataGeneratorPlugin(builder) {
 
 ### Recursing
 
-TODO: document this!
+<!-- TODO: document this! -->
 
 ```js{4,6}
 const MyObjectConnection = newWithHooks(GraphQLObjectType, {

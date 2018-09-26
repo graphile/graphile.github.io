@@ -61,7 +61,7 @@ requested as.
 
 From [`graphql-parse-resolve-info`](https://github.com/graphile/graphile-build/tree/master/packages/graphql-parse-resolve-info#getaliasfromresolveinforesolveinfo)
 
-TODO: example
+<!-- TODO: example -->
 
 ## `resolveAlias`
 

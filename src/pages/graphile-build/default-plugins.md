@@ -16,7 +16,7 @@ Declares `Cursor`, `UUID`, `JSON` and `PageInfo` types you can get from `build.g
 
 Implements some foundations for the [Relay Global Object Identification Specification](https://facebook.github.io/relay/graphql/objectidentification.htm) - adds `id` (or whatever you set as `nodeIdFieldName`) to `Query` and allows you to look up registered nodes by their `id`.
 
-TODO: document how!
+<!-- TODO: document how! -->
 
 ### QueryPlugin
 

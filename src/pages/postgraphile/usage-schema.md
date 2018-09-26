@@ -114,8 +114,9 @@ guaranteed to be called before the `watchPostGraphileSchema` promise resolves.
 It resolves to an asynchronus function that can be called to stop listening for
 schema changes.
 
+<!-- // TODO: check this works! -->
+
 ```js
-// TODO: check this works!
 async function main() {
   let graphqlSchema;
   const releaseWatcher = await watchPostGraphileSchema(

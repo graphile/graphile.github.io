@@ -6,33 +6,6 @@ title: Security
 
 ## Security
 
-Traditionally in web application architectures the security is implemented in
-the server layer and the database is treated as a simple store of data - people
-tend to figure that this reduces the workload on the database and thus
-increases scalability. As their application grows, they start needing other
-services to interact with the database too - which can mean that they need to
-duplicate the authentication/authorization logic in multiple places which can
-lead to discrepancies and increases the surface area for potential issues.
-
-Instead, we advise that you protect your lowest level - the data itself. By
-doing so you can be sure that no matter how many services interact with your
-database they will all be protected by the same underlying permissions logic
-which you only need to maintain in one place.
-
-PostgreSQL already had a powerful permissions system built in with it's roles
-and grants; but in PostgreSQL 9.5 Row Level Security policies were introduced.
-These allow your application to be considerably more specific about permissions,
-moving from table- and column-based permissions to row-level permissions.
-
-When enabled, all rows are by default not visible to any roles (except database
-administration roles and the role who created the database/table); and
-permission is selectively granted with the use of policies.
-
-If you already have a secure database schema that implements these technologies
-to protect your data at the lowest levels then you can leverage
-`postgraphile` to generate a powerful, secure and fast API in minimal
-time. All you need to do is pass a pre-authenticated pgClient to the `graphql`
-resolve function.
 
 ### Example
 
@@ -96,7 +69,7 @@ runQuery(
 });
 ```
 
-TODO: ensure this example works.
+<!-- TODO: ensure this example works. -->
 
 To see how this works in a real application, check out
 [`withPostGraphileContext` in
