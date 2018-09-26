@@ -9,7 +9,7 @@ title: PostGraphile JWT Guide
 > The language of the specification is meant to be generally applicable and
 > adoptable by any who might want to use it.
 
-# PostgreSQL JSON Web Token Serialization Specification
+## PostgreSQL JSON Web Token Serialization Specification
 
 This specification aims to define a standard way to serialize [JSON Web Tokens][jwt] (JWT, [RFC 7519][rfc7519]) to a PostgreSQL database for developers who want to move authentication logic into their PostgreSQL schema.
 
@@ -33,7 +33,7 @@ After a JSON Web Token has been verified and decoded, the resulting claims will 
 
     Will be run for every claim including registered claims like `iss`, `sub`, and the claim specified 1 (`role`). `$claim_name` is the name of the claim and `$claim_value` is the associated value.
 
-## Example
+### Example
 
 A JSON Web Token with the following claims:
 
@@ -54,7 +54,7 @@ set local jwt.claims.role to 'user';
 set local jwt.claims.user_id to 2;
 ```
 
-## A Note on `local`
+### A Note on `local`
 
 Using `local` for [`SET`][set] and [`SET ROLE`][set-role] is not required, however it is recommended. This is so that every transaction block (beginning with `BEGIN` and ending with `COMMIT` or `ROLLBACK`) will have its own local parameters. See the following demonstration:
 
@@ -68,7 +68,7 @@ commit;
 -- Does not have access to `jwt.claims.user_id`
 ```
 
-## Retrieving Claims in PostgreSQL
+### Retrieving Claims in PostgreSQL
 
 In order to retrieve a claim set by the serialization of a JSON Web Token as defined in this spec, either the `current_setting` function or the [`SHOW`][show] command may be used like so:
 

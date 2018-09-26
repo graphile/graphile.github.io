@@ -4,7 +4,7 @@ path: /postgraphile/default-role/
 title: Default Role
 ---
 
-# The Default Role
+## The Default Role
 
 PostGraphile makes full use of PostgreSQL roles, so in this article we will explain briefly how PostgreSQL roles and users work and how that relates to how we use them in PostGraphile.
 
@@ -34,7 +34,7 @@ create role editor nologin;
 
 “Logging in” just means we can use the role when authenticating in the PostgreSQL authentication section of the connection string. So with the above roles you could start a PostgreSQL connection with `postgres://admin@localhost/mydb`, but not `postgres://editor@localhost/mydb`.
 
-## Roles in PostGraphile
+### Roles in PostGraphile
 
 So how does this apply to PostGraphile? PostGraphile requires you to have at least one user (role that can log in) when connecting to the server. That role will be specified in your connection string and will from here on out be referred to as the `auth_user`. You’d connect with your `auth_user` as follows:
 

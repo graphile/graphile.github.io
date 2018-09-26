@@ -6,15 +6,11 @@ title: PostGraphile Introduction
 
 ## Introduction
 
-<p class='lead'>
+<p class='intro'>
 PostGraphile (formerly PostGraphQL) builds a powerful, extensible and
 performant GraphQL API from a PostgreSQL schema in seconds; saving you
 weeks if not months of development time.
 </p>
-
-_If you are new to GraphQL then we recommend you read through the official
-introduction to GraphQL [here](https://graphql.org/learn/) before continuing
-through the PostGraphile documentation._
 
 If you already use PostgreSQL then you understand the value that a strongly
 typed and well defined schema can bring to application development; GraphQL
@@ -23,6 +19,10 @@ layer accessible to your frontend application developers (or even API
 clients). Why duplicate your authorization and business logic in a custom API
 when you can leverage the tried and tested capabilities built into [the worlds
 most advanced open source database](https://www.postgresql.org/)?
+
+_If you are new to GraphQL then we recommend you read through the official
+introduction to GraphQL [here](https://graphql.org/learn/) before continuing
+through the PostGraphile documentation._
 
 By combining powerful features such as PostgreSQL's [role-based grant
 system](https://www.postgresql.org/docs/9.6/static/user-manag.html) and

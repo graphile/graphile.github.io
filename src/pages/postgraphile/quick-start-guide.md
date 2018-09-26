@@ -4,18 +4,18 @@ path: /postgraphile/quick-start-guide/
 title: Quick Start Guide
 ---
 
-# Quick Start Guide
+## Quick Start Guide
 
 This quick start guide will walk you through spinning up your first PostGraphile server, including installing the prerequisites such as Node and PostgreSQL.
 
-## Table of Contents
+### Table of Contents
 
 * [Install Node](#install-node)
 * [Install PostgreSQL](#install-postgresql)
 * [Create a Database](#create-a-database)
 * [Install PostGraphile](#install-postgraphile)
 
-## Install Node
+### Install Node
 
 You need to be running Node.js v8.6 or higher to run PostGraphile. You can check your current version of Node by running `node --version`. If you're running a recent version you can skip this section.
 
@@ -23,7 +23,7 @@ There's many ways of installing node; if you're on macOS you might prefer instal
 
 Once installed run `node -v` in a terminal to check your version. It must be 8.6.0 or higher.
 
-## Install PostgreSQL
+### Install PostgreSQL
 
 We need a PostgreSQL database to connect to. You can skip this section if you already have PostgreSQL version `9.6.0` or higher installed.
 
@@ -58,7 +58,7 @@ $ psql "postgres://user:password@somehost:2345/somedb"  # Connects to the `somed
 
 Read the documentation on [PostgreSQL connection strings](https://www.postgresql.org/docs/9.6/static/libpq-connect.html#LIBPQ-CONNSTRING) to learn more about alternative formats (including using a password).
 
-## Create a Database
+### Create a Database
 
 Next, create a database. You can do this by using the terminal:
 
@@ -89,7 +89,7 @@ Run the following query to make sure things are working smoothly:
 =#
 ```
 
-## Install PostGraphile
+### Install PostGraphile
 
 It is easy to install PostGraphile with [npm](https://docs.npmjs.com/getting-started/installing-node):
 

@@ -4,7 +4,7 @@ path: /postgraphile/make-add-inflectors-plugin/
 title: graphile-utils makeAddInflectorsPlugin
 ---
 
-## graphile-utils makeAddInflectorsPlugin
+## makeAddInflectorsPlugin (graphile-utils)
 
 If you're not happy with the default naming conventions in PostGraphile (or if you
 want to extend PostGraphile's functionality and use the inflection system to do
