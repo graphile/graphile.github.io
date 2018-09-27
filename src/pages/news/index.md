@@ -56,7 +56,7 @@ Version 4 has launched! More performant, more extensible and more customisable t
 ## See what people are saying
 
   <div class="mw9 ph3-ns flex flex-row flex-wrap">
-  <div class="cf ph2-ns flex">
+  <div class="cf ph2-ns flex flex-wrap">
     <article class="w-100 w-50-m w-25-ns pa2 center bg-white br3 pa4-ns mv3 ba b--black-10">
       <div class="tc">
         <h1 class="f3 di">Chad F</h1>
