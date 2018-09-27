@@ -18,8 +18,8 @@
         "sectionId": "main"
       },
       {
-        "to": "/news/logos/",
-        "title": "PostGraphile logo",
+        "to": "/news/press-kit",
+        "title": "Press Kit",
         "sectionId": "about"
       }
     ]
