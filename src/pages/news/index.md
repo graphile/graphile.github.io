@@ -65,8 +65,7 @@ Version 4 has launched! More performant, more extensible and more customisable t
       </div>
       <p class="lh-copy measure center f6 black-70">
         <i class="fas fa-quote-left h3 w3 di" style="color: #004081;" aria-hidden="true"></i>
-        Thanks for making GraphQL something I can use on my project in a robust way with <strong>minimal effort</strong>. 500-1500 requests per second on a single server is pretty awesome.
-        <i class="fas fa-quote-right h3 w3 di" style="color: #004081;" aria-hidden="true"></i>
+        Thanks for making GraphQL something I can use on my project in a robust way with <strong>minimal effort</strong>. 500-1500 requests per second on a single server is pretty awesome.&nbsp;<i class="fas fa-quote-right h3 w3 di" style="color: #004081;" aria-hidden="true"></i>
       </p>
     </article>
     <article class="w-100 w-50-m w-25-ns pa2 center bg-white br3 pa4-ns mv3 ba b--black-10" style="flex-grow: 1">
@@ -77,7 +76,7 @@ Version 4 has launched! More performant, more extensible and more customisable t
       </div>
       <p class="lh-copy measure center f6 black-70">
          <i class="fas fa-quote-left h3 w3 di" style="color: #004081;" aria-hidden="true"></i>
-         I setup my backend to use PostGraphile directly when querying the local database. It's removed a bunch of hand-written SQL, added type-safety to verify Postgres schema compatibility, and <strong>created a more consistent dev experience for frontend/backend code.</strong> <i class="fas fa-quote-right h3 w3 di" style="color: #004081;" aria-hidden="true"></i>
+         I setup my backend to use PostGraphile directly when querying the local database. It's removed a bunch of hand-written SQL, added type-safety to verify Postgres schema compatibility, and <strong>created a more consistent dev experience for frontend/backend code.</strong>&nbsp;<i class="fas fa-quote-right h3 w3 di" style="color: #004081;" aria-hidden="true"></i>
       </p>
     </article>
     <article class="w-100 w-50-m w-25-ns pa2 center bg-white br3 pa4-ns mv3 ba b--black-10" style="flex-grow: 1">
@@ -88,7 +87,7 @@ Version 4 has launched! More performant, more extensible and more customisable t
       </div>
       <p class="lh-copy measure center f6 black-70">
         <i class="fas fa-quote-left h3 w3 di" style="color: #004081;" aria-hidden="true"></i>
-        This project, Benjie's handling of it, the docs, support, and community is awesome all around. <strong>Postgraphile is a powerful, idomatic, and elegant tool.</strong> <i class="fas fa-quote-right h3 w3 di" style="color: #004081;" aria-hidden="true"></i>
+        This project, Benjie's handling of it, the docs, support, and community is awesome all around. <strong>Postgraphile is a powerful, idomatic, and elegant tool.</strong>&nbsp;<i class="fas fa-quote-right h3 w3 di" style="color: #004081;" aria-hidden="true"></i>
       </p>
     </article>
     <article class="w-100 w-50-m w-25-ns pa2 center bg-white br3 pa4-ns mv3 ba b--black-10" style="flex-grow: 1">
@@ -99,7 +98,7 @@ Version 4 has launched! More performant, more extensible and more customisable t
       </div>
       <p class="lh-copy measure center f6 black-70">
         <i class="fas fa-quote-left h3 w3 di" style="color: #004081;" aria-hidden="true"></i>
-         Recently I launched a few mobile and web apps using GraphQL, Great stuff, not least thanks to wonderful PostGraphile and Apollo. <strong>At this point, it’s quite hard for me to come back and enjoy working with REST.</strong>  <i class="fas fa-quote-right h3 w3 di" style="color: #004081;" aria-hidden="true"></i>
+         Recently I launched a few mobile and web apps using GraphQL, Great stuff, not least thanks to wonderful PostGraphile and Apollo. <strong>At this point, it’s quite hard for me to come back and enjoy working with REST.</strong>&nbsp;<i class="fas fa-quote-right h3 w3 di" style="color: #004081;" aria-hidden="true"></i>
       </p>
     </article>
   </div>
