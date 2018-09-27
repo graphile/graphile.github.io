@@ -13,7 +13,13 @@ PostGraphile helps developers expose the powerful next generation features of Po
 The Graphile Engine logo is a red angular heart, inspired by the edges in a GraphQL API.  
 The PostGraphile logo is a fierce blue elephant, combining elements from Graphile Engine's heart and PostgreSQL's elephant logo.
 
-![PostGraphile logo](../../../logos/postgraphile.optimized.svg)
-![Graphile logo](../../logos/graphile.optimized.svg)
+<div class="flex flex-wrap justify-around">
+<a href="/images/graphile.optimized.svg">
+<img alt="Graphile Engine logo" style="width:450px; height: 450px" src="/images/graphile.optimized.svg" />
+</a>
+<a href="/images/postgraphile.optimized.svg">
+<img alt="PostGraphile logo" style="width:450px; height: 450px" src="/images/postgraphile.optimized.svg" />
+</a>
+</div>
 
-[Find our Press Kit of logo images on our Dropbox](https://www.dropbox.com/sh/ubvuezh5xww3l66/AAAAPhMTfWqh8lG50Bgqz9U-a?dl=0)
+[Find our Press Kit of logo images on Dropbox](https://www.dropbox.com/sh/ubvuezh5xww3l66/AAAAPhMTfWqh8lG50Bgqz9U-a?dl=0)
