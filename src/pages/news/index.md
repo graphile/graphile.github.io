@@ -18,6 +18,11 @@ title: News
   The latest news on PostGraphile and the Graphile suite
 </h3>
 
+<br />
+<div class='flex'>
+<a class='button--solid-light' href='/news/postgraphile-version-4/'>Latest Announcement <span class='fas fa-fw fa-arrow-right' /></a>
+</div>
+
 </div>
 </div>
 </div>
@@ -35,9 +40,9 @@ title: News
 
 ## PostGraphile version 4 is here
 
-Version 4 has launched! More performant, more extensible and more customisable than ever before. This release takes PostGraphile up to be the forerunner in GraphQL Engines.
+Version 4 has launched! More performant, more extensible and more customisable than ever before. Easily extend PostGraphile's functionality with plugins developed and shared by the community.
 
-[Read more about the latest PostGraphile Version here](/news/postgraphile-version-4)
+[Read more about the latest PostGraphile Version here](/news/postgraphile-version-4/)
 
 </div>
 </div>
