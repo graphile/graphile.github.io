@@ -21,11 +21,6 @@
         "to": "/news/logos",
         "title": "Postgraphile logo",
         "sectionId": "about"
-      },
-      {
-        "to": "/news/about",
-        "title": "About Benjie",
-        "sectionId": "about"
       }
     ]
   },
