@@ -62,6 +62,11 @@ const SiteFooter = () => {
                 </a>
                 {/* TODO: update to Graphile twitter */}
               </li>
+              <li>
+                <Link to="/news/press-kit/">
+                  <i className="fas fa-file-archive" /> Logos/etc
+                </Link>
+              </li>
             </ul>
           </div>
           <div className="col-xs-12 col-md-offset-1 col-md-5">
