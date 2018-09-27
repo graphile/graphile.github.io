@@ -18,8 +18,8 @@
         "sectionId": "main"
       },
       {
-        "to": "/news/logos",
-        "title": "Postgraphile logo",
+        "to": "/news/logos/",
+        "title": "PostGraphile logo",
         "sectionId": "about"
       }
     ]

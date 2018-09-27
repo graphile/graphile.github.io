@@ -15,7 +15,7 @@ title: News
 # Graphile Announcements
 
 <h3>
-  The latest news on Postgraphile and the Graphile suite
+  The latest news on PostGraphile and the Graphile suite
 </h3>
 
 </div>
@@ -33,11 +33,11 @@ title: News
 <div class='text-center col-xs-12 col-md-9 col-lg-7'>
 <div class='hero-block'>
 
-## Postgraphile version 4 is here
+## PostGraphile version 4 is here
 
-Version 4 has launched! More performant, more extensible and more customisable than ever before. This release takes Postgraphile up to be the forerunner in GraphQL Engines.
+Version 4 has launched! More performant, more extensible and more customisable than ever before. This release takes PostGraphile up to be the forerunner in GraphQL Engines.
 
-[Read more about the latest Postgraphile Version here](/news/postgraphile-version-4)
+[Read more about the latest PostGraphile Version here](/news/postgraphile-version-4)
 
 </div>
 </div>
@@ -87,7 +87,7 @@ Version 4 has launched! More performant, more extensible and more customisable t
       </div>
       <p class="lh-copy measure center f6 black-70">
         <i class="fas fa-quote-left h3 w3 di" style="color: #004081;" aria-hidden="true"></i>
-        This project, Benjie's handling of it, the docs, support, and community is awesome all around. <strong>Postgraphile is a powerful, idomatic, and elegant tool.</strong>&nbsp;<i class="fas fa-quote-right h3 w3 di" style="color: #004081;" aria-hidden="true"></i>
+        This project, Benjie's handling of it, the docs, support, and community is awesome all around. <strong>PostGraphile is a powerful, idomatic, and elegant tool.</strong>&nbsp;<i class="fas fa-quote-right h3 w3 di" style="color: #004081;" aria-hidden="true"></i>
       </p>
     </article>
     <article class="w-100 w-50-m w-25-ns pa2 center bg-white br3 pa4-ns mv3 ba b--black-10" style="flex-grow: 1">

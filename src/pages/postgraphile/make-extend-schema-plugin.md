@@ -67,7 +67,7 @@ contains graphile-specific helpers.
 
 When extending a schema, it's often because you want to expose data from Node.js
 that would be difficult too difficult (or impossible) to access from PostgreSQL.
-When defining a field on an existing table-backed type defined by Postgraphile,
+When defining a field on an existing table-backed type defined by PostGraphile,
 it's useful to access data from the underlying table in the resolver.
 
 To do this you can use the `@requires(columns: […])` field directive to declare
