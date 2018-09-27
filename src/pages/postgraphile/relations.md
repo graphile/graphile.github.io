@@ -6,13 +6,48 @@ title: Relations
 
 ## Relations
 
-We automatically discover relations between tables by inspecting their foreign
-keys, and use this to build relations into the generated GraphQL schema.
+We automatically discover relations between database tables by inspecting
+their foreign keys, and use this to build relations into the generated
+GraphQL schema.
 
-We can detect one-to-one, one-to-many and many-to-one relations. We don't currently have built in support for many-to-many shortcut relationships, but you can still traverse the many-to-many relationship via the join table.
+An example of a foreign key constraint when defining a table would be the
+`REFERENCES` keyword below:
 
-It's also possible to add constraints on one-to-many relations such as [filtering
-with a condition](/postgraphile/filtering/).
+```sql{4}
+CREATE TABLE app_public.users (
+  -- ...
+  organization_id int NOT NULL
+    REFERENCES app_public.organizations ON DELETE CASCADE,
+  -- ...
+);
+```
+
+Alternatively a foreign key constraint can be added after table creation:
+
+```sql
+ALTER TABLE users
+  ADD CONSTRAINT users_organization_id_fkey
+  FOREIGN KEY (organization_id)
+  REFERENCES organizations
+  ON DELETE CASCADE;
+```
+
+You can read more about defining foreign key constraints, including
+constraints that utilise multiple columns, in the [PostgreSQL
+documentation](https://www.postgresql.org/docs/10/static/ddl-constraints.html#DDL-CONSTRAINTS-FK).
+
+PostGraphile detects and exposes one-to-one, one-to-many and many-to-one
+relations automatically. Many-to-many relationships can be traversed via
+their join table, but we don't have shortcut relations for these yet.
+
+By default, relations are exposed as GraphQL fields using a camelCase
+combination of the target type and the source fields (inflectors:
+`singleRelationByKeys`, `singleRelationByKeysBackwards`, and
+`manyRelationByKeys`). Unique constraints expose a GraphQL table type
+directly, non-unique constraints expose a
+[connection](/postgraphile/connections/). The GraphQL connections that these
+relations expose support pagination, [filtering](/postgraphile/filtering/),
+and ordering.
 
 ### Example database schema
 

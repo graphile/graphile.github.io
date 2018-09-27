@@ -28,22 +28,25 @@ application to be considerably more specific about permissions: adding
 row-level permission constraints to the existing table- and column-based
 permissions.
 
-Now that this functionality is stable and proven, we advise that you protect
-your lowest level - the data itself. By doing so you can be sure that no matter
-how many services interact with your database they will all be protected by the
-same underlying permissions logic, which you only need to maintain in one
-place. You can add as many microservices as you like, and they can talk to the
-database directly!
+Now that this functionality is stable and proven (and especially with the
+performance improvements in the latest PostgreSQL releases), we advise that
+you protect your lowest level - the data itself. By doing so you can be sure
+that no matter how many services interact with your database they will all be
+protected by the same underlying permissions logic, which you only need to
+maintain in one place. You can add as many microservices as you like, and
+they can talk to the database directly!
 
-When enabled, all rows are by default not visible to any roles (except database
-administration roles and the role who created the database/table); and
-permission is selectively granted with the use of policies.
+When Row Level Security (RLS) is enabled, all rows are by default not visible
+to any roles (except database administration roles and the role who created
+the database/table); and permission is selectively granted with the use of
+policies.
 
-If you already have a secure database schema that implements these technologies
-to protect your data at the lowest levels then you can leverage
+If you already have a secure database schema that implements these
+technologies to protect your data at the lowest levels then you can leverage
 `postgraphile` to generate a powerful, secure and fast API very rapidly. You
-just need to generate JWT tokens for your users, and we even help you with
-that!
+just need to generate JWT tokens for your users (and we even help you with
+that), or use [pgSettings](/postgraphile/usage-library/#pgsettings-function)
+to indicate the current user.
 
 ### Processing JWTs
 
@@ -119,7 +122,7 @@ $$ language plpgsql strict security definer;
 Which would give you an `authenticate` mutation with which you can extract the
 `jwtToken` from the response payload.
 
-TODO: test this!
+<!-- TODO: test this! -->
 
 ### Sending JWTs to the server
 
@@ -129,34 +132,56 @@ JWTs are sent via the best practice `Authorization` header:
 Authorization: Bearer JWT_TOKEN_HERE
 ```
 
-e.g. with Apollo:
+e.g. [with Apollo](https://www.apollographql.com/docs/react/recipes/authentication.html#Header):
 
-```js
-networkInterface.use([
-  {
-    applyMiddleware(req, next) {
-      const token = getJWTFromSomewhere();
-      if (token) {
-        req.options.headers = _.extend(req.options.headers, {
-          authorization: `Bearer ${token}`,
-        });
-      }
-      next();
-    },
-  },
-]);
+```js{7,12}
+const httpLink = createHttpLink({
+  uri: '/graphql',
+});
+
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from wherever you store it
+  const token = getJWTToken();
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    }
+  }
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache()
+});
 ```
 
-or with Relay:
+or [with Relay Modern](https://facebook.github.io/relay/docs/en/network-layer.html):
 
-```js
-Relay.injectNetworkLayer(
-  new Relay.DefaultNetworkLayer("/graphql", {
+```js{3,8}
+function fetchQuery( operation, variables, cacheConfig, uploadables) {
+  // get the authentication token from wherever you store it
+  const token = getJWTToken();
+  return fetch('/graphql', {
+    method: 'POST',
     headers: {
-      Authorization: `Bearer ${token}`,
+      'content-type': 'application/json'
+      authorization: token ? `Bearer ${token}` : "",
     },
-  })
-);
+    body: JSON.stringify({
+      query: operation.text, // GraphQL text from input
+      variables,
+    }),
+  }).then(response => {
+    return response.json();
+  });
+}
+
+const environment = new Environment({
+  network: Network.create(fetchQuery),
+  store: new Store(new RecordSource()),
+});
 ```
 
 ### How it works
@@ -190,8 +215,7 @@ commit;
 > via ..._
 
 ```sql
-select set_config('role', 'app_user', true), set_config('user_id', '2',
-true), ...
+select set_config('role', 'app_user', true), set_config('user_id', '2', true), ...
 ```
 
 > _... but showing `set local` is simpler to understand._

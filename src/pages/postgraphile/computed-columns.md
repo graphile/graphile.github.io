@@ -6,35 +6,52 @@ title: Computed Columns
 
 ## Computed Columns
 
-Not all the data returned from PostGraphile has to be concrete data in your
-database, we also support computing data on the fly. An example of this is our
-"computed columns" feature where you can add what appears to be an extra column
-(field) to the GraphQL type that represents your table which is actually
-calculated by calling a function. We inline this function call into the
-original select statement, so there's no N+1 issues with this - it's very
-efficient.
+"Computed columns" add what appears to be an extra column (field) to the
+GraphQL table type, but unlike actual columns the value for this field is the
+result of calling a function. This function can accept additional arguments
+that influence its result, and can return a scalars, records, lists or sets.
+Sets (denoted by `RETURNS SETOF ...`) are exposed as
+[connections](/postgraphile/connections/).
 
-You can create PostgreSQL functions that match the following criteria to add a
-field to a table type. This field could be simple (such as `name` constructed
-from `first_name || ' ' || last_name`) or could return a composite type (e.g.
-database row) or even a whole connection. For this to work, the following rules
-apply to the function you create:
+_Performance note: we inline these function calls into the original `SELECT`
+statement, so there's no N+1 issues - it's very efficient._
 
-* [Common PostGraphile function restrictions](/postgraphile/function-restrictions/)
+To create a function that PostGraphile will recognise as a computed column,
+it must obey the following rules:
+
+* adhere to [common PostGraphile function restrictions](/postgraphile/function-restrictions/)
 * name must begin with the name of the table it applies to, followed by an underscore (`_`)
 * first argument must be the table type
 * must NOT return `VOID`
-* must be marked as `STABLE`
-* must be defined in the same schema as the table
+* must be marked as `STABLE` (or `IMMUTABLE`, though that tends to be less common)
+* must be defined in the same PostgreSQL schema as the table
+
+For example, assuming a table called `person` exists, the function:
+
+```sql
+CREATE FUNCTION person_full_name(person person) RETURNS text AS $$
+  SELECT person.given_name || ' ' || person.family_name
+$$ LANGUAGE sql STABLE;
+```
+
+Will create a computed column for your table named `person`, which can be queried like this:
+
+```graphql{5}
+{
+  person(id: …) {
+    # nodeId, id, ...
+
+    fullName # A computed column, but the client doesn’t even know!
+  }
+}
+```
 
 ### Example
 
 This example creates two computed columns, one returning a simple varchar and
-the other a connection. Note that these methods could also accept additional
-arguments which would also automatically be added to the generated GraphQL
-field:
+the other a connection. Note that `||` in PostgreSQL is string concatenation.
 
-```sql
+```sql{14-17,20-27}
 create table my_schema.users (
   id serial not null primary key,
   first_name varchar not null,
@@ -47,11 +64,13 @@ create table my_schema.friendships (
   primary key (user_id, target_id)
 );
 
+-- Creates `User.name` string field
 create function my_schema.users_name(u my_schema.users)
 returns varchar as $$
   select u.first_name || ' ' || u.last_name;
 $$ language sql stable;
 
+-- Creates `User.friends` connection
 create function my_schema.users_friends(u my_schema.users)
 returns setof my_schema.users as $$
   select users.*
@@ -61,3 +80,19 @@ returns setof my_schema.users as $$
   where friendships.user_id = u.id;
 $$ language sql stable;
 ```
+
+You can also expose addition arguments via your computed column function, and these will be exposed via GraphQL:
+
+```sql{1,4}
+-- Creates `User.greet(greeting: String!)` string field
+create function my_schema.users_greet(
+  u my_schema.users,
+  greeting text
+) returns varchar as $$
+  select greeting || ', ' || u.first_name || ' ' || u.last_name || '!';
+$$ language sql stable strict;
+```
+
+### Advice
+
+See the advice in [the Custom Queries article](/postgraphile/custom-queries/#advice).

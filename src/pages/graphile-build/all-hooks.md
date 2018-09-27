@@ -10,7 +10,7 @@ The following hooks are currently supported, but more may be added in future.
 Trying to add a hook for a hook name that does not exist will result in an
 error.
 
-[(See hooks in the source)](https://github.com/graphile/graphile-build/blob/996e28f0af68f53e264170bd4528b6500ff3ef25/packages/graphile-build/SchemaBuilder.js#L11-L59)
+[(See hooks in the source)](https://github.com/graphile/graphile-engine/blob/996e28f0af68f53e264170bd4528b6500ff3ef25/packages/graphile-build/SchemaBuilder.js#L11-L59)
 
 * `build`: The build object represents the current schema build and is passed
   to all hooks, hook the 'build' event to extend this object.

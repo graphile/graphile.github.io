@@ -24,7 +24,7 @@ middleware for the following HTTP frameworks:
 * [Vanilla `http`](https://nodejs.org/api/http.html)
 
 _We also have alpha-quality support for [`koa`
-2.0](https://www.npmjs.com/package/koa), if you notice any problems please raise a GitHub issue about it._
+2.0](https://www.npmjs.com/package/koa), if you notice any problems [please raise a GitHub issue about it.](https://www.github.com/graphile/postgraphile)_
 
 To use PostGraphile with `express`, for instance, just do the following:
 
@@ -177,9 +177,9 @@ $$ LANGUAGE SQL STABLE;
 }
 ```
 
-TODO: verify the above works.
+<!-- TODO: verify the above works. -->
 
-TODO: move this to its own article?
+<!-- TODO: move this to its own article? -->
 
 [connect]: https://www.npmjs.com/connect
 [express]: https://www.npmjs.com/express

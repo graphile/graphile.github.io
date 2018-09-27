@@ -72,11 +72,11 @@ anything that breaks v9.6 support will be deemed a breaking change. The
 absolute earliest version it will run well against is v9.4, however we do not
 support this version officially - we strongly recommend you upgrade.
 
-#### PostgreSQL 9.4 [not officially supported]
+#### PostgreSQL 9.4 [not officially supported, but works]
 
 Basic operation including introspection.
 
-#### PostgreSQL 9.5 [not officially supported]
+#### PostgreSQL 9.5 [not officially supported, but works]
 
 Introduces Row-Level Security - important for securing your schema.
 
@@ -90,7 +90,7 @@ database itself).
 `--watch` is also only officially supported on 9.6+ (although it might work on
 9.5?)
 
-#### PostgreSQL 10
+#### PostgreSQL 10 [officially supported]
 
 PostgreSQL 10 solves a number of performance issues - the most interesting of
 which for us is a significant performance boost to Row Level Security policies!
@@ -99,7 +99,7 @@ Introduces ["identity
 columns"](https://blog.2ndquadrant.com/postgresql-10-identity-columns/) which
 we have preliminary support for.
 
-#### PostgreSQL 11 [not officially supported yet]
+#### PostgreSQL 11 [not officially supported _yet_, but works]
 
 Seems to work, we don't have support for any PG11 specific features yet though.
 

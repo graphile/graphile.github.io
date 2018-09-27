@@ -9,7 +9,7 @@ title: Extensible GraphQL APIs through Plugins
 <header class='hero simple'>
 <div class='hero-block container'>
 
-# Graphile Build
+# Graphile Engine
 
 <h3 class="measure">
   A library for constructing
@@ -34,9 +34,9 @@ title: Extensible GraphQL APIs through Plugins
 <div class='col-xs-12'>
 <div class='hero-block'>
 
-## Graphile Build for pluggable GraphQL APIs
+## Graphile Engine for pluggable GraphQL APIs
 
-Using Graphile Build's plugin architecture you can rapidly generate
+Using Graphile Engine's plugin architecture you can rapidly generate
 high-performance extensible GraphQL schemas by combining plugins and leveraging
 advanced look-ahead features.
 
@@ -101,7 +101,7 @@ type Person {
 <div class='col-xs-12'>
 <div class='hero-block'>
 
-## graphile-build for GraphQL performance
+## Graphile Engine for GraphQL performance
 
 Say Goodbye to the N+1 problem; fewer round-trips means higher performance.
 
@@ -238,7 +238,7 @@ implementation too).
 
 ## Automatically update your running GraphQL schema without the need to restart
 
-For example: when your underlying data structure changes your Graphile-Build
+For example: when your underlying data structure changes your Graphile Engine
 plugins can [trigger a
 rebuild](/graphile-build/schema-builder/#registerwatcherwatcher-unwatcher)
 event and you'll automatically be supplied with a fresh new GraphQL schema to

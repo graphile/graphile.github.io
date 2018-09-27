@@ -22,14 +22,17 @@ the below first though!)
   favour of a shared connection with the tables themselves - only affects you
   if you have referenced the type name in queries/fragments
 * What's nullable and what isn't has changed slightly - shouldn't cause an
-  issue in most cases
-* JWTs now have an audience of 'postgraphile' rather than 'postgraphql'
+  issue in most cases (please read [Why is it
+  nullable?](/postgraphile/why-nullable/) for an explanation of why each
+  thing is nullable)
+* JWTs now have an audience of 'postgraphile' rather than 'postgraphql', but
+  you can change this with the `--jwt-verify-audience` option
 * If you have any tables ending with `_input`, `_patch`, `Input` or `Patch`
   they will be renamed (see bottom of this article)
 
 ### Aside: project financial status
 
-**If your business uses PostGraphile, please invest in [my
+**If your business uses PostGraphile, please invest in [our
 Patreon](https://www.patreon.com/benjie)** - you'll benefit from faster fixes,
 more features, and better performance. If you need a more commercially
 justifiable way of funding the project then please [get in
@@ -215,11 +218,12 @@ _Note that changes to the watch schema are NOT deemed to be breaking changes._
 drop the old watch schema) because `--watch` is only intended for development
 use and the new schema should install itself just fine. But if you had to
 manually install the old watch schema, you'll need to manually install the [new
-one](https://github.com/graphile/graphile-build/blob/master/packages/graphile-build-pg/res/watch-fixtures.sql)
+one](https://github.com/graphile/graphile-engine/blob/master/packages/graphile-build-pg/res/watch-fixtures.sql)
 in the same way
 
-**Reasoning**: the old schema did not detect certain `DROP` commands and so adding
-stuff to your schema was fine, but removing them did not result in a refresh.
+**Reasoning**: the old schema did not detect certain `DROP` commands and so
+adding tables, columns, functions, etc. to your schema was fine, but removing
+them did not result in a refresh.
 
 ### Other changes that may affect you
 
@@ -229,7 +233,8 @@ so you can check your own applications.
 #### Introspection query has changed
 
 And will probably continue to change. Changes to the introspection query are
-not deemed to be breaking changes.
+not deemed to be breaking changes. The introspection query is now
+programatically generated so that we can support PG10 and PG11 features.
 
 #### Field descriptions have changed a little
 
@@ -241,9 +246,9 @@ We replaced the library but this doesn't affect any of the tests. If this
 causes you pain please submit an issue so we can add your fields/table names/etc to the tests
 to ensure this doesn't happen again.
 
-Workaround: it's possible to workaround this by providing your own inflection
-engine - get in touch if you need to do this as I'll try and make it a bit
-easier to do.
+Workaround: you can change the inflection engine back to the old one with a
+plugin - [see
+`makeAddInflectorsPlugin`](/postgraphile/make-add-inflectors-plugin/).
 
 #### Procedures that only supported `orderBy: NATURAL` now **do not have `orderBy` at all**.
 
@@ -275,14 +280,15 @@ you later add the table `foo_bar` then `FooBarInput` will clash. So renaming
 the tables up front means that whether or not you add that table later it'll
 still be fine without breaking existing functionality.
 
+You can rename tables directly, or if you prefer not to change your database
+layout you can use [smart comments](/postgraphile/smart-comments/) or write
+a custom [inflector](/postgraphile/inflection/).
+
 #### Very large numbers
 
 Large integers (over 4 bytes) are still referred to as `BigInt`, large floats
 (those beyond IEEE754) are now called `BigFloat`. The specific boundaries in
 which these new types kick in may have changed - particularly for
-`DECIMAL`/`NUMERIC` types.
-
-#### Typings
-
-Flow and TypeScript typings are not to be trusted right now. They might work...
-They might not. This will be resolved as part of an ongoing refactoring effort.
+`DECIMAL`/`NUMERIC` types. `DECIMAL`/`NUMERIC` are likely to change in future
+(so that smaller versions might be represented as int/float rather than
+BigInt/BigFloat).

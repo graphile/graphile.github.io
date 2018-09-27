@@ -44,19 +44,19 @@ The fastest way to get a full client-facing GraphQL API up and running from
 a PostgreSQL database schema.
 
 ```js
-npx postgraphile -c postgres://user:pass@host/dbname \
+npx postgraphile -c postgres:///dbname \
   --schema schema_name
 ```
 
 See the [Quick Start Guide](/postgraphile/quick-start-guide/) to get PostGraphile up and running.
 
-\_**Note**: Run with latest Node LTS v8+. No installation required
-(npx comes with node performs a temporary install). Connection string is of the format:
-`postgres://pg_user:pg_pass@pg_host:pg_port/pg_db`
+**Note**: Run with latest Node LTS v8+. No installation required
+(npx comes with node and performs a temporary install). Connection string is of the format:
+`postgres://pg_user:pg_pass@pg_host:pg_port/pg_db?ssl=1`
 
 <form action="//graphile.us16.list-manage.com/subscribe/post?u=d103f710cf00a9273b55e8e9b&amp;id=c3a9eb5c4e" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="novalidate">
 <div id="mc_embed_signup_scroll" class="center hero-block">
-<p>Keep up to date on Graphile and PostGraphile features/changes.
+<p>Keep up to date on Graphile Engine and PostGraphile features/changes.
 Subscribe to our occasional announcements newsletter:</p>
 <div class="mc-field-group form-inline justify-content-center">
 <div class="form-group">
@@ -146,7 +146,7 @@ servers - PostGraphile is stateless by default.
 
 ## Solves N+1 queries issues
 
-Using graphile-build's [look-ahead](/graphile-build/look-ahead/) features a
+Using Graphile Engine's [look-ahead](/graphile-build/look-ahead/) features a
 single root level GraphQL query, no matter how nested, can become just one SQL
 query - leading to fewer database round-trips and thus blazingly fast
 performance - typically much greater than that you'd get using `DataLoader`.
@@ -199,15 +199,17 @@ syntax using PostgreSQL's built in `COMMENT` facility).
 
 ## Customisable with JS plugins
 
-The GraphQL schema PostGraphile uses is entirely built from [Graphile Build
-plugins](https://github.com/graphile/graphile-build/tree/master/packages/graphile-build-pg/src/plugins),
+The GraphQL schema PostGraphile uses is entirely built from [Graphile Engine
+plugins](https://github.com/graphile/graphile-engine/tree/master/packages/graphile-build-pg/src/plugins),
 you can disable any of the built in plugins to restrict the functionality or
 add additional plugins to extended or enhanced your generated schema.
 
-This allows you to add (or remove) fields, create new types, add functionality,
-replace functionality or or even tweak existing functionality (e.g. wrapping an
-existing resolver with your own higher-order function) to gain powerful control
-over your API.
+This allows you to add (or remove) fields, create new types, add
+functionality, replace functionality or or even tweak existing functionality
+(e.g. wrapping an existing resolver with your own higher-order function) to
+gain powerful control over your API, all whilst retaining the amazing
+performance optimisations Graphile Engine makes available to you and keeping
+latency at an absolute minimum.
 
 </div>
 </div>
@@ -266,7 +268,7 @@ type Person {
 
 ## Fully GraphQL compatible
 
-PostGraphile and Graphile-Build use the [reference GraphQL
+PostGraphile and Graphile Engine use the [reference GraphQL
 implementation](http://graphql.org/graphql-js/) under the hood, so you know
 they're spec compliant.
 
@@ -296,10 +298,10 @@ Specification](https://facebook.github.io/relay/graphql/mutations.htm).
 ## PostgreSQL schema watching
 
 PostGraphile has an excellent developer experience (DX) when you use the
-`--watch` CLI flag - it will automatically re-generate the GraphQL schema when
-your database changes. What's more, it will automatically reload GraphiQL's
-documentation too, so you can see your new schema features right away! No need
-to restart the server!
+`--watch` CLI flag - it will automatically re-generate the GraphQL schema
+when your database changes. What's more, it will automatically hot reload
+GraphiQL's documentation too, without losing your place, so you can see your
+new schema features right away! No need to restart the server!
 
 </div>
 </div>
@@ -354,11 +356,13 @@ complex authorisation logic in simple policies; and because the authentication
 is _in your database_ you can ensure nothing (not even companion microservices)
 can bypass it.
 
-PostGraphile uses industry standard JWT authentication, allowing for stateless
-authentication which also works great with CORS. When used as a middleware it
-can use any HTTP authentication method that Node.js supports, via the
+PostGraphile allows you to use industry standard JWT authentication, allowing
+for stateless authentication which also works great with CORS.
+
+If you prefer not to use JWT you can use PostGraphile as a middleware, and
+via the
 [pgSettings](/postgraphile/usage-library/#exposing-http-request-data-to-postgresql)
-function. (A favourite is to use Passport.js for social login.)
+function gain access to any HTTP authentication method that Node.js supports. (A favourite is to use Passport.js for social login.)
 
 </div>
 </div>
@@ -412,7 +416,7 @@ schema directly.
 
 ```js
 npm install -g postgraphile
-postgraphile -c postgres://user:pass@host/dbname \
+postgraphile -c postgres:///dbname \
   --schema schema_name
 ```
 
@@ -448,7 +452,7 @@ Email <a href="mailto:info@graphile.org?subject=Graphile%20question/comment/feed
 <form action="//graphile.us16.list-manage.com/subscribe/post?u=d103f710cf00a9273b55e8e9b&amp;id=c3a9eb5c4e" method="post"
 id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
   <div id="mc_embed_signup_scroll" class="center hero-block">
-    <p>Keep up to date on Graphile and PostGraphile features/changes.
+    <p>Keep up to date on Graphile Engine and PostGraphile features/changes.
     Subscribe to our occasional announcements newsletter:</p>
     <div class="mc-field-group form-inline justify-content-center">
       <div class='form-group'>

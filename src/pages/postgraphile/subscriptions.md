@@ -17,35 +17,45 @@ implementation. The rest of this article details how to use this feature.
 
 ## Simple Subscriptions [SUPPORTER]
 
+### Enabling with the CLI
+
+To enable Simple Subscriptions via the CLI, just load the supporter plugin
+and pass the `--simple-subscriptions` flag.
+
+```
+postgraphile \
+  --plugins @graphile/plugin-supporter \
+  --simple-subscriptions \
+  -c postgres://mydb
+```
+
 ### Enabling with an Express app
 
-With the CLI use `--simple-subscriptions` to enable the subscriptions support.
-With the library version use `simpleSubscriptions: true`.
+When using PostGraphile as a library, you may enable Simple Subscriptions by
+passing the `pluginHook` with the supporter plugin and using
+`simpleSubscriptions: true`.
 
-We emulate part of the express stack, so if you require sessions you can pass
-additional connect/express middlewares (sorry, we don't support Koa middlewares
-here at this time) via the options `enhanceHttpServerWithSubscriptions`.
+We emulate part of the Express stack, so if you require sessions you can pass
+additional Connect/Express middlewares (sorry, we don't support Koa middlewares
+here at this time) via the `websocketMiddlewares` option.
 
 Here's an example:
 
 ```js
+const express = require("express");
 const { postgraphile, makePluginHook } = require("postgraphile");
 const {
   default: PostGraphileSupporter,
 } = require("@graphile/plugin-supporter");
-const express = require("express");
 
 const pluginHook = makePluginHook([PostGraphileSupporter]);
-
-const app = express();
 
 const postgraphileOptions = {
   pluginHook,
   simpleSubscriptions: true,
   websocketMiddlewares: [
-    // Add whatever middlewares you need here, note that
-    // they should only manipulate properties on req/res,
-    // they must not sent response data. e.g.:
+    // Add whatever middlewares you need here, note that they should only
+    // manipulate properties on req/res, they must not sent response data. e.g.:
     //
     //   require('express-session')(),
     //   require('passport').initialize(),
@@ -53,77 +63,18 @@ const postgraphileOptions = {
   ],
 };
 
+const app = express();
 app.use(postgraphile(databaseUrl, "app_public", postgraphileOptions));
-
 app.listen(parseInt(process.env.PORT, 10) || 3000);
 ```
 
-#### Advanced setup
-
-If you need websockets to be listened for before your first HTTP request comes
-in (most people don't need this) then you must create a `rawHTTPServer`, mount
-your express `app` in it, and then add subscription support to the raw server
-via the `enhanceHttpServerWithSubscriptions` function, as shown below:
-
-```js
-const { postgraphile, makePluginHook } = require("postgraphile");
-const {
-  default: PostGraphileSupporter,
-  enhanceHttpServerWithSubscriptions,
-} = require("@graphile/plugin-supporter");
-const { createServer } = require("http");
-const express = require("express");
-
-const pluginHook = makePluginHook([PostGraphileSupporter]);
-
-const app = express();
-const rawHTTPServer = createServer(app);
-
-const postgraphileOptions = {
-  pluginHook,
-  simpleSubscriptions: true,
-  websocketMiddlewares: [
-    // Add whatever middlewares you need here, note that
-    // they should only manipulate properties on req/res,
-    // they must not sent response data. e.g.:
-    //
-    //   require('express-session')(),
-    //   require('passport').initialize(),
-    //   require('passport').session(),
-  ],
-};
-
-const postgraphileMiddleware = postgraphile(
-  databaseUrl,
-  "app_public",
-  postgraphileOptions
-);
-
-app.use(postgraphileMiddleware);
-
-enhanceHttpServerWithSubscriptions(
-  rawHTTPServer,
-  postgraphileMiddleware,
-  postgraphileOptions
-);
-
-rawHTTPServer.listen(parseInt(process.env.PORT, 10) || 3000);
-```
-
-The `enhanceHttpServerWithSubscriptions` takes three arguments:
-
-1.  the raw HTTP server from `require('http').createServer()`
-2.  the postgraphile middleware (this should be the _same_ middleware that you mount into your Express app)
-3.  options, where you can optionally pass `middlewares` to enable `pgSettings(req) {...}` access to session-based things
 
 ### Using
 
-To enable simple subscriptions support, use the `--simple-subscriptions` CLI
-flag (or `simpleSubscriptions: true` middleware option).
-
-This will expose a `listen` subscription field that can be used for generic
-subscriptions to a named topic which can be triggered using PostgreSQL's built
-in LISTEN/NOTIFY functionality.
+Simple subscriptions exposes a `listen` field to the `Subscription` type that
+can be used for generic subscriptions to a named topic. This topic can be
+triggered using PostgreSQL's built in LISTEN/NOTIFY functionality (but
+remember to add the prefix - see below).
 
 ```graphql
 type ListenPayload {
@@ -137,13 +88,19 @@ type Subscription {
 }
 ```
 
+Please note that PostGraphile's bundled copy of GraphiQL does not support
+subscriptions at this time - you must use an alternative client such as
+Altair or GraphQL Playground.
+
 ### Topic prefix
 
-All topics are automatically prefixed with `postgraphile:` (but you can
-customise this with the `pgSubscriptionPrefix` setting if you're using the
-middleware version) - GraphQL consumers will not need to know about this,
-but you will need to remember to add it to your `NOTIFY` topic otherwise
+All topics requested from GraphQL are automatically prefixed with
+`postgraphile:`\* to avoid leaking other topics your application may be using
+- GraphQL consumers will not need to know about this, but you will need to
+remember to add it to the topic when you perform `NOTIFY` otherwise
 subscribers will not see the messages.
+
+\* _Customisable via `pgSubscriptionPrefix` setting._
 
 For example a user may perform the following subscription:
 
@@ -162,7 +119,8 @@ subscription {
 }
 ```
 
-To cause the subscription to receive a message, you could run:
+To cause the subscription to receive a message, you could run the following
+in PostgreSQL:
 
 ```sql
 select pg_notify(
@@ -185,7 +143,7 @@ Resulting in this GraphQL payload:
 }
 ```
 
-Which is sufficient to know that the event _occurred_, but chances are that you
+Which is sufficient to know that the event _occurred_. Chances are that you
 want to know more than this...
 
 It's also possible to send a `Node` along with your GraphQL payload using the
@@ -448,3 +406,61 @@ psql -1X -v ON_ERROR_STOP=1 subs << HERE
  \$\$ language plpgsql;
 HERE
 ```
+
+#### Advanced setup
+
+If you need websockets to be listened for before your first HTTP request comes
+in (most people don't need this) then you must create a `rawHTTPServer`, mount
+your express `app` in it, and then add subscription support to the raw server
+via the `enhanceHttpServerWithSubscriptions` function, as shown below:
+
+```js
+const { postgraphile, makePluginHook } = require("postgraphile");
+const {
+  default: PostGraphileSupporter,
+  enhanceHttpServerWithSubscriptions,
+} = require("@graphile/plugin-supporter");
+const { createServer } = require("http");
+const express = require("express");
+
+const pluginHook = makePluginHook([PostGraphileSupporter]);
+
+const app = express();
+const rawHTTPServer = createServer(app);
+
+const postgraphileOptions = {
+  pluginHook,
+  simpleSubscriptions: true,
+  websocketMiddlewares: [
+    // Add whatever middlewares you need here, note that
+    // they should only manipulate properties on req/res,
+    // they must not sent response data. e.g.:
+    //
+    //   require('express-session')(),
+    //   require('passport').initialize(),
+    //   require('passport').session(),
+  ],
+};
+
+const postgraphileMiddleware = postgraphile(
+  databaseUrl,
+  "app_public",
+  postgraphileOptions
+);
+
+app.use(postgraphileMiddleware);
+
+enhanceHttpServerWithSubscriptions(
+  rawHTTPServer,
+  postgraphileMiddleware,
+  postgraphileOptions
+);
+
+rawHTTPServer.listen(parseInt(process.env.PORT, 10) || 3000);
+```
+
+The `enhanceHttpServerWithSubscriptions` takes three arguments:
+
+1.  the raw HTTP server from `require('http').createServer()`
+2.  the postgraphile middleware (this should be the _same_ middleware that you mount into your Express app)
+3.  options, where you can optionally pass `middlewares` to enable `pgSettings(req) {...}` access to session-based things

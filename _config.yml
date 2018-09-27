@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Graphile-Build
+title: Graphile Engine
 subtitle: Construct extensible GraphQL APIs with ease
 description: graphile-build is a tool that enable powerful extensions to your GraphQL Schema using Plugins
 author: Benjie Gillam

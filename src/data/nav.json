@@ -135,7 +135,7 @@
       },
       {
         "id": "basics",
-        "title": "Basics"
+        "title": "Operation"
       },
       {
         "id": "customising",
@@ -204,7 +204,6 @@
         "sectionId": "overview",
         "subpages": []
       },
-
       {
         "to": "/postgraphile/quick-start-guide/",
         "title": "Quick Start Guide",
@@ -290,6 +289,12 @@
         ]
       },
       {
+        "to": "/postgraphile/postgresql-indexes/",
+        "title": "PostgreSQL Indexes",
+        "sectionId": "basics",
+        "subpages": []
+      },
+      {
         "to": "/postgraphile/security/",
         "title": "Security",
         "sectionId": "basics",
@@ -313,7 +318,6 @@
         "sectionId": "basics",
         "subpages": []
       },
-
       {
         "to": "/postgraphile/smart-comments/",
         "title": "Smart Comments",
@@ -324,7 +328,26 @@
         "to": "/postgraphile/extending/",
         "title": "Schema Plugins",
         "sectionId": "customising",
-        "subpages": []
+        "subpages": [
+          {
+            "to": "/postgraphile/make-extend-schema-plugin/",
+            "title": "makeExtendSchemaPlugin",
+            "sectionId": "customising",
+            "subpages": []
+          },
+          {
+            "to": "/postgraphile/make-add-inflectors-plugin/",
+            "title": "makeAddInflectorsPlugin",
+            "sectionId": "customising",
+            "subpages": []
+          },
+          {
+            "to": "/postgraphile/extending-raw/",
+            "title": "Graphile Engine",
+            "sectionId": "customising",
+            "subpages": []
+          }
+        ]
       },
       {
         "to": "/postgraphile/plugins/",
@@ -332,10 +355,15 @@
         "sectionId": "customising",
         "subpages": []
       },
-
       {
         "to": "/postgraphile/evaluating/",
         "title": "Evaluating for your Project",
+        "sectionId": "guides",
+        "subpages": []
+      },
+      {
+        "to": "/postgraphile/postgresql-schema-design/",
+        "title": "PostgreSQL Schema Design",
         "sectionId": "guides",
         "subpages": []
       },
@@ -358,24 +386,6 @@
         "subpages": []
       },
       {
-        "to": "/postgraphile/procedures/",
-        "title": "PostgreSQL Procedures",
-        "sectionId": "guides",
-        "subpages": []
-      },
-      {
-        "to": "/postgraphile/postgresql-schema-design/",
-        "title": "PostgreSQL Schema Design",
-        "sectionId": "guides",
-        "subpages": []
-      },
-      {
-        "to": "/postgraphile/postgresql-indexes/",
-        "title": "PostgreSQL Indexes",
-        "sectionId": "guides",
-        "subpages": []
-      },
-      {
         "to": "/postgraphile/v4-new-features/",
         "title": "v4 Feature Guide",
         "sectionId": "guides",
@@ -393,20 +403,6 @@
         "sectionId": "guides",
         "subpages": []
       },
-
-      {
-        "to": "/postgraphile/introspection/",
-        "title": "Introspection",
-        "sectionId": "faq",
-        "subpages": []
-      },
-      {
-        "to": "/postgraphile/why-nullable/",
-        "title": "Why is it nullable?",
-        "sectionId": "faq",
-        "subpages": []
-      },
-
       {
         "to": "/postgraphile/community-plugins/",
         "title": "Community Plugins",
@@ -424,6 +420,18 @@
         "title": "Code of Conduct",
         "sectionId": "community",
         "subpages": []
+      },
+      {
+        "to": "/postgraphile/introspection/",
+        "title": "Introspection?",
+        "sectionId": "faq",
+        "subpages": []
+      },
+      {
+        "to": "/postgraphile/why-nullable/",
+        "title": "Why is it nullable?",
+        "sectionId": "faq",
+        "subpages": []
       }
     ]
   },
@@ -437,7 +445,7 @@
     ],
     "pages": [
       {
-        "to": "/postgraphile/settings/",
+        "to": "/graphile-build-pg/settings/",
         "title": "Settings",
         "sectionId": "overview",
         "subpages": []

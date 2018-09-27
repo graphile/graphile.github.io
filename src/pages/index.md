@@ -13,7 +13,7 @@ title: Tools to build extensible and performant GraphQL APIs
 <div class='col-xs-12'>
 <div class='hero-block'>
 
-## Graphile Build
+## Graphile Engine
 
 ### High-performance pluggable GraphQL schema tools
 
@@ -61,11 +61,11 @@ const MyType =
 <div class='flex'>
 <div>
 
-Graphile Build is the core of PostGraphile - we recommend that you get started
-with PostGraphile before you graduate to using Graphile Build directly.
+Graphile Engine is the core of PostGraphile - we recommend that you get started
+with PostGraphile before you graduate to using Graphile Engine directly.
 
 <a class='strong-link' href='/postgraphile/'>Start with PostGraphile <span class='fa fa-fw fa-long-arrow-right' /></a>
-<a class='strong-link' href='/graphile-build/'>More about Graphile Build <span class='fa fa-fw fa-long-arrow-right' /></a>
+<a class='strong-link' href='/graphile-build/'>More about Graphile Engine <span class='fa fa-fw fa-long-arrow-right' /></a>
 
 <div>
 </div>

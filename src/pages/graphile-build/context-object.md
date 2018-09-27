@@ -90,4 +90,4 @@ builder.hook("GraphQLInputObjectType:fields",
 
 See also: [Look ahead](/graphile-build/look-ahead/#when-creating-an-individual-field).
 
-TODO: add more context properties
+<!-- TODO: add more context properties -->

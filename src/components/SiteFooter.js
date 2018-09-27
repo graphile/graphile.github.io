@@ -23,7 +23,7 @@ const SiteFooter = () => {
             </ul>
           </div>
           <div className="col-xs-12 col-md-2 nested-list-reset ">
-            <h6>Graphile Build</h6>
+            <h6>Graphile Engine</h6>
             <ul>
               <li>
                 <Link to="/graphile-build/">About</Link>
@@ -45,9 +45,7 @@ const SiteFooter = () => {
                 <a href="https://github.com/graphile">GitHub</a>
               </li>
               <li>
-                <a href="https://gitter.im/graphile/postgraphile">
-                  Gitter chat
-                </a>
+                <a href="http://discord.gg/graphile">Chat (discord)</a>
               </li>
               <li>
                 <a href="https://twitter.com/benjie">Twitter</a>

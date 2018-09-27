@@ -113,7 +113,7 @@ class Home extends Component {
               <div className="text">
                 <h3>
                   <Link to="/graphile-build/" className="inherit-color">
-                    Graphile-Build
+                    Graphile Engine
                   </Link>
                 </h3>
                 <h4>High-performance pluggable GraphQL schema tools</h4>
@@ -132,7 +132,7 @@ class Home extends Component {
             </div>
             <div className="cta">
               <Link className="button--solid" to="/graphile-build/">
-                More about Graphile-Build{" "}
+                More about Graphile Engine{" "}
                 <span className="fa fa-fw fa-long-arrow-right" />
               </Link>
             </div>

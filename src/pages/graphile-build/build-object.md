@@ -15,7 +15,7 @@ The following properties/methods are available on the initial build object
 
 ## `newWithHooks(type, spec, scope)`
 
-The bread-and-butter of Graphile-Build, this method is how we build hooked GraphQL objects:
+The bread-and-butter of Graphile Engine, this method is how we build hooked GraphQL objects:
 
 ```js
 const MyType = newWithHooks(type, spec, scope);
@@ -59,9 +59,9 @@ be referenced via `getTypeByName()`
 Use this in your resolver to quickly retrieve the alias that this field was
 requested as.
 
-From [`graphql-parse-resolve-info`](https://github.com/graphile/graphile-build/tree/master/packages/graphql-parse-resolve-info#getaliasfromresolveinforesolveinfo)
+From [`graphql-parse-resolve-info`](https://github.com/graphile/graphile-engine/tree/master/packages/graphql-parse-resolve-info#getaliasfromresolveinforesolveinfo)
 
-TODO: example
+<!-- TODO: example -->
 
 ## `resolveAlias`
 

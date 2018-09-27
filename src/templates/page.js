@@ -17,9 +17,9 @@ const AugmentedText = ({ children, noLink }) => (
   />
 );
 
-function PageList({ pages, location }) {
+function PageList({ pages, location, depth = 0 }) {
   return (
-    <ul className="page-list nav flex-column">
+    <ul className={`page-list nav flex-column ${depth === 0 ? 'mb5' : null}`}>
       {pages.map(({ to, title, subpages }, idx) => (
         <li key={idx} className="f6 lh-copy pv1">
           <Link
@@ -29,7 +29,7 @@ function PageList({ pages, location }) {
             <AugmentedText>{title}</AugmentedText>
           </Link>
           {subpages && subpages.length ? (
-            <PageList pages={subpages} location={location} />
+            <PageList pages={subpages} location={location} depth={depth + 1} />
           ) : null}
         </li>
       ))}
@@ -38,7 +38,7 @@ function PageList({ pages, location }) {
 }
 
 const Nav = ({ sections, pages, location }) => (
-  <aside>
+  <aside className="sidebar col-xs-12 col-md-3 last-xs mt3">
     {sections.map(({ id, title }, idx) => (
       <section key={idx}>
         <h4 className="f6 ttu fw6 mt0 mb3 bb pb2">
@@ -150,7 +150,7 @@ const Page = ({
                           location.pathname.length - 1
                         )}.md`}
                       >
-                        📝 Edit this page
+                        📝 Suggest improvements to this page
                       </a>
                     </div>
                     <div dangerouslySetInnerHTML={{ __html: html }} />

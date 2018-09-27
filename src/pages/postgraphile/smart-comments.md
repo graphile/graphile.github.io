@@ -61,7 +61,7 @@ comment on column my_schema.my_table.my_column is
 
 There are a few smart comment tags built into PostGraphile, but support for more can be added via plugins.
 
-Note that the parser is deliberately very strict currently, we might make it more flexible in future; you might want to check out the [test suite](https://github.com/graphile/graphile-build/blob/master/packages/graphile-build-pg/__tests__/tags.test.js).
+Note that the parser is deliberately very strict currently, we might make it more flexible in future; you might want to check out the [test suite](https://github.com/graphile/graphile-engine/blob/master/packages/graphile-build-pg/__tests__/tags.test.js).
 
 ### Deprecating
 
