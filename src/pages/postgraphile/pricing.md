@@ -208,7 +208,7 @@ title: PostGraphile Pro!
   <th>Purchase</th>
   <td>&mdash;</td>
   <td>Patreon or Credit Card</td>
-  <td>Credit Card or Invoice</td>
+  <td>Credit/Debit Card</td>
 </tr>
 
   </tbody>
