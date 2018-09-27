@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /news/logos/
+path: /news/press-kit/
 title: About PostGraphile
 ---
 
@@ -17,3 +17,5 @@ The Graphile Engine logo is a red angular heart. The PostGraphile logo is a fier
 
 ![PostGraphile logo](../../../logos/postgraphile.optimized.svg)
 ![Graphile logo](../../logos/graphile.optimized.svg)
+
+[Find our Press Kit of logo images on our Dropbox](https://www.dropbox.com/sh/ubvuezh5xww3l66/AAAAPhMTfWqh8lG50Bgqz9U-a?dl=0)
