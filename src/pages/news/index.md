@@ -56,8 +56,8 @@ Version 4 has launched! More performant, more extensible and more customisable t
 ## See what people are saying
 
   <div class="mw9 ph3-ns flex flex-row flex-wrap">
-  <div class="cf ph2-ns">
-    <article class="fl w-100 w-50-m w-25-ns pa2 center bg-white br3 pa4-ns mv3 ba b--black-10">
+  <div class="cf ph2-ns flex">
+    <article class="w-100 w-50-m w-25-ns pa2 center bg-white br3 pa4-ns mv3 ba b--black-10">
       <div class="tc">
         <h1 class="f3 di">Chad F</h1>
         <h2 class="i f5 di">senior technical lead <a href="https://chads.website/development/2018/08/03/How-GraphQL-Saved-My-Project.html" target="_blank"><span class="fa fa-external-link"></span></a></h2>
@@ -69,7 +69,7 @@ Version 4 has launched! More performant, more extensible and more customisable t
         <i class="fa fa-quote-right h3 w3 di" style="color: #004081;" aria-hidden="true"></i>
       </p>
     </article>
-    <article class="fl w-100 w-50-m w-25-ns pa2 center bg-white br3 pa4-ns mv3 ba b--black-10" style="flex-grow: 1">
+    <article class="w-100 w-50-m w-25-ns pa2 center bg-white br3 pa4-ns mv3 ba b--black-10" style="flex-grow: 1">
       <div class="tc">
         <h1 class="f3 di">Bradley A</h1>
         <h2 class="i f5 di">CTO <a href="https://twitter.com/bradleyayers/status/1012557510346080256" target="_blank"><i class="fa fa-twitter"></i></a></h2>
@@ -80,7 +80,7 @@ Version 4 has launched! More performant, more extensible and more customisable t
          I setup my backend to use PostGraphile directly when querying the local database. It's removed a bunch of hand-written SQL, added type-safety to verify Postgres schema compatibility, and <strong>created a more consistent dev experience for frontend/backend code.</strong> <i class="fa fa-quote-right h3 w3 di" style="color: #004081;" aria-hidden="true"></i>
       </p>
     </article>
-    <article class="fl w-100 w-50-m w-25-ns pa2 center bg-white br3 pa4-ns mv3 ba b--black-10" style="flex-grow: 1">
+    <article class="w-100 w-50-m w-25-ns pa2 center bg-white br3 pa4-ns mv3 ba b--black-10" style="flex-grow: 1">
       <div class="tc">
         <h1 class="f3 di">Sam L</h1> 
         <h2 class="i f5 di">full stack developer <a href="https://gitter.im/graphile/postgraphile?at=5b65d555e9ab53770c8c41a1"target="_blank"><i class="fa fa-external-link"></i></a></h2>
@@ -91,7 +91,7 @@ Version 4 has launched! More performant, more extensible and more customisable t
         This project, Benjie's handling of it, the docs, support, and community is awesome all around. <strong>Postgraphile is a powerful, idomatic, and elegant tool.</strong> <i class="fa fa-quote-right h3 w3 di" style="color: #004081;" aria-hidden="true"></i>
       </p>
     </article>
-    <article class="fl w-100 w-50-m w-25-ns pa2 center bg-white br3 pa4-ns mv3 ba b--black-10" style="flex-grow: 1">
+    <article class="w-100 w-50-m w-25-ns pa2 center bg-white br3 pa4-ns mv3 ba b--black-10" style="flex-grow: 1">
       <div class="tc">
         <h1 class="f3 di">Max D</h1>
         <h2 class="i f5 di">software consultant <a href="https://twitter.com/maxdesiatov/status/1001419221102940160" target="_blank"><i class="fa fa-twitter"></i></a></h2>
