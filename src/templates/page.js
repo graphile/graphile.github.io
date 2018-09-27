@@ -19,7 +19,7 @@ const AugmentedText = ({ children, noLink }) => (
 
 function PageList({ pages, location, depth = 0 }) {
   return (
-    <ul className={`page-list nav flex-column ${depth === 0 ? 'mb5' : null}`}>
+    <ul className={`page-list nav flex-column ${depth === 0 ? "mb5" : null}`}>
       {pages.map(({ to, title, subpages }, idx) => (
         <li key={idx} className="f6 lh-copy pv1">
           <Link
@@ -163,7 +163,7 @@ const Page = ({
                       <div className="col-xs-6">
                         {prev ? (
                           <Link className="" to={prev}>
-                            <span className="fa fa-fw fa-long-arrow-left" />{" "}
+                            <span className="fas fa-fw fa-arrow-left" />{" "}
                             {prevText ? (
                               <AugmentedText noLink>{prevText}</AugmentedText>
                             ) : (
@@ -180,7 +180,7 @@ const Page = ({
                             ) : (
                               "Next"
                             )}{" "}
-                            <span className="fa fa-fw fa-long-arrow-right" />
+                            <span className="fas fa-fw fa-arrow-right" />
                           </Link>
                         ) : null}
                       </div>

@@ -64,8 +64,8 @@ const MyType =
 Graphile Engine is the core of PostGraphile - we recommend that you get started
 with PostGraphile before you graduate to using Graphile Engine directly.
 
-<a class='strong-link' href='/postgraphile/'>Start with PostGraphile <span class='fa fa-fw fa-long-arrow-right' /></a>
-<a class='strong-link' href='/graphile-build/'>More about Graphile Engine <span class='fa fa-fw fa-long-arrow-right' /></a>
+<a class='strong-link' href='/postgraphile/'>Start with PostGraphile <span class='fas fa-fw fa-arrow-right' /></a>
+<a class='strong-link' href='/graphile-build/'>More about Graphile Engine <span class='fas fa-fw fa-arrow-right' /></a>
 
 <div>
 </div>

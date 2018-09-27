@@ -35,7 +35,7 @@ title: PostGraphile Pro!
 
 <tr>
   <th></th>
-  <th><span class="f3 fa fa-github"></span> Core</th>
+  <th><span class="f3 fab fa-github"></span> Core</th>
   <th><span class='plan-supporter'><span class='first-letter'>s</span></span> Supporter</th>
   <th><span class='plan-pro'><span class='first-letter'>p</span></span> Pro</th>
 </tr>
@@ -52,135 +52,135 @@ title: PostGraphile Pro!
 
 <tr>
   <th>Instant GraphQL API<br />(queries and mutations)</th>
-  <td><span class='fa fa-check-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Automatic CRUD mutations</th>
-  <td><span class='fa fa-check-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Excellent performance</th>
-  <td><span class='fa fa-check-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Authentication via JWT or custom <code>pgSettings</code></th>
-  <td><span class='fa fa-check-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>RLS and RBAC authorization</th>
-  <td><span class='fa fa-check-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Relay-compatible connections</th>
-  <td><span class='fa fa-check-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Simple list-based relations</th>
-  <td><span class='fa fa-check-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Filtering</th>
-  <td><span class='fa fa-check-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Ordering</th>
-  <td><span class='fa fa-check-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Computed columns</th>
-  <td><span class='fa fa-check-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Custom queries</th>
-  <td><span class='fa fa-check-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Custom mutations</th>
-  <td><span class='fa fa-check-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Customisable with<br />Smart Comments</th>
-  <td><span class='fa fa-check-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Extensible via plugins</th>
-  <td><span class='fa fa-check-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Simple GraphQL Subscriptions</th>
-  <td><span class='fa fa-times-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
-  <td><sup style="visibility: hidden">&nbsp;†</sup><span class='fa fa-check-circle'></span><sup>&nbsp;†</sup></td>
+  <td><span class='fas fa-times-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><sup style="visibility: hidden">&nbsp;†</sup><span class='fas fa-check-circle'></span><sup>&nbsp;†</sup></td>
 </tr>
 
 <tr>
   <th>Integrated<sup>‡</sup> GraphQL query cost limit</th>
-  <td><span class='fa fa-times-circle'></span></td>
-  <td><span class='fa fa-times-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
+  <td><span class='fas fa-times-circle'></span></td>
+  <td><span class='fas fa-times-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Integrated<sup>‡</sup> limits on pagination</th>
-  <td><span class='fa fa-times-circle'></span></td>
-  <td><span class='fa fa-times-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
+  <td><span class='fas fa-times-circle'></span></td>
+  <td><span class='fas fa-times-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Integrated<sup>‡</sup> GraphQL query depth limits</th>
-  <td><span class='fa fa-times-circle'></span></td>
-  <td><span class='fa fa-times-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
+  <td><span class='fas fa-times-circle'></span></td>
+  <td><span class='fas fa-times-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Facility to scale via read replicas</th>
-  <td><span class='fa fa-times-circle'></span></td>
-  <td><span class='fa fa-times-circle'></span></td>
-  <td><span class='fa fa-check-circle'></span></td>
+  <td><span class='fas fa-times-circle'></span></td>
+  <td><span class='fas fa-times-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
@@ -217,8 +217,8 @@ title: PostGraphile Pro!
 <tr>
   <th></th>
   <td><a class='button--outline' href='/postgraphile/introduction/'>Get Started</a></td>
-  <td><a class='button--solid' href='https://store.graphile.com'>Buy <span class='fa fa-external-link-square'></span></a></td>
-  <td><a class='button--solid' href='https://store.graphile.com'>Buy <span class='fa fa-external-link-square'></span></a></td>
+  <td><a class='button--solid' href='https://store.graphile.com'>Buy <span class='fas fa-external-link-square-alt'></span></a></td>
+  <td><a class='button--solid' href='https://store.graphile.com'>Buy <span class='fas fa-external-link-square-alt'></span></a></td>
 </tr>
 
   </tfoot>

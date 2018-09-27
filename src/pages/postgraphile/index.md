@@ -20,7 +20,7 @@ title: PostGraphile - full GraphQL API server in an instant from PostgreSQL data
 
 <br />
 <div class='flex'>
-<a class='button--solid-light' href='/postgraphile/introduction/'>Documentation <span class='fa fa-fw fa-long-arrow-right' /></a>
+<a class='button--solid-light' href='/postgraphile/introduction/'>Documentation <span class='fas fa-fw fa-arrow-right' /></a>
 </div>
 
 </div>
@@ -426,7 +426,7 @@ postgraphile -c postgres:///dbname \
 <br />
 <div class='row'>
 <div class='text-center col-xs-12'>
-<a class='strong-link' href='/postgraphile/introduction/'>Get started <span class='fa fa-fw fa-long-arrow-right' /></a>
+<a class='strong-link' href='/postgraphile/introduction/'>Get started <span class='fas fa-fw fa-arrow-right' /></a>
 </div>
 
 </div>

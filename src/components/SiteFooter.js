@@ -39,16 +39,27 @@ const SiteFooter = () => {
             </ul>
           </div>
           <div className="col-xs-12 col-md-2 nested-list-reset">
-            <h6>Community</h6>
+            <h6>Resources</h6>
             <ul>
               <li>
-                <a href="https://github.com/graphile">GitHub</a>
+                <Link to="/news/">
+                  <i className="fas fa-bullhorn" /> News
+                </Link>
               </li>
               <li>
-                <a href="http://discord.gg/graphile">Chat (discord)</a>
+                <a href="https://github.com/graphile">
+                  <i className="fab fa-github" /> GitHub
+                </a>
               </li>
               <li>
-                <a href="https://twitter.com/benjie">Twitter</a>
+                <a href="http://discord.gg/graphile">
+                  <i className="fab fa-discord" /> Chat (discord)
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/benjie">
+                  <i className="fab fa-twitter" /> Twitter
+                </a>
                 {/* TODO: update to Graphile twitter */}
               </li>
             </ul>
