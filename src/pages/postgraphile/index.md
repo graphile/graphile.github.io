@@ -8,8 +8,8 @@ title: PostGraphile - full GraphQL API server in an instant from PostgreSQL data
 
 <header class='hero simple'>
 <div class='container'>
-<div class='row'>
-<div class='col-xs-12'>
+<div class='row flex flex-wrap flex-direction-row'>
+<div class='text-center col-xs-12 col-md-9 col-lg-7'>
 <div class='hero-block'>
 
 # PostGraphile
@@ -24,6 +24,8 @@ title: PostGraphile - full GraphQL API server in an instant from PostgreSQL data
 </div>
 
 </div>
+</div>
+<div class='text-center col-xs-12 col-md-3 col-lg-5 postgraphile-logo-bg'>
 </div>
 </div>
 </div>
@@ -78,8 +80,7 @@ Subscribe to our occasional announcements newsletter:</p>
 
 </div>
 </div>
-<div class='text-center col-xs-12 col-md-3 col-lg-5 postgraphile-logo-bg'>
-</div>
+
 </div>
 
 </div>
