@@ -9,7 +9,7 @@ title: PostGraphile Usage
 PostGraphile is formed of three layers.
 
 * At the very top is the [**PostGraphile CLI**](/postgraphile/usage-cli/).
-  This layer is the most user-friendly and is repsonsible for three things: accepting common options from the command line; spinning up a HTTP server (or a cluster of them, or none at all depending on what options you're using); and mounting the PostGraphile middleware (see next). **Most users should start with this layer, many users use it successfully in production, and it's where we recommend you start.**
+  This layer is the most user-friendly and is responsible for three things: accepting common options from the command line; spinning up a HTTP server (or a cluster of them, or none at all depending on what options you're using); and mounting the PostGraphile middleware (see next). **Most users should start with this layer, many users use it successfully in production, and it's where we recommend you start.**
 
 
 * The PostGraphile CLI wraps the [**PostGraphile middleware**
