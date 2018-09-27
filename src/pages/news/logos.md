@@ -12,6 +12,8 @@ Before commencing work on [PostGraphile Version 4](/news/postgraphile-version-4/
 
 ## PostGraphile and Graphile Engine logos
 
-The PostGraphile logo is a fierce blue elephant, a mesh between the blue Postgres elephant logo and the Graphile red heart. 
+The Graphile Engine logo is a red angular heart. The PostGraphile logo is a fierce blue elephant, a mesh between the blue Postgres elephant logo and the Graphile red heart. 
 
-The Graphile Engine logo is a red angular heart. 
+
+![PostGraphile logo](../../../logos/postgraphile.optimized.svg)
+![Graphile logo](../../logos/graphile.optimized.svg)
