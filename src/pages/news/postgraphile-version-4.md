@@ -44,7 +44,7 @@ PostGraphile became a modular project, with its GraphQL generation powered by a 
 **PostGraphile is open source, supported by the community**
 
 <div class="flex flex-wrap justify-around">
-<img alt="PostGraphile thanks the community" src="/images/thanks3.png" />
+<img alt="PostGraphile thanks the community" src="/images/thanks.png" />
 </div>
 
 This release of PostGraphile wouldn’t have been possible without the community. Benjie says, “The community's response to PostGraphile has been amazing! People have found so many ways to help support the project: from testing and reporting issues, to documentation fixes, and even large feature development. Their sponsorship now funds one day a week dedicated to PostGraphile development, and this support is growing every month which is already leading to more features and faster releases. This voluntary financial support from the community is very motivational, a great antidote to the burn-out that's common in open source maintainers, and it's exciting to be turning PostGraphile into a sustainable open source project that people can rely on for years to come. It's also wonderful to see the community being so supportive of each other - sharing knowledge, debugging issues, testing and sharing plugins. There's so much more to come from PostGraphile - bring on the future!”
