@@ -1,0 +1,982 @@
+/* ----------------------------------------
+ * Remark overrides
+ */
+
+.remark-slide-scaler {
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.remark-container,
+.remark-notes-area {
+  background: black;
+}
+
+.remark-slide-content {
+  padding: 2rem;
+}
+
+.remark-slide-content.full-code {
+  padding: 0;
+}
+
+.full-code pre {
+  margin: 0;
+}
+.remark-slide > .center pre {
+  text-align: left;
+}
+
+.remark-notes-preview h1,
+.remark-notes-preview h2,
+.remark-notes-preview h3,
+.remark-notes-preview h4,
+.remark-notes-preview h5,
+.remark-notes-preview h6,
+.remark-notes-preview p,
+.remark-notes-preview a,
+.remark-notes-preview code,
+.remark-notes-preview ul,
+.remark-notes-preview ol,
+.remark-notes h1,
+.remark-notes h2,
+.remark-notes h3,
+.remark-notes h4,
+.remark-notes h5,
+.remark-notes h6,
+.remark-notes p,
+.remark-notes a,
+.remark-notes code,
+.remark-notes ul,
+.remark-notes ol {
+  color: white;
+}
+
+.remark-notes-area ul {
+  list-style-type: disc;
+  padding: 0 0 0 1em;
+}
+
+.remark-code-line-highlighted,
+.remark-code-span-highlighted {
+  background-color: #222;
+  border-left: 5px solid #ffff03;
+  border-right: 5px solid #ffff03;
+  margin: 0 -10px;
+  padding-left: 5px;
+}
+
+/* ----------------------------------------
+ * Colors
+*/
+
+.slidesLocation {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  right: 2rem;
+  opacity: 0.8;
+  text-align: left;
+}
+
+.slidesLocation a {
+  color: inherit;
+}
+
+.authorLocation {
+  position: absolute;
+  bottom: 0.75rem;
+  right: 2rem;
+  text-align: right;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 2rem;
+  right: 2rem;
+  text-align: left;
+}
+.remark-slide-content .footer p {
+  font-size: 0.8rem;
+  margin: 0;
+  padding: 0;
+}
+
+.slidesLocation.slidesLocation.slidesLocation p {
+  margin-bottom: 0rem;
+}
+
+.codeColorInherit .remark-inline-code {
+  color: inherit;
+}
+
+.remark-slide-content.compact-paragraphs p {
+  margin-bottom: 1.25rem;
+}
+
+/* ----------------------------------------
+ * Typography
+*/
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "avenir next", avenir,
+    "helvetica neue", helvetica, ubuntu, roboto, noto, "segoe ui", arial,
+    sans-serif;
+}
+
+html {
+  font-size: 22px;
+}
+
+.remark-slide-content p,
+.remark-slide-content li {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-top: 0;
+}
+
+.remark-slide-content p {
+  margin-bottom: 2rem;
+}
+
+.remark-slide-content li {
+  margin-bottom: 0;
+}
+.remark-slide-content ul {
+  margin-bottom: 1rem;
+}
+
+.remark-slide-content h1,
+.remark-slide-content h2,
+.remark-slide-content h3,
+.remark-slide-content h4,
+.remark-slide-content h5,
+.remark-slide-content h6 {
+  line-height: 1.25;
+  max-width: 30em;
+  font-weight: 800;
+}
+
+.remark-slide-content p,
+.remark-slide-content li {
+  font-weight: 600;
+}
+
+.remark-slide-content h1 {
+  margin-bottom: 2rem;
+  margin-top: 0;
+}
+
+.remark-slide-content h2,
+.remark-slide-content h3,
+.remark-slide-content h4,
+.remark-slide-content h5,
+.remark-slide-content h6 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+.remark-slide-content h1,
+.h1 {
+  font-size: 3rem;
+}
+.remark-slide-content h2,
+.h2 {
+  font-size: 2.25rem;
+}
+.remark-slide-content h3,
+.h3 {
+  font-size: 1.5rem;
+}
+.remark-slide-content h4,
+.h4 {
+  font-size: 1.25rem;
+}
+.remark-slide-content h5,
+.h5 {
+  font-size: 1rem;
+}
+.remark-slide-content h6,
+.h6 {
+  font-size: 1rem;
+}
+
+ol ul,
+ol ol,
+ul ol,
+ul ul {
+  font-size: 0.8em;
+}
+
+strong {
+  font-family: Georgia, serif;
+  font-style: italic;
+}
+
+a {
+  text-decoration: none;
+  border-bottom: 0.15em dotted;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+ul ul {
+  padding-left: 2rem;
+  list-style-type: disc;
+}
+
+.headeredList p {
+  margin-bottom: 0.5rem;
+}
+.headeredList > ul {
+  padding-left: 2rem;
+  list-style-type: disc;
+}
+
+/* ----------------------------------------
+ *
+ */
+
+img {
+  box-shadow: 0 0 20px 9px rgba(0, 0, 0, 0.18);
+  max-width: 100%;
+  max-height: 100%;
+}
+
+iframe {
+  width: 100%;
+  height: 100%;
+  border: 2px solid #ebeaea;
+}
+
+.context {
+  filter: grayscale(0.8) opacity(0.8);
+}
+
+pre + pre {
+  margin-top: 0;
+}
+
+/* ----- Template colors ----- */
+
+.fire,
+.fire * {
+  color: #ed2700;
+}
+
+.chapter-title {
+  color: white;
+  background-color: #ed2700;
+  background-image: url("images/fire-graph-2.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.chapter-title * {
+  color: white;
+}
+.chapter-title * .remark-inline-code {
+  color: #ddd;
+}
+
+.question p {
+  font-size: 2rem;
+  text-align: center;
+  line-height: 1.25;
+}
+
+/* base context title */
+.contextTitle {
+  position: absolute;
+  right: 9px;
+  bottom: 8px;
+  padding: 3px 54px 3px 10px;
+  border-radius: 5px;
+  opacity: 0.8;
+  text-align: right;
+  background-color: black;
+}
+.contextTitle p {
+  color: white;
+  padding: 0 !important;
+  margin: 0 !important;
+  line-height: inherit !important;
+  font-size: 1rem !important;
+}
+/* end of base context title */
+
+/**** SLIDE THEMES ****/
+
+/* this was bg-blue-home */
+.title-page * {
+  color: white;
+}
+.title-page {
+  color: white;
+  background: #0c74d5;
+  background-image: url("images/postgraphile.named.svg"),
+    url("images/light-graph-3.png");
+  background-repeat: no-repeat;
+  background-size: 14rem, cover;
+  background-position: bottom 1.5rem right 1.5rem, center center;
+}
+/* End of was bg-blue-home */
+
+/* This was bg-blue */
+.chapter-title *,
+.chapter-subtitle * {
+  color: white;
+}
+.chapter-title .remark-inline-code,
+.chapter-subtitle .remark-inline-code {
+  color: #b9ebff;
+}
+.chapter-title,
+.chapter-subtitle {
+  background: #0c74d5;
+  background-image: url("images/light-graph-3.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.chapter-title .contextTitle,
+.chapter-subtitle .contextTitle {
+  background: #0c74d5;
+}
+.chapter-title .contextTitle p,
+.chapter-subtitle .contextTitle p {
+  color: white;
+}
+
+/* end-of-bg-blue */
+
+/* This was invert */
+.text-slide {
+  background: #101010;
+  background-image: url("images/light-graph-2.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom center;
+}
+
+.text-slide strong {
+  color: #ed2700;
+}
+
+.text-slide * {
+  color: white;
+}
+.text-slide * .remark-inline-code {
+  color: #dda2ff;
+}
+
+.text-slide .contextTitle {
+  background-color: black;
+}
+.text-slide .contextTitle p {
+  color: white;
+}
+/* End of was invert */
+
+/* This was bg-white */
+.warning {
+  background-image: url("images/light-graph-4.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.warning .contextTitle {
+  background-color: white;
+}
+.warning .contextTitle p {
+  color: black;
+}
+/* End of bg-white */
+
+/**** END OF SLIDE THEMES ****/
+
+.bg-blue-gradient {
+  background-image: linear-gradient(
+    106deg,
+    #0f0c40 0%,
+    #222d5b 16%,
+    #324f77 33%,
+    #407294 50%,
+    #4d98b2 66%,
+    #59c0d0 83%,
+    #64e9f0 100%
+  );
+}
+
+.postgraphile-is {
+  background-image: url("images/postgraphile-bg.png");
+}
+
+.postgraphile-is h1,
+.postgraphile-is h2,
+.postgraphile-is h3,
+.postgraphile-is h4,
+.postgraphile-is h5,
+.postgraphile-is h6,
+.postgraphile-is a {
+  color: black;
+  text-shadow: 1px 1px 2px white;
+}
+
+/* ----- Code ----- */
+
+.has-code {
+  background: #101010;
+  padding: 2rem 2rem;
+  color: white;
+}
+
+.has-code-extra-space {
+  padding: 0.5rem 2rem;
+}
+
+.has-code * {
+  color: white;
+}
+.has-code strong {
+  font-family: Georgia, serif;
+  font-style: italic;
+  color: #8dbb6e;
+}
+
+.remark-code,
+.remark-inline-code {
+  font-family: Monaco, "Lucida Console", monospace;
+}
+
+.remark-inline-code {
+  color: #2b497f;
+  font-size: 0.95em;
+}
+
+.has-code .remark-inline-code {
+  color: #56a6ed;
+}
+
+.zoom-code .remark-code {
+  font-size: 1.1em;
+}
+
+.pull-left {
+  float: left;
+  width: 47%;
+}
+
+.pull-right {
+  float: right;
+  width: 47%;
+}
+
+.clear {
+  clear: both;
+  display: block;
+  height: 0;
+  padding: 0;
+  margin: 0;
+}
+
+code,
+.remark-code {
+  border: none !important;
+}
+
+code .lolight,
+code .lolight * {
+  color: #666 !important;
+}
+
+code .hilight,
+code .hilight * {
+  color: #5dc744 !important;
+}
+
+.graphiqlImage,
+.contextImage,
+.specImage {
+  position: absolute;
+  right: 2rem;
+  top: 6rem;
+}
+.graphiqlImage {
+  width: 55%;
+}
+.contextImage {
+  width: 38%;
+}
+
+.contextImage .remark-code {
+  font-size: 0.8em;
+}
+
+.graphiqlImage img,
+.contextImage img,
+.specImage img {
+  width: 100%;
+}
+
+.specImage {
+  width: 35%;
+  top: 3rem;
+}
+
+.spaceAtTop {
+  margin-top: 2rem;
+}
+
+.leftSplit {
+  width: 43%;
+  float: left;
+}
+
+.rightSplit {
+  width: 43%;
+  float: right;
+}
+
+.leftSplit.wide {
+  width: 48%;
+}
+.rightSplit.wide {
+  width: 48%;
+}
+
+.tiny {
+  font-size: 5pt;
+  text-align: right;
+}
+
+/* ----------------------------------------
+ * Prism syntax highlighting
+ */
+
+/*
+.html .token.doctype { color: #525865 }
+.html .tag .token.punctuation { color: #DC616A }
+.html .token.tag { color: #DC616A }
+.html .token.attr-name { color: #CB8F5B }
+.html .token.attr-value { color: #8DBB6E }
+
+.language-jsx .token.keyword { color: #BE6DD8 }
+.language-jsx .token.string { color: #8DBB6E }
+.language-jsx .token.operator { color: #BE6DD8 }
+.language-jsx .token.tag { color: #DC616A }
+.language-jsx .tag .token.punctuation { color: #DC616A }
+.language-jsx .tag .script .token.punctuation { color: white }
+.language-jsx .token.attr-name { color: #CB8F5B }
+.language-jsx .token.attr-value { color: #8DBB6E }
+.language-jsx .token.function { color: #56A6ED }
+.language-jsx .token.class-name { color: #56A6ED }
+.language-jsx .token.comment { color: #525865 }
+.language-jsx .token.interpolation-punctuation { color: #B6463D }
+
+
+.language-json .token.property { color: #8DBB6E }
+
+
+.language-graphql .remark-code-line { color: #8DBB6E }
+.language-graphql .remark-code-line { color: #56A6ED }
+.language-graphql .remark-code-line { color: #BE6DD8 }
+.language-graphql .token.keyword { color: #BE6DD8 }
+.language-graphql .token.attr-name { color: #56A6ED }
+.language-graphql .token.comment { color: #525865 }
+*/
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: hsl(0, 0%, 47%); /* #777777 */
+  color: hsl(0, 0%, 60%);
+}
+
+.token.punctuation {
+  opacity: 0.7;
+}
+
+.namespace {
+  opacity: 0.7;
+}
+
+.token.tag,
+.token.boolean,
+.token.number,
+.token.deleted {
+  color: hsl(14, 58%, 55%); /* #CF6A4C */
+}
+
+.token.keyword,
+.token.directive,
+.token.property,
+.token.selector,
+.token.constant,
+.token.symbol,
+.token.builtin {
+  color: hsl(53, 89%, 79%); /* #F9EE98 */
+}
+
+.token.attr-name,
+.token.attr-value,
+.token.string,
+.token.char,
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable,
+.token.inserted {
+  color: hsl(76, 21%, 52%); /* #8F9D6A */
+  color: #cb8f5b;
+}
+
+.token.atrule {
+  color: hsl(218, 22%, 55%); /* #7587A6 */
+}
+
+.token.regex,
+.token.important {
+  color: hsl(42, 75%, 65%); /* #E9C062 */
+}
+
+.language-graphql .token.type-name {
+  color: #8dbb6e;
+}
+.language-graphql .token.type-name {
+  color: #dc616a;
+}
+.language-graphql .token.type-name {
+  color: #be6dd8;
+}
+.language-graphql .token.type-name {
+  color: hsl(42, 75%, 65%);
+}
+.language-graphql .token.type-name {
+  color: hsl(42, 75%, 55%);
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.bigLi p {
+  font-size: 1.5rem;
+}
+
+.bigLi > ul {
+  padding-left: 2rem;
+  list-style-type: disc;
+}
+.bigLi.chapter-title ul {
+  list-style-type: none;
+}
+.bigLi li {
+  font-size: 1.5rem;
+}
+.bigLi li p {
+  font-size: 1.5rem;
+}
+.remark-slide-content.compact-paragraphs.bigLi li p {
+  margin-bottom: 1rem;
+}
+.headeredList.bigLi li {
+  margin-bottom: 0.5rem;
+}
+.headeredList.bigLi ul {
+  margin-top: -0.5rem;
+  margin-bottom: 2rem;
+}
+
+.smallprint p {
+  font-size: 0.9rem;
+}
+
+.pl3 {
+  padding-left: 3em;
+}
+.companies-using-graphql {
+  background-color: white;
+  color: black;
+  background-image: url("images/companies-using-graphql.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: 50% 70%;
+}
+.companies-using-graphql .contextTitle {
+  background-color: white;
+}
+.companies-using-graphql .contextTitle p {
+  color: #555;
+}
+
+.bob {
+  background-color: white;
+  color: black;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: 50% 50%;
+}
+.bob .contextTitle {
+  background-color: white;
+}
+.bob .contextTitle p {
+  color: #999;
+}
+.bob-001 {
+  background-image: url("images/bob/001.png");
+}
+.bob-002 {
+  background-image: url("images/bob/002.png");
+}
+.bob-003 {
+  background-image: url("images/bob/003.png");
+}
+.bob-004 {
+  background-image: url("images/bob/004.png");
+}
+.bob-005 {
+  background-image: url("images/bob/005.png");
+}
+.bob-006 {
+  background-image: url("images/bob/006.png");
+}
+.bob-007 {
+  background-image: url("images/bob/007.png");
+}
+.bob-008 {
+  background-image: url("images/bob/008.png");
+}
+.bob-009 {
+  background-image: url("images/bob/009.png");
+}
+.bob-010 {
+  background-image: url("images/bob/010.png");
+}
+.bob-011 {
+  background-image: url("images/bob/011.png");
+}
+.bob-012 {
+  background-image: url("images/bob/012.png");
+}
+.bob-013 {
+  background-image: url("images/bob/013.png");
+}
+.bob-014 {
+  background-image: url("images/bob/014.png");
+}
+.bob-015 {
+  background-image: url("images/bob/015.png");
+}
+.bob-016 {
+  background-image: url("images/bob/016.png");
+}
+
+.graphql-over-http {
+  background-color: white;
+  color: black;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: 50% 50%;
+  background-image: url("images/graphQL-over-HTTP5.png");
+}
+.graphql-over-http .contextTitle {
+  background-color: white;
+}
+.graphql-over-http .contextTitle p {
+  color: #999;
+}
+
+.ipad .remark-notes-area {
+  left: 30%;
+}
+.ipad.remark-container.remark-presenter-mode .remark-slides-area {
+  width: 28%;
+}
+
+.big-text p {
+  font-size: 1.25rem;
+}
+.bigger-text p {
+  font-size: 1.5rem;
+}
+
+.space {
+  height: 1rem;
+  display: block;
+  visibility: hidden;
+}
+.reset {
+  height: 1px;
+  display: block;
+  visibility: hidden;
+}
+.max-width-55 {
+  max-width: 55%;
+}
+
+html,
+body {
+  overflow: hidden;
+  -webkit-overflow-scrolling: auto;
+}
+
+.image-bg-white {
+  background-color: white;
+  color: black;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: 50% 70%;
+}
+.image-bg-white .contextTitle {
+  background-color: white;
+}
+.image-bg-white .contextTitle p {
+  color: #555;
+}
+
+.image-src-postgraphile {
+  background-image: url("images/postgraphile.named.svg");
+}
+
+.columns {
+  columns: 5;
+  column-fill: balance;
+}
+
+.remark-notes-area
+  .remark-bottom-area
+  .remark-notes-current-area
+  .remark-toggle,
+.remark-notes-area
+  .remark-bottom-area
+  .remark-notes-preview-area
+  .remark-toggle {
+  display: none;
+}
+.remark-notes-area
+  .remark-bottom-area
+  .remark-notes-current-area
+  .remark-notes-preview,
+.remark-notes-area
+  .remark-bottom-area
+  .remark-notes-preview-area
+  .remark-notes-preview {
+  top: 0;
+}
+
+.remark-notes-area .remark-bottom-area .remark-notes-current-area {
+  height: 92%;
+}
+.remark-notes-area .remark-bottom-area .remark-notes-preview-area {
+  height: 8%;
+}
+
+.superpowered {
+  position: absolute;
+  top: 95px;
+  right: 25px;
+  transform: rotate(20deg);
+  padding: 20px;
+  border: 8px solid red;
+  color: red;
+  border-radius: 10px;
+  font-size: 1.75rem;
+  margin: 0;
+  line-height: 1rem;
+  font-weight: bold;
+  background-color: #419eff;
+  box-shadow: 1px 1px 1px black;
+  text-shadow: 1px 1px 1px black;
+}
+.superpowered p {
+  padding: 0 !important;
+  margin: 0 !important;
+  line-height: inherit !important;
+  color: inherit !important;
+  font-weight: inherit !important;
+  font-size: inherit !important;
+}
+
+@media print {
+  .remark-slide-content {
+    background-color: white !important;
+  }
+  .contextTitle {
+    background: white !important;
+  }
+  * {
+    color: black !important;
+  }
+  .title-page {
+    background-image: url("images/light-graph-4.png"),
+      url("images/big-brain.png");
+  }
+  .chapter-title,
+  .chapter-subtitle {
+    background-image: url("images/light-graph-4.png");
+  }
+  .remark-slide {
+    border: 2px solid #eee;
+    box-sizing: border-box;
+  }
+  .remark-slide-content::after {
+    content: "Copyright © 2018 GraphQL-Training.com";
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 0.6rem;
+    color: #000;
+    opacity: 0.5;
+  }
+  .remark-code-line-highlighted,
+  .remark-code-span-highlighted {
+    background-color: #dff !important;
+    border-left: 5px solid #0cf;
+    border-right: 5px solid #0cf;
+    margin: 0 -10px;
+    padding-left: 5px;
+  }
+  .hide-print {
+    visibility: hidden;
+  }
+  .has-continuation {
+    display: none;
+  }
+  .remark-slide-container {
+    width: 908px;
+    height: 681px;
+    width: 1024px;
+    height: 768px;
+  }
+  .remark-slide-scaler[style] {
+    transform-origin: 0 0 !important;
+    transform: scale(1.1278) !important;
+    top: 0 !important;
+    left: 0 !important;
+  }
+  a {
+    text-decoration: none;
+    border-bottom: none;
+  }
+  .footer {
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 25px;
+    padding: 20px;
+  }
+}
