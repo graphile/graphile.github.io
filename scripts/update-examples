@@ -112,61 +112,67 @@ async function main() {
         appendPlugins: [PgSimplifyInflectorPlugin],
       }
     );
-    const queryPath = `${__dirname}/../examples/queries`;
-    const directories = fs
+    const queryPath = `${__dirname}/../examples`;
+    const categories = fs
       .readdirSync(queryPath)
       .filter(dir => fs.statSync(`${queryPath}/${dir}`).isDirectory())
+      .filter(dir => fs.existsSync(`${queryPath}/${dir}/config.js`))
       .sort();
 
     const examples = [];
 
-    for (const dir of directories) {
-      const titleFromFile = null;
-      const example = {
-        category: "graphql",
-        title: titleFromFile || filenameToTitle(dir),
-        examples: [],
-      };
-      examples.push(example);
-      const dirPath = `${queryPath}/${dir}`;
-      const outPath = `${__dirname}/../src/examples/${dir}`;
-      await spawn("mkdir", ["-p", outPath]);
-      const queries = fs
-        .readdirSync(dirPath)
-        .filter(f => f.match(/^[^.].*\.graphql$/))
+    for (const category of categories) {
+      const sectionPath = `${queryPath}/${category}`;
+      const {
+        fileFilter,
+        processFile,
+        filenameToSectionTitle = filenameToTitle,
+        filenameToExampleTitle = filenameToTitle,
+      } = require(`${sectionPath}/config.js`);
+      const sections = fs
+        .readdirSync(sectionPath)
+        .filter(dir => fs.statSync(`${sectionPath}/${dir}`).isDirectory())
         .sort();
-      for (const queryFilename of queries) {
-        const queryFilePath = `${dirPath}/${queryFilename}`;
-        //const id = `${dir}__${queryFilename}`;
-        const query = fs.readFileSync(queryFilePath, "utf8");
-        const { data, errors } = await withPostGraphileContext(
-          {
+
+      for (const dir of sections) {
+        const titleFromFile = null;
+        const currentExample = {
+          category: category,
+          title: titleFromFile || filenameToSectionTitle(dir),
+          examples: [],
+        };
+        examples.push(currentExample);
+        const dirPath = `${sectionPath}/${dir}`;
+        const queries = fs
+          .readdirSync(dirPath)
+          .filter(fileFilter)
+          .sort();
+        for (const queryFilename of queries) {
+          const queryFilePath = `${dirPath}/${queryFilename}`;
+          //const id = `${dir}__${queryFilename}`;
+          const {
+            example,
+            exampleLanguage,
+            result,
+            resultLanguage,
+            title,
+          } = await processFile(queryFilePath, {
             pgPool,
-            pgSettings: {
-              role: "graphiledemo_visitor",
-              "jwt.claims.user_id": 1,
-            },
-          },
-          context => graphql(postgraphileSchema, query, null, context)
-        );
-        if (errors && errors.length) {
-          throw new Error(
-            `Errors occurred whilst processing ${queryFilePath}!\n` +
-              String(errors)
-          );
+            postgraphileSchema,
+            prettify,
+            graphql,
+            withPostGraphileContext,
+          });
+          currentExample.examples.push({
+            title:
+              title ||
+              filenameToExampleTitle(queryFilename.replace(/\.graphql$/, "")),
+            example,
+            exampleLanguage,
+            result,
+            resultLanguage,
+          });
         }
-        const prettyQuery = await prettify(queryFilePath, query);
-        const prettyData = await prettify(
-          queryFilePath + ".json",
-          JSON.stringify(data)
-        );
-        example.examples.push({
-          title: filenameToTitle(queryFilename.replace(/\.graphql$/, "")),
-          example: prettyQuery,
-          exampleLanguage: "graphql",
-          result: prettyData,
-          resultLanguage: "json",
-        });
       }
     }
     fs.writeFileSync(

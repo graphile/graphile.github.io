@@ -1,6 +1,19 @@
 [
   {
-    "category": "graphql",
+    "category": "plugins",
+    "title": "Inflector",
+    "examples": [
+      {
+        "title": "PgNumericToFloatPlugin",
+        "example": "module.exports = function PgNumericToFloatPlugin(\n  builder,\n  { pgNumericToFloatPrecisionCap = 12, pgNumericToFloatScaleCap = 2 }\n) {\n  builder.hook(\"init\", (_init, build) => {\n    // Register a type handler for NUMERIC / DECIMAL (oid = 1700)\n    build.pgRegisterGqlTypeByTypeId(\"1700\", (_set, modifier) => {\n      if (modifier && typeof modifier === \"number\" && modifier > 0) {\n        // Ref: https://stackoverflow.com/a/3351120/141284\n        const precision = ((modifier - 4) >> 16) & 65535;\n        const scale = (modifier - 4) & 65535;\n        if (\n          precision <= pgNumericToFloatPrecisionCap &&\n          scale <= pgNumericToFloatScaleCap\n        ) {\n          // This number is no more precise than our cap, so we're declaring\n          // that we can handle it as a float:\n          return build.graphql.GraphQLFloat;\n        }\n      }\n      // If all else fails, let PostGraphile do it's default handling - i.e.\n      // BigFloat\n      return null;\n    });\n\n    // We didn't modify _init, but we still must return it.\n    return _init;\n  });\n};\n",
+        "exampleLanguage": "javascript",
+        "result": "",
+        "resultLanguage": ""
+      }
+    ]
+  },
+  {
+    "category": "queries",
     "title": "Basic",
     "examples": [
       {
@@ -20,7 +33,7 @@
     ]
   },
   {
-    "category": "graphql",
+    "category": "queries",
     "title": "Collections",
     "examples": [
       {
@@ -40,7 +53,7 @@
     ]
   },
   {
-    "category": "graphql",
+    "category": "queries",
     "title": "Relations",
     "examples": [
       {
@@ -53,7 +66,7 @@
     ]
   },
   {
-    "category": "graphql",
+    "category": "queries",
     "title": "Mutations",
     "examples": [
       {
@@ -80,7 +93,7 @@
     ]
   },
   {
-    "category": "graphql",
+    "category": "queries",
     "title": "Custom queries",
     "examples": [
       {
@@ -107,7 +120,7 @@
     ]
   },
   {
-    "category": "graphql",
+    "category": "queries",
     "title": "Custom mutations",
     "examples": [
       {
@@ -120,7 +133,7 @@
     ]
   },
   {
-    "category": "graphql",
+    "category": "queries",
     "title": "Computed columns",
     "examples": [
       {

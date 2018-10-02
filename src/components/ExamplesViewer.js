@@ -62,7 +62,7 @@ export default class ExamplesViewer extends React.Component {
         selectedCategory.examples[this.state.subSelected || 0]) ||
       {};
     return (
-      <div className="flex bg-black h6 w-100">
+      <div className="flex bg-black h7 w-100 border-box">
         <div className="w-25 bg-white-20 h-100 pa0 ma0 white w5">
           <ul className="list h-100 ma0 pa1 pa2-ns">
             {examples.map(({ title, examples: subexamples }, i) => (
@@ -98,27 +98,29 @@ export default class ExamplesViewer extends React.Component {
             ))}
           </ul>
         </div>
-        <div className="w-75 flex flex-column flex-row-l">
+        <div className="w-75 flex flex-column flex-row-l ba br0 b--silver">
           <div className="w-100 w-50-l h-50 h-100-l flex-auto">
             <PrismCode
               component="pre"
-              className={`no-shadow f7 pa1 bl bt br bn-l bt-l bb-l br0 b--silver h-100 overflow-auto language-${
+              className={`no-shadow f7 pa1 bn br0 h-100 overflow-auto language-${
                 selectedExample.exampleLanguage
               }`}
             >
               {selectedExample.example}
             </PrismCode>
           </div>
-          <div className="w-100 w-50-l h-50 h-100-l flex-auto overflow-auto">
-            <PrismCode
-              component="pre"
-              className={`no-shadow f7 pa1 ba br0 b--silver h-100 flex-auto language-${
-                selectedExample.resultLanguage
-              }`}
-            >
-              {selectedExample.result}
-            </PrismCode>
-          </div>
+          {selectedExample.result && (
+            <div className="w-100 w-50-l h-50 h-100-l flex-auto overflow-auto">
+              <PrismCode
+                component="pre"
+                className={`no-shadow f7 pa1 bt bn-l bl-l br0 b--silver h-100 flex-auto language-${
+                  selectedExample.resultLanguage
+                }`}
+              >
+                {selectedExample.result}
+              </PrismCode>
+            </div>
+          )}
         </div>
       </div>
     );
