@@ -123,6 +123,7 @@ async function main() {
     for (const dir of directories) {
       const titleFromFile = null;
       const example = {
+        category: "graphql",
         title: titleFromFile || filenameToTitle(dir),
         examples: [],
       };
@@ -136,7 +137,7 @@ async function main() {
         .sort();
       for (const queryFilename of queries) {
         const queryFilePath = `${dirPath}/${queryFilename}`;
-        const id = `${dir}__${queryFilename}`;
+        //const id = `${dir}__${queryFilename}`;
         const query = fs.readFileSync(queryFilePath, "utf8");
         const { data, errors } = await withPostGraphileContext(
           {

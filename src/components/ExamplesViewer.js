@@ -14,8 +14,7 @@ export default class ExamplesViewer extends React.Component {
         const hash = window.location.hash.replace(/^#+/, "");
         const parts = hash.split("__");
         if (parts.length >= 2) {
-          const { examples: { edges } } = props;
-          const examples = edges.map(({ node }) => node);
+          const { examples } = props;
           const selectedExampleIdx = examples.findIndex(
             e => slugify(e.title) === parts[0]
           );
@@ -37,8 +36,7 @@ export default class ExamplesViewer extends React.Component {
   }
 
   select = (i, j) => e => {
-    const { examples: { edges } } = this.props;
-    const examples = edges.map(({ node }) => node);
+    const { examples } = this.props;
     const selectedTitle = examples[i || 0] ? examples[i || 0].title : null;
     const selectedSubtitle =
       examples[i] && examples[i].examples[j || 0]
@@ -54,8 +52,7 @@ export default class ExamplesViewer extends React.Component {
     this.setState({ selected: i, subSelected: j || 0 });
   };
   render() {
-    const { examples: { edges } } = this.props;
-    const examples = edges.map(({ node }) => node);
+    const { examples } = this.props;
     const isRootSelected = i => (this.state.selected || 0) === i;
     const isSubSelected = (i, j) =>
       isRootSelected(i) && (this.state.subSelected || 0) === j;

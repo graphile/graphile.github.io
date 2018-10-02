@@ -163,7 +163,13 @@ const Page = ({
                     <div dangerouslySetInnerHTML={{ __html: html }} />
                   </div>
                   <br />
-                  {showExamples && <ExamplesViewer examples={examples} />}
+                  {showExamples && (
+                    <ExamplesViewer
+                      examples={examples.edges
+                        .filter(({ node }) => node.category === showExamples)
+                        .map(({ node }) => node)}
+                    />
+                  )}
                   <br />
                   <div className="col-xs-12 mt3 mb5">
                     <div className="row between-xs">
@@ -243,6 +249,7 @@ export const pageQuery = graphql`
     examples: allExamplesJson {
       edges {
         node {
+          category
           id
           title
           examples {

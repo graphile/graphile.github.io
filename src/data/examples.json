@@ -1,5 +1,6 @@
 [
   {
+    "category": "graphql",
     "title": "Basic",
     "examples": [
       {
@@ -15,6 +16,7 @@
     ]
   },
   {
+    "category": "graphql",
     "title": "Collections",
     "examples": [
       {
@@ -30,6 +32,7 @@
     ]
   },
   {
+    "category": "graphql",
     "title": "Relations",
     "examples": [
       {
@@ -40,6 +43,7 @@
     ]
   },
   {
+    "category": "graphql",
     "title": "Mutations",
     "examples": [
       {
@@ -60,6 +64,7 @@
     ]
   },
   {
+    "category": "graphql",
     "title": "Custom queries",
     "examples": [
       {
@@ -80,6 +85,7 @@
     ]
   },
   {
+    "category": "graphql",
     "title": "Custom mutations",
     "examples": [
       {
@@ -90,6 +96,7 @@
     ]
   },
   {
+    "category": "graphql",
     "title": "Computed columns",
     "examples": [
       {

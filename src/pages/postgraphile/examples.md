@@ -2,7 +2,7 @@
 layout: page
 path: /postgraphile/examples/
 title: PostGraphile examples
-showExamples: true
+showExamples: graphql
 ---
 
 ## PostGraphile GraphQL examples
