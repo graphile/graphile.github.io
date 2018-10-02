@@ -341,6 +341,12 @@
             "title": "Graphile Engine",
             "sectionId": "customising",
             "subpages": []
+          },
+          {
+            "to": "/postgraphile/plugin-gallery/",
+            "title": "Plugin Gallery",
+            "sectionId": "customising",
+            "subpages": []
           }
         ]
       },

@@ -162,8 +162,10 @@ async function main() {
         );
         example.examples.push({
           title: filenameToTitle(queryFilename.replace(/\.graphql$/, "")),
-          query: prettyQuery,
+          example: prettyQuery,
+          exampleLanguage: "graphql",
           result: prettyData,
+          resultLanguage: "json",
         });
       }
     }

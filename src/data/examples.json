@@ -5,13 +5,17 @@
     "examples": [
       {
         "title": "Forums",
-        "query": "{\n  allForums {\n    nodes {\n      nodeId\n      id\n      slug\n      name\n      description\n    }\n  }\n}\n",
-        "result": "{\n  \"allForums\": {\n    \"nodes\": [\n      {\n        \"nodeId\": \"WyJmb3J1bXMiLDFd\",\n        \"id\": 1,\n        \"slug\": \"cat-life\",\n        \"name\": \"Cat Life\",\n        \"description\":\n          \"A forum all about cats and how fluffy they are and how they completely ignore their owners unless there is food. Or yarn.\"\n      },\n      {\n        \"nodeId\": \"WyJmb3J1bXMiLDJd\",\n        \"id\": 2,\n        \"slug\": \"dog-life\",\n        \"name\": \"Dog Life\",\n        \"description\": \"\"\n      },\n      {\n        \"nodeId\": \"WyJmb3J1bXMiLDNd\",\n        \"id\": 3,\n        \"slug\": \"slug-life\",\n        \"name\": \"Slug Life\",\n        \"description\": \"\"\n      }\n    ]\n  }\n}\n"
+        "example": "{\n  allForums {\n    nodes {\n      nodeId\n      id\n      slug\n      name\n      description\n    }\n  }\n}\n",
+        "exampleLanguage": "graphql",
+        "result": "{\n  \"allForums\": {\n    \"nodes\": [\n      {\n        \"nodeId\": \"WyJmb3J1bXMiLDFd\",\n        \"id\": 1,\n        \"slug\": \"cat-life\",\n        \"name\": \"Cat Life\",\n        \"description\":\n          \"A forum all about cats and how fluffy they are and how they completely ignore their owners unless there is food. Or yarn.\"\n      },\n      {\n        \"nodeId\": \"WyJmb3J1bXMiLDJd\",\n        \"id\": 2,\n        \"slug\": \"dog-life\",\n        \"name\": \"Dog Life\",\n        \"description\": \"\"\n      },\n      {\n        \"nodeId\": \"WyJmb3J1bXMiLDNd\",\n        \"id\": 3,\n        \"slug\": \"slug-life\",\n        \"name\": \"Slug Life\",\n        \"description\": \"\"\n      }\n    ]\n  }\n}\n",
+        "resultLanguage": "json"
       },
       {
         "title": "Forum by slug",
-        "query": "{\n  forumBySlug(slug: \"slug-life\") {\n    nodeId\n    id\n    slug\n    name\n    description\n  }\n}\n",
-        "result": "{\n  \"forumBySlug\": {\n    \"nodeId\": \"WyJmb3J1bXMiLDNd\",\n    \"id\": 3,\n    \"slug\": \"slug-life\",\n    \"name\": \"Slug Life\",\n    \"description\": \"\"\n  }\n}\n"
+        "example": "{\n  forumBySlug(slug: \"slug-life\") {\n    nodeId\n    id\n    slug\n    name\n    description\n  }\n}\n",
+        "exampleLanguage": "graphql",
+        "result": "{\n  \"forumBySlug\": {\n    \"nodeId\": \"WyJmb3J1bXMiLDNd\",\n    \"id\": 3,\n    \"slug\": \"slug-life\",\n    \"name\": \"Slug Life\",\n    \"description\": \"\"\n  }\n}\n",
+        "resultLanguage": "json"
       }
     ]
   },
@@ -21,13 +25,17 @@
     "examples": [
       {
         "title": "First offset",
-        "query": "{\n  allForums(first: 1, offset: 1) {\n    nodes {\n      nodeId\n      id\n      name\n    }\n  }\n}\n",
-        "result": "{\n  \"allForums\": {\n    \"nodes\": [\n      {\n        \"nodeId\": \"WyJmb3J1bXMiLDJd\",\n        \"id\": 2,\n        \"name\": \"Dog Life\"\n      }\n    ]\n  }\n}\n"
+        "example": "{\n  allForums(first: 1, offset: 1) {\n    nodes {\n      nodeId\n      id\n      name\n    }\n  }\n}\n",
+        "exampleLanguage": "graphql",
+        "result": "{\n  \"allForums\": {\n    \"nodes\": [\n      {\n        \"nodeId\": \"WyJmb3J1bXMiLDJd\",\n        \"id\": 2,\n        \"name\": \"Dog Life\"\n      }\n    ]\n  }\n}\n",
+        "resultLanguage": "json"
       },
       {
         "title": "Relation condition",
-        "query": "{\n  forumBySlug(slug: \"cat-life\") {\n    nodeId\n    id\n    name\n    topics(\n      condition: { authorId: 1 }\n    ) {\n      nodes {\n        nodeId\n        id\n        title\n      }\n    }\n  }\n}\n",
-        "result": "{\n  \"forumBySlug\": {\n    \"nodeId\": \"WyJmb3J1bXMiLDFd\",\n    \"id\": 1,\n    \"name\": \"Cat Life\",\n    \"topics\": {\n      \"nodes\": [\n        {\n          \"nodeId\":\n            \"WyJ0b3BpY3MiLDFd\",\n          \"id\": 1,\n          \"title\": \"cats cats cats\"\n        },\n        {\n          \"nodeId\":\n            \"WyJ0b3BpY3MiLDJd\",\n          \"id\": 2,\n          \"title\": \"snooze life\"\n        },\n        {\n          \"nodeId\":\n            \"WyJ0b3BpY3MiLDNd\",\n          \"id\": 3,\n          \"title\": \"too hot\"\n        }\n      ]\n    }\n  }\n}\n"
+        "example": "{\n  forumBySlug(slug: \"cat-life\") {\n    nodeId\n    id\n    name\n    topics(\n      condition: { authorId: 1 }\n    ) {\n      nodes {\n        nodeId\n        id\n        title\n      }\n    }\n  }\n}\n",
+        "exampleLanguage": "graphql",
+        "result": "{\n  \"forumBySlug\": {\n    \"nodeId\": \"WyJmb3J1bXMiLDFd\",\n    \"id\": 1,\n    \"name\": \"Cat Life\",\n    \"topics\": {\n      \"nodes\": [\n        {\n          \"nodeId\":\n            \"WyJ0b3BpY3MiLDFd\",\n          \"id\": 1,\n          \"title\": \"cats cats cats\"\n        },\n        {\n          \"nodeId\":\n            \"WyJ0b3BpY3MiLDJd\",\n          \"id\": 2,\n          \"title\": \"snooze life\"\n        },\n        {\n          \"nodeId\":\n            \"WyJ0b3BpY3MiLDNd\",\n          \"id\": 3,\n          \"title\": \"too hot\"\n        }\n      ]\n    }\n  }\n}\n",
+        "resultLanguage": "json"
       }
     ]
   },
@@ -37,8 +45,10 @@
     "examples": [
       {
         "title": "Forums topics posts",
-        "query": "{\n  forumById(id: 1) {\n    name\n    topics(\n      first: 1\n      orderBy: [CREATED_AT_ASC]\n    ) {\n      nodes {\n        id\n        title\n        bodySummary\n        author {\n          id\n          username\n        }\n        posts(\n          first: 1\n          orderBy: [ID_DESC]\n        ) {\n          nodes {\n            id\n            author {\n              id\n              username\n            }\n            body\n          }\n        }\n      }\n    }\n  }\n}\n",
-        "result": "{\n  \"forumById\": {\n    \"name\": \"Cat Life\",\n    \"topics\": {\n      \"nodes\": [\n        {\n          \"id\": 1,\n          \"title\": \"cats cats cats\",\n          \"bodySummary\":\n            \"lets discuss cats because t...\",\n          \"author\": {\n            \"id\": 1,\n            \"username\": \"user\"\n          },\n          \"posts\": {\n            \"nodes\": [\n              {\n                \"id\": 3,\n                \"author\": {\n                  \"id\": 1,\n                  \"username\": \"user\"\n                },\n                \"body\":\n                  \"I love it when they completely ignore you until they want something. So much better than dogs am I rite?\"\n              }\n            ]\n          }\n        }\n      ]\n    }\n  }\n}\n"
+        "example": "{\n  forumById(id: 1) {\n    name\n    topics(\n      first: 1\n      orderBy: [CREATED_AT_ASC]\n    ) {\n      nodes {\n        id\n        title\n        bodySummary\n        author {\n          id\n          username\n        }\n        posts(\n          first: 1\n          orderBy: [ID_DESC]\n        ) {\n          nodes {\n            id\n            author {\n              id\n              username\n            }\n            body\n          }\n        }\n      }\n    }\n  }\n}\n",
+        "exampleLanguage": "graphql",
+        "result": "{\n  \"forumById\": {\n    \"name\": \"Cat Life\",\n    \"topics\": {\n      \"nodes\": [\n        {\n          \"id\": 1,\n          \"title\": \"cats cats cats\",\n          \"bodySummary\":\n            \"lets discuss cats because t...\",\n          \"author\": {\n            \"id\": 1,\n            \"username\": \"user\"\n          },\n          \"posts\": {\n            \"nodes\": [\n              {\n                \"id\": 3,\n                \"author\": {\n                  \"id\": 1,\n                  \"username\": \"user\"\n                },\n                \"body\":\n                  \"I love it when they completely ignore you until they want something. So much better than dogs am I rite?\"\n              }\n            ]\n          }\n        }\n      ]\n    }\n  }\n}\n",
+        "resultLanguage": "json"
       }
     ]
   },
@@ -48,18 +58,24 @@
     "examples": [
       {
         "title": "Create",
-        "query": "mutation {\n  createTopic(\n    input: {\n      topic: {\n        forumId: 1\n        title: \"My question relates to mutations...\"\n        body: \"How do you write them?\"\n      }\n    }\n  ) {\n    topic {\n      nodeId\n      id\n      forumId\n      title\n      body\n    }\n  }\n}\n",
-        "result": "{\n  \"createTopic\": {\n    \"topic\": {\n      \"nodeId\": \"WyJ0b3BpY3MiLDRd\",\n      \"id\": 4,\n      \"forumId\": 1,\n      \"title\":\n        \"My question relates to mutations...\",\n      \"body\": \"How do you write them?\"\n    }\n  }\n}\n"
+        "example": "mutation {\n  createTopic(\n    input: {\n      topic: {\n        forumId: 1\n        title: \"My question relates to mutations...\"\n        body: \"How do you write them?\"\n      }\n    }\n  ) {\n    topic {\n      nodeId\n      id\n      forumId\n      title\n      body\n    }\n  }\n}\n",
+        "exampleLanguage": "graphql",
+        "result": "{\n  \"createTopic\": {\n    \"topic\": {\n      \"nodeId\": \"WyJ0b3BpY3MiLDRd\",\n      \"id\": 4,\n      \"forumId\": 1,\n      \"title\":\n        \"My question relates to mutations...\",\n      \"body\": \"How do you write them?\"\n    }\n  }\n}\n",
+        "resultLanguage": "json"
       },
       {
         "title": "Update",
-        "query": "mutation {\n  updateTopicById(\n    input: {\n      id: 1\n      topicPatch: {\n        title: \"My (edited) title\"\n      }\n    }\n  ) {\n    topic {\n      nodeId\n      id\n      title\n      body\n    }\n  }\n}\n\n# Works for a table like:\n#\n#   create table app_public.topics (\n#     id serial primary key,\n#     forum_id integer NOT NULL references app_public.forums on delete cascade,\n#     title text NOT NULL,\n#     body text DEFAULT ''::text NOT NULL\n#   );\n",
-        "result": "{\n  \"updateTopicById\": {\n    \"topic\": {\n      \"nodeId\": \"WyJ0b3BpY3MiLDFd\",\n      \"id\": 1,\n      \"title\": \"My (edited) title\",\n      \"body\":\n        \"lets discuss cats because theyre totally cool\"\n    }\n  }\n}\n"
+        "example": "mutation {\n  updateTopicById(\n    input: {\n      id: 1\n      topicPatch: {\n        title: \"My (edited) title\"\n      }\n    }\n  ) {\n    topic {\n      nodeId\n      id\n      title\n      body\n    }\n  }\n}\n\n# Works for a table like:\n#\n#   create table app_public.topics (\n#     id serial primary key,\n#     forum_id integer NOT NULL references app_public.forums on delete cascade,\n#     title text NOT NULL,\n#     body text DEFAULT ''::text NOT NULL\n#   );\n",
+        "exampleLanguage": "graphql",
+        "result": "{\n  \"updateTopicById\": {\n    \"topic\": {\n      \"nodeId\": \"WyJ0b3BpY3MiLDFd\",\n      \"id\": 1,\n      \"title\": \"My (edited) title\",\n      \"body\":\n        \"lets discuss cats because theyre totally cool\"\n    }\n  }\n}\n",
+        "resultLanguage": "json"
       },
       {
         "title": "Delete",
-        "query": "mutation {\n  deleteTopicById(input: { id: 1 }) {\n    deletedTopicId\n  }\n}\n",
-        "result": "{\n  \"deleteTopicById\": {\n    \"deletedTopicId\":\n      \"WyJ0b3BpY3MiLDFd\"\n  }\n}\n"
+        "example": "mutation {\n  deleteTopicById(input: { id: 1 }) {\n    deletedTopicId\n  }\n}\n",
+        "exampleLanguage": "graphql",
+        "result": "{\n  \"deleteTopicById\": {\n    \"deletedTopicId\":\n      \"WyJ0b3BpY3MiLDFd\"\n  }\n}\n",
+        "resultLanguage": "json"
       }
     ]
   },
@@ -69,18 +85,24 @@
     "examples": [
       {
         "title": "Single scalar",
-        "query": "{\n  randomNumber\n}\n\n# Generated by SQL like:\n#\n#  create function app_public.random_number() returns int\n#  language sql stable\n#  as $$\n#    select 4; -- Chosen by fair dice roll. Guaranteed to be random. XKCD#221\n#  $$;\n#\n",
-        "result": "{ \"randomNumber\": 4 }\n"
+        "example": "{\n  randomNumber\n}\n\n# Generated by SQL like:\n#\n#  create function app_public.random_number() returns int\n#  language sql stable\n#  as $$\n#    select 4; -- Chosen by fair dice roll. Guaranteed to be random. XKCD#221\n#  $$;\n#\n",
+        "exampleLanguage": "graphql",
+        "result": "{ \"randomNumber\": 4 }\n",
+        "resultLanguage": "json"
       },
       {
         "title": "Single row",
-        "query": "{\n  currentUser {\n    nodeId\n    id\n    username\n  }\n}\n\n# Added to the GraphQL schema via\n# this SQL:\n#\n#   create function current_user()\n#   returns app_public.users\n#   language sql stable\n#   as $$\n#     select users.*\n#     from app_public.users\n#     where id = current_user_id();\n#   $$;\n",
-        "result": "{\n  \"currentUser\": {\n    \"nodeId\": \"WyJ1c2VycyIsMV0=\",\n    \"id\": 1,\n    \"username\": \"user\"\n  }\n}\n"
+        "example": "{\n  currentUser {\n    nodeId\n    id\n    username\n  }\n}\n\n# Added to the GraphQL schema via\n# this SQL:\n#\n#   create function current_user()\n#   returns app_public.users\n#   language sql stable\n#   as $$\n#     select users.*\n#     from app_public.users\n#     where id = current_user_id();\n#   $$;\n",
+        "exampleLanguage": "graphql",
+        "result": "{\n  \"currentUser\": {\n    \"nodeId\": \"WyJ1c2VycyIsMV0=\",\n    \"id\": 1,\n    \"username\": \"user\"\n  }\n}\n",
+        "resultLanguage": "json"
       },
       {
         "title": "Rows connection",
-        "query": "{\n  forumsAboutCats {\n    nodes {\n      nodeId\n      id\n      name\n      slug\n    }\n  }\n}\n\n# Created from SQL like:\n#\n#  create function app_public.forums_about_cats()\n#  returns setof app_public.forums\n#  language sql stable\n#  as $$\n#    select *\n#    from app_public.forums\n#    where slug like 'cat-%';\n#  $$;\n",
-        "result": "{\n  \"forumsAboutCats\": {\n    \"nodes\": [\n      {\n        \"nodeId\": \"WyJmb3J1bXMiLDFd\",\n        \"id\": 1,\n        \"name\": \"Cat Life\",\n        \"slug\": \"cat-life\"\n      }\n    ]\n  }\n}\n"
+        "example": "{\n  forumsAboutCats {\n    nodes {\n      nodeId\n      id\n      name\n      slug\n    }\n  }\n}\n\n# Created from SQL like:\n#\n#  create function app_public.forums_about_cats()\n#  returns setof app_public.forums\n#  language sql stable\n#  as $$\n#    select *\n#    from app_public.forums\n#    where slug like 'cat-%';\n#  $$;\n",
+        "exampleLanguage": "graphql",
+        "result": "{\n  \"forumsAboutCats\": {\n    \"nodes\": [\n      {\n        \"nodeId\": \"WyJmb3J1bXMiLDFd\",\n        \"id\": 1,\n        \"name\": \"Cat Life\",\n        \"slug\": \"cat-life\"\n      }\n    ]\n  }\n}\n",
+        "resultLanguage": "json"
       }
     ]
   },
@@ -90,8 +112,10 @@
     "examples": [
       {
         "title": "Forgot password",
-        "query": "mutation {\n  forgotPassword(\n    input: {\n      email: \"user@example.com\"\n    }\n  ) {\n    success\n  }\n}\n\n# Generated with SQL like this:\n#\n#  create function forgot_password(email text)\n#  returns boolean\n#  language plpgsql volatile\n#  as $$\n#    ...\n#  $$;\n#\n#  -- Optionally rename the result field:\n#  comment on function\n#    forgot_password(email text)\n#    is '@resultFieldName success';\n",
-        "result": "{\n  \"forgotPassword\": {\n    \"success\": true\n  }\n}\n"
+        "example": "mutation {\n  forgotPassword(\n    input: {\n      email: \"user@example.com\"\n    }\n  ) {\n    success\n  }\n}\n\n# Generated with SQL like this:\n#\n#  create function forgot_password(email text)\n#  returns boolean\n#  language plpgsql volatile\n#  as $$\n#    ...\n#  $$;\n#\n#  -- Optionally rename the result field:\n#  comment on function\n#    forgot_password(email text)\n#    is '@resultFieldName success';\n",
+        "exampleLanguage": "graphql",
+        "result": "{\n  \"forgotPassword\": {\n    \"success\": true\n  }\n}\n",
+        "resultLanguage": "json"
       }
     ]
   },
@@ -101,13 +125,17 @@
     "examples": [
       {
         "title": "Topic summary",
-        "query": "{\n  topicById(id: 2) {\n    body\n    bodySummary\n  }\n}\n\n# Generated by SQL like:\n#\n#  create function app_public.topics_body_summary(\n#    t app_public.topics,\n#    max_length int = 30\n#  )\n#  returns text\n#  language sql stable\n#  as $$\n#    select case\n#      when length(t.body) > max_length\n#      then left(t.body, max_length - 3)\n#             || '...'\n#      else t.body\n#      end;\n#  $$;\n",
-        "result": "{\n  \"topicById\": {\n    \"body\":\n      \"do you find your cat just sleeps everywhere\",\n    \"bodySummary\":\n      \"do you find your cat just s...\"\n  }\n}\n"
+        "example": "{\n  topicById(id: 2) {\n    body\n    bodySummary\n  }\n}\n\n# Generated by SQL like:\n#\n#  create function app_public.topics_body_summary(\n#    t app_public.topics,\n#    max_length int = 30\n#  )\n#  returns text\n#  language sql stable\n#  as $$\n#    select case\n#      when length(t.body) > max_length\n#      then left(t.body, max_length - 3)\n#             || '...'\n#      else t.body\n#      end;\n#  $$;\n",
+        "exampleLanguage": "graphql",
+        "result": "{\n  \"topicById\": {\n    \"body\":\n      \"do you find your cat just sleeps everywhere\",\n    \"bodySummary\":\n      \"do you find your cat just s...\"\n  }\n}\n",
+        "resultLanguage": "json"
       },
       {
         "title": "Topic summary with arg",
-        "query": "{\n  topicById(id: 2) {\n    body\n    bodySummary(maxLength: 20)\n  }\n}\n\n# Generated by SQL like:\n#\n#  create function app_public.topics_body_summary(\n#    t app_public.topics,\n#    max_length int = 30\n#  )\n#  returns text\n#  language sql stable\n#  as $$\n#    select case\n#      when length(t.body) > max_length\n#      then left(t.body, max_length - 3)\n#             || '...'\n#      else t.body\n#      end;\n#  $$;\n",
-        "result": "{\n  \"topicById\": {\n    \"body\":\n      \"do you find your cat just sleeps everywhere\",\n    \"bodySummary\":\n      \"do you find your ...\"\n  }\n}\n"
+        "example": "{\n  topicById(id: 2) {\n    body\n    bodySummary(maxLength: 20)\n  }\n}\n\n# Generated by SQL like:\n#\n#  create function app_public.topics_body_summary(\n#    t app_public.topics,\n#    max_length int = 30\n#  )\n#  returns text\n#  language sql stable\n#  as $$\n#    select case\n#      when length(t.body) > max_length\n#      then left(t.body, max_length - 3)\n#             || '...'\n#      else t.body\n#      end;\n#  $$;\n",
+        "exampleLanguage": "graphql",
+        "result": "{\n  \"topicById\": {\n    \"body\":\n      \"do you find your cat just sleeps everywhere\",\n    \"bodySummary\":\n      \"do you find your ...\"\n  }\n}\n",
+        "resultLanguage": "json"
       }
     ]
   }

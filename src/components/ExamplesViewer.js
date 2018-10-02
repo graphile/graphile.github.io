@@ -56,8 +56,11 @@ export default class ExamplesViewer extends React.Component {
     const isRootSelected = i => (this.state.selected || 0) === i;
     const isSubSelected = (i, j) =>
       isRootSelected(i) && (this.state.subSelected || 0) === j;
+    const selectedCategory = examples[this.state.selected || 0];
     const selectedExample =
-      examples[this.state.selected || 0].examples[this.state.subSelected || 0];
+      (selectedCategory &&
+        selectedCategory.examples[this.state.subSelected || 0]) ||
+      {};
     return (
       <div className="flex bg-black h6 w-100">
         <div className="w-25 bg-white-20 h-100 pa0 ma0 white w5">
@@ -99,15 +102,19 @@ export default class ExamplesViewer extends React.Component {
           <div className="w-100 w-50-l h-50 h-100-l flex-auto">
             <PrismCode
               component="pre"
-              className="no-shadow f7 pa1 bl bt br bn-l bt-l bb-l br0 b--silver h-100 overflow-auto language-graphql"
+              className={`no-shadow f7 pa1 bl bt br bn-l bt-l bb-l br0 b--silver h-100 overflow-auto language-${
+                selectedExample.exampleLanguage
+              }`}
             >
-              {selectedExample.query}
+              {selectedExample.example}
             </PrismCode>
           </div>
           <div className="w-100 w-50-l h-50 h-100-l flex-auto overflow-auto">
             <PrismCode
               component="pre"
-              className="no-shadow f7 pa1 ba br0 b--silver h-100 flex-auto language-json"
+              className={`no-shadow f7 pa1 ba br0 b--silver h-100 flex-auto language-${
+                selectedExample.resultLanguage
+              }`}
             >
               {selectedExample.result}
             </PrismCode>

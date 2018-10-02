@@ -254,8 +254,10 @@ export const pageQuery = graphql`
           title
           examples {
             title
-            query
+            example
+            exampleLanguage
             result
+            resultLanguage
           }
         }
       }
