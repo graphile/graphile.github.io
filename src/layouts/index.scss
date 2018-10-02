@@ -938,10 +938,10 @@ a.inherit-color {
 
 .banner-announcement {
   @extend .pa3;
-  @extend .bg-red;
   @extend .white;
   @extend .fw9;
   @extend .tc;
+  background-color: #bf2726;
   a {
     color: inherit;
   }
