@@ -99,7 +99,7 @@ class Home extends Component {
               </p>
               <Link className="button--solid" to="/postgraphile/">
                 More about PostGraphile{" "}
-                <span className="fa fa-fw fa-long-arrow-right" />
+                <span className="fas fa-fw fa-arrow-right" />
               </Link>
               <MailingList />
               <div className="mb4" />
@@ -133,7 +133,7 @@ class Home extends Component {
             <div className="cta">
               <Link className="button--solid" to="/graphile-build/">
                 More about Graphile Engine{" "}
-                <span className="fa fa-fw fa-long-arrow-right" />
+                <span className="fas fa-fw fa-arrow-right" />
               </Link>
             </div>
           </section>
@@ -157,7 +157,7 @@ class Home extends Component {
                 href="https://www.graphql-training.com/"
               >
                 More about GraphQL Training{" "}
-                <span className="fa fa-fw fa-long-arrow-right" />
+                <span className="fas fa-fw fa-arrow-right" />
               </a>
             </div>
           </section>

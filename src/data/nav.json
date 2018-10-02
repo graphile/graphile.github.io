@@ -1,5 +1,30 @@
 [
   {
+    "name": "news",
+    "sections": [
+      {
+        "id": "main",
+        "title": "Archive"
+      },
+      {
+        "id": "about",
+        "title": "About"
+      }
+    ],
+    "pages": [
+      {
+        "to": "/news/postgraphile-version-4/",
+        "title": "Version 4 Announcement",
+        "sectionId": "main"
+      },
+      {
+        "to": "/news/press-kit/",
+        "title": "Press Kit",
+        "sectionId": "about"
+      }
+    ]
+  },
+  {
     "name": "graphile-build",
     "sections": [
       {

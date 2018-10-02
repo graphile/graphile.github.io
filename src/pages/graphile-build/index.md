@@ -19,7 +19,7 @@ title: Extensible GraphQL APIs through Plugins
 <br />
 
 <div class='flex'>
-<a class='button--solid-light' href='/graphile-build/getting-started/'>Documentation <span class='fa fa-fw fa-long-arrow-right' /></a>
+<a class='button--solid-light' href='/graphile-build/getting-started/'>Documentation <span class='fas fa-fw fa-arrow-right' /></a>
 </div>
 
 </div>
@@ -85,7 +85,7 @@ type Person {
 
 <br />
 <div class='flex'>
-<a class='strong-link' href='/graphile-build/getting-started/'>Get started <span class='fa fa-fw fa-long-arrow-right' /></a>
+<a class='strong-link' href='/graphile-build/getting-started/'>Get started <span class='fas fa-fw fa-arrow-right' /></a>
 
 </div>
 
@@ -288,7 +288,7 @@ main();
 
 <div class='row'>
 <div class='text-center col-xs-12 col-md-9 col-lg-7'>
-<a class='strong-link' href='/graphile-build/getting-started/'>Get started <span class='fa fa-fw fa-long-arrow-right' /></a>
+<a class='strong-link' href='/graphile-build/getting-started/'>Get started <span class='fas fa-fw fa-arrow-right' /></a>
 </div>
 </div>
 

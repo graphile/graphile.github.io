@@ -24,7 +24,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-NNK4X8M');`,
             }}
           />
-          <script src="https://use.fontawesome.com/c72bfae6f9.js" />
+          <link
+            rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+            integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+            crossOrigin="anonymous"
+          />
           {this.props.headComponents}
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta

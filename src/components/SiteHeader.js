@@ -62,7 +62,7 @@ export default withRouter(
                       }`}
                       to="/"
                     >
-                      <span className="home-icon fa fa-home" />{" "}
+                      <span className="home-icon fas fa-home" />{" "}
                       <span className="home">Home</span>
                     </Link>
                   </li>
@@ -226,7 +226,38 @@ export default withRouter(
                       </li>
                     )}
                   />
+                  {/* News pages */}
 
+                  <Route
+                    path="/news"
+                    render={() => (
+                      <li className="navbar-item">
+                        <Link
+                          className={`nav-link ${
+                            location.pathname.match(/^\/news\/?$/)
+                              ? "active"
+                              : ""
+                          }`}
+                          to="/news/"
+                        >
+                          Latest Announcements
+                        </Link>
+                      </li>
+                    )}
+                  />
+                  <Route
+                    path="/news/"
+                    render={() => (
+                      <li className="navbar-item">
+                        <Link
+                          className={"nav-link"}
+                          to="/news/postgraphile-version-4/"
+                        >
+                          Archive
+                        </Link>
+                      </li>
+                    )}
+                  />
                   {/* FIN */}
 
                   <li className="navbar-item ml-auto navbar-item-right">
@@ -236,7 +267,7 @@ export default withRouter(
                         placeholder="Search"
                         ref={this.handleSearchBoxRef}
                       />
-                      <span className="fa fa-search searchbox-search" />
+                      <span className="fas fa-search searchbox-search" />
                     </span>
                   </li>
                   <li className="navbar-item navbar-item-right">
@@ -258,7 +289,7 @@ export default withRouter(
                       title="GraphQL Training in London, Europe and Remote"
                     >
                       GraphQL Training{" "}
-                      <span className="fa fa-external-link-square" />
+                      <span className="fas fa-external-link-square-alt" />
                     </a>
                   </li>
                   <li className="navbar-item navbar-item-right">
@@ -272,9 +303,10 @@ export default withRouter(
                             : "https://github.com/graphile"
                       }
                     >
-                      <span className="f3 fa fa-github" />{" "}
+                      <span className="f3 fab fa-github" />{" "}
                       <span className="github">
-                        Github <span className="fa fa-external-link-square" />
+                        Github{" "}
+                        <span className="fas fa-external-link-square-alt" />
                       </span>
                     </a>
                   </li>
