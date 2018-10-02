@@ -1,4 +1,13 @@
-module.exports = function PgNumericToFloatPlugin(
+/**
+ * This plugin will have PostGraphile use `GraphQLFloat` instead of `BigFloat`
+ * for DECIMAL / NUMERIC values that have a precision and scale under the given
+ * limits (currently 12 and 2 respectively).
+ *
+ * It's generally a bad idea to use floating point numbers to represent
+ * arbitrary precision numbers such as NUMERIC because loss of precision can
+ * occur; however some systems are okay with this compromise.
+ */
+module.exports = function PgSmallNumericToFloatPlugin(
   builder,
   { pgNumericToFloatPrecisionCap = 12, pgNumericToFloatScaleCap = 2 }
 ) {
