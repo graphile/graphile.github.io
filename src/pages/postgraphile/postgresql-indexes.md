@@ -41,7 +41,7 @@ WITH indexed_tables AS (
       i.relname as index_name,
       array_to_string(array_agg(a.attname), ', ') as column_names,
       ix.indrelid,
-      ix.indkey
+      string_to_array(ix.indkey::text, ' ')::smallint[] as indkey
   FROM pg_class i
   JOIN pg_index ix ON i.OID = ix.indrelid
   JOIN pg_class t ON ix.indrelid = t.oid
@@ -74,8 +74,8 @@ AND NOT EXISTS(
   SELECT 1
   FROM indexed_tables
   WHERE indrelid = conrelid
-  AND conkey::smallint[] = indkey::smallint[]
-  OR (array_length(indkey, 1) > 1 AND indkey::smallint[] @> conkey)
+  AND conkey = indkey
+  OR (array_length(indkey, 1) > 1 AND indkey @> conkey)
 )
 ORDER BY reltuples DESC;
 ```
