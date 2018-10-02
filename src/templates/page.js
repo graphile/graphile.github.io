@@ -143,7 +143,14 @@ const Page = ({
               <div className="col-xs-12 col-md-9 first-xs main-content">
                 <div className="row">
                   <div className="col-xs-12" style={{ width: "100%" }}>
-                    <div className="edit-this-page">
+                    <div
+                      className="edit-this-page"
+                      style={{
+                        display: location.pathname.match(/^\/news\//)
+                          ? "none"
+                          : "",
+                      }}
+                    >
                       <a
                         href={`https://github.com/graphile/graphile.github.io/edit/develop/src/pages${location.pathname.substr(
                           0,
