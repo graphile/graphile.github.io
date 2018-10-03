@@ -10,4 +10,4 @@ as $$
    * id, e.g. by extracting from the JWT
    * or indicated via pgSettings.
    */
-$$ language sql stable;
+$$ language sql stable set search_path from current;

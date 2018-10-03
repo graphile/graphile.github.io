@@ -69,4 +69,4 @@ as $$
 
     return q;
   end;
-$$ language plpgsql volatile strict;
+$$ language plpgsql volatile strict set search_path from current;
