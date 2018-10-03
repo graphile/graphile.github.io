@@ -65,7 +65,8 @@ function processHTML(html, noLink) {
   return html
     .replace(/\[SUPPORTER\]/g, tag("supporter", "supporter", noLink))
     .replace(/\[PRO\]/g, tag("pro", "pro", noLink))
-    .replace(/\[ENTERPRISE\]/g, tag("enterprise", "enterprise", noLink));
+    .replace(/\[ENTERPRISE\]/g, tag("enterprise", "enterprise", noLink))
+    .replace(/^.* Gallery$/g, "<strong>$&</strong>");
 }
 
 function htmlerize(text) {

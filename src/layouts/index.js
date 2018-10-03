@@ -5,7 +5,10 @@ import Link from "gatsby-link";
 import "prismjs";
 import "prismjs/themes/prism-solarizedlight.css";
 import "prismjs/components/prism-json";
+import "prismjs/components/prism-javascript";
 import "prismjs/components/prism-graphql";
+import "prismjs/components/prism-diff";
+import "prismjs/components/prism-sql";
 import "./flexgrid.scss";
 import "./index.scss";
 

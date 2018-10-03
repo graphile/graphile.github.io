@@ -103,15 +103,17 @@ async function main() {
   const pgPool = new pg.Pool({
     connectionString: "postgres:///graphile_org_demo",
   });
+  const getPostGraphileSchemaWithOptions = (options = {}, client = pgPool) =>
+    createPostGraphileSchema(client, ["app_public"], {
+      dynamicJson: true,
+      ...options,
+      appendPlugins: [
+        PgSimplifyInflectorPlugin,
+        ...(options.appendPlugins || []),
+      ],
+    });
   try {
-    const postgraphileSchema = await createPostGraphileSchema(
-      pgPool,
-      ["app_public"],
-      {
-        dynamicJson: true,
-        appendPlugins: [PgSimplifyInflectorPlugin],
-      }
-    );
+    const postgraphileSchema = await getPostGraphileSchemaWithOptions({});
     const queryPath = `${__dirname}/../examples`;
     const categories = fs
       .readdirSync(queryPath)
@@ -147,26 +149,27 @@ async function main() {
           .readdirSync(dirPath)
           .filter(fileFilter)
           .sort();
-        for (const queryFilename of queries) {
-          const queryFilePath = `${dirPath}/${queryFilename}`;
-          //const id = `${dir}__${queryFilename}`;
+        for (const exampleFilename of queries) {
+          const exampleFilePath = `${dirPath}/${exampleFilename}`;
+          //const id = `${dir}__${exampleFilename}`;
           const {
             example,
             exampleLanguage,
             result,
             resultLanguage,
             title,
-          } = await processFile(queryFilePath, {
+          } = await processFile(exampleFilePath, {
             pgPool,
             postgraphileSchema,
             prettify,
             graphql,
             withPostGraphileContext,
+            getPostGraphileSchemaWithOptions,
           });
           currentExample.examples.push({
             title:
               title ||
-              filenameToExampleTitle(queryFilename.replace(/\.graphql$/, "")),
+              filenameToExampleTitle(exampleFilename.replace(/\.graphql$/, "")),
             example,
             exampleLanguage,
             result,

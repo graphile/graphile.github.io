@@ -158,7 +158,7 @@
       },
       {
         "to": "/postgraphile/examples/",
-        "title": "EXAMPLES",
+        "title": "Example Gallery",
         "sectionId": "overview",
         "subpages": []
       },
@@ -279,6 +279,12 @@
             "to": "/postgraphile/function-restrictions/",
             "title": "Function Restrictions",
             "sectionId": "basics",
+            "subpages": []
+          },
+          {
+            "to": "/postgraphile/function-gallery/",
+            "title": "Function Gallery",
+            "sectionId": "customising",
             "subpages": []
           }
         ]

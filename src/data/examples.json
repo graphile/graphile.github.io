@@ -1,5 +1,28 @@
 [
   {
+    "category": "functions",
+    "title": "Custom queries",
+    "examples": [
+      {
+        "title": "logged-in-user-field",
+        "example": "create function viewer()\nreturns users\nas $$\n  select *\n  from users\n  where id = current_user_id();\n  /*\n   * current_user_id() is a function\n   * that returns the logged in user's\n   * id, e.g. by extracting from the JWT\n   * or indicated via pgSettings.\n   */\n$$ language sql stable;\n",
+        "exampleLanguage": "sql",
+        "result": "--- Original GraphQL Schema\n+++ Modified GraphQL Schema\n@@ -1077,6 +1077,7 @@\n \n   # Chosen by fair dice roll. Guaranteed to be random. XKCD#221\n   randomNumber: Int\n+  viewer: User\n \n   # Reads a single `Forum` using its globally unique `ID`.\n   forum(\n",
+        "resultLanguage": "diff"
+      }
+    ]
+  },
+  {
+    "category": "functions",
+    "title": "Computed columns",
+    "examples": []
+  },
+  {
+    "category": "functions",
+    "title": "Custom mutations",
+    "examples": []
+  },
+  {
     "category": "plugins",
     "title": "Inflector",
     "examples": [
