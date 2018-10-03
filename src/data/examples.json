@@ -15,7 +15,15 @@
   {
     "category": "functions",
     "title": "Computed columns",
-    "examples": []
+    "examples": [
+      {
+        "title": "User primary email",
+        "example": "/*\n * Returns the primary email of the\n * current user; for all other users\n * this function will return null.\n */\ncreate function \"users_primaryEmail\"(u users)\nreturns text\nas $$\n  select email\n  from user_emails\n  where user_id = current_user_id()\n  and user_id = u.id\n  and is_verified is true\n  order by id asc\n  limit 1;\n$$ language sql stable set search_path from current;\n",
+        "exampleLanguage": "sql",
+        "result": "--- Original GraphQL Schema\n+++ Modified GraphQL Schema\n@@ -1717,6 +1717,7 @@\n     # A condition to be used in determining which values should be returned by the collection.\n     condition: UserEmailCondition\n   ): UserEmailsConnection!\n+  primaryEmail: String\n }\n \n # Contains information about the login providers this user has used, so that they may disconnect them should they wish.\n",
+        "resultLanguage": "diff"
+      }
+    ]
   },
   {
     "category": "functions",
