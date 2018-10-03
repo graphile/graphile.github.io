@@ -30,5 +30,3 @@ exports.processFile = async (
     resultLanguage: "diff",
   };
 };
-
-exports.filenameToExampleTitle = fn => fn.replace(/\.[a-z]+$/, "");
