@@ -98,7 +98,7 @@ The `postgraphile` middleware factory function takes three arguments, all of whi
 
 <!-- LIBRARY_DOCBLOCK_END -->
 
-The following options and not part of PostGraphile core, but are available from the Supporter and/or Pro plugins - see [Go Pro!](/postgraphile/pricing/) for more information.
+The following options are not part of PostGraphile core, but are available from the Supporter and/or Pro plugins - see [Go Pro!](/postgraphile/pricing/) for more information.
 
 * **`options`**:
   * `simpleSubscriptions`: [SUPPORTER] ⚡️[experimental] set this to `true` to add simple subscription support
