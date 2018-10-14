@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1200"
+   height="1350"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.92.2 5c3e80d, 2017-08-06"
+   sodipodi:docname="postgraphile-super.named.svg"
+   style="stroke-width:0;shape-rendering:geometricPrecision">
+  <metadata
+     id="metadata58">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs56" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1680"
+     inkscape:window-height="1005"
+     id="namedview54"
+     showgrid="false"
+     inkscape:zoom="0.5"
+     inkscape:cx="568.33012"
+     inkscape:cy="867.4918"
+     inkscape:window-x="0"
+     inkscape:window-y="1"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2"
+     units="px" />
+  <!--This file is Copyright © 2018 Benjie Gillam. All rights reserved.-->
+  <g
+     class="ears"
+     id="g4"
+     transform="translate(0,10.522723)">
+    <path
+       d="M 100,615 25,360 260,25 715,615 Z"
+       class="seg1"
+       id="path6"
+       inkscape:connector-curvature="0"
+       style="fill:#468bcc" />
+    <path
+       d="M 25,360 260,25 600,130 715,615 Z"
+       class="seg2"
+       id="path8"
+       inkscape:connector-curvature="0"
+       style="fill:#4ba8ff" />
+    <path
+       d="M 260,25 600,130 940,25 715,615 Z"
+       class="seg1"
+       id="path10"
+       inkscape:connector-curvature="0"
+       style="fill:#468bcc" />
+    <path
+       d="M 600,130 940,25 1175,360 715,615 Z"
+       class="seg1"
+       id="path12"
+       inkscape:connector-curvature="0"
+       style="fill:#468bcc" />
+    <path
+       d="m 940,25 235,335 -75,255 -385,0 z"
+       class="seg2"
+       id="path14"
+       inkscape:connector-curvature="0"
+       style="fill:#4ba8ff" />
+    <path
+       d="M 1175,360 1100,615 600,1055 715,615 Z"
+       class="seg1"
+       id="path16"
+       inkscape:connector-curvature="0"
+       style="fill:#468bcc" />
+    <path
+       d="M 1100,615 600,1055 100,615 715,615 Z"
+       class="seg1"
+       id="path18"
+       inkscape:connector-curvature="0"
+       style="fill:#468bcc" />
+    <path
+       d="M 600,1055 100,615 25,360 715,615 Z"
+       class="seg1"
+       id="path20"
+       inkscape:connector-curvature="0"
+       style="fill:#468bcc" />
+    <path
+       d="M 100,615 25,360 715,615 Z"
+       class="seg1"
+       id="path22"
+       inkscape:connector-curvature="0"
+       style="fill:#468bcc" />
+    <!--polygon points="25,360 260,25 260,25 600,130 600,130 940,25 940,25 1175,360 1175,360 1100,615 1100,615 600,1055 600,1055 100,615 100,615 25,360" class="heart-outline" /-->
+  </g>
+  <path
+     style="fill:#ffffff;stroke:#082744;stroke-width:8;stroke-linejoin:round"
+     inkscape:connector-curvature="0"
+     id="path26"
+     class="tusk left-tusk"
+     d="m 375,750.52272 85,55 -135,105 z" />
+  <path
+     style="fill:#ffffff;stroke:#082744;stroke-width:8;stroke-linejoin:round"
+     inkscape:connector-curvature="0"
+     id="path28"
+     class="tusk right-tusk"
+     d="m 825,750.52272 -85,55 135,105 z" />
+  <path
+     style="fill:#4ba8ff"
+     inkscape:connector-curvature="0"
+     id="path30"
+     class="seg2 forehead-left"
+     d="m 325,310.52272 165,-204 h 220 l -110,354 z" />
+  <path
+     style="fill:#468bcc"
+     inkscape:connector-curvature="0"
+     id="path32"
+     class="seg1 forehead-top"
+     d="m 490,106.52272 h 220 l 165,204 -275,150 z" />
+  <path
+     style="fill:#166ebf"
+     inkscape:connector-curvature="0"
+     id="path34"
+     class="seg3 forehead-right no-stroke"
+     d="m 710,106.52272 165,204 v 425 l -275,-275 z" />
+  <path
+     style="fill:#0b457f"
+     inkscape:connector-curvature="0"
+     id="path36"
+     class="seg4 right-eye-area no-stroke"
+     d="m 875,310.52272 v 425 l -165,110 -110,-385 z" />
+  <path
+     style="fill:#0c3861"
+     inkscape:connector-curvature="0"
+     id="path38"
+     class="seg5 face-bottom-right no-stroke"
+     d="m 875,735.52272 -165,110 -110,294.99998 V 460.52272 Z" />
+  <path
+     style="fill:#166ebf"
+     inkscape:connector-curvature="0"
+     id="path40"
+     class="seg3 no-stroke trunk-highlight-right"
+     d="m 710,845.52272 v 239.99998 l -110,55 -110,-294.99998 110,-385 z" />
+  <path
+     style="fill:#4ba8ff"
+     inkscape:connector-curvature="0"
+     id="path42"
+     class="seg2 no-stroke trunk-highlight-left"
+     d="m 600,1140.5227 -110,-55 V 845.52272 l -165,-110 275,-275 z" />
+  <path
+     style="fill:#166ebf"
+     inkscape:connector-curvature="0"
+     id="path44"
+     class="seg3 face-bottom-left no-stroke"
+     d="m 490,845.52272 -165,-110 v -425 l 275,150 z" />
+  <path
+     style="fill:#468bcc"
+     inkscape:connector-curvature="0"
+     id="path46"
+     class="seg1 left-eye-area no-stroke"
+     d="m 325,735.52272 v -425 l 275,150 z" />
+  <path
+     style="fill:none;stroke:#082744;stroke-width:8;stroke-linejoin:round"
+     inkscape:connector-curvature="0"
+     id="path48"
+     class="entire-face stroke-only"
+     d="m 490,106.52272 h 220 l 165,204 v 425 l -165,110 v 239.99998 l -110,55 -110,-55 V 845.52272 l -165,-110 v -425 z" />
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     x="29.751719"
+     y="1280.1362"
+     id="text4186"
+     transform="matrix(0.99998979,-0.00451921,0.00451921,0.99998979,0,0)"><tspan
+       sodipodi:role="line"
+       id="tspan4188"
+       x="29.751719"
+       y="1280.1362"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:180px;font-family:'Avenir Next';-inkscape-font-specification:'Avenir Next Bold';fill:white;fill-opacity:1">PostGraphile</tspan></text>
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="Layer 1" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer5"
+     inkscape:label="Layer 2">
+    <path
+       style="stroke-width:1px;shape-rendering:geometricPrecision;fill:#000000;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 600,460.52272 328.5,366.5 V 578 Z"
+       id="path4086"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <path
+       sodipodi:nodetypes="cccc"
+       inkscape:connector-curvature="0"
+       id="path4089"
+       d="M 600,460.52272 871.5,366.5 V 578 Z"
+       style="fill:#000000;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;shape-rendering:geometricPrecision" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer6"
+     inkscape:label="Layer 3">
+    <path
+       style="stroke-width:0;shape-rendering:geometricPrecision;fill:#ffffff"
+       inkscape:connector-curvature="0"
+       id="path50"
+       class="eye left-eye"
+       d="m 385,425.52272 130,40 -130,50 z" />
+    <path
+       style="stroke-width:0;shape-rendering:geometricPrecision;fill:#ffffff"
+       inkscape:connector-curvature="0"
+       id="path52"
+       class="eye right-eye"
+       d="m 815,425.52272 -130,40 130,50 z" />
+  </g>
+</svg>

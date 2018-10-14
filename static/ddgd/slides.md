@@ -14,30 +14,114 @@ Slides: [https://graphile.org/ddgd](https://graphile.org/ddgd)
 
 ???
 
-Hello everybody! My name's Benjie, and I'm the maintainer of an open-source project called PostGraphile which builds and serves a highly performant, secure, client-facing GraphQL API by inspecting your existing database.
+Hello everybody! My name's Benjie, and I'm the maintainer of an open-source project called PostGraphile which builds and serves a highly performant, secure, client-facing GraphQL API by inspecting your PostgreSQL database.
 
 
 ---
-source-file: 020-main/0000-everything.md
+source-file: 020-main/0100-ddgd.md
+source-line: 1
+class: has-code compact-paragraphs bigLi
+
+### **Database-Driven GraphQL Development** (DDGD):
+
+.footer[
+
+Slides: [https://graphile.org/ddgd](https://graphile.org/ddgd)  
+]
+
+???
+
+Start: 25s  
+End: 50s
+
+<!-- prettier-ignore-start -->
+
+--
+source-file: 020-main/0100-ddgd.md
+source-line: 17
+✨ Embraces **database features**  
+--
+source-file: 020-main/0100-ddgd.md
+source-line: 19
+🚀 **Accelerates** development  
+--
+source-file: 020-main/0100-ddgd.md
+source-line: 21
+⚡️ Produces **lighting fast** APIs  
+--
+source-file: 020-main/0100-ddgd.md
+source-line: 23
+<!-- ✅ Guarantees **data consistency**  
+-- -->
+🤖 Keeps **you** in control of **the data**  
+
+<!-- prettier-ignore-end -->
+
+
+---
+source-file: 020-main/0200-familiar.md
+source-line: 1
+class: has-code compact-paragraphs bigLi img-50
+name: familiar
+layout: true
+
+### **Familiar** Data Model
+
+{{content}}
+
+???
+
+Start: 50s  
+End: 1m30s
+
+---
+source-file: 020-main/0200-familiar.md
+source-line: 14
+
+template: familiar
+
+![](/images/bob004m.png)
+
+---
+source-file: 020-main/0200-familiar.md
+source-line: 20
+
+template: familiar
+count: false
+
+![](/images/bob005m.png)
+
+---
+source-file: 020-main/0200-familiar.md
+source-line: 27
+
+template: familiar
+count: false
+
+![](/images/bob013m.png)
+
+---
+source-file: 020-main/0200-familiar.md
+source-line: 34
+
+template: familiar
+count: false
+
+![](/images/bob013mdb.png)
+
+
+---
+source-file: 020-main/0250-declarative.md
 source-line: 1
 class: has-code compact-paragraphs bigLi
 layout: false
 
 ### GraphQL is **Declarative**
 
-.slidesLocation[
-Twitter: [@Benjie](https://twitter.com/Benjie)  
-Slides: [https://graphile.org/ddgd](https://graphile.org/ddgd)
+.footer[
+
+Slides: [https://graphile.org/ddgd](https://graphile.org/ddgd)  
 ]
-
-???
-
-One of the things that I think is really powerful about GraphQL is it’s
-declarative nature.
-
---
-source-file: 020-main/0000-everything.md
-source-line: 16
 
 .pull-left[
 
@@ -56,11 +140,15 @@ source-line: 16
 
 ???
 
-You declare exactly what you want
+Start: 1m30  
+End: 1m55
+
+One of the things that I think is really powerful about GraphQL is it’s
+declarative nature.
 
 --
-source-file: 020-main/0000-everything.md
-source-line: 37
+source-file: 020-main/0250-declarative.md
+source-line: 34
 
 .pull-right[
 
@@ -78,40 +166,42 @@ source-line: 37
 ```
 
 ]
+.clear[]
 
-???
-
-and the server gives you
-that - nothing more, nothing less. This signalling of your intent allows the
-server to optimise exactly how it's serving you. It can look at the query as a
-whole and find the most efficient way to fulfill your request.
+Specifying the precise data requirements helps eliminate client-side **under-** and **over-fetching**.
 
 ---
-source-file: 020-main/0000-everything.md
-source-line: 63
+source-file: 020-main/0250-declarative.md
+source-line: 56
 
+layout: false
 class: has-code compact-paragraphs bigLi
 
-### GraphQL **Eliminates Under- and Over-fetching**
+### SQL is **Declarative**
+
+.footer[
+
+Slides: [https://graphile.org/ddgd](https://graphile.org/ddgd)  
+]
 
 .pull-left[
 
-```ruby
-posts = Post.where(id: [1, 2, 3])
-authors =
-  posts.map { |post| post.author }
+```graphql
+SELECT name, homeworld
+  FROM heroes
+  WHERE ...;
 ```
 
 ]
+
 .pull-right[
 
-```sql
-SELECT * FROM posts WHERE id IN
-  (1, 2, 3);
-SELECT * FROM users WHERE id = 10;
-SELECT * FROM users WHERE id = 11;
-SELECT * FROM users WHERE id = 12;
-```
+| name           | homeworld |
+| -------------- | --------- |
+| R2-D2          | Naboo     |
+| Luke Skywalker | Tatooine  |
+| Han Solo       | Corellia  |
+| Leia Organa    | Alderaan  |
 
 ]
 
@@ -119,288 +209,314 @@ SELECT * FROM users WHERE id = 12;
 
 ???
 
-For years we’ve been using data abstractions such as ORMs to simplify data
-access whilst programming, but this means data is fetched on a step-by-step,
-code-line by code-line basis. This under-fetching results in lots of
-inefficient data retrieval and big performance issues, or complex code that
-fetches as much as it can ahead of time - often leading to over-fetching.
+Start: 1m55  
+End: 3m00
 
-GraphQL solves both these issues by declaring up front exactly what's needed.
+The S.Q.L. (or sequel) language used by
+databases is also declerative.
 
 --
-source-file: 020-main/0000-everything.md
-source-line: 102
+source-file: 020-main/0250-declarative.md
+source-line: 99
 
-```graphql
-{
-  posts(where: { id: { in: [1, 2, 3] } }) {
-    id
-    title
-    # ...
-    author {
-      id
-      name
-      # ...
-    }
-  }
-}
-```
+SQL is:
+
+<!-- prettier-ignore-start -->
+
+✅ well **established**, widely used  
+--
+source-file: 020-main/0250-declarative.md
+source-line: 106
+✅ constantly evolving based on **real-world needs**  
+???
+
+Not just the standard, but the various database
+vendors are frequently adding new features to their offerings based on the
+**real-world needs** of their users.
+--
+source-file: 020-main/0250-declarative.md
+source-line: 113
+✅ powered by extremely **advanced query planners**
+
+<!-- prettier-ignore-end -->
+
+???
+
+**complex relational algebra operations**
+
+latest versions even use techniques such as **genetic algorithms** to rapidly figure out
+the most efficient query plan
+
+Incredible stuff!
+
 
 ---
-source-file: 020-main/0000-everything.md
-source-line: 119
-
+source-file: 020-main/0275-guarantees.md
+source-line: 1
 class: has-code compact-paragraphs bigLi
+layout: false
 
-### **Declarative** Programming
+### DDGD: Databases Give **Guarantees**
 
-???
-When you think of declarative programming, a few things might come to mind.
+.footer[
 
---
-source-file: 020-main/0000-everything.md
-source-line: 128
-
-React.js - declarative programming **applied to UIs**
-
-👉 more stable software  
-👉 reduced programmer workload
-
-???
-
-A
-recent technology that's been making waves is React, showing how declarative
-programming applied to user interfaces can lead to more stable software and
-reduced programmer workload.
-
---
-source-file: 020-main/0000-everything.md
-source-line: 142
-
-SQL - declarative **data fetching and manipulation**
-
-✅ well established  
-✅ widely used  
-✅ constantly evolving based on real-world needs
-
-???
-
-A more established example is SQL. You might thing
-SQL is ancient, but just because SQL is old, does not mean that it's stale -
-it's a constantly advancing standard that learns and evolves based on
-real-world needs.
-
-For years we’ve been declaring what we want from the database and having it
-find the most efficient way to serve our request. The query planner in Postgres
-for example has been worked on and improved for over 20 years by hundreds of
-programmers. Besides performing complex relational algebra operations, the
-latest versions even use techniques such as genetic algorithms to figure out
-what the most efficient query plan is. Incredible stuff!
-
----
-source-file: 020-main/0000-everything.md
-source-line: 164
-
-class: has-code compact-paragraphs bigLi
-
-### **Familiar** Data Model
-
-GraphQL models data in a natural way - **nodes**, their **attributes**, and the **connections** between them.
-
-???
-
-We like the way that GraphQL models our data in a similar way to the
-how we think about things in the real world - with nodes, their attributes, and
-their connections. This model meshes well with databases - tables to represent
-the nodes, columns to represent the attributes and foreign key relations to
-represent the connections between them.
-
---
-source-file: 020-main/0000-everything.md
-source-line: 180
-
-Databases represent data in a similar way:
-
-- Nodes → **tables**
-- Attributes → **columns**
-- Connections → foreign key **relations**
-
----
-source-file: 020-main/0000-everything.md
-source-line: 188
-
-class: has-code compact-paragraphs bigLi
-
-### **Efficiently** Executing GraphQL
-
-???
-
-As we've also heard from Hasura, it's possible to convert a GraphQL query into
-an SQL query,
-
---
-source-file: 020-main/0000-everything.md
-source-line: 199
-
-.pull-left[
-
-```graphql
-{
-  posts(where: {
-    id: { in: [1, 2, 3] }
-  }) {
-*   id
-*   title
-    author {
-*     id
-*     name
-    }
-  }
-}
-```
-
-]
-
-.pull-right[
-
-```sql
-⁣
-⁣
-⁣
-SELECT
-* id,
-* title,
-  (SELECT json_build_object(
-*   'id', id,
-*   'name', name
-  ) FROM person WHERE id = author_id)
-FROM posts
-WHERE id IN (1,2,3);
-```
-
+Slides: [https://graphile.org/ddgd](https://graphile.org/ddgd)  
 ]
 
 ???
 
-passing the task of finding the most efficient way of resolving
-this request over to a well-optimised query planner. That's certainly going to
-lead to some impressive performance!
+Start: 3m00  
+End: 4m30
 
-So database query planners are incredible for performance, but something that I
-think a lot of people overlook is that the database can do a lot more for us.
+Programmers love guarantees!
 
----
-source-file: 020-main/0000-everything.md
-source-line: 248
+Transactions - ensure that a series
+of statement either **all fail or all
+succeed together** - no need to clean
+up partial successes.
 
-class: has-code compact-paragraphs bigLi
+Also give us guarantees about **data
+written to the disk**; ensuring a
+consistent application in a similar
+way to adding assert() statements
+to your application code.
 
-### **Database-Driven GraphQL Development** (DDGD)
+--
+source-file: 020-main/0275-guarantees.md
+source-line: 29
 
-✨ Embraces database features  
-🚀 Rapid development  
-⚡️ Lighting fast APIs  
-🤖 Stay in control of your data
+- Ensure **relations are consistent**:  
+  `user_id int references users`
 
 ???
 
-By embracing these other capabilities we can very rapidly develop powerful
-applications, whilst maintaining full control over our most valuable asset -
-the data. This is a technique that I call database-driven GraphQL development,
-and I want to share with you today just a few of the things that I really love
-about it.
+When user_id 6 is referenced, the database checks that user with id 6 definitely exists.
+
+--
+source-file: 020-main/0275-guarantees.md
+source-line: 38
+
+- Assert **uniqueness**:  
+  `username text unique`
+
+--
+source-file: 020-main/0275-guarantees.md
+source-line: 43
+
+- Check data **conforms**:  
+  `email text check(email ~ '^[^@]+@[^@]+$')`
+
+--
+source-file: 020-main/0275-guarantees.md
+source-line: 48
+class: hide-footer
+
+Constraints are **guaranteed to remain true**.
+
+???
+
+unlike the checks and validations that we add in the application layer which
+only affect the data as it is processed
+
+--
+source-file: 020-main/0275-guarantees.md
+source-line: 58
+
+class: hide-footer
+
+Ensures **only valid data** goes into/out of our API.
+
 
 ---
-source-file: 020-main/0000-everything.md
-source-line: 267
-
+source-file: 020-main/0300-mapping.md
+source-line: 1
 class: has-code compact-paragraphs bigLi
 name: productivity
+layout: false
 
 ### DDGD: **Auto-generation**
 
-???
-The first thing is productivity. By treating the database as your source of
-truth, you can ⏭ auto-generate a lot of your API, massively ⏭ reducing the amount
-of work programmers need to do.
+.footer[
 
-⏭Further, this auto-generation reduces the risk of human error slipping into
-your GraphQL and causing inconsistencies ⏭ for example using plurals in some
-places, but singulars in others; or having typos in your connection names that
-you have to maintain for backwards compatibility. The result is a very
-consistent GraphQL schema.
-
----
-source-file: 020-main/0000-everything.md
-source-line: 285
-
-template: productivity
-count: false
+Slides: [https://graphile.org/ddgd](https://graphile.org/ddgd)  
+]
 
 .pull-left[
 
 ```sql
 CREATE TABLE post (
   id serial primary key,
+⁣
   author_id int not null
     references person,
+⁣
   blog_id int not null
     references blog,
+⁣
   title text not null,
+⁣
   body text not null,
+⁣
   published_at timestamptz
 );
 ```
 
 ]
 
+???
+
+Start: 4m30  
+End: 5m00
+
+Convert types, map fields to follow naming conventions, detect relations and add the relevant fields.
+
+- Reduces risk of human error / typos
+- Enables you to apply fixes and enhancements to the entire API easily
+
+The result is a very consistent GraphQL schema.
+
 --
-source-file: 020-main/0000-everything.md
-source-line: 307
+source-file: 020-main/0300-mapping.md
+source-line: 46
 
 .pull-right[
 
 ```graphql
 type Post {
   id: Int!
+⁣
   authorId: Int!
   author: Person
+⁣
   blogId: Int!
   blog: Blog
+⁣
   title: String!
+⁣
   body: String!
+⁣
   publishedAt: String
 }
 ```
 
 ]
 
+
 ---
-source-file: 020-main/0000-everything.md
-source-line: 326
-
+source-file: 020-main/0350-customising.md
+source-line: 1
 class: has-code compact-paragraphs bigLi
+name: customising
+layout: true
 
-### DDGD: **Customising**
+### DDGD: **Auto-generation**
+
+.footer[
+
+Slides: [https://graphile.org/ddgd](https://graphile.org/ddgd)  
+]
 
 ???
 
-It's important to note that your GraphQL schema does not have to be a perfect
-reflection of your database schema or underlying tables, there are techniques
-you can use to ⏭customise how your GraphQL schema is built - what's included,
-how it's named. For example, PostGraphile can obey the database permissions,
-ensuring you don't expose things through GraphQL that the user wouldn't be able
-to access.⏭ We also have the concept of smart comments, which allow you to
-annotate individual tables, columns, functions, etc. and change their names,
-deprecate them, or have them omitted under certain circumstances.
+Start: 5m00  
+End: 6m00
 
---
-source-file: 020-main/0000-everything.md
-source-line: 343
+When following best practices, we don't want to expose too much.
+
+Use **database permissions to guide us** - only expose the update
+mutation if the UPDATE privilege is granted
+
+Don't want to update post ID.
+
+Only expose the fields you're specifically allowed to update.
+
+---
+source-file: 020-main/0350-customising.md
+source-line: 26
+
+template: customising
 
 .pull-left[
 
 ```sql
+-- Permissions
+GRANT UPDATE
+ON post TO graphql_role;
+```
+
+]
+
+.pull-right[
+
+```graphql
+# Reflected in GraphQL
+input PostPatch {
+  id: Int
+  authorId: Int
+  blogId: Int
+  title: String
+  body: String
+  publishedAt: String
+}
+```
+
+]
+
+.clear[]
+
+---
+source-file: 020-main/0350-customising.md
+source-line: 58
+
+template: customising
+count: false
+
+.pull-left[
+
+```sql
+-- Permissions
+GRANT UPDATE (
+* body,
+* published_at
+) ON post TO graphql_role;
+```
+
+]
+
+.pull-right[
+
+```graphql
+# Reflected in GraphQL
+input PostPatch {
+* body: String
+* publishedAt: String
+}
+```
+
+]
+
+.clear[]
+
+---
+source-file: 020-main/0350-customising.md
+source-line: 89
+
+layout: false
+class: has-code compact-paragraphs bigLi
+count: false
+
+### DDGD: **Auto-generation**
+
+.footer[
+
+Slides: [https://graphile.org/ddgd](https://graphile.org/ddgd)  
+]
+
+.context[
+.pull-left[
+
+```sql
+-- Permissions
 GRANT UPDATE (
   body,
   published_at
@@ -412,6 +528,7 @@ GRANT UPDATE (
 .pull-right[
 
 ```graphql
+# Reflected in GraphQL
 input PostPatch {
   body: String
   publishedAt: String
@@ -419,26 +536,23 @@ input PostPatch {
 ```
 
 ]
+]
 
 .clear[]
-
---
-source-file: 020-main/0000-everything.md
-source-line: 369
 
 .pull-left[
 
 ```sql
--- "Smart comment"
-COMMENT ON COLUMN
-  post.published_at
-*IS E'@name publicationDate';
+-- Views create "virtual" tables
+CREATE VIEW person AS (
+ SELECT id, username, name, bio
+ FROM users, bios
+ WHERE user_id = users.id
+);
 ⁣
--- COMMENT ON TABLE ...
--- COMMENT ON FUNCTION ...
--- COMMENT ON CONSTRAINT ...
--- COMMENT ON TYPE ...
--- COMMENT ON VIEW ...
+-- Uses tables:
+--   users: id, username, ...
+--   bios: user_id, name, bio, ...
 ```
 
 ]
@@ -446,14 +560,12 @@ COMMENT ON COLUMN
 .pull-right[
 
 ```graphql
-input PostPatch {
-  body: String
-* publicationDate: String
-}
-⁣
-type Post {
-  #...
-* publicationDate: String
+# Which we can expose with GraphQL
+type Person {
+  id: Int!
+  username: String!
+  name: String
+  bio: String
 }
 ```
 
@@ -461,30 +573,25 @@ type Post {
 
 ???
 
-And because you're auto-generating your GraphQL schema you can enhance it
-across the board - for example adding custom documentation to all connections
-at once. In PostGraphile we enable these kinds of broad changes via our plugin
-system.
+Start: 5m30s  
+End: 6m00
+
+GraphQL schema does not have to be a perfect
+reflection of your database schema or underlying tables
 
 ---
-source-file: 020-main/0000-everything.md
-source-line: 411
+source-file: 020-main/0350-customising.md
+source-line: 169
 
+layout: false
 class: has-code compact-paragraphs bigLi
 
-### DDGD: **Extending via Functions**
+### DDGD: **Auto-generation - Functions**
 
-???
+.footer[
 
-Another way to extend your schema is to really embrace the powerhouse that is
-your database. ⏭ Postgres for example gives you support for very powerful
-functions, which can return anything from scalars to ⏭ set of database records.
-These can be used to efficiently add "computed columns" to your tables,
-additional queries at the root level, or ⏭ powerful custom mutations.
-
---
-source-file: 020-main/0000-everything.md
-source-line: 425
+Slides: [https://graphile.org/ddgd](https://graphile.org/ddgd)  
+]
 
 .pull-left[
 
@@ -500,6 +607,7 @@ CREATE FUNCTION person_name(
 .pull-right[
 
 ```graphql
+# Adds field to table type
 extend type Person {
   name: String
 }
@@ -509,9 +617,22 @@ extend type Person {
 
 .clear[]
 
+???
+
+Start: 6m00s  
+End: 7m00s
+
+Another way to extend your schema is to really embrace the powerhouse that is
+your database.
+
+Postgres for example gives you support for very powerful
+functions, which can return anything from scalars to ⏭ set of database records.
+These can be used to efficiently add "computed columns" to your tables,
+additional queries at the root level, or ⏭ powerful custom mutations.
+
 --
-source-file: 020-main/0000-everything.md
-source-line: 450
+source-file: 020-main/0350-customising.md
+source-line: 218
 
 .pull-left[
 
@@ -536,8 +657,8 @@ extend type Query {
 .clear[]
 
 --
-source-file: 020-main/0000-everything.md
-source-line: 474
+source-file: 020-main/0350-customising.md
+source-line: 242
 
 .pull-left[
 
@@ -564,232 +685,248 @@ extend type Mutation {
 
 ]
 
-???
-
-And of course there's an escape hatch - you can always add additional
-capabilities to your GraphQL schema itself, either by plugging directly into
-the schema generation process and gaining access to the powerful query planner,
-or by using techniques such as GraphQL schema stitching.
-
-This is all great for designing your GraphQL schema, but your database can do
-so much more for you!
-
 ---
-source-file: 020-main/0000-everything.md
-source-line: 511
+source-file: 020-main/0350-customising.md
+source-line: 269
 
 class: has-code compact-paragraphs bigLi
 
-### DDGD: Databases Give **Guarantees**
+### DDGD: **Efficient By Default**
+
+.footer[
+
+Slides: [https://graphile.org/ddgd](https://graphile.org/ddgd)  
+]
+
+![](/images/tweet3.png)
+
+**Indexes** and **foreign keys** guide schema generation
 
 ???
 
-One of the most important things it can do, is to give
-you guarantees. Guarantees are wonderful - we programmers love guarantees -
-because it reduces the number of things you have to test!
+Start: 7m00s  
+End: 7m40s
 
-What guarantees can your database give you?
+We can automatically ensure we adhere to best practices.
 
 ---
-source-file: 020-main/0000-everything.md
-source-line: 525
+source-file: 020-main/0350-customising.md
+source-line: 291
 
 class: has-code compact-paragraphs bigLi
+
+### DDGD: **Adding Power**
+
+.footer[
+
+Slides: [https://graphile.org/ddgd](https://graphile.org/ddgd)  
+]
+
+<!-- prettier-ignore-start -->
+
+- Add a **job queue** for background tasks
+???
+
+Start: 7m40s  
+End: 9m00s
+
+such as sending a verification email to each new email address added.
+
+Can be triggered by a database trigger, giving us another guarantee. Doesn't matter which service triggers it, we know the email will be sent.
+--
+source-file: 020-main/0350-customising.md
+source-line: 313
+- Extend with **plugins**, **schema stitching** or **foreign data wrappers**
+--
+source-file: 020-main/0350-customising.md
+source-line: 315
+- Add "smart" comments to rename/omit/deprecate
+
+<!-- prettier-ignore-end -->
+
+```sql
+COMMENT ON COLUMN ...
+COMMENT ON TABLE ...
+COMMENT ON CONSTRAINT ...
+COMMENT ON VIEW ...
+COMMENT ON TYPE ...
+COMMENT ON FUNCTION ...
+```
+
+
+---
+source-file: 020-main/0500-efficient.md
+source-line: 1
+class: has-code compact-paragraphs bigLi
+name: efficient
+
+### **Efficiently** Executing GraphQL with SQL
+
+.footer[
+
+Slides: [https://graphile.org/ddgd](https://graphile.org/ddgd)  
+]
+
+.pull-left[
+
+```graphql
+{
+  posts(where: {
+    id: { in: [1, 2, 3] }
+  }) {
+    id
+    title
+    author {
+      id
+      name
+    }
+  }
+}
+```
+
+]
+???
+
+Start: 9m00  
+End: 10m10
+
+DataLoader is inefficient - under-fetching - database roundtrips - increases latency.
+
+Instead...
+
+---
+source-file: 020-main/0500-efficient.md
+source-line: 38
+
+template: efficient
 count: false
+class: hide-footer
 
-### DDGD: Databases Give **Guarantees**
+.pull-right[
 
-- Transactions - everything succeeds or fails **together**
+```sql
+*-- Turn entire GraphQL query into
+*-- just one SQL statement.
+SELECT
+  id,
+  title,
+  (SELECT json_build_object(
+    'id', id,
+    'name', name
+  ) FROM person WHERE id = author_id)
+FROM posts
+WHERE id IN (1,2,3);
+```
 
-???
-The most widely known I'd guess are
-transactions - these are groups of SQL statements that either all succeed or
-all fail together - meaning you don't need to write code to undo the effects of
-partial successes.
+]
 
---
-source-file: 020-main/0000-everything.md
-source-line: 540
+.clear[]
 
-- Foreign key constraints - ensure relations are and **remain** consistent
-
-???
-But we can also have our database give guarantees about the data that it’s
-managing for us. For example we can use foreign key constraints that ensure the
-other end of the relationship definitely exists, and will continue to exist
-until it's no longer referenced.
-
---
-source-file: 020-main/0000-everything.md
-source-line: 550
-
-- Unique constraints - **assert ongoing uniqueness** of a column or set of columns
+**GraphQL Engines** can analyse entire query to help eliminate server-side **over-** and **under-fetching**, and **reduce latency**.
 
 ???
 
-We can add unique constraints that guarantee that no two people can have the same username, or that the same URL slug cannot be used more than once on the same website.
+Compile the GraphQL query into one SQL query,
+**passing the task** of finding the most efficient way of resolving
+this request over **to a well-optimised query planner**. That's certainly going to
+lead to some impressive performance!
 
---
-source-file: 020-main/0000-everything.md
-source-line: 558
-
-- Check constraints - ensure data **conforms**
-
-???
-
-Check constraints are another, these ensure that our data conforms to a
-particular format - for example that every email address has exactly one "@"
-character in it, or that `date_of_birth` is at least 18 years ago.
 
 ---
-source-file: 020-main/0000-everything.md
-source-line: 568
-
+source-file: 020-main/9999-everything.md
+source-line: 1
 class: has-code compact-paragraphs bigLi
-count: false
 
-### DDGD: Databases Give **Guarantees**
+### DDGD: **Data Security**
 
-- Transactions - everything succeeds or fails **together**
+.footer[
 
-- Foreign key constraints - ensure relations are and **remain** consistent
-
-- Unique constraints - **assert ongoing uniqueness** of a column or set of columns
-
-- Check constraints - ensure data **conforms**
-
-Constraints are **guaranteed to remain true**.
+Slides: [https://graphile.org/ddgd](https://graphile.org/ddgd)  
+]
 
 ???
 
-One of the great things about these database constraints is that the database
-will ensure that these things will _always_ be true - they are guarantees -
-unlike the checks and validations that we add in the application layer which
-only affect the data as it is processed (and could be bypassed by secondary
-systems such as work queues and microservices). As the constraints in your
-application layer evolve you must remember to go back and check previous data,
-otherwise you might find that users can no longer log in because their legacy
-username doesn't pass your new validation logic! Database constraints, however,
-apply to new and old data alike - if the new constraints are not valid, you'll
-be made aware and can take steps to correct either the constraints or the data.
+Start: 10m10s  
+End: 12m25s
+
+Database security was not granular
+enough
+
+been putting business logic in application layer for so long
+now that we think that it's the right way
 
 --
-source-file: 020-main/0000-everything.md
-source-line: 598
-
-Ensures **only valid data** goes into/out of GraphQL.
-
-???
-
-So by embracing our database, we can ensure that the data coming in and out of
-our GraphQL API will always honour our latest set of validations. But we can
-also leverage the database to improve our data security.
-
----
-source-file: 020-main/0000-everything.md
-source-line: 608
-
-class: has-code compact-paragraphs bigLi
-
-### DDGD: Data **Security**
-
-???
-
-Until a few years ago, the security available in databases was not granular
-enough for us to easily be able to use it for our common web-application needs.
-In fact, we’ve been putting business logic in the application layer for so long
-now that we think that it's the right way, because it has been the only way!
-
----
-source-file: 020-main/0000-everything.md
-source-line: 621
-
-class: has-code compact-paragraphs bigLi
-count: false
-
-### DDGD: Data **Security**
+source-file: 020-main/9999-everything.md
+source-line: 21
 
 - Row Level Security: **co-locate** security and data
 
 ???
-But it's not the only way any more. In 2015 Postgres introduced support for row
+In 2015 Postgres introduced support for row
 level security, finally giving us the granular permissions that we need to move
 our business logic into the most sensible place - co-located with the data.
 
+Single role, use transaction variables to indicate the current user or session identifier.
+
 --
-source-file: 020-main/0000-everything.md
-source-line: 635
+source-file: 020-main/9999-everything.md
+source-line: 32
 
 - Enforces data-logic rules on **every data access** - API, control panel, microservices, ...
 
-???
-
-This technology helps us to ensure that no matter how the data is accessed - by
-your application layer, your API, your admin app, everything - your business
-logic rules will always apply.
-
----
-source-file: 020-main/0000-everything.md
-source-line: 645
-
-class: has-code compact-paragraphs bigLi
-count: false
-
-### DDGD: Data **Security**
-
-- Row Level Security: **co-locate** security and data
-
-- Enforces data-logic rules on **every data access** - API, control panel, microservices, ...
+--
+source-file: 020-main/9999-everything.md
+source-line: 36
 
 - Security policy statements - easy to **audit**
 
 ???
 
-A great thing about building security in this way, is that the data access
-rules are kept as separate security policy statements, which makes it very easy
-to audit. In these days of strong data protection legislations such as the
-GDPR, being able to easily review these policies really helps us to ensure that
-we are meeting our data-protection obligations. And we can be confident that
-they are enforced using a well tested, vetted and trusted implementation from
-our database vendor, rather than something that's been developed in-house or by
+GDPR - ability to easily review these policies helps **ensure
+we are meeting our data-protection obligations**.
+
+confident - enforced using **well tested, vetted and trusted implementation from
+our database vendor**, rather than something that's been developed in-house or by
 a third party.
 
 --
-source-file: 020-main/0000-everything.md
-source-line: 669
+source-file: 020-main/9999-everything.md
+source-line: 49
 
 - Once defined, applied **automatically**
 
-???
-
-The best thing is that once we've declared these security policies, we don't
-have to think about them again! We don't have to remember to add all the
-relevant WHERE clauses whenever we access that particular resource - it's done
-for us by the database. In fact, you could say, it's guaranteed.
-
 ---
-source-file: 020-main/0000-everything.md
-source-line: 680
+source-file: 020-main/9999-everything.md
+source-line: 53
 
 class: title-page compact-paragraphs bigLi
 layout: false
 
 ## DDGD: Summary
 
-⏩ Rapid API development  
-⚡️ Lighting-fast execution  
+⏩ Accelerated development  
+⚡️ Lighting-fast APIs  
 ✅ Data consistency guaranteed  
 🤖 Maintain control of database  
 🔐 Easily auditable security
 
+.footer[
+
+### [@Benjie](https://twitter.com/Benjie)
+
+Chat: http://discord.gg/graphile  
+Slides: [https://graphile.org/ddgd](https://graphile.org/ddgd)  
+]
+
 ???
+
+Start: 12m25s  
+End: 13m15s
 
 I guess at the end of the day the thing that I like most about Database-Driven
 GraphQL Development is the speed. Both the speed at which the API can resolve
 even complex queries, and the speed with which I can develop a stable, secure
 and maintainable API.
-
-⏭
 
 Thank you for listening to my talk, I encourage you to embrace the power of the
 database, and ⏭ become SQL Superpowered! If you've any questions please come ask
@@ -798,23 +935,10 @@ us in the Graphile chat at http://discord.gg/graphile; or message me on Twitter
 - I'm @Benjie.
 
 --
-source-file: 020-main/0000-everything.md
-source-line: 708
+source-file: 020-main/9999-everything.md
+source-line: 90
 
-## Thanks for listening!
-
-.footer[
-
-### [@Benjie](https://twitter.com/Benjie)
-
-Chat: http://discord.gg/graphile  
-Slides: [https://graphile.org/ddgd](https://graphile.org/ddgd)  
-All content is Copyright © 2018 Benjie Gillam
-]
-
---
-source-file: 020-main/0000-everything.md
-source-line: 721
+class: super
 
 .superpowered[
 \#sqlsuperpowered

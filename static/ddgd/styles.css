@@ -98,6 +98,9 @@
   right: 2rem;
   text-align: left;
 }
+.hide-footer .footer {
+  display: none;
+}
 .remark-slide-content .footer p {
   font-size: 0.8rem;
   margin: 0;
@@ -218,6 +221,7 @@ strong {
 a {
   text-decoration: none;
   border-bottom: 0.15em dotted;
+  border-bottom: none;
 }
 
 ul {
@@ -325,6 +329,10 @@ pre + pre {
   background-repeat: no-repeat;
   background-size: 14rem, cover;
   background-position: bottom 1.5rem right 1.5rem, center center;
+}
+.super.title-page {
+  background-image: url("images/postgraphile-super.named.svg"),
+    url("images/light-graph-3.png");
 }
 /* End of was bg-blue-home */
 
@@ -979,4 +987,19 @@ body {
     border-radius: 25px;
     padding: 20px;
   }
+}
+
+.img-50 img {
+  width: 80%;
+  margin: auto;
+  display: block;
+}
+
+table {
+  width: 100%;
+  font-size: 1.1rem;
+}
+
+table th {
+  text-align: left;
 }
