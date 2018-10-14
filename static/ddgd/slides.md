@@ -80,7 +80,7 @@ source-line: 14
 
 template: familiar
 
-![](/images/bob004m.png)
+![](images/bob004m.png)
 
 ---
 source-file: 020-main/0200-familiar.md
@@ -89,7 +89,7 @@ source-line: 20
 template: familiar
 count: false
 
-![](/images/bob005m.png)
+![](images/bob005m.png)
 
 ---
 source-file: 020-main/0200-familiar.md
@@ -98,7 +98,7 @@ source-line: 27
 template: familiar
 count: false
 
-![](/images/bob013m.png)
+![](images/bob013m.png)
 
 ---
 source-file: 020-main/0200-familiar.md
@@ -107,7 +107,7 @@ source-line: 34
 template: familiar
 count: false
 
-![](/images/bob013mdb.png)
+![](images/bob013mdb.png)
 
 
 ---
@@ -698,7 +698,7 @@ class: has-code compact-paragraphs bigLi
 Slides: [https://graphile.org/ddgd](https://graphile.org/ddgd)  
 ]
 
-![](/images/tweet3.png)
+![](images/tweet3.png)
 
 **Indexes** and **foreign keys** guide schema generation
 
