@@ -33,7 +33,7 @@
     "graphile-build": "4.0.0-alpha.1",
     "graphql": "^0.11.7",
     "juice": "4.3.1",
-    "postgraphile": "^4.0.0-rc.5",
+    "postgraphile": "^4.1.0-alpha.0",
     "prismjs": "1.15.0",
     "react-prism": "4.3.2",
     "react-typography": "^0.16.1",
@@ -43,7 +43,9 @@
     "typography-theme-fairy-gates": "^0.15.11",
     "typography-theme-funston": "^0.15.10"
   },
-  "keywords": ["gatsby"],
+  "keywords": [
+    "gatsby"
+  ],
   "license": "MIT",
   "main": "n/a",
   "scripts": {

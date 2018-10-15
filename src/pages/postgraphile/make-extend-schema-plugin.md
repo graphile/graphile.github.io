@@ -149,12 +149,13 @@ The `selectGraphQLResultFromTable` function is vital if you want to return data
 from the database from your new GraphQL field. It is responsible for hooking into
 the query look-ahead features of `graphile-build` to inspect the incoming GraphQL
 query and pull down the relevant data from the database
-(including nested relations). You are then expected to return the result of this
-fetch via your resolver. You can use the `sqlBuilder` object to customise the
-generated query, changing the order, adding `where` clauses, `limit`s, etc.
-Note that if you do not wish to return the data directly, you can use the
-`@recurseDataGenerators` directive on the intermediary field, see the example
-below.
+(including nested relations). You are then expected to return the result of
+this fetch via your resolver. You can use the `sqlBuilder` object to customise
+the generated query, changing the order, adding `where` clauses, `limit`s, etc.
+Note that if you are not returning a record type directly (for example you're
+returning a mutation payload, or a connection interface), you should use the
+`@pgField` directive on the fields of your returned type so that the Look Ahead
+feature continues to work.
 
 The `sqlBuilder` uses an SQL AST constructed via
 [`pg-sql2` methods](https://github.com/graphile/pg-sql2/blob/master/README.md)
@@ -237,7 +238,7 @@ makeExtendSchemaPlugin(build => {
       }
 
       type RegisterUserPayload {
-        user: User @recurseDataGenerators
+        user: User @pgField
         query: Query
       }
 
@@ -306,14 +307,14 @@ makeExtendSchemaPlugin(build => {
             // Success! Write the user to the database.
             await pgClient.query("RELEASE SAVEPOINT graphql_mutation");
 
-            // We pass the fetched result via the
-            // `user` field to match the
-            // @recurseDataGenerators directive
-            // used above. GraphQL mutation
-            // payloads typically have additional
-            // fields.
+            // If the return type is a database record type, like User, then
+            // you would return `row` directly. However if it's an indirect
+            // interface such as a connection or mutation payload then
+            // you return an object with a `data` property. You can add
+            // additional properties too, that can be used by other fields
+            // on the result type.
             return {
-              user: row,
+              data: row,
               query: build.$$isQuery,
             };
           } catch (e) {
@@ -329,7 +330,5 @@ makeExtendSchemaPlugin(build => {
 });
 ```
 
-Note that the `@recurseDataGenerators` directive here tells PostGraphile to act
-as if the RegisterUserPayload didn't exist and instead the `user` field was
-returned by the mutation directly. This is because we often add other fields to
-mutation payloads, such as `query` for the root Query type.
+Note that the `@pgField` directive here is necessary for PostGraphile to "look
+ahead" and determine what to request from the database.

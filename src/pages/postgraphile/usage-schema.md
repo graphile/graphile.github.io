@@ -91,17 +91,17 @@ The returned GraphQLSchema will **not** be updated when your database changes - 
   * `includeExtensionResources`: By default, tables and functions that come from extensions are excluded from the generated GraphQL schema as general applications don't need them to be exposed to the end user. You can use this flag to include them in the generated schema (not recommended).
   * `showErrorStack`: Enables adding a `stack` field to the error response.  Can be either the boolean `true` (which results in a single stack string) or the string `json` (which causes the stack to become an array with elements for each line of the stack). Recommended in development, not recommended in production.
   * `extendedErrors`: Extends the error response with additional details from the Postgres error.  Can be any combination of `['hint', 'detail', 'errcode']`. Default is `[]`.
-  * `appendPlugins`: An array of [Graphile Build](/graphile-build/plugins/) plugins to load after the default plugins.
-  * `prependPlugins`: An array of [Graphile Build](/graphile-build/plugins/) plugins to load before the default plugins (you probably don't want this).
-  * `replaceAllPlugins`: The full array of [Graphile Build](/graphile-build/plugins/) plugins to use for schema generation (you almost definitely don't want this!).
-  * `skipPlugins`: An array of [Graphile Build](/graphile-build/plugins/) plugins to skip.
+  * `appendPlugins`: An array of [Graphile Engine](/graphile-build/plugins/) schema plugins to load after the default plugins.
+  * `prependPlugins`: An array of [Graphile Engine](/graphile-build/plugins/) schema plugins to load before the default plugins (you probably don't want this).
+  * `replaceAllPlugins`: The full array of [Graphile Engine](/graphile-build/plugins/) schema plugins to use for schema generation (you almost definitely don't want this!).
+  * `skipPlugins`: An array of [Graphile Engine](/graphile-build/plugins/) schema plugins to skip.
   * `readCache`: A file path string. Reads cached values from local cache file to improve startup time (you may want to do this in production).
   * `writeCache`: A file path string. Writes computed values to local cache file so startup can be faster (do this during the build phase).
   * `jwtSecret`: The secret for your JSON web tokens. This will be used to verify tokens in the `Authorization` header, and signing JWT tokens you return in procedures.
   * `jwtPgTypeIdentifier`: The Postgres type identifier for the compound type which will be signed as a JWT token if ever found as the return type of a procedure. Can be of the form: `my_schema.my_type`. You may use quotes as needed: `"my-special-schema".my_type`.
   * `legacyRelations`: Some one-to-one relations were previously detected as one-to-many - should we export 'only' the old relation shapes, both new and old but mark the old ones as 'deprecated' (default), or 'omit' (recommended) the old relation shapes entirely.
   * `legacyJsonUuid`: ONLY use this option if you require the v3 typenames 'Json' and 'Uuid' over 'JSON' and 'UUID'.
-  * `simpleCollections`: Should we use relay pagination, or simple collections? "omit" (default) - relay connections only, "only" (not recommended) - simple collections only (no Relay connections), "both" - both
+  * `simpleCollections`: Should we use relay pagination, or simple collections? "omit" (default) - relay connections only, "only" (not recommended) - simple collections only (no Relay connections), "both" - both.
 
 <!-- SCHEMA_DOCBLOCK_END -->
 

@@ -226,24 +226,6 @@ function MyObjectAddIdDataGeneratorPlugin(builder) {
 }
 ```
 
-### Recursing
-
-<!-- TODO: document this! -->
-
-```js{4,6}
-const MyObjectConnection = newWithHooks(GraphQLObjectType, {
-  name: "MyObjectConnection",
-  fields: ({ recurseDataGeneratorsForField }) => {
-    recurseDataGeneratorsForField("edges");
-    return {
-      edges: {
-        type: new GraphQLList(MyObjectEdge),
-      },
-    };
-  },
-});
-```
-
 ### Determining the meta-data requested subfields have specified
 
 When it comes to `resolve` time we need to know what meta-data is available as
