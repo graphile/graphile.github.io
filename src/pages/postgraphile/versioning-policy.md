@@ -31,3 +31,16 @@ interface is more stable. Despite this, breaking changes to the plugin
 interface are seen as a major issue and will be avoided as much as possible.
 Interfaces that are documented on the Graphile website will not be broken
 without a **very good reason**.
+
+### What about breaking changes in GraphQL itself (and other dependencies)?
+
+TL;DR: use a lockfile.
+
+PostGraphile will add support for wider versions of GraphQL (and other
+dependencies) over time without requiring a major or minor update. PostGraphile
+does not treat these as breaking changes as it's assumed that you follow
+Node.js best practices and use a package lockfile, such as `yarn.lock` (yarn)
+or `package-lock.json` (npm). You can use features such as [yarn's
+"resolutions"](https://yarnpkg.com/lang/en/docs/selective-version-resolutions/)
+to pin a particular dependency (such as `graphql`) to a particular version
+(such as `0.13.x`).
