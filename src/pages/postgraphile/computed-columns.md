@@ -81,7 +81,7 @@ returns setof my_schema.users as $$
 $$ language sql stable;
 ```
 
-You can also expose addition arguments via your computed column function, and these will be exposed via GraphQL:
+You can also expose additional arguments via your computed column function, and these will be exposed via GraphQL:
 
 ```sql{1,4}
 -- Creates `User.greet(greeting: String!)` string field
