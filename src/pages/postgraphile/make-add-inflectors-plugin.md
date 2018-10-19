@@ -6,6 +6,8 @@ title: graphile-utils makeAddInflectorsPlugin
 
 ## makeAddInflectorsPlugin (graphile-utils)
 
+**NOTE: this documentation applies to PostGraphile v4.1.0+**
+
 If you're not happy with the default naming conventions in PostGraphile (or if you
 want to extend PostGraphile's functionality and use the inflection system to do
 so), you can use `makeAddInflectorsPlugin` from `graphile-utils`.
@@ -26,7 +28,8 @@ module.exports = makeAddInflectorsPlugin({
   patchType(typeName: string) {
     return this.upperCamelCase(`${typeName}-change-set`);
   },
-});
+}, true); // Passing true here allows the plugin to overwrite
+          // existing inflectors.
 
 // Load this plugin with `postgraphile --append-plugins /path/to/MyInflectionPlugin.js`
 ```

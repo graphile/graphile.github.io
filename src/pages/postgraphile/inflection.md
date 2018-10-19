@@ -37,7 +37,7 @@ module.exports = makeAddInflectorsPlugin({
   patchType(typeName: string) {
     return this.upperCamelCase(`${typeName}-change-set`);
   },
-});
+}, true);
 ```
 
 ### Advice
