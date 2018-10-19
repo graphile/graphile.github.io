@@ -14,7 +14,14 @@ Slides: [https://graphile.org/ddgd](https://graphile.org/ddgd)
 
 ???
 
-Hello everybody! My name's Benjie, and I'm the maintainer of an open-source project called PostGraphile which builds and serves a highly performant, secure, client-facing GraphQL API by inspecting your PostgreSQL database.
+I'm the maintain of PostGraphile,
+an open source tool to **help you rapidly design and serve** a
+high-performance, secure, client-facing GraphQL API backed primarily
+by your PostgreSQL database.
+
+--
+source-file: 000-cover/000-cover.md
+source-line: 20
 
 
 ---
@@ -286,7 +293,7 @@ source-file: 020-main/0275-guarantees.md
 source-line: 29
 
 - Ensure **relations are consistent**:  
-  `user_id int references users`
+  .context[`user_id int`]&nbsp;&nbsp;&nbsp;`REFERENCES users`
 
 ???
 
@@ -297,14 +304,14 @@ source-file: 020-main/0275-guarantees.md
 source-line: 38
 
 - Assert **uniqueness**:  
-  `username text unique`
+  .context[`username text`]&nbsp;&nbsp;&nbsp;`UNIQUE`
 
 --
 source-file: 020-main/0275-guarantees.md
 source-line: 43
 
 - Check data **conforms**:  
-  `email text check(email ~ '^[^@]+@[^@]+$')`
+  .context[`email text`]&nbsp;&nbsp;&nbsp;`CHECK(email ~ '^[^@]+@[^@]+$')`
 
 --
 source-file: 020-main/0275-guarantees.md
@@ -545,14 +552,14 @@ input PostPatch {
 ```sql
 -- Views create "virtual" tables
 CREATE VIEW person AS (
- SELECT id, username, name, bio
+ SELECT id, username, bio
  FROM users, bios
  WHERE user_id = users.id
 );
-⁣
--- Uses tables:
---   users: id, username, ...
---   bios: user_id, name, bio, ...
+-- Custom data types
+CREATE TYPE my_type AS (
+  ...
+);
 ```
 
 ]
@@ -564,8 +571,11 @@ CREATE VIEW person AS (
 type Person {
   id: Int!
   username: String!
-  name: String
   bio: String
+}
+⁣
+type MyType {
+  ...
 }
 ```
 
@@ -581,7 +591,7 @@ reflection of your database schema or underlying tables
 
 ---
 source-file: 020-main/0350-customising.md
-source-line: 169
+source-line: 172
 
 layout: false
 class: has-code compact-paragraphs bigLi
@@ -632,7 +642,7 @@ additional queries at the root level, or ⏭ powerful custom mutations.
 
 --
 source-file: 020-main/0350-customising.md
-source-line: 218
+source-line: 221
 
 .pull-left[
 
@@ -658,7 +668,7 @@ extend type Query {
 
 --
 source-file: 020-main/0350-customising.md
-source-line: 242
+source-line: 245
 
 .pull-left[
 
@@ -687,7 +697,7 @@ extend type Mutation {
 
 ---
 source-file: 020-main/0350-customising.md
-source-line: 269
+source-line: 272
 
 class: has-code compact-paragraphs bigLi
 
@@ -709,9 +719,11 @@ End: 7m40s
 
 We can automatically ensure we adhere to best practices.
 
+**Performance is not an afterthought**
+
 ---
 source-file: 020-main/0350-customising.md
-source-line: 291
+source-line: 296
 
 class: has-code compact-paragraphs bigLi
 
@@ -735,23 +747,14 @@ such as sending a verification email to each new email address added.
 Can be triggered by a database trigger, giving us another guarantee. Doesn't matter which service triggers it, we know the email will be sent.
 --
 source-file: 020-main/0350-customising.md
-source-line: 313
+source-line: 318
 - Extend with **plugins**, **schema stitching** or **foreign data wrappers**
 --
 source-file: 020-main/0350-customising.md
-source-line: 315
-- Add "smart" comments to rename/omit/deprecate
+source-line: 320
+- Tag database entities to **rename/omit/deprecate**
 
 <!-- prettier-ignore-end -->
-
-```sql
-COMMENT ON COLUMN ...
-COMMENT ON TABLE ...
-COMMENT ON CONSTRAINT ...
-COMMENT ON VIEW ...
-COMMENT ON TYPE ...
-COMMENT ON FUNCTION ...
-```
 
 
 ---
@@ -828,8 +831,9 @@ WHERE id IN (1,2,3);
 
 Compile the GraphQL query into one SQL query,
 **passing the task** of finding the most efficient way of resolving
-this request over **to a well-optimised query planner**. That's certainly going to
-lead to some impressive performance!
+this request over **to a well-optimised query planner**.
+
+**Using sub-queries to respect the tree-nature of GraphQL**
 
 
 ---
@@ -849,7 +853,7 @@ Slides: [https://graphile.org/ddgd](https://graphile.org/ddgd)
 Start: 10m10s  
 End: 12m25s
 
-Database security was not granular
+Until fairly recently database security was not granular
 enough
 
 been putting business logic in application layer for so long
@@ -859,7 +863,7 @@ now that we think that it's the right way
 source-file: 020-main/9999-everything.md
 source-line: 21
 
-- Row Level Security: **co-locate** security and data
+- Row Level Security &mdash; **co-locate** security and data
 
 ???
 In 2015 Postgres introduced support for row
@@ -872,13 +876,19 @@ Single role, use transaction variables to indicate the current user or session i
 source-file: 020-main/9999-everything.md
 source-line: 32
 
-- Enforces data-logic rules on **every data access** - API, control panel, microservices, ...
+- Enforces rules on **every data access**
 
 --
 source-file: 020-main/9999-everything.md
 source-line: 36
 
-- Security policy statements - easy to **audit**
+- Single database role &mdash; use **transaction variables**
+
+--
+source-file: 020-main/9999-everything.md
+source-line: 40
+
+- Security **policy statements** &mdash; easy to **audit**
 
 ???
 
@@ -891,13 +901,19 @@ a third party.
 
 --
 source-file: 020-main/9999-everything.md
-source-line: 49
+source-line: 53
 
-- Once defined, applied **automatically**
+- Trusted implementation by **database vendor**
+
+--
+source-file: 020-main/9999-everything.md
+source-line: 57
+
+- Define once, applied **automatically**
 
 ---
 source-file: 020-main/9999-everything.md
-source-line: 53
+source-line: 61
 
 class: title-page compact-paragraphs bigLi
 layout: false
@@ -936,7 +952,7 @@ us in the Graphile chat at http://discord.gg/graphile; or message me on Twitter
 
 --
 source-file: 020-main/9999-everything.md
-source-line: 90
+source-line: 98
 
 class: super
 
