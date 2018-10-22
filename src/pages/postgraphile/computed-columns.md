@@ -7,9 +7,11 @@ title: Computed Columns
 ## Computed Columns
 
 "Computed columns" add what appears to be an extra column (field) to the
-GraphQL table type, but unlike actual columns the value for this field is the
-result of calling a function. This function can accept additional arguments
-that influence its result, and can return a scalars, records, lists or sets.
+GraphQL table type, but, unlike an actual column, the value for this field is the result of 
+calling a function defined in the PostgreSQL schema.
+This function will automatically be exposed to the resultant GraphQL schema
+as a field on the type; it can accept arguments that influence its result,
+and may return either a scalar, record, list or a set.
 Sets (denoted by `RETURNS SETOF ...`) are exposed as
 [connections](/postgraphile/connections/).
 
@@ -21,7 +23,7 @@ it must obey the following rules:
 
 * adhere to [common PostGraphile function restrictions](/postgraphile/function-restrictions/)
 * name must begin with the name of the table it applies to, followed by an underscore (`_`)
-* first argument must be the table type
+* first parameter must be the table type
 * must NOT return `VOID`
 * must be marked as `STABLE` (or `IMMUTABLE`, though that tends to be less common)
 * must be defined in the same PostgreSQL schema as the table
@@ -81,13 +83,13 @@ returns setof my_schema.users as $$
 $$ language sql stable;
 ```
 
-You can also expose additional arguments via your computed column function, and these will be exposed via GraphQL:
+You can also define parameters to your fields via your computed column function, and these will be exposed in the GraphQL schema as well:
 
 ```sql{1,4}
 -- Creates `User.greet(greeting: String!)` string field
 create function my_schema.users_greet(
-  u my_schema.users,
-  greeting text
+  u my_schema.users,  --- required table type parameter, unexposed
+  greeting text       --- additional parameter, will be exposed
 ) returns varchar as $$
   select greeting || ', ' || u.first_name || ' ' || u.last_name || '!';
 $$ language sql stable strict;
