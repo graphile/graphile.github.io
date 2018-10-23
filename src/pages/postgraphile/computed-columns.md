@@ -83,7 +83,7 @@ returns setof my_schema.users as $$
 $$ language sql stable;
 ```
 
-You can also define parameters to your fields via your computed column function, and these will be exposed in the GraphQL schema as well:
+You can add parameters to your computed column field by declaring additional parameters in your PostgreSQL function:
 
 ```sql{1,4}
 -- Creates `User.greet(greeting: String!)` string field
