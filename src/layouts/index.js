@@ -39,11 +39,13 @@ class TemplateWrapper extends Component {
     const { children, ...restOfProps } = this.props;
     return (
       <div onKeyDown={this.onKeyDown} tabIndex="-1" ref={this.focus}>
+        {/*
         <section className="banner-announcement">
           <Link to="/news/postgraphile-version-4/">
             ANNOUNCEMENT: PostGraphile v4 is released, <u>read more »</u>
           </Link>
         </section>
+        */}
         {children(restOfProps)}
       </div>
     );

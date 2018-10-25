@@ -6,6 +6,8 @@ title: PostGraphile Version 4 is released
 
 ## PostGraphile Launches Version 4
 
+_Announced 2018-10-02_
+
 **The original GraphQL API for PostgreSQL: now vastly more performant, customisable and extensible than ever before**
 
 After a year of development and testing, Benjie Gillam is pleased to announce the release of PostGraphile Version 4 - the most customisable and extensible automatic GraphQL API for PostgreSQL yet. PostGraphile - previously known as PostGraphQL - has been re-written from the ground up with a strong focus on performance, best practices and flexibility. This has been enabled through the creation of Graphile Engine - a powerful datasource-agnostic GraphQL Engine that has extensibility and performance at its core - upon which PostGraphile Version 4 is built.
