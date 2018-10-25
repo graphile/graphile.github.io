@@ -1,7 +1,14 @@
 const path = require("path");
 
 exports.createPages = async ({ boundActionCreators, graphql }) => {
-  const { createPage } = boundActionCreators;
+  const { createPage, createRedirect } = boundActionCreators;
+
+  createRedirect({
+    fromPath: `/`,
+    isPermanent: false,
+    redirectInBrowser: true,
+    toPath: `/postgraphile/`,
+  });
 
   const layouts = {
     page: path.resolve(`src/templates/page.js`),
