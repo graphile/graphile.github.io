@@ -281,7 +281,7 @@ Sometimes it is useful to not just return single values from your function, but 
 create function forum_example.search_posts(search text) returns setof forum_example.post as $$
   select post.*
   from forum_example.post as post
-  where post.headline ilike ('%' || search || '%') or post.body ilike ('%' || search || '%')
+  where position(search in post.headline) > 0 or position(search in post.body) > 0
 $$ language sql stable;
 
 comment on function forum_example.search_posts(text) is 'Returns posts containing a given search term.';
@@ -305,7 +305,7 @@ The difference with this function and the ones before is the return signature re
 > }
 > ```
 
-> **Note:** Postgres has awesome text searching capabilities, the function above uses a basic `ILIKE` [pattern matching](https://www.postgresql.org/docs/9.6/static/functions-matching.html) operator. If you want high quality full text searching you don’t need to look outside Postgres. Instead look into the Postgres [Full Text Search](https://www.postgresql.org/docs/9.6/static/textsearch.html) functionality. It is a great feature, but a bit much for our simple example.
+> **Note:** Postgres has awesome text searching capabilities - if you want high quality full text searching you don’t need to look outside Postgres. Instead look into the Postgres [Full Text Search](https://www.postgresql.org/docs/9.6/static/textsearch.html) functionality. It is a great feature, but a bit much for our simple example, so we just used a simple string position function instead.
 
 > **Note:** Returning an array (`returns post[]`), and returning a set (`returns setof post`) are two very different things. When you return an array, every single value in the array will always be returned. However, when you return a set it is like returning a table. Users can paginate through a set using `limit` and `offset`, but not an array.
 
