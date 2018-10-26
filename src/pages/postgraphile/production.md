@@ -4,7 +4,14 @@ path: /postgraphile/production/
 title: Production Considerations
 ---
 
-## Database Access Considerations
+## Production Considerations
+
+When it comes time to deploy your PostGraphile application in production,
+there's a few things you'll want to think about including topics such as
+logging, security and stability. This article outlines some of the issues
+you might face, and how to solve them.
+
+### Database Access Considerations
 
 PostGraphile is just a node app / middleware, so you can deploy it to any
 number of places: Heroku, Now.sh, a VM, a container such as Docker, or of
@@ -29,7 +36,42 @@ Heroku have some instructions on making RDS available for use under Heroku
 which should also work for Now.sh or any other service:
 https://devcenter.heroku.com/articles/amazon-rds
 
-## Denial of Service Considerations
+### Common Middleware Considerations
+
+In a production app, you typically want to add a few common enhancements, e.g.
+
+* Logging
+* Gzip or similar compression
+* Security protections
+* Rate limiting
+
+Since there's already a lot of options and opinions in this space, and they're
+not directly related to the problem of serving GraphQL from your PostgreSQL
+database, PostGraphile does not include these things by default. We recommend
+that you use something like Express middlewares to implement these common
+requirements. This is why we recommend [using PostGraphile as a
+library](/postgraphile/usage-library/) for production usage.
+
+Picking the Express (or similar) middlewares that work for you is beyond the
+scope of this article; below is an example of where to place these middlewares.
+
+```js
+const express = require("express");
+const { postgraphile } = require("postgraphile");
+
+const app = express();
+
+/* Example middleware you might want to put in front of PostGraphile */
+// app.use(require('morgan')(...));
+// app.use(require('compression')({...}));
+// app.use(require('helmet')({...}));
+
+app.use(postgraphile(process.env.DATABASE_URL || "postgres:///"));
+
+app.listen(process.env.PORT || 3000);
+```
+
+### Denial of Service Considerations
 
 When you run PostGraphile in production you'll want to ensure that people
 cannot easily trigger denial of service (DOS) attacks against you. Due to the
@@ -78,7 +120,7 @@ methods such as rate limiting which are typically better implemented at a
 separate layer; for example you could use [Cloudflare rate
 limiting](https://www.cloudflare.com/rate-limiting/) for this.
 
-### Simple: Query Whitelist ("persisted queries")
+#### Simple: Query Whitelist ("persisted queries")
 
 If you do not intend to open your API up to third parties to run arbitrary
 queries against then using persisted queries as a query whitelist to protect
@@ -140,7 +182,7 @@ browser plugin, ...).
 the advanced protections as it enables you to catch unnecessarily expensive
 queries before you start facing performance bottlenecks down the line.
 
-### Advanced
+#### Advanced
 
 Using a query whitelist puts the decision in the hands of your engineers
 whether a particular query should be accepted or not. Sometimes this isn't
@@ -155,11 +197,11 @@ which implements these protections in a deeply integrated and PostGraphile
 optimised way, and has the added benefit of helping sustain development and
 maintenance on the project.**
 
-The rest of this article relates to Pro Plugin's approach to addressing these
-issues, though there are hints on how you might go about solving the issues for
-yourself. Many of these techniques can be implemented outside of PostGraphile,
-for example in an express middleware or a nginx reverse proxy between
-PostGraphile and the client.
+The following details how the Pro Plugin addresses these issues, including
+hints on how you might go about solving the issues for yourself. Many of these
+techniques can be implemented outside of PostGraphile, for example in an
+express middleware or a nginx reverse proxy between PostGraphile and the
+client.
 
 #### Sending queries to read replicas
 
