@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="10mm" height="10mm" viewBox="0 0 1200 1200" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg width="6mm" height="6mm" viewBox="0 0 1200 1200" version="1.1" xmlns="http://www.w3.org/2000/svg">
 <!--
 
 This file is Copyright © 2018 Benjie Gillam. All rights reserved.
@@ -86,6 +86,9 @@ will be absolutely tiny - such as favicons - do NOT use this zoomed up!
 
     <polygon points="375,740 460,795 325,900" class="tusk left-tusk" />
     <polygon points="825,740 740,795 875,900" class="tusk right-tusk" />
+
+    <polygon points="365,730 470,805 285,950" class="tusk left-tusk" />
+    <polygon points="835,730 730,805 915,950" class="tusk right-tusk" />
 
     <polygon points="325,300 490,96 710,96 600,450" class="seg2 forehead-left" />
     <polygon points="490,96 710,96 875,300 600,450" class="seg1 forehead-top" />
