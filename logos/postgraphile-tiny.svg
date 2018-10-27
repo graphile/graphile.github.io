@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="10mm" height="10mm" viewBox="0 0 1200 1200" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<!--
+
+This file is Copyright © 2018 Benjie Gillam. All rights reserved.
+
+This is a modified version of the logo, specifically for use in places where it
+will be absolutely tiny - such as favicons - do NOT use this zoomed up!
+
+-->
+<style type="text/css">
+* {
+  stroke-width: 0;
+  shape-rendering: geometricPrecision;
+}
+.seg1 {
+  fill: #468bcc;
+  stroke: #468bcc;
+}
+.seg2 {
+  fill: #4ba8ff;
+  stroke: #4ba8ff;
+}
+.seg3 {
+  fill: #166ebf;
+  stroke: #166ebf;
+}
+.seg4 {
+  fill: #0b457f;
+  stroke: #0b457f;
+}
+.seg5 {
+  fill: #0c3861;
+  stroke: #0c3861;
+}
+
+.face .eye {
+  fill: #ffffff;
+  stroke: #ffffff;
+  stroke-width: 20;
+}
+.face .tusk {
+  stroke: #000000;
+  fill: #ffffff;
+}
+.face .no-stroke {
+  stroke: transparent;
+  stroke-opacity: 0;
+}
+.face .tusk,
+.face .stroke-only,
+.heart-outline {
+  stroke: #082744;
+  stroke-width: 30;
+  stroke-linejoin: round;
+}
+.face .stroke-only,
+.heart-outline {
+  fill: transparent;
+  fill-opacity: 0;
+}
+.heart-outline,
+.face .tusk {
+  stroke-width: 15;
+}
+</style>
+
+  <desc>PostGraphile logo</desc>
+  <g class='ears'>
+    <polygon points="100,615 25,360 260,25 715,615" class="seg1" />
+    <polygon points="25,360 260,25 600,130 715,615" class="seg2" />
+    <polygon points="260,25 600,130 940,25 715,615" class="seg1" />
+    <polygon points="600,130 940,25 1175,360 715,615" class="seg1" />
+    <polygon points="940,25 1175,360 1100,615 715,615" class="seg2" />
+    <polygon points="1175,360 1100,615 600,1055 715,615" class="seg1" />
+    <polygon points="1100,615 600,1055 100,615 715,615" class="seg1" />
+    <polygon points="600,1055 100,615 25,360 715,615" class="seg1" />
+    <polygon points="100,615 25,360 715,615" class="seg1" />
+
+    <polygon points="25,360 260,25 260,25 600,130 600,130 940,25 940,25 1175,360 1175,360 1100,615 1100,615 600,1055 600,1055 100,615 100,615 25,360" class="heart-outline" />
+
+  </g>
+
+  <g class='face'>
+
+    <polygon points="375,740 460,795 325,900" class="tusk left-tusk" />
+    <polygon points="825,740 740,795 875,900" class="tusk right-tusk" />
+
+    <polygon points="325,300 490,96 710,96 600,450" class="seg2 forehead-left" />
+    <polygon points="490,96 710,96 875,300 600,450" class="seg1 forehead-top" />
+    <polygon points="710,96 875,300 875,725 600,450" class="seg3 forehead-right no-stroke" />
+
+    <polygon points="875,300 875,725 710,835 600,450" class="seg4 right-eye-area no-stroke" />
+
+    <polygon points="875,725 710,835 600,1130 600,450" class="seg5 face-bottom-right no-stroke" />
+    <polygon points="710,835 710,1075 600,1130 490,835 600,450" class="seg3 no-stroke trunk-highlight-right" />
+    <polygon points="600,1130 490,1075 490,835 325,725 600,450" class="seg2 no-stroke trunk-highlight-left" />
+    <polygon points="490,835 325,725 325,300 600,450" class="seg3 face-bottom-left no-stroke" />
+
+    <polygon points="325,725 325,300 600,450" class="seg1 left-eye-area no-stroke" />
+
+
+    <polygon points="490,96 710,96 875,300 875,725 710,835 710,1075 600,1130 490,1075 490,835 325,725 325,300" class="entire-face stroke-only" />
+
+    <polygon points="385,415 515,455 385,505" class="eye left-eye" />
+    <polygon points="815,415 685,455 815,505" class="eye right-eye" />
+
+
+  </g>
+
+</svg>
