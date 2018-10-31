@@ -168,3 +168,54 @@ module.exports = {
   },
 };
 ```
+
+Here is the list of keys and their default values, or types, supported in the `options` object returned by `.postgraphilerc.js`.
+
+```
+  appendPlugins: <string>
+  bodySizeLimit: <string>
+  classicIds = false
+  clusterWorkers: <integer>
+  connection: <string>
+  cors= false
+  defaultRole: <string>
+  disableDefaultMutations = false
+  disableGraphiql = false
+  disableQueryLog: true/false
+  dynamicJson = false
+  enableQueryBatching: true/false
+  exportSchemaGraphql: <path string>
+  exportSchemaJson: <path string>
+  extendedErrors = []
+  graphiql = '/graphiql'
+  graphql = '/graphql'
+  host = 'localhost'
+  includeExtensionResources = false
+  jwtAudiences: <string>
+  jwtRole = ['role']
+  jwtSecret: <string>
+  jwtTokenIdentifier
+  jwtVerifyAlgorithms: <string>
+  jwtVerifyAudience: <string>
+  jwtVerifyClockTolerance: <number>
+  jwtVerifyId: <string>
+  jwtVerifyIgnoreExpiration: true/false
+  jwtVerifyIgnoreNotBefore: true/false
+  jwtVerifyIssuer: <string>
+  jwtVerifySubject: <string>
+  legacyJsonUuid: true/false
+  maxPoolSize: <number>
+  plugins: <string>
+  port = 5000
+  prependPlugins: <string>
+  readCache: <path string>
+  schema: <string>
+  secret: <string>
+  showErrorStack: true/false
+  simpleCollections: [omit|both|only]
+  skipPlugins: <string>
+  timeout: <number>
+  token: : <string>
+  watch: true/false
+  writeCache: <path string>
+  ```
