@@ -40,7 +40,7 @@ for (const file of files) {
   const links = allMatches(contents, /href="([^"]+)"/g);
   for (const link of links) {
     const trimmed = link.replace(/[?#].*$/, "");
-    if (trimmed.match(/\.(js|css|png|svg)$/)) {
+    if (trimmed.match(/\.(js|css|png|svg|webmanifest)$/)) {
       // Meh, resources
       continue;
     }
