@@ -12,16 +12,9 @@ title: PostGraphile - full GraphQL API server in an instant from PostgreSQL data
 <div class='col-xs-12'>
 <div class='hero-block'>
 
-## Rapidly build highly customisable, lightning-fast GraphQL APIs
+## PostGraphile
 
-<h3>
-  PostGraphile is an open-source tool to help you rapidly design and serve a
-  high-performance, secure, client-facing GraphQL API backed primarily by your
-  PostgreSQL database. Delight your customers with incredible performance
-  whilst maintaining full control over your data and your database. Use our
-  powerful plugin system to customise every facet of your GraphQL API to your
-  liking.
-</h3>
+### Rapidly build highly customisable, lightning-fast GraphQL APIs
 
 <br />
 <div class='flex'>
@@ -43,14 +36,22 @@ title: PostGraphile - full GraphQL API server in an instant from PostgreSQL data
 <div class='text-center col-xs-12 col-md-9 col-lg-10'>
 <div class='hero-block'>
 
+<p class='intro'>
+  PostGraphile is an open-source tool to help you rapidly design and serve a
+  high-performance, secure, client-facing GraphQL API backed primarily by your
+  PostgreSQL database.  Delight your customers with incredible performance
+  whilst maintaining full control over your data and your database. Use our
+  powerful plugin system to customise every facet of your GraphQL API to your
+  liking.
+</p>
+
 ## Try it now!
 
 The fastest way to get a full client-facing GraphQL API up and running from
 a PostgreSQL database schema.
 
 ```js
-npx postgraphile -c postgres:///dbname \
-  --schema schema_name
+npx postgraphile -c postgres:///dbname --schema public
 ```
 
 See the [Quick Start Guide](/postgraphile/quick-start-guide/) to get PostGraphile up and running.
