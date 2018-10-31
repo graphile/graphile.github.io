@@ -1,43 +1,71 @@
 #!/usr/bin/env node
 
-const { spawnSync } = require("child_process");
+const { exec } = require("child_process");
 const { readFileSync, writeFileSync, existsSync } = require("fs");
 
-const { stdout: helpText, status } = spawnSync(
-  [
+async function main() {
+  const binary = [
     `${__dirname}/../../graphile-build/postgraphile/postgraphile`, // Custom to Benjie's development setup
     `${__dirname}/../node_modules/.bin/postgraphile`,
-  ].filter(existsSync)[0],
-  ["--help"],
-  { encoding: "utf8" }
-);
+  ].filter(existsSync)[0];
 
-if (status !== 0) {
-  throw new Error(`postgraphile exited with non-zero status '${status}'`);
+  // Don't even ask why we're doing this and not a simple `spawn`...
+  // https://github.com/nodejs/node/issues/19218#issuecomment-434823785
+  const child = exec(`"${binary}" --help | cat`, {
+    maxBuffer: 5 * 1024 * 1024,
+    stdio: "pipe",
+    shell: true,
+  });
+
+  const helpText = await new Promise((resolve, reject) => {
+    // Work around node bug
+    process.stdout._handle.setBlocking(true);
+    child.stdin._handle.setBlocking(true);
+    child.stdout._handle.setBlocking(true);
+    child.stderr._handle.setBlocking(true);
+    let data = "";
+
+    child.stdout.on("data", _data => {
+      data += _data.toString("utf8");
+    });
+
+    child.on("close", code => {
+      if (code === 0) {
+        resolve(data);
+      } else {
+        reject(new Error(`child process exited with code ${code}`));
+      }
+    });
+  });
+
+  const optionsLines = helpText
+    .match(/Options:([\s\S]+)Get started:/)[1]
+    .trim()
+    .split("\n")
+    .map(str => str.trim());
+
+  const markdownBullets = optionsLines.map(line => {
+    const [, options, description] = line.match(/^(.*)\s{2,}(.*)$/);
+    return `* \`${options
+      .trim()
+      .split(/\s*,\s*/)
+      .join("`, `")}\`  \n  ${description.trim()}`;
+  });
+
+  const bulletText = markdownBullets.join("\n");
+
+  const MARKDOWN_FILE = `${__dirname}/../src/pages/postgraphile/usage-cli.md`;
+  const inputMarkdown = readFileSync(MARKDOWN_FILE, "utf8");
+
+  const outputMarkdown = inputMarkdown.replace(
+    /(<!-- CLI_DOCBLOCK_BEGIN -->)[\s\S]*(<!-- CLI_DOCBLOCK_END -->)/,
+    (_, m1, m2) => `${m1}\n\n${bulletText}\n\n${m2}`
+  );
+
+  writeFileSync(MARKDOWN_FILE, outputMarkdown);
 }
 
-const optionsLines = helpText
-  .match(/Options:([\s\S]+)Get started:/)[1]
-  .trim()
-  .split("\n")
-  .map(str => str.trim());
-
-const markdownBullets = optionsLines.map(line => {
-  const [, options, description] = line.match(/^(.*)\s{2,}(.*)$/);
-  return `* \`${options
-    .trim()
-    .split(/\s*,\s*/)
-    .join("`, `")}\`  \n  ${description.trim()}`;
+main().catch(e => {
+  console.error(e);
+  process.exit(1);
 });
-
-const bulletText = markdownBullets.join("\n");
-
-const MARKDOWN_FILE = `${__dirname}/../src/pages/postgraphile/usage-cli.md`;
-const inputMarkdown = readFileSync(MARKDOWN_FILE, "utf8");
-
-const outputMarkdown = inputMarkdown.replace(
-  /(<!-- CLI_DOCBLOCK_BEGIN -->)[\s\S]*(<!-- CLI_DOCBLOCK_END -->)/,
-  (_, m1, m2) => `${m1}\n\n${bulletText}\n\n${m2}`
-);
-
-writeFileSync(MARKDOWN_FILE, outputMarkdown);
