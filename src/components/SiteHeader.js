@@ -162,6 +162,21 @@ export default withRouter(
                     path="/postgraphile"
                     render={() => (
                       <li className="navbar-item">
+                        <a
+                          className="nav-link"
+                          href="https://www.patreon.com/benjie"
+                          target="patreon"
+                        >
+                          Donate{" "}
+                          <span className="fas fa-external-link-square-alt" />
+                        </a>
+                      </li>
+                    )}
+                  />
+                  <Route
+                    path="/postgraphile"
+                    render={() => (
+                      <li className="navbar-item">
                         <Link
                           className={`nav-link ${
                             location.pathname.match(
@@ -279,9 +294,12 @@ export default withRouter(
                       }`}
                       to="/support/"
                     >
-                      Services
+                      <span>
+                        <span className="hide-when-small">Support and </span>Services
+                      </span>
                     </Link>
                   </li>
+                  {/*
                   <li className="navbar-item navbar-item-right hide-when-small">
                     <a
                       className="nav-link"
@@ -292,6 +310,7 @@ export default withRouter(
                       <span className="fas fa-external-link-square-alt" />
                     </a>
                   </li>
+                  */}
                   <li className="navbar-item navbar-item-right">
                     <a
                       className="nav-link nav-github-link flex items-center"
