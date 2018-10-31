@@ -152,7 +152,7 @@ app.listen(process.env.PORT || 3000);
 <details>
 <summary>(Click to expand.) Create a <tt>test_helper.js</tt> file for running your queries,
 responsible for importing options from `server.js`, and setting up/tearing down
-the transaction.  </summary>
+the transaction. Don't forget to set the environment variables used by this file. </summary>
 
 ```js
 const pg = require("pg");
@@ -285,7 +285,8 @@ exports.runGraphQLQuery = async function runGraphQLQuery(
       const replacementPgClient = await rootPgPool.connect();
       await replacementPgClient.query("begin");
       await replacementPgClient.query(
-        `select set_config('role', POSTGRAPHILE_AUTHENTICATOR_ROLE, true)`
+        `select set_config('role', $1, true)`,
+        [POSTGRAPHILE_AUTHENTICATOR_ROLE]
       );
 
       const localSettings = new Map();
