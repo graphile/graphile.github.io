@@ -81,8 +81,8 @@
       "path---postgraphile-debugging-b80a4e750babac087224.js.map"
     ],
     "component---src-templates-marketing-js": [
-      "component---src-templates-marketing-js-d5ef7a9f06b00ad841be.js",
-      "component---src-templates-marketing-js-d5ef7a9f06b00ad841be.js.map"
+      "component---src-templates-marketing-js-536ec2b86ec55904745a.js",
+      "component---src-templates-marketing-js-536ec2b86ec55904745a.js.map"
     ],
     "path---": [
       "path----557518bd178906f8d58a.js",
@@ -117,8 +117,8 @@
       "path---postgraphile-v-3-migration-2b4d02f962a18befd6b6.js.map"
     ],
     "component---src-templates-page-js": [
-      "component---src-templates-page-js-3dccd2f756825f25cae2.js",
-      "component---src-templates-page-js-3dccd2f756825f25cae2.js.map"
+      "component---src-templates-page-js-6df43615680729d980c3.js",
+      "component---src-templates-page-js-6df43615680729d980c3.js.map"
     ],
     "path---postgraphile-computed-columns": [
       "path---postgraphile-computed-columns-51231f0b94b0dfed23b3.js",
@@ -177,8 +177,8 @@
       "path---support-bf3737a42974bcc2fcc5.js.map"
     ],
     "path---index": [
-      "path---index-3bae5a346a6c565dbd0d.js",
-      "path---index-3bae5a346a6c565dbd0d.js.map"
+      "path---index-9af5238ba8a8966def21.js",
+      "path---index-9af5238ba8a8966def21.js.map"
     ],
     "path---news-postgraphile-version-4": [
       "path---news-postgraphile-version-4-ae2592784d6dec0468d8.js",
@@ -201,9 +201,9 @@
       "path---postgraphile-production-0a9671ccd24a088fe1f3.js.map"
     ],
     "commons": [
-      "commons-3596aa1ab404ed60101f.js",
+      "commons-e9c5ebe9f9d03df65cb6.js",
       "build-js-styles.css",
-      "commons-3596aa1ab404ed60101f.js.map",
+      "commons-e9c5ebe9f9d03df65cb6.js.map",
       "build-js-styles.css.map"
     ],
     "path---postgraphile-testing-jest": [
@@ -267,9 +267,9 @@
       "path---postgraphile-introduction-f0d6edafb91ffb70c7f5.js.map"
     ],
     "app": [
-      "app-735428ee0c0480ed18f1.js",
+      "app-222b9850ee142540a1d0.js",
       "build-js-styles.css",
-      "app-735428ee0c0480ed18f1.js.map",
+      "app-222b9850ee142540a1d0.js.map",
       "build-js-styles.css.map"
     ],
     "path---postgraphile-code-of-conduct": [
@@ -303,10 +303,6 @@
     "path---postgraphile-custom-queries": [
       "path---postgraphile-custom-queries-197c733697b39bab258c.js",
       "path---postgraphile-custom-queries-197c733697b39bab258c.js.map"
-    ],
-    "component---src-templates-home-js": [
-      "component---src-templates-home-js-1e7d079c21a568292097.js",
-      "component---src-templates-home-js-1e7d079c21a568292097.js.map"
     ],
     "path---postgraphile-versioning-policy": [
       "path---postgraphile-versioning-policy-4cb662592bd284840ed3.js",
