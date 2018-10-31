@@ -121,9 +121,6 @@ async function main() {
         {
           transformsWithOnePath: false,
         },
-        {
-          removeDimensions: false,
-        },
         /*
         {
           removeAttrs: { attrs: "(stroke|fill)" },
@@ -136,7 +133,7 @@ async function main() {
 
     const svg = fs.readFileSync(filePath, "utf8");
 
-    const juicedSvg = juice(svg);
+    const juicedSvg = juice(svg).replace(/ viewbox=/g, " viewBox=");
 
     const { data: optimisedSvg } = await svgo.optimize(juicedSvg, {
       path: filePath,
