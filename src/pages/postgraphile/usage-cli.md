@@ -218,4 +218,6 @@ Here is the list of keys and their default values, or types, supported in the `o
   token: : <string>
   watch: true/false
   writeCache: <path string>
-  ```
+```
+
+Please note that this interface is deprecated and will be removed in v5 (but its replacement hasn't been built yet...). You're encouraged to use PostGraphile as a library rather than using a `.postgraphilerc.js`.
