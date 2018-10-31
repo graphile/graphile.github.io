@@ -167,18 +167,19 @@ export default withRouter(
                           href="https://www.patreon.com/benjie"
                           target="patreon"
                         >
-                          Donate{" "}
+                          Sponsor{" "}
                           <span className="fas fa-external-link-square-alt" />
                         </a>
                       </li>
                     )}
                   />
+                  {/*
                   <Route
                     path="/postgraphile"
                     render={() => (
                       <li className="navbar-item">
                         <Link
-                          className={`nav-link ${
+                          className={`hide-when-small nav-link ${
                             location.pathname.match(
                               /^\/postgraphile\/pricing(\/|$)/
                             )
@@ -192,6 +193,7 @@ export default withRouter(
                       </li>
                     )}
                   />
+                  */}
 
                   {/* Graphile-build pages */}
 
