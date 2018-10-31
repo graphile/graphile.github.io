@@ -15,7 +15,11 @@ function run(cmd, args) {
 }
 
 async function main() {
-  for (const file of ["postgraphile.svg", "graphile.svg"]) {
+  for (const file of [
+    "postgraphile.svg",
+    "postgraphile-tiny.svg",
+    "graphile.svg",
+  ]) {
     const svgo = new SVGO({
       plugins: [
         {
