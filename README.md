@@ -15,3 +15,8 @@ then clear the `.cache` and `public` folders:
 ```bash
 rm -Rf .cache public
 ```
+
+If you are running Windows and encounter an error installing `fsevents`, then try:
+```bash
+yarn install --ignore-optional --force
+```
