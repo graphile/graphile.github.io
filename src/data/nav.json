@@ -387,6 +387,12 @@
         "subpages": []
       },
       {
+        "to": "/postgraphile/jwk-verification/",
+        "title": "PostGraphile JWK Verification",
+        "sectionId": "guides",
+        "subpages": []
+      },
+      {
         "to": "/postgraphile/default-role/",
         "title": "The Default Role",
         "sectionId": "guides",
