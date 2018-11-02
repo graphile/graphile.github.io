@@ -388,7 +388,7 @@
       },
       {
         "to": "/postgraphile/jwk-verification/",
-        "title": "PostGraphile JWK Verification",
+        "title": "JWK Verification (e.g. Auth0)",
         "sectionId": "guides",
         "subpages": []
       },
