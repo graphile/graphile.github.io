@@ -11,7 +11,7 @@ module.exports = function PgSmallNumericToFloatPlugin(
   builder,
   { pgNumericToFloatPrecisionCap = 12, pgNumericToFloatScaleCap = 2 }
 ) {
-  builder.hook("init", (_init, build) => {
+  builder.hook("build", build => {
     // Register a type handler for NUMERIC / DECIMAL (oid = 1700)
     build.pgRegisterGqlTypeByTypeId("1700", (_set, modifier) => {
       if (modifier && typeof modifier === "number" && modifier > 0) {
@@ -33,6 +33,6 @@ module.exports = function PgSmallNumericToFloatPlugin(
     });
 
     // We didn't modify _init, but we still must return it.
-    return _init;
+    return build;
   });
 };

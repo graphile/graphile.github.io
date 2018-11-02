@@ -12,10 +12,10 @@
  * occur.
  */
 module.exports = function PgNumericToFloatPlugin(builder) {
-  builder.hook("init", (_init, build) => {
+  builder.hook("build", build => {
     // Register a type handler for NUMERIC / DECIMAL (oid = 1700), always
     // returning the GraphQLFloat type
     build.pgRegisterGqlTypeByTypeId("1700", () => build.graphql.GraphQLFloat);
-    return _init;
+    return build;
   });
 };
