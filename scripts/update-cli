@@ -9,9 +9,11 @@ async function main() {
     `${__dirname}/../node_modules/.bin/postgraphile`,
   ].filter(existsSync)[0];
 
+  const isMac = process.platform === "darwin";
+
   // Don't even ask why we're doing this and not a simple `spawn`...
   // https://github.com/nodejs/node/issues/19218#issuecomment-434823785
-  const child = exec(`"${binary}" --help | cat`, {
+  const child = exec(`"${binary}" --help${isMac ? " | cat" : ""}`, {
     maxBuffer: 5 * 1024 * 1024,
     stdio: "pipe",
     shell: true,
