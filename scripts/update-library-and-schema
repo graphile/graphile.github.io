@@ -3,6 +3,7 @@
 const fetch = require("node-fetch");
 const { readFileSync, writeFileSync, existsSync } = require("fs");
 const { spawnSync } = require("child_process");
+const prettier = require("prettier");
 
 async function main() {
   const binary = [
@@ -83,7 +84,12 @@ async function main() {
         (_, m1, m2) => `${m1}${version}${m2}`
       );
 
-    writeFileSync(MARKDOWN_FILE, outputMarkdown);
+    writeFileSync(
+      MARKDOWN_FILE,
+      prettier.format(outputMarkdown, {
+        filepath: MARKDOWN_FILE,
+      })
+    );
   }
   {
     const MARKDOWN_FILE = `${__dirname}/../src/pages/postgraphile/usage-schema.md`;
@@ -99,11 +105,16 @@ async function main() {
         (_, m1, m2) => `${m1}${version}${m2}`
       );
 
-    writeFileSync(MARKDOWN_FILE, outputMarkdown);
+    writeFileSync(
+      MARKDOWN_FILE,
+      prettier.format(outputMarkdown, {
+        filepath: MARKDOWN_FILE,
+      })
+    );
   }
 }
 
 main().then(null, error => {
-  console.error(error);
+  console.error(error); // eslint-disable-line no-console
   process.exit(1);
 });

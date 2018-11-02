@@ -2,6 +2,7 @@
 
 const { exec, spawnSync, spawn } = require("child_process");
 const { readFileSync, writeFileSync, existsSync } = require("fs");
+const prettier = require("prettier");
 
 async function main() {
   const binary = [
@@ -74,7 +75,12 @@ async function main() {
       (_, m1, m2) => `${m1}${version}${m2}`
     );
 
-  writeFileSync(MARKDOWN_FILE, outputMarkdown);
+  writeFileSync(
+    MARKDOWN_FILE,
+    prettier.format(outputMarkdown, {
+      filepath: MARKDOWN_FILE,
+    })
+  );
 }
 
 main().catch(e => {
