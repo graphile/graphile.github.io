@@ -1,15 +1,17 @@
 #!/bin/bash
 set -e
 set -x
+DATE="$(date +%Y%m%d_%H%M%S)"
+git tag "deploy-${DATE}"
+git push --tags
 rm -rf .cache public __deploy
 gatsby build
 yarn test
 git clone git@github.com:graphile/graphile.github.io __deploy
 cd __deploy
 git checkout master
-rm -Rf ./*
-cp -a ../public/* ./
+cp -af ../public/* ./
 echo 'www.graphile.org' > CNAME
 git add .
-git commit -m'Deploy'
+git commit -m"Deploy $DATE"
 git push origin master
