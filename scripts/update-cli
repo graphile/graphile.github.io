@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const { exec } = require("child_process");
+const { exec, spawnSync, spawn } = require("child_process");
 const { readFileSync, writeFileSync, existsSync } = require("fs");
 
 async function main() {
@@ -11,13 +11,18 @@ async function main() {
 
   const isMac = process.platform === "darwin";
 
+  const versionChild = spawnSync(binary, ["--version"], { encoding: "utf8" });
+  const version = versionChild.stdout.trim();
+
   // Don't even ask why we're doing this and not a simple `spawn`...
   // https://github.com/nodejs/node/issues/19218#issuecomment-434823785
-  const child = exec(`"${binary}" --help${isMac ? " | cat" : ""}`, {
-    maxBuffer: 5 * 1024 * 1024,
-    stdio: "pipe",
-    shell: true,
-  });
+  const child = isMac
+    ? exec(`"${binary}" --help | cat`, {
+        maxBuffer: 5 * 1024 * 1024,
+        stdio: "pipe",
+        shell: true,
+      })
+    : spawn(binary, ["--help"]);
 
   const helpText = await new Promise((resolve, reject) => {
     // Work around node bug
@@ -59,10 +64,15 @@ async function main() {
   const MARKDOWN_FILE = `${__dirname}/../src/pages/postgraphile/usage-cli.md`;
   const inputMarkdown = readFileSync(MARKDOWN_FILE, "utf8");
 
-  const outputMarkdown = inputMarkdown.replace(
-    /(<!-- CLI_DOCBLOCK_BEGIN -->)[\s\S]*(<!-- CLI_DOCBLOCK_END -->)/,
-    (_, m1, m2) => `${m1}\n\n${bulletText}\n\n${m2}`
-  );
+  const outputMarkdown = inputMarkdown
+    .replace(
+      /(<!-- CLI_DOCBLOCK_BEGIN -->)[\s\S]*(<!-- CLI_DOCBLOCK_END -->)/,
+      (_, m1, m2) => `${m1}\n\n${bulletText}\n\n${m2}`
+    )
+    .replace(
+      /(<!-- CLI_VERSION_BEGIN -->)[\s\S]*(<!-- CLI_VERSION_END -->)/,
+      (_, m1, m2) => `${m1}${version}${m2}`
+    );
 
   writeFileSync(MARKDOWN_FILE, outputMarkdown);
 }
