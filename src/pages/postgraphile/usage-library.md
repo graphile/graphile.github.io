@@ -116,15 +116,15 @@ The following options are not part of PostGraphile core, but are available from 
 
 Using the `pgSettings` functionality mentioned above you can extend the data
 made available through `current_setting(...)` within PostgreSQL. Instead of
-passing an object you can pass a function which will be executed for each
-request, and the results merged in with the other settings PostGraphile
-automatically adds to the request.
+passing an object you can pass an (optionally asynchronous) function which will
+be executed for each request, and the results merged in with the other settings
+PostGraphile automatically adds to the request.
 
 For example:
 
 ```js
 export postgraphile(process.env.DATABASE_URL, schemaName, {
-  pgSettings: req => ({
+  pgSettings: async req => ({
     'user.id': `${req.session.passport.user}`,
     'http.headers.x-something': `${req.headers['x-something']}`,
     'http.method': `${req.method}`,
@@ -158,7 +158,7 @@ role, and applying the application setting `jwt.claims.user_id`:
 
 ```js
 export postgraphile(process.env.DATABASE_URL, schemaName, {
-  pgSettings: req => ({
+  pgSettings: async req => ({
     'role': 'visitor',
     'jwt.claims.user_id': `${req.user.id}`,
     //...
