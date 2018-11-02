@@ -79,6 +79,7 @@ The `postgraphile` middleware factory function takes three arguments, all of whi
   * `graphqlRoute`: The endpoint the GraphQL executer will listen on. Defaults to `/graphql`.
   * `graphiqlRoute`: The endpoint the GraphiQL query interface will listen on (**NOTE:** GraphiQL will not be enabled unless the `graphiql` option is set to `true`). Defaults to `/graphiql`.
   * `graphiql`: Set this to `true` to enable the GraphiQL interface.
+  * `enhanceGraphiql`: Set this to `true` to add some enhancements to GraphiQL; intended for development usage only.
   * `enableCors`: Enables some generous CORS settings for the GraphQL endpoint. There are some costs associated when enabling this, if at all possible try to put your API behind a reverse proxy.
   * `bodySizeLimit`: Set the maximum size of HTTP request bodies that can be parsed (default 100kB).  The size can be given as a human-readable string, such as '200kB' or '5MB' (case insensitive).
   * `enableQueryBatching`: [Experimental] Enable the middleware to process multiple GraphQL queries in one request.

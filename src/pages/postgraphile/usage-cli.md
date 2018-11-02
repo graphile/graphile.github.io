@@ -33,9 +33,9 @@ There are more CLI options available to customise the GraphQL server (these are 
 * `-V`, `--version`  
   output the version number
 * `--plugins <string>`  
-  a list of postgraphile plugins (not Graphile-Build plugins) to load, MUST be the first option
+  a list of PostGraphile server plugins (not Graphile Engine schema plugins) to load; if present, must be the _first_ option
 * `-c`, `--connection <string>`  
-  the PostgreSQL database name or connection string (if omitted, inferred from environmental variables). Examples: 'db', 'postgres:///db', 'postgres://user:password@domain:port/db?ssl=1'
+  the PostgreSQL database name or connection string. If omitted, inferred from environmental variables (see https://www.postgresql.org/docs/current/static/libpq-envars.html). Examples: 'db', 'postgres:///db', 'postgres://user:password@domain:port/db?ssl=1'
 * `-s`, `--schema <string>`  
   a Postgres schema to be introspected. Use commas to define multiple schemas
 * `-w`, `--watch`  
@@ -59,7 +59,9 @@ There are more CLI options available to customise the GraphQL server (these are 
 * `--simple-collections [omit|both|only]`  
   "omit" (default) - relay connections only, "only" - simple collections only (no Relay connections), "both" - both
 * `--no-ignore-rbac`  
-  [RECOMMENDED] set this to excludes fields, queries and mutations that the user isn't permitted to access; this will be the default in v5
+  [RECOMMENDED] set this to exclude fields, queries and mutations that the user isn't permitted to access; this will be enabled by default in v5
+* `--no-ignore-indexes`  
+  [RECOMMENDED] set this to exclude filters, orderBy, and relations that would be expensive to access due to missing indexes
 * `--include-extension-resources`  
   by default, tables and functions that come from extensions are excluded; use this flag to include them (not recommended)
 * `--show-error-stack`  
@@ -67,11 +69,11 @@ There are more CLI options available to customise the GraphQL server (these are 
 * `--extended-errors <string>`  
   a comma separated list of extended Postgres error fields to display in the GraphQL result. Recommended in development: 'hint,detail,errcode'. Default: none
 * `--append-plugins <string>`  
-  a comma-separated list of plugins to append to the list of GraphQL schema plugins
+  a comma-separated list of plugins to append to the list of Graphile Engine schema plugins
 * `--prepend-plugins <string>`  
-  a comma-separated list of plugins to prepend to the list of GraphQL schema plugins
+  a comma-separated list of plugins to prepend to the list of Graphile Engine schema plugins
 * `--skip-plugins <string>`  
-  a comma-separated list of plugins to skip
+  a comma-separated list of Graphile Engine schema plugins to skip
 * `--read-cache <path>`  
   [experimental] reads cached values from local cache file to improve startup time (you may want to do this in production)
 * `--write-cache <path>`  
@@ -86,6 +88,8 @@ There are more CLI options available to customise the GraphQL server (these are 
   the route to mount the GraphQL server on. defaults to `/graphql`
 * `-i`, `--graphiql <path>`  
   the route to mount the GraphiQL interface on. defaults to `/graphiql`
+* `--enhance-graphiql`  
+  [DEVELOPMENT] opt in to additional GraphiQL functionality (this may change over time - only intended for use in development)
 * `-b`, `--disable-graphiql`  
   disables the GraphiQL interface. overrides the GraphiQL route option
 * `-o`, `--cors`  
@@ -123,11 +127,13 @@ There are more CLI options available to customise the GraphQL server (these are 
 * `-t`, `--jwt-token-identifier <identifier>`  
   the Postgres identifier for a composite type that will be used to create JWT tokens
 * `--token <identifier>`  
-  DEPRECATED: use --jwt-token-identifier instead
+  [DEPRECATED] Use --jwt-token-identifier instead. This option will be removed in v5.
 * `--secret <string>`  
-  DEPRECATED: Use --jwt-secret instead
+  [DEPRECATED] Use --jwt-secret instead. This option will be removed in v5.
 * `--jwt-audiences <string>`  
-  DEPRECATED Use --jwt-verify-audience instead
+  [DEPRECATED] Use --jwt-verify-audience instead. This option will be removed in v5.
+* `--legacy-functions-only`  
+  [DEPRECATED] PostGraphile 4.1.0 introduced support for PostgreSQL functions than declare parameters with IN/OUT/INOUT or declare RETURNS TABLE(...); enable this flag to ignore these types of functions. This option will be removed in v5.
 * `--legacy-relations <omit|deprecated|only>`  
   some one-to-one relations were previously detected as one-to-many - should we export 'only' the old relation shapes, both new and old but mark the old ones as 'deprecated', or 'omit' the old relation shapes entirely
 * `--legacy-json-uuid`  
