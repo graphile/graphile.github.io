@@ -10,8 +10,7 @@ PostGraphile is packaged as a Node.js module, you can install it with `npm` or
 `yarn` (depending on your preference) - users tend to have fewer issues with
 `yarn`, so we recommend it.
 
-We recommend using the latest LTS version of Node.js (version 8.12.0 at time of
-writing) and PostgreSQL (version 10.5 at time of writing), but we have limited
+We recommend using the latest LTS version of Node.js and PostgreSQL, but we have limited
 support for older versions. Using newer released versions should work fine (we
 don't recommend using with alpha/beta versions though).
 
