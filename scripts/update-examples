@@ -109,7 +109,8 @@ set search_path to app_public, app_private, public;
  */
 create table quiz (
   id serial primary key,
-  name text not null
+  name text not null,
+  updated_at timestamptz not null default now()
 );
 
 create table quiz_entry (
@@ -130,6 +131,11 @@ create table quiz_entry_answer (
  */
 alter table quiz add column precision_12_scale_2 numeric(12,2);
 alter table quiz add column precision_200_scale_100 numeric(200,100);
+
+/**
+ * This is just to aid testing
+ */
+insert into quiz (name) values ('Cats'), ('Dogs'), ('Snakes');
 `
   );
   const pgPool = new pg.Pool({
