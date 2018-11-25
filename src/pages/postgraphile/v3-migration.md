@@ -198,9 +198,11 @@ If you don't like the nulls everywhere, I encourage you to use the `-N` /
 non-breaking change, but disabling it **is** a breaking change - hence why it
 is not the default behaviour.
 
-#### Fields in mutations must be explicitly set to `null`
+#### Fields in create mutations now respect defaults
 
-Previously ommiting a field from a mutation query would cause it to be set to `NULL`.  Now fields must be explicitly set to `null` in the mutation payload to have the same effect. 
+In v3, omitting a field from a create mutation would cause it to be set to `NULL`,
+ignoring the column default. We fixed this in v4, now if you want to set the 
+column null you must specify NULL in the mutation (rather than omitting the key).
 
 #### Query procedures that `returns setof <scalar>` no longer have `pageInfo` nor `totalCount`
 
