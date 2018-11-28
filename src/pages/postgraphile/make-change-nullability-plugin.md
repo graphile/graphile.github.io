@@ -16,13 +16,14 @@ For more information about nullability in PostGraphile in general, see the FAQ q
 
 You can combine this plugin with the use of `makeWrapResolversPlugin` so that only the current user can see their own email address:
 
-```
+```js{5-7}
 // 1: make User.email nullable:
 makeChangeNullabilityPlugin({
   User: {
     email: true,
   },
 }),
+
 // 2: return null unless the user id matches the current logged in user_id
 makeWrapResolversPlugin({
   User: {
