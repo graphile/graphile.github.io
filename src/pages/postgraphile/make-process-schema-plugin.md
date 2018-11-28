@@ -21,8 +21,20 @@ Use cases include:
 
 ### Example
 
-```js{5-7}
+```js
+require("graphile-utils");
+
 module.exports = makeProcessSchemaPlugin(schema => {
   return addThirdPartyEnhancementsToSchema(schema);
+});
+```
+
+You can also use `makeProcessSchemaPlugin` to replace the current schema with a stitched schema and run it from within the PostGraphile server:
+
+```js
+require("graphile-utils");
+
+module.exports = makeProcessSchemaPlugin(schema => {
+  return stitchOtherSchemasInto(schema);
 });
 ```
