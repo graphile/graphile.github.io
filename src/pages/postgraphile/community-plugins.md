@@ -26,6 +26,7 @@ Schema extension plugins for PostGraphile:
 * [@graphile-contrib/pg-simplify-inflector](https://github.com/graphile-contrib/pg-simplify-inflector) - simplifies field names by automatically removing `ByFooIdAndBarId`-style suffixes.
 * [@graphile-contrib/pg-many-to-many](https://github.com/graphile-contrib/pg-many-to-many) - adds connection fields for many-to-many relations.
 * [@graphile-contrib/pg-order-by-related](https://github.com/graphile-contrib/pg-order-by-related) - enables ordering by related table columns.
+* [@graphile-contrib/pg-order-by-multi-column-index](https://github.com/graphile-contrib/pg-order-by-multi-column-index) - enables ordering by multi-column indexes when using `ignoreIndexes: false`.
 * [postgraphile-plugin-derived-field](https://github.com/mattbretl/postgraphile-plugin-derived-field) - provides an interface for adding derived fields
 * [postgraphile-plugin-upload-field](https://github.com/mattbretl/postgraphile-plugin-upload-field) - enables file uploads (see `postgraphile-upload-example` below)
 * [event-phile](https://github.com/stlbucket/event-phile) - "capture designated function calls as re-playable events"
