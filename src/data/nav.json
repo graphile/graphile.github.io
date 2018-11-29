@@ -331,14 +331,26 @@
         "sectionId": "customising",
         "subpages": [
           {
+            "to": "/postgraphile/make-add-inflectors-plugin/",
+            "title": "makeAddInflectorsPlugin",
+            "sectionId": "customising",
+            "subpages": []
+          },
+          {
+            "to": "/postgraphile/make-change-nullability-plugin/",
+            "title": "makeChangeNullabilityPlugin",
+            "sectionId": "customising",
+            "subpages": []
+          },
+          {
             "to": "/postgraphile/make-extend-schema-plugin/",
             "title": "makeExtendSchemaPlugin",
             "sectionId": "customising",
             "subpages": []
           },
           {
-            "to": "/postgraphile/make-add-inflectors-plugin/",
-            "title": "makeAddInflectorsPlugin",
+            "to": "/postgraphile/make-process-schema-plugin/",
+            "title": "makeProcessSchemaPlugin",
             "sectionId": "customising",
             "subpages": []
           },
