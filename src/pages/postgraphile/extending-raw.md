@@ -92,6 +92,19 @@ Sometimes you might want to override what an existing field does. Due to the
 way that PostGraphile works (where the root Query field resolvers are the only
 ones who perform SQL queries) this is generally most useful at the top level.
 
+In PostGraphile version 4.1 and above, you can use `makeWrapResolversPlugin` to easily wrap a resolver: 
+
+```js
+module.exports = makeWrapResolversPlugin({
+  User: {
+    async email(resolve, source, args, context, resolveInfo) {
+      const result = await resolve();
+      return result.toLowerCase();
+    }
+  }
+});
+```
+
 The following example modifies the 'createLink' mutation so that it performs
 some additional validation (thrown an error if the link's `title` is too short)
 and performs an action after the link has been saved. You could use a plugin
