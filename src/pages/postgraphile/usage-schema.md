@@ -77,7 +77,7 @@ export async function performQuery(
 
 This function takes three arguments (all are optional) and returns a promise to a GraphQLSchema object.
 
-The returned GraphQLSchema will **not** be updated when your database changes - if you require "watch" functionality, please use `watchPostGraphileSchema` instead (see below). The below options are valid for <tt>postgraphile@<!-- SCHEMA_VERSION_BEGIN -->4.1.0-rc.0<!-- SCHEMA_VERSION_END --></tt>.
+The returned GraphQLSchema will **not** be updated when your database changes - if you require "watch" functionality, please use `watchPostGraphileSchema` instead (see below). The below options are valid for <tt>postgraphile@<!-- SCHEMA_VERSION_BEGIN -->4.1.0-rc.3<!-- SCHEMA_VERSION_END --></tt>.
 
 * **`pgConfig`**: An object or string that will be passed to the [`pg`][] library and used to connect to a PostgreSQL backend. If you already have a client or pool instance, when using this function you may also pass a `pg` client or a `pg-pool` instance directly instead of a config.
 * **`schemaName`**: A string which specifies the PostgreSQL schema that PostGraphile will use to create a GraphQL schema. The default schema is the `public` schema. May be an array for multiple schemas. For users who want to run the Postgres introspection query ahead of time, you may also pass in a `PgCatalog` instance directly.
@@ -88,6 +88,7 @@ The returned GraphQLSchema will **not** be updated when your database changes - 
   * `classicIds`: Enables classic ids for Relay support. Instead of using the field name `nodeId` for globally unique ids, PostGraphile will instead use the field name `id` for its globally unique ids. This means that table `id` columns will also get renamed to `rowId`.
   * `disableDefaultMutations`: Setting this to `true` will prevent the creation of the default mutation types & fields. Database mutation will only be possible through Postgres functions.
   * `ignoreRBAC`: Set false (recommended) to exclude fields, queries and mutations that the user isn't permitted to access from the generated GraphQL schema; set this option true to skip these checks and create GraphQL fields and types for everything. The default is `true`, in v5 the default will change to `false`.
+  * `ignoreIndexes`: Set false (recommended) to exclude filters, orderBy, and relations that would be expensive to access due to missing indexes. Changing this from true to false is a breaking change, but false to true is not, so we recommend you start with it set to `false`. The default is `true`, in v5 the default may change to `false`.
   * `includeExtensionResources`: By default, tables and functions that come from extensions are excluded from the generated GraphQL schema as general applications don't need them to be exposed to the end user. You can use this flag to include them in the generated schema (not recommended).
   * `showErrorStack`: Enables adding a `stack` field to the error response. Can be either the boolean `true` (which results in a single stack string) or the string `json` (which causes the stack to become an array with elements for each line of the stack). Recommended in development, not recommended in production.
   * `extendedErrors`: Extends the error response with additional details from the Postgres error. Can be any combination of `['hint', 'detail', 'errcode']`. Default is `[]`.

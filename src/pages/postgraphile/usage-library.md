@@ -52,7 +52,7 @@ http
 
 #### API: `postgraphile(pgConfig, schemaName, options)`
 
-The `postgraphile` middleware factory function takes three arguments, all of which are optional. The below options are valid for <tt>postgraphile@<!-- LIBRARY_VERSION_BEGIN -->4.1.0-rc.0<!-- LIBRARY_VERSION_END --></tt>.
+The `postgraphile` middleware factory function takes three arguments, all of which are optional. The below options are valid for <tt>postgraphile@<!-- LIBRARY_VERSION_BEGIN -->4.1.0-rc.3<!-- LIBRARY_VERSION_END --></tt>.
 
 * **`pgConfig`**: An object or string that will be passed to the [`pg`][] library and used to connect to a PostgreSQL backend, OR a pg.Pool to use.
 * **`schemaName`**: A string, or array of strings, which specifies the PostgreSQL schema(s) you to expose via PostGraphile; defaults to 'public'
@@ -64,6 +64,7 @@ The `postgraphile` middleware factory function takes three arguments, all of whi
   * `classicIds`: Enables classic ids for Relay support. Instead of using the field name `nodeId` for globally unique ids, PostGraphile will instead use the field name `id` for its globally unique ids. This means that table `id` columns will also get renamed to `rowId`.
   * `disableDefaultMutations`: Setting this to `true` will prevent the creation of the default mutation types & fields. Database mutation will only be possible through Postgres functions.
   * `ignoreRBAC`: Set false (recommended) to exclude fields, queries and mutations that the user isn't permitted to access from the generated GraphQL schema; set this option true to skip these checks and create GraphQL fields and types for everything. The default is `true`, in v5 the default will change to `false`.
+  * `ignoreIndexes`: Set false (recommended) to exclude filters, orderBy, and relations that would be expensive to access due to missing indexes. Changing this from true to false is a breaking change, but false to true is not, so we recommend you start with it set to `false`. The default is `true`, in v5 the default may change to `false`.
   * `includeExtensionResources`: By default, tables and functions that come from extensions are excluded from the generated GraphQL schema as general applications don't need them to be exposed to the end user. You can use this flag to include them in the generated schema (not recommended).
   * `showErrorStack`: Enables adding a `stack` field to the error response. Can be either the boolean `true` (which results in a single stack string) or the string `json` (which causes the stack to become an array with elements for each line of the stack). Recommended in development, not recommended in production.
   * `extendedErrors`: Extends the error response with additional details from the Postgres error. Can be any combination of `['hint', 'detail', 'errcode']`. Default is `[]`.
@@ -78,6 +79,7 @@ The `postgraphile` middleware factory function takes three arguments, all of whi
   * `exportGqlSchemaPath`: Enables saving the detected schema, in GraphQL schema format, to the given location. The directories must exist already, if the file exists it will be overwritten.
   * `graphqlRoute`: The endpoint the GraphQL executer will listen on. Defaults to `/graphql`.
   * `graphiqlRoute`: The endpoint the GraphiQL query interface will listen on (**NOTE:** GraphiQL will not be enabled unless the `graphiql` option is set to `true`). Defaults to `/graphiql`.
+  * `externalUrlBase`: If you are using watch mode, or have enabled GraphiQL, and you either mount PostGraphile under a path, or use PostGraphile behind some kind of proxy that puts PostGraphile under a subpath (or both!) then you must specify this setting so that PostGraphile can figure out it's external URL. (e.g. if you do `app.use('/path/to', postgraphile(...))`), which is not officially supported, then you should pass `externalUrlBase: '/path/to'`.) This setting should never end in a slash (`/`). To specify that the external URL is the expected one, either omit this setting or set it to the empty string `''`.
   * `graphiql`: Set this to `true` to enable the GraphiQL interface.
   * `enhanceGraphiql`: Set this to `true` to add some enhancements to GraphiQL; intended for development usage only.
   * `enableCors`: Enables some generous CORS settings for the GraphQL endpoint. There are some costs associated when enabling this, if at all possible try to put your API behind a reverse proxy.
@@ -91,7 +93,7 @@ The `postgraphile` middleware factory function takes three arguments, all of whi
   * `legacyRelations`: Some one-to-one relations were previously detected as one-to-many - should we export 'only' the old relation shapes, both new and old but mark the old ones as 'deprecated' (default), or 'omit' (recommended) the old relation shapes entirely.
   * `legacyJsonUuid`: ONLY use this option if you require the v3 typenames 'Json' and 'Uuid' over 'JSON' and 'UUID'.
   * `disableQueryLog`: Turns off GraphQL query logging. By default PostGraphile will log every GraphQL query it processes along with some other information. Set this to `true` (recommended in production) to disable that feature.
-  * `pgSettings`: A plain object specifying custom config values to set in the PostgreSQL transaction (accessed via `current_setting('my.custom.setting')`) or a function which will return the same (or a Promise to the same) based on the incoming web request (e.g. to extract session data).
+  * `pgSettings`: A plain object specifying custom config values to set in the PostgreSQL transaction (accessed via `current_setting('my.custom.setting')`) **or** an (optionally asynchronous) function which will return the same (or a Promise to the same) based on the incoming web request (e.g. to extract session data).
   * `additionalGraphQLContextFromRequest`: Some Graphile Engine schema plugins may need additional information available on the `context` argument to the resolver - you can use this function to provide such information based on the incoming request - you can even use this to change the response [experimental], e.g. setting cookies.
   * `pluginHook`: [experimental] Plugin hook function, enables functionality within PostGraphile to be expanded with plugins. Generate with `makePluginHook(plugins)` passing a list of plugin objects.
   * `simpleCollections`: Should we use relay pagination, or simple collections? "omit" (default) - relay connections only, "only" (not recommended) - simple collections only (no Relay connections), "both" - both.
