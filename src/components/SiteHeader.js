@@ -173,7 +173,6 @@ export default withRouter(
                       </li>
                     )}
                   />
-                  {/*
                   <Route
                     path="/postgraphile"
                     render={() => (
@@ -193,7 +192,6 @@ export default withRouter(
                       </li>
                     )}
                   />
-                  */}
 
                   {/* Graphile-build pages */}
 

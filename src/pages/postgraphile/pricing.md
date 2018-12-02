@@ -149,7 +149,7 @@ title: PostGraphile Pro!
 </tr>
 
 <tr>
-  <th>Simple GraphQL Subscriptions</th>
+  <th>Simple GraphQL <a href="/postgraphile/subscriptions/">Subscriptions</a></th>
   <td><span class='fas fa-times-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
   <td><sup style="visibility: hidden">&nbsp;†</sup><span class='fas fa-check-circle'></span><sup>&nbsp;†</sup></td>
@@ -184,13 +184,6 @@ title: PostGraphile Pro!
 </tr>
 
 <tr>
-  <th>Support</th>
-  <td>Community</td>
-  <td>Community</td>
-  <td>Email</td>
-</tr>
-
-<tr>
   <th>License</th>
   <td>MIT</td>
   <td>Commercial</td>
@@ -199,9 +192,9 @@ title: PostGraphile Pro!
 
 <tr>
   <th>Pricing</th>
-  <td><strong>Free</strong><span class='note'>Patreon appreciated</span></td>
+  <td><strong>Free / Donationware</strong><span class='note'>Please give back</span></td>
   <td><strong>Pay what you can</strong><sup>§</sup><span class='note'>via Patreon, min $1/mo</span></td>
-  <td>$100/mo + VAT<span class='note'>per project</span></td>
+  <td><strong>$100/mo + VAT</strong><span class='note'>per project</span></td>
 </tr>
 
 <tr>
@@ -216,7 +209,7 @@ title: PostGraphile Pro!
 
 <tr>
   <th></th>
-  <td><a class='button--outline' href='/postgraphile/introduction/'>Get Started</a></td>
+  <td><a class='button--solid' href='https://patreon.com/benjie'>Sponsor development <span class='fas fa-external-link-square-alt'></span></a></td>
   <td><a class='button--solid' href='https://store.graphile.com'>Buy <span class='fas fa-external-link-square-alt'></span></a></td>
   <td><a class='button--solid' href='https://store.graphile.com'>Buy <span class='fas fa-external-link-square-alt'></span></a></td>
 </tr>
