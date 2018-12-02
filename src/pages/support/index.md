@@ -53,7 +53,7 @@ interest; resulting in faster features and fixes, and better documentation.
 ### Code of Conduct
 
 The Graphile project is covered by [our code of
-conduct](https://www.graphile.org/postgraphile/code-of-conduct/). Please be
+conduct](/postgraphile/code-of-conduct/). Please be
 respectful of all people and property.
 
 ### Community chat
