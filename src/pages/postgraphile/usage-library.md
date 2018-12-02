@@ -52,7 +52,7 @@ http
 
 #### API: `postgraphile(pgConfig, schemaName, options)`
 
-The `postgraphile` middleware factory function takes three arguments, all of which are optional. The below options are valid for <tt>postgraphile@<!-- LIBRARY_VERSION_BEGIN -->4.1.0-rc.3<!-- LIBRARY_VERSION_END --></tt>.
+The `postgraphile` middleware factory function takes three arguments, all of which are optional. The below options are valid for <tt>postgraphile@<!-- LIBRARY_VERSION_BEGIN -->4.1.0-rc.4<!-- LIBRARY_VERSION_END --></tt>.
 
 * **`pgConfig`**: An object or string that will be passed to the [`pg`][] library and used to connect to a PostgreSQL backend, OR a pg.Pool to use.
 * **`schemaName`**: A string, or array of strings, which specifies the PostgreSQL schema(s) you to expose via PostGraphile; defaults to 'public'
