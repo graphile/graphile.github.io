@@ -78,6 +78,31 @@ function htmlerize(text) {
     .replace(/'/g, "&apos;");
 }
 
+const getNextPrev = (nav, pathname) => {
+  const allPages = nav.reduce((memo, page) => {
+    memo.push(page);
+    if (page.subpages) {
+      memo.push(...page.subpages);
+    }
+    return memo;
+  }, []);
+  const currentPage = allPages.find(({ to }) => to === pathname);
+  if (!currentPage) {
+    return {};
+  }
+  const currentIndex = allPages.indexOf(currentPage);
+  let next, nextText, prev, prevText;
+  if (currentIndex > 0) {
+    prev = allPages[currentIndex - 1].to;
+    prevText = allPages[currentIndex - 1].title;
+  }
+  if (currentIndex >= 0 && currentIndex < allPages.length - 1) {
+    next = allPages[currentIndex + 1].to;
+    nextText = allPages[currentIndex + 1].title;
+  }
+  return { next, nextText, prev, prevText };
+};
+
 const Page = ({
   data: {
     remark: { html: rawHTML, frontmatter: { title, showExamples } },
@@ -97,16 +122,12 @@ const Page = ({
   };
   const navPages = thisNav.pages;
   const navSections = thisNav.sections || [];
-  const currentIndex = navPages.findIndex(({ to }) => to === location.pathname);
-  let next, nextText, prev, prevText;
-  if (currentIndex > 0) {
-    prev = navPages[currentIndex - 1].to;
-    prevText = navPages[currentIndex - 1].title;
-  }
-  if (currentIndex >= 0 && currentIndex < navPages.length - 1) {
-    next = navPages[currentIndex + 1].to;
-    nextText = navPages[currentIndex + 1].title;
-  }
+
+  const { next, nextText, prev, prevText } = getNextPrev(
+    navPages,
+    location.pathname
+  );
+
   const isPostGraphileDocs = navSection === "postgraphile";
 
   return (
