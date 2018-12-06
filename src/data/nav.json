@@ -371,6 +371,12 @@
             "title": "Plugin Gallery",
             "sectionId": "customising",
             "subpages": []
+          },
+          {
+            "to": "/postgraphile/community-plugins/",
+            "title": "Community Plugins",
+            "sectionId": "customising",
+            "subpages": []
           }
         ]
       },
@@ -435,8 +441,8 @@
         "subpages": []
       },
       {
-        "to": "/postgraphile/community-plugins/",
-        "title": "Community Plugins",
+        "to": "/postgraphile/community-contributions/",
+        "title": "Community Contributions",
         "sectionId": "community",
         "subpages": []
       },
