@@ -355,6 +355,12 @@
             "subpages": []
           },
           {
+            "to": "/postgraphile/make-wrap-resolvers-plugin/",
+            "title": "makeWrapResolversPlugin",
+            "sectionId": "customising",
+            "subpages": []
+          },
+          {
             "to": "/postgraphile/extending-raw/",
             "title": "Graphile Engine",
             "sectionId": "customising",
