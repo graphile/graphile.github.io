@@ -192,7 +192,7 @@ title: PostGraphile Pro!
 
 <tr>
   <th>Pricing</th>
-  <td><strong>Free / Donationware</strong><span class='note'>Please give back</span></td>
+  <td><strong>Free / Crowd-funded</strong><span class='note'>Please give back</span></td>
   <td><strong>Pay what you can</strong><sup>§</sup><span class='note'>via Patreon, min $1/mo</span></td>
   <td><strong>$100/mo + VAT</strong><span class='note'>per project</span></td>
 </tr>

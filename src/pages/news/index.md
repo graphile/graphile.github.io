@@ -20,7 +20,7 @@ title: News
 
 <br />
 <div class='flex'>
-<a class='button--solid-light' href='/news/postgraphile-version-4/'>Latest Announcement <span class='fas fa-fw fa-arrow-right' /></a>
+<a class='button--solid-light' href='/news/postgraphile-version-4-1/'>Latest Announcement <span class='fas fa-fw fa-arrow-right' /></a>
 </div>
 
 </div>

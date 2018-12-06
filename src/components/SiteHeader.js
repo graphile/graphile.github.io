@@ -76,7 +76,9 @@ export default withRouter(
                       <li className="navbar-item">
                         <Link
                           className={`nav-link ${
-                            location.pathname.match(/^\/postgraphile(\/|$)/)
+                            location.pathname.match(
+                              /^\/(postgraphile|sponsors?)(\/|$)/
+                            )
                               ? "active"
                               : ""
                           }`}
@@ -123,7 +125,7 @@ export default withRouter(
                   {/* PostGraphile pages */}
 
                   <Route
-                    path="/postgraphile"
+                    path={["/postgraphile", "/sponsor"]}
                     render={() => (
                       <li className="navbar-item">
                         <Link
@@ -140,7 +142,7 @@ export default withRouter(
                     )}
                   />
                   <Route
-                    path="/postgraphile"
+                    path={["/postgraphile", "/sponsor"]}
                     render={() => (
                       <li className="navbar-item">
                         <Link
@@ -159,22 +161,24 @@ export default withRouter(
                     )}
                   />
                   <Route
-                    path="/postgraphile"
+                    path={["/postgraphile", "/sponsor"]}
                     render={() => (
                       <li className="navbar-item">
-                        <a
-                          className="nav-link"
-                          href="https://www.patreon.com/benjie"
-                          target="patreon"
+                        <Link
+                          className={`nav-link ${
+                            location.pathname.match(/^\/sponsor(\/|$)/)
+                              ? "active"
+                              : ""
+                          }`}
+                          to="/sponsor/"
                         >
-                          Sponsor{" "}
-                          <span className="fas fa-external-link-square-alt" />
-                        </a>
+                          Sponsor
+                        </Link>
                       </li>
                     )}
                   />
                   <Route
-                    path="/postgraphile"
+                    path={["/postgraphile", "/sponsor"]}
                     render={() => (
                       <li className="navbar-item">
                         <Link
