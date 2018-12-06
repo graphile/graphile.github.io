@@ -2,6 +2,8 @@ import React from "react";
 import Link from "gatsby-link";
 import { withRouter, Switch, Route } from "react-router-dom";
 
+const POSTGRAPHILE_ROUTES = ["/postgraphile", "/sponsor", "/support"];
+
 function enableSearch(history) {
   if (typeof docsearch === "undefined") {
     return;
@@ -76,9 +78,7 @@ export default withRouter(
                       <li className="navbar-item">
                         <Link
                           className={`nav-link ${
-                            location.pathname.match(
-                              /^\/(postgraphile|sponsors?)(\/|$)/
-                            )
+                            location.pathname.match(/^\/postgraphile(\/|$)/)
                               ? "active"
                               : ""
                           }`}
@@ -108,24 +108,10 @@ export default withRouter(
                     )}
                   />
 
-                  {/* Support pages */}
-
-                  <Route
-                    exact
-                    path="/support/"
-                    render={() => (
-                      <li className="navbar-item">
-                        <Link className={"nav-link"} to="/postgraphile/">
-                          PostGraphile
-                        </Link>
-                      </li>
-                    )}
-                  />
-
                   {/* PostGraphile pages */}
 
                   <Route
-                    path={["/postgraphile", "/sponsor"]}
+                    path={POSTGRAPHILE_ROUTES}
                     render={() => (
                       <li className="navbar-item">
                         <Link
@@ -142,7 +128,7 @@ export default withRouter(
                     )}
                   />
                   <Route
-                    path={["/postgraphile", "/sponsor"]}
+                    path={POSTGRAPHILE_ROUTES}
                     render={() => (
                       <li className="navbar-item">
                         <Link
@@ -161,7 +147,7 @@ export default withRouter(
                     )}
                   />
                   <Route
-                    path={["/postgraphile", "/sponsor"]}
+                    path={POSTGRAPHILE_ROUTES}
                     render={() => (
                       <li className="navbar-item">
                         <Link
@@ -178,7 +164,7 @@ export default withRouter(
                     )}
                   />
                   <Route
-                    path={["/postgraphile", "/sponsor"]}
+                    path={POSTGRAPHILE_ROUTES}
                     render={() => (
                       <li className="navbar-item">
                         <Link
