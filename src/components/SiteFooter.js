@@ -77,15 +77,10 @@ const SiteFooter = () => {
             <br />
             <br />
             You can support the projects via{" "}
-            <a
-              href="https://www.patreon.com/benjie"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Patreon
-            </a>, by <Link to="/postgraphile/pricing/">going Pro</Link>, or by
-            paying for <Link to="/support/">Professional Services</Link>. Your
-            support is gratefully received 🙏
+            <Link to="/sponsor/">sponsorship</Link>, by{" "}
+            <Link to="/postgraphile/pricing/">going Pro</Link>, or by paying for{" "}
+            <Link to="/support/">Professional Services</Link>. Your support is
+            gratefully received 🙏
             <br />
             <br />
             This site is copyright &copy; Benjie Gillam {currentYear}. Design
