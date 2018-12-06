@@ -222,7 +222,7 @@ same name as that which you removed. It's advised that rather than removing
 things, you instead avoid them being generated in the first place.
 
 **If you're looking for an easy way to prevent certain tables, fields,
-\*functions or relations being added to your GraphQL schema, check out [smart
+functions or relations being added to your GraphQL schema, check out [smart
 comments](/postgraphile/smart-comments/).**
 
 If you want to remove a class of things from the schema then you can remove
