@@ -40,15 +40,14 @@ community members' time.
 
 ### Sponsorship
 
-PostGraphile is
-"[donationware](https://en.wikipedia.org/wiki/Donationware)" - we rely on
-individual and corporate sponsors to support our work on the PostGraphile
-project, and to enable us to keep the extremely permissive MIT license.
+PostGraphile is crowd-funded - we rely on users to become individual or
+corporate sponsors and support our work on the PostGraphile project, and to
+enable us to keep the extremely permissive MIT license.
 
 Sponsoring PostGraphile's ongoing development and maintenance is in your
 interest; resulting in faster features and fixes, and better documentation.
 
-[Donate now!](https://www.patreon.com/benjie)
+[Read more about sponsorship](/sponsor/)
 
 ### Code of Conduct
 

@@ -13,6 +13,11 @@
     ],
     "pages": [
       {
+        "to": "/news/postgraphile-version-4-1/",
+        "title": "Version 4.1 Announcement",
+        "sectionId": "main"
+      },
+      {
         "to": "/news/postgraphile-version-4/",
         "title": "Version 4 Announcement",
         "sectionId": "main"
