@@ -43,9 +43,7 @@ You also get the following query fields ("Read"):
 # Create a User and get back details of the record we created
 mutation {
   createUser(
-    input: {
-      user: { id: 1, name: "Bilbo Baggins", username: "bilbo" }
-    }
+    input: { user: { id: 1, name: "Bilbo Baggins", username: "bilbo" } }
   ) {
     user {
       id
@@ -78,3 +76,32 @@ mutation {
   }
 }
 ```
+
+### If mutations don't show up...
+
+First of all, check for errors being output from your PostGraphile server. If
+there are no errors, here's some reasons that mutations might not show up in
+the generated schema:
+
+* `--disable-default-mutations` (or `-M`) specified (or library equivalent)
+* `@omit create,update,delete` smart comments on the tables
+* Insufficient permissions on the tables and `--no-ignore-rbac` specified
+* Tables not in an exposed schema
+* Views instead of tables
+* Missing primary keys (though 'create' mutations will still be added in this case)
+
+Don't forget to check any associated `.postgraphilerc` for these settings too!
+
+If you're new to GraphQL, perhaps you're looking in the wrong place? In the
+GraphiQL interface, open the docs on the right and go to the root. Select the
+`Mutation` type to see the available mutations. If you try to execute a
+mutation (e.g. using autocomplete) you must use the `mutation` operation type
+when composing the request:
+
+```graphql
+mutation {
+  createThing...
+}
+```
+
+otherwise GraphiQL will interpret the request as a query.
