@@ -133,7 +133,9 @@ const Page = ({
   return (
     <div
       className={`template-page ${
-        location.pathname.match(/^\/(postgraphile|news|sponsors?)(\/|$)/)
+        location.pathname.match(
+          /^\/(postgraphile|news|support|sponsors?)(\/|$)/
+        )
           ? "postgraphile"
           : ""
       }`}
