@@ -27,11 +27,37 @@ own plugins.
 ### Adding root query/mutation fields
 
 A common request is to add additional root-level fields to your schema, for
-example to integrate external services. To do this we must add a
-'GraphQLObjectType:fields' hook and then add our new field:
+example to integrate external services. The easiest way to do this is to [use `makeExtendSchemaPlugin`](/postgraphile/make-extend-schema-plugin/) to generate a plugin that will extend your schema (this can be used to add fields anywhere, not just at the root-level):
 
 ```js
 // add-http-bin-plugin.js
+const { makeExtendSchemaPlugin, gql } = require("graphile-utils");
+const fetch = require("node-fetch");
+
+module.exports = makeExtendSchemaPlugin({
+  typeDefs: gql`
+    extend type Query {
+      httpBinHeaders: JSON
+    }
+  `,
+  resolvers: {
+    Query: {
+      async httpBinHeaders() {
+        const response = await fetch("https://httpbin.org/headers");
+        return response.json();
+      },
+    },
+  },
+});
+```
+
+If you need to do this using the low-level plugins API for some reason (for
+example you want access to the look-ahead features, or you're defining the
+fields in a more automated way) then you can use a 'GraphQLObjectType:fields'
+hook and to add our new field:
+
+```js
+// add-http-bin-plugin-raw.js
 const fetch = require("node-fetch");
 
 function AddHttpBinPlugin(builder, { pgExtendedTypes }) {
@@ -92,7 +118,7 @@ Sometimes you might want to override what an existing field does. Due to the
 way that PostGraphile works (where the root Query field resolvers are the only
 ones who perform SQL queries) this is generally most useful at the top level.
 
-In PostGraphile version 4.1 and above, you can use `makeWrapResolversPlugin` to easily wrap a resolver: 
+In PostGraphile version 4.1 and above, you can [use `makeWrapResolversPlugin`](/postgraphile/make-wrap-resolvers-plugin/) to easily wrap a resolver:
 
 ```js
 module.exports = makeWrapResolversPlugin({
@@ -100,11 +126,12 @@ module.exports = makeWrapResolversPlugin({
     async email(resolve, source, args, context, resolveInfo) {
       const result = await resolve();
       return result.toLowerCase();
-    }
-  }
+    },
+  },
 });
 ```
 
+If you need to process the resolvers in a more powerful way than possible via `makeWrapResolversPlugin`, then you can drop down to the raw plugin API.
 The following example modifies the 'createLink' mutation so that it performs
 some additional validation (thrown an error if the link's `title` is too short)
 and performs an action after the link has been saved. You could use a plugin
@@ -195,7 +222,7 @@ same name as that which you removed. It's advised that rather than removing
 things, you instead avoid them being generated in the first place.
 
 **If you're looking for an easy way to prevent certain tables, fields,
-*functions or relations being added to your GraphQL schema, check out [smart
+\*functions or relations being added to your GraphQL schema, check out [smart
 comments](/postgraphile/smart-comments/).**
 
 If you want to remove a class of things from the schema then you can remove
