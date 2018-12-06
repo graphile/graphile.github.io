@@ -366,6 +366,12 @@
             "subpages": []
           },
           {
+            "to": "/postgraphile/make-plugin-by-combining-plugins/",
+            "title": "makePluginByCombiningPlugins",
+            "sectionId": "customising",
+            "subpages": []
+          },
+          {
             "to": "/postgraphile/extending-raw/",
             "title": "Graphile Engine",
             "sectionId": "customising",
