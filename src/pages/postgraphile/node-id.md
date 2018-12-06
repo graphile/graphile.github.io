@@ -27,10 +27,22 @@ export const client = new ApolloClient({
 });
 ```
 
-
 **WARNING**: by default, we call the Global Object Identifier `nodeId` to
 avoid clashing with the `id` field that's common practice in database design.
 If you wish to call the Global Object Identifier field `id` instead (as is
 mandated by the Relay specification), you can do so with our `--classic-ids`
 CLI flag. In doing so, any `id` column will automatically be renamed to
 `rowId`.
+
+### Disabling the Relay Global Object Identifier
+
+You can disable the relay global object identifier throughout your API by
+skipping the `require('graphile-build').NodePlugin` plugin; e.g. from the
+CLI:
+
+```
+postgraphile --skip-plugins graphile-build:NodePlugin ...
+```
+
+Ensure that you have a good way of generating cache identifiers for your
+GraphQL client though!
