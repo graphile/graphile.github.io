@@ -121,6 +121,7 @@ We use a lot of DEBUG envvars for different parts of the system. Here's some of 
 * `postgraphile:graphql` - prints out the full GraphQL query after validation and before execution
 * `postgraphile:request` - prints out statuses during the HTTP request life-cycle
 * `postgraphile:postgres` - prints out every SQL statement that's issued to the database (does not include placeholder values)
+* `postgraphile:postgres:notice` - outputs any notices generated whilst executing SQL statements (very useful for tracing functions/triggers)
 * `postgraphile:postgres:error` - outputs any errors generated whilst executing SQL statements
 * `graphile-builder` - desperately in need of renaming, this hook is extremely useful for understanding the order in which hooks execute, and how hook executions can nest - a must for people getting started with graphile-build plugins
 * `graphile-build-pg` - prints out various things, many of which should not occur. Also used to output errors from the update/delete mutations (where `null` is returned to GraphQL)
