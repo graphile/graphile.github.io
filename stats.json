@@ -13,8 +13,8 @@
       "path---graphile-build-graphile-build-c7028d040f3d29562a91.js.map"
     ],
     "path---postgraphile-postgresql-schema-design": [
-      "path---postgraphile-postgresql-schema-design-58d45f31e595df5379f6.js",
-      "path---postgraphile-postgresql-schema-design-58d45f31e595df5379f6.js.map"
+      "path---postgraphile-postgresql-schema-design-bcc02f8c5f43a3398225.js",
+      "path---postgraphile-postgresql-schema-design-bcc02f8c5f43a3398225.js.map"
     ],
     "path---postgraphile-quick-start-guide": [
       "path---postgraphile-quick-start-guide-ad37a33309de01c25311.js",
@@ -287,17 +287,17 @@
       "path---news-postgraphile-version-4-1-58955d9496963d1bbc8b.js.map"
     ],
     "path---postgraphile-crud-mutations": [
-      "path---postgraphile-crud-mutations-2b9b40eebf0b1b4a0348.js",
-      "path---postgraphile-crud-mutations-2b9b40eebf0b1b4a0348.js.map"
+      "path---postgraphile-crud-mutations-3d6c8a79361cef820361.js",
+      "path---postgraphile-crud-mutations-3d6c8a79361cef820361.js.map"
     ],
     "path---postgraphile-introduction": [
       "path---postgraphile-introduction-2a51e1b99d55c6366ba1.js",
       "path---postgraphile-introduction-2a51e1b99d55c6366ba1.js.map"
     ],
     "app": [
-      "app-1fc147b2e9689baf38ab.js",
+      "app-abe65b0c43bb8330e71f.js",
       "build-js-styles.css",
-      "app-1fc147b2e9689baf38ab.js.map",
+      "app-abe65b0c43bb8330e71f.js.map",
       "build-js-styles.css.map"
     ],
     "path---postgraphile-code-of-conduct": [
