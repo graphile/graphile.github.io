@@ -62,8 +62,8 @@ ours work in a similar way.
 
 Note that the resolve functions defined in `resolvers` will be sent the
 standard 4 GraphQL resolve arguments (`parent`, `args`, `context`,
-`resolveInfo`); but in addition they will be passed a 5th argument that
-contains graphile-specific helpers.
+`resolveInfo`); but the 4th argument (`resolveInfo`) will also contains
+graphile-specific helpers.
 
 ### Reading database column values
 
@@ -147,17 +147,17 @@ app.listen(3030);
 
 ### The `selectGraphQLResultFromTable` helper
 
-The `selectGraphQLResultFromTable` function is vital if you want to return data
-from the database from your new GraphQL field. It is responsible for hooking into
-the query look-ahead features of `graphile-build` to inspect the incoming GraphQL
-query and pull down the relevant data from the database
-(including nested relations). You are then expected to return the result of
-this fetch via your resolver. You can use the `sqlBuilder` object to customise
-the generated query, changing the order, adding `where` clauses, `limit`s, etc.
-Note that if you are not returning a record type directly (for example you're
-returning a mutation payload, or a connection interface), you should use the
-`@pgField` directive on the fields of your returned type so that the Look Ahead
-feature continues to work.
+The `resolveInfo.graphile.selectGraphQLResultFromTable` function is vital if you want
+to return data from the database from your new GraphQL field. It is
+responsible for hooking into the query look-ahead features of
+`graphile-build` to inspect the incoming GraphQL query and pull down the
+relevant data from the database (including nested relations). You are then
+expected to return the result of this fetch via your resolver. You can use
+the `sqlBuilder` object to customise the generated query, changing the order,
+adding `where` clauses, `limit`s, etc. Note that if you are not returning a
+record type directly (for example you're returning a mutation payload, or a
+connection interface), you should use the `@pgField` directive on the fields
+of your returned type so that the Look Ahead feature continues to work.
 
 The `sqlBuilder` uses an SQL AST constructed via
 [`pg-sql2` methods](https://github.com/graphile/pg-sql2/blob/master/README.md)
@@ -192,12 +192,11 @@ const MyRandomUserPlugin = makeExtendSchemaPlugin(build => {
           _query,
           args,
           context,
-          resolveInfo,
-          { selectGraphQLResultFromTable }
+          resolveInfo
         ) => {
-          // Remember: selectGraphQLResultFromTable is where the PostGraphile
+          // Remember: resolveInfo.graphile.selectGraphQLResultFromTable is where the PostGraphile
           // look-ahead magic happens!
-          const rows = await selectGraphQLResultFromTable(
+          const rows = await resolveInfo.graphile.selectGraphQLResultFromTable(
             sql.fragment`app_public.users`,
             (tableAlias, sqlBuilder) => {
               sqlBuilder.orderBy(sql.fragment`random()`);
@@ -255,8 +254,7 @@ makeExtendSchemaPlugin(build => {
           _query,
           args,
           context,
-          resolveInfo,
-          { selectGraphQLResultFromTable }
+          resolveInfo
         ) => {
           const { pgClient } = context;
           // Start a sub-transaction
@@ -279,11 +277,10 @@ makeExtendSchemaPlugin(build => {
             // client requested, using the new user
             // account as the source of the data. You
             // should always use
-            // `selectGraphQLResultFromTable` if you
-            // return database data from your custom
-            // field.
+            // `resolveInfo.graphile.selectGraphQLResultFromTable` if you return database
+            // data from your custom field.
             const [row] =
-              await selectGraphQLResultFromTable(
+              await resolveInfo.graphile.selectGraphQLResultFromTable(
                 sql.fragment`app_public.users`,
                 (tableAlias, sqlBuilder) => {
                   sqlBuilder.where(
