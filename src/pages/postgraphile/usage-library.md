@@ -206,7 +206,7 @@ app.use(
     externalUrlBase: "/myproxypath/path/to",
     graphqlRoute: "/graphql",
     graphiql: true,
-    graphiqlRoute: "/graphiql",
+    graphiqlRoute: "/graphiql"
   })
 );
 // Then you can load GraphiQL at `/myproxypath/path/to/graphiql`
