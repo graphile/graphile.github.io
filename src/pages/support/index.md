@@ -43,7 +43,7 @@ community members' time.
 PostGraphile is
 "[donationware](https://en.wikipedia.org/wiki/Donationware)" - we rely on
 individual and corporate sponsors to support our work on the PostGraphile
-project, and to enable us to keep the extremely liberal MIT license.
+project, and to enable us to keep the extremely permissive MIT license.
 
 Sponsoring PostGraphile's ongoing development and maintenance is in your
 interest; resulting in faster features and fixes, and better documentation.
