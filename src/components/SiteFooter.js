@@ -57,10 +57,9 @@ const SiteFooter = () => {
                 </a>
               </li>
               <li>
-                <a href="https://twitter.com/benjie">
+                <a href="https://twitter.com/graphilehq">
                   <i className="fab fa-twitter" /> Twitter
                 </a>
-                {/* TODO: update to Graphile twitter */}
               </li>
               <li>
                 <Link to="/news/press-kit/">
@@ -71,11 +70,10 @@ const SiteFooter = () => {
           </div>
           <div className="col-xs-12 col-md-offset-1 col-md-5">
             <h6>About</h6>
-            PostGraphile and Graphile Build are Open Source Software, developed
-            and maintained by <a href="https://twitter.com/benjie">
-              @Benjie
-            </a>{" "}
-            with the help of the community.
+            PostGraphile and Graphile Build are crowd-funded Open Source
+            Software, developed and maintained primarily by{" "}
+            <a href="https://twitter.com/benjie">@Benjie</a> with the help of
+            the community.
             <br />
             <br />
             You can support the projects via{" "}
