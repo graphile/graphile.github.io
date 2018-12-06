@@ -184,6 +184,36 @@ $$ LANGUAGE SQL STABLE;
 
 <!-- TODO: move this to its own article? -->
 
+### Mounting PostGraphile middleware under a subpath
+
+This isn't officially supported; however it should work in most cases. If
+you're mounting under a subpath in express then `app.use("/path/to", postgraphile())` should work automatically without requiring any options. If
+you're using an external proxy then you must supply the base URL so that
+PostGraphile knows where to tell the browser the assets are located. This is
+all so that PostGraphile can reference different parts of itself correctly,
+such as the location for the watch stream to put in the header, or the
+GraphQL endpoint for GraphiQL to connect to.
+
+A really complex use case of this would be this example:
+
+```js
+// Assuming you combine both Express subpath AND an external
+// proxy which mounts your express app at `/myproxypath`, you
+// should provide options like this:
+app.use(
+  "/path/to",
+  postgraphile(db, schemas, {
+    externalUrlBase: "/myproxypath/path/to",
+    graphqlRoute: "/graphql",
+    graphiql: true,
+    graphiqlRoute: "/graphiql",
+  })
+);
+// Then you can load GraphiQL at `/myproxypath/path/to/graphiql`
+// and it will know to connect to GraphQL at
+// `/myproxypath/path/to/graphql`
+```
+
 [connect]: https://www.npmjs.com/connect
 [express]: https://www.npmjs.com/express
 [graphql/express-graphql#82]: https://github.com/graphql/express-graphql/pull/82
