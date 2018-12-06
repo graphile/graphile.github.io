@@ -9,7 +9,10 @@
 }
 
 .header {
-  @extend .bg-dark-gray;
+  background: linear-gradient(85deg, #a51b1b 0%, #7d2424 100%);
+}
+.postgraphile .header {
+  background: linear-gradient(85deg, #0e457d 0%, #0e385e 100%);
 }
 
 .header-notice {
@@ -52,13 +55,13 @@
   }
 }
 
+.postgraphile.template-marketing,
 .template-marketing {
   .header {
-    @extend .bg-transparent;
+    background: transparent;
   }
 
   .nav-link {
-
     &.active {
       border-bottom: 1px solid white;
     }
@@ -146,15 +149,28 @@ $lineColor: white;
     width: $widthLine;
   }
 
-  .line-1 { top: 0; }
-  .line-2 { top: 50%; }
-  .line-3 { top: 100%; }
+  .line-1 {
+    top: 0;
+  }
+  .line-2 {
+    top: 50%;
+  }
+  .line-3 {
+    top: 100%;
+  }
 }
 
 .navbar-toggler:checked + .nav-controls .navbar-crosses {
-  .line-1 { transform: translateY($translateY) translateX($translateX) rotate($rotation); }
-  .line-2 { opacity:0; }
-  .line-3 { transform: translateY($translateY * -1) translateX($translateX) rotate($rotation * -1); }
+  .line-1 {
+    transform: translateY($translateY) translateX($translateX) rotate($rotation);
+  }
+  .line-2 {
+    opacity: 0;
+  }
+  .line-3 {
+    transform: translateY($translateY * -1) translateX($translateX)
+      rotate($rotation * -1);
+  }
 }
 
 .nav-controls {
