@@ -15,9 +15,12 @@ _If you're looking for an easy way to remove/rename things, check out [smart com
 
 ### Writing Plugins
 
-- To add new fields and types, [check out `makeExtendSchemaPlugin`](/postgraphile/make-extend-schema-plugin/)
-- To change how fields and types are automatically named, [check out `makeAddInflectorsPlugin`](/postgraphile/make-add-inflectors-plugin/)
-- For everything else, you can [write raw Graphile Engine plugins](/postgraphile/extending-raw/)
+* To add new fields and types, [check out `makeExtendSchemaPlugin`](/postgraphile/make-extend-schema-plugin/)
+* To change how fields and types are automatically named, [check out `makeAddInflectorsPlugin`](/postgraphile/make-add-inflectors-plugin/)
+* To change how fields are resolved, [check out `makeWrapResolversPlugin`](/postgraphile/make-wrap-resolvers-plugin/)
+* To make certain fields nullable or non-nullable, [check out `makeChangeNullabilityPlugin`](/postgraphile/make-change-nullability-plugin/)
+* To process the generated schema, for example to run it through a third-party tool such as `graphql-shield`, [check out `makeProcessSchemaPlugin`](/postgraphile/make-process-schema-plugin/)
+* For everything else, you can [write raw Graphile Engine plugins](/postgraphile/extending-raw/)
 
 ### Loading Plugins
 
@@ -38,8 +41,7 @@ postgraphile \
 The `--append-plugins` option accepts a comma separated list of module specs.
 A module spec is the absolute path to a JS file to load (or name of an npm
 module), optionally followed by a colon and the name of the export (you must
-omit this if the function is exported via `module.exports = function
-MyPlugin(...){...}`). E.g.
+omit this if the function is exported via `module.exports = function MyPlugin(...){...}`). E.g.
 
 * `--append-plugins my-npm-module` (requires `module.exports = function NpmPlugin(...) {...}`)
 * `--append-plugins /path/to/local/module.js:MyPlugin` (requires `exports.MyPlugin = function MyPlugin(...) {...}`)
