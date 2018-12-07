@@ -38,11 +38,11 @@ title: News
 <div class='text-center col-xs-12 col-md-9 col-lg-7'>
 <div class='hero-block'>
 
-## PostGraphile version 4 is here
+## PostGraphile Version 4.1 released
 
-Version 4 has launched! More performant, more extensible and more customisable than ever before. Easily extend PostGraphile's functionality with plugins developed and shared by the community.
+Version 4.1 is here! A huge improvement to startup performance in serverless environments plus much broader PostgreSQL function support, an enhanced GraphiQL interface, and a lot more helpers for writing plugins.
 
-[Read more about the latest PostGraphile Version here](/news/postgraphile-version-4/)
+[Read more about the latest PostGraphile version here](/news/postgraphile-version-4-1/)
 
 </div>
 </div>
@@ -110,3 +110,29 @@ Version 4 has launched! More performant, more extensible and more customisable t
   </div>
 </div>
 </section>
+
+<!-- **************************************** -->
+
+<section>
+<div class='container'>
+
+<div class='row flex-wrap-reverse'>
+<div class='text-center col-xs-12 col-md-9 col-lg-7'>
+<div class='hero-block'>
+
+## PostGraphile Version 4 is here
+
+Version 4 has launched! More performant, more extensible and more customisable than ever before. Easily extend PostGraphile's functionality with plugins developed and shared by the community.
+
+[Read more about PostGraphile Version 4 here](/news/postgraphile-version-4/)
+
+</div>
+</div>
+<div class='text-center col-xs-12 col-md-3 col-lg-5 postgraphile-graphs-average-latency-label'>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- **************************************** -->
