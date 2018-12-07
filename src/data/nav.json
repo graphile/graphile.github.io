@@ -14,12 +14,12 @@
     "pages": [
       {
         "to": "/news/postgraphile-version-4-1/",
-        "title": "Version 4.1 - better webpackability",
+        "title": "Version 4.1 - Better Webpackability",
         "sectionId": "main"
       },
       {
         "to": "/news/postgraphile-version-4/",
-        "title": "Version 4 - fantastic performance",
+        "title": "Version 4 - Fantastic Performance",
         "sectionId": "main"
       },
       {
