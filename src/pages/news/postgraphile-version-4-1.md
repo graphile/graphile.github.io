@@ -10,7 +10,9 @@ _Announced 2018-12-06_
 
 ### The original GraphQL API for PostgreSQL: now with improved Lambda support
 
-Building upon the huge performance gains found in Version 4, Benjie Gillam is pleased to announce the release of Version 4.1 of PostGraphile, now with a huge improvement to startup performance in serverless environments. This update also brings a large number of enhancements including much broader PostgreSQL function support, an enhanced GraphiQL interface, and a lot more helpers for writing plugins. See the [entire release notes on GitHub](https://github.com/graphile/postgraphile/releases/tag/v4.1.0).
+Building upon the huge performance gains found in Version 4, Benjie Gillam is pleased to announce the release of Version 4.1 of PostGraphile, now with a huge improvement to startup performance in serverless environments. This update also brings a large number of enhancements including much broader PostgreSQL function support, an enhanced GraphiQL interface, and a lot more helpers for writing plugins. 
+
+[See the entire release notes on GitHub](https://github.com/graphile/postgraphile/releases/tag/v4.1.0).
 
 ### Better webpackability
 
@@ -26,7 +28,11 @@ This has been achieved through targeted work optimising PostGraphile’s "webpac
 
 ### Big contributions from the Graphile community
 
-Version 4.1 also includes a big update from frequent contributor [@mattbretl](https://github.com/mattbretl), which has introduced support for a wider range of PostgreSQL functions. This reduces the constraints developers have to work within, freeing them to use the right PostgreSQL function type for the task, leading to even faster development times.
+<div class="flex flex-wrap justify-around">
+<img alt="PostGraphile thanks our contributors" src="/images/undraw_developer_activity.png" />
+</div>
+
+Version 4.1 also includes a big update from frequent contributor [@mattbretl](https://github.com/mattbretl), who has introduced support for a wider range of PostgreSQL functions. This reduces the constraints developers have to work within, freeing them to use the right PostgreSQL function type for the task, leading to even faster development times.
 
 ### Help us to help you!
 
@@ -36,4 +42,8 @@ By significantly reducing the amount of work needed to achieve business goals, P
 
 Huge thanks to the 60 individuals and companies already sponsoring PostGraphile!
 
-[Sponsor PostGraphile development](/sponsor/) now!
+<strong>[Click here to sponsor PostGraphile development now.](/sponsor/)</strong>
+
+<div class="flex flex-wrap justify-around">
+<img alt="PostGraphile thanks the community" src="/images/thanks.png" />
+</div>
