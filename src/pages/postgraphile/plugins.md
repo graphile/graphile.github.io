@@ -6,62 +6,65 @@ title: PostGraphile Server Plugins
 
 ## PostGraphile Server Plugins
 
+Stability: unstable, may change in **semver minor** versions.
+
 _NOTE: This page relates to changing how the PostGraphile HTTP server and CLI
 work. If you're instead looking to change the generated GraphQL schema (e.g.
 to add fields or types), see [Schema Plugins](/postgraphile/extending/)._
 
 In addition to the [Graphile Engine plugin system](/postgraphile/extending/)
 which builds the GraphQL schema in PostGraphile, PostGraphile also has a plugin
-system for the CLI and web layer. This plugin system is less mature, it's not
-quite ready for third party plugin developers yet, however there are a couple
-of first-party plugins that you may want to use that can be purchased on the
-[Graphile Store](https://store.graphile.com):
+system for the CLI and web layer. This plugin system is less mature, help
+documenting it is welcome!
 
-* `@graphile/plugin-supporter` [SUPPORTER]  
+### First-party plugins
+
+There are a couple of first-party plugins that you may want to use that can
+be purchased on the [Graphile Store](https://store.graphile.com):
+
+* `@graphile/supporter` [SUPPORTER]  
   (pay what you want, from $1/mo+)
-* `@graphile/plugin-pro` [PRO]
+* `@graphile/pro` [PRO]
 
-<!-- _TODO: update this when the plugin interface is more mature._ -->
+To use these plugins you will need a `GRAPHILE_LICENSE` environmental variable
+to be present, as in these examples:
 
-### PostGraphile is Open Source
+```bash
+# GNU/Linux and macOS bash:
+export GRAPHILE_LICENSE="license_key_from_graphile_store"
+postgraphile -c postgres://...
 
-**PostGraphile is open source; there's no intention to make any previously
-open-source part of PostGraphile closed source.**
+# Heroku
+heroku config:set GRAPHILE_LICENSE="license_key_from_graphile_store" -a my_heroku_app
 
-Development and maintenance on a project like this is time-consuming; for it
-to be something that you can rely on for years to come there needs to be a
-way of making this work sustainable. Support, consulting and running a SaaS
-are three possible ways of financially supporting a project like this, but
-they all take large amounts of time away from working on the project itself.
-We wanted to go a different way with PostGraphile, a way that directly funds
-development on the softare. Our generous
-[Patreon](https://www.patreon.com/benjie) supporters provide the bulk of our
-income, with a little more coming in from sales of commercial plugins.
+# Windows Console
+set GRAPHILE_LICENSE="license_key_from_graphile_store" & postgraphile -c postgres://...
 
-It's important to note that you can absolutely run PostGraphile in production
-without these plugins, and many people do (just ask in our [
-chat](http://discord.gg/graphile)). We even detail how to go about solving
-these problems for yourself in the docs and the GitHub issues.
+# Windows PowerShell
+$env:GRAPHILE_LICENSE="license_key_from_graphile_store"; postgraphile -c postgres://...
+```
 
 For more information, see the FAQ at the bottom of the [Go
 Pro!](/postgraphile/pricing/) page.
 
 ### Installing
 
-You can install first-party plugins with `yarn add` or `npm install` using the
-`git+https://...:...@git.graphile.com/.../postgraphile-supporter.git` URL from
-https://store.graphile.com. Remember: **you must keep this URL confidential**.
+You can install plugins with `yarn add` or `npm install`, e.g.
+
+```bash
+yarn add @graphile/operation-hooks
+```
 
 ### Enabling via CLI flag
 
 PostGraphile plugins can be specified with the `--plugins` CLI flag; however
-this flag must be the absolute first flag passed to PostGraphile as plugins can
+this flag **must be the first flag passed** to PostGraphile as plugins can
 register additional CLI flags. Multiple plugins can be specified with comma
 separation:
 
 ```
 postgraphile --plugins \
-  @graphile/plugin-supporter,@graphile/plugin-pro \
+  @graphile/operation-hooks,@graphile/supporter,@graphile/pro \
   -c postgres:///my_db
 ```
 
@@ -73,7 +76,11 @@ If you're using the CLI version, plugins can also be enabled via
 ```js
 module.exports = {
   options: {
-    plugins: ["@graphile/plugin-supporter", "@graphile/plugin-pro"],
+    plugins: [
+      "@graphile/operation-hooks",
+      "@graphile/supporter",
+      "@graphile/pro",
+    ],
     connection: "postgres:///my_db",
     schema: ["app_public"],
     // ...
@@ -86,29 +93,34 @@ module.exports = {
 This will likely get easier in future, but for now enabling via the middleware
 is a slightly more involved process:
 
-To include the dependencies, for straight Node.js 8 you want:
+To include the dependencies using CommonJS (Node 8):
 
 ```js
 const { postgraphile, makePluginHook } = require("postgraphile");
-const {
-  default: PostGraphileSupporter,
-} = require("@graphile/plugin-supporter");
-const { default: PostGraphilePro } = require("@graphile/plugin-pro");
+const { default: OperationHooks } = require("@graphile/operation-hooks");
+const { default: GraphileSupporter } = require("@graphile/supporter");
+const { default: GraphilePro } = require("@graphile/pro");
 ```
 
-If you're using ES2015 Modules (ESM) then try this:
+If you're using ES2015 Modules (ESM) then this syntax may be more to your taste:
 
 ```js
 import { postgraphile, makePluginHook } from "postgraphile";
-import PostGraphileSupporter from "@graphile/plugin-supporter";
-import PostGraphilePro from "@graphile/plugin-pro";
+import OperationHooks from "@graphile/operation-hooks";
+import GraphileSupporter from "@graphile/supporter";
+import GraphilePro from "@graphile/pro";
 ```
 
-Then you enable the plugins by passing a `pluginHook` via the PostGraphile
-options, you can construct this using `makePluginHook` as such:
+To enable the plugins, use `makePluginHook` to create a `pluginHook` function
+to pass via the PostGraphile options:
 
 ```js
-const pluginHook = makePluginHook([PostGraphileSupporter, PostGraphilePro]);
+// Only include as many plugins as you need. An empty array is also valid.
+const pluginHook = makePluginHook([
+  OperationHooks,
+  GraphileSupporter,
+  PostGraphilePro,
+]);
 
 const postGraphileMiddleware = postgraphile(databaseUrl, "app_public", {
   pluginHook,
@@ -117,3 +129,42 @@ const postGraphileMiddleware = postgraphile(databaseUrl, "app_public", {
 
 app.use(postGraphileMiddleware);
 ```
+
+### Writing your own plugins
+
+The hook methods available can be viewed [in
+pluginHook.ts](https://github.com/graphile/postgraphile/blob/master/src/postgraphile/pluginHook.ts).
+Note that these may change in **semver minor** releases of PostGraphile as
+this is not an officially stable API yet.
+
+Each hook method is passed two parameters:
+
+* subject: the thing being hooked
+* context: an object containing some relevant helpers
+
+The hooks are expected to return either the thing being hooked (subject), or
+a derivative of it. Multiple plugins may register for the same hooks, in
+these cases the output of one hook function will be fed as input to the next.
+Hooks are _synchronous_.
+
+Your plugin will export a single object which defines the hook methods; e.g.:
+
+```js
+const MyPlugin = {
+  ["cli:greeting"](messages, { chalk }) {
+    return [...messages, `Hello ${chalk.blue("world")}!`];
+  },
+};
+
+module.exports = MyPlugin;
+// or, for ES6 modules:
+// export default MyPlugin;
+```
+
+An example of a PostGraphile server plugin is [@graphile/operation-hooks](https://github.com/graphile/operation-hooks/blob/master/src/index.ts):
+
+* uses `cli:flags:add:schema` to add `--operation-messages` and `--operation-messages-preflight` CLI options
+* uses `cli:library:options` to convert these CLI options to library options
+* uses `postgraphile:options` to a) convert the library options into graphileBuildOptions (Graphile Engine plugin options), and b) load the OperationHooksPlugin
+
+If you need help writing your own PostGraphile server plugins, [ask in our Discord chat](http://discord.gg/graphile).

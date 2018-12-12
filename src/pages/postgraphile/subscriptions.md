@@ -24,7 +24,7 @@ and pass the `--simple-subscriptions` flag.
 
 ```
 postgraphile \
-  --plugins @graphile/plugin-supporter \
+  --plugins @graphile/supporter \
   --simple-subscriptions \
   -c postgres://mydb
 ```
@@ -44,11 +44,9 @@ Here's an example:
 ```js
 const express = require("express");
 const { postgraphile, makePluginHook } = require("postgraphile");
-const {
-  default: PostGraphileSupporter,
-} = require("@graphile/plugin-supporter");
+const { default: GraphileSupporter } = require("@graphile/supporter");
 
-const pluginHook = makePluginHook([PostGraphileSupporter]);
+const pluginHook = makePluginHook([GraphileSupporter]);
 
 const postgraphileOptions = {
   pluginHook,
@@ -67,7 +65,6 @@ const app = express();
 app.use(postgraphile(databaseUrl, "app_public", postgraphileOptions));
 app.listen(parseInt(process.env.PORT, 10) || 3000);
 ```
-
 
 ### Using
 
@@ -96,9 +93,10 @@ Altair or GraphQL Playground.
 
 All topics requested from GraphQL are automatically prefixed with
 `postgraphile:`\* to avoid leaking other topics your application may be using
-- GraphQL consumers will not need to know about this, but you will need to
-remember to add it to the topic when you perform `NOTIFY` otherwise
-subscribers will not see the messages.
+
+* GraphQL consumers will not need to know about this, but you will need to
+  remember to add it to the topic when you perform `NOTIFY` otherwise
+  subscribers will not see the messages.
 
 \* _Customisable via `pgSubscriptionPrefix` setting._
 
@@ -268,7 +266,7 @@ First, set up a `.postgraphilerc.js` containing the following:
 ```js
 module.exports = {
   options: {
-    plugins: ["@graphile/plugin-supporter"],
+    plugins: ["@graphile/supporter"],
     connection: "postgres:///subs",
     schema: ["app_public"],
     simpleSubscriptions: true,
@@ -417,13 +415,13 @@ via the `enhanceHttpServerWithSubscriptions` function, as shown below:
 ```js
 const { postgraphile, makePluginHook } = require("postgraphile");
 const {
-  default: PostGraphileSupporter,
+  default: GraphileSupporter,
   enhanceHttpServerWithSubscriptions,
-} = require("@graphile/plugin-supporter");
+} = require("@graphile/supporter");
 const { createServer } = require("http");
 const express = require("express");
 
-const pluginHook = makePluginHook([PostGraphileSupporter]);
+const pluginHook = makePluginHook([GraphileSupporter]);
 
 const app = express();
 const rawHTTPServer = createServer(app);
