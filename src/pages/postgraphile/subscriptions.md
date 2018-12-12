@@ -15,6 +15,169 @@ early simple subscriptions feature via the [Supporter
 Plugin](/postgraphile/plugins/). We'd love to hear your feedback on this
 implementation. The rest of this article details how to use this feature.
 
+## Custom Subscriptions [SUPPORTER]
+
+_(Requires `@graphile/supporter` 0.7.3 or later.)_
+
+In this implementation, you use PostGraphile's extensibility to define the
+exact subscriptions you need. We advise creating an extension using [the
+`makeExtendSchemaPlugin` helper](/postgraphile/make-extend-schema-plugin/).
+
+### Writing the plugin
+
+Using `makeExtendSchemaPlugin` we can define a new subscription field and the
+subscription payload type that it returns. Using the `@pgSubscription(topic: ...)`
+directive, we can embed a function that will calculate the PostgreSQL
+topic to subscribe to based on the arguments and context passed to the
+GraphQL field (in this case factoring in the user ID).
+
+```js
+// MySubscriptionPlugin.js
+const currentUserTopicFromContext = (_args, context, _resolveInfo) => {
+  if (context.jwtClaims.user_id) {
+    return `graphql:user:${context.jwtClaims.user_id}`;
+  } else {
+    throw new Error("You're not logged in");
+  }
+};
+
+module.exports = makeExtendSchemaPlugin(({ pgSql: sql }) => ({
+  typeDefs: gql`
+    type UserSubscriptionPayload {
+      # This is populated by our resolver below
+      user: User
+
+      # This is returned directly from the PostgreSQL subscription payload (JSON object)
+      event: String
+    }
+
+    extend type Subscription {
+      """
+      Triggered when the current user's data changes:
+
+      - direct modifications to the user
+      - when their organization membership changes
+      """
+      currentUserUpdated: UserSubscriptionPayload @pgSubscription(topic: ${embed(
+        currentUserTopicFromContext
+      )})
+    }
+  `,
+
+  resolvers: {
+    UserSubscriptionPayload: {
+      // This method finds the user from the database based on the event
+      // published by PostgreSQL.
+      //
+      // In a future release, we hope to enable you to replace this entire
+      // method with a small schema directive above, should you so desire. It's
+      // mostly boilerplate.
+      async user(
+        event,
+        _args,
+        _context,
+        { graphile: { selectGraphQLResultFromTable } }
+      ) {
+        const rows = await selectGraphQLResultFromTable(
+          sql.fragment`app_public.users`,
+          (tableAlias, sqlBuilder) => {
+            sqlBuilder.where(
+              sql.fragment`${sqlBuilder.getTableAlias()}.id = ${sql.value(
+                event.subject
+              )}`
+            );
+          }
+        );
+        return rows[0];
+      },
+    },
+  },
+}));
+```
+
+<details>
+<summary>
+I'm using a fairly complex PostgreSQL function so that I can just use `CREATE TRIGGER` to trigger events in future without having to define a function for
+each trigger. Click this paragraph to expand and see the function.
+</summary>
+
+```sql
+create function app_public.graphql_subscription() returns trigger as $$
+declare
+  v_process_new bool = (TG_OP = 'INSERT' OR TG_OP = 'UPDATE');
+  v_process_old bool = (TG_OP = 'UPDATE' OR TG_OP = 'DELETE');
+  v_event text = TG_ARGV[0];
+  v_topic_template text = TG_ARGV[1];
+  v_attribute text = TG_ARGV[2];
+  v_record record;
+  v_sub text;
+  v_topic text;
+  v_i int = 0;
+  v_last_topic text;
+begin
+  for v_i in 0..1 loop
+    if (v_i = 0) and v_process_new is true then
+      v_record = new;
+    elsif (v_i = 1) and v_process_old is true then
+      v_record = old;
+    else
+      continue;
+    end if;
+     if v_attribute is not null then
+      execute 'select $1.' || quote_ident(v_attribute)
+        using v_record
+        into v_sub;
+    end if;
+    if v_sub is not null then
+      v_topic = replace(v_topic_template, '$1', v_sub);
+    else
+      v_topic = v_topic_template;
+    end if;
+    if v_topic is distinct from v_last_topic then
+      -- This if statement prevents us from triggering the same notification twice
+      v_last_topic = v_topic;
+      perform pg_notify(v_topic, json_build_object(
+        'event', v_event,
+        'subject', v_sub
+      )::text);
+    end if;
+  end loop;
+  return v_record;
+end;
+$$ language plpgsql volatile set search_path from current;
+```
+
+</details>
+
+Hooking the database up to a GraphQL subscription is now just the case of `CREATE TRIGGER`:
+
+```sql
+CREATE TRIGGER _500_gql_update
+  AFTER UPDATE ON app_public.users
+  FOR EACH ROW
+  EXECUTE PROCEDURE app_public.graphql_subscription(
+    'userChanged', -- the "event" string, useful for the client to know what happened
+    'graphql:user:$1', -- the "topic" the event will be published to, as a template
+    'id' -- If specified, `$1` above will be replaced with NEW.id or OLD.id from the trigger.
+  );
+
+CREATE TRIGGER _500_gql_update_member
+  AFTER INSERT OR UPDATE OR DELETE ON app_public.organization_members
+  FOR EACH ROW
+  EXECUTE PROCEDURE app_public.graphql_subscription('organizationsChanged', 'graphql:user:$1', 'member_id');
+```
+
+### Enabling with the CLI
+
+Load the supporter server plugin and our custom subscription schema plugin.
+
+```
+postgraphile \
+  --plugins @graphile/supporter \
+  --append-plugins `pwd`/MySubscriptionPlugin.js \
+  -c postgres:///mydb
+```
+
 ## Simple Subscriptions [SUPPORTER]
 
 In this implementation, we expose a generic `listen` handler that can be used
