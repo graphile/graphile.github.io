@@ -17,6 +17,10 @@ implementation. The rest of this article details how to use this feature.
 
 ## Simple Subscriptions [SUPPORTER]
 
+In this implementation, we expose a generic `listen` handler that can be used
+with arbitrary topics in PostgreSQL - it requires very little ahead-of-time
+planning.
+
 ### Enabling with the CLI
 
 To enable Simple Subscriptions via the CLI, just load the supporter plugin
@@ -26,7 +30,7 @@ and pass the `--simple-subscriptions` flag.
 postgraphile \
   --plugins @graphile/supporter \
   --simple-subscriptions \
-  -c postgres://mydb
+  -c postgres:///mydb
 ```
 
 ### Enabling with an Express app
