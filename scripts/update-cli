@@ -5,10 +5,9 @@ const { readFileSync, writeFileSync, existsSync } = require("fs");
 const prettier = require("prettier");
 
 async function main() {
-  const binary = [
-    `${__dirname}/../../graphile-build/postgraphile/postgraphile`, // Custom to Benjie's development setup
-    `${__dirname}/../node_modules/.bin/postgraphile`,
-  ].filter(existsSync)[0];
+  const binary = [`${__dirname}/../node_modules/.bin/postgraphile`].filter(
+    existsSync
+  )[0];
 
   const isMac = process.platform === "darwin";
 

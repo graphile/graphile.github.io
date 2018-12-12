@@ -6,10 +6,10 @@ const { spawnSync } = require("child_process");
 const prettier = require("prettier");
 
 async function main() {
-  const binary = [
-    `${__dirname}/../../graphile-build/postgraphile/postgraphile`, // Custom to Benjie's development setup
-    `${__dirname}/../node_modules/.bin/postgraphile`,
-  ].filter(existsSync)[0];
+  const binary = [`${__dirname}/../node_modules/.bin/postgraphile`].filter(
+    existsSync
+  )[0];
+  if (!binary) throw new Error("Could not find postgraphile binary");
   const versionChild = spawnSync(binary, ["--version"], { encoding: "utf8" });
   const version = versionChild.stdout.trim();
 
