@@ -398,14 +398,20 @@
         "subpages": []
       },
       {
+        "to": "/postgraphile/postgresql-schema-design/",
+        "title": "PostgreSQL Schema Design",
+        "sectionId": "guides",
+        "subpages": []
+      },
+      {
         "to": "/postgraphile/evaluating/",
         "title": "Evaluating for your Project",
         "sectionId": "guides",
         "subpages": []
       },
       {
-        "to": "/postgraphile/postgresql-schema-design/",
-        "title": "PostgreSQL Schema Design",
+        "to": "/postgraphile/best-practices/",
+        "title": "Best Practices",
         "sectionId": "guides",
         "subpages": []
       },
