@@ -143,6 +143,46 @@ comment on type flibble is
   E'@name flamble';
 ```
 
+### Constraints
+
+You can add "fake" constraints to types in PostgreSQL using smart comments.
+The primary use case for this is to make views act more table-like - allowing
+you to express the connections between tables and views.
+
+#### Not Null
+
+To mark a column as not null:
+
+```sql
+comment on column my_view.my_column is E'@notNull`;
+```
+
+#### Primary Key
+
+Primary key columns will automatically be marked as `@notNull`, as they would in PostgreSQL.
+
+If you declare something as a primary key it _must_ be unique. We do not check it's unique - we trust you - but if it isn't unique then we're not sure what will happen...
+
+```sql
+comment on view my_view is E'@primaryKey id';
+-- or
+comment on view my_view is E'@primaryKey type, identifier';
+```
+
+### Foreign Key
+
+If you're referencing a Primary Key on the remote table/view then you can skip the column specification should you wish. Otherwise, you must reference columns matching a unique constraint.
+
+```sql
+comment on view my_view is E'@foreignKey (post_id) references post_view';
+-- or
+comment on view my_view is E'@foreignKey (post_id) references post_view (id)';
+-- or
+comment on materialized view my_materialized_view is E'@foreignKey (post_id) references posts (id)';
+-- or
+comment on materialized view my_materialized_view is E'@foreignKey (key_1, key_2) references other_table (key_1, key_2)';
+```
+
 ### Example
 
 Here is a basic table, with the name changed from `original_table` to `renamed_table`:
