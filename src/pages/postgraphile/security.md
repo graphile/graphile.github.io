@@ -96,7 +96,7 @@ And finally you might add a PostgreSQL function such as:
 create function my_public_schema.authenticate(
   email text,
   password text
-) returns forum_example.jwt_token as $$
+) returns my_private_schema.jwt_token as $$
 declare
   account my_public_schema.person_account;
 begin
