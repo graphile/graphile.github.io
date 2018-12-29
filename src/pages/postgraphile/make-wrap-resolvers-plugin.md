@@ -79,6 +79,8 @@ was requested. (Note that the email is still retrieved from the database, it
 is just not returned to the user.)
 
 ```js
+const { makeWrapResolversPlugin } = require("graphile-utils");
+
 makeWrapResolversPlugin({
   User: {
     email: {
