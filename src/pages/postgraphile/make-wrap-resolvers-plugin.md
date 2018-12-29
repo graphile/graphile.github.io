@@ -81,7 +81,7 @@ is just not returned to the user.)
 ```js
 const { makeWrapResolversPlugin } = require("graphile-utils");
 
-makeWrapResolversPlugin({
+module.exports = makeWrapResolversPlugin({
   User: {
     email: {
       requires: {
