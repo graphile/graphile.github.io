@@ -2,7 +2,7 @@ mutation {
   createTopic(
     input: {
       topic: {
-        forumId: 1
+        forumId: 2
         title: "My question relates to mutations..."
         body: "How do you write them?"
       }

@@ -1,5 +1,5 @@
 {
-  forumBySlug(slug: "slug-life") {
+  forumBySlug(slug: "testimonials") {
     nodeId
     id
     slug

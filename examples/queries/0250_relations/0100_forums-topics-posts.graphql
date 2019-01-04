@@ -1,5 +1,5 @@
 {
-  forumById(id: 1) {
+  forumBySlug(slug: "cat-life") {
     name
     topics(first: 1, orderBy: [CREATED_AT_ASC]) {
       nodes {

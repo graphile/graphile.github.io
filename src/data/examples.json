@@ -119,14 +119,14 @@
         "title": "Forums",
         "example": "{\n  allForums {\n    nodes {\n      nodeId\n      id\n      slug\n      name\n      description\n    }\n  }\n}\n",
         "exampleLanguage": "graphql",
-        "result": "{\n  \"allForums\": {\n    \"nodes\": [\n      {\n        \"nodeId\": \"WyJmb3J1bXMiLDFd\",\n        \"id\": 1,\n        \"slug\": \"cat-life\",\n        \"name\": \"Cat Life\",\n        \"description\":\n          \"A forum all about cats and how fluffy they are and how they completely ignore their owners unless there is food. Or yarn.\"\n      },\n      {\n        \"nodeId\": \"WyJmb3J1bXMiLDJd\",\n        \"id\": 2,\n        \"slug\": \"dog-life\",\n        \"name\": \"Dog Life\",\n        \"description\": \"\"\n      },\n      {\n        \"nodeId\": \"WyJmb3J1bXMiLDNd\",\n        \"id\": 3,\n        \"slug\": \"slug-life\",\n        \"name\": \"Slug Life\",\n        \"description\": \"\"\n      }\n    ]\n  }\n}\n",
+        "result": "{\n  \"allForums\": {\n    \"nodes\": [\n      {\n        \"nodeId\": \"WyJmb3J1bXMiLDFd\",\n        \"id\": 1,\n        \"slug\": \"testimonials\",\n        \"name\": \"Testimonials\",\n        \"description\":\n          \"How do you rate PostGraphile?\"\n      },\n      {\n        \"nodeId\": \"WyJmb3J1bXMiLDJd\",\n        \"id\": 2,\n        \"slug\": \"feedback\",\n        \"name\": \"Feedback\",\n        \"description\":\n          \"How are you finding PostGraphile?\"\n      },\n      {\n        \"nodeId\": \"WyJmb3J1bXMiLDNd\",\n        \"id\": 3,\n        \"slug\": \"cat-life\",\n        \"name\": \"Cat Life\",\n        \"description\":\n          \"A forum all about cats and how fluffy they are and how they completely ignore their owners unless there is food. Or yarn.\"\n      },\n      {\n        \"nodeId\": \"WyJmb3J1bXMiLDRd\",\n        \"id\": 4,\n        \"slug\": \"cat-help\",\n        \"name\": \"Cat Help\",\n        \"description\":\n          \"A forum to seek advice if your cat is becoming troublesome.\"\n      }\n    ]\n  }\n}\n",
         "resultLanguage": "json"
       },
       {
         "title": "Forum by slug",
-        "example": "{\n  forumBySlug(slug: \"slug-life\") {\n    nodeId\n    id\n    slug\n    name\n    description\n  }\n}\n",
+        "example": "{\n  forumBySlug(slug: \"testimonials\") {\n    nodeId\n    id\n    slug\n    name\n    description\n  }\n}\n",
         "exampleLanguage": "graphql",
-        "result": "{\n  \"forumBySlug\": {\n    \"nodeId\": \"WyJmb3J1bXMiLDNd\",\n    \"id\": 3,\n    \"slug\": \"slug-life\",\n    \"name\": \"Slug Life\",\n    \"description\": \"\"\n  }\n}\n",
+        "result": "{\n  \"forumBySlug\": {\n    \"nodeId\": \"WyJmb3J1bXMiLDFd\",\n    \"id\": 1,\n    \"slug\": \"testimonials\",\n    \"name\": \"Testimonials\",\n    \"description\":\n      \"How do you rate PostGraphile?\"\n  }\n}\n",
         "resultLanguage": "json"
       }
     ]
@@ -139,14 +139,14 @@
         "title": "First offset",
         "example": "{\n  allForums(first: 1, offset: 1) {\n    nodes {\n      nodeId\n      id\n      name\n    }\n  }\n}\n",
         "exampleLanguage": "graphql",
-        "result": "{\n  \"allForums\": {\n    \"nodes\": [\n      {\n        \"nodeId\": \"WyJmb3J1bXMiLDJd\",\n        \"id\": 2,\n        \"name\": \"Dog Life\"\n      }\n    ]\n  }\n}\n",
+        "result": "{\n  \"allForums\": {\n    \"nodes\": [\n      {\n        \"nodeId\": \"WyJmb3J1bXMiLDJd\",\n        \"id\": 2,\n        \"name\": \"Feedback\"\n      }\n    ]\n  }\n}\n",
         "resultLanguage": "json"
       },
       {
         "title": "Relation condition",
-        "example": "{\n  forumBySlug(slug: \"cat-life\") {\n    nodeId\n    id\n    name\n    topics(\n      condition: { authorId: 1 }\n    ) {\n      nodes {\n        nodeId\n        id\n        title\n      }\n    }\n  }\n}\n",
+        "example": "{\n  forumBySlug(slug: \"testimonials\") {\n    nodeId\n    id\n    name\n    topics(\n      condition: { authorId: 2 }\n    ) {\n      nodes {\n        nodeId\n        id\n        title\n        body\n      }\n    }\n  }\n}\n",
         "exampleLanguage": "graphql",
-        "result": "{\n  \"forumBySlug\": {\n    \"nodeId\": \"WyJmb3J1bXMiLDFd\",\n    \"id\": 1,\n    \"name\": \"Cat Life\",\n    \"topics\": {\n      \"nodes\": [\n        {\n          \"nodeId\":\n            \"WyJ0b3BpY3MiLDFd\",\n          \"id\": 1,\n          \"title\": \"cats cats cats\"\n        },\n        {\n          \"nodeId\":\n            \"WyJ0b3BpY3MiLDJd\",\n          \"id\": 2,\n          \"title\": \"snooze life\"\n        },\n        {\n          \"nodeId\":\n            \"WyJ0b3BpY3MiLDNd\",\n          \"id\": 3,\n          \"title\": \"too hot\"\n        }\n      ]\n    }\n  }\n}\n",
+        "result": "{\n  \"forumBySlug\": {\n    \"nodeId\": \"WyJmb3J1bXMiLDFd\",\n    \"id\": 1,\n    \"name\": \"Testimonials\",\n    \"topics\": {\n      \"nodes\": [\n        {\n          \"nodeId\":\n            \"WyJ0b3BpY3MiLDFd\",\n          \"id\": 1,\n          \"title\": \"Thank you!\",\n          \"body\":\n            \"500-1500 requests per second on a single server is pretty awesome.\"\n        }\n      ]\n    }\n  }\n}\n",
         "resultLanguage": "json"
       }
     ]
@@ -157,9 +157,9 @@
     "examples": [
       {
         "title": "Forums topics posts",
-        "example": "{\n  forumById(id: 1) {\n    name\n    topics(\n      first: 1\n      orderBy: [CREATED_AT_ASC]\n    ) {\n      nodes {\n        id\n        title\n        bodySummary\n        author {\n          id\n          username\n        }\n        posts(\n          first: 1\n          orderBy: [ID_DESC]\n        ) {\n          nodes {\n            id\n            author {\n              id\n              username\n            }\n            body\n          }\n        }\n      }\n    }\n  }\n}\n",
+        "example": "{\n  forumBySlug(slug: \"cat-life\") {\n    name\n    topics(\n      first: 1\n      orderBy: [CREATED_AT_ASC]\n    ) {\n      nodes {\n        id\n        title\n        bodySummary\n        author {\n          id\n          username\n        }\n        posts(\n          first: 1\n          orderBy: [ID_DESC]\n        ) {\n          nodes {\n            id\n            author {\n              id\n              username\n            }\n            body\n          }\n        }\n      }\n    }\n  }\n}\n",
         "exampleLanguage": "graphql",
-        "result": "{\n  \"forumById\": {\n    \"name\": \"Cat Life\",\n    \"topics\": {\n      \"nodes\": [\n        {\n          \"id\": 1,\n          \"title\": \"cats cats cats\",\n          \"bodySummary\":\n            \"lets discuss cats because t...\",\n          \"author\": {\n            \"id\": 1,\n            \"username\": \"user\"\n          },\n          \"posts\": {\n            \"nodes\": [\n              {\n                \"id\": 3,\n                \"author\": {\n                  \"id\": 1,\n                  \"username\": \"user\"\n                },\n                \"body\":\n                  \"I love it when they completely ignore you until they want something. So much better than dogs am I rite?\"\n              }\n            ]\n          }\n        }\n      ]\n    }\n  }\n}\n",
+        "result": "{\n  \"forumBySlug\": {\n    \"name\": \"Cat Life\",\n    \"topics\": {\n      \"nodes\": [\n        {\n          \"id\": 4,\n          \"title\": \"I love cats!\",\n          \"bodySummary\":\n            \"They're the best!\",\n          \"author\": {\n            \"id\": 1,\n            \"username\": \"user\"\n          },\n          \"posts\": {\n            \"nodes\": [\n              {\n                \"id\": 6,\n                \"author\": {\n                  \"id\": 3,\n                  \"username\":\n                    \"Bradley_A\"\n                },\n                \"body\":\n                  \"I love it when they completely ignore you until they want something. So much better than dogs am I rite?\"\n              }\n            ]\n          }\n        }\n      ]\n    }\n  }\n}\n",
         "resultLanguage": "json"
       }
     ]
@@ -170,16 +170,16 @@
     "examples": [
       {
         "title": "Create",
-        "example": "mutation {\n  createTopic(\n    input: {\n      topic: {\n        forumId: 1\n        title: \"My question relates to mutations...\"\n        body: \"How do you write them?\"\n      }\n    }\n  ) {\n    topic {\n      nodeId\n      id\n      forumId\n      title\n      body\n    }\n  }\n}\n",
+        "example": "mutation {\n  createTopic(\n    input: {\n      topic: {\n        forumId: 2\n        title: \"My question relates to mutations...\"\n        body: \"How do you write them?\"\n      }\n    }\n  ) {\n    topic {\n      nodeId\n      id\n      forumId\n      title\n      body\n    }\n  }\n}\n",
         "exampleLanguage": "graphql",
-        "result": "{\n  \"createTopic\": {\n    \"topic\": {\n      \"nodeId\": \"WyJ0b3BpY3MiLDRd\",\n      \"id\": 4,\n      \"forumId\": 1,\n      \"title\":\n        \"My question relates to mutations...\",\n      \"body\": \"How do you write them?\"\n    }\n  }\n}\n",
+        "result": "{\n  \"createTopic\": {\n    \"topic\": {\n      \"nodeId\": \"WyJ0b3BpY3MiLDVd\",\n      \"id\": 5,\n      \"forumId\": 2,\n      \"title\":\n        \"My question relates to mutations...\",\n      \"body\": \"How do you write them?\"\n    }\n  }\n}\n",
         "resultLanguage": "json"
       },
       {
         "title": "Update",
         "example": "mutation {\n  updateTopicById(\n    input: {\n      id: 1\n      topicPatch: {\n        title: \"My (edited) title\"\n      }\n    }\n  ) {\n    topic {\n      nodeId\n      id\n      title\n      body\n    }\n  }\n}\n\n# Works for a table like:\n#\n#   create table app_public.topics (\n#     id serial primary key,\n#     forum_id integer NOT NULL references app_public.forums on delete cascade,\n#     title text NOT NULL,\n#     body text DEFAULT ''::text NOT NULL\n#   );\n",
         "exampleLanguage": "graphql",
-        "result": "{\n  \"updateTopicById\": {\n    \"topic\": {\n      \"nodeId\": \"WyJ0b3BpY3MiLDFd\",\n      \"id\": 1,\n      \"title\": \"My (edited) title\",\n      \"body\":\n        \"lets discuss cats because theyre totally cool\"\n    }\n  }\n}\n",
+        "result": "{\n  \"updateTopicById\": {\n    \"topic\": {\n      \"nodeId\": \"WyJ0b3BpY3MiLDFd\",\n      \"id\": 1,\n      \"title\": \"My (edited) title\",\n      \"body\":\n        \"500-1500 requests per second on a single server is pretty awesome.\"\n    }\n  }\n}\n",
         "resultLanguage": "json"
       },
       {
@@ -213,7 +213,7 @@
         "title": "Rows connection",
         "example": "{\n  forumsAboutCats {\n    nodes {\n      nodeId\n      id\n      name\n      slug\n    }\n  }\n}\n\n# Created from SQL like:\n#\n#  create function app_public.forums_about_cats()\n#  returns setof app_public.forums\n#  language sql stable\n#  as $$\n#    select *\n#    from app_public.forums\n#    where slug like 'cat-%';\n#  $$;\n",
         "exampleLanguage": "graphql",
-        "result": "{\n  \"forumsAboutCats\": {\n    \"nodes\": [\n      {\n        \"nodeId\": \"WyJmb3J1bXMiLDFd\",\n        \"id\": 1,\n        \"name\": \"Cat Life\",\n        \"slug\": \"cat-life\"\n      }\n    ]\n  }\n}\n",
+        "result": "{\n  \"forumsAboutCats\": {\n    \"nodes\": [\n      {\n        \"nodeId\": \"WyJmb3J1bXMiLDNd\",\n        \"id\": 3,\n        \"name\": \"Cat Life\",\n        \"slug\": \"cat-life\"\n      },\n      {\n        \"nodeId\": \"WyJmb3J1bXMiLDRd\",\n        \"id\": 4,\n        \"name\": \"Cat Help\",\n        \"slug\": \"cat-help\"\n      }\n    ]\n  }\n}\n",
         "resultLanguage": "json"
       }
     ]
@@ -224,7 +224,7 @@
     "examples": [
       {
         "title": "Forgot password",
-        "example": "mutation {\n  forgotPassword(\n    input: {\n      email: \"user@example.com\"\n    }\n  ) {\n    success\n  }\n}\n\n# Generated with SQL like this:\n#\n#  create function forgot_password(email text)\n#  returns boolean\n#  language plpgsql volatile\n#  as $$\n#    ...\n#  $$;\n#\n#  -- Optionally rename the result field:\n#  comment on function\n#    forgot_password(email text)\n#    is '@resultFieldName success';\n",
+        "example": "mutation {\n  forgotPassword(\n    input: {\n      email: \"benjie@example.com\"\n    }\n  ) {\n    success\n  }\n}\n\n# Generated with SQL like this:\n#\n#  create function forgot_password(email text)\n#  returns boolean\n#  language plpgsql volatile\n#  as $$\n#    ...\n#  $$;\n#\n#  -- Optionally rename the result field:\n#  comment on function\n#    forgot_password(email text)\n#    is '@resultFieldName success';\n",
         "exampleLanguage": "graphql",
         "result": "{\n  \"forgotPassword\": {\n    \"success\": true\n  }\n}\n",
         "resultLanguage": "json"
@@ -239,14 +239,14 @@
         "title": "Topic summary",
         "example": "{\n  topicById(id: 2) {\n    body\n    bodySummary\n  }\n}\n\n# Generated by SQL like:\n#\n#  create function app_public.topics_body_summary(\n#    t app_public.topics,\n#    max_length int = 30\n#  )\n#  returns text\n#  language sql stable\n#  as $$\n#    select case\n#      when length(t.body) > max_length\n#      then left(t.body, max_length - 3)\n#             || '...'\n#      else t.body\n#      end;\n#  $$;\n",
         "exampleLanguage": "graphql",
-        "result": "{\n  \"topicById\": {\n    \"body\":\n      \"do you find your cat just sleeps everywhere\",\n    \"bodySummary\":\n      \"do you find your cat just s...\"\n  }\n}\n",
+        "result": "{\n  \"topicById\": {\n    \"body\":\n      \"PostGraphile is a powerful, idomatic, and elegant tool.\",\n    \"bodySummary\":\n      \"PostGraphile is a powerful,...\"\n  }\n}\n",
         "resultLanguage": "json"
       },
       {
         "title": "Topic summary with arg",
         "example": "{\n  topicById(id: 2) {\n    body\n    bodySummary(maxLength: 20)\n  }\n}\n\n# Generated by SQL like:\n#\n#  create function app_public.topics_body_summary(\n#    t app_public.topics,\n#    max_length int = 30\n#  )\n#  returns text\n#  language sql stable\n#  as $$\n#    select case\n#      when length(t.body) > max_length\n#      then left(t.body, max_length - 3)\n#             || '...'\n#      else t.body\n#      end;\n#  $$;\n",
         "exampleLanguage": "graphql",
-        "result": "{\n  \"topicById\": {\n    \"body\":\n      \"do you find your cat just sleeps everywhere\",\n    \"bodySummary\":\n      \"do you find your ...\"\n  }\n}\n",
+        "result": "{\n  \"topicById\": {\n    \"body\":\n      \"PostGraphile is a powerful, idomatic, and elegant tool.\",\n    \"bodySummary\":\n      \"PostGraphile is a...\"\n  }\n}\n",
         "resultLanguage": "json"
       }
     ]
