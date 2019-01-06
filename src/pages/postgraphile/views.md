@@ -6,7 +6,7 @@ title: Views
 
 ## Views
 
-Views are a great solution for abstraction.  
+Views are a great solution for abstraction.
 
 ### Abstract Business Logic
 
@@ -39,10 +39,52 @@ And query this `view` as it was a normal table:
   }
 ```
 
+### Flatten API
+
+`Views` enable to flatten a nested object that is built from multiple tables.
+
+```sql
+CREATE TABLE app_public.person (
+  id serial PRIMARY KEY
+);
+
+CREATE TABLE app_public.address (
+  id serial PRIMARY KEY,
+  country text,
+  street text,
+  person_id int references app_public.person (id)
+);
+
+CREATE VIEW person_view AS
+  SELECT person.id, address.country, address.street
+  FROM app_public.person person
+  INNER JOIN app_public.address address on person.id = address.person_id;
+```
+
+And now the `GraphQL` query is flatten:
+
+```graphql
+person {
+  id
+  address {
+    country
+    street
+  }
+}
+
+personView {
+  id
+  country
+  street
+}
+```
+
+**_NOTE: you can use [smart comments](/postgraphile/smart-comments) to change the GraphQL endpoint name_**
+
 ### API Layer
 
 Using `views`, one can create a layer of API that won't break
-while making changes to the tables themselves.
+while making changes to the underlying tables.
 
 PostGraphile supports reading from and writing to views; however PostgreSQL
 lacks the powerful introspection capabilities on views that it has on tables,
