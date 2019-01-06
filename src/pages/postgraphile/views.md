@@ -113,7 +113,7 @@ CREATE VIEW personal_data_view AS
 
 ### API Layer
 
-Using `views`, one can create a layer of API that won't break
+Using `views`, one can create an access layer that will remain consistent even
 while making changes to the underlying tables (simple name changes can be solved using smart comments).
 
 
