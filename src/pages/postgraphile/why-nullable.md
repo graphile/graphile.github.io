@@ -174,7 +174,7 @@ we leave these as nullable.
 
 I'd be happy to accept a Pull Request that adds functionality marking a
 function as non-nullable via a smart comment (e.g.
-`COMMENT ON FUNCTION foo_func(foo) IS E'@nonNull';`) - do raise an issue if
+`COMMENT ON FUNCTION foo_func(foo) IS E'@notNull';`) - do raise an issue if
 this is of interest to you. Even with this, though, it would be unwise to mark
 root-level functions as non-nullable - what if the PostgreSQL connection is
 terminated when resolving that field, should that make all the other fields
