@@ -214,6 +214,19 @@ app.use(
 // `/myproxypath/path/to/graphql`
 ```
 
+### Composing PostGraphile middleware with other middleware
+
+Some use cases might require to mount other middleware before PostGraphile, for instance if requests to the GraphQL endpoint should be subject to an authorization / authentication mechanism.
+
+With express, such a compositon can be done like the following:
+```
+// mount other middleware on the GraphQL endpoint
+app.use('/graphql', authMiddleware);
+// mount PostGraphile as usual
+app.use(postgraphile(db, schema, options);
+```
+Other frameworks should work analogously.
+
 [connect]: https://www.npmjs.com/connect
 [express]: https://www.npmjs.com/express
 [graphql/express-graphql#82]: https://github.com/graphql/express-graphql/pull/82
