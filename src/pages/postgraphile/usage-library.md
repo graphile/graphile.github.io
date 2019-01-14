@@ -216,16 +216,21 @@ app.use(
 
 ### Composing PostGraphile middleware with other middleware
 
-Some use cases might require to mount other middleware before PostGraphile, for instance if requests to the GraphQL endpoint should be subject to an authorization / authentication mechanism.
+Some use cases might require to mount other middleware before PostGraphile, for instance if requests to the GraphQL endpoint should be subject to an additional authorization / authentication mechanism.
 
-With express, such a compositon can be done like the following:
+With express, such a composition can be done like the following:
 ```
-// mount other middleware on the GraphQL endpoint
+// Example middleware, does nothing
+function authMiddleware(req, res, next) {
+  //...
+  next();
+}
+// Mount middleware on the GraphQL endpoint
 app.use('/graphql', authMiddleware);
-// mount PostGraphile as usual
-app.use(postgraphile(db, schema, options);
+// Mount PostGraphile after this middleware
+app.use(postgraphile(connectionString, schema, options));
 ```
-Other frameworks should work analogously.
+This example uses Express, but a similar approach is possible with other Node.js webservers.
 
 [connect]: https://www.npmjs.com/connect
 [express]: https://www.npmjs.com/express
