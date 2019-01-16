@@ -331,3 +331,5 @@ makeExtendSchemaPlugin(build => {
 
 Note that the `@pgField` directive here is necessary for PostGraphile to "look
 ahead" and determine what to request from the database.
+
+**NOTE**: if your `defaultRole` does not have privileges to insert data into your table you can define a `security definer` function and call it instead, see [Custom Mutations](https://www.graphile.org/postgraphile/custom-mutations/) for more details.
