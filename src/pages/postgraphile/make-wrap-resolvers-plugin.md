@@ -108,7 +108,7 @@ function makeWrapResolversPlugin<T>(
     field: GraphQLFieldConfig,
     options: Options
   ) => T | null,
-  rule: (match: T) => ResolveWrapperRule | ResolveWrapperFn
+  rule: (match: T) => ResolverWrapperRule | ResolverWrapperFn
 );
 ```
 
