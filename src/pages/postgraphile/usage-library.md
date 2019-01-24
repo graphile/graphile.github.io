@@ -52,7 +52,7 @@ http
 
 #### API: `postgraphile(pgConfig, schemaName, options)`
 
-The `postgraphile` middleware factory function takes three arguments, all of which are optional. The below options are valid for <tt>postgraphile@<!-- LIBRARY_VERSION_BEGIN -->4.1.0<!-- LIBRARY_VERSION_END --></tt>.
+The `postgraphile` middleware factory function takes three arguments, all of which are optional. The below options are valid for <tt>postgraphile@<!-- LIBRARY_VERSION_BEGIN -->4.3.1<!-- LIBRARY_VERSION_END --></tt>.
 
 * **`pgConfig`**: An object or string that will be passed to the [`pg`][] library and used to connect to a PostgreSQL backend, OR a pg.Pool to use.
 * **`schemaName`**: A string, or array of strings, which specifies the PostgreSQL schema(s) you to expose via PostGraphile; defaults to 'public'
@@ -219,6 +219,7 @@ app.use(
 Some use cases might require to mount other middleware before PostGraphile, for instance if requests to the GraphQL endpoint should be subject to an additional authorization / authentication mechanism.
 
 With express, such a composition can be done like the following:
+
 ```
 // Example middleware, does nothing
 function authMiddleware(req, res, next) {
@@ -230,6 +231,7 @@ app.use('/graphql', authMiddleware);
 // Mount PostGraphile after this middleware
 app.use(postgraphile(connectionString, schema, options));
 ```
+
 This example uses Express, but a similar approach is possible with other Node.js webservers.
 
 [connect]: https://www.npmjs.com/connect
