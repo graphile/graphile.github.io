@@ -5,6 +5,8 @@ import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
 import ExamplesViewer from "../components/ExamplesViewer";
 import ContactAndMailingList from "../components/ContactAndMailingList";
+import Layout from "../components/Layout";
+import { graphql } from "gatsby";
 
 const sectionIs = desiredSection => ({ sectionId }) =>
   sectionId === desiredSection;
@@ -105,7 +107,10 @@ const getNextPrev = (nav, pathname) => {
 
 const Page = ({
   data: {
-    remark: { html: rawHTML, frontmatter: { title, showExamples } },
+    remark: {
+      html: rawHTML,
+      frontmatter: { title, showExamples },
+    },
     nav,
     examples,
   },
@@ -131,108 +136,113 @@ const Page = ({
   const isPostGraphileDocs = navSection === "postgraphile";
 
   return (
-    <div
-      className={`template-page ${
-        location.pathname.match(
-          /^\/(postgraphile|news|support|sponsors?)(\/|$)/
-        )
-          ? "postgraphile"
-          : ""
-      }`}
-    >
-      <Helmet
-        title={`${isPostGraphileDocs ? "PostGraphile" : "Graphile"} | ${title}`}
-        meta={[
-          {
-            name: "description",
-            content: "Utilities to build powerful and performant GraphQL APIs",
-          },
-          {
-            name: "keywords",
-            content:
-              "GraphQL, API, Graph, PostgreSQL, PostGraphile, PostGraphQL, Postgres-GraphQL, server, plugins, introspection, reflection",
-          },
-        ]}
-      />
-      <SiteHeader location={location} />
-      <div className="page-content">
-        <section>
-          <div className="container">
-            <div className="row between-xs">
-              <Nav
-                sections={navSections}
-                pages={navPages}
-                location={location}
-              />
-              <div className="col-xs-12 col-md-9 first-xs main-content">
-                <div className="row">
-                  <div className="col-xs-12" style={{ width: "100%" }}>
-                    <div
-                      className="edit-this-page"
-                      style={{
-                        display: location.pathname.match(/^\/news\//)
-                          ? "none"
-                          : "",
-                      }}
-                    >
-                      <a
-                        href={`https://github.com/graphile/graphile.github.io/edit/develop/src/pages${location.pathname.substr(
-                          0,
-                          location.pathname.length - 1
-                        )}.md`}
+    <Layout {...this.props}>
+      <div
+        className={`template-page ${
+          location.pathname.match(
+            /^\/(postgraphile|news|support|sponsors?)(\/|$)/
+          )
+            ? "postgraphile"
+            : ""
+        }`}
+      >
+        <Helmet
+          title={`${
+            isPostGraphileDocs ? "PostGraphile" : "Graphile"
+          } | ${title}`}
+          meta={[
+            {
+              name: "description",
+              content:
+                "Utilities to build powerful and performant GraphQL APIs",
+            },
+            {
+              name: "keywords",
+              content:
+                "GraphQL, API, Graph, PostgreSQL, PostGraphile, PostGraphQL, Postgres-GraphQL, server, plugins, introspection, reflection",
+            },
+          ]}
+        />
+        <SiteHeader location={location} />
+        <div className="page-content">
+          <section>
+            <div className="container">
+              <div className="row between-xs">
+                <Nav
+                  sections={navSections}
+                  pages={navPages}
+                  location={location}
+                />
+                <div className="col-xs-12 col-md-9 first-xs main-content">
+                  <div className="row">
+                    <div className="col-xs-12" style={{ width: "100%" }}>
+                      <div
+                        className="edit-this-page"
+                        style={{
+                          display: location.pathname.match(/^\/news\//)
+                            ? "none"
+                            : "",
+                        }}
                       >
-                        📝 Suggest improvements to this page
-                      </a>
-                    </div>
-                    <div dangerouslySetInnerHTML={{ __html: html }} />
-                  </div>
-                  <br />
-                  {showExamples && (
-                    <ExamplesViewer
-                      examples={examples.edges
-                        .filter(({ node }) => node.category === showExamples)
-                        .map(({ node }) => node)}
-                    />
-                  )}
-                  <br />
-                  <div className="col-xs-12 mt3 mb5">
-                    <div className="row between-xs">
-                      <div className="col-xs-6">
-                        {prev ? (
-                          <Link className="" to={prev}>
-                            <span className="fas fa-fw fa-arrow-left" />{" "}
-                            {prevText ? (
-                              <AugmentedText noLink>{prevText}</AugmentedText>
-                            ) : (
-                              "Previous"
-                            )}
-                          </Link>
-                        ) : null}
+                        <a
+                          href={`https://github.com/graphile/graphile.github.io/edit/develop/src/pages${location.pathname.substr(
+                            0,
+                            location.pathname.length - 1
+                          )}.md`}
+                        >
+                          📝 Suggest improvements to this page
+                        </a>
                       </div>
-                      <div className="col-xs-6 tr">
-                        {next ? (
-                          <Link className="" to={next}>
-                            {nextText ? (
-                              <AugmentedText noLink>{nextText}</AugmentedText>
-                            ) : (
-                              "Next"
-                            )}{" "}
-                            <span className="fas fa-fw fa-arrow-right" />
-                          </Link>
-                        ) : null}
+                      <div dangerouslySetInnerHTML={{ __html: html }} />
+                    </div>
+                    <br />
+                    {showExamples && (
+                      <ExamplesViewer
+                        examples={examples.edges
+                          .filter(({ node }) => node.category === showExamples)
+                          .map(({ node }) => node)}
+                      />
+                    )}
+                    <br />
+                    <div className="col-xs-12 mt3 mb5">
+                      <div className="row between-xs">
+                        <div className="col-xs-6">
+                          {prev ? (
+                            <Link className="" to={prev}>
+                              <span className="fas fa-fw fa-arrow-left" />{" "}
+                              {prevText ? (
+                                <AugmentedText noLink>{prevText}</AugmentedText>
+                              ) : (
+                                "Previous"
+                              )}
+                            </Link>
+                          ) : null}
+                        </div>
+                        <div className="col-xs-6 tr">
+                          {next ? (
+                            <Link className="" to={next}>
+                              {nextText ? (
+                                <AugmentedText noLink>{nextText}</AugmentedText>
+                              ) : (
+                                "Next"
+                              )}{" "}
+                              <span className="fas fa-fw fa-arrow-right" />
+                            </Link>
+                          ) : null}
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <ContactAndMailingList />
+          <ContactAndMailingList />
+        </div>
+        <SiteFooter />
       </div>
-      <SiteFooter />
-    </div>
+    </Layout>
   );
 };
 
