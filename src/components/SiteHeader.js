@@ -4,9 +4,12 @@ import { Switch, Router } from "@reach/router";
 
 const Route = ({ exact, path, render }) => {
   const Child = () => render();
+  const paths = Array.isArray(path) ? path : [path];
   return (
     <Router>
-      <Child path={exact ? path : path + "/*"} />
+      {paths.map(path => (
+        <Child key={path} path={exact ? path : path + "/*"} />
+      ))}
     </Router>
   );
 };
