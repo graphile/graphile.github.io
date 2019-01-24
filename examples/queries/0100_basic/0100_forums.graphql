@@ -1,5 +1,5 @@
 {
-  allForums {
+  forums {
     nodes {
       nodeId
       id
