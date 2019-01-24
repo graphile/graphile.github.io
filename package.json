@@ -35,6 +35,8 @@
     "juice": "5.1.0",
     "postgraphile": "^4.3.1",
     "prismjs": "1.15.0",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
     "react-prism": "4.3.2",
     "react-typography": "^0.16.18",
     "remark-custom-blocks": "^2.3.1",
@@ -43,9 +45,7 @@
     "typography-theme-fairy-gates": "^0.16.18",
     "typography-theme-funston": "^0.16.18"
   },
-  "keywords": [
-    "gatsby"
-  ],
+  "keywords": ["gatsby"],
   "license": "MIT",
   "main": "n/a",
   "scripts": {
@@ -59,7 +59,7 @@
     "watch:examples": "nodemon -x './scripts/update-examples' -w examples/queries -e graphql"
   },
   "resolutions": {
-    "graphql": "0.11.x"
+    "graphql": "14.x"
   },
   "devDependencies": {
     "eslint_d": "7.2.0",
