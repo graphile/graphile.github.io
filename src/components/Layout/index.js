@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Link from "gatsby-link";
 
 import "prismjs";
 import "prismjs/themes/prism-solarizedlight.css";
@@ -28,15 +27,8 @@ class TemplateWrapper extends Component {
       el.focus();
     }
   };
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.location.pathname !== this.props.location.pathname) {
-      setTimeout(() => {
-        if (this.self) this.self.focus();
-      }, 0);
-    }
-  }
   render() {
-    const { children, ...restOfProps } = this.props;
+    const { children } = this.props;
     return (
       <div onKeyDown={this.onKeyDown} tabIndex="-1" ref={this.focus}>
         {/*
@@ -46,7 +38,7 @@ class TemplateWrapper extends Component {
           </Link>
         </section>
         */}
-        {children(restOfProps)}
+        {children}
       </div>
     );
   }

@@ -834,7 +834,7 @@ h6 code {
     &.postgraphile .logo {
       flex: 1 0 15rem;
       min-height: 15rem;
-      background-image: url("../../logos/postgraphile.optimized.svg");
+      background-image: url("../../../logos/postgraphile.optimized.svg");
     }
     .graphile {
       //background: linear-gradient(85deg, #a51b1b 0%, #7d2424 100%);
@@ -844,7 +844,7 @@ h6 code {
       background: linear-gradient(135deg, #ddeffd 0%, #bcdaf5 100%);
     }
     .graphile .logo {
-      background-image: url("../../logos/graphile.optimized.svg");
+      background-image: url("../../../logos/graphile.optimized.svg");
     }
     .training .logo {
       background-image: url("https://www.graphql-training.com/images/brain-medium.png");
@@ -892,30 +892,30 @@ h6 code {
 }
 
 .postgraphile-graphs-average-latency {
-  background-image: url("../../static/images/v4-average-latency.png");
+  background-image: url("../../../static/images/v4-average-latency.png");
 }
 
 .postgraphile-graphs-average-latency-label {
-  background-image: url("../../static/images/v4-average-latency-with-label.png");
+  background-image: url("../../../static/images/v4-average-latency-with-label.png");
 }
 
 .postgraphile-graphs-requests-per-second {
-  background-image: url("../../static/images/v4-requests-per-second.png");
+  background-image: url("../../../static/images/v4-requests-per-second.png");
 }
 
 .postgraphile-graphs-memory-usage {
-  background-image: url("../../static/images/v4-memory-usage.png");
+  background-image: url("../../../static/images/v4-memory-usage.png");
 }
 
 .postgraphile-logo-bg {
-  background-image: url("../../logos/postgraphile.optimized.svg");
+  background-image: url("../../../logos/postgraphile.optimized.svg");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: 50% 20%;
   min-height: 120px;
 }
 .graphile-logo-bg {
-  background-image: url("../../logos/graphile.optimized.svg");
+  background-image: url("../../../logos/graphile.optimized.svg");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: 50% 20%;

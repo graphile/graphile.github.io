@@ -1,7 +1,7 @@
 const path = require("path");
 
-exports.createPages = async ({ boundActionCreators, graphql }) => {
-  const { createPage, createRedirect } = boundActionCreators;
+exports.createPages = async ({ actions, graphql }) => {
+  const { createPage, createRedirect } = actions;
 
   createRedirect({
     fromPath: `/`,
@@ -52,6 +52,7 @@ exports.createPages = async ({ boundActionCreators, graphql }) => {
       path: node.frontmatter.path,
       component: layouts[node.frontmatter.layout] || layouts.page,
       context: {
+        slug: node.frontmatter.path,
         layout: node.frontmatter.layout || "page",
       },
     });

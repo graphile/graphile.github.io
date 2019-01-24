@@ -1,5 +1,5 @@
 {
-  allForums(first: 1, offset: 1) {
+  forums(first: 1, offset: 1) {
     nodes {
       nodeId
       id
