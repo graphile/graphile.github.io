@@ -89,25 +89,16 @@ Marketing.propTypes = {
   children: PropTypes.func,
 };
 
-const MarketingWithData = props => (
-  <StaticQuery
-    variables={{
-      path: props.location.pathname,
-    }}
-    query={graphql`
-      query MarketingPageByPath($path: String!) {
-        remark: markdownRemark(frontmatter: { path: { eq: $path } }) {
-          html
-          frontmatter {
-            path
-            title
-          }
-        }
+export const pageQuery = graphql`
+  query MarketingPageByPath($slug: String!) {
+    remark: markdownRemark(frontmatter: { path: { eq: $slug } }) {
+      html
+      frontmatter {
+        path
+        title
       }
-    `}
-  >
-    {data => <Marketing {...props} data={data} />}
-  </StaticQuery>
-);
+    }
+  }
+`;
 
-export default MarketingWithData;
+export default Marketing;

@@ -52,6 +52,7 @@ exports.createPages = async ({ actions, graphql }) => {
       path: node.frontmatter.path,
       component: layouts[node.frontmatter.layout] || layouts.page,
       context: {
+        slug: node.frontmatter.path,
         layout: node.frontmatter.layout || "page",
       },
     });

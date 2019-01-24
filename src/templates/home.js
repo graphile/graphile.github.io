@@ -181,25 +181,15 @@ Home.propTypes = {
   children: PropTypes.func,
 };
 
-const HomeWithData = props => (
-  <StaticQuery
-    variables={{
-      path: props.location.pathname,
-    }}
-    query={graphql`
-      query HomePageByPath($path: String!) {
-        remark: markdownRemark(frontmatter: { path: { eq: $path } }) {
-          html
-          frontmatter {
-            path
-            title
-          }
-        }
+export const pageQuery = graphql`
+  query HomePageByPath($slug: String!) {
+    remark: markdownRemark(frontmatter: { path: { eq: $slug } }) {
+      html
+      frontmatter {
+        path
+        title
       }
-    `}
-  >
-    {data => <Home {...props} data={data} />}
-  </StaticQuery>
-);
-
-export default HomeWithData;
+    }
+  }
+`;
+export default Home;

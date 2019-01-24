@@ -105,18 +105,19 @@ const getNextPrev = (nav, pathname) => {
   return { next, nextText, prev, prevText };
 };
 
-const Page = ({
-  data: {
-    remark: {
-      html: rawHTML,
-      frontmatter: { title, showExamples },
+const Page = props => {
+  const {
+    data: {
+      remark: {
+        html: rawHTML,
+        frontmatter: { title, showExamples },
+      },
+      nav,
+      examples,
     },
-    nav,
-    examples,
-  },
-  location,
-  history,
-}) => {
+    location,
+    history,
+  } = props;
   const html = processHTML(rawHTML);
   const [, navSection] = location.pathname.split("/");
   const thisNavEdge = nav.edges.find(
@@ -137,7 +138,7 @@ const Page = ({
   const isPostGraphileDocs = navSection === "postgraphile";
 
   return (
-    <Layout {...this.props}>
+    <Layout {...props}>
       <div
         className={`template-page ${
           location.pathname.match(
@@ -247,64 +248,55 @@ const Page = ({
   );
 };
 
-const PageWithData = props => (
-  <StaticQuery
-    variables={{
-      path: props.location.pathname,
-    }}
-    query={graphql`
-      query PageByPath($path: String!) {
-        remark: markdownRemark(frontmatter: { path: { eq: $path } }) {
-          html
-          frontmatter {
-            path
+export const pageQuery = graphql`
+  query PageByPath($slug: String!) {
+    remark: markdownRemark(frontmatter: { path: { eq: $slug } }) {
+      html
+      frontmatter {
+        path
+        title
+        showExamples
+      }
+    }
+    nav: allNavJson {
+      edges {
+        node {
+          id
+          name
+          sections {
+            id
             title
-            showExamples
           }
-        }
-        nav: allNavJson {
-          edges {
-            node {
-              id
-              name
-              sections {
-                id
-                title
-              }
-              pages {
-                to
-                title
-                sectionId
-                subpages {
-                  to
-                  title
-                  sectionId
-                }
-              }
-            }
-          }
-        }
-        examples: allExamplesJson {
-          edges {
-            node {
-              category
-              id
+          pages {
+            to
+            title
+            sectionId
+            subpages {
+              to
               title
-              examples {
-                title
-                example
-                exampleLanguage
-                result
-                resultLanguage
-              }
+              sectionId
             }
           }
         }
       }
-    `}
-  >
-    {data => <Page {...props} data={data} />}
-  </StaticQuery>
-);
+    }
+    examples: allExamplesJson {
+      edges {
+        node {
+          category
+          id
+          title
+          examples {
+            title
+            example
+            exampleLanguage
+            result
+            resultLanguage
+          }
+        }
+      }
+    }
+  }
+`;
 
-export default PageWithData;
+export default Page;
