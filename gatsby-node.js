@@ -1,7 +1,7 @@
 const path = require("path");
 
-exports.createPages = async ({ boundActionCreators, graphql }) => {
-  const { createPage, createRedirect } = boundActionCreators;
+exports.createPages = async ({ actions, graphql }) => {
+  const { createPage, createRedirect } = actions;
 
   createRedirect({
     fromPath: `/`,
