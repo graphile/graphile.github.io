@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /postgraphile/custom-queries/
+slug: /postgraphile/custom-queries/
 title: Custom Queries
 ---
 

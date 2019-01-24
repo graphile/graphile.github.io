@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /postgraphile/evaluating/
+slug: /postgraphile/evaluating/
 title: Evaluating
 ---
 

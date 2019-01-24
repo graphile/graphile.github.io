@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /postgraphile/community-plugins/
+slug: /postgraphile/community-plugins/
 title: PostGraphile community plugins
 ---
 

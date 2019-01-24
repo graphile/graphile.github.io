@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /postgraphile/requirements/
+slug: /postgraphile/requirements/
 title: PostGraphile Requirements
 ---
 

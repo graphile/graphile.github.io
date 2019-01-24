@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /postgraphile/community-contributions/
+slug: /postgraphile/community-contributions/
 title: Community contributions
 ---
 

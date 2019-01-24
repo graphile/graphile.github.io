@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /postgraphile/function-gallery/
+slug: /postgraphile/function-gallery/
 title: PostGraphile Function Gallery
 showExamples: functions
 ---

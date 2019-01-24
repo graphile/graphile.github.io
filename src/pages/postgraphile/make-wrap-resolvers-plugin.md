@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /postgraphile/make-wrap-resolvers-plugin/
+slug: /postgraphile/make-wrap-resolvers-plugin/
 title: makeWrapResolversPlugin
 ---
 

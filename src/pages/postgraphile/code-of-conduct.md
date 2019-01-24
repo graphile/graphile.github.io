@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /postgraphile/code-of-conduct/
+slug: /postgraphile/code-of-conduct/
 title: Code of Conduct
 ---
 

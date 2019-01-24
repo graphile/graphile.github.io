@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /news/press-kit/
+slug: /news/press-kit/
 title: About PostGraphile
 ---
 

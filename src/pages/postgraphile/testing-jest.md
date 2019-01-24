@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /postgraphile/testing-jest/
+slug: /postgraphile/testing-jest/
 title: Testing with Jest
 ---
 

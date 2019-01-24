@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /history/
+slug: /history/
 title: History
 ---
 

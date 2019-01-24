@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /graphile-build/schema-builder/
+slug: /graphile-build/schema-builder/
 title: SchemaBuilder
 ---
 

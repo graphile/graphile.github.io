@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /postgraphile/usage-library/
+slug: /postgraphile/usage-library/
 title: PostGraphile as a Library
 ---
 

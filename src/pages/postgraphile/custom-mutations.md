@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /postgraphile/custom-mutations/
+slug: /postgraphile/custom-mutations/
 title: Custom Mutations
 ---
 

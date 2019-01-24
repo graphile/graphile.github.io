@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /postgraphile/jwt-guide/
+slug: /postgraphile/jwt-guide/
 title: PostGraphile JWT Guide
 ---
 

@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /graphile-build/context-object/
+slug: /graphile-build/context-object/
 title: The Context Object
 ---
 

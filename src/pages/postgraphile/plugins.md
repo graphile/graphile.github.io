@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /postgraphile/plugins/
+slug: /postgraphile/plugins/
 title: PostGraphile Server Plugins
 ---
 

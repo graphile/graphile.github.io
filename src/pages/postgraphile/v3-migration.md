@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /postgraphile/v3-migration/
+slug: /postgraphile/v3-migration/
 title: Migrating from PostGraphQL v3
 ---
 

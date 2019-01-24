@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /graphile-build/omitting-plugins/
+slug: /graphile-build/omitting-plugins/
 title: Omitting Plugins
 ---
 

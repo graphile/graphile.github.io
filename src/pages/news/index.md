@@ -1,6 +1,6 @@
 ---
 layout: marketing
-path: /news/
+slug: /news/
 title: News
 ---
 

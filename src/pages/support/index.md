@@ -1,6 +1,6 @@
 ---
 layout: marketing
-path: /support/
+slug: /support/
 title: Support for PostGraphile and Graphile Engine from the maintainer
 ---
 

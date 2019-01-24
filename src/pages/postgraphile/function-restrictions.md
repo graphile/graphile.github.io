@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /postgraphile/function-restrictions/
+slug: /postgraphile/function-restrictions/
 title: PostGraphile Function Restrictions
 ---
 

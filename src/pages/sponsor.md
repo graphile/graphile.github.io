@@ -1,6 +1,6 @@
 ---
 layout: marketing
-path: /sponsor/
+slug: /sponsor/
 title: Sponsor PostGraphile and Graphile Engine development
 ---
 

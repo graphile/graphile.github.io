@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /postgraphile/introspection/
+slug: /postgraphile/introspection/
 title: Introspection?
 ---
 

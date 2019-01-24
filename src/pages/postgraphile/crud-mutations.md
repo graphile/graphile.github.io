@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /postgraphile/crud-mutations/
+slug: /postgraphile/crud-mutations/
 title: CRUD Mutations
 ---
 

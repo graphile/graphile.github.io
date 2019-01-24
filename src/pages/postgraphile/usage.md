@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /postgraphile/usage/
+slug: /postgraphile/usage/
 title: PostGraphile Usage
 ---
 

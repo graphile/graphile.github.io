@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /graphile-build/getting-started/
+slug: /graphile-build/getting-started/
 title: Getting Started
 ---
 

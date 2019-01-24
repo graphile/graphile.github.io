@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /postgraphile/versioning-policy/
+slug: /postgraphile/versioning-policy/
 title: Versioning Policy
 ---
 

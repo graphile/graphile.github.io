@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /graphile-build/look-ahead/
+slug: /graphile-build/look-ahead/
 title: Look Ahead
 ---
 

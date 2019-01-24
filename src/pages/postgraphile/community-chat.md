@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /postgraphile/community-chat/
+slug: /postgraphile/community-chat/
 title: PostGraphile chat
 ---
 

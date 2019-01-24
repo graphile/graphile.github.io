@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /postgraphile/make-plugin-by-combining-plugins/
+slug: /postgraphile/make-plugin-by-combining-plugins/
 title: graphile-utils makePluginByCombiningPlugins
 ---
 

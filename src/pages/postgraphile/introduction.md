@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /postgraphile/introduction/
+slug: /postgraphile/introduction/
 title: PostGraphile Introduction
 ---
 

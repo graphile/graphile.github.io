@@ -1,6 +1,6 @@
 ---
 layout: page
-path: /postgraphile/procedures/
+slug: /postgraphile/procedures/
 title: Procedures
 ---
 
