@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /postgraphile/v4-new-features/
+path: /postgraphile/v4-new-features/
 title: v4 Feature Guide
 ---
 

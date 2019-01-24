@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /postgraphile/examples/
+path: /postgraphile/examples/
 title: PostGraphile examples
 showExamples: queries
 ---

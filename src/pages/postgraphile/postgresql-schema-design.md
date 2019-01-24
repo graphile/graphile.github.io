@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /postgraphile/postgresql-schema-design/
+path: /postgraphile/postgresql-schema-design/
 title: PostgreSQL Schema Design
 ---
 

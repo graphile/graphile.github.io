@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /postgraphile/functions/
+path: /postgraphile/functions/
 title: Functions
 ---
 

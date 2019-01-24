@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /postgraphile/usage-cli/
+path: /postgraphile/usage-cli/
 title: PostGraphile CLI
 ---
 

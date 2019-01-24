@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /postgraphile/quick-start-guide/
+path: /postgraphile/quick-start-guide/
 title: Quick Start Guide
 ---
 

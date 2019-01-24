@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /postgraphile/subscriptions/
+path: /postgraphile/subscriptions/
 title: GraphQL Subscriptions
 ---
 

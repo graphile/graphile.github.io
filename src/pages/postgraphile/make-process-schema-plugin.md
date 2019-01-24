@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /postgraphile/make-process-schema-plugin/
+path: /postgraphile/make-process-schema-plugin/
 title: makeProcessSchemaPlugin
 ---
 

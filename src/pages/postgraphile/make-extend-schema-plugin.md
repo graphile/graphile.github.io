@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /postgraphile/make-extend-schema-plugin/
+path: /postgraphile/make-extend-schema-plugin/
 title: graphile-utils makeExtendSchemaPlugin
 ---
 

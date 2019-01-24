@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /graphile-build-pg/security/
+path: /graphile-build-pg/security/
 title: Security
 ---
 

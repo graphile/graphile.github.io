@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /postgraphile/usage-schema/
+path: /postgraphile/usage-schema/
 title: Graphile-Build-PG Usage
 ---
 

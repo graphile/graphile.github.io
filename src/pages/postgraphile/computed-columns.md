@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /postgraphile/computed-columns/
+path: /postgraphile/computed-columns/
 title: Computed Columns
 ---
 

@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /postgraphile/extending-raw/
+path: /postgraphile/extending-raw/
 title: Schema Plugins - Graphile Engine
 ---
 

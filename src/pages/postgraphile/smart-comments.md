@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /postgraphile/smart-comments/
+path: /postgraphile/smart-comments/
 title: Smart Comments
 ---
 

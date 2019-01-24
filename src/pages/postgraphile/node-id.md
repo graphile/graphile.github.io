@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /postgraphile/node-id/
+path: /postgraphile/node-id/
 title: nodeId / id / Globally Unique Object Identification
 ---
 

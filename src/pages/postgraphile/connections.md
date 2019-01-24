@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /postgraphile/connections/
+path: /postgraphile/connections/
 title: Connections
 ---
 

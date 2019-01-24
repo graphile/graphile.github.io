@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /postgraphile/jwk-verification/
+path: /postgraphile/jwk-verification/
 title: PostGraphile JWT/JWK Verification
 ---
 

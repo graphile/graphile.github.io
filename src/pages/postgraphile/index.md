@@ -1,6 +1,6 @@
 ---
 layout: marketing
-slug: /postgraphile/
+path: /postgraphile/
 title: PostGraphile - full GraphQL API server in an instant from PostgreSQL database
 ---
 

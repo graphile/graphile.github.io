@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /graphile-build/graphile-build/
+path: /graphile-build/graphile-build/
 title: graphile-build
 ---
 

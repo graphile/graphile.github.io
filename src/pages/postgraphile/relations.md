@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /postgraphile/relations/
+path: /postgraphile/relations/
 title: Relations
 ---
 

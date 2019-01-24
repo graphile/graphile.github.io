@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /postgraphile/performance/
+path: /postgraphile/performance/
 title: Performance
 ---
 

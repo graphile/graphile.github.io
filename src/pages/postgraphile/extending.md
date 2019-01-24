@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /postgraphile/extending/
+path: /postgraphile/extending/
 title: GraphQL Schema Plugins
 ---
 

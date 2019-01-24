@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /graphile-build/build-object/
+path: /graphile-build/build-object/
 title: The Build Object
 ---
 

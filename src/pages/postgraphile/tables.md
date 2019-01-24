@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /postgraphile/tables/
+path: /postgraphile/tables/
 title: PostgreSQL Tables
 ---
 

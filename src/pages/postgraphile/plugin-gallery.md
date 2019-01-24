@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /postgraphile/plugin-gallery/
+path: /postgraphile/plugin-gallery/
 title: PostGraphile Plugin Gallery
 showExamples: plugins
 ---

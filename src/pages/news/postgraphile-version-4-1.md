@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /news/postgraphile-version-4-1/
+path: /news/postgraphile-version-4-1/
 title: PostGraphile Version 4.1 is released
 ---
 

@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /postgraphile/why-nullable/
+path: /postgraphile/why-nullable/
 title: Why is it nullable?
 ---
 

@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /postgraphile/default-role/
+path: /postgraphile/default-role/
 title: Default Role
 ---
 

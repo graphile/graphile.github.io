@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /postgraphile/namespaces/
+path: /postgraphile/namespaces/
 title: Namespaces
 ---
 

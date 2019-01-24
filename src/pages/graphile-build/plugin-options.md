@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /graphile-build/plugin-options/
+path: /graphile-build/plugin-options/
 title: Plugin Options
 ---
 

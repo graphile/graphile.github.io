@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /postgraphile/debugging/
+path: /postgraphile/debugging/
 title: Debugging
 ---
 

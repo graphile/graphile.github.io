@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /postgraphile/filtering/
+path: /postgraphile/filtering/
 title: Filtering
 ---
 

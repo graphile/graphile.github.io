@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /postgraphile/security/
+path: /postgraphile/security/
 title: Security
 ---
 

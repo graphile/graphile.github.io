@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /graphile-build/default-plugins/
+path: /graphile-build/default-plugins/
 title: Default Plugins
 ---
 

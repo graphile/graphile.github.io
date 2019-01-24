@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /graphile-build/plugins/
+path: /graphile-build/plugins/
 title: Plugins
 ---
 

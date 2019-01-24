@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /graphile-build-pg/settings/
+path: /graphile-build-pg/settings/
 title: Settings
 ---
 

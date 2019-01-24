@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /postgraphile/make-add-inflectors-plugin/
+path: /postgraphile/make-add-inflectors-plugin/
 title: graphile-utils makeAddInflectorsPlugin
 ---
 

@@ -1,6 +1,6 @@
 ---
 layout: marketing
-slug: /postgraphile/pricing/
+path: /postgraphile/pricing/
 title: PostGraphile Pro!
 ---
 

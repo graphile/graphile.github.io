@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /postgraphile/views/
+path: /postgraphile/views/
 title: Views
 ---
 

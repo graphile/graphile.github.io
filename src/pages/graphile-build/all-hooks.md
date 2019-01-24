@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /graphile-build/all-hooks/
+path: /graphile-build/all-hooks/
 title: All Hooks
 ---
 

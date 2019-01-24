@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /postgraphile/best-practices/
+path: /postgraphile/best-practices/
 title: PostGraphile best practices
 ---
 

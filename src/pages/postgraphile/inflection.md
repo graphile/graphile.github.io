@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /postgraphile/inflection/
+path: /postgraphile/inflection/
 title: Inflection
 ---
 

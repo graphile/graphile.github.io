@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /postgraphile/make-change-nullability-plugin/
+path: /postgraphile/make-change-nullability-plugin/
 title: makeChangeNullabilityPlugin
 ---
 

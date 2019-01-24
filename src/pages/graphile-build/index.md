@@ -1,6 +1,6 @@
 ---
 layout: marketing
-slug: /graphile-build/
+path: /graphile-build/
 title: Extensible GraphQL APIs through Plugins
 ---
 

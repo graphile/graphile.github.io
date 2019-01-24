@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: /postgraphile/production/
+path: /postgraphile/production/
 title: Production Considerations
 ---
 
