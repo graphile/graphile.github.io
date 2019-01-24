@@ -12,11 +12,8 @@ class Marketing extends Component {
   state = {
     mailchimp: false,
   };
-  componentDidMount() {
-    setTimeout(this.mailchimpScript, 0);
-  }
-  mailchimpScript = () => {
-    if (this.root.querySelector("#mc-embedded-subscribe-form")) {
+  mailchimpScript = root => {
+    if (root.querySelector("#mc-embedded-subscribe-form")) {
       this.setState({ mailchimp: true });
     }
   };
@@ -38,9 +35,7 @@ class Marketing extends Component {
               ? "postgraphile"
               : ""
           }`}
-          ref={el => {
-            this.root = el;
-          }}
+          ref={this.mailchimpScript}
         >
           <Helmet
             title="Graphile | Powerful, Extensible and Performant GraphQL APIs Rapidly"
