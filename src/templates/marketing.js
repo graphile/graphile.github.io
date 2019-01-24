@@ -4,7 +4,7 @@ import Helmet from "react-helmet";
 import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
 import Layout from "../components/Layout";
-import { graphql } from "gatsby";
+import { graphql, StaticQuery } from "gatsby";
 
 import "prismjs/themes/prism-solarizedlight.css";
 
@@ -23,12 +23,10 @@ class Marketing extends Component {
   render() {
     const {
       data: {
-        remark: {
-          html,
-          frontmatter: { next, nextText, prev, prevText },
-        },
+        remark: { html },
       },
       location,
+      history,
     } = this.props;
     return (
       <Layout {...this.props}>
@@ -75,7 +73,7 @@ class Marketing extends Component {
               />
             )}
           </Helmet>
-          <SiteHeader location={location} />
+          <SiteHeader location={location} history={history} />
           <div
             className="page-content"
             dangerouslySetInnerHTML={{ __html: html }}
@@ -91,16 +89,25 @@ Marketing.propTypes = {
   children: PropTypes.func,
 };
 
-export default Marketing;
-
-export const pageQuery = graphql`
-  query MarketingPageByPath($path: String!) {
-    remark: markdownRemark(frontmatter: { path: { eq: $path } }) {
-      html
-      frontmatter {
-        path
-        title
+const MarketingWithData = props => (
+  <StaticQuery
+    variables={{
+      path: props.location.pathname,
+    }}
+    query={graphql`
+      query MarketingPageByPath($path: String!) {
+        remark: markdownRemark(frontmatter: { path: { eq: $path } }) {
+          html
+          frontmatter {
+            path
+            title
+          }
+        }
       }
-    }
-  }
-`;
+    `}
+  >
+    {data => <Marketing {...props} data={data} />}
+  </StaticQuery>
+);
+
+export default MarketingWithData;

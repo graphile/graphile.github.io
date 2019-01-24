@@ -33,6 +33,7 @@
     "graphile-build": "^4.1.0",
     "graphql": "^0.13.2",
     "juice": "5.1.0",
+    "node-sass": "^4.11.0",
     "postgraphile": "^4.3.1",
     "prismjs": "1.15.0",
     "react": "^16.7.0",

@@ -1,6 +1,15 @@
 import React from "react";
 import Link from "gatsby-link";
-import { withRouter, Switch, Route } from "react-router-dom";
+import { Switch, Router } from "@reach/router";
+
+const Route = ({ exact, path, render }) => {
+  const Child = () => render();
+  return (
+    <Router>
+      <Child path={exact ? path : path + "/*"} />
+    </Router>
+  );
+};
 
 const POSTGRAPHILE_ROUTES = ["/postgraphile", "/sponsor", "/support"];
 
@@ -21,275 +30,273 @@ function enableSearch(history) {
   });
 }
 
-export default withRouter(
-  class SiteHeader extends React.Component {
-    handleSearchBoxRef = () => {
-      document.addEventListener(
-        "DOMContentLoaded",
-        enableSearch.bind(null, this.props.history)
-      );
-      document.addEventListener(
-        "load",
-        enableSearch.bind(null, this.props.history)
-      );
-      enableSearch(this.props.history);
-    };
-    render() {
-      const { location } = this.props;
-      return (
-        <header className="header content absolute z-999 w-100">
-          <nav className="navbar">
-            <div className="container">
-              <input
-                className="navbar-toggler input-reset"
-                type="checkbox"
-                id="toggle"
-                data-toggle="collapse"
-                data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-              />
-              <div className="nav-controls nested-list-reset ">
-                <div className="navbar-crosses">
-                  <span className="line line-1"> </span>
-                  <span className="line line-2"> </span>
-                  <span className="line line-3"> </span>
-                </div>
-                <ul className="navbar-nav flex w-100">
-                  <li className="navbar-item">
-                    <Link
-                      className={`nav-link ${
-                        location.pathname.match(/^\/$/) ? "active" : ""
-                      }`}
-                      to="/"
-                    >
-                      <span className="home-icon fas fa-home" />{" "}
-                      <span className="home">Home</span>
-                    </Link>
-                  </li>
+export default class SiteHeader extends React.Component {
+  handleSearchBoxRef = () => {
+    document.addEventListener(
+      "DOMContentLoaded",
+      enableSearch.bind(null, this.props.history)
+    );
+    document.addEventListener(
+      "load",
+      enableSearch.bind(null, this.props.history)
+    );
+    enableSearch(this.props.history);
+  };
+  render() {
+    const { location } = this.props;
+    return (
+      <header className="header content absolute z-999 w-100">
+        <nav className="navbar">
+          <div className="container">
+            <input
+              className="navbar-toggler input-reset"
+              type="checkbox"
+              id="toggle"
+              data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            />
+            <div className="nav-controls nested-list-reset ">
+              <div className="navbar-crosses">
+                <span className="line line-1"> </span>
+                <span className="line line-2"> </span>
+                <span className="line line-3"> </span>
+              </div>
+              <ul className="navbar-nav flex w-100">
+                <li className="navbar-item">
+                  <Link
+                    className={`nav-link ${
+                      location.pathname.match(/^\/$/) ? "active" : ""
+                    }`}
+                    to="/"
+                  >
+                    <span className="home-icon fas fa-home" />{" "}
+                    <span className="home">Home</span>
+                  </Link>
+                </li>
 
-                  {/* HOMEPAGE */}
+                {/* HOMEPAGE */}
 
-                  <Route
-                    exact
-                    path="/"
-                    render={() => (
-                      <li className="navbar-item">
-                        <Link
-                          className={`nav-link ${
-                            location.pathname.match(/^\/postgraphile(\/|$)/)
-                              ? "active"
-                              : ""
-                          }`}
-                          to="/postgraphile/"
-                        >
-                          PostGraphile
-                        </Link>
-                      </li>
-                    )}
-                  />
-                  <Route
-                    exact
-                    path="/"
-                    render={() => (
-                      <li className="navbar-item">
-                        <Link
-                          className={`nav-link ${
-                            location.pathname.match(/^\/graphile-build(\/|$)/)
-                              ? "active"
-                              : ""
-                          }`}
-                          to="/graphile-build/"
-                        >
-                          Graphile Engine
-                        </Link>
-                      </li>
-                    )}
-                  />
+                <Route
+                  exact
+                  path="/"
+                  render={() => (
+                    <li className="navbar-item">
+                      <Link
+                        className={`nav-link ${
+                          location.pathname.match(/^\/postgraphile(\/|$)/)
+                            ? "active"
+                            : ""
+                        }`}
+                        to="/postgraphile/"
+                      >
+                        PostGraphile
+                      </Link>
+                    </li>
+                  )}
+                />
+                <Route
+                  exact
+                  path="/"
+                  render={() => (
+                    <li className="navbar-item">
+                      <Link
+                        className={`nav-link ${
+                          location.pathname.match(/^\/graphile-build(\/|$)/)
+                            ? "active"
+                            : ""
+                        }`}
+                        to="/graphile-build/"
+                      >
+                        Graphile Engine
+                      </Link>
+                    </li>
+                  )}
+                />
 
-                  {/* PostGraphile pages */}
+                {/* PostGraphile pages */}
 
-                  <Route
-                    path={POSTGRAPHILE_ROUTES}
-                    render={() => (
-                      <li className="navbar-item">
-                        <Link
-                          className={`nav-link ${
-                            location.pathname.match(/^\/postgraphile\/?$/)
-                              ? "active"
-                              : ""
-                          }`}
-                          to="/postgraphile/"
-                        >
-                          Overview
-                        </Link>
-                      </li>
-                    )}
-                  />
-                  <Route
-                    path={POSTGRAPHILE_ROUTES}
-                    render={() => (
-                      <li className="navbar-item">
-                        <Link
-                          className={`nav-link ${
-                            location.pathname.match(
-                              /^\/postgraphile\/.(?!ricing)/
-                            )
-                              ? "active"
-                              : ""
-                          }`}
-                          to="/postgraphile/introduction/"
-                        >
-                          Documentation
-                        </Link>
-                      </li>
-                    )}
-                  />
-                  <Route
-                    path={POSTGRAPHILE_ROUTES}
-                    render={() => (
-                      <li className="navbar-item">
-                        <Link
-                          className={`nav-link ${
-                            location.pathname.match(/^\/sponsor(\/|$)/)
-                              ? "active"
-                              : ""
-                          }`}
-                          to="/sponsor/"
-                        >
-                          Sponsor
-                        </Link>
-                      </li>
-                    )}
-                  />
-                  <Route
-                    path={POSTGRAPHILE_ROUTES}
-                    render={() => (
-                      <li className="navbar-item">
-                        <Link
-                          className={`hide-when-small nav-link ${
-                            location.pathname.match(
-                              /^\/postgraphile\/pricing(\/|$)/
-                            )
-                              ? "active"
-                              : ""
-                          }`}
-                          to="/postgraphile/pricing/"
-                        >
-                          Go Pro!
-                        </Link>
-                      </li>
-                    )}
-                  />
+                <Route
+                  path={POSTGRAPHILE_ROUTES}
+                  render={() => (
+                    <li className="navbar-item">
+                      <Link
+                        className={`nav-link ${
+                          location.pathname.match(/^\/postgraphile\/?$/)
+                            ? "active"
+                            : ""
+                        }`}
+                        to="/postgraphile/"
+                      >
+                        Overview
+                      </Link>
+                    </li>
+                  )}
+                />
+                <Route
+                  path={POSTGRAPHILE_ROUTES}
+                  render={() => (
+                    <li className="navbar-item">
+                      <Link
+                        className={`nav-link ${
+                          location.pathname.match(
+                            /^\/postgraphile\/.(?!ricing)/
+                          )
+                            ? "active"
+                            : ""
+                        }`}
+                        to="/postgraphile/introduction/"
+                      >
+                        Documentation
+                      </Link>
+                    </li>
+                  )}
+                />
+                <Route
+                  path={POSTGRAPHILE_ROUTES}
+                  render={() => (
+                    <li className="navbar-item">
+                      <Link
+                        className={`nav-link ${
+                          location.pathname.match(/^\/sponsor(\/|$)/)
+                            ? "active"
+                            : ""
+                        }`}
+                        to="/sponsor/"
+                      >
+                        Sponsor
+                      </Link>
+                    </li>
+                  )}
+                />
+                <Route
+                  path={POSTGRAPHILE_ROUTES}
+                  render={() => (
+                    <li className="navbar-item">
+                      <Link
+                        className={`hide-when-small nav-link ${
+                          location.pathname.match(
+                            /^\/postgraphile\/pricing(\/|$)/
+                          )
+                            ? "active"
+                            : ""
+                        }`}
+                        to="/postgraphile/pricing/"
+                      >
+                        Go Pro!
+                      </Link>
+                    </li>
+                  )}
+                />
 
-                  {/* Graphile-build pages */}
+                {/* Graphile-build pages */}
 
-                  <Route
-                    path="/graphile-build"
-                    render={() => (
-                      <li className="navbar-item">
-                        <Link
-                          className={`nav-link ${
-                            location.pathname.match(/^\/graphile-build\/?$/)
-                              ? "active"
-                              : ""
-                          }`}
-                          to="/graphile-build/"
-                        >
-                          Overview
-                        </Link>
-                      </li>
-                    )}
-                  />
-                  <Route
-                    path="/graphile-build"
-                    render={() => (
-                      <li className="navbar-item">
-                        <Link
-                          className={`nav-link ${
-                            location.pathname.match(
-                              /^\/graphile-build\/.(?!ricing)/
-                            )
-                              ? "active"
-                              : ""
-                          }`}
-                          to="/graphile-build/getting-started/"
-                        >
-                          Documentation
-                        </Link>
-                      </li>
-                    )}
-                  />
-                  <Route
-                    path="/graphile-build"
-                    render={() => (
-                      <li className="navbar-item">
-                        <Link className={"nav-link"} to="/postgraphile/">
-                          PostGraphile
-                        </Link>
-                      </li>
-                    )}
-                  />
-                  {/* News pages */}
+                <Route
+                  path="/graphile-build"
+                  render={() => (
+                    <li className="navbar-item">
+                      <Link
+                        className={`nav-link ${
+                          location.pathname.match(/^\/graphile-build\/?$/)
+                            ? "active"
+                            : ""
+                        }`}
+                        to="/graphile-build/"
+                      >
+                        Overview
+                      </Link>
+                    </li>
+                  )}
+                />
+                <Route
+                  path="/graphile-build"
+                  render={() => (
+                    <li className="navbar-item">
+                      <Link
+                        className={`nav-link ${
+                          location.pathname.match(
+                            /^\/graphile-build\/.(?!ricing)/
+                          )
+                            ? "active"
+                            : ""
+                        }`}
+                        to="/graphile-build/getting-started/"
+                      >
+                        Documentation
+                      </Link>
+                    </li>
+                  )}
+                />
+                <Route
+                  path="/graphile-build"
+                  render={() => (
+                    <li className="navbar-item">
+                      <Link className={"nav-link"} to="/postgraphile/">
+                        PostGraphile
+                      </Link>
+                    </li>
+                  )}
+                />
+                {/* News pages */}
 
-                  <Route
-                    path="/news"
-                    render={() => (
-                      <li className="navbar-item">
-                        <Link
-                          className={`nav-link ${
-                            location.pathname.match(/^\/news\/?$/)
-                              ? "active"
-                              : ""
-                          }`}
-                          to="/news/"
-                        >
-                          Latest Announcements
-                        </Link>
-                      </li>
-                    )}
-                  />
-                  <Route
-                    path="/news/"
-                    render={() => (
-                      <li className="navbar-item">
-                        <Link
-                          className={"nav-link"}
-                          to="/news/postgraphile-version-4/"
-                        >
-                          Archive
-                        </Link>
-                      </li>
-                    )}
-                  />
-                  {/* FIN */}
+                <Route
+                  path="/news"
+                  render={() => (
+                    <li className="navbar-item">
+                      <Link
+                        className={`nav-link ${
+                          location.pathname.match(/^\/news\/?$/) ? "active" : ""
+                        }`}
+                        to="/news/"
+                      >
+                        Latest Announcements
+                      </Link>
+                    </li>
+                  )}
+                />
+                <Route
+                  path="/news/"
+                  render={() => (
+                    <li className="navbar-item">
+                      <Link
+                        className={"nav-link"}
+                        to="/news/postgraphile-version-4/"
+                      >
+                        Archive
+                      </Link>
+                    </li>
+                  )}
+                />
+                {/* FIN */}
 
-                  <li className="navbar-item ml-auto navbar-item-right">
-                    <span className="searchbox-container">
-                      <input
-                        id="search-box"
-                        placeholder="Search"
-                        ref={this.handleSearchBoxRef}
-                      />
-                      <span className="fas fa-search searchbox-search" />
+                <li className="navbar-item ml-auto navbar-item-right">
+                  <span className="searchbox-container">
+                    <input
+                      id="search-box"
+                      placeholder="Search"
+                      ref={this.handleSearchBoxRef}
+                    />
+                    <span className="fas fa-search searchbox-search" />
+                  </span>
+                </li>
+                <li className="navbar-item navbar-item-right">
+                  <Link
+                    className={`nav-link ${
+                      location.pathname.match(/^\/support(\/|$)/)
+                        ? "active"
+                        : ""
+                    }`}
+                    to="/support/"
+                  >
+                    <span>
+                      <span className="hide-when-small">Support and </span>
+                      Services
                     </span>
-                  </li>
-                  <li className="navbar-item navbar-item-right">
-                    <Link
-                      className={`nav-link ${
-                        location.pathname.match(/^\/support(\/|$)/)
-                          ? "active"
-                          : ""
-                      }`}
-                      to="/support/"
-                    >
-                      <span>
-                        <span className="hide-when-small">Support and </span>Services
-                      </span>
-                    </Link>
-                  </li>
-                  {/*
+                  </Link>
+                </li>
+                {/*
                   <li className="navbar-item navbar-item-right hide-when-small">
                     <a
                       className="nav-link"
@@ -301,30 +308,29 @@ export default withRouter(
                     </a>
                   </li>
                   */}
-                  <li className="navbar-item navbar-item-right">
-                    <a
-                      className="nav-link nav-github-link flex items-center"
-                      href={
-                        location.pathname.match(/^\/postgraphile(\/|$)/)
-                          ? "https://github.com/graphile/postgraphile"
-                          : location.pathname.match(/^\/graphile-build(\/|$)/)
-                            ? "https://github.com/graphile/graphile-engine"
-                            : "https://github.com/graphile"
-                      }
-                    >
-                      <span className="f3 fab fa-github" />{" "}
-                      <span className="github">
-                        Github{" "}
-                        <span className="fas fa-external-link-square-alt" />
-                      </span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
+                <li className="navbar-item navbar-item-right">
+                  <a
+                    className="nav-link nav-github-link flex items-center"
+                    href={
+                      location.pathname.match(/^\/postgraphile(\/|$)/)
+                        ? "https://github.com/graphile/postgraphile"
+                        : location.pathname.match(/^\/graphile-build(\/|$)/)
+                        ? "https://github.com/graphile/graphile-engine"
+                        : "https://github.com/graphile"
+                    }
+                  >
+                    <span className="f3 fab fa-github" />{" "}
+                    <span className="github">
+                      Github{" "}
+                      <span className="fas fa-external-link-square-alt" />
+                    </span>
+                  </a>
+                </li>
+              </ul>
             </div>
-          </nav>
-        </header>
-      );
-    }
+          </div>
+        </nav>
+      </header>
+    );
   }
-);
+}

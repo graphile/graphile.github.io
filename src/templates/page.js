@@ -6,7 +6,7 @@ import SiteHeader from "../components/SiteHeader";
 import ExamplesViewer from "../components/ExamplesViewer";
 import ContactAndMailingList from "../components/ContactAndMailingList";
 import Layout from "../components/Layout";
-import { graphql } from "gatsby";
+import { graphql, StaticQuery } from "gatsby";
 
 const sectionIs = desiredSection => ({ sectionId }) =>
   sectionId === desiredSection;
@@ -115,6 +115,7 @@ const Page = ({
     examples,
   },
   location,
+  history,
 }) => {
   const html = processHTML(rawHTML);
   const [, navSection] = location.pathname.split("/");
@@ -163,7 +164,7 @@ const Page = ({
             },
           ]}
         />
-        <SiteHeader location={location} />
+        <SiteHeader location={location} history={history} />
         <div className="page-content">
           <section>
             <div className="container">
@@ -246,55 +247,64 @@ const Page = ({
   );
 };
 
-export default Page;
-
-export const pageQuery = graphql`
-  query PageByPath($path: String!) {
-    remark: markdownRemark(frontmatter: { path: { eq: $path } }) {
-      html
-      frontmatter {
-        path
-        title
-        showExamples
-      }
-    }
-    nav: allNavJson {
-      edges {
-        node {
-          id
-          name
-          sections {
-            id
+const PageWithData = props => (
+  <StaticQuery
+    variables={{
+      path: props.location.pathname,
+    }}
+    query={graphql`
+      query PageByPath($path: String!) {
+        remark: markdownRemark(frontmatter: { path: { eq: $path } }) {
+          html
+          frontmatter {
+            path
             title
+            showExamples
           }
-          pages {
-            to
-            title
-            sectionId
-            subpages {
-              to
+        }
+        nav: allNavJson {
+          edges {
+            node {
+              id
+              name
+              sections {
+                id
+                title
+              }
+              pages {
+                to
+                title
+                sectionId
+                subpages {
+                  to
+                  title
+                  sectionId
+                }
+              }
+            }
+          }
+        }
+        examples: allExamplesJson {
+          edges {
+            node {
+              category
+              id
               title
-              sectionId
+              examples {
+                title
+                example
+                exampleLanguage
+                result
+                resultLanguage
+              }
             }
           }
         }
       }
-    }
-    examples: allExamplesJson {
-      edges {
-        node {
-          category
-          id
-          title
-          examples {
-            title
-            example
-            exampleLanguage
-            result
-            resultLanguage
-          }
-        }
-      }
-    }
-  }
-`;
+    `}
+  >
+    {data => <Page {...props} data={data} />}
+  </StaticQuery>
+);
+
+export default PageWithData;

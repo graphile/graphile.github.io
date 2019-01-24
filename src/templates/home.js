@@ -5,7 +5,7 @@ import SiteFooter from "../components/SiteFooter";
 import Link from "gatsby-link";
 import { MailingList } from "../components/ContactAndMailingList";
 import Layout from "../components/Layout";
-import { graphql } from "gatsby";
+import { graphql, StaticQuery } from "gatsby";
 
 function unindent(strings, ...vars) {
   if (vars.length) {
@@ -181,16 +181,25 @@ Home.propTypes = {
   children: PropTypes.func,
 };
 
-export default Home;
-
-export const pageQuery = graphql`
-  query HomePageByPath($path: String!) {
-    remark: markdownRemark(frontmatter: { path: { eq: $path } }) {
-      html
-      frontmatter {
-        path
-        title
+const HomeWithData = props => (
+  <StaticQuery
+    variables={{
+      path: props.location.pathname,
+    }}
+    query={graphql`
+      query HomePageByPath($path: String!) {
+        remark: markdownRemark(frontmatter: { path: { eq: $path } }) {
+          html
+          frontmatter {
+            path
+            title
+          }
+        }
       }
-    }
-  }
-`;
+    `}
+  >
+    {data => <Home {...props} data={data} />}
+  </StaticQuery>
+);
+
+export default HomeWithData;
