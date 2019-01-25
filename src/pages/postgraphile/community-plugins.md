@@ -23,6 +23,7 @@ Schema extension plugins for PostGraphile:
 * [postgraphile-plugin-custom-filter](https://github.com/RoadRunnerEngineering/postgraphile-plugin-custom-filter) - adds a `customFilter:` arg to connections that offers user defined filters on any conditions, as long as they can be fit into a `where`
 * [postgraphile-plugin-nested-mutations](https://github.com/mlipscombe/postgraphile-plugin-nested-mutations) - enables a single mutation to create/update many related records
 * [graphile-upsert-plugin](https://github.com/einarjegorov/graphile-upsert-plugin/blob/master/index.js) - adds upsert mutations
+* [@fullstackio/postgraphile-upsert-plugin](https://github.com/jashmenn/postgraphile-upsert-plugin) - another upsert mutations plugin - adds upsert `where` conditions 
 * [@graphile-contrib/pg-simplify-inflector](https://github.com/graphile-contrib/pg-simplify-inflector) - simplifies field names by automatically removing `ByFooIdAndBarId`-style suffixes.
 * [@graphile-contrib/pg-many-to-many](https://github.com/graphile-contrib/pg-many-to-many) - adds connection fields for many-to-many relations.
 * [@graphile-contrib/pg-order-by-related](https://github.com/graphile-contrib/pg-order-by-related) - enables ordering by related table columns.
