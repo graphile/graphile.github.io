@@ -267,27 +267,9 @@ aside ul.page-list ul.page-list {
 .template-marketing-hero {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(85deg, #a51b1b 0%, #7d2424 100%);
-
-  &:before,
-  &:after {
-    content: "";
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 400%;
-    z-index: 0;
-    top: 0;
-    left: 70%;
-  }
-  &:before {
-    transform: translate(45%, 0) rotate(-27deg) translate(0, -50%);
-    background: #922323;
-  }
-  &:after {
-    transform: rotate(27deg) translate(0, 0%);
-    background: #9c2828;
-  }
+  background-repeat: no-repeat;
+  background-position: 50% 0%;
+  background-size: 100% 100%;
 }
 
 .template-marketing {
@@ -299,6 +281,10 @@ aside ul.page-list ul.page-list {
     > .container {
       z-index: 1;
     }
+    background-image: url("../../images/header-graphile.svg");
+  }
+  &.postgraphile .hero {
+    background-image: url("../../images/header.svg");
   }
 
   section:nth-child(even):not(.no-highlight) {
@@ -321,18 +307,6 @@ aside ul.page-list ul.page-list {
     border-color: transparent $backgroundColor transparent transparent;
     top: -1 * $triHeight;
     z-index: 0;
-  }
-
-  &.postgraphile .hero {
-    background: linear-gradient(85deg, #0e457d 0%, #0e385e 100%);
-
-    &:after {
-      background: #0e4c86;
-    }
-
-    &:before {
-      background: #0c457e;
-    }
   }
 }
 
@@ -363,7 +337,6 @@ aside ul.page-list ul.page-list {
 
 .template-marketing {
   .hero {
-    @extend .cover;
     @extend .white;
     @extend .flex;
     @extend .flex-column;
@@ -738,18 +711,6 @@ h6 code {
       left: 50%;
     }
   }
-  .template-marketing-hero {
-    &:before,
-    &:after {
-      height: 200%;
-    }
-    &:after {
-      transform: translate(0, 0) rotate(20deg);
-    }
-    &:before {
-      transform: translate(0, -50%) rotate(-20deg);
-    }
-  }
 }
 
 @media screen and (max-width: 30em) {
@@ -759,15 +720,6 @@ h6 code {
       left: 50%;
     }
   }
-  .template-marketing-hero {
-    &:after {
-      transform: translate(0, 0) rotate(15deg);
-    }
-    &:before {
-      transform: translate(0, -50%) rotate(-15deg);
-    }
-  }
-
   .template-marketing {
     $triHeightSm: 10px;
     section:after {
@@ -788,17 +740,14 @@ h6 code {
   }
   .top-section {
     @extend .template-marketing-hero;
-    background: linear-gradient(85deg, #0e457d 0%, #0e385e 100%);
-    &:before {
-      background: #0c457e;
-    }
-    &:after {
-      background: #0e4c86;
-    }
     color: white;
     p {
       color: white;
     }
+    background-image: url("../../images/header-graphile.svg");
+  }
+  &.postgraphile .top-section {
+    background-image: url("../../images/header.svg");
   }
   .top-section {
     .box-content {

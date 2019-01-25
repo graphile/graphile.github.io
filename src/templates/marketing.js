@@ -13,7 +13,7 @@ class Marketing extends Component {
     mailchimp: false,
   };
   mailchimpScript = root => {
-    if (root.querySelector("#mc-embedded-subscribe-form")) {
+    if (root && root.querySelector("#mc-embedded-subscribe-form")) {
       this.setState({ mailchimp: true });
     }
   };
