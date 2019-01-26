@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import Helmet from "react-helmet";
 import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
 import Layout from "../components/Layout";
-import { graphql, StaticQuery } from "gatsby";
 
 import "prismjs/themes/prism-solarizedlight.css";
 
