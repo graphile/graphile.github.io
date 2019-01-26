@@ -11,6 +11,7 @@ import { Flex, Col } from '$components/Flex';
 import MarketingSection from '$components/MarketingSection';
 import MarketingDivide from '$components/MarketingDivide';
 import MarketingCodebox from '$components/MarketingCodebox';
+import MarketingBullets from '$components/MarketingBullets';
 import postgresPostgraphileGraphql from '$images/postgres_postgraphile_graphql.png';
 
 <MarketingLayout location={location} history={history} blue>
@@ -77,33 +78,27 @@ Connection strings have the form:
 <MarketingDivide from="light" to="nodes" via="medium" down />
 
 <MarketingSection bg="nodes">
-<Flex>
-<Col className="center" span="8" offset="2">
+<div style={{maxWidth: '48em', margin: 'auto'}}>
 
 ### Rapidly develop lightning-fast powerful applications
 
-#### Features:
+<big>PostGraphile automatically detects tables, columns, indexes, relationships,
+views, types, functions, comments, and more &mdash; providing a GraphQL server that
+is highly intelligent about your data, and that automatically updates itself
+without restarting when you modify your database.</big>
 
-<Flex className="tl">
-<Col span="6">
+<MarketingBullets bullets={[
+'Strong PostgreSQL support',
+'GraphQL best practices',
+'Simple to deploy and scale',
+'Highly customisable',
+'Impressively high performance',
+'Granular authorisation via RLS',
+'Open source under MIT license',
+'Powerful plugin system',
+]}/>
 
-✅ Strong PostgreSQL support  
-✅ GraphQL best practices  
-✅ Simple to deploy and scale  
-✅ Highly customisable  
-
-</Col>
-<Col span="6">
-
-✅ Impressively high performance  
-✅ Granular authorisation via RLS  
-✅ Open source under liberal MIT license  
-✅ Powerful plugin system
-
-</Col>
-</Flex>
-</Col>
-</Flex>
+</div>
 </MarketingSection>
 <MarketingSection odd>
 

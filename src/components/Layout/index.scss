@@ -898,3 +898,13 @@ a.inherit-color {
 .main-content p tt {
   font-size: 1.25em;
 }
+
+.ul-check {
+  list-style-type: none;
+}
+.ul-check li {
+  background-image: url("../../images/check.svg");
+  background-repeat: no-repeat;
+  background-position: 0px 3px;
+  padding-left: 30px;
+}
