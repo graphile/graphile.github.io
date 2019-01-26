@@ -5,6 +5,8 @@
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
     "@graphile-contrib/pg-simplify-inflector": "4.0.0-alpha.0",
+    "@mdx-js/mdx": "^0.16.8",
+    "@mdx-js/tag": "^0.16.8",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^10.0.1",
     "babel-preset-env": "^1.7.0",
@@ -20,6 +22,7 @@
     "fsevents": "^1.2.7",
     "gatsby": "^2.0.96",
     "gatsby-link": "^2.0.9",
+    "gatsby-mdx": "^0.3.5",
     "gatsby-plugin-catch-links": "^2.0.9",
     "gatsby-plugin-react-helmet": "^3.0.5",
     "gatsby-plugin-sass": "^2.0.7",
