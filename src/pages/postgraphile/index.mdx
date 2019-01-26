@@ -60,15 +60,21 @@ import Testimonial from '$components/MarketingTestimonial';
 
 <big>Try it now:</big>
 
-<big><pre><code>npx postgraphile -c my_db --watch</code></pre></big>
+<div className='mv4'>
+<big><code>npx postgraphile -c my_db --watch</code></big>
+</div>
 
 <small><em>requires Node.js 8.6 or higher</em></small>
 
 </MarketingCodebox>
 
-If your database is on another machine, you may pass a connection string in place of `my_db`. Connection strings have the form:
+<p className='f7'>
+If your database is on another machine, you may pass a connection string in place of <tt>my_db</tt>. Connection strings have the form:
+</p>
 
-`postgres://pg_user:pg_pass@pg_host:pg_port/pg_db?ssl=1`
+<p className='f7'>
+<tt>postgres://pg_user:pg_pass@pg_host:pg_port/pg_db?ssl=1</tt>
+</p>
 
 
 
@@ -120,17 +126,6 @@ without restarting when you modify your database.</big>
   single server is pretty awesome.
 </Testimonial>
 
-<Testimonial
-  name="Bradley A"
-  role="CTO"
-  link="https://twitter.com/bradleyayers/status/1012557510346080256"
-  linkIcon='fab fa-twitter'
->
-  I setup my backend to use PostGraphile directly when querying the local
-  database. It's removed a bunch of hand-written SQL, added type-safety to
-  verify Postgres schema compatibility, and <strong>created a more consistent
-  dev experience for frontend/backend code.</strong>
-</Testimonial>
 
 <Testimonial
   name="Sam L"
@@ -154,6 +149,17 @@ without restarting when you modify your database.</big>
   REST.</strong>
 </Testimonial>
 
+<Testimonial
+  name="Bradley A"
+  role="CTO"
+  link="https://twitter.com/bradleyayers/status/1012557510346080256"
+  linkIcon='fab fa-twitter'
+>
+  I setup my backend to use PostGraphile directly when querying the local
+  database. It's removed a bunch of hand-written SQL, added type-safety to
+  verify Postgres schema compatibility, and <strong>created a more consistent
+  dev experience for frontend/backend code.</strong>
+</Testimonial>
 <Testimonial
   name="Steven M"
   role="VP engineering"
