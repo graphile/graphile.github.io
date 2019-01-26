@@ -2,11 +2,12 @@ import React from "react";
 import Link from "gatsby-link";
 import { Switch, Router } from "@reach/router";
 
+const SimpleFrag = ({ children }) => <>{children}</>;
 const Route = ({ exact, path, render }) => {
   const Child = () => render();
   const paths = Array.isArray(path) ? path : [path];
   return (
-    <Router>
+    <Router component={SimpleFrag}>
       {paths.map(path => (
         <Child key={path} path={exact ? path : path + "/*"} />
       ))}
