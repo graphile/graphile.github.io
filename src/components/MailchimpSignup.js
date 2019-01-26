@@ -34,7 +34,7 @@ export default function MailchimpSignup() {
                 name="EMAIL"
                 spellCheck="false"
                 type="email"
-                value=""
+                defaultValue=""
               />
               {/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */}
               <div
@@ -45,7 +45,7 @@ export default function MailchimpSignup() {
                   type="text"
                   name="b_d103f710cf00a9273b55e8e9b_c3a9eb5c4e"
                   tabIndex="-1"
-                  value=""
+                  defaultValue=""
                 />
               </div>
               <input
@@ -53,7 +53,7 @@ export default function MailchimpSignup() {
                 id="mc-embedded-subscribe"
                 name="subscribe"
                 type="submit"
-                value="Subscribe"
+                defaultValue="Subscribe"
               />
             </div>
             <div id="mce-responses" className="clear">
@@ -79,7 +79,7 @@ export default function MailchimpSignup() {
       <script
         type="text/javascript"
         dangerouslySetInnerHTML={{
-          __html: `(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='BIRTHDAY';ftypes[3]='birthday';}(jQuery));var $mcj = jQuery.noConflict(true);`,
+          __html: `(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='BIRTHDAY';ftypes[3]='birthday';}(window.jQuery));var $mcj = jQuery.noConflict(true);`,
         }}
       />
     </div>
