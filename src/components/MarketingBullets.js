@@ -24,7 +24,7 @@ export default function MarketingBullets({ bullets }) {
       </li>
     );
   };
-  const half = Math.floor(bullets.length / 2);
+  const half = Math.ceil(bullets.length / 2);
   return (
     <div className="tl container">
       <div className="row">

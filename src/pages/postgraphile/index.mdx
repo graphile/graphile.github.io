@@ -66,9 +66,7 @@ import Testimonial from '$components/MarketingTestimonial';
 
 </MarketingCodebox>
 
-If your database is on another machine, you may pass a connection string in place of `my_db`.
-
-Connection strings have the form:
+If your database is on another machine, you may pass a connection string in place of `my_db`. Connection strings have the form:
 
 `postgres://pg_user:pg_pass@pg_host:pg_port/pg_db?ssl=1`
 
@@ -176,17 +174,17 @@ without restarting when you modify your database.</big>
 <MarketingBullets bullets={[
 ['Client-facing GraphQL server', 'No need for complex server architectures, containers, etc: PostGraphile is pure Node.js and can be embedded in your existing Node.js project'],
 ['Server-side rendering', 'Issue requests to your PostGraphile API without network roundtrips, fantastic for React SSR'],
+['Hot-reloading GraphQL API', 'Automatically re-generate the GraphQL schema when your database changes when you\'re using `--watch`'],
+['Lightning fast', 'Much faster [performance](/postgraphile/performance/) than even a hand-rolled GraphQL schema using `DataLoader`'],
+['No N+1 problem', 'PostGraphile compiles a query tree of any depth into a single SQL statement, resulting in extremely efficient execution'],
+['Auto-generated documentation', 'Database comments are exported to GraphQL and browsable via the built in PostGraphiQL IDE'],
+['GraphQL best practices', 'Including: [cursor pagination](https://facebook.github.io/relay/graphql/connections.htm), [global object identification](https://facebook.github.io/relay/graphql/objectidentification.htm), and [Relay mutations](https://facebook.github.io/relay/graphql/mutations.htm)'],
 ['Super secure', 'Implement authorization via PostgreSQL\'s RBAC and Row-Level Security features, get full-stack security you can trust'],
 ['Respects database permissions', 'Tables and columns that you don\'t `GRANT` access to will not be exported via GraphQL when using `--no-ignore-rbac`'],
-['Lightning fast', 'Thanks to Graphile Engine\'s look-ahead features, get much [faster performance](/postgraphile/performance/) than even a hand-rolled GraphQL schema using `DataLoader`'],
-['No N+1 problem', 'PostGraphile compiles a query tree of any depth into a single SQL statement, resulting in extremely efficient execution'],
-['Customisable with SQL', 'First-class support for SQL functions, automatically exporting them as [custom queries](/postgraphile/custom-queries/), [custom mutations](/postgraphile/custom-mutations/) and [computed columns](/postgraphile/computed-columns/) as appropriate.'],
-['Customisable via smart-comments', 'Refine your generated GraphQL schema with our [smart comments](/postgraphile/smart-comments/) feature: rename, omit, enhance, all using PostgreSQL\'s built in `COMMENT` facility).'],
-['Customisable via JS', 'PostGraphile is built from a large number of plugins, you can add your own, replace or remove existing plugins, or pick and choose from community plugins to get the exact API you desire'],
-['Fully GraphQL compatible', 'We use the [reference GraphQL implementation](http://graphql.org/graphql-js/) under the hood, so you know we\'re spec compliant.'],
-['GraphQL best practices', 'Including: [cursor-based connection pagination](https://facebook.github.io/relay/graphql/connections.htm), [global object identification](https://facebook.github.io/relay/graphql/objectidentification.htm), and the [Relay Input Object Mutations Specification](https://facebook.github.io/relay/graphql/mutations.htm).'],
-['Hot-reloading GraphQL API', 'Automatically re-generate the GraphQL schema when your database changes when you\'re using `--watch`'],
-['Auto-generated documentation', 'Database comments are exported to GraphQL and browsable via the built in PostGraphiQL IDE'],
+['Customisable with SQL', 'Excellent PostgreSQL function support, mapping to [custom queries](/postgraphile/custom-queries/), [custom mutations](/postgraphile/custom-mutations/) and [computed columns](/postgraphile/computed-columns/)'],
+['Customisable via smart-comments', 'Refine your GraphQL schema with [smart comments](/postgraphile/smart-comments/): rename, omit, enhance with a simple `COMMENT`'],
+['Customisable via JS', 'PostGraphile is built from a large number of plugins; get the exact API you desire by replacing or removing existing plugins, building your own with our helpers, or selecting from community plugins'],
+['Fully GraphQL compatible', 'We use the [reference GraphQL implementation](http://graphql.org/graphql-js/) under the hood, so you know we\'re spec compliant'],
 ]}/>
 
 

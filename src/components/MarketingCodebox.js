@@ -4,12 +4,10 @@ import COLOURS, { TEXT } from "./colours";
 export default function MarketingCodebox({ children }) {
   return (
     <div
+      className="marketing-codebox"
       style={{
-        padding: "2em",
-        margin: "1em auto",
         backgroundColor: COLOURS.dark,
         color: TEXT.dark,
-        maxWidth: "32em",
       }}
     >
       {children}

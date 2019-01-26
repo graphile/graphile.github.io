@@ -908,3 +908,21 @@ a.inherit-color {
   background-position: 0px 3px;
   padding-left: 30px;
 }
+
+.marketing-section-medium,
+.marketing-section-dark {
+  a {
+    color: #4880b2;
+    color: #95cdff;
+    font-weight: bold;
+  }
+}
+
+.marketing-codebox {
+  padding: 2em;
+  margin: 1em auto;
+  max-width: 32em;
+  pre {
+    box-shadow: none;
+  }
+}
