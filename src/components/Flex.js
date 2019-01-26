@@ -1,8 +1,8 @@
 import React from "react";
 
-export function Flex({ children }) {
+export function Flex({ className = "", children }) {
   return (
-    <div className="container">
+    <div className={className + " container"}>
       <div className="row flex-wrap">{children}</div>
     </div>
   );
