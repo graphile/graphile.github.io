@@ -3,12 +3,13 @@ import Helmet from "react-helmet";
 import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
 import Layout from "../components/Layout";
+import { Router } from "@reach/router";
 
 import "prismjs/themes/prism-solarizedlight.css";
 
 export default class MarketingLayout extends Component {
   render() {
-    const { location, history, children, blue } = this.props;
+    const { children, blue } = this.props;
     return (
       <Layout {...this.props}>
         <div
@@ -32,7 +33,9 @@ export default class MarketingLayout extends Component {
               },
             ]}
           />
-          <SiteHeader location={location} history={history} />
+          <Router>
+            <SiteHeader path="/*" />
+          </Router>
           <div className="page-content">{children}</div>
           <SiteFooter />
         </div>
