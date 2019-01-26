@@ -301,8 +301,8 @@ export default class SiteHeader extends React.Component {
                     to="/support/"
                   >
                     <span>
-                      <span className="hide-when-small">Support and </span>
-                      Services
+                      <span className="hide-when-small">Professional </span>
+                      Support
                     </span>
                   </Link>
                 </li>
