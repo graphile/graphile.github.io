@@ -44,8 +44,4 @@ class TemplateWrapper extends Component {
   }
 }
 
-TemplateWrapper.propTypes = {
-  children: PropTypes.func,
-};
-
 export default TemplateWrapper;

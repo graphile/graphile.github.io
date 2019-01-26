@@ -1,8 +1,14 @@
 import React from "react";
 import Link from "gatsby-link";
-import { Switch, Router } from "@reach/router";
+import { Router } from "@reach/router";
 
-const SimpleFrag = ({ children }) => <>{children}</>;
+class SimpleFrag extends React.Component {
+  focus() {}
+  render() {
+    const { children } = this.props;
+    return <>{children}</>;
+  }
+}
 const Route = ({ exact, path, render }) => {
   const Child = () => render();
   const paths = Array.isArray(path) ? path : [path];
