@@ -6,30 +6,106 @@ title: PostGraphile - full GraphQL API server in an instant from PostgreSQL data
 
 import MailchimpSignup from '$components/MailchimpSignup';
 import MarketingLayout from '$components/MarketingLayout';
+import Hero from '$components/Hero';
+import { Flex, Col } from '$components/Flex';
+import MarketingSection from '$components/MarketingSection';
+import MarketingDivide from '$components/MarketingDivide';
+import MarketingCodebox from '$components/MarketingCodebox';
+import postgresPostgraphileGraphql from '$images/postgres_postgraphile_graphql.png';
 
 <MarketingLayout location={location} history={history} blue>
+<Hero white>
 
-
-<header class='hero simple'>
-<div class='container'>
-<div class='row'>
-<div class='col-xs-12'>
-<div class='hero-block'>
-
-## PostGraphile
-
-### Rapidly build highly customisable, lightning-fast GraphQL APIs
+## PostGraphile Instant GraphQL API
 
 <br />
+
 <div class='flex'>
 <a class='button--solid-light' href='/postgraphile/introduction/'>Documentation <span class='fas fa-fw fa-arrow-right' /></a>
 </div>
 
-</div>
-</div>
-</div>
-</div>
-</header>
+</Hero>
+
+<MarketingSection white>
+
+<Flex>
+<Col className="center" span="8">
+<img src={postgresPostgraphileGraphql} style={{maxWidth: '100%'}} />
+</Col>
+</Flex>
+
+</MarketingSection>
+
+<MarketingDivide from="white" to="dark" />
+
+<MarketingSection bg="dark">
+
+<Flex>
+<Col span="8" offset="2" className='tc'>
+
+### Instantly spin-up a GraphQL API server by pointing PostGraphile at your existing PostgreSQL database
+
+</Col>
+</Flex>
+
+</MarketingSection>
+
+<MarketingDivide from="dark" to="light" via="medium" />
+
+<MarketingSection bg="light">
+
+<MarketingCodebox>
+
+<big>Try it now:</big>
+
+<big><pre><code>npx postgraphile -c my_db --watch</code></pre></big>
+
+<small><em>requires Node.js 8.6 or higher</em></small>
+
+</MarketingCodebox>
+
+If your database is on another machine, you may pass a connection string in place of `my_db`.
+
+Connection strings have the form:
+
+`postgres://pg_user:pg_pass@pg_host:pg_port/pg_db?ssl=1`
+
+
+
+</MarketingSection>
+
+<MarketingDivide from="light" to="nodes" via="medium" down />
+
+<MarketingSection bg="nodes">
+<Flex>
+<Col className="center" span="8" offset="2">
+
+### Rapidly develop lightning-fast powerful applications
+
+#### Features:
+
+<Flex>
+<Col span="6">
+
+✅ Strong PostgreSQL support  
+✅ GraphQL best practices  
+✅ Simple to deploy and scale  
+✅ Highly customisable  
+
+</Col>
+<Col span="6">
+
+✅ Impressively high performance  
+✅ Granular authorisation via RLS  
+✅ Open source under liberal MIT license  
+✅ Powerful plugin system
+
+</Col>
+</Flex>
+</Col>
+</Flex>
+</MarketingSection>
+<MarketingSection odd>
 
 
 
@@ -493,5 +569,5 @@ Email <a href="mailto:info@graphile.org?subject=Graphile%20question/comment/feed
 </div>
 </section>
 
-
+</MarketingSection>
 </MarketingLayout>

@@ -66,6 +66,7 @@ exports.onCreateWebpackConfig = ({ actions }) => {
       modules: [path.resolve(__dirname, "src"), "node_modules"],
       alias: {
         $components: path.resolve(__dirname, "src/components"),
+        $images: path.resolve(__dirname, "src/images"),
       },
     },
   });

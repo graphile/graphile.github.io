@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
+    "@benjie/gatsby-mdx": "^0.3.6-0",
     "@graphile-contrib/pg-simplify-inflector": "4.0.0-alpha.0",
     "@mdx-js/mdx": "^0.16.8",
     "@mdx-js/tag": "^0.16.8",
