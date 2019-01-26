@@ -12,13 +12,15 @@ const SiteFooter = () => {
             <h6>PostGraphile</h6>
             <ul>
               <li>
-                <Link to="/postgraphile/introduction/">Introduction</Link>
+                <Link to="/postgraphile/introduction/">Documentation</Link>
               </li>
               <li>
-                <Link to="/postgraphile/security/">Security</Link>
+                <Link to="/postgraphile/">About</Link>
               </li>
               <li>
-                <Link to="/postgraphile/extending/">Extending</Link>
+                <Link to="/postgraphile/community-plugins/">
+                  Community Plugins
+                </Link>
               </li>
             </ul>
           </div>
@@ -26,12 +28,10 @@ const SiteFooter = () => {
             <h6>Graphile Engine</h6>
             <ul>
               <li>
-                <Link to="/graphile-build/">About</Link>
+                <Link to="/graphile-build/getting-started/">Documentation</Link>
               </li>
               <li>
-                <Link to="/graphile-build/getting-started/">
-                  Getting Started
-                </Link>
+                <Link to="/graphile-build/">About</Link>
               </li>
               <li>
                 <Link to="/graphile-build/plugins/">Plugins</Link>
@@ -92,7 +92,8 @@ const SiteFooter = () => {
             received via{" "}
             <a href="https://github.com/graphile/graphile.github.io">
               its GitHub repository
-            </a>.
+            </a>
+            .
             <br />
             <br />
             PostGraphile was <a href="/history/">originally authored</a> as
