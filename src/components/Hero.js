@@ -1,10 +1,11 @@
 import React from "react";
+import COLOURS from "./colours";
 
-export default function Hero({ children, white }) {
+export default function Hero({ children, bg }) {
   return (
     <header
       className="hero simple"
-      style={white ? { backgroundColor: "white" } : {}}
+      style={bg ? { backgroundColor: COLOURS[bg] } : {}}
     >
       <div className="container">
         <div className="row">

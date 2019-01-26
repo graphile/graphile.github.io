@@ -15,9 +15,11 @@ export default function MarketingTestimonial({
         <span className="f3 b">{name}</span>
         <br />
         <span className="i f5 b">{role}</span>{" "}
-        <a href={link} rel="noopener noreferrer" target="_blank">
-          <span className={`${linkIcon}`} />
-        </a>
+        {link ? (
+          <a href={link} rel="noopener noreferrer" target="_blank">
+            <span className={`${linkIcon}`} />
+          </a>
+        ) : null}
         <hr className="mw3 bb bw1 b--black-10 db" />
       </div>
       <p className="lh-copy measure center f6 black-70">
