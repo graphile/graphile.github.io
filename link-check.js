@@ -37,7 +37,7 @@ for (const file of files) {
       `${filePretty} mentions 'Postgraphile'; please change to 'PostGraphile' or 'postgraphile' for consistency.`
     );
   }
-  const links = allMatches(contents, /href="([^"]+)"/g);
+  const links = allMatches(contents, /<a[^>]+href="([^"]+)"/g);
   for (const link of links) {
     const trimmed = link.replace(/[?#].*$/, "");
     if (trimmed.match(/\.(js|css|png|svg|webmanifest)$/)) {
