@@ -1,7 +1,29 @@
 import React from "react";
+import remark from "remark";
+import remark2react from "remark-react";
+
+function Markdown({ children }) {
+  return remark()
+    .use(remark2react)
+    .processSync(children).contents;
+}
 
 export default function MarketingBullets({ bullets }) {
-  const renderBullet = (text, i) => <li key={i}>{text}</li>;
+  const renderBullet = (bullet, i) => {
+    const [text, sub] = Array.isArray(bullet) ? bullet : [bullet];
+    return (
+      <li key={i}>
+        <strong>{text}</strong>
+        {sub ? (
+          <>
+            <br />
+            <Markdown>{sub}</Markdown>
+            <div className="mb3" />
+          </>
+        ) : null}
+      </li>
+    );
+  };
   const half = Math.floor(bullets.length / 2);
   return (
     <div className="tl container">
