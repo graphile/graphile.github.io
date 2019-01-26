@@ -8,8 +8,8 @@ export default function MarketingTestimonial({
 }) {
   return (
     <article
-      className="w-100 w-50-m w-25-ns pa2 center bg-white br3 pa4-ns mv3 ba b--black-10"
-      style={{ color: "black" }}
+      className="pa1 black bg-white pa4-ns mv3 mh2 ba b--black-10"
+      style={{ flex: "1 0 20rem" }}
     >
       <div className="tc">
         <span className="f3 b">{name}</span>
