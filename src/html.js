@@ -38,10 +38,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           />
           <link
             rel="stylesheet"
-            href={`/styles.css?t=${encodeURIComponent(buildTimestamp)}`}
-          />
-          <link
-            rel="stylesheet"
             href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css"
           />
           <link
