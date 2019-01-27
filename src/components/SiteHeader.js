@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "gatsby-link";
-import { Router } from "@reach/router";
+import { Router, navigate } from "@reach/router";
 
 class SimpleFrag extends React.Component {
   focus() {}
@@ -35,7 +35,7 @@ function enableSearch(history) {
     handleSelected: (input, event, suggestion) => {
       const url = suggestion.url;
       const path = url.replace(/^https?:\/\/[^/]*/, "");
-      history.push(path);
+      navigate(path);
     },
   });
 }
