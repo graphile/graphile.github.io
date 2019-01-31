@@ -43,7 +43,7 @@ function Avatar({ src }) {
 export class Sponsor extends React.Component {
   static contextType = LevelContext;
   render() {
-    const { name, contributor, avatar } = this.props;
+    const { name, contributor, avatar, plain } = this.props;
     const level = this.context;
     const showAvatar = level === "featured" || level === "leaders";
     return (
@@ -56,8 +56,8 @@ export class Sponsor extends React.Component {
           alignItems: "center",
 
           flex: `0 0 ${showAvatar ? "14em" : "12em"}`,
-          backgroundColor: "white",
-          color: "#1b3955",
+          backgroundColor: plain ? null : "white",
+          color: plain ? "white" : "#1b3955",
           margin: "0.5em",
           borderRadius: 0,
           minHeight: showAvatar ? "8em" : "3em",
