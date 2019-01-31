@@ -85,6 +85,14 @@ async function psql(flags, sql) {
   );
 }
 
+async function tryPsql(flags, sql) {
+  try {
+    return await psql(flags, sql);
+  } catch (e) {
+    // NOOP
+  }
+}
+
 async function main() {
   const schemaSql = await (await fetch(
     "https://raw.githubusercontent.com/graphile/examples/master/data/schema.sql"
@@ -97,6 +105,22 @@ async function main() {
   } catch (e) {
     /* non-existence is fine */
   }
+
+  const password = String(Math.random());
+  await tryPsql(
+    ["template1"],
+    `CREATE ROLE graphiledemo WITH LOGIN PASSWORD '${password}' SUPERUSER`
+  );
+  await tryPsql(
+    ["template1"],
+    `CREATE ROLE graphiledemo_authenticator WITH LOGIN PASSWORD '${password}' NOINHERIT;`
+  );
+  await tryPsql(["template1"], `CREATE ROLE graphiledemo_visitor;`);
+  await tryPsql(
+    ["template1"],
+    `GRANT graphiledemo_visitor TO graphiledemo_authenticator;`
+  );
+
   await spawn("createdb", ["-O", "graphiledemo", "graphile_org_demo"]);
   await psql(["graphile_org_demo"], schemaSql);
   await psql(["graphile_org_demo"], dataSql);
