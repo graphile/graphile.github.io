@@ -8,7 +8,8 @@ export default {
 
 export const TEXT = {
   node: "black",
-  white: "black",
+  //white: "black",
+  white: "#1b3956",
   dark: "white",
   medium: "white",
   light: "white",
