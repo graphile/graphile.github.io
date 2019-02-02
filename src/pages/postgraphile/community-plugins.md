@@ -35,6 +35,8 @@ Schema extension plugins for PostGraphile:
 * [graphile-build-postgis](https://github.com/singingwolfboy/graphile-build-postgis) - PostGIS support (WIP)
 * [postgraphile-pm2-status](https://github.com/stlbucket/phile-starter/blob/master/api/src/graphile-extensions/pm2Status.js) - expose pm2 process status thru a query
 * [PassportLoginPlugin](https://github.com/graphile/examples/blob/master/shared/plugins/PassportLoginPlugin.js) - example plugin to add a username/password `login` and `register` mutations using Passport.js
+* [postgraphile-plugin-fulltext-filter](https://github.com/mlipscombe/postgraphile-plugin-fulltext-filter) - adds support for `tsvector` full text search fields to postgraphile-plugin-connection-filter
+* [postgraphile-plugin-zombodb](https://github.com/mlipscombe/postgraphile-plugin-zombodb) - adds advanced search capabilities using [ZomboDB](https://github.com/zombodb/zombodb) and ElasticSearch
 
 Examples of using these plugins:
 
