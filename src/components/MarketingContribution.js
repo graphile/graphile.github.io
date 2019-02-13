@@ -2,22 +2,6 @@ import React from "react";
 import fallbackIcon from "../images/avatar.svg";
 
 
-export default function MarketingContributions({ children }) {
-  return (
-      <div>
-        <div
-          className="flex"
-          style={{
-            justifyContent: "space-around",
-            flexWrap: "wrap"
-          }}
-        >
-          {children}
-        </div>
-      </div>
-  );
-}
-
 function Icon({ src }) {
   return (
     <img
@@ -27,9 +11,7 @@ function Icon({ src }) {
   );
 }
 
-export class Contribution extends React.Component {
-  render() {
-    const { title, text, icon } = this.props;
+export default function Contribution({ title, children,  text, icon }) {
     return (
       <div
         style={{
@@ -37,12 +19,13 @@ export class Contribution extends React.Component {
           flexDirection: "row",
           backgroundColor: "white",
           color: "#1b3955",
-          margin: "0.5em",
-          padding: "0.5em",
+          margin: "1em",
+          padding: "1em",
           borderRadius: 0,
           minHeight: "8em",
-          justifyContent: "space-evenly",
-          flex: "0 0 26em"
+          justifyContent: "center",
+          flex: "0 0 28em",
+          maxWidth: "100%"
         }}>
         <div
           style={{
@@ -52,6 +35,8 @@ export class Contribution extends React.Component {
             justifyContent: "space-evenly",
             alignItems: "center",
             fontSize: "1.6em",
+            flex: "0 0 5em",
+
           }}
         >
           <Icon src={icon} />
@@ -59,12 +44,13 @@ export class Contribution extends React.Component {
         </div>
         <div
           style={{
-            flex: "0 0 16em",
           }}  
         >
-          <span>{text}</span>
+          {text || children}
         </div>
       </div>
     );
-  }
+  
 }
+
+

@@ -13,7 +13,17 @@ import MarketingDivide from '$components/MarketingDivide';
 import MarketingCodebox from '$components/MarketingCodebox';
 import MarketingBullets from '$components/MarketingBullets';
 import postgresPostgraphileGraphql from '$images/postgres_postgraphile_graphql.png';
-import Contributions, {Contribution}  from '$components/MarketingContribution';
+import Contributions from '$components/MarketingContributions';
+import Contribution from '$components/MarketingContribution';
+
+import chat from '$images/contributions/chat.png';
+import code from '$images/contributions/code.png';
+import docs from '$images/contributions/docs2.png';
+import sponsor from '$images/contributions/sponsor.png';
+import stories from '$images/contributions/stories.png';
+import talks from '$images/contributions/talks.png';
+import write from '$images/contributions/write.png';
+
 
 <MarketingLayout blue>
 <Hero bg="white">
@@ -57,10 +67,41 @@ Here are some ways you can support us:
 
 <Contributions>
 
-<Contribution title="Code" text="Some or more text about some or more contributions like this amount" />
-<Contribution title="Write" text="Some or more text about some or more contributions like this amount" />
-<Contribution title="Sponsor" text="Some or more text about some or more contributions like this amount" />
-<Contribution title="Organise" text="Some or more text about some or more contributions like this amount" />
+<Contribution title="Chat" icon={chat}>
+
+Join us on our [chat server](https://discord.gg/graphile). Here we **discuss** current plans for the project, and help users with queries. We always welcome more members who can help answer questions.
+
+</Contribution>
+<Contribution title="Code" icon={code}>
+
+Customisability and extensibility are at the heart of PostGraphile and Graphile Engine. An easy way to get started with code contributions is to write your own plugins to add to the project's functionality.
+
+</Contribution>
+<Contribution title="Docs" icon={docs}>
+
+Adding to the documentation is always a valuable way to contribute to the project. This will help you learn, and will teach other users too. Look for issues tagged 'Add to Docs' as a way to start.
+
+</Contribution>
+<Contribution title="Events" icon={talks}>
+
+Talk about PostGraphile at your local meetups and in your workplace. If you're planning on giving a presentation, let us know and we'll send you some stickers for the event.
+
+</Contribution>
+<Contribution title="Stories" icon={stories}>
+
+We always want to hear about your personal use of PostGraphile, whether a good experience or bad. Sharing your story helps us improve, and encourages other potential users to give PostGraphile a try.
+
+</Contribution>
+<Contribution title="Write" icon={write}>
+
+Share your experiences with the project on your blog or social media - it could be about how you use the project, what success you've seen, or anything else; don't forget to tag us on twitter and we'll share your writing too.
+
+</Contribution>
+<Contribution title="Sponsor" icon={sponsor}>
+
+Crowd-sourced funding enables us to spend the most time directly working on improving PostGraphile, which you and other PostGraphile users then benefit from. [Sponsor PostGraphile on Patreon here](link)
+
+</Contribution>
 
 </Contributions>
 
