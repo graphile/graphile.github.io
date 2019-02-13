@@ -13,22 +13,23 @@ import MarketingDivide from '$components/MarketingDivide';
 import MarketingCodebox from '$components/MarketingCodebox';
 import MarketingBullets from '$components/MarketingBullets';
 import postgresPostgraphileGraphql from '$images/postgres_postgraphile_graphql.png';
-import Testimonial from '$components/MarketingTestimonial';
+import Contributions, {Contribution}  from '$components/MarketingContribution';
 
 <MarketingLayout blue>
 <Hero bg="white">
 
-# Sponsor PostGraphile Development
+# Contribute to PostGraphile and Graphile Engine
 
 </Hero>
 
 <MarketingSection bg="white" left maxWidth>
 <h3>
-  PostGraphile is a crowd-funded open-source project, licensed under the permissive MIT license.
+  PostGraphile is a crowd-funded open-source project. It wouldn't be where it is today without valuable contributions from the open source community.
 </h3>
 
 <div class='flex'>
-<a class='button--solid' href='https://patreon.com/benjie'>Sponsor PostGraphile <span class='fas fa-fw fa-external-link-square-alt' /></a>
+<a class='button--solid' href='https://patreon.com/benjie'>Sponsor PostGraphile <span class='fas fa-fw fa-external-link-square-alt' /></a>&nbsp;
+<a class='button--solid' href='https://github/graphile/postgraphile'>PostGraphile on Github <span class='fas fa-fw fa-external-link-square-alt' /></a>
 </div>
 
 </MarketingSection>
@@ -36,13 +37,15 @@ import Testimonial from '$components/MarketingTestimonial';
 
 <MarketingSection bg="medium">
 
-### Who sponsors PostGraphile?
+### How to contribute
 
 <div style={{maxWidth: '48rem', margin: '0 auto'}}>
 
-We're extremely grateful to the following individuals and businesses that
-help to fund ongoing development on PostGraphile through sponsorship. **THANK
-YOU!**
+The PostGraphile and Graphile Engine projects wouldn’t be where they are today without the people who supported them by dedicating their time, skills and knowledge to them since their inception in 2016.
+
+There is always something for anyone who wants to get involved to work on; be it programming, writing, organising meetups or more. We are working hard to build an inclusive community around our open source projects, and would love for more interested people to join.
+
+Here are some ways you can support us:
 
 </div>
 
@@ -50,31 +53,22 @@ YOU!**
 </MarketingSection>
 <MarketingDivide from="medium" to="dark" via="light" down />
 
-<MarketingSection bg="dark" left maxWidth>
+<MarketingSection bg="dark" left>
 
+<Contributions>
 
-### Why is PostGraphile a "crowd-funded open-source project"?
+<Contribution title="Code" text="Some or more text about some or more contributions like this amount" />
+<Contribution title="Write" text="Some or more text about some or more contributions like this amount" />
+<Contribution title="Sponsor" text="Some or more text about some or more contributions like this amount" />
+<Contribution title="Organise" text="Some or more text about some or more contributions like this amount" />
 
-PostGraphile is open-source to give users great freedom in how they use the
-software, and to enable the community to have influence over how the project
-progresses to make it appropriate for a wide range of use-cases. To make PostGraphile a project that users can rely on for years to come, it
-needs to be well directed and financially sustainable.
-
-**The absolute best way to support PostGraphile’s ongoing development efforts
-is to become a Patreon sponsor.** Crowd-sourced funding enables us to spend
-the most time directly working on improving PostGraphile, which you and other
-PostGraphile users then benefit from.
-
-
-<p className="tc">
-<a href="https://www.patreon.com/bePatron?u=7308310" data-patreon-widget-type="become-patron-button"><img src="/images/patreon_button.png" alt='Become a Patron' /></a>
-</p>
+</Contributions>
 
 </MarketingSection>
 <MarketingDivide from="dark" to="light" />
 <MarketingSection bg="light" left maxWidth>
 
-### How is sponsorship money spent?
+### Next Section
 
 Sponsorship money is used to fund software development, testing,
 documentation and releases of the PostGraphile and Graphile Engine software
@@ -84,7 +78,7 @@ suite.
 <MarketingDivide from="light" to="medium" down />
 <MarketingSection bg="medium" left maxWidth>
 
-### Is sponsorship required to use PostGraphile?
+### Next section?
 
 Users are not legally required to give back to the PostGraphile project, but
 it is in their interest to do so.
