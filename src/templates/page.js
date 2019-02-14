@@ -122,7 +122,7 @@ class Page extends React.Component {
   componentDidMount() {
     setTimeout(() => {
       this.setState({ hack: 2 });
-    }, 200);
+    }, 0);
   }
   render() {
     const {
