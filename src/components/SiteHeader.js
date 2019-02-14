@@ -21,7 +21,7 @@ const Route = ({ exact, path, render }) => {
   );
 };
 
-const POSTGRAPHILE_ROUTES = ["/postgraphile", "/sponsor", "/support"];
+const POSTGRAPHILE_ROUTES = ["/postgraphile", "/sponsor", "/support", "/contribute"];
 
 function enableSearch(history) {
   if (typeof docsearch === "undefined") {
@@ -159,7 +159,7 @@ export default class SiteHeader extends React.Component {
                         }`}
                         to="/postgraphile/introduction/"
                       >
-                        Documentation
+                        Docs
                       </Link>
                     </li>
                   )}
@@ -177,6 +177,23 @@ export default class SiteHeader extends React.Component {
                         to="/sponsor/"
                       >
                         Sponsor
+                      </Link>
+                    </li>
+                  )}
+                />
+                <Route
+                  path={POSTGRAPHILE_ROUTES}
+                  render={() => (
+                    <li className="navbar-item">
+                      <Link
+                        className={`nav-link ${
+                          location.pathname.match(/^\/contribute(\/|$)/)
+                            ? "active"
+                            : ""
+                        }`}
+                        to="/contribute/"
+                      >
+                        Contribute
                       </Link>
                     </li>
                   )}
