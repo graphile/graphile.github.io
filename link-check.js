@@ -46,7 +46,9 @@ for (const file of files) {
     }
     if (
       trimmed.match(/^(https?:)?\/\//) &&
-      (trimmed.match(/github\.com/) || !trimmed.match(/graphile\.(org|meh)/))
+      (trimmed.match(/github\.com/) ||
+        !trimmed.match(/graphile\.(org|meh)/) ||
+        trimmed.match(/learn\.graphile\.org/))
     ) {
       // Absolute, continue
       continue;
