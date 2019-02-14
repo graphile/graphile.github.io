@@ -6,7 +6,19 @@ import SiteHeader from "../components/SiteHeader";
 import ExamplesViewer from "../components/ExamplesViewer";
 import ContactAndMailingList from "../components/ContactAndMailingList";
 import Layout from "../components/Layout";
-import { graphql, StaticQuery } from "gatsby";
+import { graphql } from "gatsby";
+
+/*
+ * So... On production, if you load a page with a code sample containing <span
+ * class="gatsby-highlight-code-line"> then that span will be removed, and thus
+ * all the line breaks in highlighted areas of your code will be missing. But
+ * React still believe it's rendering it, and SSR definitely rendered it, so
+ * I've no idea where it actually goes. And of course you can't reproduce it on
+ * development. And if you navigate to the page it's fine - it's only when you
+ * link to it directly that it goes wrong. Sense: it makes none. Anyway, this
+ * hack might fix it... 🤷‍♂️
+ */
+let hack = 0;
 
 const sectionIs = desiredSection => ({ sectionId }) =>
   sectionId === desiredSection;
@@ -195,7 +207,10 @@ const Page = props => {
                           📝 Suggest improvements to this page
                         </a>
                       </div>
-                      <div dangerouslySetInnerHTML={{ __html: html }} />
+                      <div
+                        key={++hack}
+                        dangerouslySetInnerHTML={{ __html: html }}
+                      />
                     </div>
                     <br />
                     {showExamples && (
