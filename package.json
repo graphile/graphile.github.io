@@ -60,6 +60,7 @@
   "main": "n/a",
   "scripts": {
     "build": "./scripts/update && gatsby build",
+    "clean": "rm -vRf .cache __deploy",
     "deploy": "./scripts/deploy",
     "develop": "./scripts/update && gatsby develop",
     "format": "prettier --write 'src/**/*.js' '**/*.md'",

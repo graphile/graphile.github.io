@@ -1,0 +1,133 @@
+---
+layout: marketing
+path: /contribute/
+title: Contribute to PostGraphile
+---
+
+import MarketingLayout from '$components/MarketingLayout';
+import MailchimpSignup from '$components/MailchimpSignup';
+import Hero from '$components/Hero';
+import { Flex, Col } from '$components/Flex';
+import MarketingSection from '$components/MarketingSection';
+import MarketingDivide from '$components/MarketingDivide';
+import Contributions from '$components/MarketingContributions';
+import Contribution from '$components/MarketingContribution';
+
+import chat from '$images/contributions/chat.png';
+import code from '$images/contributions/code.png';
+import docs from '$images/contributions/docs2.png';
+import sponsor from '$images/contributions/sponsor.png';
+import stories from '$images/contributions/stories.png';
+import talks from '$images/contributions/talks.png';
+import write from '$images/contributions/write.png';
+
+
+<MarketingLayout blue>
+<Hero bg="white">
+
+# Contribute to PostGraphile
+
+</Hero>
+
+<MarketingSection bg="white" left maxWidth>
+<h3>
+  PostGraphile is a crowd-funded open-source project. It wouldn't be where it is today without valuable contributions from the open source community.
+</h3>
+
+<div class='flex'>
+<a class='button--solid' href='https://patreon.com/benjie'>Sponsor PostGraphile <span class='fas fa-fw fa-external-link-square-alt' /></a>&nbsp;
+<a class='button--outline' href='https://github/graphile/postgraphile'>PostGraphile on Github <span class='fas fa-fw fa-external-link-square-alt' /></a>
+</div>
+
+</MarketingSection>
+<MarketingDivide from="white" to="medium" />
+
+<MarketingSection bg="medium">
+
+### How to contribute
+
+<div style={{maxWidth: '48rem', margin: '0 auto'}}>
+
+PostGraphile wouldn’t be where it is today without the people who supported it by dedicating their time, skills and knowledge to it since its inception in 2016.
+
+There is always something for anyone who wants to get involved; be it programming, writing, presenting at meetups or more. We are working hard to build an inclusive and supportive community around the Graphile suite, and would love for more interested people to join.
+
+</div>
+
+
+</MarketingSection>
+<MarketingDivide from="medium" to="dark" via="light" down />
+
+<MarketingSection bg="dark" left>
+
+<Contributions>
+
+<Contribution title="Chat" icon={chat}>
+
+Join us on our [chat server](https://discord.gg/graphile). Here we discuss current plans for the project, and help users with queries. We always welcome more members who can help answer questions and share their experiences.
+
+</Contribution>
+<Contribution title="Code" icon={code}>
+
+An easy way to get started with code contributions is to share code examples in our [Documentation](/postgraphile/introduction/), or write and share your own PostGraphile plugins. Come and discuss your ideas in the #plugin-development channel on our [chat server](https://discord.gg/graphile).
+
+</Contribution>
+<Contribution title="Docs" icon={docs}>
+
+Adding to the documentation is always a valuable way to contribute. You can add code samples, explanations, images, example plugins, or anything else you think will be helpful. This will help you learn, and will teach other users too. Look for issues tagged ['Add to Docs'](https://github.com/graphile/postgraphile/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3A%22%F0%9F%93%84+add-to-docs%22+) as a way to start.
+
+</Contribution>
+<Contribution title="Talks" icon={talks}>
+
+Talk about PostGraphile at your local meetups and in your workplace. If you're planning on giving a presentation, let us know and we'll send you some stickers or [cheatsheets](https://learn.graphile.org) to support your talk. You can contact us on our [chat server](https://discord.gg/graphile) or [on twitter](https://twitter.com/graphilehq) and we'll do what we can to help you.
+
+</Contribution>
+<Contribution title="Stories" icon={stories}>
+
+We always want to hear about your use of PostGraphile, whether a good experience or bad. Sharing your story helps us improve, and encourages other potential users to give PostGraphile a try. We want to compile some user case studies, so please get in contact [on chat](https://discord.gg/graphile) or [on twitter](https://twitter.com/graphilehq) with your PostGraphile story.
+
+</Contribution>
+<Contribution title="Write" icon={write}>
+
+Share your experiences with the project on your blog or social media - it could be about how you use the project, what success you've seen, or anything else; sharing your experiences with PostGraphile helps more people find us, which in turn allows the project to grow and become more sustainable. Don't forget to tag us [on twitter](https://twitter.com/graphilehq) and we'll share your writing too.
+
+</Contribution>
+<Contribution title="Sponsor" icon={sponsor}>
+
+Crowd-sourced funding enables us to spend the most time directly working on improving PostGraphile, which you and other PostGraphile users then benefit from. Sponsorship money is used to fund software development, testing, documentation and releases of the PostGraphile and Graphile Engine software suite. [Sponsor PostGraphile on Patreon here.](https://www.patreon.com/benjie)
+
+</Contribution>
+
+</Contributions>
+
+</MarketingSection>
+<MarketingDivide from="dark" to="medium" via="light" />
+<MarketingSection bg="medium" left maxWidth>
+
+### Core Code Contribution Guide
+
+We welcome code contributions, together we can make great software that enables developers to build powerful applications in record time. Your first step should be to check in with our maintainers on the [Discord chat server](https://discord.gg/graphile) to see what areas of PostGraphile are being worked on at the moment. 
+
+We also have a [Contributing Guide](https://github.com/graphile/postgraphile/blob/master/CONTRIBUTING.md) which contains details of our development and testing environment as well as guidelines on commit messages and other things which are useful for code contributors. Be sure to read it through before making your pull request!
+
+Pull requests should be focussed to changing only one thing at a time, the smaller the PR the easier it is to review and the faster the turn-around time. Any large changes should seek maintainer approval first.
+
+
+</MarketingSection>
+<MarketingDivide from="medium" to="dark" via="light" down />
+<MarketingSection bg="dark" left maxWidth>
+
+### Code of Conduct
+
+The Graphile projects are governed by the Contributor Covenant code of
+conduct. In the interest of fostering an open and welcoming environment, we
+as contributors and maintainers pledge to making participation in our project
+and our community a harassment-free experience for everyone. This covers all
+areas of the Graphile community, including: the source code, commit messages,
+issues and pull requests on GitHub, any and all documentation, online chat
+and official social media accounts. [The full code of conduct can be found
+here](https://www.graphile.org/postgraphile/code-of-conduct/).
+
+</MarketingSection>
+
+</MarketingLayout>

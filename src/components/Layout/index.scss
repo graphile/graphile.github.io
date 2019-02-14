@@ -436,6 +436,11 @@ code {
   background-color: transparent;
 }
 
+.gatsby-highlight-code-line .gatsby-highlight-code-line:before {
+  display: block;
+  content: "";
+}
+
 .gatsby-highlight {
   @extend .mb4;
 }
@@ -915,6 +920,12 @@ a.inherit-color {
     color: #4880b2;
     color: #95cdff;
     font-weight: bold;
+  }
+}
+
+.marketing-contribution {
+  a {
+    color: #4880b2;
   }
 }
 
