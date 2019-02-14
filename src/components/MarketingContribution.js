@@ -1,5 +1,6 @@
 import React from "react";
 import fallbackIcon from "../images/avatar.svg";
+import { black } from "ansi-colors";
 
 
 function Icon({ src }) {
@@ -14,6 +15,7 @@ function Icon({ src }) {
 export default function Contribution({ title, children,  text, icon }) {
     return (
       <div
+        className={`marketing-contribution`}
         style={{
           display: "flex",
           flexDirection: "row",
@@ -25,7 +27,7 @@ export default function Contribution({ title, children,  text, icon }) {
           minHeight: "8em",
           justifyContent: "center",
           flex: "0 0 28em",
-          maxWidth: "100%"
+          maxWidth: "100%",
         }}>
         <div
           style={{

@@ -1,7 +1,7 @@
 ---
 layout: marketing
 path: /contribute/
-title: Contribute to PostGraphile and Graphile Engine development
+title: Contribute to PostGraphile
 ---
 
 import MarketingLayout from '$components/MarketingLayout';
@@ -10,9 +10,6 @@ import Hero from '$components/Hero';
 import { Flex, Col } from '$components/Flex';
 import MarketingSection from '$components/MarketingSection';
 import MarketingDivide from '$components/MarketingDivide';
-import MarketingCodebox from '$components/MarketingCodebox';
-import MarketingBullets from '$components/MarketingBullets';
-import postgresPostgraphileGraphql from '$images/postgres_postgraphile_graphql.png';
 import Contributions from '$components/MarketingContributions';
 import Contribution from '$components/MarketingContribution';
 
@@ -28,7 +25,7 @@ import write from '$images/contributions/write.png';
 <MarketingLayout blue>
 <Hero bg="white">
 
-# Contribute to PostGraphile and Graphile Engine
+# Contribute to PostGraphile
 
 </Hero>
 
@@ -51,11 +48,9 @@ import write from '$images/contributions/write.png';
 
 <div style={{maxWidth: '48rem', margin: '0 auto'}}>
 
-The PostGraphile and Graphile Engine projects wouldn’t be where they are today without the people who supported them by dedicating their time, skills and knowledge to them since their inception in 2016.
+PostGraphile wouldn’t be where it is today without the people who supported it by dedicating their time, skills and knowledge to it since its inception in 2016.
 
-There is always something for anyone who wants to get involved to work on; be it programming, writing, organising meetups or more. We are working hard to build an inclusive community around our open source projects, and would love for more interested people to join.
-
-Here are some ways you can support us:
+There is always something for anyone who wants to get involved; be it programming, writing, presenting at meetups or more. We are working hard to build an inclusive community around our open source projects, and would love for more interested people to join.
 
 </div>
 
@@ -69,80 +64,62 @@ Here are some ways you can support us:
 
 <Contribution title="Chat" icon={chat}>
 
-Join us on our [chat server](https://discord.gg/graphile). Here we **discuss** current plans for the project, and help users with queries. We always welcome more members who can help answer questions.
+Join us on our [chat server](https://discord.gg/graphile). Here we discuss current plans for the project, and help users with queries. We always welcome more members who can help answer questions and share their experiences.
 
 </Contribution>
 <Contribution title="Code" icon={code}>
 
-Customisability and extensibility are at the heart of PostGraphile and Graphile Engine. An easy way to get started with code contributions is to write your own plugins to add to the project's functionality.
+An easy way to get started with code contributions is to share code examples in our [Documentation](/postgraphile/introduction/), or write and share your own PostGraphile plugins. Come and discuss your ideas in the #plugin-development channel on our [chat server](https://discord.gg/graphile).
 
 </Contribution>
 <Contribution title="Docs" icon={docs}>
 
-Adding to the documentation is always a valuable way to contribute to the project. This will help you learn, and will teach other users too. Look for issues tagged 'Add to Docs' as a way to start.
+Adding to the documentation is always a valuable way to contribute. You can add code samples, explanations, images, example plugins, or anything else you think will be helpful. This will help you learn, and will teach other users too. Look for issues tagged ['Add to Docs'](https://github.com/graphile/postgraphile/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3A%22%F0%9F%93%84+add-to-docs%22+) as a way to start.
 
 </Contribution>
-<Contribution title="Events" icon={talks}>
+<Contribution title="Talks" icon={talks}>
 
-Talk about PostGraphile at your local meetups and in your workplace. If you're planning on giving a presentation, let us know and we'll send you some stickers for the event.
+Talk about PostGraphile at your local meetups and in your workplace. If you're planning on giving a presentation, let us know and we'll send you some stickers or [cheatsheets](https://learn.graphile.org) to support your talk. You can contact us on our [chat server](https://discord.gg/graphile) or [on twitter](https://twitter.com/graphilehq) and we'll do what we can to help you.
 
 </Contribution>
 <Contribution title="Stories" icon={stories}>
 
-We always want to hear about your personal use of PostGraphile, whether a good experience or bad. Sharing your story helps us improve, and encourages other potential users to give PostGraphile a try.
+We always want to hear about your use of PostGraphile, whether a good experience or bad. Sharing your story helps us improve, and encourages other potential users to give PostGraphile a try. We want to compile some user case studies, so please get in contact [on chat](https://discord.gg/graphile) or [on twitter](https://twitter.com/graphilehq) with your PostGraphile story.
 
 </Contribution>
 <Contribution title="Write" icon={write}>
 
-Share your experiences with the project on your blog or social media - it could be about how you use the project, what success you've seen, or anything else; don't forget to tag us on twitter and we'll share your writing too.
+Share your experiences with the project on your blog or social media - it could be about how you use the project, what success you've seen, or anything else; sharing your experiences with PostGraphile helps more people find us, which in turn allows the project to grow and become more sustainable. Don't forget to tag us [on twitter](https://twitter.com/graphilehq) and we'll share your writing too.
 
 </Contribution>
 <Contribution title="Sponsor" icon={sponsor}>
 
-Crowd-sourced funding enables us to spend the most time directly working on improving PostGraphile, which you and other PostGraphile users then benefit from. [Sponsor PostGraphile on Patreon here](link)
+Crowd-sourced funding enables us to spend the most time directly working on improving PostGraphile, which you and other PostGraphile users then benefit from. Sponsorship money is used to fund software development, testing, documentation and releases of the PostGraphile and Graphile Engine software suite. [Sponsor PostGraphile on Patreon here.](https://www.patreon.com/benjie)
 
 </Contribution>
 
 </Contributions>
 
 </MarketingSection>
-<MarketingDivide from="dark" to="light" />
-<MarketingSection bg="light" left maxWidth>
-
-### Next Section
-
-Sponsorship money is used to fund software development, testing,
-documentation and releases of the PostGraphile and Graphile Engine software
-suite.
-
-</MarketingSection>
-<MarketingDivide from="light" to="medium" down />
+<MarketingDivide from="dark" to="medium" via="light" />
 <MarketingSection bg="medium" left maxWidth>
 
-### Next section?
+### Core Code Contribution Guide
 
-Users are not legally required to give back to the PostGraphile project, but
-it is in their interest to do so.
+We welcome code contributions from all contributors, together we can make great software that enables developers to build powerful applications in much less time then would previously have been taken. Your first step should be to check in with our maintainers on the [Discord chat server](https://discord.gg/graphile) to see what areas of PostGraphile are being worked on at the moment. 
 
-By significantly reducing the amount of work needed to achieve business goals
-and reducing running costs, PostGraphile results in huge time and money
-savings for users. We encourage organizations to contribute a portion of
-these savings back, enabling the project to advance more rapidly, and result
-in even greater savings for your organization.
+We also have a [Contributing Guide](https://github.com/graphile/postgraphile/blob/master/CONTRIBUTING.md) which contains details of our development and testing environment as well as guidelines on commit messages and other things which are useful for code contributors. Be sure to read it through before making your pull request.
+
 
 </MarketingSection>
-<MarketingDivide from="medium" to="dark" via="light" />
+<MarketingDivide from="medium" to="dark" via="light" down />
 <MarketingSection bg="dark" left maxWidth>
 
-### How can I sponsor PostGraphile
+### Code of Conduct
 
-Our preferred sponsorship provider is currently Patreon:
-
-<p style='text-align: center'>
-<a href="https://www.patreon.com/bePatron?u=7308310" data-patreon-widget-type="become-patron-button"><img src="/images/patreon_button.png" alt='Become a Patron' /></a>
-</p>
-
-If you wish to sponsor PostGraphile through other means, please get in touch with team@graphile, or DM us [on Discord](http://discord.gg/graphile).
+The Graphile projects are governed by the Contributor Covenant code of conduct; 
+In the interest of fostering an open and welcoming environment, we as contributors and maintainers pledge to making participation in our project and our community a harassment-free experience for everyone. This covers all areas of the Graphile community, including: the source code, commit messages, issues and pull requests on GitHub, any and all documentation, online chat and official social media accounts. [The full code of conduct can be found here](https://www.graphile.org/postgraphile/code-of-conduct/). 
 
 </MarketingSection>
+
 </MarketingLayout>
