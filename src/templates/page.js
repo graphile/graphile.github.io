@@ -8,18 +8,6 @@ import ContactAndMailingList from "../components/ContactAndMailingList";
 import Layout from "../components/Layout";
 import { graphql } from "gatsby";
 
-/*
- * So... On production, if you load a page with a code sample containing <span
- * class="gatsby-highlight-code-line"> then that span will be removed, and thus
- * all the line breaks in highlighted areas of your code will be missing. But
- * React still believe it's rendering it, and SSR definitely rendered it, so
- * I've no idea where it actually goes. And of course you can't reproduce it on
- * development. And if you navigate to the page it's fine - it's only when you
- * link to it directly that it goes wrong. Sense: it makes none. Anyway, this
- * hack might fix it... 🤷‍♂️
- */
-let hack = 0;
-
 const sectionIs = desiredSection => ({ sectionId }) =>
   sectionId === desiredSection;
 
@@ -117,151 +105,177 @@ const getNextPrev = (nav, pathname) => {
   return { next, nextText, prev, prevText };
 };
 
-const Page = props => {
-  const {
-    data: {
-      remark: {
-        html: rawHTML,
-        frontmatter: { title, showExamples },
-      },
-      nav,
-      examples,
-    },
-    location,
-    history,
-  } = props;
-  const html = processHTML(rawHTML);
-  const [, navSection] = location.pathname.split("/");
-  const thisNavEdge = nav.edges.find(
-    ({ node: { name } }) => name === navSection
-  );
-  const thisNav = (thisNavEdge && thisNavEdge.node) || {
-    pages: [],
-    sections: [],
+class Page extends React.Component {
+  state = {
+    /*
+     * So... On production, if you load a page with a code sample containing <span
+     * class="gatsby-highlight-code-line"> then that span will be removed, and thus
+     * all the line breaks in highlighted areas of your code will be missing. But
+     * React still believe it's rendering it, and SSR definitely rendered it, so
+     * I've no idea where it actually goes. And of course you can't reproduce it on
+     * development. And if you navigate to the page it's fine - it's only when you
+     * link to it directly that it goes wrong. Sense: it makes none. Anyway, this
+     * hack might fix it... 🤷‍♂️
+     */
+    hack: 1,
   };
-  const navPages = thisNav.pages;
-  const navSections = thisNav.sections || [];
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ hack: 2 });
+    }, 200);
+  }
+  render() {
+    const {
+      data: {
+        remark: {
+          html: rawHTML,
+          frontmatter: { title, showExamples },
+        },
+        nav,
+        examples,
+      },
+      location,
+      history,
+    } = this.props;
+    const html = processHTML(rawHTML);
+    const [, navSection] = location.pathname.split("/");
+    const thisNavEdge = nav.edges.find(
+      ({ node: { name } }) => name === navSection
+    );
+    const thisNav = (thisNavEdge && thisNavEdge.node) || {
+      pages: [],
+      sections: [],
+    };
+    const navPages = thisNav.pages;
+    const navSections = thisNav.sections || [];
 
-  const { next, nextText, prev, prevText } = getNextPrev(
-    navPages,
-    location.pathname
-  );
+    const { next, nextText, prev, prevText } = getNextPrev(
+      navPages,
+      location.pathname
+    );
 
-  const isPostGraphileDocs = navSection === "postgraphile";
+    const isPostGraphileDocs = navSection === "postgraphile";
 
-  return (
-    <Layout {...props}>
-      <div
-        className={`template-page ${
-          location.pathname.match(
-            /^\/(postgraphile|news|support|sponsors?)(\/|$)/
-          )
-            ? "postgraphile"
-            : ""
-        }`}
-      >
-        <Helmet
-          title={`${
-            isPostGraphileDocs ? "PostGraphile" : "Graphile"
-          } | ${title}`}
-          meta={[
-            {
-              name: "description",
-              content:
-                "Utilities to build powerful and performant GraphQL APIs",
-            },
-            {
-              name: "keywords",
-              content:
-                "GraphQL, API, Graph, PostgreSQL, PostGraphile, PostGraphQL, Postgres-GraphQL, server, plugins, introspection, reflection",
-            },
-          ]}
-        />
-        <SiteHeader location={location} history={history} />
-        <div className="page-content">
-          <section>
-            <div className="container">
-              <div className="row between-xs">
-                <Nav
-                  sections={navSections}
-                  pages={navPages}
-                  location={location}
-                />
-                <div className="col-xs-12 col-md-9 first-xs main-content">
-                  <div className="row">
-                    <div className="col-xs-12" style={{ width: "100%" }}>
-                      <div
-                        className="edit-this-page"
-                        style={{
-                          display: location.pathname.match(/^\/news\//)
-                            ? "none"
-                            : "",
-                        }}
-                      >
-                        <a
-                          href={`https://github.com/graphile/graphile.github.io/edit/develop/src/pages${location.pathname.substr(
-                            0,
-                            location.pathname.length - 1
-                          )}.md`}
+    return (
+      <Layout {...this.props}>
+        <div
+          className={`template-page ${
+            location.pathname.match(
+              /^\/(postgraphile|news|support|sponsors?)(\/|$)/
+            )
+              ? "postgraphile"
+              : ""
+          }`}
+        >
+          <Helmet
+            title={`${
+              isPostGraphileDocs ? "PostGraphile" : "Graphile"
+            } | ${title}`}
+            meta={[
+              {
+                name: "description",
+                content:
+                  "Utilities to build powerful and performant GraphQL APIs",
+              },
+              {
+                name: "keywords",
+                content:
+                  "GraphQL, API, Graph, PostgreSQL, PostGraphile, PostGraphQL, Postgres-GraphQL, server, plugins, introspection, reflection",
+              },
+            ]}
+          />
+          <SiteHeader location={location} history={history} />
+          <div className="page-content">
+            <section>
+              <div className="container">
+                <div className="row between-xs">
+                  <Nav
+                    sections={navSections}
+                    pages={navPages}
+                    location={location}
+                  />
+                  <div className="col-xs-12 col-md-9 first-xs main-content">
+                    <div className="row">
+                      <div className="col-xs-12" style={{ width: "100%" }}>
+                        <div
+                          className="edit-this-page"
+                          style={{
+                            display: location.pathname.match(/^\/news\//)
+                              ? "none"
+                              : "",
+                          }}
                         >
-                          📝 Suggest improvements to this page
-                        </a>
-                      </div>
-                      <div
-                        key={++hack}
-                        dangerouslySetInnerHTML={{ __html: html }}
-                      />
-                    </div>
-                    <br />
-                    {showExamples && (
-                      <ExamplesViewer
-                        examples={examples.edges
-                          .filter(({ node }) => node.category === showExamples)
-                          .map(({ node }) => node)}
-                      />
-                    )}
-                    <br />
-                    <div className="col-xs-12 mt3 mb5">
-                      <div className="row between-xs">
-                        <div className="col-xs-6">
-                          {prev ? (
-                            <Link className="" to={prev}>
-                              <span className="fas fa-fw fa-arrow-left" />{" "}
-                              {prevText ? (
-                                <AugmentedText noLink>{prevText}</AugmentedText>
-                              ) : (
-                                "Previous"
-                              )}
-                            </Link>
-                          ) : null}
+                          <a
+                            href={`https://github.com/graphile/graphile.github.io/edit/develop/src/pages${location.pathname.substr(
+                              0,
+                              location.pathname.length - 1
+                            )}.md`}
+                          >
+                            📝 Suggest improvements to this page
+                          </a>
                         </div>
-                        <div className="col-xs-6 tr">
-                          {next ? (
-                            <Link className="" to={next}>
-                              {nextText ? (
-                                <AugmentedText noLink>{nextText}</AugmentedText>
-                              ) : (
-                                "Next"
-                              )}{" "}
-                              <span className="fas fa-fw fa-arrow-right" />
-                            </Link>
-                          ) : null}
+                        <div
+                          key={this.state.hack}
+                          dangerouslySetInnerHTML={{ __html: html }}
+                        />
+                      </div>
+                      <br />
+                      {showExamples && (
+                        <ExamplesViewer
+                          examples={examples.edges
+                            .filter(
+                              ({ node }) => node.category === showExamples
+                            )
+                            .map(({ node }) => node)}
+                        />
+                      )}
+                      <br />
+                      <div className="col-xs-12 mt3 mb5">
+                        <div className="row between-xs">
+                          <div className="col-xs-6">
+                            {prev ? (
+                              <Link className="" to={prev}>
+                                <span className="fas fa-fw fa-arrow-left" />{" "}
+                                {prevText ? (
+                                  <AugmentedText noLink>
+                                    {prevText}
+                                  </AugmentedText>
+                                ) : (
+                                  "Previous"
+                                )}
+                              </Link>
+                            ) : null}
+                          </div>
+                          <div className="col-xs-6 tr">
+                            {next ? (
+                              <Link className="" to={next}>
+                                {nextText ? (
+                                  <AugmentedText noLink>
+                                    {nextText}
+                                  </AugmentedText>
+                                ) : (
+                                  "Next"
+                                )}{" "}
+                                <span className="fas fa-fw fa-arrow-right" />
+                              </Link>
+                            ) : null}
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </section>
+            </section>
 
-          <ContactAndMailingList />
+            <ContactAndMailingList />
+          </div>
+          <SiteFooter />
         </div>
-        <SiteFooter />
-      </div>
-    </Layout>
-  );
-};
+      </Layout>
+    );
+  }
+}
 
 export const pageQuery = graphql`
   query PageByPath($slug: String!) {
