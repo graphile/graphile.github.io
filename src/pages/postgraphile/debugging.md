@@ -52,7 +52,7 @@ Use the following CLI options with PostGraphile:
 * or
 
 ```
---extended-errors severity,code,detail,hint,positon,internalPosition,internalQuery,where,schema,table,column,dataType,constraint,file,line,routine
+--extended-errors severity,code,detail,hint,position,internalPosition,internalQuery,where,schema,table,column,dataType,constraint,file,line,routine
 ```
 
 or for the library:
@@ -62,7 +62,7 @@ or for the library:
 * or
 
 ```
-extendedErrors: ['severity', 'code', 'detail', 'hint', 'positon', 'internalPosition', 'internalQuery', 'where', 'schema', 'table', 'column', 'dataType', 'constraint', 'file', 'line', 'routine']
+extendedErrors: ['severity', 'code', 'detail', 'hint', 'position', 'internalPosition', 'internalQuery', 'where', 'schema', 'table', 'column', 'dataType', 'constraint', 'file', 'line', 'routine']
 ```
 
 * or use a custom `handleErrors` function to explore even more details about
