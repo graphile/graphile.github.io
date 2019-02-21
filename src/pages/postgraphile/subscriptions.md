@@ -4,32 +4,40 @@ path: /postgraphile/subscriptions/
 title: GraphQL Subscriptions
 ---
 
-## GraphQL Subscriptions
+## Subscriptions
 
-PostGraphile Core doesn't yet have subscriptions support built in. There is
-much talk about what a GraphQL subscriptions solution might look like in
-[issue #92](https://github.com/graphile/postgraphile/issues/92).
+<p class='intro'>
+Subscriptions notify you when an event occurs on the server side.
+</p>
 
-Patreon backers (and those who have purchased the Pro plugin) may try out an
-early simple subscriptions feature via the [Supporter
-Plugin](/postgraphile/plugins/). We'd love to hear your feedback on this
-implementation. The rest of this article details how to use this feature.
+_This feature requires PostGraphile v4.4.0 or higher._
 
-## Custom Subscriptions [SUPPORTER]
+Pass `--subscriptions` (or `subscriptions: true`) to PostGraphile and we'll
+enhance GraphiQL with subscription capabilities and give your PostGraphile
+server the power of websocket communications; but you'll notice that your
+schema still only has `query` and `mutation` types. To add subscriptions to
+your GraphQL schema you'll need a plugin to provide the relevant
+`subscription` fields - or you can write your own [with
+`makeExtendSchemaPlugin`](/postgraphile/make-extend-schema-plugin/).
 
-_(Requires `@graphile/supporter` 0.7.3 or later.)_
+The easiest way to get started is with Simple Subscriptions (see below) but
+we recommend that you take the Custom Subscriptions approach as it allows you
+to be much more expressive about the realtime features of your GraphQL API.
+
+---
+
+### Custom Subscriptions
 
 In this implementation, you use PostGraphile's extensibility to define the
-exact subscriptions you need. We advise creating an extension using [the
-`makeExtendSchemaPlugin` helper](/postgraphile/make-extend-schema-plugin/).
+exact subscriptions you need.
 
-### Writing the plugin
+#### Writing the plugin
 
 Using `makeExtendSchemaPlugin` we can define a new subscription field and the
 subscription payload type that it returns. Using the `@pgSubscription(topic: ...)`
-directive, we can embed a function that will calculate the PostgreSQL
-topic to subscribe to based on the arguments and context passed to the
-GraphQL field (in this case factoring in the user ID).
+directive provided by `@graphile/pg-pubsub` we can embed a function that will
+calculate the PostgreSQL topic to subscribe to based on the arguments and
+context passed to the GraphQL field (in this case factoring in the user ID).
 
 ```js
 // MySubscriptionPlugin.js
@@ -76,7 +84,9 @@ module.exports = makeExtendSchemaPlugin(({ pgSql: sql }) => ({
         event,
         _args,
         _context,
-        { graphile: { selectGraphQLResultFromTable } }
+        {
+          graphile: { selectGraphQLResultFromTable },
+        }
       ) {
         const rows = await selectGraphQLResultFromTable(
           sql.fragment`app_public.users`,
@@ -167,39 +177,48 @@ CREATE TRIGGER _500_gql_update_member
   EXECUTE PROCEDURE app_public.graphql_subscription('organizationsChanged', 'graphql:user:$1', 'member_id');
 ```
 
-### Enabling with the CLI
+#### Enabling with the CLI
 
-Load the supporter server plugin and our custom subscription schema plugin.
+Load the `@graphile/pg-pubsub` _server_ plugin (`--plugins`, or `pluginHook`
+for the library), our custom subscription _schema_ plugin
+(`--append-plugins`, or `appendPlugins` for the library), and enable
+PostGraphile server's websockets support with `--subscriptions` (or
+`subscriptions: true` for the library).
 
 ```
 postgraphile \
-  --plugins @graphile/supporter \
+  --plugins @graphile/pg-pubsub \
   --append-plugins `pwd`/MySubscriptionPlugin.js \
-  -c postgres:///mydb
+  --subscriptions \
+  -c mydb
 ```
 
-## Simple Subscriptions [SUPPORTER]
+---
 
-In this implementation, we expose a generic `listen` handler that can be used
-with arbitrary topics in PostgreSQL - it requires very little ahead-of-time
-planning.
+### Simple Subscriptions
 
-### Enabling with the CLI
+In this implementation, we have `@graphile/pg-pubsub` automatically expose a
+generic `listen` handler that can be used with arbitrary topics in PostgreSQL
+— it requires very little ahead-of-time planning.
 
-To enable Simple Subscriptions via the CLI, just load the supporter plugin
-and pass the `--simple-subscriptions` flag.
+#### Enabling with the CLI
+
+To enable Simple Subscriptions via the CLI, just load the
+`@graphile/pg-pubsub` plugin and pass the `--subscriptions` and
+`--simple-subscriptions` flags.
 
 ```
 postgraphile \
-  --plugins @graphile/supporter \
+  --plugins @graphile/pg-pubsub \
+  --subscriptions \
   --simple-subscriptions \
-  -c postgres:///mydb
+  -c mydb
 ```
 
-### Enabling with an Express app
+#### Enabling with an Express app
 
 When using PostGraphile as a library, you may enable Simple Subscriptions by
-passing the `pluginHook` with the supporter plugin and using
+passing the `pluginHook` with the `@graphile/pg-pubsub` plugin and using
 `simpleSubscriptions: true`.
 
 We emulate part of the Express stack, so if you require sessions you can pass
@@ -211,12 +230,13 @@ Here's an example:
 ```js
 const express = require("express");
 const { postgraphile, makePluginHook } = require("postgraphile");
-const { default: GraphileSupporter } = require("@graphile/supporter");
+const { default: PgPubsub } = require("@graphile/pg-pubsub");
 
-const pluginHook = makePluginHook([GraphileSupporter]);
+const pluginHook = makePluginHook([PgPubsub]);
 
 const postgraphileOptions = {
   pluginHook,
+  subscriptions: true,
   simpleSubscriptions: true,
   websocketMiddlewares: [
     // Add whatever middlewares you need here, note that they should only
@@ -233,7 +253,7 @@ app.use(postgraphile(databaseUrl, "app_public", postgraphileOptions));
 app.listen(parseInt(process.env.PORT, 10) || 3000);
 ```
 
-### Using
+#### Using
 
 Simple subscriptions exposes a `listen` field to the `Subscription` type that
 can be used for generic subscriptions to a named topic. This topic can be
@@ -252,16 +272,15 @@ type Subscription {
 }
 ```
 
-Please note that PostGraphile's bundled copy of GraphiQL does not support
-subscriptions at this time - you must use an alternative client such as
-Altair or GraphQL Playground.
+PostGraphile's built in GraphiQL now supports subscriptions, so you can use
+it directly to test your application.
 
-### Topic prefix
+#### Topic prefix
 
 All topics requested from GraphQL are automatically prefixed with
 `postgraphile:`\* to avoid leaking other topics your application may be using
 
-* GraphQL consumers will not need to know about this, but you will need to
+- GraphQL consumers will not need to know about this, but you will need to
   remember to add it to the topic when you perform `NOTIFY` otherwise
   subscribers will not see the messages.
 
@@ -359,7 +378,7 @@ Resulting in this GraphQL payload:
 > limited to 63 characters. Subtracting the `postgraphile:` prefix leaves 50
 > characters for your topic name.
 
-### Subscription security
+#### Subscription security
 
 By default, any user may subscribe to any topic, whether logged in or not, and
 they will remain subscribed until they close the connection themselves. This
@@ -416,7 +435,7 @@ When a message is published to the topic identified by the return value of this
 function (NOTE: this topic will NOT be prefixed with `postgraphile:` because it
 should be private), the associated subscription will automatically be terminated.
 
-### Naming your topics
+#### Naming your topics
 
 You might want to make the topic a combination of things, for example the
 subject type and identifier - e.g. 'channel:123'. If you do this then your
@@ -426,14 +445,14 @@ topic that will be published to in the event the user is kicked from the
 channel, e.g. `'channel:123:kick:987'` (assuming '987' is the id
 of the current user).
 
-### Example walk-through
+#### Example walk-through
 
 First, set up a `.postgraphilerc.js` containing the following:
 
 ```js
 module.exports = {
   options: {
-    plugins: ["@graphile/supporter"],
+    plugins: ["@graphile/pg-pubsub"],
     connection: "postgres:///subs",
     schema: ["app_public"],
     simpleSubscriptions: true,
@@ -572,7 +591,7 @@ psql -1X -v ON_ERROR_STOP=1 subs << HERE
 HERE
 ```
 
-#### Advanced setup
+##### Advanced setup
 
 If you need websockets to be listened for before your first HTTP request comes
 in (most people don't need this) then you must create a `rawHTTPServer`, mount
@@ -580,15 +599,16 @@ your express `app` in it, and then add subscription support to the raw server
 via the `enhanceHttpServerWithSubscriptions` function, as shown below:
 
 ```js
-const { postgraphile, makePluginHook } = require("postgraphile");
 const {
-  default: GraphileSupporter,
+  postgraphile,
+  makePluginHook,
   enhanceHttpServerWithSubscriptions,
-} = require("@graphile/supporter");
+} = require("postgraphile");
+const { default: PgPubsub } = require("@graphile/pg-pubsub");
 const { createServer } = require("http");
 const express = require("express");
 
-const pluginHook = makePluginHook([GraphileSupporter]);
+const pluginHook = makePluginHook([PgPubsub]);
 
 const app = express();
 const rawHTTPServer = createServer(app);
@@ -615,17 +635,12 @@ const postgraphileMiddleware = postgraphile(
 
 app.use(postgraphileMiddleware);
 
-enhanceHttpServerWithSubscriptions(
-  rawHTTPServer,
-  postgraphileMiddleware,
-  postgraphileOptions
-);
+enhanceHttpServerWithSubscriptions(rawHTTPServer, postgraphileMiddleware);
 
 rawHTTPServer.listen(parseInt(process.env.PORT, 10) || 3000);
 ```
 
-The `enhanceHttpServerWithSubscriptions` takes three arguments:
+The `enhanceHttpServerWithSubscriptions` takes two arguments:
 
 1.  the raw HTTP server from `require('http').createServer()`
 2.  the postgraphile middleware (this should be the _same_ middleware that you mount into your Express app)
-3.  options, where you can optionally pass `middlewares` to enable `pgSettings(req) {...}` access to session-based things

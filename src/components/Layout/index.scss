@@ -600,6 +600,7 @@ h6 code {
   text-align: center;
 }
 .pricing-table .fa-check-circle,
+.pricing-table .fa-minus-circle,
 .pricing-table .fa-times-circle {
   @extend .f3;
 }
@@ -608,6 +609,9 @@ h6 code {
 }
 .pricing-table .fa-times-circle {
   color: red;
+}
+.pricing-table .fa-minus-circle {
+  color: #ccc;
 }
 .pricing-table .note {
   @extend .pt2;
