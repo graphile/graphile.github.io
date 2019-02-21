@@ -12,7 +12,7 @@ title: PostGraphile Pro!
 
 # Get PostGraphile Pro!
 
-#### PostGraphile core is open source software under the MIT license. Supporter and Pro are commercial plugins which enhance PostGraphile with additional features and help fund development and maintenance on PostGraphile Core.
+#### PostGraphile core is open source software under the MIT license. Pro is a commercial plugin which enhances PostGraphile with additional features and helps fund development and maintenance on PostGraphile Core.
 
 ##### See below the pricing table for more information.
 
@@ -36,7 +36,6 @@ title: PostGraphile Pro!
 <tr>
   <th></th>
   <th><span class="f3 fab fa-github"></span> Core</th>
-  <th><span class='plan-supporter'><span class='first-letter'>s</span></span> Supporter</th>
   <th><span class='plan-pro'><span class='first-letter'>p</span></span> Pro</th>
 </tr>
 
@@ -46,13 +45,11 @@ title: PostGraphile Pro!
 <tr>
   <th>Audience</th>
   <td>Hobbyists, OSS projects and<br />pre-revenue startups</td>
-  <td>Hobbyists & startups who support PostGraphile</td>
   <td>Businesses and enterprise</td>
 </tr>
 
 <tr>
   <th>Instant GraphQL API<br />(queries and mutations)</th>
-  <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
 </tr>
@@ -61,12 +58,10 @@ title: PostGraphile Pro!
   <th>Automatic CRUD mutations</th>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
-  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Excellent performance</th>
-  <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
 </tr>
@@ -75,12 +70,10 @@ title: PostGraphile Pro!
   <th>Authentication via JWT or custom <code>pgSettings</code></th>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
-  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>RLS and RBAC authorization</th>
-  <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
 </tr>
@@ -89,12 +82,10 @@ title: PostGraphile Pro!
   <th>Relay-compatible connections</th>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
-  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Simple list-based relations</th>
-  <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
 </tr>
@@ -103,12 +94,10 @@ title: PostGraphile Pro!
   <th>Filtering</th>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
-  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Ordering</th>
-  <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
 </tr>
@@ -117,12 +106,10 @@ title: PostGraphile Pro!
   <th>Computed columns</th>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
-  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Custom queries</th>
-  <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
 </tr>
@@ -131,12 +118,10 @@ title: PostGraphile Pro!
   <th>Custom mutations</th>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
-  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Customisable with<br />Smart Comments</th>
-  <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
 </tr>
@@ -145,12 +130,16 @@ title: PostGraphile Pro!
   <th>Extensible via plugins</th>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
-  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
-  <th>Simple GraphQL <a href="/postgraphile/subscriptions/">Subscriptions</a></th>
-  <td><span class='fas fa-times-circle'></span></td>
+  <th>GraphQL <a href="/postgraphile/subscriptions/">Subscriptions</a></th>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><sup style="visibility: hidden">&nbsp;†</sup><span class='fas fa-check-circle'></span><sup>&nbsp;†</sup></td>
+</tr>
+
+<tr>
+  <th>GraphQL <a href="/postgraphile/live-queries/">Live Queries</a></th>
   <td><span class='fas fa-check-circle'></span></td>
   <td><sup style="visibility: hidden">&nbsp;†</sup><span class='fas fa-check-circle'></span><sup>&nbsp;†</sup></td>
 </tr>
@@ -158,13 +147,11 @@ title: PostGraphile Pro!
 <tr>
   <th>Integrated<sup>‡</sup> GraphQL query cost limit</th>
   <td><span class='fas fa-times-circle'></span></td>
-  <td><span class='fas fa-times-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Integrated<sup>‡</sup> limits on pagination</th>
-  <td><span class='fas fa-times-circle'></span></td>
   <td><span class='fas fa-times-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
 </tr>
@@ -172,13 +159,11 @@ title: PostGraphile Pro!
 <tr>
   <th>Integrated<sup>‡</sup> GraphQL query depth limits</th>
   <td><span class='fas fa-times-circle'></span></td>
-  <td><span class='fas fa-times-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Facility to scale via read replicas</th>
-  <td><span class='fas fa-times-circle'></span></td>
   <td><span class='fas fa-times-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
 </tr>
@@ -187,20 +172,17 @@ title: PostGraphile Pro!
   <th>License</th>
   <td>MIT</td>
   <td>Commercial</td>
-  <td>Commercial</td>
 </tr>
 
 <tr>
   <th>Pricing</th>
-  <td><strong>Free / Crowd-funded</strong><span class='note'>Please give back</span></td>
-  <td><strong>Pay what you can</strong><sup>§</sup><span class='note'>via Patreon, min $1/mo</span></td>
+  <td><strong>Crowd-funded</strong><span class='note'>Please give back</span></td>
   <td><strong>$100/mo + VAT</strong><span class='note'>per project</span></td>
 </tr>
 
 <tr>
   <th>Purchase</th>
   <td>&mdash;</td>
-  <td>Patreon or Credit Card</td>
   <td>Credit/Debit Card</td>
 </tr>
 
@@ -210,7 +192,6 @@ title: PostGraphile Pro!
 <tr>
   <th></th>
   <td><a class='button--solid' href='https://patreon.com/benjie'>Sponsor development <span class='fas fa-external-link-square-alt'></span></a></td>
-  <td><a class='button--solid' href='https://store.graphile.com'>Buy <span class='fas fa-external-link-square-alt'></span></a></td>
   <td><a class='button--solid' href='https://store.graphile.com'>Buy <span class='fas fa-external-link-square-alt'></span></a></td>
 </tr>
 

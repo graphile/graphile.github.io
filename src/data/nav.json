@@ -313,10 +313,23 @@
         "subpages": []
       },
       {
-        "to": "/postgraphile/subscriptions/",
-        "title": "Subscriptions",
+        "to": "/postgraphile/realtime/",
+        "title": "Realtime",
         "sectionId": "basics",
-        "subpages": []
+        "subpages": [
+          {
+            "to": "/postgraphile/subscriptions/",
+            "title": "Subscriptions",
+            "sectionId": "basics",
+            "subpages": []
+          },
+          {
+            "to": "/postgraphile/live-queries/",
+            "title": "Live Queries",
+            "sectionId": "basics",
+            "subpages": []
+          }
+        ]
       },
       {
         "to": "/postgraphile/reserved-keywords/",
