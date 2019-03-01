@@ -177,7 +177,7 @@ title: PostGraphile Pro!
 <tr>
   <th>Pricing</th>
   <td><strong><a href='/sponsor'>Crowd-funded</a></strong><span class='note'>Please give back</span></td>
-  <td><strong><small><s>$100/mo</s></small> $25/mo + VAT</strong><span class='note'>per project</span></td>
+  <td><strong><small><s>$100/mo</s> USD</small> $25<small>/mo exc. VAT</small></strong><span class='note'><small>EUR €25/mo, GBP £20/mo</small></span></td>
 </tr>
 
 <tr>
