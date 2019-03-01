@@ -202,7 +202,8 @@ bringing your servers to their knees.
 **You are highly encouraged to purchase the [Pro Plugin [PRO]](/postgraphile/pricing/),
 which implements these protections in a deeply integrated and PostGraphile
 optimised way, and has the added benefit of helping sustain development and
-maintenance on the project.**
+maintenance on the project.** You can read the [@graphile/pro README on
+npm](https://www.npmjs.com/package/@graphile/pro).
 
 The following details how the Pro Plugin addresses these issues, including
 hints on how you might go about solving the issues for yourself. Many of these

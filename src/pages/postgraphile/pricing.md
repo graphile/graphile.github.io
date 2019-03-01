@@ -227,13 +227,10 @@ contributions from the community, [professional services](/support/) contracts,
 [Patreon supporters](https://patreon.com/benjie) and sales of commercial plugin
 licenses.
 
-### PostGraphile Supporter and Pro are commercial plugins
+### PostGraphile Pro is a commercial plugin
 
-The Supporter and Pro plugins enhance PostGraphile with additional features and
-are loaded through the standard [plugin interface](/postgraphile/plugins/).
-
-The Supporter plugin is a reward for people who support PostGraphile's
-development via [Patreon](https://patreon.com/benjie).
+The Pro plugin enhances PostGraphile with additional features and is loaded
+through the standard [server plugin interface](/postgraphile/plugins/).
 
 The Pro plugin contains features that are particularly useful to businesses
 wishing to scale their solution out using database read-replicas or protect the
@@ -242,6 +239,13 @@ third parties. (Typically if the intended clients to your GraphQL API are
 first-party only then you would use a GraphQL query whitelist (e.g. persisted
 queries) for this purpose; although the Pro features can still be helpful to
 dissuade your developers from building expensive queries!)
+
+### Where are the @graphile/pro docs/changelog?
+
+You can read the [@graphile/pro README on
+npm](https://www.npmjs.com/package/@graphile/pro). There's also a lot more
+information in the [Production Considerations](/postgraphile/production) page
+on this website.
 
 ### Commercial plugins help fund development on PostGraphile
 
