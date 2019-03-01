@@ -244,7 +244,7 @@ dissuade your developers from building expensive queries!)
 
 You can read the [@graphile/pro README on
 npm](https://www.npmjs.com/package/@graphile/pro). There's also a lot more
-information in the [Production Considerations](/postgraphile/production) page
+information in the [Production Considerations](/postgraphile/production/) page
 on this website.
 
 ### Commercial plugins help fund development on PostGraphile

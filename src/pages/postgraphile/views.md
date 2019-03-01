@@ -91,7 +91,7 @@ query After {
 }
 ```
 
-**_NOTE: you can use [smart comments](/postgraphile/smart-comments) to change the GraphQL field name_**
+**_NOTE: you can use [smart comments](/postgraphile/smart-comments/) to change the GraphQL field name_**
 
 ### Authorization
 
