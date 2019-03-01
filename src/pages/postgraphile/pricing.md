@@ -135,13 +135,13 @@ title: PostGraphile Pro!
 <tr>
   <th>GraphQL <a href="/postgraphile/subscriptions/">Subscriptions</a></th>
   <td><span class='fas fa-check-circle'></span></td>
-  <td><sup style="visibility: hidden">&nbsp;†</sup><span class='fas fa-check-circle'></span><sup>&nbsp;†</sup></td>
+  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>GraphQL <a href="/postgraphile/live-queries/">Live Queries</a></th>
   <td><span class='fas fa-check-circle'></span></td>
-  <td><sup style="visibility: hidden">&nbsp;†</sup><span class='fas fa-check-circle'></span><sup>&nbsp;†</sup></td>
+  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
@@ -176,8 +176,8 @@ title: PostGraphile Pro!
 
 <tr>
   <th>Pricing</th>
-  <td><strong>Crowd-funded</strong><span class='note'>Please give back</span></td>
-  <td><strong>$100/mo + VAT</strong><span class='note'>per project</span></td>
+  <td><strong><a href='/sponsor'>Crowd-funded</a></strong><span class='note'>Please give back</span></td>
+  <td><strong><small><s>$100/mo</s></small> $25/mo + VAT</strong><span class='note'>per project</span></td>
 </tr>
 
 <tr>
@@ -199,11 +199,7 @@ title: PostGraphile Pro!
 
 </table>
 
-##### <sup>†</sup> Access to Supporter plugin is included with Pro plugin access.
-
-##### <sup>‡</sup> These features integrate deeply with PostGraphile and have been optimised for its nuances by the maintainer. If you wish to build and maintain protections yourself rather than using the Pro plugin, refer to [Running in Production](/postgraphile/production/) for information on how you might go about doing this. Purchasing the Pro plugin helps fund ongoing development and maintenance on the open source PostGraphile.
-
-##### <sup>§</sup> You do not need to select a Patreon tier, instead you may opt to select "Custom" and enter a number you're comfortable with.
+##### <sup>‡</sup> These features integrate deeply with PostGraphile and have been optimised for its nuances by the maintainer. If you wish to build and maintain protections yourself rather than using the Pro plugin, refer to [Running in Production](/postgraphile/production/) for information on how you might go about doing this. Purchasing the Pro plugin helps fund ongoing development and maintenance on the open source PostGraphile project.
 
 Questions, comments or feedback? Email <a href="mailto:info@graphile.org?subject=Pricing%20question/comment/feedback:)">info@graphile.org</a>
 
