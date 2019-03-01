@@ -6,7 +6,7 @@ title: Production Considerations
 
 ## Production Considerations
 
-When it comes time to deploy your PostGraphile application in production,
+When it comes time to deploy your PostGraphile application to production,
 there's a few things you'll want to think about including topics such as
 logging, security and stability. This article outlines some of the issues
 you might face, and how to solve them.
@@ -30,7 +30,7 @@ here are a few things we recommend:
     `openssl rand -base64 30 | tr '+/' '-_'`
 4.  Use a non-standard port for your PostgreSQL server if you can (pick a random port number)
 5.  Use a hard-to-guess hostname, and never reveal the hostname to anyone who doesn't need to know it
-6.  If possible, limit the IP addresses that can connect to your DB to be those of your hosting provider.
+6.  If possible, limit the IP addresses that can connect to your DB to be just those of your hosting provider.
 
 Heroku have some instructions on making RDS available for use under Heroku
 which should also work for Now.sh or any other service:
@@ -40,10 +40,10 @@ https://devcenter.heroku.com/articles/amazon-rds
 
 In a production app, you typically want to add a few common enhancements, e.g.
 
-* Logging
-* Gzip or similar compression
-* Security protections
-* Rate limiting
+- Logging
+- Gzip or similar compression
+- Security protections
+- Rate limiting
 
 Since there's already a lot of options and opinions in this space, and they're
 not directly related to the problem of serving GraphQL from your PostgreSQL
@@ -70,6 +70,12 @@ app.use(postgraphile(process.env.DATABASE_URL || "postgres:///"));
 
 app.listen(process.env.PORT || 3000);
 ```
+
+Should you want to use something like PostGraphile's built in logging, but
+send it to your own logging provider, you can compose a PostGraphile server
+plugin to do so. Here's an example plugin that uses Nuxt's consola library
+for logging, you could use it as a base for your own plugin:
+https://github.com/graphile/postgraphile-log-consola
 
 ### Denial of Service Considerations
 
@@ -118,45 +124,45 @@ from Apollo.
 These techniques should be used in conjunction with common HTTP protection
 methods such as rate limiting which are typically better implemented at a
 separate layer; for example you could use [Cloudflare rate
-limiting](https://www.cloudflare.com/rate-limiting/) for this.
+limiting](https://www.cloudflare.com/rate-limiting/) for this, or an
+Express.js middleware.
 
 #### Simple: Query Whitelist ("persisted queries")
 
 If you do not intend to open your API up to third parties to run arbitrary
 queries against then using persisted queries as a query whitelist to protect
-your GraphQL endpoint is a good solution. This technique ensures that only the
-queries you use in your own applications can be executed on the server (but you
-can of course change the variables).
+your GraphQL endpoint is a great and highly recommended solution. This
+technique ensures that only the queries you use in your own applications can
+be executed on the server (but you can of course change the variables).
 
 This technique has a few caveats:
 
-* Your API will only accept queries that you've approved, so it's not suitable if you want third parties to run arbitrary queries
-* You must be able to generate a unique ID from each query; e.g. a hash
-* You must use "static GraphQL queries" - that is the queries must be known at build time of your application/webpage, and only the variables fed to those queries can change at run-time
-* You must have a way of sharing these queries between the application and the server
-* You must be careful not to use variables in dangerous places; for example don't write `allUsers(first: $myVar)` as a malicious attacker could set `$myVar` to 2147483647 in order to cause your server to process as much data as possible.
+- Your API will only accept queries that you've approved, so it's not suitable if you want third parties to run arbitrary queries
+- You must be able to generate a unique ID from each query; e.g. a hash
+- You must use "static GraphQL queries" - that is the queries must be known at build time of your application/webpage, and only the variables fed to those queries can change at run-time
+- You must have a way of sharing these queries between the application and the server
+- You must be careful not to use variables in dangerous places; for example don't write `allUsers(first: $myVar)` as a malicious attacker could set `$myVar` to 2147483647 in order to cause your server to process as much data as possible.
 
 PostGraphile currently doesn't have this functionality built in, but it's
 fairly easy to add it when using PostGraphile as an express middleware, a
 simple implementation might look like this:
 
 ```js{9-18}
-const postgraphile = require('postgraphile');
-const express = require('express');
-const bodyParser = require('body-parser');
+const postgraphile = require("postgraphile");
+const express = require("express");
+const bodyParser = require("body-parser");
 
 const app = express();
 app.use(bodyParser.json());
 
 /**** BEGINNING OF CUSTOMIZATION ****/
-const persistedQueries = require('./persistedQueries.json');
+const persistedQueries = require("./persistedQueries.json");
 
-app.use('/graphql', async (req, res, next) => {
+app.use("/graphql", async (req, res, next) => {
   // TODO: validate req.body is of the right form
-  req.body.query =
-    {}.hasOwnProperty.call(persistedQueries, req.body.id)
-      ? persistedQueries[req.body.id]
-      : null;
+  req.body.query = {}.hasOwnProperty.call(persistedQueries, req.body.id)
+    ? persistedQueries[req.body.id]
+    : null;
   next();
 });
 /**** END OF CUSTOMIZATION *** */
@@ -168,19 +174,20 @@ app.listen(5000);
 
 i.e. a simple middleware mounted before postgraphile that manipulates the request body.
 
-I personally use my forks of Apollo's `persistgraphql` tools to help me manage
-the persisted queries themselves:
+I (Benjie) personally use my forks of Apollo's `persistgraphql` tools to help
+me manage the persisted queries themselves:
 
-* https://github.com/benjie/persistgraphql
-* https://github.com/benjie/persistgraphql-webpack-plugin
+- https://github.com/benjie/persistgraphql
+- https://github.com/benjie/persistgraphql-webpack-plugin
 
 These forks generate hashes rather than numbers; which make the persisted
 queries consistent across multiple builds and applications (website, mobile,
 browser plugin, ...).
 
-**NOTE**: even if you're using persisted queries, it can be wise to implement
-the advanced protections as it enables you to catch unnecessarily expensive
-queries before you start facing performance bottlenecks down the line.
+**NOTE**: even if you're using persisted queries, it can still be wise to
+implement advanced protections as it enables you to catch unnecessarily
+expensive queries during development, before you start facing performance
+bottlenecks down the line.
 
 #### Advanced
 
@@ -205,19 +212,23 @@ client.
 
 #### Sending queries to read replicas
 
-Probably the most important thing regarding scalability is making sure that your
-master database doesn't bow under the pressure of all the clients talking to it.
-One way to reduce this pressure is to offload read operations to read replicas.
-In GraphQL it's easy to tell if a request will perform any writes or not: if
-it's a `query` then it's read-only, if it's a `mutation` then it may perform
-writes.
+Probably the most important thing regarding scalability is making sure that
+your master database doesn't bow under the pressure of all the clients
+talking to it. It's wise to perform load testing to figure out at what point
+this will occur, and have a plan for it. One way to reduce this pressure is
+to offload read operations to read replicas (clones of your primary database)
+
+- this reduces the load on your primary database significantly, and reduces
+  the need for complex caching layers. In GraphQL it's easy to tell if a
+  request will perform any writes or not: if it's a `query` then it's
+  read-only, if it's a `mutation` then it may perform writes.
 
 Using `--read-only-connection <string>` [PRO] you may give PostGraphile a
 separate connection string to use for queries, to compliment the connection
 string passed via `--connection` which will now be used only for mutations.
 
-(If you're using middleware, then you'll want to pass a read-only pool to the
-`readReplicaPgPool`[PRO] option instead.)
+(If you're using middleware, then you should use the `readOnlyConnection`
+option instead.)
 
 > NOTE: We don't currently support the multi-host syntax for this connection
 > string, but you can use a PostgreSQL proxy such a PgPool or PgBouncer between
@@ -229,10 +240,13 @@ string passed via `--connection` which will now be used only for mutations.
 It's unlikely that you want users to request `allUsers` and receive back
 literally all of the users in the database. More likely you want users to use
 cursor-based pagination over this connection with `first` / `after`. The Pro
-Plugin introduces the `--default-pagination-cap [int]` [PRO] option which
-enables you to enforce a pagination cap on all connections. Whatever number
-you pass will be used as the pagination cap, but you can override it on a
-table-by-table basis using [smart comments](/postgraphile/smart-comments/) - in this case the `@paginationCap`[PRO] smart comment.
+Plugin introduces the `--default-pagination-cap [int]` [PRO] option (library
+option: `defaultPaginationCap`) which enables you to enforce a pagination cap
+on all connections. Whatever number you pass will be used as the pagination
+cap (allowing requests smaller or equal to this cap to go through, and
+blocking those above it), but you can override it on a table-by-table basis
+using [smart comments](/postgraphile/smart-comments/) - in this case the
+`@paginationCap`[PRO] smart comment.
 
 ```sql
 comment on table users is
@@ -249,37 +263,37 @@ validation.
 
 #### [EXPERIMENTAL] GraphQL cost limit
 
-The most powerful way of preventing DOS is to limit the cost of GraphQL queries
-that may be executed against your GraphQL server. The Pro Plugin contains a
-very early implementation of this technique, but the costs are not very
-accurate yet. You may enable a cost limit with `--graphql-cost-limit [int]`
-[PRO] and the calculated cost of any GraphQL queries will be made available on
-`meta` field in the GraphQL payload.
+The most powerful way of preventing DOS is to limit the cost of GraphQL
+queries that may be executed against your GraphQL server. The Pro Plugin
+contains a early implementation of this technique with heuristically
+estimated costs. You may enable a cost limit with `--graphql-cost-limit [int]` [PRO] and the calculated cost of any GraphQL queries will be made
+available on `meta` field in the GraphQL payload.
 
 If your GraphQL query is seen to be too expensive, here's some techniques to
 bring the calculated cost down:
 
-* If you've not specified a limit (`first`/`last`) on a connection, we assume
-  it will return 1000 results. If you're expecting fewer than this, specify the
-  maximum you'd ever expect to receive.
-* Cost is based on number of expected results (without looking at the
-  database!) so lower your limits on connections.
-* Connections multiply the cost of their children by the number of results
-  they're expected to return, so lower the limits on connections.
-* Nested fields multiply costs; so pulling a connection inside a connection
+- If you've not specified a limit (`first`/`last`) on a connection, we assume
+  it will return 1000 results. You should always specify a limit.
+- Cost is based on number of expected results (without looking at the
+  database!) so lowering your limits on connections will also lower the costs.
+- Connections multiply the cost of their children by the number of results
+  they're expected to return, so lower the limits on parent connections.
+- Nested fields multiply costs; so pulling a connection inside a connection
   inside a connection is going to be expensive - to address this, try placing
   lower `first`/`last` values on the connections or avoiding fetching nested
   data until you need to display it (split into multiple requests / only
-  request the data you need).
-* Subscriptions are automatically seen as 10x as expensive as queries - try
+  request the data you need for the current view).
+- Subscriptions are automatically seen as 10x as expensive as queries - try
   and minimise the amount of data your subscription requests.
-* Procedure connections are treated as more expensive than table connections.
-* `totalCount` on a table has a fair cost
-* `totalCount` on a procedure has a higher cost
-* Using `pageInfo` adds significant cost to connections
-* Computed columns are seen as fairly expensive - in future we may factor in
+- Procedure connections are treated as more expensive than table connections.
+- `totalCount` on a table has a high cost
+- `totalCount` on a procedure has a higher cost
+- Using `pageInfo` adds significant cost to connections
+- Computed columns are seen as fairly expensive - in future we may factor in
   PostgreSQL's `COST` parameter when figuring this out.
 
-Keep in mind this is a **very early** implementation of cost analysis, there's
-much improvement to be made. Feel free to reach out with any bad costs/queries
-so we can improve it.
+Keep in mind cost analysis is hard and the real cost of a query varies wildly
+based on what your database has been dealing with recently, what indexes are
+available, and many more factors. Our cost estimation is based on analysis of
+a large test suite, but feel free to reach out with any bad costs/queries so
+we can improve this feature.
