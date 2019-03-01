@@ -18,9 +18,9 @@ columns as non-null).
 
 ### Abstract Business Logic
 
-We can prepare certain business queries in advance and expose it as GraphQL.
-For example, say we want `Comedy` films from our `films` table,
-we can create a `view` that contains the specific film type.
+We can prepare certain queries in advance and expose the results through
+GraphQL. For example, say we want just the `Comedy` films from our `films`
+table, we can create a view that contains this specific film type.
 
 ```sql
 CREATE TABLE app_public.films (
@@ -29,27 +29,27 @@ CREATE TABLE app_public.films (
   release_year int,
   kind text
 );
-```
 
-```sql
 CREATE VIEW comedies AS
     SELECT *
     FROM app_public.films
     WHERE kind = 'Comedy';
 ```
 
-And query this `view` as it was a normal table:
+And query this view as if it were a normal table:
 
 ```graphql
-  comedies (first: 20) {
+{
+  comedies(first: 20) {
     name
     releaseYear
   }
+}
 ```
 
-### Flatten API
+### Flatten joined tables
 
-`Views` enable to flatten a nested object that is built from multiple tables.
+Views enable you to expose a simple "flattened" object built from multiple tables.
 
 ```sql
 CREATE TABLE app_public.person (
@@ -57,33 +57,37 @@ CREATE TABLE app_public.person (
 );
 
 CREATE TABLE app_public.address (
-  id serial PRIMARY KEY,
+  person_id int PRIMARY KEY REFERENCES app_public.person,
   country text,
   street text,
-  person_id int references app_public.person (id)
 );
 
 CREATE VIEW person_view AS
   SELECT person.id, address.country, address.street
   FROM app_public.person person
-  INNER JOIN app_public.address address on person.id = address.person_id;
+  INNER JOIN app_public.address
+  ON person.id = address.person_id;
 ```
 
-And now the `GraphQL` query is flatten:
+The GraphQL query using this view is flatter than the query using the underlying tables:
 
 ```graphql
-person {
-  id
-  address {
-    country
-    street
+query Before {
+  person {
+    id
+    address {
+      country
+      street
+    }
   }
 }
 
-personView {
-  id
-  country
-  street
+query After {
+  personView {
+    id
+    country
+    street
+  }
 }
 ```
 
@@ -105,17 +109,19 @@ CREATE TABLE app_public.personal_data (
   person_id references app_public.person (id)
 );
 
-CREATE VIEW personal_data_view AS
-  SELECT personal_data.*
-  FROM app_public.personal_data personal_data
-  INNER JOIN app_public.person person on person.id = current_settings('jwt.id');
+CREATE VIEW personal_data_view
+  WITH (security_barrier, check_option = 'cascaded');
+  AS
+    SELECT personal_data.*
+    FROM app_public.personal_data personal_data
+    WHERE person_id = current_user_id()
 ```
+
+(`current_user_id()` here is a function that might return something like `nullif(current_setting('jwt.claims.user_id', true), '')::int`)
 
 ### API Layer
 
-Using `views`, one can create an access layer that will remain consistent even
-while making changes to the underlying tables (simple name changes can be solved using smart comments).
-
-
-Help expanding this page would be welcome, please use the "Suggest
-improvements to this page" link above.
+Using views, one can create an access layer that will remain consistent even
+while making changes to the underlying tables - for example when splitting
+tables or combining them. Note that simple name changes can be solved using
+smart comments without the need for views.
