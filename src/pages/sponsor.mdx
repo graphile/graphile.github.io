@@ -15,10 +15,13 @@ import MarketingBullets from '$components/MarketingBullets';
 import postgresPostgraphileGraphql from '$images/postgres_postgraphile_graphql.png';
 import Testimonial from '$components/MarketingTestimonial';
 import Sponsors, {Sponsor} from '$components/MarketingSponsor';
-import missionMode from '$images/sponsors/missionmode.png';
-import stagency from '$images/sponsors/stagency.png';
+
 import chad from '$images/sponsors/chadf.png';
+import domonda from '$images/sponsors/domonda.png';
+import missionmode from '$images/sponsors/missionmode.png';
 import nodesource from '$images/sponsors/nodesource.png';
+import stagency from '$images/sponsors/stagency.png';
+
 
 <MarketingLayout blue>
 <Hero bg="white">
@@ -61,8 +64,8 @@ YOU!**
 <Sponsors level="leaders">
 
 <Sponsor name="Joe Dennis" />
-<Sponsor name="MissionMode" business avatar={missionMode} />
-<Sponsor name="DOMONDA"  business/>
+<Sponsor name="MissionMode" business avatar={missionmode} />
+<Sponsor name="DOMONDA"  business avatar={domonda}/>
 <Sponsor name="Alec Wenzowski" />
 <Sponsor name="James Allain" />
 <Sponsor name="Stagency" business avatar={stagency}/>
