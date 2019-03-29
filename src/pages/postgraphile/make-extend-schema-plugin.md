@@ -332,4 +332,30 @@ makeExtendSchemaPlugin(build => {
 Note that the `@pgField` directive here is necessary for PostGraphile to "look
 ahead" and determine what to request from the database.
 
+### Using the `@pgQuery` directive for non-root queries and better performance
+
+To extend your schema with relational data between views for example it is necessary to combine some identificators by hand, because views do not support primary and/or foreign key to detect relation automatically by postgraphile. You could use Smart Comments (https://www.graphile.org/postgraphile/smart-comments/) to achieve this approach, but you can also write your own field definition to extend your schema using the '@pgQuery' directive:
+
+```js
+const { makeExtendSchemaPlugin, gql, embed } = require('graphile-utils');
+
+module.exports = makeExtendSchemaPlugin(build => {
+  const { pgSql: sql } = build;
+  return {
+    typeDefs: gql`
+      extend type User {
+        myCustomViewConnection: UserConnection @pgQuery(
+          source: ${embed(sql.fragment`mySchema.users`)}
+          withQueryBuilder: ${embed((queryBuilder, args) => {
+            queryBuilder.where(sql.fragment`${queryBuilder.parentQueryBuilder.getTableAlias()}.view_primarykey_field = ${queryBuilder.getTableAlias()}.view_foreignkey_field`);
+          })}
+        )
+      }
+    `,
+  };
+});
+```
+Note that UserConnection is just one type of the schema as an example.
+
+
 **NOTE**: Plugins access the database with the same privileges as everything else - they are subject to RLS/RBAC/etc. If your user does not have privileges to perform the action your plugin is attempting to achieve then you may need to create a companion database function that is marked as `SECURITY DEFINER` in order to perform the action with elevated privileges; alternatively you could just use this database function directly - see [Custom Mutations](/postgraphile/custom-mutations/) for more details.
