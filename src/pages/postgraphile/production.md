@@ -127,6 +127,22 @@ separate layer; for example you could use [Cloudflare rate
 limiting](https://www.cloudflare.com/rate-limiting/) for this, or an
 Express.js middleware.
 
+One simple "dirty" solution to this issue is to place a timeout on the database operations via the `statement_timeout` postgresql conf flag.
+
+You can actually set this from right within postgraphile in the `pgSettings` object.
+
+```js
+{
+  ...
+  pgSettings: {
+    statement_timeout: '3000'
+  },
+  ...
+}
+```
+
+This will block all potentially expensive queries from running longer than 3 seconds in this case. It's not as good as cutting things off at the source before a query is ever sent but it's a good way to catch anything that may have slipped through the cracks, or just to get you up and running while you work on more robust/lower level solutions.
+
 #### Simple: Query Whitelist ("persisted queries")
 
 If you do not intend to open your API up to third parties to run arbitrary
