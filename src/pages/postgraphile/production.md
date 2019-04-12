@@ -127,6 +127,37 @@ separate layer; for example you could use [Cloudflare rate
 limiting](https://www.cloudflare.com/rate-limiting/) for this, or an
 Express.js middleware.
 
+
+#### Statement Timeout
+
+One simple solution to this issue is to place a timeout on the database operations via the [`statement_timeout` PostgreSQL setting](https://www.postgresql.org/docs/current/runtime-config-client.html#GUC-STATEMENT-TIMEOUT). This will halt any query that takes longer than the specified number of milliseconds to execute. This can still enable nefarious actors to have your database work hard for that duration, but it does prevent these malicious queries from running for an extended period, reducing the ease of a DoS (Denial of Service) attack. This solution is a good way to catch anything that may have slipped through the cracks of your other defences, or just to get you up and running while you work on more robust/lower level solutions, but when you expose your GraphQL endpoint to the world it's better to cut things off at the source before a query is ever sent to the database using one or more of the techniques detailed below.
+
+Currently you can set this on a per-transaction basis using the [`pgSettings` functionality](/postgraphile/usage-library/#pgsettings-function) in PostGraphile library mode, e.g.:
+
+```js
+app.use(postgraphile(process.env.DATABASE_URL, "public", {
+  // ...
+  pgSettings: {
+    statement_timeout: '3000'
+  },
+}));
+```
+
+You can also set this up on a per connection basis if you pass a correctly configured `pg.Pool` instance to PostGraphile directly, e.g.:
+
+```js
+const { Pool } = require('pg');
+
+const pool = new Pool();
+pool.on('connect', (client) => {
+  client.query('SET statement_timeout TO 3000')
+});
+
+// ...
+app.use(postgraphile(pool, "public", { ... }));
+// ...
+```
+
 #### Simple: Query Whitelist ("persisted queries")
 
 If you do not intend to open your API up to third parties to run arbitrary
