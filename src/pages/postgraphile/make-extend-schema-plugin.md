@@ -113,7 +113,6 @@ const express = require("express");
 const { convertUsdToAud } = require("ficticious-npm-library");
 
 const MyForeignExchangePlugin = makeExtendSchemaPlugin(build => {
-  const { pgSql: sql } = build;
   return {
     typeDefs: gql`
       extend type Product {
