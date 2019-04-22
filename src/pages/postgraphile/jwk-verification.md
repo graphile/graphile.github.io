@@ -28,7 +28,7 @@ HTTP framework and supporting Node packages authored and maintained by Auth0:
 - [`jwks-rsa`](https://github.com/auth0/node-jwks-rsa) - 
 _A library to retrieve RSA public keys from a JWKS (JSON Web Key Set) endpoint_
 
-```
+```bash
 yarn add express express-jwt jwks-rsa
 # Or:
 npm install --save express express-jwt jwks-rsa
@@ -53,7 +53,7 @@ granted by an API which we will need to verify.
 You will need two values from your Auth0 configuration: The Auth0 _tenant 
 domain name_, and the API _identifier._ 
 
-```
+```javascript{1-2,20,24-25}
 const jwt = require('express-jwt');
 const jwksRsa = require('jwks-rsa');
 
@@ -67,7 +67,7 @@ const jwksRsa = require('jwks-rsa');
 // request (`req`) as a `user` parameter.
 const checkJwt = jwt({
   // Dynamically provide a signing key
-  // based on the kid in the header and 
+  // based on the `kid` in the header and
   // the signing keys provided by the JWKS endpoint.
   secret: jwksRsa.expressJwtSecret({
     cache: true,
@@ -90,11 +90,11 @@ Remember that a JWT has [three _period-separated_ sections](https://jwt.io/intro
 and signature. On successful verification, the payload will be available for
 us to save inside the Postgraphile request via the
 [`pgSettings`](https://www.graphile.org/postgraphile/usage-library/#exposing-http-request-data-to-postgresql)
-object.
+function.
 
 Let's look at an example payload:
 
-```
+```json{8}
 {
   "iss": "https://YOUR_DOMAIN/",
   "sub": "CLIENT_ID@clients",
@@ -115,7 +115,7 @@ meaningful data is in the `scope` value.
 
 Now let's make use of the `checkJwt` middleware function:
 
-```
+```javascript{23-24,28-36}
 const express = require("express");
 const { postgraphile } = require("postgraphile");
 
@@ -157,7 +157,7 @@ app.use(
 ```
 
 Postgraphile applies everything returned by
-[pgSettings](https://www.graphile.org/postgraphile/usage-library/#pgsettings-function) to the 
+[pgSettings](https://www.graphile.org/postgraphile/usage-library/#pgsettings-function) to the
 [current session](https://www.postgresql.org/docs/current/functions-admin.html#FUNCTIONS-ADMIN-SET)
 with `set_config($key, $value, true)`. So inside Postgres we can read
 the current value of `user.permissions` by
@@ -165,22 +165,22 @@ the current value of `user.permissions` by
 
 ## Basic Error Handling
 
-By default, if there is an error in the JWT verification process, 
+By default, if there is an error in the JWT verification process,
 the `express-jwt` package will send a 401 status with an
 HTML-formatted error message as a response.
-Instead, we want to follow the pattern of Postgraphile and return errors in
-the format our consumers expect: a JSON response. 
+Instead, we want to follow the pattern of Postgraphile and return errors
+properly formatted in a [GraphQL-compliant](http://graphql.github.io/graphql-spec/June2018/#sec-Errors) JSON response.
 
 Let's create a basic Express middleware for handling the errors which
 our `checkJwt` function will throw:
 
-```
+```javascript
 const authErrors = (err, req, res, next) => {
   if (err.name === 'UnauthorizedError') {
     console.log(err); // You will still want to log the error...
     // but we don't want to send back internal operation details
     // like a stack trace to the client!
-    res.status(err.status).json({ error: err.message }); 
+    res.status(err.status).json({ errors: [{ message: err.message }] });
     res.end();
   }
 };
@@ -192,11 +192,15 @@ app.use('/graphql', authErrors);
 
 So, now, for example, if someone tries to connect to our GraphQL service
 without any token at all, we still get a 401 status, but with the
-following succinct response:
+appropriate and succinct response:
 
-```
+```json
 {
-  "error": "No authorization token was found"
+  "errors": [
+    {
+      "message": ""No authorization token was found"
+    }
+  ]
 }
 ```
 
