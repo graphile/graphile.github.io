@@ -331,4 +331,63 @@ makeExtendSchemaPlugin(build => {
 Note that the `@pgField` directive here is necessary for PostGraphile to "look
 ahead" and determine what to request from the database.
 
-**NOTE**: Plugins access the database with the same privileges as everything else - they are subject to RLS/RBAC/etc. If your user does not have privileges to perform the action your plugin is attempting to achieve then you may need to create a companion database function that is marked as `SECURITY DEFINER` in order to perform the action with elevated privileges; alternatively you could just use this database function directly - see [Custom Mutations](/postgraphile/custom-mutations/) for more details.
+### Using the `@pgQuery` directive for non-root queries and better performance
+
+**NOTE: this section applies to PostGraphile v4.4.0+**
+
+If your field is not defined on the `Query`/`Mutation` type directly (i.e. it's
+not defined at the root level) then for performance reasons you should hook into
+the "look-ahead" system when adding a custom connection/list/record, rather than
+using a resolver. You can achieve this with the `@pgQuery` directive, as shown
+below. Alternative approaches you may wish to consider are [Smart
+Comments](/postgraphile/smart-comments/) and [Computed
+Columns](/postgraphile/computed-columns/).
+
+The `@pgQuery` directive accepts the following inputs:
+
+- `source`: the source of the row(s) used in the result; can be a table name,
+  subquery, or function call (but must always return the relevant table type
+  and nothing more); currently this requires the boilerplate syntax below,
+  but this may be simplified in future
+- `withQueryBuilder(queryBuilder, args)`: this optional callback function is
+  how you customise which rows will be returned from the `source`; you may
+  add `where`, `orderBy`, `limit` and `offset` constraints. The `args`
+  argument contains the arguments that the field was passed, if any. This may
+  be useful when constructing the query constraints.
+  
+The `@pgQuery` directive may be used with connections, lists of table records,
+or individual table records. (When used with individual records you must ensure
+that at most one row is returned; you can do so with the `queryBuilder.limit`
+constraint.) You can see examples of these three use cases [in the
+tests](https://github.com/graphile/graphile-engine/blob/5211758b7a48191ffd7600f9f5ae572672ffd221/packages/graphile-utils/__tests__/ExtendSchemaPlugin-pg.test.js#L507-L720).
+
+```js
+const { makeExtendSchemaPlugin, gql, embed } = require('graphile-utils');
+
+module.exports = makeExtendSchemaPlugin(build => {
+  const { pgSql: sql } = build;
+  return {
+    typeDefs: gql`
+      extend type User {
+        pets: PetsConnection @pgQuery(
+          source: ${embed(sql.fragment`app_public.pets`)}
+          withQueryBuilder: ${embed((queryBuilder, args) => {
+            queryBuilder.where(sql.fragment`${queryBuilder.getTableAlias()}.user_id = ${queryBuilder.parentQueryBuilder.getTableAlias()}.id`);
+          })}
+        )
+      }
+    `,
+  };
+});
+```
+
+Notes:
+
+- `PetsConnection` is just one type from the schema, as an example
+- `queryBuilder.getTableAlias()` refers to the `app_public.pets` referenced in the `source` field
+- `queryBuilder.parentQueryBuilder.getTableAlias()` refers to the table/function/view/etc from which the `User` (the parent type) was retrieved
+- Regular connection arguments are added automatically thanks to the plugin system
+
+### Plugin SQL Privileges
+
+Plugins access the database with the same privileges as everything else - they are subject to RLS/RBAC/etc. If your user does not have privileges to perform the action your plugin is attempting to achieve then you may need to create a companion database function that is marked as `SECURITY DEFINER` in order to perform the action with elevated privileges; alternatively you could just use this database function directly - see [Custom Mutations](/postgraphile/custom-mutations/) for more details.
