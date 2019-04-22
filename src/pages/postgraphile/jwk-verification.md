@@ -198,7 +198,7 @@ appropriate and succinct response:
 {
   "errors": [
     {
-      "message": ""No authorization token was found"
+      "message": "No authorization token was found"
     }
   ]
 }
