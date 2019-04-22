@@ -1,184 +1,209 @@
 ---
 layout: page
 path: /postgraphile/jwk-verification/
-title: PostGraphile JWT/JWK Verification
+title: PostGraphile JWT/JWK Verification Quickstart
 ---
 
-## PostGraphile JWT/JWK Verification
+## PostGraphile JWT/JWK Verification Quickstart
 
-This guide illustrates how to intercept and verify a [JWT
-token](https://auth0.com/docs/jwt) via a [JWK (JSON Web
-Key)](https://auth0.com/docs/jwks). It focuses on Auth0, but can be adapted for
-any JWK setup. This is only sample code, use at your own risk. We disclaim all
-liability.
+This guide is an adaption of the official quickstart tutorial 
+for Node (Express) provided by 
+[Auth0](https://auth0.com/docs/quickstart/backend/nodejs/01-authorization).
+The code illustrates how to intercept and verify a 
+[JWT Access Token](https://auth0.com/docs/jwt) via a 
+[JWKS (JSON Web Key Set)](https://auth0.com/docs/jwks) using
+[Auth0](https://auth0.com/).
 
-## Dependencies
 
-The only dependency is the [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) package for verifying your JWT and decoding your JWK fetched from Auth0.
+Although this code should work, we make no claims as to its validity 
+or fit for production use. We disclaim all liability.
+
+### Dependencies
+
+This guide uses the [`express`](https://www.npmjs.com/package/express)
+HTTP framework and supporting Node packages authored and maintained by Auth0:
+
+- [`express-jwt`](https://github.com/auth0/express-jwt) - 
+    _Middleware that validates a JWT and copies its contents to `req.user`_
+- [`jwks-rsa`](https://github.com/auth0/node-jwks-rsa) - 
+_A library to retrieve RSA public keys from a JWKS (JSON Web Key Set) endpoint_
 
 ```bash
-$ yarn add jsonwebtoken
+yarn add express express-jwt jwks-rsa
 # Or:
-$ npm install --save jsonwebtoken
+npm install --save express express-jwt jwks-rsa
 ```
+
+### Prior Knowledge & Context
+
+As a developer, the three essential aspects of Auth0 are: 
+
+- [_APIs_](https://auth0.com/docs/apis) and 
+    [_Applications_](https://auth0.com/docs/applications)
+- [_JWT types_](https://auth0.com/docs/tokens) 
+    (e.g. _ID Token_ vs. _Access Token_)
+- Authentication and Authorization [_Flows_](https://auth0.com/docs/flows) 
+
+To keep it simple, in this guide we will be dealing with an 
+[Access Token](https://auth0.com/docs/tokens/overview-access-tokens) 
+granted by an API which we will need to verify.
 
 ## Getting Started
 
-When setting up your PostGraphile server, the core setting for verifying your
-JWT against a JWK is the [`pgSettings`
-function](/postgraphile/usage-library/#pgsettings-function). The `pgSettings`
-function, in our case, will be an asynchronous function that inspects the
-incoming web request, extracting and verifying the authorization header against
-Auth0.
+You will need two values from your Auth0 configuration: The Auth0 _tenant 
+domain name_, and the API _identifier._ 
 
-Let's add a simple function to `pgSettings` in order to capture the authorization header. If there is no header, we will throw an error, aborting the request.
+```javascript{1-2,20,24-25}
+const jwt = require('express-jwt');
+const jwksRsa = require('jwks-rsa');
 
-```javascript{3-11}
+// ...
+
+// Authentication middleware. When used, the
+// Access Token must exist and be verified against
+// the Auth0 JSON Web Key Set.
+// On successful verification, the payload of the
+// decrypted Access Token is appended to the
+// request (`req`) as a `user` parameter.
+const checkJwt = jwt({
+  // Dynamically provide a signing key
+  // based on the `kid` in the header and
+  // the signing keys provided by the JWKS endpoint.
+  secret: jwksRsa.expressJwtSecret({
+    cache: true,
+    rateLimit: true,
+    jwksRequestsPerMinute: 5,
+    jwksUri: `https://YOUR_DOMAIN/.well-known/jwks.json`
+  }),
+
+  // Validate the audience and the issuer.
+  audience: 'YOUR_API_IDENTIFIER',
+  issuer: `https://YOUR_DOMAIN/`,
+  algorithms: ['RS256']
+});
+```
+
+(note: if we were processing an [ID Token](https://auth0.com/docs/tokens/id-token)
+instead of an Access Token, the _audience_ would be the _Client ID_ instead)
+
+Remember that a JWT has [three _period-separated_ sections](https://jwt.io/introduction/): header, payload,
+and signature. On successful verification, the payload will be available for
+us to save inside the Postgraphile request via the
+[`pgSettings`](https://www.graphile.org/postgraphile/usage-library/#exposing-http-request-data-to-postgresql)
+function.
+
+Let's look at an example payload:
+
+```json{8}
+{
+  "iss": "https://YOUR_DOMAIN/",
+  "sub": "CLIENT_ID@clients",
+  "aud": "YOUR_API_IDENTIFIER",
+  "iat": 1555808706,
+  "exp": 1555895106,
+  "azp": "CLIENT_ID",
+  "scope": "read:schema",  // scopes a.k.a. permissions
+  "gty": "client-credentials"
+}
+```
+
+In this example payload, we can see that the only scope the API has made
+available is `read:schema`. Our user can perform no mutations, nor can they
+perform any queries, they are limited to fetching the schema.
+Not all tokens will have such simple payloads, but, in this example, the only
+meaningful data is in the `scope` value.
+
+Now let's make use of the `checkJwt` middleware function:
+
+```javascript{23-24,28-36}
+const express = require("express");
+const { postgraphile } = require("postgraphile");
+
+const jwt = require('express-jwt');
+const jwksRsa = require('jwks-rsa');
+
+// ...
+
+const checkJwt = jwt({
+  secret: jwksRsa.expressJwtSecret({
+    cache: true,
+    rateLimit: true,
+    jwksRequestsPerMinute: 5,
+    jwksUri: `https://YOUR_DOMAIN/.well-known/jwks.json`
+  }),
+  audience: 'YOUR_API_IDENTIFIER',
+  issuer: `https://YOUR_DOMAIN/`,
+  algorithms: ['RS256']
+});
+
+const app = express();
+
+// Apply checkJwt to our graphql endpoint
+app.use('/graphql', checkJwt); 
+
 app.use(
   postgraphile(process.env.DATABASE_URL, process.env.DB_SCHEMA, {
     pgSettings: req => {
-      const authHeader = req.headers.authorization;
-      if (!authHeader) {
-        throw new Error("No authorization header provided.");
+      const settings = {};
+      if (req.user) {
+        settings['user.permissions'] = req.user.scopes;
       }
-
-      /* Read on for handling the header */
-      throw new Error("Unimplemented");
+      return settings;
     },
+    // any other Postgraphile options go here
   })
 );
+
 ```
 
-## Check that the token is well formed
+Postgraphile applies everything returned by
+[pgSettings](https://www.graphile.org/postgraphile/usage-library/#pgsettings-function) to the
+[current session](https://www.postgresql.org/docs/current/functions-admin.html#FUNCTIONS-ADMIN-SET)
+with `set_config($key, $value, true)`. So inside Postgres we can read
+the current value of `user.permissions` by
+`select current_setting('user.permissions', true)::text;`.
 
-Now that we've verified a header exists, we should check that it is well formed. Visit [this tutorial](https://auth0.com/docs/api-auth/tutorials/verify-access-token) for more information on verifying a JWT.
+## Basic Error Handling
 
-To start, in case the token is malformed, we'll add a try-catch around our verification process to describe to the client where the verification process went wrong.
+By default, if there is an error in the JWT verification process,
+the `express-jwt` package will send a 401 status with an
+HTML-formatted error message as a response.
+Instead, we want to follow the pattern of Postgraphile and return errors
+properly formatted in a [GraphQL-compliant](http://graphql.github.io/graphql-spec/June2018/#sec-Errors) JSON response.
 
-```javascript{1,6,12-36}
-const jwt = require("jsonwebtoken");
-// ...
-app.use(
-  postgraphile(process.env.DATABASE_URL, process.env.DB_SCHEMA, {
-    pgSettings: req => {
-      try {
-        const authHeader = req.headers.authorization;
-        if (!authHeader) {
-          throw new Error("No authorization header provided.");
-        }
+Let's create a basic Express middleware for handling the errors which
+our `checkJwt` function will throw:
 
-        const authSplit = authHeader.split(" ");
+```javascript
+const authErrors = (err, req, res, next) => {
+  if (err.name === 'UnauthorizedError') {
+    console.log(err); // You will still want to log the error...
+    // but we don't want to send back internal operation details
+    // like a stack trace to the client!
+    res.status(err.status).json({ errors: [{ message: err.message }] });
+    res.end();
+  }
+};
 
-        if (authSplit.length !== 2) {
-          throw new Error(
-            'Malformed authentication header. "Bearer accessToken" syntax expected.'
-          );
-        } else if (authSplit[0].toLowerCase() !== "bearer") {
-          throw new Error(
-            '"Bearer" keyword missing from front of authorization header.'
-          );
-        }
-
-        const token = authSplit[1];
-        const decodedToken = jwt.decode(token, { complete: true });
-
-        if (decodedToken === null) {
-          throw new Error("Unable to decode JWT, refresh login and try again.");
-        }
-
-        /* Not finished yet, read on ... */
-        throw new Error("Unimplemented");
-      } catch (e) {
-        e.status = 401; // append a generic 401 Unauthorized header status
-        throw e;
-      }
-    },
-  })
-);
+// Apply error handling to the graphql endpoint
+app.use('/graphql', authErrors);
 ```
 
-## Verify the JWT against the JWK provided from Auth0
 
-After testing the token for malformation, we need to fetch our JWKS provided by Auth0 in order to verify the validity of the JWT.
+So, now, for example, if someone tries to connect to our GraphQL service
+without any token at all, we still get a 401 status, but with the
+appropriate and succinct response:
 
-To do this, I recommend following the [tutorial provided by Auth0](https://auth0.com/blog/navigating-rs256-and-jwks/).
-
-```javascript{31-66}
-const jwt = require("jsonwebtoken");
-// ...
-app.use(
-  postgraphile(process.env.DATABASE_URL, process.env.DB_SCHEMA, {
-    pgSettings: async req => {
-      try {
-        const authHeader = req.headers.authorization;
-        if (!authHeader) {
-          throw new Error("No authorization header provided.");
-        }
-
-        const authSplit = authHeader.split(" ");
-
-        if (authSplit.length !== 2) {
-          throw new Error(
-            'Malformed authentication header. "Bearer accessToken" syntax expected.'
-          );
-        } else if (authSplit[0].toLowerCase() !== "bearer") {
-          throw new Error(
-            '"Bearer" keyword missing from front of authorization header.'
-          );
-        }
-
-        const token = authSplit[1];
-        const decodedToken = jwt.decode(token, { complete: true });
-
-        if (decodedToken === null) {
-          throw new Error("Unable to decode JWT, refresh login and try again.");
-        }
-
-        // Follow Auth0 tutorial linked above for this function flow
-        // (particularly around `expressJwtSecret`).
-        const secretKey = await getSecretKey(
-          req,
-          decodedToken.header,
-          decodedToken.payload
-        );
-
-        // Once the matching secret key is retrieved from the Auth0 provided
-        // JWK, we can verify the token against it.
-        const jwtClaims = await jwt.verify(
-          token,
-          secretKey.publicKey,
-          {
-            audience: process.env.AUTH0_AUDIENCE,
-            issuer: `https://${process.env.AUTH0_TENANT}.auth0.com/`,
-            algorithms: ["RS256"],
-          },
-          function(err, verifiedToken) {
-            if (err) {
-              throw new Error(err);
-            }
-          }
-        );
-
-        // You can perform any final verification of the jwtClaims here and
-        // throw an error if they're invalid.
-
-        // Finally return the transaction settings to use.
-        // See: https://graphile.org/postgraphile/usage-library/#pgsettings-function
-        return {
-          /* e.g. */
-          // 'role': jwtClaims.role,
-          // 'jwt.claims.user_id': jwtClaims.user_id,
-          // ...
-        };
-      } catch (e) {
-        e.status = 401; // append a generic 401 Unauthorized header status
-        throw e;
-      }
-    },
-  })
-);
+```json
+{
+  "errors": [
+    {
+      "message": "No authorization token was found"
+    }
+  ]
+}
 ```
 
-And this brings us to the end of the guide. Please file an issue, or send a pull request if you notice any issues on this page!
+----
 
-_This article was originally written by [Travis O'Neal](https://github.com/wtravO)._
+_This article was written by [BR](http://gitlab.com/benjamin-rood)._
