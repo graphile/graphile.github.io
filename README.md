@@ -7,6 +7,10 @@ yarn install --force # Because we sometimes get issues with sharp
 yarn run develop
 ```
 
+## View in Browser
+
+You can view the website in browser at http://localhost:8000/
+
 ## Troubleshooting
 
 Gatsby sometimes goes wrong/gets confused. First port of call is to kill it,
