@@ -76,5 +76,8 @@
     "node-fetch": "^2.3.0",
     "nodemon": "1.18.9",
     "prettier": "1.16.1"
+  },
+  "optionalDependencies": {
+    "fsevents": "^1.2.7"
   }
 }
