@@ -36,6 +36,16 @@ Heroku have some instructions on making RDS available for use under Heroku
 which should also work for Now.sh or any other service:
 https://devcenter.heroku.com/articles/amazon-rds
 
+
+It is recommended that you use the `--no-ignore-rbac` (or `ignoreRBAC: false` in the 
+library). It inspects the RBAC (GRANT / REVOKE) privileges in the database and reflects
+these in your GraphQL schema. As is GraphQL best practices, this still only results in
+one GraphQL schema  (not one per user), so it takes the user account you connect to 
+PostgreSQL with (from your connection string) and walks all the roles that this user
+can become within the database, and uses the union of all these permissions. Using this
+flag is recommended, as it results in a much leaner schema that doesn't contain 
+functionality that you can't actually use. 
+
 ### Common Middleware Considerations
 
 In a production app, you typically want to add a few common enhancements, e.g.

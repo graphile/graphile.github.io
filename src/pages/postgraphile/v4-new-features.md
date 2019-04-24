@@ -22,7 +22,7 @@ guide](/postgraphile/v3-migration/).
 - Plugin system - no need to maintain a fork; mix and match additional functionality
 - Tidier schema:
   - PostgreSQL extension resources automatically omitted (disable with `--include-extension-resources`)
-  - with `--no-ignore-rbac`, automatically omit tables and columns you don't have permission to access
+  - with `--no-ignore-rbac`, automatically omit tables and columns the user account you connect to PostgreSQL with (from your connection string) doesn't have permission to access. 
   - [smart comments](/postgraphile/smart-comments/) for omitting, renaming and deprecating things easily
   - [write your own naming functions](/postgraphile/inflection/) if you don't like the built in ones!
       - `userByAuthorId` becomes just `author` with the help of `@graphile-contrib/pg-simplify-inflector`

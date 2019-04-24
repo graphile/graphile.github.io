@@ -74,6 +74,15 @@ have access to. For example if you perform `GRANT UPDATE (username, name) ON
 users TO graphql_visitor;` then the `updateUser` mutations will only accept
 `username` and `name` fields - the other columns will not be present.
 
+Note that the `--no-ignore-rbac` (or `ignoreRBAC: false` in the library) inspects the
+RBAC (GRANT / REVOKE) privileges in the database and reflects these in your GraphQL
+schema. As is GraphQL best practices, this still only results in one GraphQL schema 
+(not one per user), so it takes the user account you connect to PostgreSQL with 
+(from your connection string) and walks all the roles that this user can become 
+within the database, and uses the union of all these permissions. Using this flag is
+recommended, as it results in a much leaner schema that doesn't contain functionality
+that you can't actually use. 
+
 \* **_NOTE: We strongly [advise against](/postgraphile/requirements/) using
 column-based `SELECT` grants with PostGraphile. Instead, split your
 permission concerns into separate tables and join them with one-to-one

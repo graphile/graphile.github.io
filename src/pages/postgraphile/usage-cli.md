@@ -59,7 +59,7 @@ There are more CLI options available to customise the GraphQL server (these are 
 - `--simple-collections [omit|both|only]`  
   "omit" (default) - relay connections only, "only" - simple collections only (no Relay connections), "both" - both
 - `--no-ignore-rbac`  
-  [RECOMMENDED] set this to exclude fields, queries and mutations that the user isn't permitted to access; this will be enabled by default in v5
+  [RECOMMENDED] set this to exclude fields, queries and mutations that the user account you connect to PostgreSQL with (from your connection string)  isn't permitted to access; this will be enabled by default in v5
 - `--no-ignore-indexes`  
   [RECOMMENDED] set this to exclude filters, orderBy, and relations that would be expensive to access due to missing indexes
 - `--include-extension-resources`  
