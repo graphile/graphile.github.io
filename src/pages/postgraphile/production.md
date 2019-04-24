@@ -46,7 +46,6 @@ can become within the database, and uses the union of all these permissions. Usi
 flag is recommended, as it results in a much leaner schema that doesn't contain 
 functionality that you can't actually use. 
 
-\* **_NOTE: We strongly [advise against](/postgraphile/requirements/) using
 ### Common Middleware Considerations
 
 In a production app, you typically want to add a few common enhancements, e.g.
