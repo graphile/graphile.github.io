@@ -30,9 +30,11 @@ module.exports = makeAddInflectorsPlugin(
       return this.upperCamelCase(`${typeName}-change-set`);
     },
   },
+  /* Passing true here allows the plugin to overwrite
+   * existing inflectors.
+   */
   true
-); // Passing true here allows the plugin to overwrite
-// existing inflectors.
+);
 
 // Load this plugin with `postgraphile --append-plugins /path/to/MyInflectionPlugin.js`
 ```
