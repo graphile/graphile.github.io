@@ -51,9 +51,7 @@
     "typography-theme-fairy-gates": "^0.16.19",
     "typography-theme-funston": "^0.16.19"
   },
-  "keywords": [
-    "gatsby"
-  ],
+  "keywords": ["gatsby"],
   "license": "MIT",
   "main": "n/a",
   "scripts": {
@@ -61,7 +59,7 @@
     "clean": "rm -vRf .cache __deploy",
     "deploy": "./scripts/deploy",
     "develop": "./scripts/update && gatsby develop",
-    "format": "prettier --write 'src/**/*.js' '**/*.md'",
+    "format": "prettier --write 'src/**/*.js' 'src/**/*.md' '*.md'",
     "start": "gatsby develop",
     "test": "node link-check.js",
     "update": "./scripts/update",
