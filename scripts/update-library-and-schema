@@ -24,7 +24,7 @@ async function main() {
    */
 
   const relevantCode = code
-    .match(/^export interface PostGraphileOptions \{([\s\S]+?)^};?$/m)[1]
+    .match(/^export interface PostGraphileOptions<[\s\S]+?> extends PostGraphileCoreOptions \{([\s\S]+?)^};?$/m)[1]
     .trim()
     .split("\n")
     .map(str => str.trim());
