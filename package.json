@@ -4,7 +4,6 @@
   "version": "1.0.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
-    "@benjie/gatsby-mdx": "^0.3.6-0",
     "@graphile-contrib/pg-simplify-inflector": "4.0.0-alpha.0",
     "@mdx-js/mdx": "^1.0.15",
     "@mdx-js/runtime": "1.0.15",
@@ -52,7 +51,9 @@
     "typography-theme-fairy-gates": "^0.16.19",
     "typography-theme-funston": "^0.16.19"
   },
-  "keywords": ["gatsby"],
+  "keywords": [
+    "gatsby"
+  ],
   "license": "MIT",
   "main": "n/a",
   "scripts": {
