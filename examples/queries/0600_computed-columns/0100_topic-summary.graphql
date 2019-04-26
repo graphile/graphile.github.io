@@ -1,5 +1,5 @@
 {
-  topicById(id: 2) {
+  topic(id: 2) {
     body
     bodySummary
   }

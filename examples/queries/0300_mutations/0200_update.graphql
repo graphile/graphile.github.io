@@ -1,5 +1,5 @@
 mutation {
-  updateTopicById(input: { id: 1, patch: { title: "My (edited) title" } }) {
+  updateTopic(input: { id: 1, patch: { title: "My (edited) title" } }) {
     topic {
       nodeId
       id

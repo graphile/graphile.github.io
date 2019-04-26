@@ -772,10 +772,10 @@
     signedsource "^1.0.0"
     yargs "^9.0.0"
 
-"@graphile-contrib/pg-simplify-inflector@4.0.0-alpha.0":
-  version "4.0.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/@graphile-contrib/pg-simplify-inflector/-/pg-simplify-inflector-4.0.0-alpha.0.tgz#e3053b777a9e86051cc2be21de9e8b27ef87ceb0"
-  integrity sha512-nm4Yfoi+8u5bARX8DV8UpHu5w0QkKEDAg9/Fi84ujPYCpMHmrBCDgBjRATVXxp2WUUzajq0C2Acg8TMzYGjqwg==
+"@graphile-contrib/pg-simplify-inflector@5.0.0-beta.1":
+  version "5.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/@graphile-contrib/pg-simplify-inflector/-/pg-simplify-inflector-5.0.0-beta.1.tgz#f7e890566d33e8ee6796dab5ec75ff9bca040701"
+  integrity sha512-oE1znqxBgGl6WK7t8sO4okQEqlP+GZ7ZYT4m2EB38GGbT3YuzjHTI8TcxJtDZsLPG3kPvZvB4Uc34Kb0/NGUVQ==
 
 "@mapbox/hast-util-table-cell-style@^0.1.3":
   version "0.1.3"

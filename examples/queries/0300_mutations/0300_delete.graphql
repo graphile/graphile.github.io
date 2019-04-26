@@ -1,5 +1,5 @@
 mutation {
-  deleteTopicById(input: { id: 1 }) {
-    deletedTopicId
+  deleteTopic(input: { id: 1 }) {
+    deletedTopicNodeId
   }
 }
