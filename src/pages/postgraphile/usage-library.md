@@ -52,18 +52,22 @@ http
 
 #### API: `postgraphile(pgConfig, schemaName, options)`
 
-The `postgraphile` middleware factory function takes three arguments, all of which are optional. The below options are valid for <tt>postgraphile@<!-- LIBRARY_VERSION_BEGIN -->4.3.1<!-- LIBRARY_VERSION_END --></tt>.
+The `postgraphile` middleware factory function takes three arguments, all of which are optional. The below options are valid for <tt>postgraphile@<!-- LIBRARY_VERSION_BEGIN -->4.4.0-rc.0<!-- LIBRARY_VERSION_END --></tt>.
 
 - **`pgConfig`**: An object or string that will be passed to the [`pg`][] library and used to connect to a PostgreSQL backend, OR a pg.Pool to use.
 - **`schemaName`**: A string, or array of strings, which specifies the PostgreSQL schema(s) you to expose via PostGraphile; defaults to 'public'
 - **`options`**: An object containing other miscellaneous options. Options include: <!-- LIBRARY_DOCBLOCK_BEGIN -->
   - `watchPg`: When true, PostGraphile will update the GraphQL API whenever your database schema changes. This feature requires some changes to your database in the form of the [`postgraphile_watch`](https://github.com/graphile/graphile-engine/blob/master/packages/graphile-build-pg/res/watch-fixtures.sql) schema; PostGraphile will try to add this itself but requires DB superuser privileges to do so. If PostGraphile can't install it, you can do so manually. PostGraphile will not drop the schema when it exits, to remove it you can execute: `DROP SCHEMA postgraphile_watch CASCADE;`
+  - `ownerConnectionString`: Connection string to use to connect to the database as a privileged user (e.g. for setting up watch fixtures, logical decoding, etc).
+  - `subscriptions`: [EXPERIMENTAL] Enable GraphQL websocket transport support for subscriptions (you still need a subscriptions plugin currently)
+  - `live`: [EXPERIMENTAL] Enables live-query support via GraphQL subscriptions (sends updated payload any time nested collections/records change)
+  - `websocketMiddlewares`: [EXPERIMENTAL] If you're using websockets (subscriptions || live) then you may want to authenticate your users using sessions or similar. You can pass some simple middlewares here that will be executed against the websocket connection in order to perform authentication. We current only support express (not Koa) middlewares here.
   - `pgDefaultRole`: The default Postgres role to use. If no role was provided in a provided JWT token, this role will be used.
   - `dynamicJson`: By default, JSON and JSONB fields are presented as strings (JSON encoded) from the GraphQL schema. Setting this to `true` (recommended) enables raw JSON input and output, saving the need to parse / stringify JSON manually.
-  - `setofFunctionsContainNulls`: If none of your `RETURNS SETOF compound_type` functions mix NULLs with the results then you may set this true to reduce the nullables in the GraphQL schema.
+  - `setofFunctionsContainNulls`: If none of your `RETURNS SETOF compound_type` functions mix NULLs with the results then you may set this false to reduce the nullables in the GraphQL schema.
   - `classicIds`: Enables classic ids for Relay support. Instead of using the field name `nodeId` for globally unique ids, PostGraphile will instead use the field name `id` for its globally unique ids. This means that table `id` columns will also get renamed to `rowId`.
   - `disableDefaultMutations`: Setting this to `true` will prevent the creation of the default mutation types & fields. Database mutation will only be possible through Postgres functions.
-  - `ignoreRBAC`: Set false (recommended) to exclude fields, queries and mutations that the user account you connect to PostgreSQL with (from your connection string)  isn't permitted to access from the generated GraphQL schema; set this option true to skip these checks and create GraphQL fields and types for everything. The default is `true`, in v5 the default will change to `false`.
+  - `ignoreRBAC`: Set false (recommended) to exclude fields, queries and mutations that the user isn't permitted to access from the generated GraphQL schema; set this option true to skip these checks and create GraphQL fields and types for everything. The default is `true`, in v5 the default will change to `false`.
   - `ignoreIndexes`: Set false (recommended) to exclude filters, orderBy, and relations that would be expensive to access due to missing indexes. Changing this from true to false is a breaking change, but false to true is not, so we recommend you start with it set to `false`. The default is `true`, in v5 the default may change to `false`.
   - `includeExtensionResources`: By default, tables and functions that come from extensions are excluded from the generated GraphQL schema as general applications don't need them to be exposed to the end user. You can use this flag to include them in the generated schema (not recommended).
   - `showErrorStack`: Enables adding a `stack` field to the error response. Can be either the boolean `true` (which results in a single stack string) or the string `json` (which causes the stack to become an array with elements for each line of the stack). Recommended in development, not recommended in production.
@@ -77,11 +81,12 @@ The `postgraphile` middleware factory function takes three arguments, all of whi
   - `writeCache`: A file path string. Writes computed values to local cache file so startup can be faster (do this during the build phase).
   - `exportJsonSchemaPath`: Enables saving the detected schema, in JSON format, to the given location. The directories must exist already, if the file exists it will be overwritten.
   - `exportGqlSchemaPath`: Enables saving the detected schema, in GraphQL schema format, to the given location. The directories must exist already, if the file exists it will be overwritten.
+  - `sortExport`: If true, lexicographically (alphabetically) sort exported schema for more stable diffing.
   - `graphqlRoute`: The endpoint the GraphQL executer will listen on. Defaults to `/graphql`.
   - `graphiqlRoute`: The endpoint the GraphiQL query interface will listen on (**NOTE:** GraphiQL will not be enabled unless the `graphiql` option is set to `true`). Defaults to `/graphiql`.
   - `externalUrlBase`: If you are using watch mode, or have enabled GraphiQL, and you either mount PostGraphile under a path, or use PostGraphile behind some kind of proxy that puts PostGraphile under a subpath (or both!) then you must specify this setting so that PostGraphile can figure out it's external URL. (e.g. if you do `app.use('/path/to', postgraphile(...))`), which is not officially supported, then you should pass `externalUrlBase: '/path/to'`.) This setting should never end in a slash (`/`). To specify that the external URL is the expected one, either omit this setting or set it to the empty string `''`.
   - `graphiql`: Set this to `true` to enable the GraphiQL interface.
-  - `enhanceGraphiql`: Set this to `true` to add some enhancements to GraphiQL; intended for development usage only.
+  - `enhanceGraphiql`: Set this to `true` to add some enhancements to GraphiQL; intended for development usage only (automatically enables with `subscriptions` and `live`).
   - `enableCors`: Enables some generous CORS settings for the GraphQL endpoint. There are some costs associated when enabling this, if at all possible try to put your API behind a reverse proxy.
   - `bodySizeLimit`: Set the maximum size of HTTP request bodies that can be parsed (default 100kB). The size can be given as a human-readable string, such as '200kB' or '5MB' (case insensitive).
   - `enableQueryBatching`: [Experimental] Enable the middleware to process multiple GraphQL queries in one request.

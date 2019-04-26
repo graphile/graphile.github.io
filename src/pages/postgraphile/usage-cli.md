@@ -26,7 +26,7 @@ PostGraphile also reads options from a `.postgraphilerc.js` file from the curren
 
 ### CLI options
 
-There are more CLI options available to customise the GraphQL server (these are from <tt>postgraphile@<!-- CLI_VERSION_BEGIN -->4.3.1<!-- CLI_VERSION_END --></tt>):
+There are more CLI options available to customise the GraphQL server (these are from <tt>postgraphile@<!-- CLI_VERSION_BEGIN -->4.4.0-rc.0<!-- CLI_VERSION_END --></tt>):
 
 <!-- CLI_DOCBLOCK_BEGIN -->
 
@@ -36,8 +36,14 @@ There are more CLI options available to customise the GraphQL server (these are 
   a list of PostGraphile server plugins (not Graphile Engine schema plugins) to load; if present, must be the _first_ option
 - `-c`, `--connection <string>`  
   the PostgreSQL database name or connection string. If omitted, inferred from environmental variables (see https://www.postgresql.org/docs/current/static/libpq-envars.html). Examples: 'db', 'postgres:///db', 'postgres://user:password@domain:port/db?ssl=1'
+- `-C`, `--owner-connection <string>`  
+  as `--connection`, but for a privileged user (e.g. for setting up watch fixtures, logical decoding, etc); defaults to the value from `--connection`
 - `-s`, `--schema <string>`  
   a Postgres schema to be introspected. Use commas to define multiple schemas
+- `-S`, `--subscriptions`  
+  [EXPERIMENTAL] Enable GraphQL websocket transport support for subscriptions (you still need a subscriptions plugin currently)
+- `-L`, `--live`  
+  [EXPERIMENTAL] Enables live-query support via GraphQL subscriptions (sends updated payload any time nested collections/records change). Implies --subscriptions
 - `-w`, `--watch`  
   automatically updates your GraphQL schema when your database schema changes (NOTE: requires DB superuser to install `postgraphile_watch` schema)
 - `-n`, `--host <string>`  
@@ -59,7 +65,7 @@ There are more CLI options available to customise the GraphQL server (these are 
 - `--simple-collections [omit|both|only]`  
   "omit" (default) - relay connections only, "only" - simple collections only (no Relay connections), "both" - both
 - `--no-ignore-rbac`  
-  [RECOMMENDED] set this to exclude fields, queries and mutations that the user account you connect to PostgreSQL with (from your connection string)  isn't permitted to access; this will be enabled by default in v5
+  [RECOMMENDED] set this to exclude fields, queries and mutations that the user isn't permitted to access; this will be enabled by default in v5
 - `--no-ignore-indexes`  
   [RECOMMENDED] set this to exclude filters, orderBy, and relations that would be expensive to access due to missing indexes
 - `--include-extension-resources`  
@@ -82,6 +88,8 @@ There are more CLI options available to customise the GraphQL server (these are 
   enables exporting the detected schema, in JSON format, to the given location. The directories must exist already, if the file exists it will be overwritten.
 - `--export-schema-graphql <path>`  
   enables exporting the detected schema, in GraphQL schema format, to the given location. The directories must exist already, if the file exists it will be overwritten.
+- `--sort-export`  
+  lexicographically (alphabetically) sort exported schema for more stable diffing.
 - `-X`, `--no-server`  
   [experimental] for when you just want to use --write-cache or --export-schema-\* and not actually run a server (e.g. CI)
 - `-q`, `--graphql <path>`  
@@ -89,7 +97,7 @@ There are more CLI options available to customise the GraphQL server (these are 
 - `-i`, `--graphiql <path>`  
   the route to mount the GraphiQL interface on. defaults to `/graphiql`
 - `--enhance-graphiql`  
-  [DEVELOPMENT] opt in to additional GraphiQL functionality (this may change over time - only intended for use in development)
+  [DEVELOPMENT] opt in to additional GraphiQL functionality (this may change over time - only intended for use in development; automatically enables with `subscriptions` and `live`)
 - `-b`, `--disable-graphiql`  
   disables the GraphiQL interface. overrides the GraphiQL route option
 - `-o`, `--cors`  
