@@ -61,8 +61,8 @@ async function main() {
 
   const bulletText = markdownBullets.join("\n");
 
-  const MARKDOWN_FILE = `${__dirname}/../src/pages/postgraphile/usage-cli.md`;
-  const inputMarkdown = readFileSync(MARKDOWN_FILE, "utf8");
+  const filepath = `${__dirname}/../src/pages/postgraphile/usage-cli.md`;
+  const inputMarkdown = readFileSync(filepath, "utf8");
 
   const outputMarkdown = inputMarkdown
     .replace(
@@ -74,10 +74,12 @@ async function main() {
       (_, m1, m2) => `${m1}${version}${m2}`
     );
 
+  const prettierOptions = await prettier.resolveConfig(filepath);
   writeFileSync(
-    MARKDOWN_FILE,
+    filepath,
     prettier.format(outputMarkdown, {
-      filepath: MARKDOWN_FILE,
+      ...prettierOptions,
+      filepath,
     })
   );
 }
