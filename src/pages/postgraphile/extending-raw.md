@@ -190,9 +190,11 @@ module.exports = function CreateLinkWrapPlugin(builder) {
           // Perform some validation (or any other action you want to do before
           // calling the old resolver)
           const RESOLVE_ARGS_INDEX = 1;
-          const { input: { link: { title } } } = resolveParams[
-            RESOLVE_ARGS_INDEX
-          ];
+          const {
+            input: {
+              link: { title },
+            },
+          } = resolveParams[RESOLVE_ARGS_INDEX];
           if (title.length < 3) {
             throw new Error("Title is too short!");
           }

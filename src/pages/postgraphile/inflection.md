@@ -12,9 +12,9 @@ in PostgreSQL are named in the generated GraphQL schema.
 The default inflections in PostGraphile attempts to map things to natural
 names in GraphQL whilst attempting to avoid naming conflicts. For example:
 
-* Table names are singularised and changed to UpperCamelCase: `pending_users` → `PendingUser`
-* Column names are changed to camelCase: `created_at` → `createdAt`
-* Relations reference the target type and the referencing columns: `postsByAuthorId` (see "advice" below about making this shorter!)
+- Table names are singularised and changed to UpperCamelCase: `pending_users` → `PendingUser`
+- Column names are changed to camelCase: `created_at` → `createdAt`
+- Relations reference the target type and the referencing columns: `postsByAuthorId` (see "advice" below about making this shorter!)
 
 ### Overriding Inflection - One-off
 
@@ -33,11 +33,14 @@ is documented in the [`makeAddInflectorsPlugin` article](/postgraphile/make-add-
 An example plugin looks something like this:
 
 ```js{2-4}
-module.exports = makeAddInflectorsPlugin({
-  patchType(typeName: string) {
-    return this.upperCamelCase(`${typeName}-change-set`);
+module.exports = makeAddInflectorsPlugin(
+  {
+    patchType(typeName: string) {
+      return this.upperCamelCase(`${typeName}-change-set`);
+    },
   },
-}, true);
+  true
+);
 ```
 
 ### Advice

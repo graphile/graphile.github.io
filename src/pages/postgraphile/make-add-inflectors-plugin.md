@@ -24,12 +24,15 @@ you could make a plugin such as this one:
 // MyInflectionPlugin.js
 const { makeAddInflectorsPlugin } = require("graphile-utils");
 
-module.exports = makeAddInflectorsPlugin({
-  patchType(typeName: string) {
-    return this.upperCamelCase(`${typeName}-change-set`);
+module.exports = makeAddInflectorsPlugin(
+  {
+    patchType(typeName: string) {
+      return this.upperCamelCase(`${typeName}-change-set`);
+    },
   },
-}, true); // Passing true here allows the plugin to overwrite
-          // existing inflectors.
+  true
+); // Passing true here allows the plugin to overwrite
+// existing inflectors.
 
 // Load this plugin with `postgraphile --append-plugins /path/to/MyInflectionPlugin.js`
 ```

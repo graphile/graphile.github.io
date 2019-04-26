@@ -36,15 +36,14 @@ Heroku have some instructions on making RDS available for use under Heroku
 which should also work for Now.sh or any other service:
 https://devcenter.heroku.com/articles/amazon-rds
 
-
-It is recommended that you use the `--no-ignore-rbac` (or `ignoreRBAC: false` in the 
+It is recommended that you use the `--no-ignore-rbac` (or `ignoreRBAC: false` in the
 library). It inspects the RBAC (GRANT / REVOKE) privileges in the database and reflects
 these in your GraphQL schema. As is GraphQL best practices, this still only results in
-one GraphQL schema  (not one per user), so it takes the user account you connect to 
+one GraphQL schema (not one per user), so it takes the user account you connect to
 PostgreSQL with (from your connection string) and walks all the roles that this user
 can become within the database, and uses the union of all these permissions. Using this
-flag is recommended, as it results in a much leaner schema that doesn't contain 
-functionality that you can't actually use. 
+flag is recommended, as it results in a much leaner schema that doesn't contain
+functionality that you can't actually use.
 
 ### Common Middleware Considerations
 
@@ -137,7 +136,6 @@ separate layer; for example you could use [Cloudflare rate
 limiting](https://www.cloudflare.com/rate-limiting/) for this, or an
 Express.js middleware.
 
-
 #### Statement Timeout
 
 One simple solution to this issue is to place a timeout on the database operations via the [`statement_timeout` PostgreSQL setting](https://www.postgresql.org/docs/current/runtime-config-client.html#GUC-STATEMENT-TIMEOUT). This will halt any query that takes longer than the specified number of milliseconds to execute. This can still enable nefarious actors to have your database work hard for that duration, but it does prevent these malicious queries from running for an extended period, reducing the ease of a DoS (Denial of Service) attack. This solution is a good way to catch anything that may have slipped through the cracks of your other defences, or just to get you up and running while you work on more robust/lower level solutions, but when you expose your GraphQL endpoint to the world it's better to cut things off at the source before a query is ever sent to the database using one or more of the techniques detailed below.
@@ -145,12 +143,14 @@ One simple solution to this issue is to place a timeout on the database operatio
 Currently you can set this on a per-transaction basis using the [`pgSettings` functionality](/postgraphile/usage-library/#pgsettings-function) in PostGraphile library mode, e.g.:
 
 ```js
-app.use(postgraphile(process.env.DATABASE_URL, "public", {
-  // ...
-  pgSettings: {
-    statement_timeout: '3000'
-  },
-}));
+app.use(
+  postgraphile(process.env.DATABASE_URL, "public", {
+    // ...
+    pgSettings: {
+      statement_timeout: "3000",
+    },
+  })
+);
 ```
 
 You can also set this up on a per connection basis if you pass a correctly configured `pg.Pool` instance to PostGraphile directly, e.g.:

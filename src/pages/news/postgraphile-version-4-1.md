@@ -10,7 +10,7 @@ _Announced 2018-12-06_
 
 ### The original GraphQL API for PostgreSQL: now with improved Lambda support
 
-Building upon the huge performance gains found in Version 4, Benjie Gillam is pleased to announce the release of Version 4.1 of PostGraphile, now with a huge improvement to startup performance in serverless environments. This update also brings a large number of enhancements including much broader PostgreSQL function support, an enhanced GraphiQL interface, and a lot more helpers for writing plugins. 
+Building upon the huge performance gains found in Version 4, Benjie Gillam is pleased to announce the release of Version 4.1 of PostGraphile, now with a huge improvement to startup performance in serverless environments. This update also brings a large number of enhancements including much broader PostgreSQL function support, an enhanced GraphiQL interface, and a lot more helpers for writing plugins.
 
 [See the entire release notes on GitHub](https://github.com/graphile/postgraphile/releases/tag/v4.1.0).
 
@@ -18,9 +18,9 @@ Building upon the huge performance gains found in Version 4, Benjie Gillam is pl
 
 Thanks to funding from [Connecting Good](https://cogo.co/), PostGraphile Version 4.1 enhances startup performance for webpack and serverless/Amazon Lambda users:
 
-* Bundle size is around 10 times smaller
-* Unzip time is up to 140 times faster
-* Cold start time is now under half a second
+- Bundle size is around 10 times smaller
+- Unzip time is up to 140 times faster
+- Cold start time is now under half a second
 
 This has been achieved through targeted work optimising PostGraphile’s "webpackability" - how well it could be processed by the popular webpack tool. Previously, many features of PostGraphile could not be included in webpack's output, resulting in >4000 files to be zipped up and sent to Lambda. Now a PostGraphile application can be reduced to just 2 files, leading to a smaller zip file and a faster startup time.
 

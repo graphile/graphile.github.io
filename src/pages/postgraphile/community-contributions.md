@@ -12,6 +12,6 @@ One of the common ways of contributing is to write a plugin, see [Community Plug
 
 Community members also help each other on our [Discord chat](http://discord.gg/graphile) or through example code/projects/tutorials/blog posts. Here are links to some of these (use the "Suggest improvements to this page" link above to suggest more!):
 
-  * [Multi roles JWT token example](https://github.com/dijam/graphile-jwt-example)
+- [Multi roles JWT token example](https://github.com/dijam/graphile-jwt-example)
 
 And of course, we couldn't keep progressing this project like we do if it wasn't for the financial support of many [community members](https://github.com/graphile/postgraphile/blob/master/SPONSORS.md).

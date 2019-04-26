@@ -140,9 +140,9 @@ for the `fields` property of every `GraphQLObjectType` that is constructed.
 
 The callback to this [hook](/graphile-build/hooks/) is passed the three standard options:
 
-* input object, `fields`, which is basically a [`GraphQLFieldConfigMap` from graphql-js](http://graphql.org/graphql-js/type/#graphqlobjecttype).
-* [`Build` object](/graphile-build/build-object/) (from which we're using `extend` and `graphql.GraphQLInt`
-* [`Context` object](/graphile-build/context-object/) which it is ignoring; but if we wanted to filter which objects get the `random` field added this would be what we'd use
+- input object, `fields`, which is basically a [`GraphQLFieldConfigMap` from graphql-js](http://graphql.org/graphql-js/type/#graphqlobjecttype).
+- [`Build` object](/graphile-build/build-object/) (from which we're using `extend` and `graphql.GraphQLInt`
+- [`Context` object](/graphile-build/context-object/) which it is ignoring; but if we wanted to filter which objects get the `random` field added this would be what we'd use
 
 Finally we're returning a derivative of the `fields` that were input by adding
 an additonal property `field` which is a standard GraphQL field config
@@ -153,8 +153,8 @@ documentation](http://graphql.org/graphql-js/type/#graphqlobjecttype).
 
 Plugins are called with just two arguments:
 
-* `builder` - the instance of [`SchemaBuilder`](/graphile-build/graphile-build/) the plugin is being loaded against
-* `options` - [the options](/graphile-build/plugin-options/) that were passed to `buildSchema(plugins, options)` (or `getBuilder(plugins, options)`)
+- `builder` - the instance of [`SchemaBuilder`](/graphile-build/graphile-build/) the plugin is being loaded against
+- `options` - [the options](/graphile-build/plugin-options/) that were passed to `buildSchema(plugins, options)` (or `getBuilder(plugins, options)`)
 
 ### Plugin actions
 
@@ -164,5 +164,5 @@ object (its first argument). For a list of the functions and what they do, see
 
 The most common actions are:
 
-* Register a hook: `builder.hook(hookName, hookFunction)`; see [Hooks](/graphile-build/hooks/)
-* Add watch-mode event listeners: `builder.registerWatcher(watcher, unwatcher)`; see [SchemaBuilder](/graphile-build/schema-builder/)
+- Register a hook: `builder.hook(hookName, hookFunction)`; see [Hooks](/graphile-build/hooks/)
+- Add watch-mode event listeners: `builder.registerWatcher(watcher, unwatcher)`; see [SchemaBuilder](/graphile-build/schema-builder/)

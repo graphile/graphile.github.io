@@ -83,9 +83,9 @@ return a null that would cascade and cause the field itself to be null.
 In PostGraphile, two of our `Query` fields are not nullable because they adhere
 to this check:
 
-* `nodeId` returns a set value (the string 'query') so it can never
+- `nodeId` returns a set value (the string 'query') so it can never
   error
-* `query` returns the `Query` object again (it's a Relay 1 hack) and so it has
+- `query` returns the `Query` object again (it's a Relay 1 hack) and so it has
   all the same guarantees as the Query object
 
 Everything else is nullable, because **errors happen** and we don't want them

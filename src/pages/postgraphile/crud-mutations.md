@@ -18,23 +18,23 @@ Using the `users` table from the [parent article](/postgraphile/tables/),
 depending on the PostGraphile settings you use (and the permissions you've
 granted), you might get the following mutations:
 
-* createUser - Creates a single `User`. [See example](/postgraphile/examples/#Mutations__Create).
-* updateUser - Updates a single `User` using its globally unique id and a patch.
-* updateUserById - Updates a single `User` using a unique key and a patch. [See example](/postgraphile/examples/#Mutations__Update).
-* updateUserByUsername - Updates a single `User` using a unique key and a patch.
-* deleteUser - Deletes a single `User` using its globally unique id.
-* deleteUserById - Deletes a single `User` using a unique key. [See example](/postgraphile/examples/#Mutations__Delete).
-* deleteUserByUsername - Deletes a single `User` using a unique key.
+- createUser - Creates a single `User`. [See example](/postgraphile/examples/#Mutations__Create).
+- updateUser - Updates a single `User` using its globally unique id and a patch.
+- updateUserById - Updates a single `User` using a unique key and a patch. [See example](/postgraphile/examples/#Mutations__Update).
+- updateUserByUsername - Updates a single `User` using a unique key and a patch.
+- deleteUser - Deletes a single `User` using its globally unique id.
+- deleteUserById - Deletes a single `User` using a unique key. [See example](/postgraphile/examples/#Mutations__Delete).
+- deleteUserByUsername - Deletes a single `User` using a unique key.
 
 **The `update` and `delete` mutations are created only if the table contains a
 `primary key` column.**
 
 You also get the following query fields ("Read"):
 
-* user - Returns a single `User` using its globally unique `ID`.
-* userById - Reads a single `User` using its globally unique `ID`.
-* userByUsername - Reads a single `User` using its unique `username`.
-* allUsers - Returns a [connection](/postgraphile/connections/) enabling
+- user - Returns a single `User` using its globally unique `ID`.
+- userById - Reads a single `User` using its globally unique `ID`.
+- userByUsername - Reads a single `User` using its unique `username`.
+- allUsers - Returns a [connection](/postgraphile/connections/) enabling
   pagination through a set of (visible) `User`.
 
 ### Examples
@@ -83,12 +83,12 @@ First of all, check for errors being output from your PostGraphile server. If
 there are no errors, here's some reasons that mutations might not show up in
 the generated schema:
 
-* `--disable-default-mutations` (or `-M`) specified (or library equivalent)
-* `@omit create,update,delete` smart comments on the tables
-* Insufficient permissions on the tables and `--no-ignore-rbac` specified
-* Tables not in an exposed schema
-* Views instead of tables
-* Missing primary keys (though 'create' mutations will still be added in this case)
+- `--disable-default-mutations` (or `-M`) specified (or library equivalent)
+- `@omit create,update,delete` smart comments on the tables
+- Insufficient permissions on the tables and `--no-ignore-rbac` specified
+- Tables not in an exposed schema
+- Views instead of tables
+- Missing primary keys (though 'create' mutations will still be added in this case)
 
 Don't forget to check any associated `.postgraphilerc` for these settings too!
 

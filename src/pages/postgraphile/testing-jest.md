@@ -85,7 +85,9 @@ exports.createUsers = async function createUsers(client, count) {
   }
   const userLetter = "abcdefghijklmnopqrstuvwxyz"[userCreationCounter];
   for (let i = 0; i < count; i++) {
-    let { rows: [user] } = await client.query(
+    let {
+      rows: [user],
+    } = await client.query(
       "SELECT * FROM app_private.register_user_by_email($1)",
       [`${userLetter}${i || ""}@b.c`]
     );
@@ -109,7 +111,9 @@ test("can delete self", () =>
     const [user] = await createUsers(pgClient, 1);
 
     await becomeUser(pgClient, user);
-    const { rows: [deletedUser] } = await pgClient.query(
+    const {
+      rows: [deletedUser],
+    } = await pgClient.query(
       "delete from app_public.users where id = $1 returning *",
       [user.id]
     );
@@ -133,7 +137,7 @@ const app = express();
 
 function postgraphileOptions() {
   return {
-    dynamicJson: true
+    dynamicJson: true,
   };
 }
 exports.postgraphileOptions = postgraphileOptions;
@@ -284,10 +288,9 @@ exports.runGraphQLQuery = async function runGraphQLQuery(
 
       const replacementPgClient = await rootPgPool.connect();
       await replacementPgClient.query("begin");
-      await replacementPgClient.query(
-        `select set_config('role', $1, true)`,
-        [POSTGRAPHILE_AUTHENTICATOR_ROLE]
-      );
+      await replacementPgClient.query(`select set_config('role', $1, true)`, [
+        POSTGRAPHILE_AUTHENTICATOR_ROLE,
+      ]);
 
       const localSettings = new Map();
 

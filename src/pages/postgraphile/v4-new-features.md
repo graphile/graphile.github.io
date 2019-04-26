@@ -22,14 +22,14 @@ guide](/postgraphile/v3-migration/).
 - Plugin system - no need to maintain a fork; mix and match additional functionality
 - Tidier schema:
   - PostgreSQL extension resources automatically omitted (disable with `--include-extension-resources`)
-  - with `--no-ignore-rbac`, automatically omit tables and columns the user account you connect to PostgreSQL with (from your connection string) doesn't have permission to access. 
+  - with `--no-ignore-rbac`, automatically omit tables and columns the user account you connect to PostgreSQL with (from your connection string) doesn't have permission to access.
   - [smart comments](/postgraphile/smart-comments/) for omitting, renaming and deprecating things easily
   - [write your own naming functions](/postgraphile/inflection/) if you don't like the built in ones!
-      - `userByAuthorId` becomes just `author` with the help of `@graphile-contrib/pg-simplify-inflector`
+    - `userByAuthorId` becomes just `author` with the help of `@graphile-contrib/pg-simplify-inflector`
 - One-to-one relationships detected correctly (connection interface still present but deprecated)
 - Simple collections: option to avoid `edges` / `nodes` should you so desire
 - GraphQL query batching
-- `orderBy` more than one column 
+- `orderBy` more than one column
 - GraphiQL improvements around watch mode
 - Introspection cache (`--read-cache` / `--write-cache`)
 - Better errors - with details on why it's occurred and often hints on how to fix!
@@ -71,9 +71,9 @@ the posts have received. It uses a computed column for the user `fullName`s,
 but other than that it's just regular relations. Here's the results of v4 vs
 v3 for this query:
 
-* at concurrency = 1: 12x more requests/second, 90% reduction in RAM usage, and less than 1/10th the latency
-* at concurrency = 10: 17x more requests/second, 92% reduction in RAM usage, and nearly 1/20th the latency
-* at concurrency = 100: 55x more requests/second, 91% reduction in RAM usage, and around 1/40th the latency
+- at concurrency = 1: 12x more requests/second, 90% reduction in RAM usage, and less than 1/10th the latency
+- at concurrency = 10: 17x more requests/second, 92% reduction in RAM usage, and nearly 1/20th the latency
+- at concurrency = 100: 55x more requests/second, 91% reduction in RAM usage, and around 1/40th the latency
 
 Simpler queries still reveal good performance improvements. All in all,
 PostGraphile v4 is capable of scaling much better than v3. There's still
@@ -105,12 +105,9 @@ your schema by default only includes the functionality you've added yourself.
 
 We highly recommend you enable the new `--no-ignore-rbac` option which tells
 PostGraphile to omit anything from your GraphQL schema that you do not have
-access to. This means that if you only do `GRANT UPDATE (name, bio) ON users
-TO graphql_visitor;` then the update mutation will only expose the `name` and
+access to. This means that if you only do `GRANT UPDATE (name, bio) ON users TO graphql_visitor;` then the update mutation will only expose the `name` and
 `bio` fields. No more useless GraphQL fields that throw errors when you
 attempt to use them! This option will probably be enabled by default in v5.
-
-
 
 ### Omitting things
 
@@ -214,7 +211,7 @@ For Apollo, you can use the
 link - something like:
 
 ```js
-import { ApolloClient } from 'apollo-client';
+import { ApolloClient } from "apollo-client";
 import { BatchHttpLink } from "apollo-link-batch-http";
 
 const link = new BatchHttpLink({ uri: "/graphql" });
@@ -239,12 +236,12 @@ People have been running PostGraphile on AWS Lambda and similar environments, an
 
 ### Better support, better errors
 
-* Many previously invalid enums are now made valid
-* When the introspection results in an empty name, an error is thrown explaining why
-* When schema building results in a naming clash, an error it thrown explaining where the two names originated, and even hinting how to fix the issue
-* When you specify `--schema` and that schema doesn't exist, you will be warned
-* Tables that end in `_input` or `_patch` are renamed to FooInputRecord or similar to avoid clashes with mutation types on other tables
-* Support `point`, `hstore` and `inet` types
+- Many previously invalid enums are now made valid
+- When the introspection results in an empty name, an error is thrown explaining why
+- When schema building results in a naming clash, an error it thrown explaining where the two names originated, and even hinting how to fix the issue
+- When you specify `--schema` and that schema doesn't exist, you will be warned
+- Tables that end in `_input` or `_patch` are renamed to FooInputRecord or similar to avoid clashes with mutation types on other tables
+- Support `point`, `hstore` and `inet` types
 
 ### Column-level SELECT grants may now work
 

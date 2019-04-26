@@ -6,23 +6,22 @@ title: Security
 
 ## Security
 
-
 ### Example
 
 ```js{21,28-29,35-37,42}
-const { createPostGraphileSchema } = require('postgraphile');
-const pg = require('pg');
+const { createPostGraphileSchema } = require("postgraphile");
+const pg = require("pg");
 
 const pgPool = new pg.Pool(process.env.DATABASE_URL);
 
 async function runQuery(query, variables) {
   const schema = await createPostGraphileSchema(
     process.env.DATABASE_URL,
-    ['users_schema', 'posts_schema'],
+    ["users_schema", "posts_schema"],
     {
       dynamicJson: true,
       jwtSecret: process.env.JWT_SECRET,
-      jwtPgTypeIdentifier: 'users_schema.jwt_type',
+      jwtPgTypeIdentifier: "users_schema.jwt_type",
     }
   );
 
@@ -46,7 +45,7 @@ async function runQuery(query, variables) {
       null,
       /* CONTEXT > */ {
         pgClient: pgClient,
-      }, /* < CONTEXT */
+      } /* < CONTEXT */,
       variables
     );
   } finally {
@@ -60,13 +59,15 @@ async function runQuery(query, variables) {
 
 runQuery(
   "query MyQuery { allPosts { nodes { id, title, author: userByAuthorId { username } } } }"
-).then(result => {
-  console.dir(result);
-  pgPool.release();
-}).catch(e => {
-  console.error(e);
-  process.exit(1);
-});
+)
+  .then(result => {
+    console.dir(result);
+    pgPool.release();
+  })
+  .catch(e => {
+    console.error(e);
+    process.exit(1);
+  });
 ```
 
 <!-- TODO: ensure this example works. -->

@@ -10,10 +10,10 @@ This quick start guide will walk you through spinning up your first PostGraphile
 
 ### Table of Contents
 
-* [Install Node](#install-node)
-* [Install PostgreSQL](#install-postgresql)
-* [Create a Database](#create-a-database)
-* [Install PostGraphile](#install-postgraphile)
+- [Install Node](#install-node)
+- [Install PostgreSQL](#install-postgresql)
+- [Create a Database](#create-a-database)
+- [Install PostGraphile](#install-postgraphile)
 
 ### Install Node
 

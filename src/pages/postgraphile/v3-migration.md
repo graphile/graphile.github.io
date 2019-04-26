@@ -18,16 +18,16 @@ switch or configuration parameter - if these are a problem for you then please
 get in touch and we'll discuss how one might go about fixing them (please read
 the below first though!)
 
-* Per-function `returns setof <table>` connection names have been removed in
+- Per-function `returns setof <table>` connection names have been removed in
   favour of a shared connection with the tables themselves - only affects you
   if you have referenced the type name in queries/fragments
-* What's nullable and what isn't has changed slightly - shouldn't cause an
+- What's nullable and what isn't has changed slightly - shouldn't cause an
   issue in most cases (please read [Why is it
   nullable?](/postgraphile/why-nullable/) for an explanation of why each
   thing is nullable)
-* JWTs now have an audience of 'postgraphile' rather than 'postgraphql', but
+- JWTs now have an audience of 'postgraphile' rather than 'postgraphql', but
   you can change this with the `--jwt-verify-audience` option
-* If you have any tables ending with `_input`, `_patch`, `Input` or `Patch`
+- If you have any tables ending with `_input`, `_patch`, `Input` or `Patch`
   they will be renamed (see bottom of this article)
 
 ### Aside: project financial status
@@ -94,9 +94,9 @@ are not met.
 
 **Solution**: upgrade your software
 
-* Node.js v8.6+ required
-* PostgreSQL 9.4+ required (v9.6+ recommended)
-* GraphQL v0.9+ required
+- Node.js v8.6+ required
+- PostgreSQL 9.4+ required (v9.6+ recommended)
+- GraphQL v0.9+ required
 
 **Reasoning**: Node.js v8 is the current active LTS, v6 will be leaving active LTS
 status for maintenance mode in April 2018 (next month at time of writing), and
@@ -201,7 +201,7 @@ is not the default behaviour.
 #### Fields in create mutations now respect defaults
 
 In v3, omitting a field from a create mutation would cause it to be set to `NULL`,
-ignoring the column default. We fixed this in v4, now if you want to set the 
+ignoring the column default. We fixed this in v4, now if you want to set the
 column null you must specify NULL in the mutation (rather than omitting the key).
 
 #### Query procedures that `returns setof <scalar>` no longer have `pageInfo` nor `totalCount`

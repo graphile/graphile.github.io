@@ -32,35 +32,35 @@ must match one of the supported hooks. See [All
 Hooks](/graphile-build/all-hooks/) for a list of all the hooks we support,
 here's a brief overview of some of the more important ones:
 
-* `build`: extend the [Build object](/graphile-build/build-object/) passed to all other hooks
+- `build`: extend the [Build object](/graphile-build/build-object/) passed to all other hooks
 
-* `init`: perform setup after `build` freezes but before building the schema starts
+- `init`: perform setup after `build` freezes but before building the schema starts
 
-* `GraphQLSchema`: root-level schema - hook to add `query`,
+- `GraphQLSchema`: root-level schema - hook to add `query`,
   `mutation` or `subscription` fields; called implicitly by `buildSchema(plugins, options)`
 
-* When creating a `GraphQLObjectType` via
+- When creating a `GraphQLObjectType` via
   `newWithHooks`:
 
-  * `GraphQLObjectType` add/remove any root-level attributes, e.g. add a description
-  * `GraphQLObjectType:interfaces` add/remove interfaces
-  * `GraphQLObjectType:fields` add/remove fields (delayed)
-  * `GraphQLObjectType:fields:field`: manipulate individual field spec, e.g.
+  - `GraphQLObjectType` add/remove any root-level attributes, e.g. add a description
+  - `GraphQLObjectType:interfaces` add/remove interfaces
+  - `GraphQLObjectType:fields` add/remove fields (delayed)
+  - `GraphQLObjectType:fields:field`: manipulate individual field spec, e.g.
     add a description
-  * `GraphQLObjectType:fields:field:args` add/remove arguments to an individual field
+  - `GraphQLObjectType:fields:field:args` add/remove arguments to an individual field
 
-* When creating a `GraphQLInputObjectType` via
+- When creating a `GraphQLInputObjectType` via
   `newWithHooks`:
 
-  * `GraphQLInputObjectType` add/remove root-level attributes, e.g. description
-  * `GraphQLInputObjectType:fields` add/remove additional fields to this object type (delayed)
-  * `GraphQLInputObjectType:fields:field`: customize an individual field from above
+  - `GraphQLInputObjectType` add/remove root-level attributes, e.g. description
+  - `GraphQLInputObjectType:fields` add/remove additional fields to this object type (delayed)
+  - `GraphQLInputObjectType:fields:field`: customize an individual field from above
 
-* When creating a `GraphQLEnumType` via `newWithHooks`:
+- When creating a `GraphQLEnumType` via `newWithHooks`:
 
-  * `GraphQLEnumType` add/remove any root-level attributes, e.g. add a description
-  * `GraphQLEnumType:values` add/remove values
-  * `GraphQLEnumType:values:value` customize an individual value from above
+  - `GraphQLEnumType` add/remove any root-level attributes, e.g. add a description
+  - `GraphQLEnumType:values` add/remove values
+  - `GraphQLEnumType:values:value` customize an individual value from above
 
 The "(delayed)" hooks above (and their descendents) are not called until
 _after_ the object is constructed (which means they can reference the object
@@ -96,10 +96,10 @@ hook is complete the build object is frozen.
 
 The most commonly used methods are:
 
-* `build.extend(obj1, obj2)` - returns a new object based on a non-destructive
+- `build.extend(obj1, obj2)` - returns a new object based on a non-destructive
   merge of `obj1` and `obj2` (will not overwrite keys!) - normally used at the
   return value for a hook
-* `build.graphql` - equivalent to `require('graphql')`, but helps ensure
+- `build.graphql` - equivalent to `require('graphql')`, but helps ensure
   GraphQL version clashes do not occur
 
 See [Build Object](/graphile-build/build-object/)) for the rest.
@@ -112,13 +112,13 @@ the information relevant to the current hook. Most importantly it contains the
 also contains a number of other useful things. Here's some of the more commonly
 used ones:
 
-* `scope` - an object based on the third argument to `newWithHooks` or
+- `scope` - an object based on the third argument to `newWithHooks` or
   `fieldWithHooks`; for deeper hooks (such as `GraphQLObjectType:fields:field`)
   the scope from shallower hooks (such as `GraphQLObjectType`) are merged in.
-* `Self` - only available on hooks that are called after the object is created
+- `Self` - only available on hooks that are called after the object is created
   (e.g. `GraphQLObjectType:fields`), this contains the object that has been
   created allowing recursive references.
-* `fieldWithHooks(fieldName, spec, scope = {})` - on `GraphQLObjectType:fields`, used for adding a field if
+- `fieldWithHooks(fieldName, spec, scope = {})` - on `GraphQLObjectType:fields`, used for adding a field if
   you need access to the field helpers (or want to define a scope)
 
 ### Namespaces

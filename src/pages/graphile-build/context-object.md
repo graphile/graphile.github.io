@@ -26,12 +26,9 @@ For example you might use a hook such as this to add a description to the
 `clientMutationId` field on all mutation input objects:
 
 ```js{5,7-11}
-builder.hook("GraphQLInputObjectType:fields:field",
-  (
-    field,
-    { extend },
-    { scope: { isMutationInput, fieldName } }
-  ) => {
+builder.hook(
+  "GraphQLInputObjectType:fields:field",
+  (field, { extend }, { scope: { isMutationInput, fieldName } }) => {
     if (
       !isMutationInput ||
       fieldName !== "clientMutationId" ||
@@ -40,7 +37,8 @@ builder.hook("GraphQLInputObjectType:fields:field",
       return field;
     }
     return extend(field, {
-      description: "An arbitrary string value with no semantic meaning. " +
+      description:
+        "An arbitrary string value with no semantic meaning. " +
         "Will be included in the payload verbatim. " +
         "May be used to track mutations by the client.",
     });

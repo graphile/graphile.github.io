@@ -17,9 +17,9 @@ function as `SECURITY DEFINER` - but be very careful when you do so!
 To create a function that PostGraphile will recognise as a custom mutation,
 it must obey the following rules:
 
-* adhere to [common PostGraphile function restrictions](/postgraphile/function-restrictions/)
-* must be marked as `VOLATILE` (which is the default for PostgreSQL functions)
-* must be defined in one of the introspected schemas
+- adhere to [common PostGraphile function restrictions](/postgraphile/function-restrictions/)
+- must be marked as `VOLATILE` (which is the default for PostgreSQL functions)
+- must be defined in one of the introspected schemas
 
 Functions matching these requirements will be represented in GraphQL in a way that is compatible with the [Relay Input Object Mutations Specification](https://facebook.github.io/relay/graphql/mutations.htm). For example the function
 
@@ -58,23 +58,22 @@ $$ LANGUAGE sql VOLATILE STRICT SECURITY DEFINER;
 
 Notes on the above function:
 
-* `STRICT` is optional, it means that if any of the arguments are null then the
+- `STRICT` is optional, it means that if any of the arguments are null then the
   mutation will not be called (and will thus return null with no error) - this
   allows us to mark `teamId` as a required argument.
-* `SECURITY INVOKER` is the default, it means the function will run with the
+- `SECURITY INVOKER` is the default, it means the function will run with the
   _security_ of the person who _invoked_ the function
-* `SECURITY DEFINER` means that the function will run with the _security_ of
+- `SECURITY DEFINER` means that the function will run with the _security_ of
   the person who _defined_ the function, typically the database owner - this
   means that the function may bypass RLS, RBAC and other security concerns. Be
   careful when using `SECURITY DEFINER` - think of it like `sudo`!
-* we use `LANGUAGE sql` here, but you can use `LANGUAGE plpgsql` if you need
+- we use `LANGUAGE sql` here, but you can use `LANGUAGE plpgsql` if you need
   variables or looping or if blocks or similar concerns; or if you want to
   write in a more familiar language you can use `LANGUAGE plv8` (JavaScript,
   requires extension), or one of the built in `LANGUAGE` options such as
   Python, Perl or Tcl
 
-A note on **named types**: if you have a function that `RETURNS SETOF table(a
-int, b text)` then PostGraphile will not _currently_ pick it up due to the
+A note on **named types**: if you have a function that `RETURNS SETOF table(a int, b text)` then PostGraphile will not _currently_ pick it up due to the
 [common PostGraphile function
 restrictions](/postgraphile/function-restrictions/). Work is underway to lift
 these restrictions, but it's easy to work around for now - just define a

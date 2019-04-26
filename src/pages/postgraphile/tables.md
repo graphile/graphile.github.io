@@ -34,9 +34,10 @@ For a table like this, PostGraphile will:
   - Add [fields for the relevant relations](/postgraphile/relations/) (e.g. `organizationByOrganizationId`\*).
 - Add to related table types:
   - Reverse [relations for each forward relation](/postgraphile/relations/)
-  (e.g. `Organization.usersByOrganizationId`\*).
+    (e.g. `Organization.usersByOrganizationId`\*).
 - Add to the root `Query` type:
-<!--
+  <!--
+
 ```graphql
 type Query implements Node {
   allUsers(
@@ -56,10 +57,12 @@ type Query implements Node {
   user(nodeId: ID!): User
 }
 ```
+
 -->
-  - An `allUsers` [connection](/postgraphile/connections/) field with pagination, filtering, and ordering (inflector: `allRows`)
-  - A number of `userByKey(key: ...)` fields (e.g. `userById`, `userByUsername`), one for each of the unique constraints on the table (inflector: `rowByUniqueKeys`)
-  - A `foo(nodeId: ID!)` field to get the row by its `nodeId`
+
+- An `allUsers` [connection](/postgraphile/connections/) field with pagination, filtering, and ordering (inflector: `allRows`)
+- A number of `userByKey(key: ...)` fields (e.g. `userById`, `userByUsername`), one for each of the unique constraints on the table (inflector: `rowByUniqueKeys`)
+- A `foo(nodeId: ID!)` field to get the row by its `nodeId`
 - Add [CRUD Mutations](/postgraphile/crud-mutations/) to the root `Mutation` type
 
 \* Remember these fields can be simplified by loading the `@graphile-contrib/pg-simplify-inflector` plugin.
@@ -70,24 +73,22 @@ Read more about [relations](/postgraphile/relations/), [connections](/postgraphi
 
 If you're using `--no-ignore-rbac` or `ignoreRBAC: false` (highly
 recommended) then PostGraphile will only expose the tables/columns/fields you
-have access to. For example if you perform `GRANT UPDATE (username, name) ON
-users TO graphql_visitor;` then the `updateUser` mutations will only accept
+have access to. For example if you perform `GRANT UPDATE (username, name) ON users TO graphql_visitor;` then the `updateUser` mutations will only accept
 `username` and `name` fields - the other columns will not be present.
 
 Note that the `--no-ignore-rbac` (or `ignoreRBAC: false` in the library) inspects the
 RBAC (GRANT / REVOKE) privileges in the database and reflects these in your GraphQL
-schema. As is GraphQL best practices, this still only results in one GraphQL schema 
-(not one per user), so it takes the user account you connect to PostgreSQL with 
-(from your connection string) and walks all the roles that this user can become 
+schema. As is GraphQL best practices, this still only results in one GraphQL schema
+(not one per user), so it takes the user account you connect to PostgreSQL with
+(from your connection string) and walks all the roles that this user can become
 within the database, and uses the union of all these permissions. Using this flag is
 recommended, as it results in a much leaner schema that doesn't contain functionality
-that you can't actually use. 
+that you can't actually use.
 
 \* **_NOTE: We strongly [advise against](/postgraphile/requirements/) using
 column-based `SELECT` grants with PostGraphile. Instead, split your
 permission concerns into separate tables and join them with one-to-one
 relations._**
-
 
 <!--!RUN
 dropdb test

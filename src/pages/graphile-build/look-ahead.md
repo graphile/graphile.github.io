@@ -23,10 +23,10 @@ The [`resolve` method in
 GraphQL](http://graphql.org/graphql-js/type/#graphqlobjecttype) is actually
 called with 4 arguments:
 
-* source - the data provided by the parent field
-* args - the arguments passed to the field in the query
-* context - the context object used throughout the resolvers
-* resolveInfo - an instance of GraphQLResolveInfo
+- source - the data provided by the parent field
+- args - the arguments passed to the field in the query
+- context - the context object used throughout the resolvers
+- resolveInfo - an instance of GraphQLResolveInfo
 
 This 4th argument is the one we're interested in because it contains a number
 of goodies. But some of these are hard to digest, so we give you some helpers...
@@ -36,10 +36,10 @@ of goodies. But some of these are hard to digest, so we give you some helpers...
 Will take the AST from the GraphQLResolveInfo and extract from it a nested
 object consisting of:
 
-* name - the name of the current field
-* alias - the alias the current field was requested as
-* args - the arguments passed to the field in the query
-* fieldsByTypeName - the sub-fields that were requested on the current object
+- name - the name of the current field
+- alias - the alias the current field was requested as
+- args - the arguments passed to the field in the query
+- fieldsByTypeName - the sub-fields that were requested on the current object
   broken down by the names of the GraphQL types that could be returned.
 
 Because GraphQL supports Union and other complex types, it's possible to
@@ -79,47 +79,44 @@ There are three ways to declare meta-data with a field:
 
 Instead of passing an object to `fields`, you can pass a function. This function will be passed the methods:
 
-* `addDataGeneratorForField(fieldName, generatorFn)` - will associate the data
+- `addDataGeneratorForField(fieldName, generatorFn)` - will associate the data
   generator with the field
 
 ```js{6-10,22-25}
-const MyObject = newWithHooks(
-  GraphQLObjectType,
-  {
-    name: "MyObject",
-    fields: ({ addDataGeneratorForField }) => {
-      addDataGeneratorForField("id", ({ alias }) => {
-        return {
-          map: obj => ({ [alias]: obj.ID }),
-        };
-      });
-      addDataGeneratorForField("caps", ({ alias }) => {
-        return {
-          map: obj => ({ [alias]: obj.CAPS }),
-        };
-      });
-      addDataGeneratorForField("random", ({ alias }) => {
-        return {
-          map: () => ({ [alias]: Math.floor(Math.random() * 10000) }),
-        };
-      });
+const MyObject = newWithHooks(GraphQLObjectType, {
+  name: "MyObject",
+  fields: ({ addDataGeneratorForField }) => {
+    addDataGeneratorForField("id", ({ alias }) => {
       return {
-        id: {
-          type: new GraphQLNonNull(GraphQLString),
-          resolve: resolveAlias,
-        },
-        caps: {
-          type: new GraphQLNonNull(GraphQLString),
-          resolve: resolveAlias,
-        },
-        random: {
-          type: new GraphQLNonNull(GraphQLInt),
-          resolve: resolveAlias,
-        },
+        map: obj => ({ [alias]: obj.ID }),
       };
-    },
-  }
-);
+    });
+    addDataGeneratorForField("caps", ({ alias }) => {
+      return {
+        map: obj => ({ [alias]: obj.CAPS }),
+      };
+    });
+    addDataGeneratorForField("random", ({ alias }) => {
+      return {
+        map: () => ({ [alias]: Math.floor(Math.random() * 10000) }),
+      };
+    });
+    return {
+      id: {
+        type: new GraphQLNonNull(GraphQLString),
+        resolve: resolveAlias,
+      },
+      caps: {
+        type: new GraphQLNonNull(GraphQLString),
+        resolve: resolveAlias,
+      },
+      random: {
+        type: new GraphQLNonNull(GraphQLInt),
+        resolve: resolveAlias,
+      },
+    };
+  },
+});
 ```
 
 #### When creating an individual field
@@ -179,24 +176,21 @@ const MyObject = newWithHooks(GraphQLObjectType, {
   name: "MyObject",
   fields: ({ fieldWithHooks }) => {
     return {
-      connection: fieldWithHooks(
-        "connection",
-        ({ addArgDataGenerator }) => {
-          addArgDataGenerator(function connectionFirst({ first }) {
-            if (first) {
-              return { limit: [first] };
-            }
-          });
-          return {
-            type: ConnectionType,
-            args: {
-              first: {
-                type: GraphQLInt,
-              },
+      connection: fieldWithHooks("connection", ({ addArgDataGenerator }) => {
+        addArgDataGenerator(function connectionFirst({ first }) {
+          if (first) {
+            return { limit: [first] };
+          }
+        });
+        return {
+          type: ConnectionType,
+          args: {
+            first: {
+              type: GraphQLInt,
             },
-          };
-        }
-      ),
+          },
+        };
+      }),
     };
   },
 });
@@ -208,21 +202,20 @@ Hooks can also associate metadata with a field; they are passed `addDataGenerato
 
 ```js{10-14}
 function MyObjectAddIdDataGeneratorPlugin(builder) {
-  builder.hook('GraphQLObjectType:fields:field', (
-    field,
-    _,
-    { fieldName, Self, addDataGenerator }
-  ) => {
-    if (Self.name !== 'MyObject' || fieldName !== 'id') {
+  builder.hook(
+    "GraphQLObjectType:fields:field",
+    (field, _, { fieldName, Self, addDataGenerator }) => {
+      if (Self.name !== "MyObject" || fieldName !== "id") {
+        return field;
+      }
+      addDataGenerator(({ alias }) => {
+        return {
+          map: obj => ({ [alias]: obj.ID }),
+        };
+      });
       return field;
     }
-    addDataGenerator(({ alias }) => {
-      return {
-        map: obj => ({ [alias]: obj.ID }),
-      };
-    });
-    return field;
-  });
+  );
 }
 ```
 

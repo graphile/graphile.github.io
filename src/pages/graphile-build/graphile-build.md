@@ -8,8 +8,8 @@ title: graphile-build
 
 We export two methods, both of which take the same arguments:
 
-* `plugins` - an array of [plugin functions](/graphile-build/plugins/) to execute
-* `options` - an optional hash of [options](/graphile-build/plugin-options/) to pass through to all the plugins
+- `plugins` - an array of [plugin functions](/graphile-build/plugins/) to execute
+- `options` - an optional hash of [options](/graphile-build/plugin-options/) to pass through to all the plugins
 
 We also export one property: `defaultPlugins`
 
@@ -40,7 +40,7 @@ useful if you want to use watch mode; see
 [`SchemaBuilder`](/graphile-build/schema-builder/) for more information.
 
 ```js{4,8}
-const { getBuilder, defaultPlugins } = require('graphile-build');
+const { getBuilder, defaultPlugins } = require("graphile-build");
 
 async function main() {
   const builder = await getBuilder(defaultPlugins, {});
@@ -50,5 +50,5 @@ async function main() {
   await builder.watchSchema(onSchema);
 }
 
-main()
+main();
 ```

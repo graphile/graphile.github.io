@@ -18,11 +18,11 @@ auto-generated name such as `arg1`.
 To create a function that PostGraphile will recognise as a custom query,
 it must obey the following rules:
 
-* adhere to [common PostGraphile function restrictions](/postgraphile/function-restrictions/)
-* if the function accepts arguments, the first argument must NOT be a table type (see [computed columns](/postgraphile/computed-columns/))
-* must NOT return `VOID`
-* must be marked as `STABLE` (or `IMMUTABLE`, though that tends to be less common)
-* must be defined in one of the introspected schemas
+- adhere to [common PostGraphile function restrictions](/postgraphile/function-restrictions/)
+- if the function accepts arguments, the first argument must NOT be a table type (see [computed columns](/postgraphile/computed-columns/))
+- must NOT return `VOID`
+- must be marked as `STABLE` (or `IMMUTABLE`, though that tends to be less common)
+- must be defined in one of the introspected schemas
 
 For example the functions:
 
@@ -131,7 +131,6 @@ Stripe](https://medium.com/@sastraxi/authenticated-and-stitched-schemas-with-pos
 [procedures]: /postgraphile/procedures/
 [forum example]: https://github.com/graphile/postgraphile/tree/master/examples/forum
 [`like`]: http://www.postgresql.org/docs/current/static/functions-matching.html
-
 
 ### Advice
 

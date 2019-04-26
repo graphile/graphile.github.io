@@ -21,11 +21,11 @@ The bread-and-butter of Graphile Engine, this method is how we build hooked Grap
 const MyType = newWithHooks(type, spec, scope);
 ```
 
-* `type` is a GraphQL object type, such as `GraphQLEnumType` or `GraphQLInputObjectType`
-* `spec` is a valid specification that will be passed through the relevant
+- `type` is a GraphQL object type, such as `GraphQLEnumType` or `GraphQLInputObjectType`
+- `spec` is a valid specification that will be passed through the relevant
   hooks before ultimately being passed to the constructor of the aforementioned
   `type` and returning an instance of that type
-* `scope` is where you can add scope information that will be available through
+- `scope` is where you can add scope information that will be available through
   the `scope` property in the context object passed to hooks (see `Context`
   below)
 

@@ -19,17 +19,17 @@ don't recommend using with alpha/beta versions though).
 These aren't exactly "requirements", but they will impact your PostGraphile
 experience.
 
-* **Use primary keys**: if you don't have primary keys on your tables then they
+- **Use primary keys**: if you don't have primary keys on your tables then they
   won't get the `nodeId` globally unique identifier interface. Further if you
   don't have unique constraints then you won't be able to use the automatic
   update/delete mutations.
-* **Use foreign keys**: we infer relations between tables using
+- **Use foreign keys**: we infer relations between tables using
   [foreign key constraints](https://www.postgresql.org/docs/10/static/ddl-constraints.html#DDL-CONSTRAINTS-FK);
   if you don't use these constraints then we won't know there's a relationship
   between the tables. There are plugins to get around this (using smart
   comments) but it's highly recommended that you use PostgreSQL's built in
   relations support.
-* **Don't use column-based SELECT grants**: column-based grants work well for
+- **Don't use column-based SELECT grants**: column-based grants work well for
   `INSERT` and `UPDATE` (especially when combined with `--no-ignore-rbac`!),
   but they don't make sense for `DELETE` and they cause issues when used with
   `SELECT`. Quite a few things in PostGraphile depend on full-table `SELECT`
@@ -43,11 +43,11 @@ experience.
   again - this also makes writing your RBAC/RLS policies simpler. If you want
   to omit a column entirely then you can use the
   [`@omit` smart comment](/postgraphile/smart-comments/#omitting).
-* **Function restrictions**: we have pretty good support for PostgreSQL
+- **Function restrictions**: we have pretty good support for PostgreSQL
   functions, but there's some
   [common function restrictions](/postgraphile/function-restrictions/)
   you should check out.
-* **Use unique constraints** rather than unique indexes when appropriate: we
+- **Use unique constraints** rather than unique indexes when appropriate: we
   use unique constraints to create mutations such as `updateUserByUsername`; note
   that "PostgreSQL automatically creates a unique index when a unique
   constraint or primary key is defined for a table." -- [PG

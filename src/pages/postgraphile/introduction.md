@@ -34,13 +34,13 @@ your generated schema is secure, performant and extensible.
 
 Some of the features we offer:
 
-* [Great performance](/postgraphile/performance/) - no N+1 query issues
-* [Connections](/postgraphile/connections/) for easy pagination and Relay support
-* [Auto-discovered relations](/postgraphile/relations/) e.g. `userByAuthorId`
-* [Automatic CRUD mutations](/postgraphile/crud-mutations/) e.g. `updatePost`
-* [Computed columns](/postgraphile/computed-columns/) allowing easy expansion of your API
-* [Custom query procedures](/postgraphile/custom-queries/) enabling arbitrary SQL queries
-* [Custom mutation procedures](/postgraphile/custom-mutations/) enabling complex changes to be exposed simply
+- [Great performance](/postgraphile/performance/) - no N+1 query issues
+- [Connections](/postgraphile/connections/) for easy pagination and Relay support
+- [Auto-discovered relations](/postgraphile/relations/) e.g. `userByAuthorId`
+- [Automatic CRUD mutations](/postgraphile/crud-mutations/) e.g. `updatePost`
+- [Computed columns](/postgraphile/computed-columns/) allowing easy expansion of your API
+- [Custom query procedures](/postgraphile/custom-queries/) enabling arbitrary SQL queries
+- [Custom mutation procedures](/postgraphile/custom-mutations/) enabling complex changes to be exposed simply
 
 The easiest way to get started is with the [CLI
 interface](/postgraphile/usage-cli/); if you have `npx` installed you can try

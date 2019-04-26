@@ -14,7 +14,7 @@ After a year of development and testing, Benjie Gillam is pleased to announce th
 
 Instead of requiring developers to learn a new set of tools and lock business logic into a new software stack, PostGraphile encourages them to build the important things - their data and business logic - using the database they're already using. Then with minimal configuration, they can use PostGraphile to make this available as a secure and lightning-fast GraphQL API.
 
-* **PostGraphile Version 4 is highly performant**
+- **PostGraphile Version 4 is highly performant**
 
 Benjie has rebuilt the core of PostGraphile entirely, with a strong focus on performance. Unlike other solutions, PostGraphile is able to look at the GraphQL query holistically and find the most efficient way of executing it. This has lead to a large increase in the request throughput, and a 94% decrease in latency. Peak memory usage has also reduced by 92% as compared to Version 3. The result is a much faster application, and happier end users - especially those on mobile. PostGraphile Version 3 developers will be able to reap these massive performance improvements simply by updating - no need to change their application code.
 
@@ -25,7 +25,7 @@ Benjie has rebuilt the core of PostGraphile entirely, with a strong focus on per
 
 [Read more about the stunning new performance of PostGraphile version 4](/postgraphile/performance/)
 
-* **Version 4 is highly customisable**
+- **Version 4 is highly customisable**
 
 Version 4 has added three handy features to help developers streamline their GraphQL schema. First, unnecessary functionality from PostgreSQL extensions is automatically filtered out by default, so only the tables and functions the developer has added are exposed. Secondly, PostGraphile can now inspect database permissions, and automatically remove types and fields from the generated schema the end user has no way of accessing. Finally, Version 4 introduces the concept of "smart comments".
 
@@ -35,7 +35,7 @@ These features lead to smaller GraphQL schemas that are easier for developers to
 
 [Read more about the new smart comments system](/postgraphile/smart-comments/)
 
-* **Version 4 is highly extensible**
+- **Version 4 is highly extensible**
 
 Before commencing work on PostGraphile Version 4, Benjie reviewed every issue in the PostGraphile bug tracker, and concluded that a rigid one-size-fits all GraphQL API was too restrictive for many users. The rigid nature of Version 3 resulted in a number of users having to compromise with workarounds such as schema stitching, or resort to maintaining a separate fork of the project to add their desired functionality. With this in mind Benjie, set out to find a solution to all these issues.
 

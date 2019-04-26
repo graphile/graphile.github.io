@@ -8,9 +8,8 @@ title: PostGraphile Usage
 
 PostGraphile is formed of three layers.
 
-* At the very top is the [**PostGraphile CLI**](/postgraphile/usage-cli/).
+- At the very top is the [**PostGraphile CLI**](/postgraphile/usage-cli/).
   This layer is the most user-friendly and is responsible for three things: accepting common options from the command line; spinning up a HTTP server (or a cluster of them, or none at all depending on what options you're using); and mounting the PostGraphile middleware (see next). **Most users should start with this layer, many users use it successfully in production, and it's where we recommend you start.**
-
 
 * The PostGraphile CLI wraps the [**PostGraphile middleware**
   ("library")](/postgraphile/usage-library/). This middleware is suitable for
@@ -24,8 +23,7 @@ PostGraphile is formed of three layers.
   rate limiting, sessions, authentication and other concerns) and the ability
   to take greater control over the PostGraphile system.
 
-
-* Deepest down is the [**PostGraphile GraphQL schema**
+- Deepest down is the [**PostGraphile GraphQL schema**
   ("schema-only")](/postgraphile/usage-schema/) itself which contains all the
   types, fields and resolvers. (The schema is constructed dynamically, so
   cannot be written to disk.) **Most users will never use this level.**
@@ -41,6 +39,6 @@ PostGraphile library if you need deeper integration with Node.js.
 
 Which layer would you like to read more about?
 
-* [**CLI**](/postgraphile/usage-cli/)
-* [**Middleware** ("library")](/postgraphile/usage-library/)
-* [**GraphQL schema** ("schema-only")](/postgraphile/usage-schema/)
+- [**CLI**](/postgraphile/usage-cli/)
+- [**Middleware** ("library")](/postgraphile/usage-library/)
+- [**GraphQL schema** ("schema-only")](/postgraphile/usage-schema/)

@@ -21,7 +21,12 @@ const Route = ({ exact, path, render }) => {
   );
 };
 
-const POSTGRAPHILE_ROUTES = ["/postgraphile", "/sponsor", "/support", "/contribute"];
+const POSTGRAPHILE_ROUTES = [
+  "/postgraphile",
+  "/sponsor",
+  "/support",
+  "/contribute",
+];
 
 function enableSearch(history) {
   if (typeof docsearch === "undefined") {

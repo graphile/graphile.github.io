@@ -37,8 +37,8 @@ module.exports = MySchemaExtensionPlugin;
 
 And would be added to your PostGraphile instance via
 
-* CLI: `` --append-plugins `pwd`/MySchemaExtensionPlugin.js ``
-* Library: `appendPlugins: [require('./MySchemaExtensionPlugin')]`
+- CLI: `` --append-plugins `pwd`/MySchemaExtensionPlugin.js ``
+- Library: `appendPlugins: [require('./MySchemaExtensionPlugin')]`
 
 The `build` argument to the makeExtendSchemaPlugin callback contains lots of
 information and helpers defined by various plugins, most importantly it
@@ -48,10 +48,10 @@ is just an instance of [pg-sql2](https://www.npmjs.com/package/pg-sql2)).
 
 The callback should return an object with two keys:
 
-* `typeDefs`: a graphql AST generated with the `gql` helper from
+- `typeDefs`: a graphql AST generated with the `gql` helper from
   `graphile-utils` (note this is NOT from the `graphql-tag` library, ours works
   in a slightly different way).
-* `resolvers`: an object that's keyed by the GraphQL type names of types
+- `resolvers`: an object that's keyed by the GraphQL type names of types
   defined (or extended) in `typeDefs`, the values of which are objects keyed by
   the field names with values that are resolver functions.
 
@@ -121,9 +121,7 @@ const MyForeignExchangePlugin = makeExtendSchemaPlugin(build => {
     `,
     resolvers: {
       Product: {
-        priceInAuCents: async (
-          product
-        ) => {
+        priceInAuCents: async product => {
           // Note that the columns are converted to fields, so the case changes
           // from `price_in_us_cents` to `priceInUsCents`
           const { priceInUsCents } = product;
@@ -164,11 +162,11 @@ to dynamically create powerful SQL queries without risking SQL injection
 attacks. The `sqlBuilder` has a number of methods which affect the query which
 will be generated. The main ones you're likely to want are:
 
-* `where(sqlFragment)`; e.g. `` sqlBuilder.where(build.pgSql.fragment`is_admin is true`) ``
-* `orderBy(() => sqlFragment, ascending)`; e.g. `` sqlBuilder.orderBy(() => build.pgSql.fragment`created_at`, false) ``
-* `limit(number)`; e.g. `sqlBuilder.limit(1)`
-* `offset(number)`; e.g. `sqlBuilder.offset(1)`
-* `select(() => sqlFragment, alias)`; e.g. `` sqlBuilder.select(() => build.pgSql.fragment`gen_random_uuid()`, '__my_random_uuid') `` - it's advised to start your alias with two underscores to prevent it clashing with any potential columns exposed as GraphQL fields.
+- `where(sqlFragment)`; e.g. `` sqlBuilder.where(build.pgSql.fragment`is_admin is true`) ``
+- `orderBy(() => sqlFragment, ascending)`; e.g. `` sqlBuilder.orderBy(() => build.pgSql.fragment`created_at`, false) ``
+- `limit(number)`; e.g. `sqlBuilder.limit(1)`
+- `offset(number)`; e.g. `sqlBuilder.offset(1)`
+- `select(() => sqlFragment, alias)`; e.g. `` sqlBuilder.select(() => build.pgSql.fragment`gen_random_uuid()`, '__my_random_uuid') `` - it's advised to start your alias with two underscores to prevent it clashing with any potential columns exposed as GraphQL fields.
 
 ```js{7-36}
 const { postgraphile } = require("postgraphile");
@@ -187,12 +185,7 @@ const MyRandomUserPlugin = makeExtendSchemaPlugin(build => {
     `,
     resolvers: {
       Query: {
-        randomUser: async (
-          _query,
-          args,
-          context,
-          resolveInfo
-        ) => {
+        randomUser: async (_query, args, context, resolveInfo) => {
           // Remember: resolveInfo.graphile.selectGraphQLResultFromTable is where the PostGraphile
           // look-ahead magic happens!
           const rows = await resolveInfo.graphile.selectGraphQLResultFromTable(
@@ -226,8 +219,7 @@ services. For example, you might want to add a custom `registerUser` mutation
 which inserts the new user into the database and also sends them an email:
 
 ```js{17,23-91}
-const MyRegisterUserMutationPlugin =
-makeExtendSchemaPlugin(build => {
+const MyRegisterUserMutationPlugin = makeExtendSchemaPlugin(build => {
   const { pgSql: sql } = build;
   return {
     typeDefs: gql`
@@ -243,33 +235,25 @@ makeExtendSchemaPlugin(build => {
       }
 
       extend type Mutation {
-        registerUser(input: RegisterUserInput!):
-          RegisterUserPayload
+        registerUser(input: RegisterUserInput!): RegisterUserPayload
       }
     `,
     resolvers: {
       Mutation: {
-        registerUser: async (
-          _query,
-          args,
-          context,
-          resolveInfo
-        ) => {
+        registerUser: async (_query, args, context, resolveInfo) => {
           const { pgClient } = context;
           // Start a sub-transaction
           await pgClient.query("SAVEPOINT graphql_mutation");
           try {
             // Our custom logic to register the user:
-            const { rows: [user] } = await pgClient.query(
+            const {
+              rows: [user],
+            } = await pgClient.query(
               `INSERT INTO app_public.users(
                 name, email, bio
               ) VALUES ($1, $2, $3)
               RETURNING *`,
-              [
-                args.input.name,
-                args.input.email,
-                args.input.bio,
-              ]
+              [args.input.name, args.input.email, args.input.bio]
             );
 
             // Now we fetch the result that the GraphQL
@@ -278,17 +262,16 @@ makeExtendSchemaPlugin(build => {
             // should always use
             // `resolveInfo.graphile.selectGraphQLResultFromTable` if you return database
             // data from your custom field.
-            const [row] =
-              await resolveInfo.graphile.selectGraphQLResultFromTable(
-                sql.fragment`app_public.users`,
-                (tableAlias, sqlBuilder) => {
-                  sqlBuilder.where(
-                    sql.fragment`${tableAlias}.id = ${
-                      sql.value(user.id)
-                    }`
-                  );
-                }
-              );
+            const [
+              row,
+            ] = await resolveInfo.graphile.selectGraphQLResultFromTable(
+              sql.fragment`app_public.users`,
+              (tableAlias, sqlBuilder) => {
+                sqlBuilder.where(
+                  sql.fragment`${tableAlias}.id = ${sql.value(user.id)}`
+                );
+              }
+            );
 
             // Finally we send the email. If this
             // fails then we'll catch the error
@@ -298,8 +281,7 @@ makeExtendSchemaPlugin(build => {
             await mockSendEmail(
               args.input.email,
               "Welcome to my site",
-              `You're user ${user.id} - ` +
-                `thanks for being awesome`
+              `You're user ${user.id} - ` + `thanks for being awesome`
             );
 
             // Success! Write the user to the database.
@@ -354,7 +336,7 @@ The `@pgQuery` directive accepts the following inputs:
   add `where`, `orderBy`, `limit` and `offset` constraints. The `args`
   argument contains the arguments that the field was passed, if any. This may
   be useful when constructing the query constraints.
-  
+
 The `@pgQuery` directive may be used with connections, lists of table records,
 or individual table records. (When used with individual records you must ensure
 that at most one row is returned; you can do so with the `queryBuilder.limit`
@@ -362,7 +344,7 @@ constraint.) You can see examples of these three use cases [in the
 tests](https://github.com/graphile/graphile-engine/blob/5211758b7a48191ffd7600f9f5ae572672ffd221/packages/graphile-utils/__tests__/ExtendSchemaPlugin-pg.test.js#L507-L720).
 
 ```js
-const { makeExtendSchemaPlugin, gql, embed } = require('graphile-utils');
+const { makeExtendSchemaPlugin, gql, embed } = require("graphile-utils");
 
 module.exports = makeExtendSchemaPlugin(build => {
   const { pgSql: sql } = build;
@@ -372,7 +354,9 @@ module.exports = makeExtendSchemaPlugin(build => {
         pets: PetsConnection @pgQuery(
           source: ${embed(sql.fragment`app_public.pets`)}
           withQueryBuilder: ${embed((queryBuilder, args) => {
-            queryBuilder.where(sql.fragment`${queryBuilder.getTableAlias()}.user_id = ${queryBuilder.parentQueryBuilder.getTableAlias()}.id`);
+            queryBuilder.where(
+              sql.fragment`${queryBuilder.getTableAlias()}.user_id = ${queryBuilder.parentQueryBuilder.getTableAlias()}.id`
+            );
           })}
         )
       }

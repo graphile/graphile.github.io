@@ -18,24 +18,24 @@ If you haven't installed PostGraphile already, you can follow our [Quick Start G
 
 ### Table of Contents
 
-* [The Basics](#the-basics)
-  * [Setting Up Your Schemas](#setting-up-your-schemas)
-  * [The Person Table](#the-person-table)
-  * [Table Documentation](#table-documentation)
-  * [The Post Table](#the-post-table)
-* [Database Functions](#database-functions)
-  * [Set Returning Functions](#set-returning-functions)
-  * [Triggers](#triggers)
-* [Authentication and Authorization](#authentication-and-authorization)
-  * [Storing Emails and Passwords](#storing-emails-and-passwords)
-  * [Registering Users](#registering-users)
-  * [Postgres Roles](#postgres-roles)
-  * [JSON Web Tokens](#json-web-tokens)
-  * [Logging In](#logging-in)
-  * [Using the Authorized User](#using-the-authorized-user)
-  * [Grants](#grants)
-  * [Row Level Security](#row-level-security)
-* [Conclusion](#conclusion)
+- [The Basics](#the-basics)
+  - [Setting Up Your Schemas](#setting-up-your-schemas)
+  - [The Person Table](#the-person-table)
+  - [Table Documentation](#table-documentation)
+  - [The Post Table](#the-post-table)
+- [Database Functions](#database-functions)
+  - [Set Returning Functions](#set-returning-functions)
+  - [Triggers](#triggers)
+- [Authentication and Authorization](#authentication-and-authorization)
+  - [Storing Emails and Passwords](#storing-emails-and-passwords)
+  - [Registering Users](#registering-users)
+  - [Postgres Roles](#postgres-roles)
+  - [JSON Web Tokens](#json-web-tokens)
+  - [Logging In](#logging-in)
+  - [Using the Authorized User](#using-the-authorized-user)
+  - [Grants](#grants)
+  - [Row Level Security](#row-level-security)
+- [Conclusion](#conclusion)
 
 ### The Basics
 
@@ -351,9 +351,9 @@ After we define our `forum_example_private.set_updated_at` function, we can use 
 
 That’s about it as far as Postgres functions go! They are a fun, interesting, and useful topic to understand when it comes to good Postgres schema design. Always remember, the Postgres documentation is your best friend as you try to write your own functions. Some important documentation articles we mentioned for your reference are as follows:
 
-* [`CREATE FUNCTION`](https://www.postgresql.org/docs/current/static/sql-createfunction.html)
-* [`CREATE TRIGGER`](https://www.postgresql.org/docs/9.6/static/sql-createtrigger.html)
-* [`PL/pgSQL`](https://www.postgresql.org/docs/8.3/static/plpgsql.html)
+- [`CREATE FUNCTION`](https://www.postgresql.org/docs/current/static/sql-createfunction.html)
+- [`CREATE TRIGGER`](https://www.postgresql.org/docs/9.6/static/sql-createtrigger.html)
+- [`PL/pgSQL`](https://www.postgresql.org/docs/8.3/static/plpgsql.html)
 
 Next up, we are going to learn about auth in Postgres and PostGraphile!
 

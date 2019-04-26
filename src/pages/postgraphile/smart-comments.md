@@ -14,10 +14,10 @@ If you're using PostGraphile in `--watch` mode, you should be able to see in Pos
 
 ### Table of Contents
 
-* [Smart comment spec](#smart-comment-spec)
-* [Deprecating](#deprecating)
-* [Renaming](#renaming)
-* [Omitting](#omitting)
+- [Smart comment spec](#smart-comment-spec)
+- [Deprecating](#deprecating)
+- [Renaming](#renaming)
+- [Omitting](#omitting)
 
 ### Smart comment spec
 

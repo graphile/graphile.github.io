@@ -19,29 +19,29 @@ See the [CLI](/postgraphile/usage-cli/) or
 
 Schema extension plugins for PostGraphile:
 
-* [postgraphile-plugin-connection-filter](https://github.com/graphile-contrib/postgraphile-plugin-connection-filter) - adds a `filter:` arg to connections that offers a more powerful alternative to the built in filtering operations
-* [postgraphile-plugin-custom-filter](https://github.com/RoadRunnerEngineering/postgraphile-plugin-custom-filter) - adds a `customFilter:` arg to connections that offers user defined filters on any conditions, as long as they can be fit into a `where`
-* [postgraphile-plugin-nested-mutations](https://github.com/mlipscombe/postgraphile-plugin-nested-mutations) - enables a single mutation to create/update many related records
-* [graphile-upsert-plugin](https://github.com/einarjegorov/graphile-upsert-plugin/blob/master/index.js) - adds upsert mutations
-* [@fullstackio/postgraphile-upsert-plugin](https://github.com/jashmenn/postgraphile-upsert-plugin) - another upsert mutations plugin - adds upsert `where` conditions 
-* [@graphile-contrib/pg-simplify-inflector](https://github.com/graphile-contrib/pg-simplify-inflector) - simplifies field names by automatically removing `ByFooIdAndBarId`-style suffixes.
-* [@graphile-contrib/pg-many-to-many](https://github.com/graphile-contrib/pg-many-to-many) - adds connection fields for many-to-many relations.
-* [@graphile-contrib/pg-order-by-related](https://github.com/graphile-contrib/pg-order-by-related) - enables ordering by related table columns.
-* [@graphile-contrib/pg-order-by-multi-column-index](https://github.com/graphile-contrib/pg-order-by-multi-column-index) - enables ordering by multi-column indexes when using `ignoreIndexes: false`.
-* [postgraphile-plugin-derived-field](https://github.com/mattbretl/postgraphile-plugin-derived-field) - provides an interface for adding derived fields
-* [postgraphile-plugin-upload-field](https://github.com/mattbretl/postgraphile-plugin-upload-field) - enables file uploads (see `postgraphile-upload-example` below)
-* [event-phile](https://github.com/stlbucket/event-phile) - "capture designated function calls as re-playable events"
-* [postgraphile-plugin-connection-multi-tenant](https://github.com/deden/postgraphile-plugin-connection-multi-tenant) - "Filtering Connections in PostGraphile by Tenants"
-* [graphile-build-postgis](https://github.com/singingwolfboy/graphile-build-postgis) - PostGIS support (WIP)
-* [postgraphile-pm2-status](https://github.com/stlbucket/phile-starter/blob/master/api/src/graphile-extensions/pm2Status.js) - expose pm2 process status thru a query
-* [PassportLoginPlugin](https://github.com/graphile/examples/blob/master/shared/plugins/PassportLoginPlugin.js) - example plugin to add a username/password `login` and `register` mutations using Passport.js
-* [postgraphile-plugin-fulltext-filter](https://github.com/mlipscombe/postgraphile-plugin-fulltext-filter) - adds support for `tsvector` full text search fields to postgraphile-plugin-connection-filter
-* [postgraphile-plugin-zombodb](https://github.com/mlipscombe/postgraphile-plugin-zombodb) - adds advanced search capabilities using [ZomboDB](https://github.com/zombodb/zombodb) and ElasticSearch
+- [postgraphile-plugin-connection-filter](https://github.com/graphile-contrib/postgraphile-plugin-connection-filter) - adds a `filter:` arg to connections that offers a more powerful alternative to the built in filtering operations
+- [postgraphile-plugin-custom-filter](https://github.com/RoadRunnerEngineering/postgraphile-plugin-custom-filter) - adds a `customFilter:` arg to connections that offers user defined filters on any conditions, as long as they can be fit into a `where`
+- [postgraphile-plugin-nested-mutations](https://github.com/mlipscombe/postgraphile-plugin-nested-mutations) - enables a single mutation to create/update many related records
+- [graphile-upsert-plugin](https://github.com/einarjegorov/graphile-upsert-plugin/blob/master/index.js) - adds upsert mutations
+- [@fullstackio/postgraphile-upsert-plugin](https://github.com/jashmenn/postgraphile-upsert-plugin) - another upsert mutations plugin - adds upsert `where` conditions
+- [@graphile-contrib/pg-simplify-inflector](https://github.com/graphile-contrib/pg-simplify-inflector) - simplifies field names by automatically removing `ByFooIdAndBarId`-style suffixes.
+- [@graphile-contrib/pg-many-to-many](https://github.com/graphile-contrib/pg-many-to-many) - adds connection fields for many-to-many relations.
+- [@graphile-contrib/pg-order-by-related](https://github.com/graphile-contrib/pg-order-by-related) - enables ordering by related table columns.
+- [@graphile-contrib/pg-order-by-multi-column-index](https://github.com/graphile-contrib/pg-order-by-multi-column-index) - enables ordering by multi-column indexes when using `ignoreIndexes: false`.
+- [postgraphile-plugin-derived-field](https://github.com/mattbretl/postgraphile-plugin-derived-field) - provides an interface for adding derived fields
+- [postgraphile-plugin-upload-field](https://github.com/mattbretl/postgraphile-plugin-upload-field) - enables file uploads (see `postgraphile-upload-example` below)
+- [event-phile](https://github.com/stlbucket/event-phile) - "capture designated function calls as re-playable events"
+- [postgraphile-plugin-connection-multi-tenant](https://github.com/deden/postgraphile-plugin-connection-multi-tenant) - "Filtering Connections in PostGraphile by Tenants"
+- [graphile-build-postgis](https://github.com/singingwolfboy/graphile-build-postgis) - PostGIS support (WIP)
+- [postgraphile-pm2-status](https://github.com/stlbucket/phile-starter/blob/master/api/src/graphile-extensions/pm2Status.js) - expose pm2 process status thru a query
+- [PassportLoginPlugin](https://github.com/graphile/examples/blob/master/shared/plugins/PassportLoginPlugin.js) - example plugin to add a username/password `login` and `register` mutations using Passport.js
+- [postgraphile-plugin-fulltext-filter](https://github.com/mlipscombe/postgraphile-plugin-fulltext-filter) - adds support for `tsvector` full text search fields to postgraphile-plugin-connection-filter
+- [postgraphile-plugin-zombodb](https://github.com/mlipscombe/postgraphile-plugin-zombodb) - adds advanced search capabilities using [ZomboDB](https://github.com/zombodb/zombodb) and ElasticSearch
 
 Examples of using these plugins:
 
-* [postgraphile-upload-example](https://github.com/mattbretl/postgraphile-upload-example) - demonstrates how to add file upload support to PostGraphile using the GraphQL Multipart Request Spec.
+- [postgraphile-upload-example](https://github.com/mattbretl/postgraphile-upload-example) - demonstrates how to add file upload support to PostGraphile using the GraphQL Multipart Request Spec.
 
 These extensions extend PostGraphile in different ways:
 
-* [hapi-postgraphile](https://github.com/mshick/hapi-postgraphile) - add PostGraphile to your HAPI application
+- [hapi-postgraphile](https://github.com/mshick/hapi-postgraphile) - add PostGraphile to your HAPI application

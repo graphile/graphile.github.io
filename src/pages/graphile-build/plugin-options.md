@@ -14,7 +14,7 @@ plugin (as their second argument).
 
 The following options apply to the default plugins:
 
-* `nodeIdFieldName` - defaults to `id` which might clash with your other
+- `nodeIdFieldName` - defaults to `id` which might clash with your other
   fields. It is not recommended to change it, but you might consider `nodeId`
   instead. (Use of `__id` is discouraged because GraphQL wants to deprecate
   non-introspection fields that begin with `__`)

@@ -47,9 +47,9 @@ keep private.
 
 Use the following CLI options with PostGraphile:
 
-* `--show-error-stack`
-* `--extended-errors hint,detail,errcode` (other options available [here](https://github.com/brianc/node-postgres/blob/7de137f9f88611b8fcae5539aa90b6037133f1f1/lib/connection.js#L565-L580))
-* or
+- `--show-error-stack`
+- `--extended-errors hint,detail,errcode` (other options available [here](https://github.com/brianc/node-postgres/blob/7de137f9f88611b8fcae5539aa90b6037133f1f1/lib/connection.js#L565-L580))
+- or
 
 ```
 --extended-errors severity,code,detail,hint,position,internalPosition,internalQuery,where,schema,table,column,dataType,constraint,file,line,routine
@@ -57,15 +57,15 @@ Use the following CLI options with PostGraphile:
 
 or for the library:
 
-* `showErrorStack: true`
-* `extendedErrors: ['hint', 'detail', 'errcode']` (other options available [here](https://github.com/brianc/node-postgres/blob/7de137f9f88611b8fcae5539aa90b6037133f1f1/lib/connection.js#L565-L580))
-* or
+- `showErrorStack: true`
+- `extendedErrors: ['hint', 'detail', 'errcode']` (other options available [here](https://github.com/brianc/node-postgres/blob/7de137f9f88611b8fcae5539aa90b6037133f1f1/lib/connection.js#L565-L580))
+- or
 
 ```
 extendedErrors: ['severity', 'code', 'detail', 'hint', 'position', 'internalPosition', 'internalQuery', 'where', 'schema', 'table', 'column', 'dataType', 'constraint', 'file', 'line', 'routine']
 ```
 
-* or use a custom `handleErrors` function to explore even more details about
+- or use a custom `handleErrors` function to explore even more details about
   the errors (or to log them server side), note this overrides the above
   options. You might be interested in the `originalError` property on the
   GraphQLErrors you're handed.
@@ -117,17 +117,17 @@ $env:DEBUG = "postgraphile:postgres*"; postgraphile -c postgres://...
 
 We use a lot of DEBUG envvars for different parts of the system. Here's some of the ones you might care about:
 
-* `postgraphile:cli` - informs about plugins being loaded
-* `postgraphile:graphql` - prints out the full GraphQL query after validation and before execution
-* `postgraphile:request` - prints out statuses during the HTTP request life-cycle
-* `postgraphile:postgres` - prints out every SQL statement that's issued to the database (does not include placeholder values)
-* `postgraphile:postgres:notice` - outputs any notices generated whilst executing SQL statements (very useful for tracing functions/triggers)
-* `postgraphile:postgres:error` - outputs any errors generated whilst executing SQL statements
-* `graphile-builder` - desperately in need of renaming, this hook is extremely useful for understanding the order in which hooks execute, and how hook executions can nest - a must for people getting started with graphile-build plugins
-* `graphile-build-pg` - prints out various things, many of which should not occur. Also used to output errors from the update/delete mutations (where `null` is returned to GraphQL)
-* `graphile-build-pg:warn` - prints out warnings that occur during schema generation; these warnings might hint at field conflicts and similar issues
-* `graphile-build-pg:sql` - prints out _some_ SQL statements, you probably want `postgraphile:postgres` instead
-* `graphql-parse-resolve-info` - far more information than you could possibly need regarding how we process the resolveInfo / AST
+- `postgraphile:cli` - informs about plugins being loaded
+- `postgraphile:graphql` - prints out the full GraphQL query after validation and before execution
+- `postgraphile:request` - prints out statuses during the HTTP request life-cycle
+- `postgraphile:postgres` - prints out every SQL statement that's issued to the database (does not include placeholder values)
+- `postgraphile:postgres:notice` - outputs any notices generated whilst executing SQL statements (very useful for tracing functions/triggers)
+- `postgraphile:postgres:error` - outputs any errors generated whilst executing SQL statements
+- `graphile-builder` - desperately in need of renaming, this hook is extremely useful for understanding the order in which hooks execute, and how hook executions can nest - a must for people getting started with graphile-build plugins
+- `graphile-build-pg` - prints out various things, many of which should not occur. Also used to output errors from the update/delete mutations (where `null` is returned to GraphQL)
+- `graphile-build-pg:warn` - prints out warnings that occur during schema generation; these warnings might hint at field conflicts and similar issues
+- `graphile-build-pg:sql` - prints out _some_ SQL statements, you probably want `postgraphile:postgres` instead
+- `graphql-parse-resolve-info` - far more information than you could possibly need regarding how we process the resolveInfo / AST
 
 To enable these DEBUG modes, join them with commas when setting a DEBUG envvar, then run PostGraphile or your Node.js server in the same terminal:
 

@@ -47,10 +47,10 @@ GRANT UPDATE ON users TO graphql_role;
 
 Column-level SELECT grants cause a lot of issues:
 
-* Reduces the number of optimisations we can do
-* Cannot `SELECT * FROM`
-* Cannot use `RETURNING *` (e.g. what we do in CRUD operations currently)
-* Cannot pass a row type into a function (like we do for computed columns)
+- Reduces the number of optimisations we can do
+- Cannot `SELECT * FROM`
+- Cannot use `RETURNING *` (e.g. what we do in CRUD operations currently)
+- Cannot pass a row type into a function (like we do for computed columns)
 
 Table-level INSERT/UPDATE grants are not advisable because they lack the
 explicitness that should come from such operations.

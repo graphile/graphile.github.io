@@ -7,7 +7,7 @@ title: Computed Columns
 ## Computed Columns
 
 "Computed columns" add what appears to be an extra column (field) to the
-GraphQL table type, but, unlike an actual column, the value for this field is the result of 
+GraphQL table type, but, unlike an actual column, the value for this field is the result of
 calling a function defined in the PostgreSQL schema.
 This function will automatically be exposed to the resultant GraphQL schema
 as a field on the type; it can accept arguments that influence its result,
@@ -21,12 +21,12 @@ statement, so there's no N+1 issues - it's very efficient._
 To create a function that PostGraphile will recognise as a computed column,
 it must obey the following rules:
 
-* adhere to [common PostGraphile function restrictions](/postgraphile/function-restrictions/)
-* name must begin with the name of the table it applies to, followed by an underscore (`_`)
-* first parameter must be the table type
-* must NOT return `VOID`
-* must be marked as `STABLE` (or `IMMUTABLE`, though that tends to be less common)
-* must be defined in the same PostgreSQL schema as the table
+- adhere to [common PostGraphile function restrictions](/postgraphile/function-restrictions/)
+- name must begin with the name of the table it applies to, followed by an underscore (`_`)
+- first parameter must be the table type
+- must NOT return `VOID`
+- must be marked as `STABLE` (or `IMMUTABLE`, though that tends to be less common)
+- must be defined in the same PostgreSQL schema as the table
 
 For example, assuming a table called `person` exists, the function:
 

@@ -37,10 +37,10 @@ SELECT * FROM app_public.best_user();
 Having built quite a few applications on PostGraphile now, I (Benjie) have
 settled on the following:
 
-* `app_public` - tables and functions to be exposed to GraphQL
-* `app_hidden` - same privileges as `app_public`, but simply not exposed to GraphQL
-* `app_private` - secrets that require elevated privileges to access
-* `app_jobs` - where my [job queue](https://gist.github.com/benjie/839740697f5a1c46ee8da98a1efac218) lives
+- `app_public` - tables and functions to be exposed to GraphQL
+- `app_hidden` - same privileges as `app_public`, but simply not exposed to GraphQL
+- `app_private` - secrets that require elevated privileges to access
+- `app_jobs` - where my [job queue](https://gist.github.com/benjie/839740697f5a1c46ee8da98a1efac218) lives
 
 I personally don't use the `public` schema for anything other than as the
 [default location that PostgreSQL extensions get

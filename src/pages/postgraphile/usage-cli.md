@@ -178,8 +178,8 @@ module.exports = {
     jwtSecret: "myJwtSecret",
     defaultRole: "myapp_anonymous",
     jwtTokenIdentifier: "myApp.jwt_token",
-    watch: true
-  }
+    watch: true,
+  },
 };
 ```
 

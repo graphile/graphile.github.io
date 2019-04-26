@@ -9,10 +9,9 @@ title: Functions
 One of the easiest ways to add more capabilities to your PostGraphile schema
 is with PostgreSQL functions. The three main methods are:
 
-* [Computed Columns](/postgraphile/computed-columns/) enable you to add a computed field to a table type
-* [Custom Queries](/postgraphile/custom-queries/) enable you to add a root level Query field which can return a scalar, list, custom type, table row or even a table connection
-* [Custom Mutations](/postgraphile/custom-mutations/) enable you to add a root level Mutation field which can cause modifications to your database and return nothing (`void`), a scalar, list, custom type, table row or list of table rows (but not a connection, since you cannot paginate over a mutation)
-
+- [Computed Columns](/postgraphile/computed-columns/) enable you to add a computed field to a table type
+- [Custom Queries](/postgraphile/custom-queries/) enable you to add a root level Query field which can return a scalar, list, custom type, table row or even a table connection
+- [Custom Mutations](/postgraphile/custom-mutations/) enable you to add a root level Mutation field which can cause modifications to your database and return nothing (`void`), a scalar, list, custom type, table row or list of table rows (but not a connection, since you cannot paginate over a mutation)
 
 ### Understanding Functions
 
@@ -30,9 +29,9 @@ schema][].
 
 ### Recommended Reading
 
-* PostgreSQL [`CREATE FUNCTION`][] documentation for actually creating functions.
-* PostgreSQL [`CREATE TRIGGER`][] documentation.
-* StackOverflow answer describing [computed columns in PostgreSQL][].
+- PostgreSQL [`CREATE FUNCTION`][] documentation for actually creating functions.
+- PostgreSQL [`CREATE TRIGGER`][] documentation.
+- StackOverflow answer describing [computed columns in PostgreSQL][].
 
 [`create function`]: http://www.postgresql.org/docs/current/static/sql-createfunction.html
 [`create trigger`]: http://www.postgresql.org/docs/current/static/sql-createtrigger.html
@@ -70,8 +69,8 @@ $$ LANGUAGE plpgsql IMMUTABLE STRICT;
 
 If you don’t want to use PL/pgSQL or SQL, many popular scripting languages can be used _inside_ PostgreSQL to write your functions! You can see a few of these projects here:
 
-* [JavaScript (plv8)][]
-* [Ruby (plruby)][]
+- [JavaScript (plv8)][]
+- [Ruby (plruby)][]
 
 For example, a function defined using JavaScript could look like:
 
@@ -209,7 +208,6 @@ query](/postgraphile/custom-queries/), and could be queried like this:
 
 More information on constructing advanced queries can be found
 [here](/postgraphile/custom-queries/).
-
 
 [forum example sql schema]: https://github.com/graphile/postgraphile/blob/master/examples/forum/schema.sql
 
