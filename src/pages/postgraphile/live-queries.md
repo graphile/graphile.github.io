@@ -99,8 +99,117 @@ app.use(
 );
 ```
 
+Then to make a query live, you simply turn it into a subscription, e.g.
+
+```graphql
+{
+  allPeople {
+    nodes {
+      name
+    }
+  }
+}
+```
+
+would become:
+
+```graphql
+subscription {
+  allPeople {
+    nodes {
+      name
+    }
+  }
+}
+```
+
 More detailed instructions are available in the [@graphile/subscriptions-lds
 README](https://www.npmjs.com/package/@graphile/subscriptions-lds).
+
+### Configuration
+
+You can configure the live query support with the following environmental variables:
+
+#### `LD_WAIT` (default 125)
+
+This environmental variable controls how often in milliseconds we check for
+changes from the database. Setting it smaller leads to more timely updates
+but increases overhead. Setting it larger increases efficiency but means each
+batch takes longer to process which may slow the Node.js event loop.
+
+#### `LIVE_THROTTLE` (default 500)
+
+This environmental variable is the minimum duration in milliseconds between
+live updates to the same subscription.
+
+If your server is getting overwhelmed, you may increase this to increase the
+period between live updates sent to clients.
+
+If your application is not responsive enough, you may decrease this to get
+closer to real-time updates.
+
+(Throttle fires on both the leading and trailing edge, so decreasing this
+only affects successive updates, not the initial update.)
+
+#### `LD_TABLE_PATTERN` (default "\*.\*")
+
+Set this envvar to e.g. `app_public.*` to only monitor tables in the
+`app_public` schema. See [`filter-tables` in the wal2json
+documentation](https://github.com/eulerto/wal2json#parameters). This
+should increase performance by ignoring irrelevant data.
+
+### Performance
+
+Logical decoding uses a "logical" PostgreSQL replication slot (replication
+slots are the technology behind how PostgreSQL read replicas stay up to date
+with the primary). We poll this slot for changes using the efficient
+`pg_logical_slot_get_changes` API in PostgreSQL. When a change is detected,
+we check to see if this change is relevant to any of the running live queries,
+and if so we tell that live query to refetch its data.
+
+This refetching process requires the query to be executed again (in order for
+us to ensure any requested data still matches the permissions you have set via
+RLS, and to ensure that no old (cached) data can make the request
+inconsistent/stale). However, it does come at a cost as any relevant data may
+trigger multiple (or _all_) connected clients to all request the same data
+at the same time (the "thundering herd" problem). We solve this slightly
+by giving each client their own throttled callback, so the callbacks are
+offset. There's a lot more that can be done to optimise our logical decoding
+support, so if you get to a point where logical decoding performance is an
+issue, please get in touch!
+
+Optimisation steps you can take currently:
+
+- Whitelist (or otherwise limit) the live queries that your system may perform
+- Only write small non-overlapping live queries - since the entire query must run again on change it's better to have 20 small queries than one large one (quite the opposite to normal queries!)
+- Use `LD_TABLE_PATTERN` to ignore irrelevant data
+- Increase `LIVE_THROTTLE` and/or `LD_WAIT` to reduce the frequency data is recalculated
+- Move the logical decoding system to a dedicated server
+- Add more `liveConditions` to queries to filter rows the user may not see so that they do not trigger live updates for that user (TODO: document this!)
+- Use read replicas [PRO]
+
+We do not currently recommend live queries for very large deployments - if
+you're expecting tens of thousands of concurrent users it's going to be
+significantly more efficient to use regular
+[subscriptions](/postgraphile/subscriptions/)
+
+### Scaling
+
+Once you reach beyond a few PostGraphile instances you'll want to make your
+live decoding usage more efficient. We support this by allowing you to run a
+dedicated live decoding server (LDS) and have PostGraphile instances connect to
+this server. You can use the `LDS_URL` envvar to tell PostGraphile where to
+find this shared server. To set up the server, follow the instructions in the
+[@graphile/lds](https://github.com/graphile/graphile-engine/blob/master/packages/lds/README.md)
+project. When running LDS standalone like this, there are more options for
+configuring it.
+
+### Inflection
+
+By default, live fields use the same names as fields in the `Query` type;
+however these field names are sent through the `live` inflector so you may
+customise these if you wish using [the inflection
+system](/postgraphile/inflection/).
 
 ### Limitations
 
@@ -109,7 +218,8 @@ able to detect all changes. For example `@graphile/subscriptions-lds` can
 detect changes to results queried from tables, but cannot currently detect
 changes to results queried from views and functions. In particular, computed
 columns are not kept up to date (although they are re-calculated whenever a
-table update triggers the subscription).
+table update triggers the subscription). Monitored tables must also use
+primary keys.
 
 ### Performance
 
