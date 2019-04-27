@@ -330,7 +330,7 @@ comment on table email is
 
 ```sql
 comment on constraint email_user_id_fkey on email is
-  E'@simpleCollection both';
+  E'@simpleCollections both';
 ```
 
 ```sql

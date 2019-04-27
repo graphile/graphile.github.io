@@ -25,3 +25,9 @@ that would be returned if you were to query the nodes. This means they ignore
 the `first`, `last`, `before`, `after` and `offset` arguments. This is
 deliberate (if you only need aggregates over the data that matches your
 pagination information then you could calculate these on the client).
+
+### Aggregates only work on Relay connection
+
+If you're using `simpleCollections: "only"` you can override it on a
+per-collection basis with the [`@simpleCollections` smart
+comment](/postgraphile/smart-comments/#simple-collections).
