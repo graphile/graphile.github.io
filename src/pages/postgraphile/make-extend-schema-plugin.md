@@ -156,11 +156,12 @@ record type directly (for example you're returning a mutation payload, or a
 connection interface), you should use the `@pgField` directive on the fields
 of your returned type so that the Look Ahead feature continues to work.
 
-The `sqlBuilder` uses an SQL AST constructed via
-[`pg-sql2` methods](https://github.com/graphile/pg-sql2/blob/master/README.md)
-to dynamically create powerful SQL queries without risking SQL injection
-attacks. The `sqlBuilder` has a number of methods which affect the query which
-will be generated. The main ones you're likely to want are:
+`sqlBuilder` is an instance of `QueryBuilder`, a helper that uses an SQL AST
+constructed via [`pg-sql2`
+methods](https://github.com/graphile/pg-sql2/blob/master/README.md) to
+dynamically create powerful SQL queries without risking SQL injection attacks.
+The `sqlBuilder` has a number of methods which affect the query which will be
+generated. The main ones you're likely to want are:
 
 - `where(sqlFragment)`; e.g. `` sqlBuilder.where(build.pgSql.fragment`is_admin is true`) ``
 - `orderBy(() => sqlFragment, ascending)`; e.g. `` sqlBuilder.orderBy(() => build.pgSql.fragment`created_at`, false) ``
