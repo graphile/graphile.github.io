@@ -150,24 +150,28 @@ responsible for hooking into the query look-ahead features of
 `graphile-build` to inspect the incoming GraphQL query and pull down the
 relevant data from the database (including nested relations). You are then
 expected to return the result of this fetch via your resolver. You can use
-the `sqlBuilder` object to customise the generated query, changing the order,
+the `queryBuilder` object to customise the generated query, changing the order,
 adding `where` clauses, `limit`s, etc. Note that if you are not returning a
 record type directly (for example you're returning a mutation payload, or a
 connection interface), you should use the `@pgField` directive on the fields
 of your returned type so that the Look Ahead feature continues to work.
 
-`sqlBuilder` is an instance of `QueryBuilder`, a helper that uses an SQL AST
+#### QueryBuilder
+
+`queryBuilder` is an instance of `QueryBuilder`, a helper that uses an SQL AST
 constructed via [`pg-sql2`
 methods](https://github.com/graphile/pg-sql2/blob/master/README.md) to
 dynamically create powerful SQL queries without risking SQL injection attacks.
-The `sqlBuilder` has a number of methods which affect the query which will be
+The `queryBuilder` has a number of methods which affect the query which will be
 generated. The main ones you're likely to want are:
 
-- `where(sqlFragment)`; e.g. `` sqlBuilder.where(build.pgSql.fragment`is_admin is true`) ``
-- `orderBy(() => sqlFragment, ascending)`; e.g. `` sqlBuilder.orderBy(() => build.pgSql.fragment`created_at`, false) ``
-- `limit(number)`; e.g. `sqlBuilder.limit(1)`
-- `offset(number)`; e.g. `sqlBuilder.offset(1)`
-- `select(() => sqlFragment, alias)`; e.g. `` sqlBuilder.select(() => build.pgSql.fragment`gen_random_uuid()`, '__my_random_uuid') `` - it's advised to start your alias with two underscores to prevent it clashing with any potential columns exposed as GraphQL fields.
+- `where(sqlFragment)`; e.g. `` queryBuilder.where(build.pgSql.fragment`is_admin is true`) ``
+- `orderBy(() => sqlFragment, ascending)`; e.g. `` queryBuilder.orderBy(() => build.pgSql.fragment`created_at`, false) ``
+- `limit(number)`; e.g. `queryBuilder.limit(1)`
+- `offset(number)`; e.g. `queryBuilder.offset(1)`
+- `select(() => sqlFragment, alias)`; e.g. `` queryBuilder.select(() => build.pgSql.fragment`gen_random_uuid()`, '__my_random_uuid') `` - it's advised to start your alias with two underscores to prevent it clashing with any potential columns exposed as GraphQL fields.
+
+#### Query Example
 
 ```js{7-36}
 const { postgraphile } = require("postgraphile");
@@ -191,9 +195,9 @@ const MyRandomUserPlugin = makeExtendSchemaPlugin(build => {
           // look-ahead magic happens!
           const rows = await resolveInfo.graphile.selectGraphQLResultFromTable(
             sql.fragment`app_public.users`,
-            (tableAlias, sqlBuilder) => {
-              sqlBuilder.orderBy(sql.fragment`random()`);
-              sqlBuilder.limit(1);
+            (tableAlias, queryBuilder) => {
+              queryBuilder.orderBy(sql.fragment`random()`);
+              queryBuilder.limit(1);
             }
           );
           return rows[0];
@@ -216,7 +220,11 @@ The above is a simple and fairly pointless example which would have been better
 served by a [Custom Query SQL
 Procedure](/postgraphile/custom-queries/#custom-query-sql-procedures); however
 you can also use this system to define mutations or to call out to external
-services. For example, you might want to add a custom `registerUser` mutation
+services.
+
+#### Mutation Example
+
+For example, you might want to add a custom `registerUser` mutation
 which inserts the new user into the database and also sends them an email:
 
 ```js{17,23-91}
@@ -267,8 +275,8 @@ const MyRegisterUserMutationPlugin = makeExtendSchemaPlugin(build => {
               row,
             ] = await resolveInfo.graphile.selectGraphQLResultFromTable(
               sql.fragment`app_public.users`,
-              (tableAlias, sqlBuilder) => {
-                sqlBuilder.where(
+              (tableAlias, queryBuilder) => {
+                queryBuilder.where(
                   sql.fragment`${tableAlias}.id = ${sql.value(user.id)}`
                 );
               }
