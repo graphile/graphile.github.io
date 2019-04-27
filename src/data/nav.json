@@ -301,6 +301,12 @@
         "subpages": []
       },
       {
+        "to": "/postgraphile/aggregates/",
+        "title": "Aggregates",
+        "sectionId": "basics",
+        "subpages": []
+      },
+      {
         "to": "/postgraphile/postgresql-indexes/",
         "title": "PostgreSQL Indexes",
         "sectionId": "basics",
