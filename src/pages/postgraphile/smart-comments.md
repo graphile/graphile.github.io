@@ -172,7 +172,18 @@ comment on view my_view is E'@primaryKey type, identifier';
 
 #### Foreign Key
 
-If you're referencing a Primary Key on the remote table/view then you can skip the column specification should you wish. Otherwise, you must reference columns matching a unique constraint.
+The foreign key adds a fake constraint pretending to be a foreign key. It has
+the following syntax which mirrors the PostgreSQL foreign key constraint:
+
+`@foreignKey (col1, ...) references [my_schema.]my_table [(col1, ...)]`
+
+The schema is optional if the target table is in the same schema. If you're
+referencing a Primary Key on the remote table/view then you can skip the final
+column specification should you wish. Otherwise, you must reference columns
+matching a unique constraint.
+
+This constraint applies to tables, views, materialised views and (in one
+direction only) to composite types.
 
 ```sql
 comment on view my_view is E'@foreignKey (post_id) references post_view';
@@ -182,6 +193,8 @@ comment on view my_view is E'@foreignKey (post_id) references post_view (id)';
 comment on materialized view my_materialized_view is E'@foreignKey (post_id) references posts (id)';
 -- or
 comment on materialized view my_materialized_view is E'@foreignKey (key_1, key_2) references other_table (key_1, key_2)';
+-- or
+comment on type my_composite_type is E'@foreignKey (my_table_id) references my_table';
 ```
 
 #### Example
