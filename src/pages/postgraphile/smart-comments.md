@@ -18,6 +18,7 @@ If you're using PostGraphile in `--watch` mode, you should be able to see in Pos
 - [Deprecating](#deprecating)
 - [Renaming](#renaming)
 - [Omitting](#omitting)
+- [Simple collections](#simple-collections)
 
 ### Smart comment spec
 
@@ -143,7 +144,7 @@ comment on type flibble is
   E'@name flamble';
 ```
 
-### Constraints
+#### Constraints
 
 You can add "fake" constraints to types in PostgreSQL using smart comments.
 The primary use case for this is to make views act more table-like - allowing
@@ -169,7 +170,7 @@ comment on view my_view is E'@primaryKey id';
 comment on view my_view is E'@primaryKey type, identifier';
 ```
 
-### Foreign Key
+#### Foreign Key
 
 If you're referencing a Primary Key on the remote table/view then you can skip the column specification should you wish. Otherwise, you must reference columns matching a unique constraint.
 
@@ -183,7 +184,7 @@ comment on materialized view my_materialized_view is E'@foreignKey (post_id) ref
 comment on materialized view my_materialized_view is E'@foreignKey (key_1, key_2) references other_table (key_1, key_2)';
 ```
 
-### Example
+#### Example
 
 Here is a basic table, with the name changed from `original_table` to `renamed_table`:
 
@@ -308,3 +309,31 @@ comment on table forum_example.book is E'@omit create,update,delete';
 On the left, you can see the documentation for all the fields and types regarding `book` before the `create` operation was omitted. On the right, you can see the reduced fields and types once the `create` operation is omitted.
 
 ![GraphiQL displaying an omit smart comment example](./smart-comments-omit-example.png)
+
+### Simple collections
+
+You can control whether simple collections are enabled by default using
+`--simple-collections omit|both|only` (or `simpleCollections: "omit"|"both"|"only"`); however sometimes you want to override this on a case
+by case setting - for example if you want relay connections for almost all
+collections, except when it comes to a user's email addresses where you want to
+use a simple list.
+
+You can do this with the `@simpleCollections omit`, `@simpleCollections both`
+and `@simpleCollections only` smart comments.
+
+This applies to tables, relations and functions (both custom queries and computed columns):
+
+```sql
+comment on table email is
+  E'@simpleCollections both';
+```
+
+```sql
+comment on constraint email_user_id_fkey on email is
+  E'@simpleCollection both';
+```
+
+```sql
+comment on function search_people(query text) is
+  E'@simpleCollections both';
+```
