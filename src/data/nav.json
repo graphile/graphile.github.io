@@ -465,6 +465,12 @@
         "subpages": []
       },
       {
+        "to": "/postgraphile/pg-pubsub-migration/",
+        "title": "@graphile/pg-pubsub Migration Guide",
+        "sectionId": "guides",
+        "subpages": []
+      },
+      {
         "to": "/postgraphile/v4-new-features/",
         "title": "v4 Feature Guide",
         "sectionId": "guides",
