@@ -15,9 +15,10 @@ export default function MarketingDivide({ from, to, via, down }) {
       xmlnsXlink="http://www.w3.org/1999/xlink"
       width="100%"
       height={via ? "64" : "32"}
-      viewBox="0 0 1000 200"
+      viewBox="0 1 1000 199"
       preserveAspectRatio="none"
       style={{ display: "block" }}
+      className="MarketingDivide"
     >
       {transparentBg ? null : (
         <path
