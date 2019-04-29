@@ -230,3 +230,15 @@ collection including filtering constraints), and changes will most likely be
 more frequent as they're coming from multiple sources. Use live queries with
 care - it's wise to keep the queries as small as possible since they must be
 recalculated any time anything within the query results changes.
+
+### Amazon RDS
+
+Configuring Live Queries on Amazon RDS is slightly different, as it's a managed
+service. (Also note that RDS runs a slightly out-of-date `wal2json`.)
+
+To set up your RDS server:
+
+- Go to 'Parameter groups' in the AWS management console and change the
+  `rds.logical_replication` setting to `1`, then reboot your database
+- Connect to the RDS server as your superuser and `grant rds_replication to DB_OWNER;` where `DB_OWNER` is the name of the PostgreSQL role that created
+  your database.
