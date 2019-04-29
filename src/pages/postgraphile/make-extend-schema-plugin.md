@@ -16,23 +16,25 @@ The main one you'll care about to start with is `makeExtendSchemaPlugin`.
 
 Using `makeExtendSchemaPlugin` you can write a plugin that will merge additional
 GraphQL types and resolvers into your schema using a similar syntax to
-`graphql-tools`. You just need to provide the `typeDefs` and `resolvers` to
-use. Your plugin will likely take a shape like this:
+`graphql-tools`. You need to provide the `typeDefs` schema definition and
+`resolvers` function to use. Your plugin will likely take a shape like this:
 
-```js{9,10}
-const {
-  makeExtendSchemaPlugin,
-  gql,
-} = require('graphile-utils');
+```js
+const { makeExtendSchemaPlugin, gql } = require("graphile-utils");
 
-const MySchemaExtensionPlugin =
-  makeExtendSchemaPlugin(
-    build => ({
-      typeDefs: gql`...`,
-      resolvers: ...
-    })
-  );
-module.exports = MySchemaExtensionPlugin;
+const MyPlugin = makeExtendSchemaPlugin(build => {
+  // Get any helpers we need from `build`
+  const { pgSql: sql, inflection } = build;
+
+  return {
+    typeDefs: gql`...`,
+    resolvers: {
+      /*...*/
+    },
+  };
+});
+
+module.exports = MyPlugin;
 ```
 
 And would be added to your PostGraphile instance via
@@ -44,11 +46,11 @@ The `build` argument to the makeExtendSchemaPlugin callback contains lots of
 information and helpers defined by various plugins, most importantly it
 includes the introspection results (`build.pgIntrospectionResultsByKind`),
 inflection functions (`build.inflection`), and SQL helper (`build.pgSql`, which
-is just an instance of [pg-sql2](https://www.npmjs.com/package/pg-sql2)).
+is an instance of [pg-sql2](https://www.npmjs.com/package/pg-sql2)).
 
 The callback should return an object with two keys:
 
-- `typeDefs`: a graphql AST generated with the `gql` helper from
+- `typeDefs`: a GraphQL AST generated with the `gql` helper from
   `graphile-utils` (note this is NOT from the `graphql-tag` library, ours works
   in a slightly different way).
 - `resolvers`: an object that's keyed by the GraphQL type names of types
@@ -62,13 +64,13 @@ ours work in a similar way.
 
 Note that the resolve functions defined in `resolvers` will be sent the
 standard 4 GraphQL resolve arguments (`parent`, `args`, `context`,
-`resolveInfo`); but the 4th argument (`resolveInfo`) will also contains
+`resolveInfo`); but the 4th argument (`resolveInfo`) will also contain
 graphile-specific helpers.
 
 ### Reading database column values
 
 When extending a schema, it's often because you want to expose data from Node.js
-that would be difficult too difficult (or impossible) to access from PostgreSQL.
+that would be too difficult (or impossible) to access from PostgreSQL.
 When defining a field on an existing table-backed type defined by PostGraphile,
 it's useful to access data from the underlying table in the resolver.
 
@@ -90,7 +92,7 @@ create table product (
 );
 ```
 
-This would result in the following GraphQL type:
+This may result in the following GraphQL type:
 
 ```graphql
 type Product {
@@ -102,11 +104,11 @@ type Product {
 
 However imagine you're selling internationally, and you want to expose the price
 in other currencies directly from the `Product` type itself. This kind of
-functionality is trivial to perform in Node.js (e.g. by making a REST call to a
-foreign exchange service over the internet) but might be a struggle from with
-PostgreSQL.
+functionality is well suited to being performed in Node.js (e.g. by making a
+REST call to a foreign exchange service over the internet) but might be a
+struggle from with PostgreSQL.
 
-```js{2,4,6-27,33}
+```js{2,4,6-25,30}
 const { postgraphile } = require("postgraphile");
 const { makeExtendSchemaPlugin, gql } = require("graphile-utils");
 const express = require("express");
@@ -383,4 +385,4 @@ Notes:
 
 ### Plugin SQL Privileges
 
-Plugins access the database with the same privileges as everything else - they are subject to RLS/RBAC/etc. If your user does not have privileges to perform the action your plugin is attempting to achieve then you may need to create a companion database function that is marked as `SECURITY DEFINER` in order to perform the action with elevated privileges; alternatively you could just use this database function directly - see [Custom Mutations](/postgraphile/custom-mutations/) for more details.
+Plugins access the database with the same privileges as everything else - they are subject to RLS/RBAC/etc. If your user does not have privileges to perform the action your plugin is attempting to achieve then you may need to create a companion database function that is marked as `SECURITY DEFINER` in order to perform the action with elevated privileges; alternatively you could use this database function directly - see [Custom Mutations](/postgraphile/custom-mutations/) for more details.
