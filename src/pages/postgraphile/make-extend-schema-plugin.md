@@ -67,6 +67,57 @@ standard 4 GraphQL resolve arguments (`parent`, `args`, `context`,
 `resolveInfo`); but the 4th argument (`resolveInfo`) will also contain
 graphile-specific helpers.
 
+### The `gql` and `embed` helpers
+
+The `gql` helper is responsible for turning the human-readable GraphQL schema
+language you write into an abstract syntax tree (AST) that the application can
+understand. Our `gql` help differs slightly from the one you may be familiar
+with in the `graphql-tag` npm module, namely in how the placeholders work. Ours
+is designed to work with PostGraphile's [inflection
+system](/postgraphile/inflection/), so you can embed strings directly. You may
+also embed other gql tags directly. For example:
+
+```js
+const nameOfType = "MyType"; // Or use the inflection system to generate a type
+
+// This tag interpolates the string `nameOfType` to allow dynamic naming of the
+// type.
+const Type = gql`
+  type ${nameOfType} {
+    str: String
+    int: Int
+  }
+`;
+
+// This tag interpolates the entire definition in `Type` above.
+const typeDefs = gql`
+  ${Type}
+
+  extend type Query {
+    fieldName: Type
+  }
+`;
+```
+
+The `embed` helper is for use with `gql` when you want to embed a raw
+JavaScript value (anything: regexp, function, string, object, etc) into the
+document; for example to pass it to a directive. We use this with the
+`@pgQuery` directive further down this page. Here's a simple example of
+embedding an object.
+
+```js
+const meta = {
+  /* arbitrary data */
+  name: "fieldName",
+  added: "2019-04-29T16:15:00Z",
+};
+const typeDefs = gql`
+  extend type Query {
+    fieldName: Int @scope(meta: ${embed(fieldNameMeta)})
+  }
+`;
+```
+
 ### Reading database column values
 
 When extending a schema, it's often because you want to expose data from Node.js
@@ -146,17 +197,28 @@ app.listen(3030);
 
 ### The `selectGraphQLResultFromTable` helper
 
-The `resolveInfo.graphile.selectGraphQLResultFromTable` function is vital if you want
-to return data from the database from your new GraphQL field. It is
-responsible for hooking into the query look-ahead features of
-`graphile-build` to inspect the incoming GraphQL query and pull down the
-relevant data from the database (including nested relations). You are then
-expected to return the result of this fetch via your resolver. You can use
-the `queryBuilder` object to customise the generated query, changing the order,
-adding `where` clauses, `limit`s, etc. Note that if you are not returning a
-record type directly (for example you're returning a mutation payload, or a
-connection interface), you should use the `@pgField` directive on the fields
-of your returned type so that the Look Ahead feature continues to work.
+Resolvers are passed 4 arguments: `parent, args, context, resolveInfo`. In the
+`context.pgClient` is an instance of a database client from the `pg` module
+that's already in a transaction configured with the settings for this
+particular GraphQL request. You can use this client to make requests to the
+database within this transaction.
+
+However, because PostGraphile uses Graphile Engine's look-ahead features, you
+will not be able to easily build a query that will return the data PostGraphile
+requires to represent nested relations/etc using `pgClient` directly. That is
+why `resolveInfo.graphile.selectGraphQLResultFromTable` exists.
+
+The `resolveInfo.graphile.selectGraphQLResultFromTable` function is vital if
+you want to return PostGraphile database table/view/function/etc-related types
+from your GraphQL field. It is responsible for hooking into the query
+look-ahead features of Graphile Engine to inspect the incoming GraphQL query
+and pull down the relevant data from the database (including nested relations).
+You are then expected to return the result of this fetch via your resolver. You
+can use the `queryBuilder` object to customise the generated query, changing
+the order, adding `where` clauses, `limit`s, etc (see below). Note that if you
+are not returning a record type directly (for example you're returning a
+mutation payload, or a connection interface), you should use the `@pgField`
+directive as shown below so that the Look Ahead feature continues to work.
 
 #### QueryBuilder
 
@@ -175,7 +237,16 @@ generated. The main ones you're likely to want are:
 
 #### Query Example
 
-```js{7-36}
+The below is a simple example which would have been better served by [Custom
+Query SQL
+Procedures](/postgraphile/custom-queries/#custom-query-sql-procedures); however
+it demonstrates using `makeExtendSchemaPlugin` with a database record, table
+connection, and list of database records.
+
+You can also use this system to define mutations or to call out to external
+services — see below.
+
+```js
 const { postgraphile } = require("postgraphile");
 const { makeExtendSchemaPlugin, gql } = require("graphile-utils");
 const express = require("express");
@@ -187,11 +258,23 @@ const MyRandomUserPlugin = makeExtendSchemaPlugin(build => {
   return {
     typeDefs: gql`
       extend type Query {
+        # Individual record
         randomUser: User
+
+        # Connection record
+        randomUsersConnection: UsersConnection
+
+        # List record
+        randomUsersList: [User!]
       }
     `,
     resolvers: {
       Query: {
+        /*
+         * Individual record needs to return just one row but
+         * `selectGraphQLResultFromTable` always returns an array; so the
+         * resolver is responsible for turning the array into a single record.
+         */
         randomUser: async (_query, args, context, resolveInfo) => {
           // Remember: resolveInfo.graphile.selectGraphQLResultFromTable is where the PostGraphile
           // look-ahead magic happens!
@@ -204,6 +287,27 @@ const MyRandomUserPlugin = makeExtendSchemaPlugin(build => {
           );
           return rows[0];
         },
+
+        /*
+         * Connection and list resolvers are identical; PostGraphile handles
+         * the complexities for you. We've simplified these down to a direct
+         * call to `selectGraphQLResultFromTable` but you may wish to wrap this
+         * with additional logic.
+         */
+        randomUsersConnection: (_query, args, context, resolveInfo) =>
+          resolveInfo.graphile.selectGraphQLResultFromTable(
+            sql.fragment`app_public.users`,
+            (tableAlias, queryBuilder) => {
+              queryBuilder.orderBy(sql.fragment`random()`);
+            }
+          ),
+        randomUsersList: (_query, args, context, resolveInfo) =>
+          resolveInfo.graphile.selectGraphQLResultFromTable(
+            sql.fragment`app_public.users`,
+            (tableAlias, queryBuilder) => {
+              queryBuilder.orderBy(sql.fragment`random()`);
+            }
+          ),
       },
     },
   };
@@ -217,12 +321,6 @@ app.use(
 );
 app.listen(3030);
 ```
-
-The above is a simple and fairly pointless example which would have been better
-served by a [Custom Query SQL
-Procedure](/postgraphile/custom-queries/#custom-query-sql-procedures); however
-you can also use this system to define mutations or to call out to external
-services.
 
 #### Mutation Example
 
