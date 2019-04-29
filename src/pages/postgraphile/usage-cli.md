@@ -26,7 +26,7 @@ PostGraphile also reads options from a `.postgraphilerc.js` file from the curren
 
 ### CLI options
 
-There are more CLI options available to customise the GraphQL server (these are from <tt>postgraphile@<!-- CLI_VERSION_BEGIN -->4.4.0-rc.0<!-- CLI_VERSION_END --></tt>):
+There are more CLI options available to customise the GraphQL server (these are from <tt>postgraphile@<!-- CLI_VERSION_BEGIN -->4.4.0-rc.1<!-- CLI_VERSION_END --></tt>):
 
 <!-- CLI_DOCBLOCK_BEGIN -->
 
@@ -41,7 +41,7 @@ There are more CLI options available to customise the GraphQL server (these are 
 - `-s`, `--schema <string>`  
   a Postgres schema to be introspected. Use commas to define multiple schemas
 - `-S`, `--subscriptions`  
-  [EXPERIMENTAL] Enable GraphQL websocket transport support for subscriptions (you still need a subscriptions plugin currently)
+  Enable GraphQL websocket transport support for subscriptions (you still need a subscriptions plugin currently)
 - `-L`, `--live`  
   [EXPERIMENTAL] Enables live-query support via GraphQL subscriptions (sends updated payload any time nested collections/records change). Implies --subscriptions
 - `-w`, `--watch`  
@@ -54,6 +54,8 @@ There are more CLI options available to customise the GraphQL server (these are 
   the maximum number of clients to keep in the Postgres pool. defaults to 10
 - `-r`, `--default-role <string>`  
   the default Postgres role to use when a request is made. supercedes the role used to connect to the database
+- `--retry-on-init-fail`  
+  if an error occurs building the initial schema, this flag will cause PostGraphile to keep trying to build the schema with exponential backoff rather than exiting
 - `-j`, `--dynamic-json`  
   [RECOMMENDED] enable dynamic JSON in GraphQL inputs and outputs. PostGraphile uses stringified JSON by default
 - `-N`, `--no-setof-functions-contain-nulls`  
@@ -65,7 +67,7 @@ There are more CLI options available to customise the GraphQL server (these are 
 - `--simple-collections [omit|both|only]`  
   "omit" (default) - relay connections only, "only" - simple collections only (no Relay connections), "both" - both
 - `--no-ignore-rbac`  
-  [RECOMMENDED] set this to exclude fields, queries and mutations that the user isn't permitted to access; this will be enabled by default in v5
+  [RECOMMENDED] set this to exclude fields, queries and mutations that are not available to any possible user (determined from the user in connection string and any role they can become); this will be enabled by default in v5
 - `--no-ignore-indexes`  
   [RECOMMENDED] set this to exclude filters, orderBy, and relations that would be expensive to access due to missing indexes
 - `--include-extension-resources`  
