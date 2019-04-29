@@ -235,6 +235,16 @@ generated. The main ones you're likely to want are:
 - `offset(number)`; e.g. `queryBuilder.offset(1)`
 - `select(() => sqlFragment, alias)`; e.g. `` queryBuilder.select(() => build.pgSql.fragment`gen_random_uuid()`, '__my_random_uuid') `` - it's advised to start your alias with two underscores to prevent it clashing with any potential columns exposed as GraphQL fields.
 
+On top of these methods, `QueryBuilder` has the following useful properties:
+
+- `parentQueryBuilder`: gives access to the parent QueryBuilder instance;
+  primarily (and possibly only) useful for executing
+  `queryBuilder.parentQueryBuilder.getTableAlias()` so you can reference a
+  field on the parent record (e.g. to perform filtering based on a relation).
+
+There are many other internal properties and methods, but you probably
+shouldn't call them. Only rely on the methods and properties documented above.
+
 #### Query Example
 
 The below is a simple example which would have been better served by [Custom
