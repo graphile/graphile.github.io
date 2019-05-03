@@ -64,7 +64,7 @@ There will be more enhancements in live queries in future. If you're interested 
 
 By significantly reducing the amount of work needed to achieve business goals, PostGraphile results in huge savings for users. If your organization contributes some of these savings back then everyone can benefit from more frequent releases with better performance, better compatibility, better documentation, easier customization, and more features — leading to even greater savings or profits for your organization.
 
-Huge thanks to the 60 individuals and companies already sponsoring PostGraphile!
+Huge thanks to the 70 individuals and companies already sponsoring PostGraphile!
 
 [Click here to find out more about why and how you should sponsor PostGraphile development.](/sponsor/)
 
