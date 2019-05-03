@@ -20,7 +20,7 @@ title: News
 
 <br />
 <div class='flex'>
-<a class='button--solid-light' href='/news/postgraphile-version-4-1/'>Latest Announcement <span class='fas fa-fw fa-arrow-right' /></a>
+<a class='button--solid-light' href='/news/postgraphile-version-4-4/'>Latest Announcement <span class='fas fa-fw fa-arrow-right' /></a>
 </div>
 
 </div>
@@ -38,11 +38,11 @@ title: News
 <div class='text-center col-xs-12 col-md-9 col-lg-7'>
 <div class='hero-block'>
 
-## PostGraphile Version 4.1 released
+## PostGraphile Version 4.4 released
 
-Version 4.1 is here! A huge improvement to startup performance in serverless environments plus much broader PostgreSQL function support, an enhanced GraphiQL interface, and a lot more helpers for writing plugins.
+Version 4.4 is here, and among other things it adds real-time features including GraphQL subscriptions and live queries!
 
-[Read more about the latest PostGraphile version here](/news/postgraphile-version-4-1/)
+[Read more about the latest PostGraphile version here](/news/postgraphile-version-4-4/)
 
 </div>
 </div>
