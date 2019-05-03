@@ -115,6 +115,27 @@ Version 4.4 is here, and among other things it adds real-time features including
 
 <section>
 <div class='container'>
+<div class='row flex-wrap-reverse'>
+<div class='text-center col-xs-12 col-md-9 col-lg-7'>
+<div class='hero-block'>
+
+## PostGraphile Version 4.1 - better webpackability!
+
+Building upon the huge performance gains found in Version 4, the release of Version 4.1 has a huge improvement to startup performance in serverless environments. This update also brings a large number of enhancements including much broader PostgreSQL function support, an enhanced GraphiQL interface, and a lot more helpers for writing plugins.
+
+[Read more about PostGraphile Version 4.1 here](/news/postgraphile-version-4-1/)
+
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- **************************************** -->
+
+<section>
+<div class='container'>
 
 <div class='row flex-wrap-reverse'>
 <div class='text-center col-xs-12 col-md-9 col-lg-7'>
