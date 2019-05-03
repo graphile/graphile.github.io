@@ -7,12 +7,42 @@ title: Live Queries
 ## Live Queries
 
 <p class='intro'>
-Live queries let you monitor an entire query for changes, automatically
-sending you an updated version whenever any of the previously returned
-data changes.
+A “live query” monitors the query a user provides and gives the client an updated version whenever the query would return a different result.
 </p>
 
 _This feature requires PostGraphile v4.4.0 or higher._
+
+### What are live queries?
+
+You can think of live queries as akin to extremely frequent polling of a regular query, but without the bandwidth costs. Live queries are not yet an official feature of GraphQL, and so there are a number of different implementations. PostGraphile’s live queries do not require specific client software since we use the standard GraphQL subscriptions interface — simply change your `query` to a `subscription` and it becomes live, as in the following example ([available on GitHub](https://github.com/graphile/livesotope)) showing real-time points rankings of fictional players:
+
+<div class="tc">
+<img alt="Changing a query to a live query" src="/images/query2subscription.png" style="max-height: 230px" />
+</div>
+
+<p></p>
+
+<div class="tc">
+<img alt="Demo of live query" src="/images/live_demo_rankings.gif" />
+</div>
+
+Live queries are an incredibly powerful tool for frontend developers, as it means they don’t need to worry about monitoring for changes in the data — they know the data they’ve requested will always be up to date. However, live queries are not a panacea: they can come with significant backend cost and/or complexity.
+
+One way to achieve 100% accurate live queries is to run the users query over and over on the server side, and send an update whenever the results change. This, however, is not very efficient and puts an excessive load on the server.
+
+### Live queries via logical decoding
+
+PostGraphile supports "realtime provider plugins" to source information about when data changes. Our initial official realtime provider plugin, `@graphile/subscriptions-lds`, monitors a “logical replication slot” from PostgreSQL (this is similar to the system that PostgreSQL read-replicas use to stay up to date with the primary database). This allows us to determine relevant changes without putting too much additional load on the database.
+
+However, we must re-run the user's query to see if anything else (e.g. computed values from functions, views, plugins, etc; reordering of results; effects on pagination) has changed before returning the updated data to the user. Therefore, it’s best to keep live queries small and simple: the more complex the query, the more sources of change it has (so updates may happen more frequently), and the longer it will take to execute.
+
+### When (not) to use live queries
+
+PostGraphile has worked hard to decrease the costs associated with live queries, but there’s still more to be done. Currently we feel PostGraphile live queries may be suitable in apps with relatively small user bases (such as for internal tooling used across a large enterprise), but if you’re targeting an internet scale deployment hoping for millions of users you will likely be better off using [subscriptions](/postgraphile/subscriptions/), or keeping live queries to a very small area of your application.
+
+One particular problem to be aware of is the "thundering herd" — if thousands of users are all subscribed to the same data, and that data is updated, then thousands of SQL queries will be issued against the database at the same time. This issue can be lessened by ensuring that live queries only apply to a subset of users at a time.
+
+### Enabling live queries
 
 To enable live queries support in PostGraphile, you will need:
 
@@ -160,6 +190,14 @@ should increase performance by ignoring irrelevant data.
 
 ### Performance
 
+Live queries are a lot more expensive than regular subscriptions — the server
+must monitor a lot more sources to detect a change (monitoring each
+individual record returned, plus monitoring for additions/removals from any
+collection including filtering constraints), and changes will most likely be
+more frequent as they're coming from multiple sources. Use live queries with
+care - it's wise to keep the queries as small as possible since they must be
+recalculated any time anything within the query results changes.
+
 Logical decoding uses a "logical" PostgreSQL replication slot (replication
 slots are the technology behind how PostgreSQL read replicas stay up to date
 with the primary). We poll this slot for changes using the efficient
@@ -220,16 +258,6 @@ changes to results queried from views and functions. In particular, computed
 columns are not kept up to date (although they are re-calculated whenever a
 table update triggers the subscription). Monitored tables must also use
 primary keys.
-
-### Performance
-
-Live queries are a lot more expensive than regular subscriptions - the server
-must monitor a lot more sources to detect a change (monitoring each
-individual record returned, plus monitoring for additions/removals from any
-collection including filtering constraints), and changes will most likely be
-more frequent as they're coming from multiple sources. Use live queries with
-care - it's wise to keep the queries as small as possible since they must be
-recalculated any time anything within the query results changes.
 
 ### Amazon RDS
 
