@@ -19,6 +19,7 @@ If you're using PostGraphile in `--watch` mode, you should be able to see in Pos
 - [Renaming](#renaming)
 - [Omitting](#omitting)
 - [Simple collections](#simple-collections)
+- [Composite types as function arguments](#composite-types-as-function-arguments)
 
 ### Smart comment spec
 
@@ -350,3 +351,37 @@ comment on constraint email_user_id_fkey on email is
 comment on function search_people(query text) is
   E'@simpleCollections both';
 ```
+
+### Composite types as function arguments
+
+When building a custom mutation, you probably want to use the composite type that is generated when creating a table in PostgreSQL as a function argument, like this (note this is just an example for illustrative purposes):
+
+```
+create table example(
+  id uuid primary key
+  name text not null
+)
+
+create function new_example(input example) returns example as $$
+  insert into example (id, name) values (input.id, input.name) returning *;
+$$ language sql volatile;
+```
+
+The `example` composite type will be translated into a GraphQL type by Postgraphile with the same characteristics, i.e. all fields are `not null`. You can let Postgraphile know that you want to convert the composite type into another GraphQL type, for example:
+
+```
+create table example(
+  id uuid primary key
+  name text not null
+)
+
+create function new_example_with_auto_id(input example) returns example as $$
+  -- pseudocode: auto_id = auto_generate_id()
+  insert into example (id, name) values (auto_id, input.name) returning *;
+$$ language sql volatile;
+
+comment on function new_example_with_auto_id(input example) is
+  E'@arg0variant patch';
+```
+
+This uses the `patch` variant from Postgraphile's update mutations which has all the fields except `id`. This will mean that the custom mutation will not ask for the `id` on the client-side anymore (because it will generate it itself). Note how `arg0` refers to the first function argument (it works like array positions). There's also the `base` variant that ignores `not null` and makes all fields nullable in GraphQL.
