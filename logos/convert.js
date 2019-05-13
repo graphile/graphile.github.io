@@ -18,6 +18,7 @@ async function main() {
   for (const file of [
     "postgraphile.svg",
     "postgraphile-tiny.svg",
+    "postgraphile-white.svg",
     "graphile.svg",
   ]) {
     const svgo = new SVGO({
