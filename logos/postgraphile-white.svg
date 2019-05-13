@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="1200" height="1200" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<!--
+
+This file is Copyright © 2018 Benjie Gillam. All rights reserved.
+
+-->
+<style type="text/css">
+* {
+  stroke-width: 30px;
+  shape-rendering: geometricPrecision;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.bg {
+  fill: #4ba8ff;
+}
+.whitefill {
+  fill: white;
+}
+.whitestroke {
+  stroke: white;
+}
+.trans {
+  fill: transparent;
+}
+.sharp, .eye {
+  stroke-linejoin: miter;
+  stroke-linecap: butt;
+  stroke-width: 0px;
+}
+.eye {
+  stroke-width: 10px;
+}
+</style>
+
+  <desc>PostGraphile logo</desc>
+  <polygon points="0,0 1200,0 1200,1200, 0,1200" class="bg" />
+
+  <polygon
+    points="25,360 260,25 490,96 710,96 940,25 1175,360 1100,615 710,960 710,1075 600,1130 490,1075 490,960 100,615 25,360"
+    class="heart-outline whitestroke trans"
+  />
+  <polygon
+    points="490,96 710,96 875,300 875,725 710,835 710,1075 600,1130 490,1075 490,835 325,725 325,300"
+    class="entire-face whitestroke trans"
+  />
+  <polygon
+    points="325,300 490,96 710,96 875,300 600,450"
+    class="whitestroke whitefill sharp"
+  />
+  <polygon
+    points="600,450 600,1130 490,1075 475,825"
+    class="whitestroke whitefill sharp"
+  />
+  <polygon
+    points="600,450 875,725 695,845"
+    class="whitestroke whitefill sharp"
+  />
+
+  <polygon points="385,415 515,455 385,505" class="eye left-eye whitefill whitestroke" />
+  <polygon points="815,415 685,455 815,505" class="eye right-eye whitefill whitestroke" />
+
+  <!--
+  <polygon points="200,615 225,360 260,25 715,615" class="seg" />
+  <polygon points="25,360 260,25 600,130 715,615" class="seg" />
+  <polygon points="260,25 600,130 940,25 715,615" class="seg" />
+  <polygon points="600,130 940,25 1175,360 715,615" class="seg" />
+  <polygon points="940,25 1175,360 1100,615 715,615" class="seg" />
+  <polygon points="1175,360 1100,615 600,1055 715,615" class="seg" />
+  <polygon points="1100,615 600,1055 100,615 715,615" class="seg" />
+  <polygon points="600,1055 100,615 25,360 715,615" class="seg" />
+  <polygon points="100,615 25,360 715,615" class="seg" />
+  -->
+
+  <!-- polygon points="25,360 260,25 260,25 600,130 600,130 940,25 940,25 1175,360 1175,360 1100,615 1100,615 600,1055 600,1055 100,615 100,615 25,360" class="heart-outline" / -->
+
+  <!--
+  <g class='face'>
+
+    <polygon points="375,740 460,795 325,900" class="tusk left-tusk" />
+    <polygon points="825,740 740,795 875,900" class="tusk right-tusk" />
+
+    <polygon points="325,300 490,96 710,96 600,450" class="seg forehead-left" />
+    <polygon points="490,96 710,96 875,300 600,450" class="seg forehead-top" />
+    <polygon points="710,96 875,300 875,725 600,450" class="seg3 forehead-right no-stroke" />
+
+    <polygon points="875,300 875,725 710,835 600,450" class="seg4 right-eye-area no-stroke" />
+
+    <polygon points="875,725 710,835 600,1130 600,450" class="seg5 face-bottom-right no-stroke" />
+    <polygon points="710,835 710,1075 600,1130 490,835 600,450" class="seg3 no-stroke trunk-highlight-right" />
+    <polygon points="600,1130 490,1075 490,835 325,725 600,450" class="seg no-stroke trunk-highlight-left" />
+    <polygon points="490,835 325,725 325,300 600,450" class="seg3 face-bottom-left no-stroke" />
+
+    <polygon points="325,725 325,300 600,450" class="seg left-eye-area no-stroke" />
+
+
+    <polygon points="490,96 710,96 875,300 875,725 710,835 710,1075 600,1130 490,1075 490,835 325,725 325,300" class="entire-face stroke-only" />
+
+    <polygon points="385,415 515,455 385,505" class="eye left-eye" />
+    <polygon points="815,415 685,455 815,505" class="eye right-eye" />
+
+
+  </g>
+    -->
+
+</svg>
