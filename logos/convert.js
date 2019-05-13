@@ -19,6 +19,7 @@ async function main() {
     "postgraphile.svg",
     "postgraphile-tiny.svg",
     "postgraphile-white.svg",
+    "postgraphile-white-named.svg",
     "graphile.svg",
   ]) {
     const svgo = new SVGO({

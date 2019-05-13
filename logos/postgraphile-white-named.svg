@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg viewBox="-200 -100 7200 1330" width="720" height="133" version="1.1" xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+>
+<!--
+
+This file is Copyright © 2018 Benjie Gillam. All rights reserved.
+
+-->
+<style type="text/css">
+* {
+  stroke-width: 40px;
+  shape-rendering: geometricPrecision;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.bg {
+  fill: blue;
+}
+.whitefill {
+  fill: white;
+}
+.whitestroke {
+  stroke: white;
+}
+.trans {
+  fill: transparent;
+}
+.sharp, .eye {
+  stroke-linejoin: miter;
+  stroke-linecap: butt;
+  stroke-width: 0px;
+}
+.eye {
+  stroke-width: 10px;
+}
+.red {
+  fill: transparent;
+}
+</style>
+
+  <desc>PostGraphile logo</desc>
+  <polygon points="-200,-100 7000,-100 7000,1300 -200,1300" class="bg" />
+
+  <polygon
+    points="940,25 1175,360 715,615"
+    class="red"
+  />
+
+  <polygon
+    points="25,360 260,25 490,96 710,96 940,25 1175,360 1100,615 710,960 710,1075 600,1130 490,1075 490,960 100,615 25,360"
+    class="heart-outline whitestroke trans"
+  />
+  <polygon
+    points="490,96 710,96 875,300 875,725 710,835 710,1075 600,1130 490,1075 490,835 325,725 325,300"
+    class="entire-face whitestroke trans"
+  />
+  <polygon
+    points="325,300 490,96 710,96 875,300 600,450"
+    class="whitestroke whitefill sharp"
+  />
+  <polygon
+    points="600,450 600,1130 490,1075 475,825"
+    class="whitestroke whitefill sharp"
+  />
+  <polygon
+    points="260,25 375,175 285,286 285,455 25,360"
+    class="whitestroke whitefill sharp"
+  />
+  <polygon
+    points="940,25 1175,360 915,507 915,287 863,222"
+    class="whitefill sharp"
+  />
+
+  <polygon points="385,415 515,455 385,505" class="eye left-eye whitefill whitestroke" />
+  <polygon points="815,415 685,455 815,505" class="eye right-eye whitefill whitestroke" />
+  <polygon points="371,750 450,805 325,900" class="tusk left-tusk whitefill whitestroke eye" />
+  <polygon points="835,750 750,805 875,900" class="tusk right-tusk whitefill whitestroke eye" />
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     x="1376"
+     y="981"
+     id="text4186"
+     sodipodi:linespacing="125%"
+     transform="matrix(0.99998979,-0.00451921,0.00451921,0.99998979,0,0)"><tspan
+       sodipodi:role="line"
+       id="tspan4188"
+       x="1376.6265"
+       y="861.92047"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:875px;font-family:'Avenir Next';-inkscape-font-specification:'Avenir Next Bold';fill:white;fill-opacity:1">PostGraphile</tspan></text>
+</svg>
