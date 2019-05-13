@@ -75,18 +75,18 @@ This file is Copyright © 2018 Benjie Gillam. All rights reserved.
   />
   -->
   <polygon
-    points="260,25 385,185 300,290 300,460 25,360"
+    points="260,25 375,175 285,286 285,455 25,360"
     class="whitestroke whitefill sharp"
   />
   <polygon
-    points="940,25 1175,360 900,512 900,290 858,240"
+    points="940,25 1175,360 915,507 915,287 863,222"
     class="whitefill sharp"
   />
 
   <polygon points="385,415 515,455 385,505" class="eye left-eye whitefill whitestroke" />
   <polygon points="815,415 685,455 815,505" class="eye right-eye whitefill whitestroke" />
-  <polygon points="375,740 460,795 325,900" class="tusk left-tusk whitefill whitestroke eye" />
-  <polygon points="825,740 740,795 875,900" class="tusk right-tusk whitefill whitestroke eye" />
+  <polygon points="371,750 450,805 325,900" class="tusk left-tusk whitefill whitestroke eye" />
+  <polygon points="835,750 750,805 875,900" class="tusk right-tusk whitefill whitestroke eye" />
 
   <!--
   <polygon points="200,615 225,360 260,25 715,615" class="seg" />
