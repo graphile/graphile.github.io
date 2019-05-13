@@ -14,7 +14,7 @@ This file is Copyright © 2018 Benjie Gillam. All rights reserved.
   stroke-linecap: round;
 }
 .bg {
-  fill: #4ba8ff;
+  fill: transparent;
 }
 .whitefill {
   fill: white;
