@@ -26,7 +26,7 @@
     "gatsby-plugin-catch-links": "^2.0.13",
     "gatsby-plugin-react-helmet": "^3.0.12",
     "gatsby-plugin-sass": "^2.0.11",
-    "gatsby-plugin-sharp": "^2.0.35",
+    "gatsby-plugin-sharp": "^2.0.37",
     "gatsby-remark-autolink-headers": "^2.0.16",
     "gatsby-remark-images": "^3.0.11",
     "gatsby-remark-prismjs": "^3.2.8",
@@ -36,7 +36,7 @@
     "graphile-build": "^4.4.0-rc.1",
     "graphql": "^14.2.1",
     "juice": "5.2.0",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.12.0",
     "postgraphile": "^4.4.0-rc.1",
     "prismjs": "1.16.0",
     "react": "^16.8.6",
@@ -75,6 +75,6 @@
     "prettier": "1.17.0"
   },
   "optionalDependencies": {
-    "fsevents": "^2.0.6"
+    "fsevents": "^2.0.7"
   }
 }
