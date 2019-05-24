@@ -17,6 +17,7 @@ If you're using PostGraphile in `--watch` mode, you should be able to see in Pos
 - [Smart comment spec](#smart-comment-spec)
 - [Deprecating](#deprecating)
 - [Renaming](#renaming)
+- [Adding fake constraints](#constraints) (e.g. on views/custom types)
 - [Omitting](#omitting)
 - [Simple collections](#simple-collections)
 - [Composite types as function arguments](#composite-types-as-function-arguments)
@@ -145,11 +146,12 @@ comment on type flibble is
   E'@name flamble';
 ```
 
-#### Constraints
+### Constraints
 
 You can add "fake" constraints to types in PostgreSQL using smart comments.
 The primary use case for this is to make views act more table-like - allowing
-you to express the connections between tables and views.
+you to express the connections between tables and views. It's also useful
+on composite types.
 
 #### Not Null
 
