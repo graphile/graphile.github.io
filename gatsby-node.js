@@ -1,14 +1,7 @@
 const path = require("path");
 
 exports.createPages = async ({ actions, graphql }) => {
-  const { createPage, createRedirect } = actions;
-
-  createRedirect({
-    fromPath: `/`,
-    isPermanent: false,
-    redirectInBrowser: true,
-    toPath: `/postgraphile/`,
-  });
+  const { createPage } = actions;
 
   const layouts = {
     page: path.resolve(`src/templates/page.js`),
