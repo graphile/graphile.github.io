@@ -96,7 +96,16 @@ The syntax and features of the Postgres [`CREATE TABLE`](https://www.postgresql.
 > );
 > ```
 >
-> If you are going to use UUIDs as the primary key, it is recommended you use `uuid_generate_v1mc` to generate the ids. This is because `uuid_generate_v1mc` is time based which means the ids will be mostly sequential which is good for your primary key index.
+> Alternatively you could use fully random UUIDs:
+>
+> ```sql
+> create extension if not exists "pgcrypto";
+>
+> create table forum_example.person (
+>   id uuid primary key default gen_random_uuid(),
+>   ...
+> );
+> ```
 >
 > There are pros and cons to both approaches, choose what works best for your application!
 
