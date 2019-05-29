@@ -114,6 +114,7 @@ export default class SiteHeader extends React.Component {
                 />
                 <Route
                   path="/"
+                  exact
                   render={() => (
                     <li className="navbar-item">
                       <Link
@@ -129,6 +130,7 @@ export default class SiteHeader extends React.Component {
                 />
                 <Route
                   path="/"
+                  exact
                   render={() => (
                     <li className="navbar-item">
                       <a className="nav-link" to="https://discord.gg/graphile">
