@@ -9,7 +9,7 @@ import "prismjs/themes/prism-solarizedlight.css";
 
 export default class MarketingLayout extends Component {
   render() {
-    const { children, blue } = this.props;
+    const { children, blue, noheader = false } = this.props;
     return (
       <Layout {...this.props}>
         <div
@@ -33,9 +33,11 @@ export default class MarketingLayout extends Component {
               },
             ]}
           />
-          <Router>
-            <SiteHeader path="/*" />
-          </Router>
+          {noheader ? null : (
+            <Router>
+              <SiteHeader path="/*" />
+            </Router>
+          )}
           <div className="page-content">{children}</div>
           <SiteFooter />
         </div>
