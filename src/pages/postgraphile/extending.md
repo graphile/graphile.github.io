@@ -55,6 +55,21 @@ If you're using postgraphile as a library you can instead use the
 `appendPlugins` option which you should pass an array of plugin functions
 (you are responsible for importing these functions yourself).
 
+```js
+const ConnectionFilterPlugin = require("postgraphile-plugin-connection-filter");
+//...
+app.use(
+  postgraphile(process.env.DATABASE_URL, "app_public", {
+    appendPlugins: [
+      ConnectionFilterPlugin,
+      /* add any more plugins you need here */
+    ],
+    graphiql: true,
+  })
+);
+//...
+```
+
 Remember: multiple versions of `graphql` in your `node_modules` will cause
 problems; so we **strongly** recommend using the `graphql` object that's
 available on the `Build` object (second argument to hooks) rather than
