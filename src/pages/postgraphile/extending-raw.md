@@ -159,9 +159,10 @@ module.exports = function CreateLinkWrapPlugin(builder) {
       { scope: { isRootMutation, fieldName }, addArgDataGenerator }
     ) => {
       if (!isRootMutation || fieldName !== "createLink") {
-        // If it's not the root mutation, or the mutation isn't the 'createLink'
-        // mutation then we don't want to modify it - so return the input object
-        // unmodified.
+        // The 'GraphQLObjectType:fields:field' hook runs for every field on
+        // every object type in the schema. If it's not a field in the root
+        // mutation type, or the field isn't named 'createLink', we don't want
+        // to modify it in this hook - so return the input object unmodified.
         return field;
       }
 
