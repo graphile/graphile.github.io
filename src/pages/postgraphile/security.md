@@ -71,7 +71,7 @@ it as a string JWT token as part of your GraphQL response payload.
 For example, you might define a composite type such as this in PostgreSQL:
 
 ```sql
-create type my_private_schema.jwt_token as (
+create type my_public_schema.jwt_token as (
   role text,
   exp integer,
   person_id integer,
@@ -84,7 +84,7 @@ Then run postgraphile as:
 
 ```
 postgraphile \
-  --jwt-token-identifier my_private_schema.jwt_token \
+  --jwt-token-identifier my_public_schema.jwt_token \
   --jwt-secret $JWT_SECRET \
   -c postgres://user:pass@host/dbname \
   -s my_public_schema
@@ -96,12 +96,12 @@ And finally you might add a PostgreSQL function such as:
 create function my_public_schema.authenticate(
   email text,
   password text
-) returns my_private_schema.jwt_token as $$
+) returns my_public_schema.jwt_token as $$
 declare
-  account my_public_schema.person_account;
+  account my_private_schema.person_account;
 begin
   select a.* into account
-    from my_public_schema.person_account as a
+    from my_private_schema.person_account as a
     where a.email = authenticate.email;
 
   if account.password_hash = crypt(password, account.password_hash) then
@@ -111,7 +111,7 @@ begin
       account.person_id,
       account.is_admin,
       account.username
-    )::my_private_schema.jwt_token;
+    )::my_public_schema.jwt_token;
   else
     return null;
   end if;
@@ -228,7 +228,7 @@ the empty string); for example here's a helper function:
 ```sql
 create function current_user_id() returns integer as $$
   select nullif(current_setting('jwt.claims.user_id', true), '')::integer;
-$$ language sql stable security definer;
+$$ language sql stable;
 ```
 
 e.g. you might have a row level policy such as:
