@@ -3,3 +3,136 @@ layout: marketing
 path: /
 title: PostGraphile - full GraphQL API server in an instant from PostgreSQL database
 ---
+
+import MarketingLayout from "$components/MarketingLayout";
+import MailchimpSignup from "$components/MailchimpSignup";
+import Hero from "$components/Hero";
+import { Flex, Col } from "$components/Flex";
+import MarketingSection from "$components/MarketingSection";
+import MarketingDivide from "$components/MarketingDivide";
+import MarketingCodebox from "$components/MarketingCodebox";
+import MarketingBullets from "$components/MarketingBullets";
+import MarketingProduct from "$components/MarketingProduct";
+import postgresPostgraphileGraphql from "$images/postgres_postgraphile_graphql.png";
+import Testimonial from "$components/MarketingTestimonial";
+import GitHubButton from "react-github-btn";
+import COLOURS from "$components/colours";
+
+<MarketingLayout blue>
+<MarketingSection bg="dark" nopad>
+<div style={{height: '60px'}} />
+</MarketingSection>
+
+<MarketingSection bg="white">
+
+
+<Flex>
+  <Col className="center" span="8">
+    <img src={postgresPostgraphileGraphql} style={{ maxWidth: "80%" }} alt="PostGraphile" />
+  </Col>
+</Flex>
+
+### Extensible high-performance automatic GraphQL API for PostgreSQL
+
+
+<div class='df flex-row justify-center' style={{height: '3rem'}}>
+  <div class='ph2 df flex-column justify-center'>
+  <a class='button--outline' href='/postgraphile/introduction/'><span class='fas fa-book-open' /> Documentation</a>{ ' '}
+  </div>
+  <div class='ph2 df flex-column justify-center'>
+  <a class='button--solid' href='/postgraphile/'><span class='fas fa-arrow-right' /> Learn More</a>{ ' '}
+  </div>
+  <div class='ph2 df h-100 flex-column justify-center'>
+  <GitHubButton
+  href="https://github.com/graphile/postgraphile"
+  data-size="large"
+  data-show-count="true"
+  aria-label="Star graphile/postgraphile on GitHub">
+    Star
+  </GitHubButton>
+  </div>
+</div>
+
+</MarketingSection>
+
+<MarketingDivide from="white" to="medium" via="light" down />
+
+
+<MarketingSection bg="medium">
+
+## Database tools
+
+<Flex>
+<Col span="6">
+
+<MarketingProduct name="Graphile Worker" headline="High performance Node.js/PostgreSQL job queue" docs="https://github.com/graphile/worker"
+github="https://github.com/graphile/worker">
+Run jobs (e.g. sending emails, generating PDFs, …) "in the background" so
+that your HTTP response code is not held up. Starts jobs almost instantly (2ms latency).
+
+Used with any PostgreSQL-backed application.
+
+</MarketingProduct>
+
+</Col>
+<Col span="6">
+
+<MarketingProduct
+name="Graphile Migrate"
+tag="alpha"
+headline="Opinionated SQL-powered productive roll-forward migration tool for PostgreSQL."
+docs="https://github.com/graphile/migrate"
+github="https://github.com/graphile/migrate">
+
+Experimental, being developed in the open. Focusses on fast iteration speed.
+
+</MarketingProduct>
+</Col>
+</Flex>
+
+</MarketingSection>
+<MarketingDivide from="medium" to="nodes" />
+<MarketingSection bg="nodes">
+<MarketingProduct big name="Professional Support" headline="Guaranteed response to critical issues in under 1 business day" more="/support/">
+Give your team access to the knowledge and experience of PostGraphile's maintainer for any issues you face whilst using Graphile tools. 
+</MarketingProduct>
+
+</MarketingSection>
+<MarketingDivide from="nodes" to="dark" />
+
+<MarketingSection bg="dark">
+
+
+<Flex>
+<Col span="6">
+
+<img
+src="/images/graphile.optimized.svg"
+alt="Graphile Heart"
+class='mw5 pt4'
+/>
+
+</Col>
+<Col span="6">
+<MarketingProduct
+big
+name="Graphile Engine"
+headline="Build high-performance easily-extensible GraphQL schemas by combining plugins"
+docs="/graphile-build/getting-started/"
+more="/graphile-build/"
+>
+
+Graphile Engine is the database-independent heart of PostGraphile — it's an
+extremely powerful way to build extensible automatic GraphQL APIs over any
+data source.
+
+</MarketingProduct>
+</Col>
+</Flex>
+
+
+</MarketingSection>
+<MarketingDivide from="dark" to="white" via="light" down />
+
+
+</MarketingLayout>

@@ -7,14 +7,15 @@ export default function MarketingSection({
   bg,
   left,
   maxWidth,
+  nopad = false,
 }) {
   return (
     <div
       className={
         className +
-        ` pv3 ma0 marketing-section marketing-section-${bg} ${
-          left ? "tl" : "tc"
-        }`
+        ` ${
+          nopad ? "pv0" : "pv3"
+        } ma0 marketing-section marketing-section-${bg} ${left ? "tl" : "tc"}`
       }
       style={{ backgroundColor: COLOURS[bg], color: TEXT[bg] }}
     >

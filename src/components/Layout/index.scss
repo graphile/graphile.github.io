@@ -501,7 +501,7 @@ h6 code {
   @extend .f7;
   @extend .input-reset;
   @extend .link;
-  @extend .mb2;
+  @extend .mv2;
   @extend .no-underline-hover;
   @extend .ph3;
   @extend .pointer;
@@ -944,4 +944,13 @@ a.inherit-color {
 
 svg.MarketingDivide {
   margin: -1px 0;
+}
+
+.product-tile {
+}
+.product {
+  background-color: #1b3956;
+  color: white;
+  margin: 0.5rem;
+  padding: 0.5rem;
 }

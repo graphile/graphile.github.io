@@ -101,32 +101,40 @@ export default class SiteHeader extends React.Component {
                     <li className="navbar-item">
                       <Link
                         className={`nav-link ${
-                          location.pathname.match(/^\/postgraphile(\/|$)/)
+                          location.pathname.match(/^\/sponsor(\/|$)/)
                             ? "active"
                             : ""
                         }`}
-                        to="/postgraphile/"
+                        to="/sponsor/"
                       >
-                        PostGraphile
+                        Sponsor
                       </Link>
                     </li>
                   )}
                 />
                 <Route
-                  exact
                   path="/"
                   render={() => (
                     <li className="navbar-item">
                       <Link
                         className={`nav-link ${
-                          location.pathname.match(/^\/graphile-build(\/|$)/)
-                            ? "active"
-                            : ""
+                          location.pathname.match(/^\/news\/?$/) ? "active" : ""
                         }`}
-                        to="/graphile-build/"
+                        to="/news/"
                       >
-                        Graphile Engine
+                        News
                       </Link>
+                    </li>
+                  )}
+                />
+                <Route
+                  path="/"
+                  render={() => (
+                    <li className="navbar-item">
+                      <a className="nav-link" to="https://discord.gg/graphile">
+                        Chat{" "}
+                        <span className="fas fa-external-link-square-alt" />{" "}
+                      </a>
                     </li>
                   )}
                 />

@@ -1,9 +1,11 @@
 import React from "react";
 
-export function Flex({ className = "", children }) {
+export function Flex({ className = "", center = false, children }) {
   return (
     <div className={className + " container"}>
-      <div className="row flex-wrap">{children}</div>
+      <div className={`row flex-wrap ${center ? "justify-center" : null}`}>
+        {children}
+      </div>
     </div>
   );
 }
