@@ -142,8 +142,8 @@ their account is created or logging failed authentication attempts.
 Previously we used `GraphQLObjectType:fields` to add a field, as that
 manipulates the list of fields. This time we are manipulating an individual
 field, so we will use the `GraphQLObjectType:fields:field` hook. This makes
-our intent clear, and also grants us access to the `addArgDataGenerator`
-function we need to request the record id. (Read more about the different hooks [in the Graphile Engine docs](/graphile-build/all-hooks/).)
+our intent clear, and also grants us access to [the `addArgDataGenerator`](https://www.graphile.org/graphile-build/look-ahead/#when-processing-arguments-addargdatagenerator)
+function which we need to request the record id. The following example also uses an instance of [`queryBuilder.`](http://localhost:8000/postgraphile/make-extend-schema-plugin/#querybuilder) (Read more about the different hooks [in the Graphile Engine docs](/graphile-build/all-hooks/).)
 
 ```js
 function performAnotherTask(linkId) {
