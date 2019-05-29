@@ -37,8 +37,7 @@ constraints that utilise multiple columns, in the [PostgreSQL
 documentation](https://www.postgresql.org/docs/10/static/ddl-constraints.html#DDL-CONSTRAINTS-FK).
 
 PostGraphile detects and exposes one-to-one, one-to-many and many-to-one
-relations automatically. Many-to-many relationships can be traversed via
-their join table, but we don't have shortcut relations for these yet.
+relations automatically. Many-to-many relationships can be handled with the [many-to-many relations plugin](https://github.com/graphile-contrib/pg-many-to-many).
 
 By default, relations are exposed as GraphQL fields using a camelCase
 combination of the target type and the source fields (inflectors:
@@ -49,7 +48,9 @@ directly, non-unique constraints expose a
 relations expose support pagination, [filtering](/postgraphile/filtering/),
 and ordering.
 
-### Example database schema
+### Examples
+
+#### Example database schema for one-to-many relation
 
 ```sql
 create schema a;
@@ -72,7 +73,7 @@ create table a.post (
 );
 ```
 
-### Example query against this schema
+#### Example query against the above schema
 
 ```graphql
 {
@@ -90,4 +91,36 @@ create table a.post (
     }
   }
 }
+```
+
+#### Many-to-many relations
+
+Many-to-many relations can be handled with the [many-to-many relations plugin](https://github.com/graphile-contrib/pg-many-to-many) or by using a computed column that returns `setof`:
+
+```sql
+
+create table post (
+  id serial primary key,
+  headline text,
+  body text
+);
+create table author (
+  id serial primary key,
+  name text
+);
+create table post_author (
+  post_id integer references post,
+  author_id integer references author,
+  primary key (post_id, author_id)
+);
+
+create function "post_authorsByPostId"(p post)
+returns setof author as $$
+  select author.*
+  from author
+  inner join post_author
+  on (post_author.author_id = author.id)
+  where post_author.post_id = p.id;
+$$ language sql stable;
+
 ```
