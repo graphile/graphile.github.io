@@ -1,8 +1,9 @@
 {
-  "name": "gatsby-starter-default",
-  "description": "Gatsby default starter",
+  "name": "graphile-org",
+  "private": true,
+  "description": "Graphile website",
   "version": "1.0.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Graphile Ltd.",
   "dependencies": {
     "@graphile-contrib/pg-simplify-inflector": "5.0.0-beta.1",
     "@mdx-js/mdx": "^1.0.20",
@@ -52,10 +53,6 @@
     "typography-theme-fairy-gates": "^0.16.19",
     "typography-theme-funston": "^0.16.19"
   },
-  "keywords": [
-    "gatsby"
-  ],
-  "license": "MIT",
   "main": "n/a",
   "scripts": {
     "build": "./scripts/update && gatsby build",
