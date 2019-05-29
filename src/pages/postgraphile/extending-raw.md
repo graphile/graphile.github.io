@@ -139,6 +139,12 @@ and performs an action after the link has been saved. You could use a plugin
 like this to achieve many different tasks, including emailing a user after
 their account is created or logging failed authentication attempts.
 
+Previously we used `GraphQLObjectType:fields` to add a field, as that
+manipulates the list of fields. This time we are manipulating an individual
+field, so we will use the `GraphQLObjectType:fields:field` hook. This makes
+our intent clear, and also grants us access to the `addArgDataGenerator`
+function we need to request the record id. (Read more about the different hooks [in the Graphile Engine docs](/graphile-build/all-hooks/).)
+
 ```js
 function performAnotherTask(linkId) {
   console.log(`We created link ${linkId}!`);
