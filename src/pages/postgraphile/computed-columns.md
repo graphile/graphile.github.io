@@ -40,7 +40,7 @@ Will create a computed column for your table named `person`, which can be querie
 
 ```graphql{5}
 {
-  person(id: …) {
+  personById(id: …) {
     # nodeId, id, ...
 
     fullName # A computed column, but the client doesn’t even know!
@@ -90,9 +90,19 @@ You can add parameters to your computed column field by declaring additional par
 create function my_schema.users_greet(
   u my_schema.users,  --- required table type parameter, unexposed
   greeting text       --- additional parameter, will be exposed
-) returns varchar as $$
+) returns text as $$
   select greeting || ', ' || u.first_name || ' ' || u.last_name || '!';
 $$ language sql stable strict;
+```
+
+which can be queried like:
+
+```graphql{5}
+{
+  userById(id: …) {
+    greet(greeting: "Greetings and salutations")
+  }
+}
 ```
 
 ### Advice
