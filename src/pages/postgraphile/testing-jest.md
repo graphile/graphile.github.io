@@ -391,7 +391,7 @@ const { setup, teardown, runGraphQLQuery } = require("../test_helper");
 beforeAll(setup);
 afterAll(teardown);
 
-test("GraphQL query nodeId", () => {
+test("GraphQL query nodeId", async () => {
   await runGraphQLQuery(
     // GraphQL query goes here:
     `{ nodeId }`,
@@ -404,7 +404,7 @@ test("GraphQL query nodeId", () => {
     {
       // Assuming you're using Passport.js / pgSettings, you could pretend
       // to be logged in by setting `req.user` to `{id: 17}`:
-      user: { id: 17 }
+      user: { id: 17 },
     },
 
     // This function runs all your test assertions:
