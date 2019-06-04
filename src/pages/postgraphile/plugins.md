@@ -180,7 +180,7 @@ If you are using postgraphile as a library (i.e. middleware) and you want to mak
 const graphiqlBrandingTweak = {
     ['postgraphile:graphiql:html'](html) {
         console.log("Applying GraphiQL Branding Tweak...");
-        return html.replace('i.a.createElement("div",null,"PostGraph",i.a.createElement("em",null,"i"),"QL")', '"GraphiQL for MyCompany"');
+        return html.replace('</head>', '<style type="text/css">div.topBar > div.title > div { visibility: hidden; display: none !important; } div.topBar > div.title::after { content: "GraphiQL for MyCompany" }</style></head>');
     },
 };
 const pluginHook = makePluginHook([graphiqlBrandingTweak]);
