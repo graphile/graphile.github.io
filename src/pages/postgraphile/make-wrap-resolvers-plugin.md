@@ -171,17 +171,11 @@ to 'rollback' the SQL transation if the custom code fails.
 ```ts
 export const CreatePostPlugin = makeWrapResolversPlugin({
   Mutation: {
-    async createPost(
-      resolve: any,
-      _source,
-      _args,
-      context: any,
-      _resolveInfo
-    ) {
+    async createPost(resolve: any, _source, _args, context: any, _resolveInfo) {
       // Extract the pgClient (already in a transaction) from context:
       const { pgClient } = context;
       // Create a savepoint we can restore to
-      await pgClient.query('savepoint mutation_wrapper');
+      await pgClient.query("savepoint mutation_wrapper");
       // Run the original resolver
       const result = await resolve();
       try {
@@ -189,11 +183,14 @@ export const CreatePostPlugin = makeWrapResolversPlugin({
         await doCustomThing();
       } catch (e) {
         // Something went wrong - rollback!
-        await pgClient.query('rollback to savepoint mutation_wrapper');
+        // NOTE: Do NOT rollback entire transaction as a transaction maybe
+        // shared across multiple mutations. Rolling back to the above defined
+        // savepoint allows other mutations to succeed.
+        await pgClient.query("rollback to savepoint mutation_wrapper");
         // Re-throw the error so the GraphQL client knows about it
         throw e;
       } finally {
-        await pgClient.query('release savepoint mutation_wrapper');
+        await pgClient.query("release savepoint mutation_wrapper");
       }
       // Finally return the result of our original mutation
       return result;
@@ -202,7 +199,7 @@ export const CreatePostPlugin = makeWrapResolversPlugin({
 });
 
 async function doCustomThing() {
-  throw new Error('to be implemented')
+  throw new Error("to be implemented");
 }
 ```
 
