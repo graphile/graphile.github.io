@@ -103,6 +103,26 @@ module.exports = makeWrapResolversPlugin({
 });
 ```
 
+This example shows a different order of operation.
+It uses the default resolver of the `User.email` field
+to get the actual value, but then masks the value instead of omitting it.
+
+```js
+const { makeWrapResolversPlugin } = require("graphile-utils");
+
+module.exports = makeWrapResolversPlugin({
+  User: {
+    email: {
+      resolve(resolver, user, args, context, _resolveInfo) {
+        const unmaskedValue = await resolver();
+        // someone@sub.example.com -> so***@su***.com
+        return unmaskedValue.replace(/^(.{1,2})[^@]*@(.{,2})[^.]*\.([A-z]{2,})$/, '$1***@$2***.$3');
+      },
+    },
+  },
+});
+```
+
 ### Method 2: wrap all resolvers matching a filter
 
 ```typescript
