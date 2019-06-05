@@ -113,7 +113,7 @@ const { makeWrapResolversPlugin } = require("graphile-utils");
 module.exports = makeWrapResolversPlugin({
   User: {
     email: {
-      resolve(resolver, user, args, context, _resolveInfo) {
+      async resolve(resolver, user, args, context, _resolveInfo) {
         const unmaskedValue = await resolver();
         // someone@sub.example.com -> so***@su***.com
         return unmaskedValue.replace(/^(.{1,2})[^@]*@(.{,2})[^.]*\.([A-z]{2,})$/, '$1***@$2***.$3');
