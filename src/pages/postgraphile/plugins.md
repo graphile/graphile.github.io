@@ -168,4 +168,27 @@ An example of a PostGraphile server plugin is [@graphile/operation-hooks](https:
 - uses `cli:library:options` to convert these CLI options to library options
 - uses `postgraphile:options` to a) convert the library options into graphileBuildOptions (Graphile Engine plugin options), and b) load the OperationHooksPlugin
 
+### Inline tweaks via pluginHook
+
+If you are using postgraphile as a library (i.e. middleware) and you want to make a quick tweak to something using the server plugin hooks, you can do so in your main server.js file:
+
+```js
+
+/**
+ * This plugin override changes the branding piece of graphiql.
+ */
+const graphiqlBrandingTweak = {
+    ['postgraphile:graphiql:html'](html) {
+        console.log("Applying GraphiQL Branding Tweak...");
+        return html.replace('</head>', '<style type="text/css">div.topBar > div.title > div { visibility: hidden; display: none !important; } div.topBar > div.title::after { content: "GraphiQL for MyCompany" }</style></head>');
+    },
+};
+const pluginHook = makePluginHook([graphiqlBrandingTweak]);
+
+const postGraphileMiddleware = postgraphile(databaseUrl, "app_public", {
+  pluginHook,
+  // ...
+});
+```
+
 If you need help writing your own PostGraphile server plugins, [ask in our Discord chat](http://discord.gg/graphile).
