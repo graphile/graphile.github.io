@@ -182,6 +182,47 @@ export default makeWrapResolversPlugin(
 );
 ```
 
+### Leveraging PostgreSQL transaction
+
+If you want a mutation to succeed only if some custom code succeeds, you
+can do that plugging into the current PostgreSQL transaction. This allows you
+to 'rollback' the SQL transation if the custom code fails.
+
+```ts
+export const CreatePostPlugin = makeWrapResolversPlugin({
+  Mutation: {
+    async createPost(resolve: any, _source, _args, context: any, _resolveInfo) {
+      // The pgClient on context is already in a transaction configured for the user:
+      const { pgClient } = context;
+      // Create a savepoint we can roll back to
+      await pgClient.query("SAVEPOINT mutation_wrapper");
+      try {
+        // Run the original resolver
+        const result = await resolve();
+        // Do the custom thing
+        await doCustomThing();
+      } catch (e) {
+        // Something went wrong - rollback!
+        // NOTE: Do NOT rollback entire transaction as a transaction may be
+        // shared across multiple mutations. Rolling back to the above defined
+        // SAVEPOINT allows other mutations to succeed.
+        await pgClient.query("ROLLBACK TO SAVEPOINT mutation_wrapper");
+        // Re-throw the error so the GraphQL client knows about it
+        throw e;
+      } finally {
+        await pgClient.query("RELEASE SAVEPOINT mutation_wrapper");
+      }
+      // Finally return the result of our original mutation
+      return result;
+    },
+  },
+});
+
+async function doCustomThing() {
+  throw new Error("to be implemented");
+}
+```
+
 ### Resolver wrapper functions
 
 A resolver wrapper function is similar to a GraphQL resolver, except it takes an additional argument (at the start) which allows delegating to the resolver that is being wrapped. If and when you call the `resolve` function, you may optionally pass one or more of the arguments `source, args, context, resolveInfo`; these will then override the values that the resolver will be passed. Calling `resolve()` with no arguments will just pass through the original values unmodified.
