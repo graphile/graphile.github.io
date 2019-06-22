@@ -222,6 +222,50 @@ const client = new ApolloClient({
 });
 ```
 
+If you manually build the payload of your http request, you should provide an array of queries to be executed as a batch. Example for a batch of 3 queries:
+
+```json
+[
+  {
+    "query": "...",
+    "operationName": "...",
+    "variables": {
+      someVariable: "..."
+    }
+  },
+  {
+    "query": "...",
+    "operationName": "...",
+    "variables": {
+      someVariable: "..."
+    }
+  },
+  {
+    "query": "...",
+    "operationName": "...",
+    "variables": {
+      someVariable: "..."
+    }
+  }
+]
+```
+
+The response returned by PostGraphile is an array of the response of each query. Example for a batch of 3 queries including one error:
+
+```json
+[
+  {
+    "data": [...]
+  },
+  {
+    "data": [...]
+  },
+  {
+    "errors": [...]
+  }
+]
+```
+
 ### Order! Order!
 
 Connections now support ordering by an array of columns rather than just one -
