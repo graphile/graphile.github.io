@@ -230,21 +230,21 @@ If you manually build the payload of your http request, you should provide an ar
     "query": "...",
     "operationName": "...",
     "variables": {
-      someVariable: "..."
+      "someVariable": "..."
     }
   },
   {
     "query": "...",
     "operationName": "...",
     "variables": {
-      someVariable: "..."
+      "someVariable": "..."
     }
   },
   {
     "query": "...",
     "operationName": "...",
     "variables": {
-      someVariable: "..."
+      "someVariable": "..."
     }
   }
 ]
