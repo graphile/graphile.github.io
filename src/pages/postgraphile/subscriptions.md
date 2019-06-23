@@ -284,7 +284,7 @@ All topics requested from GraphQL are automatically prefixed with
   remember to add it to the topic when you perform `NOTIFY` otherwise
   subscribers will not see the messages.
 
-\* _Customisable via `pgSubscriptionPrefix` setting._
+\* _This is applied by default, but you can override it via `pgSubscriptionPrefix` setting in the `graphileBuildOptions` object; e.g. `postgraphile(DATABASE_URL, SCHEMAS, {pluginHook, subscriptions: true, graphileBuildOptions: { pgSubscriptionPrefix: "MyPrefix:"}})`. Note further that this setting only applies to simple subscriptions, custom subscriptions have no automatic prefix._
 
 For example a user may perform the following subscription:
 
