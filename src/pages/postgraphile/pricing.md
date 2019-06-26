@@ -246,7 +246,7 @@ The [Pro plugin EULA](https://store.graphile.com/eulas/postgraphile-pro/) states
 
 > use up to four Production Instances and up to 100 Development Instances of the Software
 
-This is enough to cover a small cluster of PostGraphile 4 servers. If you
+This is enough to cover a small cluster of 4 PostGraphile servers. If you
 will be running a larger cluster than this, please [get in
 touch](mailto:team@graphile.org?subject=Large%20cluster) for custom
 licensing.
