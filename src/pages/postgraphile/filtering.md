@@ -46,4 +46,4 @@ check it out!
 
 Some more of the community plugins relate to filtering, you can read more
 about them on the [community plugins
-page](http://graphile.meh/postgraphile/community-plugins/)
+page](/postgraphile/community-plugins/)
