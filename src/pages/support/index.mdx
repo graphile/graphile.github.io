@@ -105,7 +105,9 @@ Price: $125/mo (+ VAT where applicable)
 <MarketingSection bg="dark">
 <div className="f4 tl" style={{maxWidth: '50rem', margin: '0 auto'}}>
 
-### Severity
+## FAQ
+
+### How is severity classified?
 
 We classify the severity of incoming support requests according to these classes:
 
@@ -114,7 +116,60 @@ We classify the severity of incoming support requests according to these classes
 - **moderate**: a core function of the Software is impaired, where the impairment does not constitute a serious issue; or a non-core function of the Software is significantly impaired; and
 - **minor**: any impairment of the Software not falling into the above categories; and any cosmetic issue affecting the Software or its documentation.
 
+### Does the support plan cover large/complex deployments, and multi-stage QA pipelines?
 
+The advertised fee is not affected by how you deploy, or how many development
+environments you have. However, you should note that the support plan
+covers PostGraphile issues only, it does not cover external concerns such as
+your servers, routing, proxying and deployment — we cannot help you debug your
+Kubernetes cluster, or help spot an issue in your nginx config.
+
+### Do support hours rollover from month to month?
+
+No; you are not paying for "support hours," you are paying for access to
+support within a guaranteed timeframe if you hit a bug in the PostGraphile
+software, or an issue with your use of PostGraphile where the solution is not
+well documented. We're a small open source company with limited resources, so
+we must apply a cap to the hours we can spend helping you so that we can
+honour our other responsibilities. In normal situations you should never come
+near to this cap, since we can answer most queries rapidly.
+
+### What kind of things can the support be used for?
+
+The main use case for PostGraphile support is that if you hit a bug in
+PostGraphile, we can help you to understand it, and advise you on how to work
+around the issue until a fix is available. Given PostGraphile's MIT license
+(which disclaims all liabilities), having the guarantee of a rapid response
+to production issues you may face is the main value proposition of the
+support plan.
+
+A secondary use case is if the PostGraphile documentation is unclear or
+lacking in a particular area, we can prioritise fixing it, and can provide
+you with a solution/explanation in the interrim.
+
+Experimental features of PostGraphile (these are marked with 'experimental'
+or 'EXPERIMENTAL' in the documentation) are not officially covered under the
+support agreement, but if we're able we will try and help you with these
+also.
+
+Support **cannot** be used:
+
+- for general consulting
+- for brainstorming
+- for development of new features or plugins
+
+Should you require these services, we have other options such as [one-on-one
+ad-hoc consulting](https://supersaas.co.uk/schedule/Benjie/One_on_One) or
+longer consulting and/or software development contracts. Please [get in
+touch](mailto:team@graphile.com?subject=Support%20enquiry) for more
+information.
+
+### What other benefits does a support plan give me?
+
+On [our Discord chat](http://discord.gg/graphile), members are given coloured
+name badges if they support PostGraphile in some way (sponsorship, support
+plan, etc). Unofficially, we can allocate more time to helping these
+members with coloured name badges.
 
 </div>
 </MarketingSection>

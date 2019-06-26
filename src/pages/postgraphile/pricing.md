@@ -240,12 +240,53 @@ first-party only then you would use a GraphQL query whitelist (e.g. persisted
 queries) for this purpose; although the Pro features can still be helpful to
 dissuade your developers from building expensive queries!)
 
+### Does the licenses cover my production cluster?
+
+The [Pro plugin EULA](https://store.graphile.com/eulas/postgraphile-pro/) states you may:
+
+> use up to four Production Instances and up to 100 Development Instances of the Software
+
+This is enough to cover a small cluster of PostGraphile 4 servers. If you
+will be running a larger cluster than this, please [get in
+touch](mailto:team@graphile.org?subject=Large%20cluster) for custom
+licensing.
+
+### How many licenses do I need to cover my multiple development/testing stages?
+
+The [Pro plugin EULA](https://store.graphile.com/eulas/postgraphile-pro/) states you may:
+
+> use up to four Production Instances and up to 100 Development Instances of the Software
+
+"Development Instance" is defined as "an Instance that is used to support
+development, testing or deployment of a Production Instance", which covers
+standard development, staging, QA and similar environments.
+
+If you have larger needs than this, please [get in
+touch](mailto:team@graphile.org?subject=Large%20cluster) for custom
+licensing.
+
 ### Where are the @graphile/pro docs/changelog?
 
 You can read the [@graphile/pro README on
 npm](https://www.npmjs.com/package/@graphile/pro). There's also a lot more
 information in the [Production Considerations](/postgraphile/production/) page
 on this website.
+
+### Is the fulfillment of the license key automated?
+
+Yes, license keys are issued automatically by our store software upon
+completion of the payment process.
+
+### Do license keys "phone home"?
+
+No, license keys are static and contain all the necessary claims, not
+dissimilar to JWTs. Our software does not "phone home."
+
+You are not permitted to use the software once the EULA terminates (e.g. if
+you stop paying). We trust you, and want to minimise your maintenance burden,
+so the automated keys expire after one year rather than one month. You will
+be able to issue new keys via the store when your key is near to expiry.
+Please do not abuse our trust.
 
 ### Commercial plugins help fund development on PostGraphile
 
@@ -256,7 +297,7 @@ fixes to be developed and released faster.
 
 ### I'm an enterprise user and need X, Y and Z
 
-Please [get in touch](mailto:benjie@graphile.org?subject=Enterprise) and I'll
+Please [get in touch](mailto:team@graphile.org?subject=Enterprise%20enquiry) and I'll
 be happy to help!
 
 </div>
