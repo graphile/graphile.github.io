@@ -36,7 +36,7 @@ the below first though!)
 Patreon](https://www.patreon.com/benjie)** - you'll benefit from faster fixes,
 more features, and better performance. If you need a more commercially
 justifiable way of funding the project then please [get in
-touch](mailto:benjie@graphile.org?subject=PostGraphile).
+touch](mailto:team@graphile.org?subject=Giving%20back).
 
 ### Deprecations
 
