@@ -29,14 +29,25 @@ _We also have alpha-quality support for [`koa`
 To use PostGraphile with `express`, for instance, just do the following:
 
 ```js
-const express = require("express");
-const { postgraphile } = require("postgraphile");
+const express = require('express');
+const { postgraphile } = require('postgraphile');
 
 const app = express();
 
-app.use(postgraphile(process.env.DATABASE_URL || "postgres:///"));
+const schemaName = 'public';
+const databaseName = 'enterDBName'
+const database =
+  process.env.DATABASE_URL ||
+  `postgres://username:password@localhost:5432/${databaseName}`;
+const pglConfig = {
+  watchPg: true,
+  graphiql: true,
+  enhanceGraphiql: true,
+};
+app.use(postgraphile(database, schemaName, pglConfig));
 
 app.listen(process.env.PORT || 3000);
+
 ```
 
 Or to use it with the built-in `http` module:
