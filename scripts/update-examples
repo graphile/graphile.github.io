@@ -4,7 +4,6 @@
 
 const fs = require("fs");
 const pg = require("pg");
-const fetch = require("node-fetch");
 const prettier = require("prettier");
 const { graphql } = require("graphql");
 const child_process = require("child_process");
@@ -94,12 +93,9 @@ async function tryPsql(flags, sql) {
 }
 
 async function main() {
-  const schemaSql = await (await fetch(
-    "https://raw.githubusercontent.com/graphile/examples/master/data/schema.sql"
-  )).text();
-  const dataSql = await (await fetch(
-    "https://raw.githubusercontent.com/graphile/examples/master/db/999_data.sql"
-  )).text();
+  const schemaSql = fs.readFileSync("../examples/db/schema.sql", "utf8");
+  const dataSql = fs.readFileSync("../examples/db/999_data.sql", "utf8");
+
   try {
     await spawn("dropdb", ["graphile_org_demo"]);
   } catch (e) {
