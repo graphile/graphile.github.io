@@ -77,6 +77,12 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
 
 COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UUIDs)';
 
+--
+-- Name: html; Type: DOMAIN; Schema: public; Owner: -
+--
+
+CREATE DOMAIN public.html AS text;
+
 
 SET default_tablespace = '';
 
@@ -1042,7 +1048,7 @@ CREATE TABLE app_public.topics (
     forum_id integer NOT NULL,
     author_id integer DEFAULT app_public.current_user_id() NOT NULL,
     title text NOT NULL,
-    body text DEFAULT ''::text NOT NULL,
+    body public.html DEFAULT '' NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
     CONSTRAINT topics_title_check CHECK ((length(title) > 0))
@@ -1205,7 +1211,7 @@ CREATE TABLE app_public.posts (
     id integer NOT NULL,
     topic_id integer NOT NULL,
     author_id integer DEFAULT app_public.current_user_id() NOT NULL,
-    body text DEFAULT ''::text NOT NULL,
+    body public.html DEFAULT '' NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL
 );
