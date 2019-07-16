@@ -1,6 +1,7 @@
 import React from "react";
 import { upperFirst } from "lodash";
 import fallbackAvatar from "../images/avatar.svg";
+import { normalize } from "upath";
 
 const LevelContext = React.createContext(null);
 
@@ -31,10 +32,10 @@ export default function MarketingSponsors({ level, children }) {
   );
 }
 
-function Avatar({ src }) {
+function Avatar({ src, style }) {
   return (
     <img
-      style={{ borderRadius: "10rem", width: "5rem", height: "5rem" }}
+      style={{ borderRadius: "10rem", width: "5rem", height: "5rem", ...style }}
       src={src || fallbackAvatar}
     />
   );
@@ -43,11 +44,13 @@ function Avatar({ src }) {
 export class Sponsor extends React.Component {
   static contextType = LevelContext;
   render() {
-    const { name, contributor, avatar, plain } = this.props;
+    const { name, contributor, avatar, plain, href } = this.props;
     const level = this.context;
     const showAvatar = level === "featured" || level === "leaders";
+    const Component = href ? "a" : "div";
     return (
-      <div
+      <Component
+        href={href}
         style={{
           display: "flex",
           flexDirection: "column",
@@ -61,11 +64,20 @@ export class Sponsor extends React.Component {
           margin: "0.5em",
           borderRadius: 0,
           minHeight: showAvatar ? "8em" : "3em",
+          fontWeight: "normal",
         }}
       >
-        {showAvatar ? <Avatar src={avatar} /> : null}
+        {showAvatar ? (
+          <Avatar
+            src={avatar}
+            style={{
+              width: "4em",
+              height: "4em",
+            }}
+          />
+        ) : null}
         <span>{name}</span>
-      </div>
+      </Component>
     );
   }
 }
