@@ -17,6 +17,10 @@ import postgresPostgraphileGraphql from "$images/postgres_postgraphile_graphql.p
 import Testimonial from "$components/MarketingTestimonial";
 import GitHubButton from "react-github-btn";
 import COLOURS from "$components/colours";
+import Sponsors, {Sponsor} from '$components/MarketingSponsor';
+
+import chad from '$images/sponsors/chadf.png';
+import timescale from '$images/sponsors/timescale.svg';
 
 <MarketingLayout blue>
 <MarketingSection bg="dark" nopad>
@@ -91,7 +95,39 @@ Experimental, being developed in the open. Focusses on fast iteration speed.
 </Flex>
 
 </MarketingSection>
-<MarketingDivide from="medium" to="nodes" />
+
+<MarketingDivide from="medium" to="light" down />
+
+<MarketingSection bg="light">
+
+## Crowd-funded open-source software
+
+
+<div style={{maxWidth: '48rem', margin: '0 auto'}}>
+
+We're extremely grateful to our sponsors, for helping to fund ongoing
+development on PostGraphile, Graphile Engine, Graphile Worker and Graphile
+Migrate.  
+**THANK YOU!**
+
+</div>
+
+### Featured Sponsors:
+
+<Sponsors level="featured">
+
+<Sponsor name="Chad Furman" avatar={chad} />
+<Sponsor name="Timescale" avatar={timescale} href="https://timescale.com"/>
+
+</Sponsors>
+
+<a class='button--solid-light' href='/sponsor/'><span class='fas fa-arrow-right' /> Learn more about sponsors and sponsorship</a>
+
+
+</MarketingSection>
+
+
+<MarketingDivide from="light" to="nodes" />
 <MarketingSection bg="nodes">
 <MarketingProduct big name="Professional Support" headline="Guaranteed response to critical issues in under 1 business day" more="/support/">
 Give your team access to the knowledge and experience of PostGraphile's maintainer for any issues you face whilst using Graphile tools. 

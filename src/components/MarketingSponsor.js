@@ -13,13 +13,13 @@ export default function MarketingSponsors({ level, children }) {
           className="flex"
           style={{
             justifyItems: "stretch",
-            justifyContent: "space-around",
+            justifyContent: "center",
             alignItems: "stretch",
             flexWrap: "wrap",
 
             fontSize:
               level === "featured"
-                ? "1.6rem"
+                ? "1.85rem"
                 : level === "leaders"
                 ? "1.25rem"
                 : "1rem",
