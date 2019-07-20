@@ -28,5 +28,4 @@ There are other potential conflicts too, if you discover more conflicts then ple
 
 If there exists multiple schemas with the same table name inside of them, it can cause issues with the `nodeId: ID` (or `id: ID`) field, by making IDs which are not globally unique. Calls utilizing those IDs may return unexpected results. In order to avoid this, we must disable the `PgNodeAliasPostGraphile` plugin, and therefore use the GraphQL type name rather than the PostgreSQL table name in the identifiers. On the CLI you'd do this like: `postgraphile --skip-plugins graphile-build-pg:PgNodeAliasPostGraphile`.
 
-To support non-unique table names you should implement an [inflection override](https://www.graphile.org/postgraphile/inflection/#overriding-inflection---general) that will change how the GraphQL type names are generated from the raw table name.
-
+To support non-unique table names you should implement an [inflection override](/postgraphile/inflection/#overriding-inflection---general) that will change how the GraphQL type names are generated from the raw table name.
