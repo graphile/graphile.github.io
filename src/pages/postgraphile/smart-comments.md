@@ -200,7 +200,19 @@ comment on materialized view my_materialized_view is E'@foreignKey (key_1, key_2
 comment on type my_composite_type is E'@foreignKey (my_table_id) references my_table';
 ```
 
-#### Example
+#### Adding smart comments to fake constraints
+
+If you need to apply any smart comments to a fake constraint, you cannot use
+newlines (`\n`) because they will be interpretted as separate smart comments
+on the original entity. We've added a workaround for this: you can use the
+pipe (`|`) symbol to assign smart comments to the fake constraint, for example
+to rename the fake constraint:
+
+```sql
+comment on materialized view my_materialized_view is E'@foreignKey (post_id) references posts (id)|@fieldName yourNameHere';
+```
+
+### Example
 
 Here is a basic table, with the name changed from `original_table` to `renamed_table`:
 
