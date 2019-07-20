@@ -26,7 +26,7 @@ middleware for the following HTTP frameworks:
 _We also have alpha-quality support for [`koa`
 2.0](https://www.npmjs.com/package/koa), if you notice any problems [please raise a GitHub issue about it.](https://www.github.com/graphile/postgraphile)_
 
-To use PostGraphile with `express`, for instance, just do the following:
+To use PostGraphile with `express`, for instance, a small example would be:
 
 ```js
 const express = require("express");
@@ -34,7 +34,17 @@ const { postgraphile } = require("postgraphile");
 
 const app = express();
 
-app.use(postgraphile(process.env.DATABASE_URL || "postgres:///"));
+app.use(
+  postgraphile(
+    process.env.DATABASE_URL || "postgres://user:pass@host:5432/dbname",
+    "public",
+    {
+      watchPg: true,
+      graphiql: true,
+      enhanceGraphiql: true,
+    }
+  )
+);
 
 app.listen(process.env.PORT || 3000);
 ```
@@ -46,7 +56,17 @@ const http = require("http");
 const { postgraphile } = require("postgraphile");
 
 http
-  .createServer(postgraphile(process.env.DATABASE_URL || "postgres:///"))
+  .createServer(
+    postgraphile(
+      process.env.DATABASE_URL || "postgres://user:pass@host:5432/dbname",
+      "public",
+      {
+        watchPg: true,
+        graphiql: true,
+        enhanceGraphiql: true,
+      }
+    )
+  )
   .listen(process.env.PORT || 3000);
 ```
 
