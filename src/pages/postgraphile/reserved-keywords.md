@@ -23,3 +23,10 @@ converts between these for you.
 - [Column] `primary_key` - we automatically add `orderBy: PRIMARY_KEY_ASC` to ordering, if you have a column called `primary_key` then this value will be generated twice and cause issues.
 
 There are other potential conflicts too, if you discover more conflicts then please consider using the "Edit this page" link above to suggest some changes!
+
+### Non-unique table names
+
+If there exists multiple schemas with the same table name inside of them, it can cause issues with the `nodeId: ID` (or `id: ID`) field, by making IDs which are not globally unique. Calls utilizing those IDs may return unexpected results. In order to avoid this, we must disable the `PgNodeAliasPostGraphile` plugin, and therefore use the GraphQL type name rather than the PostgreSQL table name in the identifiers. On the CLI you'd do this like: `postgraphile --skip-plugins graphile-build-pg:PgNodeAliasPostGraphile`.
+
+To support non-unique table names you should implement an [inflection override](https://www.graphile.org/postgraphile/inflection/#overriding-inflection---general) that will change how the GraphQL type names are generated from the raw table name.
+
