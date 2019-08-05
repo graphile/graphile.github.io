@@ -13,7 +13,7 @@ This guide is a work in progress. If you have ideas for best practices, please u
 PostgreSQL does _NOT_ add indexes to foreign keys by default. This isn't an
 issue for the forward relation (`user_id` → user), but for the reverse
 relation (user → things by `user_id`) it can make the lookup very expensive.
-Always add foreign keys to your indexes.
+Always add indexes to your foreign keys.
 
 ### Row Level Security
 
