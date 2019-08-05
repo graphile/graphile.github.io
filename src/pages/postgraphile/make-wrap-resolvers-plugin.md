@@ -191,34 +191,39 @@ to 'rollback' the SQL transation if the custom code fails.
 ```ts
 export const CreatePostPlugin = makeWrapResolversPlugin({
   Mutation: {
-    async createPost(resolve: any, _source, _args, context: any, _resolveInfo) {
-      // The pgClient on context is already in a transaction configured for the user:
-      const { pgClient } = context;
-      // Create a savepoint we can roll back to
-      await pgClient.query("SAVEPOINT mutation_wrapper");
-      try {
-        // Run the original resolver
-        const result = await resolve();
-        // Do the custom thing
-        await doCustomThing();
-      } catch (e) {
-        // Something went wrong - rollback!
-        // NOTE: Do NOT rollback entire transaction as a transaction may be
-        // shared across multiple mutations. Rolling back to the above defined
-        // SAVEPOINT allows other mutations to succeed.
-        await pgClient.query("ROLLBACK TO SAVEPOINT mutation_wrapper");
-        // Re-throw the error so the GraphQL client knows about it
-        throw e;
-      } finally {
-        await pgClient.query("RELEASE SAVEPOINT mutation_wrapper");
-      }
-      // Finally return the result of our original mutation
-      return result;
+    createPost: {
+      requires: {
+        childColumns: [{ column: "id", alias: "$post_id" }],
+      },
+      async resolve(resolve: any, _source, _args, context: any, _resolveInfo) {
+        // The pgClient on context is already in a transaction configured for the user:
+        const { pgClient } = context;
+        // Create a savepoint we can roll back to
+        await pgClient.query("SAVEPOINT mutation_wrapper");
+        try {
+          // Run the original resolver
+          const result = await resolve();
+          // Do the custom thing
+          await doCustomThing(result.data.$post_id);
+          // Finally return the result of our original mutation
+          return result;
+        } catch (e) {
+          // Something went wrong - rollback!
+          // NOTE: Do NOT rollback entire transaction as a transaction may be
+          // shared across multiple mutations. Rolling back to the above defined
+          // SAVEPOINT allows other mutations to succeed.
+          await pgClient.query("ROLLBACK TO SAVEPOINT mutation_wrapper");
+          // Re-throw the error so the GraphQL client knows about it
+          throw e;
+        } finally {
+          await pgClient.query("RELEASE SAVEPOINT mutation_wrapper");
+        }
+      },
     },
   },
 });
 
-async function doCustomThing() {
+async function doCustomThing(postId: number) {
   throw new Error("to be implemented");
 }
 ```
