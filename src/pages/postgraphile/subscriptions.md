@@ -12,12 +12,18 @@ Subscriptions notify you when an event occurs on the server side.
 
 _This feature requires PostGraphile v4.4.0 or higher._
 
+### Introduction
+
 Pass `--subscriptions` (or `subscriptions: true`) to PostGraphile and we'll
 enhance GraphiQL with subscription capabilities and give your PostGraphile
-server the power of websocket communications; but you'll notice that your
+server the power of websocket communications. This will enable the websocket endpoint.
+
+Additionally, you'll have to add the [`@graphile/pg-pubsub` plugin](https://www.npmjs.com/package/@graphile/pg-pubsub). It's intended that you use this plugin as a provider of realtime data to other plugins which can use it to add subscription fields to your API. For example, this plugin will add the `@pgSubscriptions` directive to easily define your own subscriptions using LISTEN/NOTIFY with makeExtendSchemaPlugin; and adds the --simple-subscriptions feature which, when enabled, adds a simple listen subscription field to your GraphQL API. See below how to enable the plugin for each approach
+
+Finally, you'll notice that your
 schema still only has `query` and `mutation` types. To add subscriptions to
 your GraphQL schema you'll need a plugin to provide the relevant
-`subscription` fields - or you can write your own [with
+`subscription` fields (by extending the `Subscription` type)- or you can write your own [with
 `makeExtendSchemaPlugin`](/postgraphile/make-extend-schema-plugin/).
 
 The easiest way to get started is with Simple Subscriptions (see below) but
@@ -192,6 +198,71 @@ postgraphile \
   --subscriptions \
   -c mydb
 ```
+
+#### Enabling with an Express app
+
+When using PostGraphile as a library, you may enable Custom Subscriptions by
+passing the `pluginHook` with the `@graphile/pg-pubsub` plugin, setting `subscriptions:true`
+and adding your custom plugin.
+
+We emulate part of the Express stack, so if you require sessions you can pass
+additional Connect/Express middlewares (sorry, we don't support Koa middlewares
+here at this time) via the `websocketMiddlewares` option.
+
+Here's an example:
+
+```js
+const express = require("express");
+const { postgraphile, makePluginHook } = require("postgraphile");
+const MySubscriptionPlugin = require("./MySubscriptionPlugin"); // our plugin defined in previous step
+const { default: PgPubsub } = require("@graphile/pg-pubsub"); // rembember to install through yarn/npm
+
+const pluginHook = makePluginHook([PgPubsub]);
+
+const postgraphileOptions = {
+  pluginHook, // add the plugin hook. This will make the @pgSubscription avaiable in our schema definitions
+  subscriptions: true, // start the websocket server
+  websocketMiddlewares: [
+    // Add whatever middlewares you need here, note that they should only
+    // manipulate properties on req/res, they must not sent response data. e.g.:
+    //
+    //   require('express-session')(),
+    //   require('passport').initialize(),
+    //   require('passport').session(),
+  ],
+};
+
+const app = express();
+app.use(postgraphile(databaseUrl, "app_public", postgraphileOptions));
+app.listen(parseInt(process.env.PORT, 10) || 3000);
+```
+
+#### Testing your subscription with GraphiQL/GraphQL Playground
+To test your subscription you will need to first subscribe and then trigger it. 
+
+To subscribe, in one GraphiQL tab execute
+```gql
+subscription MySubscription {
+  currentUserUpdated {	
+    user
+    event
+  }
+}
+```
+You should get the answer: `"Waiting for subscription to yield data…"`
+
+To trigger the subscription, *in another GraphiQL tab* run a mutation that changes the user. This
+will depend on your implementation, for example:
+```gql
+mutation MyMutation {
+  updateUserById(input: {userPatch: {name: 'foo'}, id: ""}) {
+    clientMutationId
+  }
+}
+```
+In this tab you will get the regular mutation answer. Going back to the previous tab, 
+you will see the subscription paylod. You are good to go! This should
+serve as the basis to implement your own custom subscriptions.
 
 ---
 
