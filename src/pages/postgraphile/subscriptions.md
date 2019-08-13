@@ -21,7 +21,7 @@ server the power of websocket communications. This will enable the websocket end
 Although you can now use `makeExtendSchemaPlugin` to add your own subscription fields using your own realtime events, it's likely that you'll want to add the [`@graphile/pg-pubsub` realtime provider plugin](https://www.npmjs.com/package/@graphile/pg-pubsub) so that you can leverage PostgreSQL's built-in pubsub support. For example, this plugin will allow `makeExtendSchemaPlugin` to use the `@pgSubscriptions` directive to easily define your own subscriptions using PostgreSQL's `LISTEN`/`NOTIFY` (recommended for production). This plugin also adds the `--simple-subscriptions` flag that can be used to add a simple listen subscription field to your GraphQL API (useful for experimentation). See below how to enable the plugin for each approach.
 
 If you just use the `--subscriptions` flag alone, you'll notice that your
-schema still only has `query` and `mutation` types. To add subscriptions to
+schema still only has `query` and `mutation` operation types. To add subscriptions to
 your GraphQL schema you'll need a plugin to provide the relevant
 `subscription` fields (by extending the `Subscription` type) - or you can write your own [with
 `makeExtendSchemaPlugin`](/postgraphile/make-extend-schema-plugin/).
