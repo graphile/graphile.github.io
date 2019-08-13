@@ -23,7 +23,7 @@ Although you can now use `makeExtendSchemaPlugin` to add your own subscription f
 If you just use the `--subscriptions` flag alone, you'll notice that your
 schema still only has `query` and `mutation` types. To add subscriptions to
 your GraphQL schema you'll need a plugin to provide the relevant
-`subscription` fields (by extending the `Subscription` type)- or you can write your own [with
+`subscription` fields (by extending the `Subscription` type) - or you can write your own [with
 `makeExtendSchemaPlugin`](/postgraphile/make-extend-schema-plugin/).
 
 The easiest way to get started is with Simple Subscriptions (see below) but
