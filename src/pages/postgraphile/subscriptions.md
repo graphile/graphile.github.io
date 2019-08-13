@@ -202,7 +202,7 @@ postgraphile \
 #### Enabling with an Express app
 
 When using PostGraphile as a library, you may enable Custom Subscriptions by
-passing the `pluginHook` with the `@graphile/pg-pubsub` plugin, setting `subscriptions:true`
+passing the `pluginHook` with the `@graphile/pg-pubsub` plugin, setting `subscriptions: true`
 and adding your custom plugin.
 
 We emulate part of the Express stack, so if you require sessions you can pass
