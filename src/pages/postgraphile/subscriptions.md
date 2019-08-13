@@ -255,7 +255,7 @@ To trigger the subscription, *in another GraphiQL tab* run a mutation that chang
 will depend on your implementation, for example:
 ```gql
 mutation MyMutation {
-  updateUserById(input: {userPatch: {name: 'foo'}, id: ""}) {
+  updateUserById(input: {userPatch: {name: "foo"}, id: 27}) {
     clientMutationId
   }
 }
