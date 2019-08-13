@@ -261,7 +261,7 @@ mutation MyMutation {
 }
 ```
 In this tab you will get the regular mutation answer. Going back to the previous tab, 
-you will see the subscription paylod. You are good to go! This should
+you will see the subscription payload. You are good to go! This should
 serve as the basis to implement your own custom subscriptions.
 
 ---
