@@ -18,7 +18,7 @@ Pass `--subscriptions` (or `subscriptions: true`) to PostGraphile and we'll
 enhance GraphiQL with subscription capabilities and give your PostGraphile
 server the power of websocket communications. This will enable the websocket endpoint.
 
-Additionally, you'll have to add the [`@graphile/pg-pubsub` plugin](https://www.npmjs.com/package/@graphile/pg-pubsub). It's intended that you use this plugin as a provider of realtime data to other plugins which can use it to add subscription fields to your API. For example, this plugin will add the `@pgSubscriptions` directive to easily define your own subscriptions using LISTEN/NOTIFY with makeExtendSchemaPlugin; and adds the --simple-subscriptions feature which, when enabled, adds a simple listen subscription field to your GraphQL API. See below how to enable the plugin for each approach
+Although you can now use `makeExtendSchemaPlugin` to add your own subscription fields using your own realtime events, it's likely that you'll want to add the [`@graphile/pg-pubsub` realtime provider plugin](https://www.npmjs.com/package/@graphile/pg-pubsub) so that you can leverage PostgreSQL's built-in pubsub support. For example, this plugin will allow `makeExtendSchemaPlugin` to use the `@pgSubscriptions` directive to easily define your own subscriptions using PostgreSQL's `LISTEN`/`NOTIFY` (recommended for production). This plugin also adds the `--simple-subscriptions` flag that can be used to add a simple listen subscription field to your GraphQL API (useful for experimentation). See below how to enable the plugin for each approach.
 
 Finally, you'll notice that your
 schema still only has `query` and `mutation` types. To add subscriptions to
