@@ -67,6 +67,29 @@ module.exports = makeWrapResolversPlugin({
 });
 ```
 
+Also when plugin is only for one type, then still better to use first method. e.g.:
+
+```js
+const validateUserData = (propName) => {
+  return async (resolve, source, args, context, resolveInfo) => {
+    const user = args.input[propName]
+
+    await isValidUserData(user) // throws error if invalid
+
+    return resolve()
+  }
+}
+
+module.exports = makeWrapResolversPlugin({
+  Mutation: {
+    createUser: validateUserData('user'),
+    updateUser: validateUserData('userPatch'),
+    updateUserById: validateUserData('userPatch'),
+    updateUserByEmail: validateUserData('userPatch'),
+  },
+});
+```
+
 The rules object is a two-level map of `typeName` (the name of a GraphQLObjectType) and `fieldName` (the name of one of the fields of this type) to either a rule for that field, or a resolver wrapper function for that field. The generator function accepts an `Options` object (which contains everything you may have added to `graphileBuildOptions` and more).
 
 ```ts
