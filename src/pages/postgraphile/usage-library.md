@@ -72,7 +72,7 @@ http
 
 #### API: `postgraphile(pgConfig, schemaName, options)`
 
-The `postgraphile` middleware factory function takes three arguments, all of which are optional. The below options are valid for <tt>postgraphile@<!-- LIBRARY_VERSION_BEGIN -->4.4.1<!-- LIBRARY_VERSION_END --></tt>.
+The `postgraphile` middleware factory function takes three arguments, all of which are optional. The below options are valid for <tt>postgraphile@<!-- LIBRARY_VERSION_BEGIN -->4.4.3<!-- LIBRARY_VERSION_END --></tt>.
 
 - **`pgConfig`**: An object or string that will be passed to the [`pg`][] library and used to connect to a PostgreSQL backend, OR a pg.Pool to use.
 - **`schemaName`**: A string, or array of strings, which specifies the PostgreSQL schema(s) you to expose via PostGraphile; defaults to 'public'
@@ -113,7 +113,7 @@ The `postgraphile` middleware factory function takes three arguments, all of whi
   - `enableQueryBatching`: [Experimental] Enable the middleware to process multiple GraphQL queries in one request.
   - `jwtSecret`: The secret for your JSON web tokens. This will be used to verify tokens in the `Authorization` header, and signing JWT tokens you return in procedures.
   - `jwtVerifyOptions`: Options with which to perform JWT verification - see https://github.com/auth0/node-jsonwebtoken#jwtverifytoken-secretorpublickey-options-callback If 'audience' property is unspecified, it will default to ['postgraphile']; to prevent audience verification set it explicitly to null.
-  - `jwtRole`: An array of strings that give a path in the jwt from which to extract the postgres role. If none is provided it will use the key `role` on the root of the jwt.
+  - `jwtRole`: An array of (strings) path components that make up the path in the jwt from which to extract the postgres role. By default, the role is extracted from `token.role`, so the default value is `['role']`. e.g. `{ iat: 123456789, creds: { local: { role: "my_role" } } }` the path would be `token.creds.local.role` i.e. `['creds', 'local', 'role']`
   - `jwtPgTypeIdentifier`: The Postgres type identifier for the compound type which will be signed as a JWT token if ever found as the return type of a procedure. Can be of the form: `my_schema.my_type`. You may use quotes as needed: `"my-special-schema".my_type`.
   - `jwtAudiences`: [DEPRECATED] The audience to use when verifing the JWT token. Deprecated, use `jwtVerifyOptions.audience` instead.
   - `legacyRelations`: Some one-to-one relations were previously detected as one-to-many - should we export 'only' the old relation shapes, both new and old but mark the old ones as 'deprecated' (default), or 'omit' (recommended) the old relation shapes entirely.
@@ -123,7 +123,7 @@ The `postgraphile` middleware factory function takes three arguments, all of whi
   - `additionalGraphQLContextFromRequest`: Some Graphile Engine schema plugins may need additional information available on the `context` argument to the resolver - you can use this function to provide such information based on the incoming request - you can even use this to change the response [experimental], e.g. setting cookies.
   - `pluginHook`: [experimental] Plugin hook function, enables functionality within PostGraphile to be expanded with plugins. Generate with `makePluginHook(plugins)` passing a list of plugin objects.
   - `simpleCollections`: Should we use relay pagination, or simple collections? "omit" (default) - relay connections only, "only" (not recommended) - simple collections only (no Relay connections), "both" - both.
-  - `queryCacheMaxSize`: Max query cache size in MBs of queries. Default, 50MB.
+  - `queryCacheMaxSize`: Max query cache size in bytes (extremely approximate, not accurate at all). Default `50000000` (~50MB). Set to 0 to disable.
 
 <!-- LIBRARY_DOCBLOCK_END -->
 

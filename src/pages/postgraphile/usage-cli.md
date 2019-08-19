@@ -26,7 +26,7 @@ PostGraphile also reads options from a `.postgraphilerc.js` file from the curren
 
 ### CLI options
 
-There are more CLI options available to customise the GraphQL server (these are from <tt>postgraphile@<!-- CLI_VERSION_BEGIN -->4.4.1<!-- CLI_VERSION_END --></tt>):
+There are more CLI options available to customise the GraphQL server (these are from <tt>postgraphile@<!-- CLI_VERSION_BEGIN -->4.4.3<!-- CLI_VERSION_END --></tt>):
 
 <!-- CLI_DOCBLOCK_BEGIN -->
 

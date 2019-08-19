@@ -77,7 +77,7 @@ export async function performQuery(
 
 This function takes three arguments (all are optional) and returns a promise to a GraphQLSchema object.
 
-The returned GraphQLSchema will **not** be updated when your database changes - if you require "watch" functionality, please use `watchPostGraphileSchema` instead (see below). The below options are valid for <tt>postgraphile@<!-- SCHEMA_VERSION_BEGIN -->4.4.1<!-- SCHEMA_VERSION_END --></tt>.
+The returned GraphQLSchema will **not** be updated when your database changes - if you require "watch" functionality, please use `watchPostGraphileSchema` instead (see below). The below options are valid for <tt>postgraphile@<!-- SCHEMA_VERSION_BEGIN -->4.4.3<!-- SCHEMA_VERSION_END --></tt>.
 
 - **`pgConfig`**: An object or string that will be passed to the [`pg`][] library and used to connect to a PostgreSQL backend. If you already have a client or pool instance, when using this function you may also pass a `pg` client or a `pg-pool` instance directly instead of a config.
 - **`schemaName`**: A string which specifies the PostgreSQL schema that PostGraphile will use to create a GraphQL schema. The default schema is the `public` schema. May be an array for multiple schemas. For users who want to run the Postgres introspection query ahead of time, you may also pass in a `PgCatalog` instance directly.
