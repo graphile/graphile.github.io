@@ -19,6 +19,7 @@ If you're using PostGraphile in `--watch` mode, you should be able to see in Pos
 - [Renaming](#renaming)
 - [Adding fake constraints](#constraints) (e.g. on views/custom types)
 - [Omitting](#omitting)
+- [Sorting and filtering scalar computed columns](#sorting-and-filtering-scalar-computed-columns)
 - [Simple collections](#simple-collections)
 - [Composite types as function arguments](#composite-types-as-function-arguments)
 
@@ -337,6 +338,58 @@ comment on table forum_example.book is E'@omit create,update,delete';
 On the left, you can see the documentation for all the fields and types regarding `book` before the `create` operation was omitted. On the right, you can see the reduced fields and types once the `create` operation is omitted.
 
 ![GraphiQL displaying an omit smart comment example](./smart-comments-omit-example.png)
+
+### Sorting and filtering scalar computed columns
+Since version [v4.3.1](https://github.com/graphile/postgraphile/releases/tag/v4.3.1) the smart comments `@sortable` and `@filterable` can be added to scalar computed columns. These comments also work on functions returning `SETOF`.
+
+#### Sorting
+```sql
+comment on function foo() is E'@sortable';
+comment on function users_foo(users) is E'@sortable';
+```
+```graphql
+{
+  # If the function returns a set of table rows
+  foo(orderBy: [ID_ASC]) { ... }
+  user(nodeId: ...) {
+    foo(orderBy: [ID_ASC]) { ... }
+  }
+
+  # If the function return a scalar
+  allUsers(orderBy: [FOO_ASC]) { ... }
+}
+```
+#### Filtering
+```sql
+comment on function foo() is E'@filterable';
+comment on function users_foo(users) is E'@filterable';
+```
+```graphql
+{
+  # If the function returns a set of table rows
+  foo(condition: {firstName: "Alice"}) { ... }
+
+  # If the function return a scalar
+  allUsers(condition: {foo: "FOO_VALUE"}) { ... }
+}
+```
+
+#### Sorting and filtering non-scalar computed columns
+If your computed column is returning a composite type, the recommended approach is to wrap it with a computed column that returns the scalar field you want to sort and/or filter by. For example:
+```sql
+-- non scalar function
+CREATE OR REPLACE FUNCTION user_object(user user) RETURNS object AS $$
+SELECT * FROM object where id = user.object_id;
+$$ language SQL STABLE;
+
+-- wrapper. Note the () for notation. Failing to use them will throw an error
+CREATE OR REPLACE FUNCTION user_object_field(user user) RETURNS varchar AS $$
+SELECT (user_object(user)).field;
+$$ language SQL STABLE;
+
+-- don't forget the comments...
+comment on function user_object_field() is E'@sortable';
+```
 
 ### Simple collections
 
