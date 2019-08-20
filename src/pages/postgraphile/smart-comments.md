@@ -210,7 +210,8 @@ pipe (`|`) symbol to assign smart comments to the fake constraint, for example
 to rename the fake constraint:
 
 ```sql
-comment on materialized view my_materialized_view is E'@foreignKey (post_id) references posts (id)|@fieldName yourNameHere';
+comment on materialized view my_materialized_view is
+  E'@foreignKey (post_id) references posts (id)|@fieldName yourNameHere';
 ```
 
 ### Example
