@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+set -e
+# DO NOT 'set -x' as it could leak the GITHUB_TOKEN
+
+yarn test
+
+if [ "$GITHUB_TOKEN" != "" ]; then
+  echo "GITHUB_TOKEN is specified, we'll try and trigger a deploy now"
+
+  if ! git diff-index HEAD --; then
+    echo "But first; there were changes so lets try and push those back to 'develop'"
+    git add -u
+    git commit -m"Fixes from CI"
+
+    # I really hope this doesn't cause an infinite CI loop
+    git push deploy HEAD:develop
+  fi
+
+  echo "Okay; time to deploy"
+  scripts/deploy
+elif ! git diff-index HEAD --; then
+  echo "The above changes should be incorporated into your local branch"
+  echo 'Do so by running `yarn update` and `yarn format`'
+fi
