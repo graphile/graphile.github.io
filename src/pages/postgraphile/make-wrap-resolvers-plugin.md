@@ -70,22 +70,22 @@ module.exports = makeWrapResolversPlugin({
 Also when plugin is only for one type, then still better to use first method. e.g.:
 
 ```js
-const validateUserData = (propName) => {
+const validateUserData = propName => {
   return async (resolve, source, args, context, resolveInfo) => {
-    const user = args.input[propName]
+    const user = args.input[propName];
 
-    await isValidUserData(user) // throws error if invalid
+    await isValidUserData(user); // throws error if invalid
 
-    return resolve()
-  }
-}
+    return resolve();
+  };
+};
 
 module.exports = makeWrapResolversPlugin({
   Mutation: {
-    createUser: validateUserData('user'),
-    updateUser: validateUserData('userPatch'),
-    updateUserById: validateUserData('userPatch'),
-    updateUserByEmail: validateUserData('userPatch'),
+    createUser: validateUserData("user"),
+    updateUser: validateUserData("userPatch"),
+    updateUserById: validateUserData("userPatch"),
+    updateUserByEmail: validateUserData("userPatch"),
   },
 });
 ```
@@ -139,7 +139,10 @@ module.exports = makeWrapResolversPlugin({
       async resolve(resolver, user, args, context, _resolveInfo) {
         const unmaskedValue = await resolver();
         // someone@sub.example.com -> so***@su***.com
-        return unmaskedValue.replace(/^(.{1,2})[^@]*@(.{,2})[^.]*\.([A-z]{2,})$/, '$1***@$2***.$3');
+        return unmaskedValue.replace(
+          /^(.{1,2})[^@]*@(.{,2})[^.]*\.([A-z]{2,})$/,
+          "$1***@$2***.$3"
+        );
       },
     },
   },
