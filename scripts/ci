@@ -27,6 +27,12 @@ if [ "$GITHUB_TOKEN" != "" ]; then
     git push deploy HEAD:develop
     echo "Exiting with failed build due to local changes"
     exit 1
+  else
+    echo
+    echo "#"
+    echo "# LGTM!"
+    echo "#"
+    echo "########################################"
   fi
 
   echo "Okay; time to deploy"
@@ -37,6 +43,12 @@ elif ! git diff-index --exit-code --name-only HEAD --; then
   echo '# Do so by running `yarn update` and `yarn format`'
   echo "#"
   echo "# DON'T WORRY - if you don't have time to do this now, CI will attempt to do it for you when the PR is merged"
+  echo "#"
+  echo "########################################"
+else
+  echo
+  echo "#"
+  echo "# LGTM!"
   echo "#"
   echo "########################################"
 fi
