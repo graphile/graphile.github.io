@@ -9,8 +9,8 @@ addons:
       - postgresql-client-10
 env:
   global:
-    - PGPORT=5433
-    - TEST_DATABASE_URL=postgres://localhost:5433/travis
+    - PGPORT=5432
+    - TEST_DATABASE_URL=postgres://localhost:5432/travis
     - PGVERSION=10
 cache:
   yarn: true
