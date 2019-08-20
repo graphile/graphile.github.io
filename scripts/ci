@@ -5,6 +5,12 @@ set -e
 
 yarn test
 
+echo "########################################"
+echo "#"
+echo "# Checking for unformatted/out of date files"
+echo "#"
+echo
+
 if [ "$GITHUB_TOKEN" != "" ]; then
   echo "GITHUB_TOKEN is specified, we'll try and trigger a deploy now"
 
@@ -22,8 +28,11 @@ if [ "$GITHUB_TOKEN" != "" ]; then
   echo "Okay; time to deploy"
   scripts/deploy
 elif ! git diff-index --exit-code --name-only HEAD --; then
-  echo "The above changes should be incorporated into your local branch"
-  echo 'Do so by running `yarn update` and `yarn format`'
-
-  exit 1
+  echo
+  echo "# The above changes should be incorporated into your local branch"
+  echo '# Do so by running `yarn update` and `yarn format`'
+  echo "#"
+  echo "# DON'T WORRY - if you don't have time to do this now, CI will attempt to do it for you when the PR is merged"
+  echo "#"
+  echo "########################################"
 fi
