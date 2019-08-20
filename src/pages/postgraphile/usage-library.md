@@ -244,7 +244,6 @@ app.use(
 
 Some use cases might require to mount other middleware before PostGraphile, for instance if requests to the GraphQL endpoint should be subject to an additional authorization / authentication mechanism.
 
-
 With express, such a composition can be done like the following:
 
 ```js

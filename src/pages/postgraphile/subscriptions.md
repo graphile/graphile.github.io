@@ -716,6 +716,7 @@ enhanceHttpServerWithSubscriptions(rawHTTPServer, postgraphileMiddleware);
 rawHTTPServer.listen(parseInt(process.env.PORT, 10) || 3000);
 ```
 
+
 The `enhanceHttpServerWithSubscriptions` takes two arguments:
 
 1.  the raw HTTP server from `require('http').createServer()`
