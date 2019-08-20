@@ -173,15 +173,17 @@ An example of a PostGraphile server plugin is [@graphile/operation-hooks](https:
 If you are using postgraphile as a library (i.e. middleware) and you want to make a quick tweak to something using the server plugin hooks, you can do so in your main server.js file:
 
 ```js
-
 /**
  * This plugin override changes the branding piece of graphiql.
  */
 const graphiqlBrandingTweak = {
-    ['postgraphile:graphiql:html'](html) {
-        console.log("Applying GraphiQL Branding Tweak...");
-        return html.replace('</head>', '<style type="text/css">div.topBar > div.title > div { visibility: hidden; display: none !important; } div.topBar > div.title::after { content: "GraphiQL for MyCompany" }</style></head>');
-    },
+  ["postgraphile:graphiql:html"](html) {
+    console.log("Applying GraphiQL Branding Tweak...");
+    return html.replace(
+      "</head>",
+      '<style type="text/css">div.topBar > div.title > div { visibility: hidden; display: none !important; } div.topBar > div.title::after { content: "GraphiQL for MyCompany" }</style></head>'
+    );
+  },
 };
 const pluginHook = makePluginHook([graphiqlBrandingTweak]);
 

@@ -238,29 +238,34 @@ app.listen(parseInt(process.env.PORT, 10) || 3000);
 ```
 
 #### Testing your subscription with GraphiQL/GraphQL Playground
-To test your subscription you will need to first subscribe and then trigger it. 
+
+To test your subscription you will need to first subscribe and then trigger it.
 
 To subscribe, in one GraphiQL tab execute
+
 ```gql
 subscription MySubscription {
-  currentUserUpdated {	
+  currentUserUpdated {
     user
     event
   }
 }
 ```
+
 You should get the answer: `"Waiting for subscription to yield data…"`
 
-To trigger the subscription, *in another GraphiQL tab* run a mutation that changes the user. This
+To trigger the subscription, _in another GraphiQL tab_ run a mutation that changes the user. This
 will depend on your implementation, for example:
+
 ```gql
 mutation MyMutation {
-  updateUserById(input: {userPatch: {name: "foo"}, id: 27}) {
+  updateUserById(input: { userPatch: { name: "foo" }, id: 27 }) {
     clientMutationId
   }
 }
 ```
-In this tab you will get the regular mutation answer. Going back to the previous tab, 
+
+In this tab you will get the regular mutation answer. Going back to the previous tab,
 you will see the subscription payload. You are good to go! This should
 serve as the basis to implement your own custom subscriptions.
 

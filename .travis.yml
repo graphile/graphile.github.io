@@ -1,0 +1,24 @@
+language: node_js
+node_js:
+  - 10
+addons:
+  postgresql: "10"
+  apt:
+    packages:
+      - postgresql-10
+      - postgresql-client-10
+env:
+  global:
+    - PGPORT=5432
+    - TEST_DATABASE_URL=postgres://localhost:5432/travis
+    - PGVERSION=10
+cache:
+  yarn: true
+before_script:
+  - git config credential.helper "store --file=.git/credentials"
+  - echo "https://${GH_TOKEN}:@github.com" > .git/credentials
+  - yarn clean
+  - yarn format
+  - yarn build
+script:
+  - scripts/ci

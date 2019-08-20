@@ -341,13 +341,16 @@ On the left, you can see the documentation for all the fields and types regardin
 ![GraphiQL displaying an omit smart comment example](./smart-comments-omit-example.png)
 
 ### Sorting and filtering scalar computed columns
+
 Since version [v4.3.1](https://github.com/graphile/postgraphile/releases/tag/v4.3.1) the smart comments `@sortable` and `@filterable` can be added to scalar computed columns. These comments also work on functions returning `SETOF`.
 
 #### Sorting
+
 ```sql
 comment on function foo() is E'@sortable';
 comment on function users_foo(users) is E'@sortable';
 ```
+
 ```graphql
 {
   # If the function returns a set of table rows
@@ -360,11 +363,14 @@ comment on function users_foo(users) is E'@sortable';
   allUsers(orderBy: [FOO_ASC]) { ... }
 }
 ```
+
 #### Filtering
+
 ```sql
 comment on function foo() is E'@filterable';
 comment on function users_foo(users) is E'@filterable';
 ```
+
 ```graphql
 {
   # If the function returns a set of table rows
@@ -376,7 +382,9 @@ comment on function users_foo(users) is E'@filterable';
 ```
 
 #### Sorting and filtering non-scalar computed columns
+
 If your computed column is returning a composite type, the recommended approach is to wrap it with a computed column that returns the scalar field you want to sort and/or filter by. For example:
+
 ```sql
 -- non scalar function
 CREATE OR REPLACE FUNCTION user_object(user user) RETURNS object AS $$

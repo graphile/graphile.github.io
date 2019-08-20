@@ -66,7 +66,9 @@ for (const file of files) {
       continue;
     }
     invalid++;
-    console.error(`${filePretty} has invalid link to '${link}'`);
+    console.error(
+      `${filePretty} has disallowed link to '${link}' (please ensure links start with '/' if possible, do not include https://graphile.org)`
+    );
   }
 }
 

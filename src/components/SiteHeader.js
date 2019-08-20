@@ -133,7 +133,10 @@ export default class SiteHeader extends React.Component {
                   exact
                   render={() => (
                     <li className="navbar-item">
-                      <a className="nav-link" href="https://discord.gg/graphile">
+                      <a
+                        className="nav-link"
+                        href="https://discord.gg/graphile"
+                      >
                         Chat{" "}
                         <span className="fas fa-external-link-square-alt" />{" "}
                       </a>
