@@ -243,7 +243,7 @@ To test your subscription you will need to first subscribe and then trigger it.
 
 To subscribe, in one GraphiQL tab execute
 
-```gql
+```graphql
 subscription MySubscription {
   currentUserUpdated {
     user
@@ -257,7 +257,7 @@ You should get the answer: `"Waiting for subscription to yield data…"`
 To trigger the subscription, _in another GraphiQL tab_ run a mutation that changes the user. This
 will depend on your implementation, for example:
 
-```gql
+```graphql
 mutation MyMutation {
   updateUserById(input: { userPatch: { name: "foo" }, id: 27 }) {
     clientMutationId

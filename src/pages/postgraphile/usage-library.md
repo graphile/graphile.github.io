@@ -246,14 +246,14 @@ Some use cases might require to mount other middleware before PostGraphile, for 
 
 With express, such a composition can be done like the following:
 
-```
+```js
 // Example middleware, does nothing
 function authMiddleware(req, res, next) {
   //...
   next();
 }
 // Mount middleware on the GraphQL endpoint
-app.use('/graphql', authMiddleware);
+app.use("/graphql", authMiddleware);
 // Mount PostGraphile after this middleware
 app.use(postgraphile(connectionString, schema, options));
 ```
