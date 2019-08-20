@@ -16,7 +16,7 @@ cache:
   yarn: true
 before_script:
   - git config credential.helper "store --file=.git/credentials"
-  - echo "https://${GH_TOKEN}:@github.com" > .git/credentials
+  - echo "https://benjie:${GITHUB_TOKEN}@github.com" > .git/credentials
   - yarn clean
   - yarn format
   - yarn build

@@ -16,7 +16,7 @@ git checkout -- src/data/examples.json
 git checkout -- src/pages/postgraphile/usage-*.md
 
 if [ "$GITHUB_TOKEN" != "" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
-  echo "GITHUB_TOKEN is specified, we'll try and trigger a deploy now"
+  echo "GITHUB_TOKEN is specified"
 
   if ! git diff-index --exit-code --name-only HEAD --; then
     echo "But first; there were changes so lets try and push those back to 'develop'"
@@ -35,7 +35,7 @@ if [ "$GITHUB_TOKEN" != "" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     echo "########################################"
   fi
 
-  echo "Okay; time to deploy"
+  echo "Okay; time to deploy..."
   scripts/deploy
 elif ! git diff-index --exit-code --name-only HEAD --; then
   echo
