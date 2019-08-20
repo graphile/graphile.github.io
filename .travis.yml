@@ -1,6 +1,11 @@
 language: node_js
 node_js:
   - lts/*
+addons:
+  postgresql: "9.6"
+env:
+  TEST_DATABASE_URL: postgres://localhost:5432/travis
+  PGVERSION: 9.6
 cache:
   yarn: true
 before_script:
