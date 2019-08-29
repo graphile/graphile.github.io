@@ -201,6 +201,29 @@ appropriate and succinct response:
 }
 ```
 
+If, however, you prefer to assign a default PostgreSQL role when no token has been provided (in a way replicating `pgDefaultRole` behavior) then that's also possible by intercepting when `err.code === 'credentials_required'`:
+
+```javascript
+const authErrors = (err, req, res, next) => {
+  if (err.name === "UnauthorizedError") {
+    console.log(err); // You will still want to log the error...
+    if (err.code === 'credentials_required') {
+      // No token provided, so assign a default PostgreSQL role (see pgDefaultRole) and continue
+      req.user = {
+        role: 'unauthenticated'
+      }
+      next()
+    } else {
+      // Some other auth problem, send back as normal
+      res.status(err.status).json({ errors: [{ message: err.message }] });
+      res.end();
+    }
+  } 
+};
+```
+
+* Make sure the `authErrors` is added between `checkJwt` and `postgraphile` middlewares.
+
 ---
 
 _This article was written by [BR](http://gitlab.com/benjamin-rood)._
