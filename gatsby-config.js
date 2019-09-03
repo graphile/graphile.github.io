@@ -3,7 +3,7 @@ module.exports = {
     title: `Graphile.org`,
   },
   plugins: [
-    `gatsby-mdx`,
+    `gatsby-plugin-mdx`,
     `gatsby-plugin-sass`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-catch-links`,

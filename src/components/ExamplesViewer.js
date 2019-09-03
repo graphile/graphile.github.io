@@ -102,9 +102,7 @@ export default class ExamplesViewer extends React.Component {
           <div className="w-100 w-50-l h-50 h-100-l flex-auto">
             <PrismCode
               component="pre"
-              className={`no-shadow f7 pa1 bn br0 h-100 overflow-auto language-${
-                selectedExample.exampleLanguage
-              }`}
+              className={`no-shadow f7 pa1 bn br0 h-100 overflow-auto language-${selectedExample.exampleLanguage}`}
             >
               {selectedExample.example}
             </PrismCode>
@@ -113,9 +111,7 @@ export default class ExamplesViewer extends React.Component {
             <div className="w-100 w-50-l h-50 h-100-l flex-auto overflow-auto">
               <PrismCode
                 component="pre"
-                className={`no-shadow f7 pa1 bt bn-l bl-l br0 b--silver h-100 flex-auto language-${
-                  selectedExample.resultLanguage
-                }`}
+                className={`no-shadow f7 pa1 bt bn-l bl-l br0 b--silver h-100 flex-auto language-${selectedExample.resultLanguage}`}
               >
                 {selectedExample.result}
               </PrismCode>

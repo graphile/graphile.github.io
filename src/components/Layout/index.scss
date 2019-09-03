@@ -24,7 +24,7 @@ h6 {
   @extend .helvetica;
   @extend .lh-title;
   @extend .mt3;
-  @extend .measure;
+  //@extend .measure;
   @extend .fw6;
 }
 th {
@@ -92,7 +92,7 @@ p,
   @extend .f5-ns;
   @extend .f6;
   @extend .lh-copy;
-  @extend .measure-wide;
+  //@extend .measure-wide;
   @extend .mb3-ns;
   @extend .mt3-ns;
 }
@@ -102,7 +102,7 @@ p,
   background-repeat: repeat;
   p,
   .response {
-    @extend .measure;
+    //@extend .measure;
   }
 }
 
@@ -184,7 +184,7 @@ footer li {
   @extend .f6;
   @extend .lh-copy;
   @extend .mb1;
-  @extend .measure;
+  //@extend .measure;
   &.f6 {
     @extend .f6;
   }
