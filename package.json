@@ -59,7 +59,7 @@
     "clean": "rm -vRf .cache __deploy",
     "deploy": "./scripts/deploy",
     "develop": "./scripts/update && gatsby develop",
-    "format": "prettier --write 'src/**/*.js' 'src/**/*.md' '*.md'",
+    "format": "prettier --write 'src/**/*.js' 'src/**/*.md' '*.md' 'src/**/*.scss'",
     "start": "gatsby develop",
     "test": "node link-check.js",
     "update": "./scripts/update",
