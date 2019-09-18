@@ -56,7 +56,7 @@ $ psql postgres:///testdb # Connects to the `testdb` database on your local mach
 $ psql "postgres://user:password@somehost:2345/somedb"  # Connects to the `somedb` database at `postgres://somehost:2345` using login with `user` and `password`
 ```
 
-Read the documentation on [PostgreSQL connection strings](https://www.postgresql.org/docs/9.6/static/libpq-connect.html#LIBPQ-CONNSTRING) to learn more about alternative formats (including using a password).
+Read the documentation on [PostgreSQL connection strings](https://www.postgresql.org/docs/current/static/libpq-connect.html#LIBPQ-CONNSTRING) to learn more about alternative formats (including using a password).
 
 ### Create a Database
 
@@ -66,7 +66,7 @@ Next, create a database. You can do this by using the terminal:
 $ createdb mydb
 ```
 
-This will create a PostgreSQL database called "mydb". You can read more about this on the [PostgreSQL Documentation site](https://www.postgresql.org/docs/9.6/static/tutorial-createdb.html). Now you can run `psql` with your database URL and get a SQL prompt:
+This will create a PostgreSQL database called "mydb". You can read more about this on the [PostgreSQL Documentation site](https://www.postgresql.org/docs/current/static/tutorial-createdb.html). Now you can run `psql` with your database URL and get a SQL prompt:
 
 ```bash
 $ psql "postgres:///mydb"
