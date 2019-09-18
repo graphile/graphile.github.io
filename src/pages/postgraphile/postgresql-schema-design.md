@@ -542,7 +542,7 @@ set local jwt.claims.role to 'forum_example_person'
 
 Now, the user would have the permissions of the `forum_example_person` role as they execute their query.
 
-> **Warning:** Unless explicitly set, JWTs never expire. Once they have been issued they may never be invalidated. This is both good and bad, good in that JWTs are fast in not requiring a database lookup. Bad in that if an attacker gets their hands on a JWT you can’t stop them from using it until the token expires. Postgraphile sets an expiration date of one day to any JWT without an `exp` field.
+> **Warning:** Unless explicitly set, JWTs never expire. Once they have been issued they may never be invalidated. This is both good and bad, good in that JWTs are fast in not requiring a database lookup. Bad in that if an attacker gets their hands on a JWT you can’t stop them from using it until the token expires. PostGraphile sets an expiration date of one day to any JWT without an `exp` field.
 >
 > A solution to this is to use very short expiration times on your tokens and/or to use refresh tokens. A refresh token you would use whenever your JWT expires to get a new JWT without prompting the user for their password again. Refresh tokens would be stored in the database so you could easily invalidate refresh tokens.
 
