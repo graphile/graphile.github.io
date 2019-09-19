@@ -20,6 +20,7 @@ See the [CLI](/postgraphile/usage-cli/) or
 Schema extension plugins for PostGraphile:
 
 - [postgraphile-plugin-connection-filter](https://github.com/graphile-contrib/postgraphile-plugin-connection-filter) - adds a `filter:` arg to connections that offers a more powerful alternative to the built in filtering operations
+- [postgraphile-plugin-connection-filter-polymorphic](https://github.com/hansololai/postgraphile-connection-filter-polymorphic) - adds association filter on top of connection filter for polymorphic associations. 
 - [postgraphile-plugin-custom-filter](https://github.com/RoadRunnerEngineering/postgraphile-plugin-custom-filter) - adds a `customFilter:` arg to connections that offers user defined filters on any conditions, as long as they can be fit into a `where`
 - [postgraphile-plugin-nested-mutations](https://github.com/mlipscombe/postgraphile-plugin-nested-mutations) - enables a single mutation to create/update many related records
 - [graphile-upsert-plugin](https://github.com/einarjegorov/graphile-upsert-plugin/blob/master/index.js) - adds upsert mutations
