@@ -8,7 +8,8 @@ title: Hooks
 
 The most common thing for a plugin to do is to add hooks to the builder.
 
-Hooks allow you to manipulate the argument (specification) that is being passed
+The GraphQL hooks ran by [`newWithHooks`](/graphile-build/build-object/#newwithhookstype-spec-scope)
+allow you to manipulate the argument (specification) that is being passed
 to the GraphQL object constructors before the objects are constructed. You can
 think of hooks as wrappers around the original object spec, like this:
 
@@ -20,54 +21,42 @@ const MyType = newWithHooks(GraphQLObjectType, spec);
 const MyType = new GraphQLObjectType(hook3(hook2(hook1(spec))));
 ```
 
-Hooks are registered via a call to `builder.hook(hookName, hookFunction)`.
+Hooks are registered via a call to [`builder.hook(hookName, hookFunction)`](/graphile-build/schema-builder/#hookhookname-hookfunction).
 
 Every `hookFunction` must synchronously return a value - either the value that it was passed
 or a derivative of it (preferably immutable, but we're not strict on that).
 
-### Which hook to attach to: `hookName`
+Hook functions for one hook by default run in the order they were registered, that is why the order of plugins is sometimes relevant.
 
-The `hookName` that you register via `builder.hook(hookName, hookFunction)`
-must match one of the supported hooks. See [All
-Hooks](/graphile-build/all-hooks/) for a list of all the hooks we support,
-here's a brief overview of some of the more important ones:
+### Stages of the build process
 
-- `build`: extend the [Build object](/graphile-build/build-object/) passed to all other hooks
+The `hookName` that you register the function for must match [one of the supported hooks](/graphile-build/all-hooks/).
 
-- `init`: perform setup after `build` freezes but before building the schema starts
+Here's a brief rundown of how the hooks are used by the Graphile engine.
+See the [`buildSchema`](https://github.com/graphile/graphile-engine/blob/v4.4.4/packages/graphile-build/src/SchemaBuilder.js#L474-L499)
+and [`createBuild`](https://github.com/graphile/graphile-engine/blob/v4.4.4/packages/graphile-build/src/SchemaBuilder.js#L450-L472) methods in the source code.
 
-- `GraphQLSchema`: root-level schema - hook to add `query`,
-  `mutation` or `subscription` fields; called implicitly by `buildSchema(plugins, options)`
+1.  A new [Build object](/graphile-build/build-object/) with the basic functionality is created
+    by [`makeNewBuild`](https://github.com/graphile/graphile-engine/blob/v4.4.4/packages/graphile-build/src/makeNewBuild.js#L230)
+2.  The `inflection` hook allows plugins to add new inflection methods to the `build.inflection` object, or overwrite previously declared ones.
+3.  The `build` hook allows plugins to add new utility methods to the `build` object itself, or overwrite previously declared ones.
+4.  The `init` hook is the setup phase where the schema types get created by the plugins,
+    using the [`newWithHooks`](/graphile-build/build-object/#newwithhookstype-spec-scope)
+    or [`addType`](/graphile-build/build-object/#addtypetype-graphqlnamedtype) methods of the build object.
+    For example, the [default `StandardTypesPlugin`](/graphile-build/default-plugins/#standardtypesplugin) registers the builtin scalars,
+    or the PostGraphile plugins register the types found in the introspection results.
+5.  The schema is constructed using `newWithHooks(GraphQLSchema, …)`, where the `query`, `mutation` and `subscription` root operations
+    are configured by the respective [default plugins](/graphile-build/default-plugins)
+    and [other schema options](https://github.com/graphql/graphql-js/blob/v14.5.6/src/type/schema.js#L318-L324) can be adjusted.
+6.  The `finalize` hook allows plugins to alter the schema instance and all its contents.
 
-- When creating a `GraphQLObjectType` via
-  `newWithHooks`:
+During the `init` hook, the [hooks for the respective GraphQL types](/graphile-build/all-hooks/) are applied [in the
+`newWithHooks` function](https://github.com/graphile/graphile-engine/blob/v4.4.4/packages/graphile-build/src/makeNewBuild.js#L329),
+which may cause them to run in a nested fashion.
 
-  - `GraphQLObjectType` add/remove any root-level attributes, e.g. add a description
-  - `GraphQLObjectType:interfaces` add/remove interfaces
-  - `GraphQLObjectType:fields` add/remove fields (delayed)
-  - `GraphQLObjectType:fields:field`: manipulate individual field spec, e.g.
-    add a description
-  - `GraphQLObjectType:fields:field:args` add/remove arguments to an individual field
-
-- When creating a `GraphQLInputObjectType` via
-  `newWithHooks`:
-
-  - `GraphQLInputObjectType` add/remove root-level attributes, e.g. description
-  - `GraphQLInputObjectType:fields` add/remove additional fields to this object type (delayed)
-  - `GraphQLInputObjectType:fields:field`: customize an individual field from above
-
-- When creating a `GraphQLEnumType` via `newWithHooks`:
-
-  - `GraphQLEnumType` add/remove any root-level attributes, e.g. add a description
-  - `GraphQLEnumType:values` add/remove values
-  - `GraphQLEnumType:values:value` customize an individual value from above
-
-The "(delayed)" hooks above (and their descendents) are not called until
-_after_ the object is constructed (which means they can reference the object
-itself - allowing circular references such as our `type Query { query: Query }`
-circular type); GraphQL will automatically call them when `Type.getFields()` is
-called, which may still be within the same tick - i.e. they are not fully
-asynchronous.
+This hook system makes the library both powerful and flexible, at the expense of traceability - instead of having a clear declarative `import`,
+the origin of a called method might be in any of the used plugins, or even multiple ones.
+See [PostGraphile's *Debugging* instructions](http://localhost:8000/postgraphile/debugging/#debug-envvars) for how to alleviate this.
 
 ### What to do when that hook fires: `hookFunction`
 
@@ -77,16 +66,9 @@ The `hookFunction` that you register via `builder.hook(hookName, hookFunction)` 
 2.  The `Build` object (see below)
 3.  The `Context` object (see below) which contains a `scope` property
 
-#### Input object
-
-Depending on the hook being called the input object might be an array (as in
-the case of `GraphQLObjectType:interfaces`) or an object (as in all other
-cases, currently). See [All Hooks](/graphile-build/all-hooks/) for a list of
-all the hooks, their input types, etc
-
 #### Build object (`Build`)
 
-The build object (see [Build Object](/graphile-build/build-object/)) contains a
+The [Build Object](/graphile-build/build-object/) contains a
 number of helpers and sources of information relevant to the current build of
 the GraphQL API. If you're in watch mode then every time a new schema is
 generated a new build object will be used.
@@ -101,12 +83,13 @@ The most commonly used methods are:
   return value for a hook
 - `build.graphql` - equivalent to `require('graphql')`, but helps ensure
   GraphQL version clashes do not occur
+- `build.inflection` - carries all the inflector functions for names
 
-See [Build Object](/graphile-build/build-object/)) for the rest.
+See [Build Object](/graphile-build/build-object/) for the rest.
 
 #### Context object (`Context`)
 
-The context object (see [Context Object](/graphile-build/context-object/)) contains
+The [Context Object](/graphile-build/context-object/) contains
 the information relevant to the current hook. Most importantly it contains the
 `scope` (an object based on the third argument passed to `newWithHooks`) but it
 also contains a number of other useful things. Here's some of the more commonly
@@ -115,7 +98,7 @@ used ones:
 - `scope` - an object based on the third argument to `newWithHooks` or
   `fieldWithHooks`; for deeper hooks (such as `GraphQLObjectType:fields:field`)
   the scope from shallower hooks (such as `GraphQLObjectType`) are merged in.
-- `Self` - only available on hooks that are called after the object is created
+- `Self` - only available on deferred hooks that are called after the object is created
   (e.g. `GraphQLObjectType:fields`), this contains the object that has been
   created allowing recursive references.
 - `fieldWithHooks(fieldName, spec, scope = {})` - on `GraphQLObjectType:fields`, used for adding a field if

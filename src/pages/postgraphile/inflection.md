@@ -46,6 +46,8 @@ module.exports = makeAddInflectorsPlugin(
 );
 ```
 
+See there also for [which inflectors to overwrite](/postgraphile/make-add-inflectors-plugin/#where-are-the-default-inflectors-defined).
+
 ### Advice
 
 The relation field names are quite explicit to avoid accidental conflicts,

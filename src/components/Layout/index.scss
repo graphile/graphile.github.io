@@ -456,6 +456,10 @@ ol {
   }
 }
 
+a code {
+  @extend .underline;
+}
+
 ul,
 ol {
   p {
