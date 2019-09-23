@@ -26,20 +26,20 @@ error.
 - `GraphQLObjectType*`: When creating a GraphQLObjectType via
   `newWithHooks`, we'll execute the following hooks:
 
-  - `GraphQLObjectType` to add/remove any root-level attributes, e.g. a description
-  - `GraphQLObjectType:interfaces` to add additional interfaces to this object type or remove them
-  - `GraphQLObjectType:fields` (*deferred*) to add additional fields to this object type or remove them.
+  - `GraphQLObjectType` to add any root-level attributes, e.g. a description
+  - `GraphQLObjectType:interfaces` to add additional interfaces to this object type.
+  - `GraphQLObjectType:fields` (*deferred*) to add additional fields to this object type.
     It is ran asynchronously (by passing `fields` as a thunk to [`GraphQLObjectType`](https://graphql.org/graphql-js/type/#graphqlobjecttype))
     and gets a reference to the final GraphQL Type as `Self` in the context.
   - `GraphQLObjectType:fields:field`: to manipulate any root-level attributes on an
     individual field, e.g. add a description
-  - `GraphQLObjectType:fields:field:args` to add/remove arguments of an individual field
+  - `GraphQLObjectType:fields:field:args` to add arguments of an individual field
 
 - `GraphQLInputObjectType*`: When creating a GraphQLInputObjectType via
   `newWithHooks`, we'll execute the following hooks:
 
-  - `GraphQLInputObjectType` to add/remove any root-level attributes, e.g. a description
-  - `GraphQLInputObjectType:fields` (*deferred*) to add additional fields to this input type or remove them.
+  - `GraphQLInputObjectType` to add any root-level attributes, e.g. a description
+  - `GraphQLInputObjectType:fields` (*deferred*) to add additional fields to this input type.
     It is ran asynchronously (by passing `fields` as a thunk to [`GraphQLInputObjectType`](https://graphql.org/graphql-js/type/#graphqlinputobjecttype))
     and gets a reference to the final GraphQL Type as `Self` in the context.
   - `GraphQLInputObjectType:fields:field`: to customize an individual field from above
@@ -47,15 +47,15 @@ error.
 - `GraphQLEnumType*`: When creating a GraphQLEnumType via `newWithHooks`,
   we'll execute the following hooks:
 
-  - `GraphQLEnumType` add/remove any root-level attributes, e.g. add a description
-  - `GraphQLEnumType:values` add/remove values
+  - `GraphQLEnumType` add any root-level attributes, e.g. add a description
+  - `GraphQLEnumType:values` add values
   - `GraphQLEnumType:values:value` customize an individual value from above
 
-- `GraphQLSchema`: This event defines the root-level schema; hook it to add `query`,
-  `mutation`, `subscription` root operations or similar schema configurations.
+- `GraphQLSchema`: This event defines the root-level schema configuration;
+   hook it to add `query`, `mutation`, `subscription` root operations or similar options.
 
 - `finalize`: This event is triggered when the schema has been constructed,
-  hook it to modify or wrap the schema instance.
+  hook it to modify or wrap the built schema instance.
 
 The "(deferred)" hooks above (and their descendents) are not called until
 _after_ the object is constructed (which means they can reference the object
@@ -63,6 +63,8 @@ itself - allowing circular references such as `type Query { query: Query }`);
 GraphQL will automatically call them when `Type.getFields()` is
 called, which may still be within the same tick - i.e. they are not fully
 asynchronous.
+
+<!-- TODO: note about (discouraged) removing of options during a hook -->
 
 ### Input types
 
