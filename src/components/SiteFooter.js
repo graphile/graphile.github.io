@@ -23,9 +23,9 @@ const SiteFooter = () => {
                 </Link>
               </li>
               <li>
-                <Link to="https://github.com/graphile/postgraphile/releases">
+                <a href="https://github.com/graphile/postgraphile/releases">
                   <i className="fab fa-github" /> Changelog
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
