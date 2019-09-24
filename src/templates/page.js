@@ -198,6 +198,17 @@ class Page extends React.Component {
                     <div className="row">
                       <div className="col-xs-12" style={{ width: "100%" }}>
                         <div
+                          className="book-a-call"
+                          style={{
+                            display: location.pathname.match(/^\/news\//)
+                              ? "none"
+                              : "",
+                          }}
+                        >
+                          Need support with your project? Book a call with
+                          PostGraphile maintainer Benjie right now!
+                        </div>
+                        <div
                           className="edit-this-page"
                           style={{
                             display: location.pathname.match(/^\/news\//)
