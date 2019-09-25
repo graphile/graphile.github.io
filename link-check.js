@@ -50,7 +50,7 @@ for (const file of files) {
     );
     const isGraphile = trimmed.match(/^https?:\/\/graphile\.(org|meh)/);
     const isLocalhost = trimmed.match(
-      /^https?:\/\/(localhost|127\.0\.0\.1|0\.0\.0\.0)/
+      /^https?:\/\/(localhost|127\.0\.0\.1|0\.0\.0\.0):(?:[^5]|5[^0]|50[^0]|500[^0])/
     );
     const isGraphileOrLocalhost = isGraphile || isLocalhost;
     if (isGitHub || isLearnDotGraphile || !isGraphileOrLocalhost) {
