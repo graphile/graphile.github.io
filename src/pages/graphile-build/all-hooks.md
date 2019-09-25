@@ -23,12 +23,15 @@ error.
   useful later. The argument to this is an opaque object and should be passed
   through unmodified (it currently is an empty object that gets ignored).
 
+- `GraphQLSchema`: This event defines the root-level schema configuration;
+  hook it to add `query`, `mutation`, `subscription` root operations or similar options.
+
 - `GraphQLObjectType*`: When creating a GraphQLObjectType via
   `newWithHooks`, we'll execute the following hooks:
 
   - `GraphQLObjectType` to add any root-level attributes, e.g. a description
   - `GraphQLObjectType:interfaces` to add additional interfaces to this object type.
-  - `GraphQLObjectType:fields` (*deferred*) to add additional fields to this object type.
+  - `GraphQLObjectType:fields` (_deferred_) to add additional fields to this object type.
     It is ran asynchronously (by passing `fields` as a thunk to [`GraphQLObjectType`](https://graphql.org/graphql-js/type/#graphqlobjecttype))
     and gets a reference to the final GraphQL Type as `Self` in the context.
   - `GraphQLObjectType:fields:field`: to manipulate any root-level attributes on an
@@ -39,7 +42,7 @@ error.
   `newWithHooks`, we'll execute the following hooks:
 
   - `GraphQLInputObjectType` to add any root-level attributes, e.g. a description
-  - `GraphQLInputObjectType:fields` (*deferred*) to add additional fields to this input type.
+  - `GraphQLInputObjectType:fields` (_deferred_) to add additional fields to this input type.
     It is ran asynchronously (by passing `fields` as a thunk to [`GraphQLInputObjectType`](https://graphql.org/graphql-js/type/#graphqlinputobjecttype))
     and gets a reference to the final GraphQL Type as `Self` in the context.
   - `GraphQLInputObjectType:fields:field`: to customize an individual field from above
@@ -50,9 +53,6 @@ error.
   - `GraphQLEnumType` add any root-level attributes, e.g. add a description
   - `GraphQLEnumType:values` add values
   - `GraphQLEnumType:values:value` customize an individual value from above
-
-- `GraphQLSchema`: This event defines the root-level schema configuration;
-   hook it to add `query`, `mutation`, `subscription` root operations or similar options.
 
 - `finalize`: This event is triggered when the schema has been constructed,
   hook it to modify or wrap the built schema instance.
