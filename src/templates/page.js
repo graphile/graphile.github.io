@@ -191,12 +191,19 @@ class Page extends React.Component {
                 className="book-a-call"
                 style={{
                   display: location.pathname.match(/^\/news\//) ? "none" : "",
-                  backgroundColor: "#4680B4",
+                  backgroundColor: "#2d80d3",
                   color: "white",
+                  padding: 10,
                 }}
               >
-                Need support with your project? Book a call with PostGraphile
-                maintainer Benjie right now!
+                Need one-to-one support? Slots now available!
+                <Link
+                  className="button--outline"
+                  to="/support/"
+                  style={{ backgroundColor: "white", margin: 10 }}
+                >
+                  Get support
+                </Link>
               </div>
               <div className="container">
                 <div className="row between-xs">
