@@ -44,7 +44,7 @@ settled on the following:
 
 I personally don't use the `public` schema for anything other than as the
 [default location that PostgreSQL extensions get
-installed](https://www.postgresql.org/docs/10/static/sql-createextension.html).
+installed](https://www.postgresql.org/docs/current/static/sql-createextension.html).
 
 Using this pattern is **not required** and in fact you can just use the
 default `public` schema if you so chose. By default, PostGraphile will

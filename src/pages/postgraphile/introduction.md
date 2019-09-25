@@ -25,9 +25,9 @@ introduction to GraphQL [here](https://graphql.org/learn/) before continuing
 through the PostGraphile documentation._
 
 By combining powerful features such as PostgreSQL's [role-based grant
-system](https://www.postgresql.org/docs/9.6/static/user-manag.html) and
+system](https://www.postgresql.org/docs/current/static/user-manag.html) and
 [row-level security
-policies](https://www.postgresql.org/docs/9.6/static/ddl-rowsecurity.html) with
+policies](https://www.postgresql.org/docs/current/static/ddl-rowsecurity.html) with
 Graphile Engine's advanced [GraphQL look-ahead](/graphile-build/look-ahead/) and
 [plugin expansion](/graphile-build/plugins/) technologies, PostGraphile ensures
 your generated schema is secure, performant and extensible.

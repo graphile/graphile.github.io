@@ -20,7 +20,7 @@ on inflection in PostGraphile.
 If you want `*Patch` types to instead be called `*ChangeSet`
 you could make a plugin such as this one:
 
-```js{5-7}
+```js{6-8}
 // MyInflectionPlugin.js
 const { makeAddInflectorsPlugin } = require("graphile-utils");
 
@@ -43,8 +43,9 @@ module.exports = makeAddInflectorsPlugin(
 
 The default Graphile Engine inflectors (`pluralize`, `singularize`,
 `upperCamelCase`, `camelCase` and `constantCase`) can be found
-[in makeNewBuild.js](https://github.com/graphile/graphile-engine/blob/6b0cb9e4e91050c98f1a9c62b73e3613a6c78f09/packages/graphile-build/src/makeNewBuild.js#L811-L815).
+[in `makeNewBuild.js`](https://github.com/graphile/graphile-engine/blob/v4.4.4/packages/graphile-build/src/makeNewBuild.js#L929-L997).
 
 The additional inflectors used in PostGraphile can be found [in
-PgBasicsPlugin.js](https://github.com/graphile/graphile-engine/blob/6b0cb9e4e91050c98f1a9c62b73e3613a6c78f09/packages/graphile-build-pg/src/plugins/PgBasicsPlugin.js#L296-L699).
+`PgBasicsPlugin.js`](https://github.com/graphile/graphile-engine/blob/v4.4.4/packages/graphile-build-pg/src/plugins/PgBasicsPlugin.js#L383-L874),
+but also [some other places](<https://github.com/graphile/graphile-engine/search?q="hook inflection">)
 There's a lot of them!

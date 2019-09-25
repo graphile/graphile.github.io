@@ -72,7 +72,7 @@ buildSchema([...defaultPlugins, NoopPlugin]).then(schema => {
 <details>
 <summary>View output</summary>
 
-```
+```graphql
 I don't do anything
 # An object with a globally unique `ID`.
 interface Node {
@@ -98,6 +98,18 @@ type Query implements Node {
 ```
 
 </details>
+
+### Plugin actions
+
+Whilst a plugin is being executed it can perform actions on the [`builder`
+object](/graphile-build/schema-builder/), its first argument.
+
+The most common actions for a plugin are:
+
+- Register a [**Hook**](/graphile-build/hooks/) callback to perform transformations at a specific step in the build, using `builder.hook(hookName, hookFunction)`.
+  Through the use of hooks, a plugin might provide functionality for other plugins, overwrite functionality that was exposed by other plugins,
+  or add things to specific parts of the schema.
+- Add watch-mode event listeners, using [`builder.registerWatcher(watcher, unwatcher)`](/graphile-build/schema-builder/#registerwatcherwatcher-unwatcher)
 
 ### An example plugin
 
@@ -155,14 +167,3 @@ Plugins are called with just two arguments:
 
 - `builder` - the instance of [`SchemaBuilder`](/graphile-build/graphile-build/) the plugin is being loaded against
 - `options` - [the options](/graphile-build/plugin-options/) that were passed to `buildSchema(plugins, options)` (or `getBuilder(plugins, options)`)
-
-### Plugin actions
-
-Whilst a plugin is being executed it can perform actions on the `builder`
-object (its first argument). For a list of the functions and what they do, see
-[SchemaBuilder](/graphile-build/schema-builder/).
-
-The most common actions are:
-
-- Register a hook: `builder.hook(hookName, hookFunction)`; see [Hooks](/graphile-build/hooks/)
-- Add watch-mode event listeners: `builder.registerWatcher(watcher, unwatcher)`; see [SchemaBuilder](/graphile-build/schema-builder/)

@@ -24,7 +24,7 @@ experience.
   don't have unique constraints then you won't be able to use the automatic
   update/delete mutations.
 - **Use foreign keys**: we infer relations between tables using
-  [foreign key constraints](https://www.postgresql.org/docs/10/static/ddl-constraints.html#DDL-CONSTRAINTS-FK);
+  [foreign key constraints](https://www.postgresql.org/docs/current/static/ddl-constraints.html#DDL-CONSTRAINTS-FK);
   if you don't use these constraints then we won't know there's a relationship
   between the tables. There are plugins to get around this (using smart
   comments) but it's highly recommended that you use PostgreSQL's built in
@@ -51,7 +51,7 @@ experience.
   use unique constraints to create mutations such as `updateUserByUsername`; note
   that "PostgreSQL automatically creates a unique index when a unique
   constraint or primary key is defined for a table." -- [PG
-  docs](https://www.postgresql.org/docs/10/static/indexes-unique.html)
+  docs](https://www.postgresql.org/docs/current/static/indexes-unique.html)
 
 On top of this standard PostgreSQL best practices apply: use indexes carefully
 for performance, use constraints to ensure your data is valid and consistent,

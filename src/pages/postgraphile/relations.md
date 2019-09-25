@@ -34,7 +34,7 @@ ALTER TABLE users
 
 You can read more about defining foreign key constraints, including
 constraints that utilise multiple columns, in the [PostgreSQL
-documentation](https://www.postgresql.org/docs/10/static/ddl-constraints.html#DDL-CONSTRAINTS-FK).
+documentation](https://www.postgresql.org/docs/current/static/ddl-constraints.html#DDL-CONSTRAINTS-FK).
 
 PostGraphile detects and exposes one-to-one, one-to-many and many-to-one
 relations automatically. Many-to-many relationships can be handled with the [many-to-many relations plugin](https://github.com/graphile-contrib/pg-many-to-many).

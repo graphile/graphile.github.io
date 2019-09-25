@@ -21,7 +21,7 @@ bottleneck).
 
 However, this is no longer necessary since PostgreSQL introduced much more
 granular permissions in the form of [Row-Level Security (RLS)
-policies](https://www.postgresql.org/docs/9.6/static/ddl-rowsecurity.html) in
+policies](https://www.postgresql.org/docs/current/static/ddl-rowsecurity.html) in
 PostgreSQL 9.5 back at the beginning of 2016. Now you can combine this with
 PostgreSQL established permissions system (based on roles) allowing your
 application to be considerably more specific about permissions: adding

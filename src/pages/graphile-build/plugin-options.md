@@ -6,9 +6,8 @@ title: Plugin Options
 
 ## Plugin Options
 
-The second argument to `buildSchema` is [the
-options](/graphile-build/plugin-options/) which are made available to every
-plugin (as their second argument).
+The second argument to [`buildSchema` and `getBuilder`](/graphile-build/graphile-build/#the-graphile-build-module)
+is an **`options`** object with arbitrary properties which is made available to every plugin as its second argument.
 
 ### Supported Options
 
@@ -19,7 +18,8 @@ The following options apply to the default plugins:
   instead. (Use of `__id` is discouraged because GraphQL wants to deprecate
   non-introspection fields that begin with `__`)
 
-Plugins may define further options if they wish.
+Plugins may expect further options if they wish, for example see [those of `graphile-build-pg`](/graphile-build-pg/settings/).
+To prevent collisions between the property names, the plugins should follow some namespacing conventions.
 
 ### Example
 

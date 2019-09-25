@@ -56,7 +56,7 @@ and the description on the last line would be made available as documentation as
 This field has a load of arbitrary tags.
 ```
 
-To put newlines in smart comments we recommend the use of the [`E` "escape" string constants](https://www.postgresql.org/docs/10/static/sql-syntax-lexical.html#SQL-SYNTAX-CONSTANTS), wherein you can use `\n` for newlines. For example the text above could be added to a comment on a field via:
+To put newlines in smart comments we recommend the use of the [`E` "escape" string constants](https://www.postgresql.org/docs/current/static/sql-syntax-lexical.html#SQL-SYNTAX-CONSTANTS), wherein you can use `\n` for newlines. For example the text above could be added to a comment on a field via:
 
 ```sql
 comment on column my_schema.my_table.my_column is
