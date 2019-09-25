@@ -17,7 +17,7 @@ The following settings are supported:
 - `pgJwtSecret`: the secret with which to sign the above token
 - `pgDisableDefaultMutations`: set to `true` if you don't want to use our default [CRUD mutations](/postgraphile/crud-mutations/)
 
-These are mostly taken from the [PostGraphile API `options`](http://localhost:8000/postgraphile/usage-library/#api-postgraphilepgconfig-schemaname-options),
+These are mostly taken from the [PostGraphile API `options`](/postgraphile/usage-library/#api-postgraphilepgconfig-schemaname-options),
 options for custom plugins can be supplied through `graphileBuildOptions`. For the complete list of options see [the source of `getPostGraphileBuilder`](https://github.com/graphile/graphile-engine/blob/v4.4.4/packages/postgraphile-core/src/index.ts#L365-L405).
 
 \* Required

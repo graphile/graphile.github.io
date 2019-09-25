@@ -6,7 +6,7 @@ title: Plugin Options
 
 ## Plugin Options
 
-The second argument to [`buildSchema` and `getBuilder`](http://localhost:8000/graphile-build/graphile-build/#the-graphile-build-module)
+The second argument to [`buildSchema` and `getBuilder`](/graphile-build/graphile-build/#the-graphile-build-module)
 is an **`options`** object with arbitrary properties which is made available to every plugin as its second argument.
 
 ### Supported Options
