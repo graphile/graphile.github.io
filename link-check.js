@@ -44,12 +44,16 @@ for (const file of files) {
       // Meh, resources
       continue;
     }
-    if (
-      trimmed.match(/^(https?:)?\/\//) &&
-      (trimmed.match(/github\.com/) ||
-        !trimmed.match(/graphile\.(org|meh)/) ||
-        trimmed.match(/learn\.graphile\.org/))
-    ) {
+    const isGitHub = trimmed.match(/^https?:\/\/(?:www\.)?github\.com/);
+    const isLearnDotGraphile = trimmed.match(
+      /^https?:\/\/learn\.graphile\.org\//
+    );
+    const isGraphile = trimmed.match(/^https?:\/\/graphile\.(org|meh)/);
+    const isLocalhost = trimmed.match(
+      /^https?:\/\/(localhost|127\.0\.0\.1|0\.0\.0\.0)/
+    );
+    const isGraphileOrLocalhost = isGraphile || isLocalhost;
+    if (isGitHub || isLearnDotGraphile || !isGraphileOrLocalhost) {
       const matches = trimmed.match(
         /^https?:\/\/(?:www\.)?postgresql.org\/docs\/([^\/]+)\/[^#]*(#.*)?$/
       );
