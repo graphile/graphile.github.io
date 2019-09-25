@@ -50,6 +50,38 @@ for (const file of files) {
         !trimmed.match(/graphile\.(org|meh)/) ||
         trimmed.match(/learn\.graphile\.org/))
     ) {
+      const matches = trimmed.match(
+        /^https?:\/\/(?:www\.)?postgresql.org\/docs\/([^\/]+)\/[^#]*(#.*)?$/
+      );
+      if (matches) {
+        const [_, docVersion, hash] = matches;
+        const CURRENT_VERSION = "11";
+        /*
+         * It's better to link to /docs/current/ in general, but when there's a
+         * hash we want to ensure the links don't break when we go up a major
+         * version so linking to /docs/11/ is appropriate then. Linking to
+         * older docs is currently not accepted, but we may need to add
+         * exceptions in future.
+         */
+        const isOkay =
+          docVersion === CURRENT_VERSION || (!hash && docVersion === "current");
+        if (!isOkay) {
+          invalid++;
+          if (hash) {
+            console.error(
+              `${filePretty} has disallowed link to '${link}' (please ensure PostgreSQL documentation links with hashes link to the '/docs/${CURRENT_VERSION}/...' documentation, you linked to '/docs/${docVersion}/...')`
+            );
+          } else {
+            console.error(
+              `${filePretty} has disallowed link to '${link}' (please ensure PostgreSQL documentation links link to the '/docs/current/...' documentation, you linked to '/docs/${docVersion}/...')`
+            );
+          }
+          // Handled above
+          continue;
+        }
+      }
+      // TODO: check the link resolves
+
       // Absolute, continue
       continue;
     }
