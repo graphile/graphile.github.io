@@ -542,7 +542,7 @@ set local jwt.claims.role to 'forum_example_person'
 
 Now, the user would have the permissions of the `forum_example_person` role as they execute their query.
 
-> **Warning:** Unless explicitly set, JWTs never expire. Once they have been issued they may never be invalidated. This is both good and bad, good in that JWTs are fast in not requiring a database lookup. Bad in that if an attacker gets their hands on a JWT you can’t stop them from using it until the token expires.
+> **Warning:** Unless explicitly set, JWTs never expire. Once they have been issued they may never be invalidated. This is both good and bad, good in that JWTs are fast in not requiring a database lookup. Bad in that if an attacker gets their hands on a JWT you can’t stop them from using it until the token expires. If you do not override `exp` then **PostGraphile's defaults set JWTs to expire after one day**.
 >
 > A solution to this is to use very short expiration times on your tokens and/or to use refresh tokens. A refresh token you would use whenever your JWT expires to get a new JWT without prompting the user for their password again. Refresh tokens would be stored in the database so you could easily invalidate refresh tokens.
 
@@ -555,7 +555,8 @@ You can pass an option to PostGraphile, called `--token <identifier>` in the CLI
 ```sql
 create type forum_example.jwt_token as (
   role text,
-  person_id integer
+  person_id integer,
+  exp bigint
 );
 ```
 
@@ -580,14 +581,14 @@ begin
   where a.email = $1;
 
   if account.password_hash = crypt(password, account.password_hash) then
-    return ('forum_example_person', account.person_id)::forum_example.jwt_token;
+    return ('forum_example_person', account.person_id, extract(epoch from (now() + interval '2 days')))::forum_example.jwt_token;
   else
     return null;
   end if;
 end;
 $$ language plpgsql strict security definer;
 
-comment on function forum_example.authenticate(text, text) is 'Creates a JWT token that will securely identify a person and give them certain permissions.';
+comment on function forum_example.authenticate(text, text) is 'Creates a JWT token that will securely identify a person and give them certain permissions. This token expires in 2 days.';
 ```
 
 This function will return null if the user failed to authenticate, and a JWT token if the user succeeds. Returning null could mean that the password was incorrect, a user with their email doesn’t exist, or the client forgot to pass `email` and/or `password` arguments. It is then up to the client to raise an error when encountering `null`. If a user with the provided email _does_ exist, and the provided password checks out with `password_hash` in `forum_example_private.person_account` then we return an instance of `forum_example.jwt_token` which will then be converted into an actual JWT by PostGraphile.
@@ -612,7 +613,7 @@ end if;
 
 This is an if/else statement that checks to see if the plaintext `password` argument we were provided matches the password hash that was stored in our `forum_example_private.person_account`’s `password_hash` table. If there is a match, then we return a JWT token. Otherwise we return null. The password match check is done in the code `account.password_hash = crypt(password, account.password_hash)`. To better understand how this works, read the documentation for `pgcrypto` on [password hashing functions](https://www.postgresql.org/docs/current/static/pgcrypto.html#AEN178870).
 
-In order to construct a `forum_example.jwt_token` we use the Postgres [composite value input](https://www.postgresql.org/docs/current/static/rowtypes.html#AEN8046) syntax which looks like: `('forum_example_person', account.person_id)`. Then we cast that composite value with `::forum_example.jwt_token`. The order in which the values go is the order in which they were originally defined. Since we defined `role` first and `person_id` second, this JWT will have a `role` of `forum_example_person` and a `person_id` of `account.person_id`.
+In order to construct a `forum_example.jwt_token` we use the Postgres [composite value input](https://www.postgresql.org/docs/9.6/static/rowtypes.html#AEN8046) syntax which looks like: `('forum_example_person', account.person_id, extract(epoch from (now() + interval '2 days')))`. Then we cast that composite value with `::forum_example.jwt_token`. We use Postgres [date/time functions](https://www.postgresql.org/docs/9.1/functions-datetime.html) to generate a date that is two days from the current date, and then convert it to a POSIX timestamp. The order in which the values go is the order in which they were originally defined. Since we defined `role`, `person_id` and `exp`, this JWT will have a `role` of `forum_example_person`, a `person_id` of `account.person_id`, and an `exp` that is two days from now.
 
 > **Warning:** Be careful about logging around this function too.
 

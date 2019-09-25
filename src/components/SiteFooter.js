@@ -22,6 +22,11 @@ const SiteFooter = () => {
                   Community Plugins
                 </Link>
               </li>
+              <li>
+                <a href="https://github.com/graphile/postgraphile/releases">
+                  <i className="fab fa-github" /> Changelog
+                </a>
+              </li>
             </ul>
           </div>
           <div className="col-xs-12 col-md-2 nested-list-reset ">
