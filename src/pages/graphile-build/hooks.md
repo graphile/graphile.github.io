@@ -46,7 +46,7 @@ and [`createBuild`](https://github.com/graphile/graphile-engine/blob/v4.4.4/pack
     For example, the [default `StandardTypesPlugin`](/graphile-build/default-plugins/#standardtypesplugin) registers the builtin scalars,
     or the PostGraphile plugins register the types found in the introspection results.
 5.  The schema is constructed using `newWithHooks(GraphQLSchema, …)`, where the `query`, `mutation` and `subscription` root operations
-    are configured by the respective [default plugins](/graphile-build/default-plugins)
+    are configured by the respective [default plugins](/graphile-build/default-plugins/)
     and [other schema options](https://github.com/graphql/graphql-js/blob/v14.5.6/src/type/schema.js#L318-L324) can be adjusted.
 6.  The `finalize` hook allows plugins to replace the schema that has been built with an alternative (likely derivative) schema, should that be desired. It also opens an opportunity to do something with the built schema (for example log it out) before it is returned.
 
@@ -56,7 +56,7 @@ which may cause them to run in a nested fashion.
 
 This hook system makes the library both powerful and flexible, at the expense of traceability - instead of having a clear declarative `import`,
 the origin of a called method might be in any of the used plugins, or even multiple ones.
-See [PostGraphile's *Debugging* instructions](http://localhost:8000/postgraphile/debugging/#debug-envvars) for how to alleviate this.
+See [PostGraphile's _Debugging_ instructions](http://localhost:8000/postgraphile/debugging/#debug-envvars) for how to alleviate this.
 
 ### What to do when that hook fires: `hookFunction`
 
@@ -98,10 +98,9 @@ used ones:
 - `scope` - an object based on the third argument to `newWithHooks` or
   `fieldWithHooks`; for deeper hooks (such as `GraphQLObjectType:fields:field`)
   the scope from shallower hooks (such as `GraphQLObjectType`) are merged in.
-- `Self` - only available on deferred hooks (those that are called after the object is created,
-   e.g. `GraphQLOb...
-  (e.g. `GraphQLObjectType:fields`), this contains the object that has been
-  created allowing recursive references.
+- `Self` - only available on deferred hooks (those that are called after the
+  object is created, e.g.`GraphQLObjectType:fields`) this is the
+  object that has been created, allowing recursive references.
 - `fieldWithHooks(fieldName, spec, scope = {})` - on `GraphQLObjectType:fields`, used for adding a field if
   you need access to the field helpers (or want to define a scope)
 
