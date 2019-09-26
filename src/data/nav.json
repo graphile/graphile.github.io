@@ -151,6 +151,10 @@
         "title": "Guides"
       },
       {
+        "id": "deploying",
+        "title": "Deploying"
+      },
+      {
         "id": "community",
         "title": "Community"
       },
@@ -503,6 +507,30 @@
         "to": "/postgraphile/testing-jest/",
         "title": "Testing with Jest",
         "sectionId": "guides",
+        "subpages": []
+      },
+      {
+        "to": "/postgraphile/deploying-heroku/",
+        "title": "Deploying to Heroku",
+        "sectionId": "deploying",
+        "subpages": []
+      },
+      {
+        "to": "/postgraphile/deploying-docker/",
+        "title": "Deploying with Docker",
+        "sectionId": "deploying",
+        "subpages": []
+      },
+      {
+        "to": "/postgraphile/deploying-lambda/",
+        "title": "Deploying to AWS Lambda",
+        "sectionId": "deploying",
+        "subpages": []
+      },
+      {
+        "to": "/postgraphile/deploying-gcp/",
+        "title": "Deploying to GCP",
+        "sectionId": "deploying",
         "subpages": []
       },
       {
