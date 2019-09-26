@@ -31,7 +31,6 @@ Schema extension plugins for PostGraphile:
 - [@graphile-contrib/pg-order-by-multi-column-index](https://github.com/graphile-contrib/pg-order-by-multi-column-index) - enables ordering by multi-column indexes when using `ignoreIndexes: false`.
 - [postgraphile-plugin-derived-field](https://github.com/mattbretl/postgraphile-plugin-derived-field) - provides an interface for adding derived fields
 - [postgraphile-plugin-upload-field](https://github.com/mattbretl/postgraphile-plugin-upload-field) - enables file uploads (see `postgraphile-upload-example` below)
-- [event-phile](https://github.com/stlbucket/event-phile) - "capture designated function calls as re-playable events"
 - [postgraphile-plugin-connection-multi-tenant](https://github.com/deden/postgraphile-plugin-connection-multi-tenant) - "Filtering Connections in PostGraphile by Tenants"
 - [graphile-build-postgis](https://github.com/singingwolfboy/graphile-build-postgis) - PostGIS support (WIP)
 - [postgraphile-pm2-status](https://github.com/stlbucket/phile-starter/blob/master/api/src/graphile-extensions/pm2Status.js) - expose pm2 process status thru a query
