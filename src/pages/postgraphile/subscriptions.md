@@ -30,6 +30,8 @@ The easiest way to get started is with Simple Subscriptions (see below) but
 we recommend that you take the Custom Subscriptions approach as it allows you
 to be much more expressive about the realtime features of your GraphQL API.
 
+NOTE: the endpoint for subscriptions is the same as for GraphQL, except the protocol is changed from `http` or `https` to `ws` or `wss` respectively.
+
 ---
 
 ### Custom Subscriptions
