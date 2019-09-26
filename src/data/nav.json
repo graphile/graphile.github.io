@@ -510,6 +510,12 @@
         "subpages": []
       },
       {
+        "to": "/postgraphile/bundling-webpack/",
+        "title": "Bundling with Webpack",
+        "sectionId": "guides",
+        "subpages": []
+      },
+      {
         "to": "/postgraphile/deploying-heroku/",
         "title": "Deploying to Heroku",
         "sectionId": "deploying",
