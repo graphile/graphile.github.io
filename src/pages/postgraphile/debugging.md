@@ -27,9 +27,11 @@ Network Devtools to see exactly what's being sent and received.
 ### Step 2: try your query in GraphiQL
 
 It sometimes helps to try doing the same thing a different way, and this is
-where GraphiQL comes in handy. Take the query you're running and execute it via
-GraphiQL. Is it producing the same issue? Note that we currently do not support
-setting headers in GraphiQL (although it is set to use `Credentials: same-origin` which is helpful if you're using cookie-based sessions).
+where GraphiQL comes in handy. Take the query you're running and execute it
+via GraphiQL. Is it producing the same issue? Note that you can set headers
+in GraphiQL by ensuring that you're using the enhanced GraphiQL
+(`--enhance-graphiql` or `enhanceGraphiql: true`) and pressing the `Headers`
+button.
 
 ### Step 3: increase PostGraphile's logging
 
