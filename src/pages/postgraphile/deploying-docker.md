@@ -11,6 +11,25 @@ don't need custom plugins and are deploying PostGraphile as standalone:
 
 https://hub.docker.com/r/graphile/postgraphile/
 
+Our Docker images are versioned:
+
+- `graphile/postgraphile:4` will give you the latest stable in the "v4.x.x" line (no alphas, betas, rcs); **this is the recommended version to use**
+- Every new versioned git tag will be available using the exact same tag; e.g. `v5.6.7-alpha.8` would become `graphile/postgraphile:v5.6.7-alpha.8`
+- Every new `vX.Y.Z` git tag (i.e. no alpha/beta/rc) will automatically release `graphile/postgraphile:X-Y` and `graphile/postgraphile:X-Y-Z`
+- `graphile/postgraphile:latest` will give you the latest _stable_ (but beware of major version bumps!)
+- `graphile/postgraphile:next` will give you the equivalent of what's on `master` right now (i.e. pre-release/bleeding edge/nightly)
+
+From time to time `graphile/postgraphile:4` may lag behind where it should be
+because it's the only manual step in the above. If this happens, give Benjie
+a poke over Discord and he'll push the latest v4.x.y tag to the `v4` branch
+via `git push origin v4.x.y:v4`.
+
+A request was made for clarification on why there are Docker versions with dots and other Docker versions with dashes; hopefully this clears things up:
+
+- `X` and `X-Y` are the versions that you should use, they will be updated over time with compatible bug fixes.
+- `X-Y-Z` for completeness, and may include alpha/beta/etc versions of that specific release in future
+- `vX.Y.Z-foo.A` or whatever are the explicit git tags which will only ever build once and will not be kept up to date as the project advances. Use these if you need to pin an explicit version... explicitly.
+
 ### Custom Dockerfile
 
 Should you want to deploy a more custom app then a custom Dockerfile is
