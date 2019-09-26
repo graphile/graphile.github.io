@@ -516,6 +516,12 @@
         "subpages": []
       },
       {
+        "to": "/postgraphile/multiple-schemas/",
+        "title": "Multiple GraphQL Schemas",
+        "sectionId": "guides",
+        "subpages": []
+      },
+      {
         "to": "/postgraphile/deploying-heroku/",
         "title": "Deploying to Heroku",
         "sectionId": "deploying",
