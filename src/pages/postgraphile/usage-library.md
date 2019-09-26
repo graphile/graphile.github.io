@@ -210,6 +210,57 @@ $$ LANGUAGE SQL STABLE;
 
 <!-- TODO: move this to its own article? -->
 
+### Making HTTP data available to resolvers
+
+#### `additionalGraphQLContextFromRequest` function
+
+`additionalGraphQLContextFromRequest` is an optionally asynchronous function
+passed the `req` and `res` request and response objects from your HTTP
+library. The result returned from the function is merged into the GraphQL
+`context` object which is passed as the third argument to every GraphQL
+resolver.
+
+If you're using Koa then you can get back to the Koa context using
+`const ctx = req._koaCtx`.
+
+Be careful to not clash with internal context keys such as `pgClient` and
+`jwtClaims`. For the absolute best future compatibility, we recommend that you
+prefix your context keys with your initials or similar.
+
+Example:
+
+```js
+const postgraphileOptions = {
+  // ... other options here ...
+
+  async additionalGraphQLContextFromRequest(req, res) {
+    // You can perform asynchronous actions here if you need to; for example
+    // looking up the current user in the database.
+
+    // Return here things that your resolvers need
+    return {
+      // Return the current user from Passport.js or similar
+      user: req.user,
+
+      // Add a helper to get a header
+      getHeader(name) {
+        return req.get(name);
+      },
+
+      // Give access to the database-owner PostgreSQL pool, for example to
+      // perform privileged actions
+      rootPgPool,
+    };
+  },
+};
+```
+
+It's _not_ a good idea to return direct access to the `req` or `res` objects
+from `additionalGraphQLContextFromRequest(req, res)` as it binds the context
+too tightly to the request lifecycle, and that's not compatible with local
+usage of the schema, or with usage over other transports such as websockets
+for realtime. Instead, add helpers to get/set the data you need.
+
 ### Mounting PostGraphile middleware under a subpath
 
 This isn't officially supported; however it should work in most cases. If
