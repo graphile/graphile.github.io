@@ -12,7 +12,7 @@ sponsor me to do so) then we can promote it to stable._
 
 PostGraphile adds `orderBy` arguments to various of the table collection
 fields it builds so that you can control the order in which you receive the
-results. By default we add the tables columns (or, if `--no-ignore-indexes`
+results. By default we add the table's columns (or, if `--no-ignore-indexes`
 is enabled, only the columns _that are indexed_) in both ascending and
 descending order. For example, you could request the list of all forums
 ordered from newest to oldest:

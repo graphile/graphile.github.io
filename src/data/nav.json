@@ -396,6 +396,12 @@
             "subpages": []
           },
           {
+            "to": "/postgraphile/make-add-pg-table-condition-plugin/",
+            "title": "makeAddPgTableConditionPlugin",
+            "sectionId": "customising",
+            "subpages": []
+          },
+          {
             "to": "/postgraphile/make-add-pg-table-order-by-plugin/",
             "title": "makeAddPgTableOrderByPlugin",
             "sectionId": "customising",
