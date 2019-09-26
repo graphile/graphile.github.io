@@ -6,7 +6,7 @@ title: Deploying to Heroku
 
 ## Deploying to Heroku
 
-It's possible to use Postgraphile on Heroku with either AWS RDS or Heroku Postgres.
+It's possible to use PostGraphile on Heroku with either AWS RDS or Heroku Postgres.
 
 ### AWS RDS
 
