@@ -372,7 +372,7 @@ app.listen(3030);
 For example, you might want to add a custom `registerUser` mutation
 which inserts the new user into the database and also sends them an email:
 
-```js{17,23-91}
+```js {17,23-91}
 const MyRegisterUserMutationPlugin = makeExtendSchemaPlugin(build => {
   const { pgSql: sql } = build;
   return {
