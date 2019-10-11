@@ -65,8 +65,8 @@ features.
 
 ### PostgreSQL: use latest
 
-For best results we recommend you use the latest stable release of PostgreSQL
-(v10.5 at time of writing), however it should run well on 9.6 or higher and
+For best results we recommend you use the latest stable release of PostgreSQL that we officially support
+(v11 at time of writing), however it should run well on 9.6 or higher and
 anything that breaks v9.6 support will be deemed a breaking change. The
 absolute earliest version it will run well against is v9.4, however we do not
 support this version officially - we strongly recommend you upgrade.
@@ -98,9 +98,13 @@ Introduces ["identity
 columns"](https://blog.2ndquadrant.com/postgresql-10-identity-columns/) which
 we have preliminary support for.
 
-#### PostgreSQL 11 [not officially supported _yet_, but works]
+#### PostgreSQL 11 [officially supported]
 
-Seems to work, we don't have support for any PG11 specific features yet though.
+Works well.
+
+#### PostgreSQL 12 [not officially supported _yet_, but works]
+
+Seems to work.
 
 ### Operating system
 
