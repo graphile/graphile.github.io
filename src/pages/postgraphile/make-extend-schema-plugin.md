@@ -526,6 +526,43 @@ Notes:
 - `queryBuilder.parentQueryBuilder.getTableAlias()` refers to the table/function/view/etc from which the `User` (the parent type) was retrieved
 - Regular connection arguments are added automatically thanks to the plugin system
 
+**NOTE: this section applies to PostGraphile v4.4.6+**
+
+Alternatively, the @pgQuery directive can be used with a `fragment` argument instead of `source`. That allows for a primitive type (or array of primitives) to be returned from the field.
+
+`fragment` can either be a `sql.fragment` or a function that receives a `QueryBuilder` as the first argument, any query parameters as the second argument and returns a `sql.fragment`.
+
+```js
+const { makeExtendSchemaPlugin, gql, embed } = require("graphile-utils");
+
+module.exports = makeExtendSchemaPlugin(build => {
+  const { pgSql: sql } = build;
+  return {
+    typeDefs: gql`
+      extend type User {
+        nameWithSuffix(suffix: String!): String! @pgQuery(
+            fragment: ${embed(
+                (queryBuilder, args) =>
+                    sql.fragment`(${queryBuilder.getTableAlias()}.name || ' ' || ${sql.value(args.suffix)}::text)`
+            )}
+          )
+      }
+    `,
+  };
+});
+```
+
+
+Notes:
+
+- `queryBuilder.getTableAlias()` refers to the table/function/view/etc from which the `User` (the parent type) was retrieved
+- there is no `queryBuilder.parentQueryBuilder`
+- Regular connection arguments are added automatically thanks to the plugin system
+
+
+You can see more examples of these use cases [in the
+tests](https://github.com/graphile/graphile-engine/blob/49259c291d651ab8b70d1f1785cf273bdd97fcf1/packages/graphile-utils/__tests__/ExtendSchemaPlugin-pg.test.js#L713-L832).
+
 ### Plugin SQL Privileges
 
 Plugins access the database with the same privileges as everything else - they are subject to RLS/RBAC/etc. If your user does not have privileges to perform the action your plugin is attempting to achieve then you may need to create a companion database function that is marked as `SECURITY DEFINER` in order to perform the action with elevated privileges; alternatively you could use this database function directly - see [Custom Mutations](/postgraphile/custom-mutations/) for more details.
