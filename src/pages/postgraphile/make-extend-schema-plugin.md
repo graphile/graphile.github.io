@@ -469,8 +469,6 @@ ahead" and determine what to request from the database.
 
 ### Using the `@pgQuery` directive for non-root queries and better performance
 
-**NOTE: this section applies to PostGraphile v4.4.0+**
-
 If your field is not defined on the `Query`/`Mutation` type directly (i.e. it's
 not defined at the root level) then for performance reasons you should hook into
 the "look-ahead" system when adding a custom connection/list/record, rather than
@@ -479,7 +477,12 @@ below. Alternative approaches you may wish to consider are [Smart
 Comments](/postgraphile/smart-comments/) and [Computed
 Columns](/postgraphile/computed-columns/).
 
-The `@pgQuery` directive accepts the following inputs:
+#### @pgQuery with an object type
+
+**NOTE: this section applies to PostGraphile v4.4.0+**
+
+When returning an object type (e.g. a table/composite type, connection, etc),
+the `@pgQuery` directive accepts the following inputs:
 
 - `source`: the source of the row(s) used in the result; can be a table name,
   subquery, or function call (but must always return the relevant table type
@@ -526,11 +529,14 @@ Notes:
 - `queryBuilder.parentQueryBuilder.getTableAlias()` refers to the table/function/view/etc from which the `User` (the parent type) was retrieved
 - Regular connection arguments are added automatically thanks to the plugin system
 
+#### @pgQuery with a leaf type
+
 **NOTE: this section applies to PostGraphile v4.4.6+**
 
-Alternatively, the @pgQuery directive can be used with a `fragment` argument instead of `source`. That allows for a primitive type (or array of primitives) to be returned from the field.
+The @pgQuery directive can also be used with leaf fields (those returning a scalar or list thereof). To do so, we pass `@pgQuery` a `fragment:` argument. This argument can take two forms:
 
-`fragment` can either be a `sql.fragment` or a function that receives a `QueryBuilder` as the first argument, any query parameters as the second argument and returns a `sql.fragment`.
+1. an `sql.fragment`
+2. a function `f(queryBuilder, args)` that returns a `sql.fragment`. `queryBuilder` is a `QueryBuilder` instance, and `args` is the arguments that were passed to the GraphQL field.
 
 ```js
 const { makeExtendSchemaPlugin, gql, embed } = require("graphile-utils");
@@ -541,11 +547,11 @@ module.exports = makeExtendSchemaPlugin(build => {
     typeDefs: gql`
       extend type User {
         nameWithSuffix(suffix: String!): String! @pgQuery(
-            fragment: ${embed(
-                (queryBuilder, args) =>
-                    sql.fragment`(${queryBuilder.getTableAlias()}.name || ' ' || ${sql.value(args.suffix)}::text)`
-            )}
-          )
+          fragment: ${embed(
+            (queryBuilder, args) =>
+              sql.fragment`(${queryBuilder.getTableAlias()}.name || ' ' || ${sql.value(args.suffix)}::text)`
+          )}
+        )
       }
     `,
   };
@@ -557,7 +563,6 @@ Notes:
 
 - `queryBuilder.getTableAlias()` refers to the table/function/view/etc from which the `User` (the parent type) was retrieved
 - there is no `queryBuilder.parentQueryBuilder`
-- Regular connection arguments are added automatically thanks to the plugin system
 
 
 You can see more examples of these use cases [in the
