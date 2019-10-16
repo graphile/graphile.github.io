@@ -549,7 +549,9 @@ module.exports = makeExtendSchemaPlugin(build => {
         nameWithSuffix(suffix: String!): String! @pgQuery(
           fragment: ${embed(
             (queryBuilder, args) =>
-              sql.fragment`(${queryBuilder.getTableAlias()}.name || ' ' || ${sql.value(args.suffix)}::text)`
+              sql.fragment`(${queryBuilder.getTableAlias()}.name || ' ' || ${sql.value(
+                args.suffix
+              )}::text)`
           )}
         )
       }
@@ -558,12 +560,10 @@ module.exports = makeExtendSchemaPlugin(build => {
 });
 ```
 
-
 Notes:
 
 - `queryBuilder.getTableAlias()` refers to the table/function/view/etc from which the `User` (the parent type) was retrieved
 - there is no `queryBuilder.parentQueryBuilder`
-
 
 You can see more examples of these use cases [in the
 tests](https://github.com/graphile/graphile-engine/blob/49259c291d651ab8b70d1f1785cf273bdd97fcf1/packages/graphile-utils/__tests__/ExtendSchemaPlugin-pg.test.js#L713-L832).
