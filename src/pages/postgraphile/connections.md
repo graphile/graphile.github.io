@@ -7,7 +7,7 @@ title: Connections
 ## Connections
 
 When a GraphQL field is expected to return a large list of database records,
-we typically implement a connection adhereing to the [Relay Cursor
+we typically implement a connection adhering to the [Relay Cursor
 Connections
 Specification](https://facebook.github.io/relay/graphql/connections.htm)
 (with a few enhancements). This connection allows you to perform cursor-based
