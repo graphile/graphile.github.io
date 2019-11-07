@@ -193,7 +193,7 @@ class Page extends React.Component {
                   display: location.pathname.match(/^\/news\//) ? "none" : "",
                   backgroundColor: "#2d80d3",
                   color: "white",
-                  padding: 10,
+                  padding: 5,
                 }}
               >
                 Need one-to-one support? Slots now available!
