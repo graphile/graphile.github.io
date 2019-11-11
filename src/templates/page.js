@@ -7,6 +7,7 @@ import ExamplesViewer from "../components/ExamplesViewer";
 import ContactAndMailingList from "../components/ContactAndMailingList";
 import Layout from "../components/Layout";
 import { graphql } from "gatsby";
+import { auto } from "eol";
 
 const sectionIs = desiredSection => ({ sectionId }) =>
   sectionId === desiredSection;
@@ -188,22 +189,29 @@ class Page extends React.Component {
           <div className="page-content">
             <section>
               <div
-                className="book-a-call"
                 style={{
                   display: location.pathname.match(/^\/news\//) ? "none" : "",
-                  backgroundColor: "#2d80d3",
-                  color: "white",
-                  padding: 5,
+                  textAlign: "center",
                 }}
               >
-                Need one-to-one support? Slots now available!
-                <Link
-                  className="button--outline"
-                  to="/support/"
-                  style={{ backgroundColor: "white", margin: 10 }}
+                <div
+                  className="book-a-call"
+                  style={{
+                    backgroundColor: "#2d80d3",
+                    color: "white",
+                    padding: 5,
+                  }}
                 >
-                  Get support
-                </Link>
+                  Need one-to-one support? Support plans with one-to-one calls
+                  now available
+                  <Link
+                    className="button--outline"
+                    to="/support/"
+                    style={{ backgroundColor: "white", margin: 10 }}
+                  >
+                    Get support
+                  </Link>
+                </div>
               </div>
               <div className="container">
                 <div className="row between-xs">
