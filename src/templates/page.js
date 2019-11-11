@@ -7,7 +7,6 @@ import ExamplesViewer from "../components/ExamplesViewer";
 import ContactAndMailingList from "../components/ContactAndMailingList";
 import Layout from "../components/Layout";
 import { graphql } from "gatsby";
-import { auto } from "eol";
 
 const sectionIs = desiredSection => ({ sectionId }) =>
   sectionId === desiredSection;
