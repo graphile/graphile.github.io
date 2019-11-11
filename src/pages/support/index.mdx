@@ -28,19 +28,43 @@ import Testimonial from '$components/MarketingTestimonial';
 </div>
 
 </Hero>
+<MarketingSection bg="nodes">
+
+<div className="f4 b tl" style={{maxWidth: '54rem', margin: '0 auto'}}>
+
+## On Demand Consultancy
+
+
+<MarketingBullets single big bullets={[
+'One hour of screen sharing with the PostGraphile maintainer',
+'Same-day slots often available',
+'Book directly from the calendar using PayPal',
+]}/>
+
+<div class='flex'>
+<a class='mr3 button--solid' target="_blank" href='https://www.supersaas.co.uk/schedule/Benjie/One_on_One'>Consult with Benjie ASAP <span class='fas fa-fw fa-external-link-alt' /></a>
+</div>
+
+
+</div>
+
+</MarketingSection>
+
+<MarketingDivide from="nodes" to="dark" down />
+<MarketingDivide from="dark" to="nodes" down />
 
 <MarketingSection bg="nodes">
 
 <div className="f4 b tl" style={{maxWidth: '54rem', margin: '0 auto'}}>
 
-## Annual Support Plans
+## Standard Support Plan
 
 <MarketingBullets single big bullets={[
-'Guaranteed response to critical issues in under 1 business day.',
-'Support provided via email, chat and VoIP.',
-'From the team behind PostGraphile.',
-'Plans start at $125/mo.',
-'NDA available.',
+'✨NEW✨ 3 x 30 minute consultancy calls each month',
+'Guaranteed response to critical issues in under 1 business day',
+'Support provided via email, chat and VoIP',
+'From the team behind the Graphile suite of tools',
+'NDA available',
 ]}/>
 
 <div class='flex'>
@@ -56,22 +80,14 @@ import Testimonial from '$components/MarketingTestimonial';
 <MarketingSection bg="dark">
 <div className="f4 tl" style={{maxWidth: '50rem', margin: '0 auto'}}>
 
-## Standard Support Plan
-
 Our standard support plan gives your team access to the knowledge and
-experience of PostGraphile's maintainer for any issues you face whilst using
-PostGraphile. Response times are guaranteed based on the severity of the
-incoming support request:
-
-- **critical**: 1 business day
-- **serious**: 1.5 business days
-- **moderate**: 2 business days
-- **minor**: 5 business days
+experience of the Graphile team for any issues you face whilst using
+PostGraphile and the Graphile suite of tools.
 
 Support time is capped at 4 hours per month, after which additional support
 is available for an hourly rate.
 
-Price: $250/mo (+ VAT where applicable)
+Price: $250/mo, paid annually (+ VAT where applicable)
 
 <div class='flex'>
 <a class='button--solid' href='mailto:team@graphile.com?subject=Standard%20support%20plan%20enquiry'>Get in touch <span class='fas fa-fw fa-arrow-right' /></a>
@@ -87,15 +103,10 @@ Price: $250/mo (+ VAT where applicable)
 
 ## Budget Support Plan
 
-Our budget support plan is highly competetive and easy to understand: it's
+Our budget support plan is highly competitive and easy to understand: it's
 half the price of the standard plan, is capped at half the hours, and has
 double the response times. It's particularly suitable for solo founders,
 pre-revenue startups and non-profits.
-
-- **critical**: 2 business day
-- **serious**: 3 business days
-- **moderate**: 4 business days
-- **minor**: 10 business days
 
 Support time is capped at 2 hours per month, after which additional support
 is available for an hourly rate.
@@ -109,34 +120,29 @@ Price: $125/mo (+ VAT where applicable)
 </div>
 </MarketingSection>
 
-<MarketingDivide from="medium" to="nodes" via="light"/>
-
-<MarketingSection bg="nodes">
-
-<div className="f4 b tl" style={{maxWidth: '54rem', margin: '0 auto'}}>
-
-## On Demand Consultancy
-
-
-<MarketingBullets single big bullets={[
-'One hour of screen sharing with the maintainer.',
-'Same-day slots often available.',
-'Book directly from the calendar using PayPal.',
-]}/>
-
-<div class='flex'>
-<a class='mr3 button--solid' target="_blank" href='https://www.supersaas.co.uk/schedule/Benjie/One_on_One'>Consult with Benjie ASAP <span class='fas fa-fw fa-external-link-alt' /></a>
-</div>
-
-
-</div>
-
-</MarketingSection>
+<MarketingDivide from="medium" to="dark" via="light"/>
 
 <MarketingSection bg="dark">
 <div className="f4 tl pb5" style={{maxWidth: '50rem', margin: '0 auto'}}>
 
 ## FAQ
+
+### What are the response times? 
+
+Response times are guaranteed based on the severity of the
+incoming support request:
+
+- **critical**: 1 business day
+- **serious**: 1.5 business days
+- **moderate**: 2 business days
+- **minor**: 5 business days
+
+For the budget plans, response times are doubled:
+
+- **critical**: 2 business day
+- **serious**: 3 business days
+- **moderate**: 4 business days
+- **minor**: 10 business days
 
 ### How is severity classified?
 
@@ -151,14 +157,14 @@ We classify the severity of incoming support requests according to these classes
 
 The advertised fee is not affected by how you deploy, or how many development
 environments you have. However, you should note that the support plan
-covers PostGraphile issues only, it does not cover external concerns such as
+covers issues with the Graphile suite only, it does not cover external concerns such as
 your servers, routing, proxying and deployment — we cannot help you debug your
 Kubernetes cluster, or help spot an issue in your nginx config.
 
 ### Do support hours rollover from month to month?
 
 No; you are not paying for "support hours," you are paying for access to
-support within a guaranteed timeframe if you hit a bug in the PostGraphile
+support within a guaranteed timeframe if you hit a bug in the Graphile
 software, or an issue with your use of PostGraphile where the solution is not
 well documented. We're a small open source company with limited resources, so
 we must apply a cap to the hours we can spend helping you so that we can
@@ -167,29 +173,31 @@ near to this cap, since we can answer most queries rapidly.
 
 ### What kind of things can the support be used for?
 
-The main use case for PostGraphile support is that if you hit a bug in
-PostGraphile, we can help you to understand it, and advise you on how to work
+The main use case for Graphile support is that if you hit a bug in
+PostGraphile or the Graphile suite of tools, we can help you to understand it, and advise you on how to work
 around the issue until a fix is available. Given PostGraphile's MIT license
 (which disclaims all liabilities), having the guarantee of a rapid response
 to production issues you may face is the main value proposition of the
 support plan.
 
-A secondary use case is if the PostGraphile documentation is unclear or
+A secondary use case is if the documentation is unclear or
 lacking in a particular area, we can prioritise fixing it, and can provide
-you with a solution/explanation in the interrim.
+you with a solution/explanation in the interim.
 
 Experimental features of PostGraphile (these are marked with 'experimental'
 or 'EXPERIMENTAL' in the documentation) are not officially covered under the
 support agreement, but if we're able we will try and help you with these
 also.
 
-Support **cannot** be used:
+Support requests **cannot** be used:
 
 - for general consulting,
 - for brainstorming,
 - for development of new features or plugins.
 
-Should you require these services, we have other options such as [one-on-one
+✨NEW✨The Standard Plan now includes 3 x 30 minute screensharing calls each month, which can be used in a more flexible way, and allows for important one-on-one time with the maintainer of the PostGraphile software. Calls work best when you come to them with a planned list of discussion points, and these can include more general queries and advice.
+
+Should you require longer consulting hours or developing of new features and plugins, we have other options such as [one-on-one
 ad-hoc consulting](https://www.supersaas.co.uk/schedule/Benjie/One_on_One) or
 longer consulting and/or software development contracts. Please [get in
 touch](mailto:team@graphile.com?subject=Support%20enquiry) for more
