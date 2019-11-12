@@ -431,6 +431,12 @@
             "subpages": []
           },
           {
+            "to": "/postgraphile/make-pg-smart-tags-plugin/",
+            "title": "makePgSmartTagsPlugin",
+            "sectionId": "customising",
+            "subpages": []
+          },
+          {
             "to": "/postgraphile/make-plugin-by-combining-plugins/",
             "title": "makePluginByCombiningPlugins",
             "sectionId": "customising",
