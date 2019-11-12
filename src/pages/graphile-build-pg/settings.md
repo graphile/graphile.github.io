@@ -5,8 +5,6 @@ title: Settings
 # TODO: rename to "Options"?
 ---
 
-## Settings
-
 The following settings are supported:
 
 - `pgConfig`\*: either the PostgreSQL connection string ('postgres://user:password@host/dbname') or a pgClient with which to introspect the database

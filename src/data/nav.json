@@ -365,10 +365,23 @@
         "subpages": []
       },
       {
-        "to": "/postgraphile/smart-comments/",
-        "title": "Smart Comments",
+        "to": "/postgraphile/smart-tags/",
+        "title": "Smart Tags",
         "sectionId": "customising",
-        "subpages": []
+        "subpages": [
+          {
+            "to": "/postgraphile/smart-tags-file/",
+            "title": "The postgraphile.tags.json5 file",
+            "sectionId": "customising",
+            "subpages": []
+          },
+          {
+            "to": "/postgraphile/smart-comments/",
+            "title": "Database Smart Comments",
+            "sectionId": "customising",
+            "subpages": []
+          }
+        ]
       },
       {
         "to": "/postgraphile/extending/",
@@ -414,6 +427,12 @@
           {
             "to": "/postgraphile/make-add-pg-table-order-by-plugin/",
             "title": "makeAddPgTableOrderByPlugin",
+            "sectionId": "customising",
+            "subpages": []
+          },
+          {
+            "to": "/postgraphile/make-pg-smart-tags-plugin/",
+            "title": "makePgSmartTagsPlugin",
             "sectionId": "customising",
             "subpages": []
           },

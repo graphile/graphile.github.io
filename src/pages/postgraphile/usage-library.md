@@ -2,9 +2,8 @@
 layout: page
 path: /postgraphile/usage-library/
 title: PostGraphile as a Library
+fullTitle: Using PostGraphile as a Library
 ---
-
-## Using PostGraphile as a Library
 
 Some people may want to use PostGraphile as a dependency of their current
 Node.js projects instead of as a CLI tool. If this is the approach you want to
@@ -70,7 +69,72 @@ http
   .listen(process.env.PORT || 3000);
 ```
 
-#### API: `postgraphile(pgConfig, schemaName, options)`
+### Recommended options
+
+As PostGraphile evolves, we add more features; however we can't always enable
+these features by default as they may be breaking changes. There are also
+options that may have security repurcussions. For this reason, many features
+are behind flags. We understand this page is very long, so we've included
+some default option sets you might like to use:
+
+We recommend you install the `@graphile-contrib/pg-simplify-inflector` plugin.
+
+#### For Development
+
+**NOTE**: if something you're expecting to see doesn't appear, try removing
+`ignoreRBAC: false` and/or `ignoreIndexes: false`, this should give you a hint
+as to what you need to fix in your database (you should only expose fields
+through GraphQL that are inexpensive for users to use).
+
+```js
+const postgraphileOptions = {
+  subscriptions: true,
+  watchPg: true,
+  dynamicJson: true,
+  setofFunctionsContainNulls: false,
+  ignoreRBAC: false,
+  ignoreIndexes: false,
+  showErrorStack: "json",
+  extendedErrors: ["hint", "detail", "errcode"],
+  appendPlugins: [require("@graphile-contrib/pg-simplify-inflector")],
+  exportGqlSchemaPath: "schema.graphql",
+  graphiql: true,
+  enhanceGraphiql: true,
+  allowExplain(req) {
+    // TODO: customise condition!
+    return true;
+  },
+  enableQueryBatching: true,
+  legacyRelations: "omit",
+  pgSettings(req) {
+    /* TODO */
+  },
+};
+```
+
+#### For Production
+
+```js
+const postgraphileOptions = {
+  subscriptions: true,
+  retryOnInitFail: true,
+  dynamicJson: true,
+  setofFunctionsContainNulls: false,
+  ignoreRBAC: false,
+  ignoreIndexes: false,
+  extendedErrors: ["errcode"],
+  appendPlugins: [require("@graphile-contrib/pg-simplify-inflector")],
+  graphiql: false,
+  enableQueryBatching: true,
+  disableQueryLog: true, // our default logging has performance issues, but do make sure you have a logging system in place!
+  legacyRelations: "omit",
+  pgSettings(req) {
+    /* TODO */
+  },
+};
+```
+
+### API: `postgraphile(pgConfig, schemaName, options)`
 
 The `postgraphile` middleware factory function takes three arguments, all of which are optional. The below options are valid for <tt>postgraphile@<!-- LIBRARY_VERSION_BEGIN -->4.4.3<!-- LIBRARY_VERSION_END --></tt>.
 

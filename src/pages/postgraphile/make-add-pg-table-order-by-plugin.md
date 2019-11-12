@@ -1,10 +1,8 @@
 ---
 layout: page
 path: /postgraphile/make-add-pg-table-order-by-plugin/
-title: graphile-utils makeAddPgTableOrderByPlugin
+title: makeAddPgTableOrderByPlugin (graphile-utils v4.4.5+)
 ---
-
-## makeAddPgTableOrderByPlugin (graphile-utils v4.4.5+)
 
 **WARNING**: _this plugin generator doesn't currently have any tests, so it's
 status is **experimental**. If you can spare the time to write some tests (or

@@ -4,8 +4,6 @@ path: /postgraphile/production/
 title: Production Considerations
 ---
 
-## Production Considerations
-
 When it comes time to deploy your PostGraphile application to production,
 there's a few things you'll want to think about including topics such as
 logging, security and stability. This article outlines some of the issues

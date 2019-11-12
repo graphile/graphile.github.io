@@ -4,8 +4,6 @@ path: /postgraphile/bundling-webpack/
 title: Bundling PostGraphile with Webpack
 ---
 
-## Bundling PostGraphile with Webpack
-
 PostGraphile is designed to be ran as a standard Node.js application on the
 server, using the built in `require` functionality which reads code from the
 filesystem. However, if system startup time is a critical metric in your

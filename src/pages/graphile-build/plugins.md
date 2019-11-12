@@ -4,8 +4,6 @@ path: /graphile-build/plugins/
 title: Plugins
 ---
 
-# Plugins
-
 <p class="intro">
 Almost everything in Graphile Engine is accomplished through plugins. You can
 add plugins, remove plugins, even replace the entire stack if you so desire.
@@ -122,28 +120,31 @@ module.exports = function MyRandomFieldPlugin(
   builder,
   { myDefaultMin = 1, myDefaultMax = 100 }
 ) {
-  builder.hook("GraphQLObjectType:fields", (
-    fields, // input object
-    { extend, graphql: { GraphQLInt } }, // Build
-    context // Context
-  ) => {
-    return extend(fields, {
-      random: {
-        type: GraphQLInt,
-        args: {
-          sides: {
-            type: GraphQLInt,
+  builder.hook(
+    "GraphQLObjectType:fields",
+    (
+      fields, // input object
+      { extend, graphql: { GraphQLInt } }, // Build
+      context // Context
+    ) => {
+      return extend(fields, {
+        random: {
+          type: GraphQLInt,
+          args: {
+            sides: {
+              type: GraphQLInt,
+            },
+          },
+          resolve(_, { sides = myDefaultMax }) {
+            return (
+              Math.floor(Math.random() * (sides - myDefaultMin + 1)) +
+              myDefaultMin
+            );
           },
         },
-        resolve(_, { sides = myDefaultMax }) {
-          return (
-            Math.floor(Math.random() * (sides - myDefaultMin + 1)) +
-            myDefaultMin
-          );
-        },
-      },
-    });
-  });
+      });
+    }
+  );
 };
 ```
 

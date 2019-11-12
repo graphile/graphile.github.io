@@ -4,8 +4,6 @@ path: /graphile-build/getting-started/
 title: Getting Started
 ---
 
-## Getting Started
-
 ### Installation
 
 graphile-build uses your local version of `graphql` to avoid conflicts, so you need to install both:

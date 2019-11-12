@@ -4,8 +4,6 @@ path: /postgraphile/filtering/
 title: Filtering
 ---
 
-## Filtering
-
 Out of the box, PostGraphile supports rudimentary filtering on
 [connections](/postgraphile/connections/) using a `condition` argument. This
 allows you to filter for specific values (e.g. `username: "Alice"` or

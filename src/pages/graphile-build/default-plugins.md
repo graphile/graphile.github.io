@@ -4,8 +4,6 @@ path: /graphile-build/default-plugins/
 title: Default Plugins
 ---
 
-## Default Plugins
-
 The following plugins come bundled with `graphile-build` as `defaultPlugins` and it's recommended to use them in your schemas.
 
 ### StandardTypesPlugin

@@ -4,8 +4,6 @@ path: /graphile-build/all-hooks/
 title: All Hooks
 ---
 
-## All Hooks
-
 The following hooks are currently supported, but more may be added in future.
 Trying to add a hook for a hook name that does not exist will result in an
 error.

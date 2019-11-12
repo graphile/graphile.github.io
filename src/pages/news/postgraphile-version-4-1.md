@@ -1,10 +1,8 @@
 ---
 layout: page
 path: /news/postgraphile-version-4-1/
-title: PostGraphile Version 4.1 is released
+title: PostGraphile Releases Version 4.1 - Better Webpackability!
 ---
-
-## PostGraphile Releases Version 4.1 - Better Webpackability!
 
 _Announced 2018-12-06_
 

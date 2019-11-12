@@ -1,10 +1,8 @@
 ---
 layout: page
 path: /postgraphile/make-process-schema-plugin/
-title: makeProcessSchemaPlugin
+title: makeProcessSchemaPlugin (graphile-utils)
 ---
-
-## makeProcessSchemaPlugin
 
 **NOTE: this documentation applies to PostGraphile v4.1.0+**
 

@@ -1,10 +1,8 @@
 ---
 layout: page
 path: /postgraphile/make-add-pg-table-condition-plugin/
-title: graphile-utils makeAddPgTableConditionPlugin
+title: makeAddPgTableConditionPlugin (graphile-utils v4.4.5+)
 ---
-
-## makeAddPgTableConditionPlugin (graphile-utils v4.4.5+)
 
 **WARNING**: _this plugin generator doesn't currently have any tests, so it's
 status is **experimental**. If you can spare the time to write some tests (or

@@ -4,8 +4,6 @@ path: /postgraphile/code-of-conduct/
 title: Code of Conduct
 ---
 
-## Code of Conduct
-
 The Graphile project is governed by the Contributor Covenant code of conduct.
 Please be careful to ensure your language always contributes to creating a
 positive environment.

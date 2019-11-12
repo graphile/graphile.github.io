@@ -1,11 +1,9 @@
 ---
 layout: page
 path: /postgraphile/examples/
-title: PostGraphile examples
+title: Example queries and mutations
 showExamples: queries
 ---
-
-## PostGraphile GraphQL examples
 
 _If you are new to GraphQL then I recommend you read through the official
 introduction to GraphQL [here](https://graphql.org/learn/) before continuing

@@ -1,10 +1,8 @@
 ---
 layout: page
 path: /graphile-build/schema-builder/
-title: SchemaBuilder
+title: SchemaBuilder instance
 ---
-
-## `SchemaBuilder` instance
 
 The SchemaBuilder instance returned by
 [`getBuilder`](/graphile-build/graphile-build/) has a number of methods on it

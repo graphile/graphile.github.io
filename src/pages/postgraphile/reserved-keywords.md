@@ -1,10 +1,8 @@
 ---
 layout: page
 path: /postgraphile/reserved-keywords/
-title: Reserved Keywords
+title: Reserved Keywords / Table Names
 ---
-
-## Reserved Keywords/Table names
 
 Some table, column, function and argument names can cause issues with
 PostGraphile due to conflicts with auto-generated type and field names. In

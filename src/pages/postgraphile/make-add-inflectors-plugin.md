@@ -1,10 +1,8 @@
 ---
 layout: page
 path: /postgraphile/make-add-inflectors-plugin/
-title: graphile-utils makeAddInflectorsPlugin
+title: makeAddInflectorsPlugin (graphile-utils)
 ---
-
-## makeAddInflectorsPlugin (graphile-utils)
 
 **NOTE: this documentation applies to PostGraphile v4.1.0+**
 

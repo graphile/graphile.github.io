@@ -628,9 +628,44 @@ h6 code {
 }
 
 .edit-this-page {
-  @extend .f6;
-  float: right;
-  margin: 0.5rem;
+  @extend .f5;
+  margin: 1rem 0.5rem -1rem;
+  text-align: right;
+}
+
+.toc {
+  @extend .fr;
+  @extend .cr;
+  padding: 1rem;
+  margin: 1.25rem 0 2rem 2rem;
+  background-color: #f3feff;
+  width: 18rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.12);
+  h4 {
+    margin-top: 0;
+  }
+  > div > ul {
+    margin-left: 0;
+    padding-left: 0;
+  }
+  ul {
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style-type: none;
+  }
+  li {
+    word-break: break-all;
+    word-break: break-word;
+    margin-top: 0.5rem;
+  }
+}
+@media screen and (max-width: 46rem) {
+  .toc {
+    width: auto;
+    float: none;
+    margin: 0;
+  }
 }
 
 @media screen and (max-width: 36em) {

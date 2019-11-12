@@ -1,10 +1,8 @@
 ---
 layout: page
 path: /graphile-build/look-ahead/
-title: Look Ahead
+title: "Advanced: Look Ahead"
 ---
-
-## Advanced: Look Ahead
 
 <p class="intro">
 Traditionally in GraphQL APIs DataLoader is used to batch requests to minimize

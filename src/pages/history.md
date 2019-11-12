@@ -4,13 +4,6 @@ path: /history/
 title: History
 ---
 
-<section class="history">
-<div class='container'>
-<div class='row justify-content-center'>
-<div class='col-xs-12 col-md-8'>
-
-## History
-
 PostGraphQL was originally written and maintained by
 [@calebmer](https://twitter.com/calebmer) — v1.0.1 was released on 23rd April
 2016 with the [first contribution from the
@@ -33,78 +26,11 @@ During the second quarter of 2017 Caleb handed the reins over to
 PostGraphQL whilst Caleb transitioned to Facebook with a new mission: to make
 [Flow](https://flow.org/) the best static type-checker for JavaScript.
 
-[Version 4](https://github.com/graphile/postgraphile/pull/506) is a focussed
-on lower latency, higher performance and greater extensibility whilst
-maintaining as much compatibility with version 3 as possible. Due to trademark
-concerns, version 4 also introduces a rename of the project from PostGraphQL to
+[Version 4](https://github.com/graphile/postgraphile/pull/506) replaced 80%
+of the codebase with the new Graphile Engine core, focussing on lower
+latency, higher performance and greater extensibility whilst maintaining as
+much compatibility with version 3 as possible. Due to trademark concerns,
+version 4 also introduces a rename of the project from PostGraphQL to
 **PostGraphile**.
 
 But version 4 is not the end of PostGraphile's history — there's lots more to come...
-
-</div>
-</div>
-</div>
-</section>
-
-<!-- **************************************** -->
-
-<section class='mailinglist'>
-<div class='container'>
-
-<div class='row'>
-<div class='col-xs-12'>
-<div class='hero-block'>
-
-<h3>
-Questions, comments or feedback?
-<br />
-Email <a href="mailto:info@graphile.org?subject=Graphile%20question/comment/feedback:)">info@graphile.org</a>
-</h3>
-
-<form action="//graphile.us16.list-manage.com/subscribe/post?u=d103f710cf00a9273b55e8e9b&amp;id=c3a9eb5c4e" method="post"
-id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-  <div id="mc_embed_signup_scroll" class="center hero-block">
-    <p>Keep up to date on Graphile and PostGraphile features/changes.
-    Subscribe to our occasional announcements newsletter:</p>
-    <div class="mc-field-group form-inline justify-content-center">
-      <div class='form-group'>
-        <div class="mb2">
-          <label class="label--small" for="mce-EMAIL">Email address:</label>
-        </div>
-          <input
-            autocapitalize="off"
-            autocomplete="off"
-            autocorrect="off"
-            class="input-text mb0-ns mb1"
-            id="mce-EMAIL"
-            name="EMAIL"
-            spellcheck="false"
-            type="email"
-            value=""
-          />
-        <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_d103f710cf00a9273b55e8e9b_c3a9eb5c4e" tabindex="-1" value="" /></div>
-        <input
-          class="button--solid"
-          id="mc-embedded-subscribe"
-          name="subscribe"
-          type="submit"
-          value="Subscribe"
-        />
-      </div>
-      <div id="mce-responses" class="clear">
-        <div class="response" id="mce-error-response" style="display:none"></div>
-        <div class="response" id="mce-success-response" style="display:none"></div>
-      </div>
-    </div>
-  </div>
-</form>
-
-</div>
-</div>
-</div>
-
-</div>
-</section>
-
-<!-- **************************************** -->

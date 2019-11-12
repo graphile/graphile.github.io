@@ -1,10 +1,8 @@
 ---
 layout: page
 path: /postgraphile/function-restrictions/
-title: PostGraphile Function Restrictions
+title: Database Function Restrictions
 ---
-
-## Function Restrictions
 
 PostGraphile supports a wide range of PostgreSQL functions, the only major class of functions we don't support currently are VARIADIC functions.
 

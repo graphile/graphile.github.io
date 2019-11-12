@@ -4,8 +4,6 @@ path: /graphile-build-pg/security/
 title: Security
 ---
 
-## Security
-
 ### Example
 
 ```js{21,28-29,35-37,42}

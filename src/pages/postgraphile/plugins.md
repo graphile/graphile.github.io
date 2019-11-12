@@ -4,8 +4,6 @@ path: /postgraphile/plugins/
 title: PostGraphile Server Plugins
 ---
 
-## PostGraphile Server Plugins
-
 Stability: experimental, may change in **semver minor** versions.
 
 _NOTE: This page relates to changing how the PostGraphile HTTP server and CLI

@@ -1,10 +1,8 @@
 ---
 layout: page
 path: /postgraphile/usage-cli/
-title: PostGraphile CLI
+title: Command Line Interface
 ---
-
-## Command Line Interface
 
 The easiest way to get up and running with PostGraphile is to use the Command Line Interface.
 
@@ -23,6 +21,64 @@ postgraphile -c postgres:///mydb -s public -a -j
 where `-c` is the connection string (defaults to `postgres:///`), `-s` is the schema name (defaults to "public"), `-a` enables Relay support and `-j` enables dynamic JSON.
 
 PostGraphile also reads options from a `.postgraphilerc.js` file from the current working directory.
+
+### Recommended options
+
+As PostGraphile evolves, we add more features; however we can't always enable
+these features by default as they may be breaking changes. There are also
+options that may have security repurcussions. For this reason, many features
+are behind flags. We understand this page is very long, so we've included
+some default option sets you might like to use:
+
+We recommend you install the `@graphile-contrib/pg-simplify-inflector` plugin.
+
+#### For Development
+
+**NOTE**: if something you're expecting to see doesn't appear, try removing
+`--no-ignore-indexes` and/or `--no-ignore-rbac`, this should give you a hint
+as to what you need to fix in your database (you should only expose fields
+through GraphQL that are inexpensive for users to use).
+
+```bash
+postgraphile \
+  --subscriptions \
+  --watch \
+  --dynamic-json \
+  --no-setof-functions-contain-nulls \
+  --no-ignore-rbac \
+  --no-ignore-indexes \
+  --show-error-stack=json \
+  --extended-errors hint,detail,errcode \
+  --append-plugins @graphile-contrib/pg-simplify-inflector \
+  --export-schema-graphql schema.graphql \
+  --graphiql "/" \
+  --enhance-graphiql \
+  --allow-explain \
+  --enable-query-batching \
+  --legacy-relations omit \
+  --connection $DATABASE_URL \
+  --schema app_public
+```
+
+#### For Production
+
+```bash
+postgraphile \
+  --subscriptions \
+  --retry-on-init-fail \
+  --dynamic-json \
+  --no-setof-functions-contain-nulls \
+  --no-ignore-rbac \
+  --no-ignore-indexes \
+  --extended-errors errcode \
+  --append-plugins @graphile-contrib/pg-simplify-inflector \
+  --disable-graphiql \
+  --enable-query-batching \
+  --disable-query-log \ # our default logging has performance issues, but do make sure you have a logging system in place!
+  --legacy-relations omit \
+  --connection $DATABASE_URL \
+  --schema app_public
+```
 
 ### CLI options
 

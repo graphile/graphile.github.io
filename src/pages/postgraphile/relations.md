@@ -4,8 +4,6 @@ path: /postgraphile/relations/
 title: Relations
 ---
 
-## Relations
-
 We automatically discover relations between database tables by inspecting
 their foreign keys, and use this to build relations into the generated
 GraphQL schema.

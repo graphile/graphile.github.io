@@ -4,8 +4,6 @@ path: /graphile-build/plugin-options/
 title: Plugin Options
 ---
 
-## Plugin Options
-
 The second argument to [`buildSchema` and `getBuilder`](/graphile-build/graphile-build/#the-graphile-build-module)
 is an **`options`** object with arbitrary properties which is made available to every plugin as its second argument.
 

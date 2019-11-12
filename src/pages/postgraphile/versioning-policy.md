@@ -4,8 +4,6 @@ path: /postgraphile/versioning-policy/
 title: Versioning Policy
 ---
 
-## What is PostGraphile's versioning policy?
-
 TL;DR: breaking changes to the GraphQL schema require a major version update.
 Breaking changes to the plugin interface would typically require a major
 version update, but in rare cases may be included in a minor version update.

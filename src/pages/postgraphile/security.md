@@ -4,8 +4,6 @@ path: /postgraphile/security/
 title: Security
 ---
 
-## Security
-
 Traditionally in web application architectures the security is implemented in
 the server layer and the database is treated as a simple store of data. Partly
 this was due to necessity (the security policies offered by databases such as

@@ -1,10 +1,8 @@
 ---
 layout: page
 path: /news/postgraphile-version-4/
-title: PostGraphile Version 4 is released
+title: PostGraphile Launches Version 4
 ---
-
-## PostGraphile Launches Version 4
 
 _Announced 2018-10-02_
 

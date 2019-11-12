@@ -70,6 +70,18 @@ function processHTML(html, noLink) {
     .replace(/\[ENTERPRISE\]/g, tag("enterprise", "enterprise", noLink))
     .replace(/^.* Gallery$/g, "<strong>$&</strong>");
 }
+function processTableOfContents(html) {
+  if (!html) return null;
+  console.dir(html);
+  return html
+    .replace(/\bPostgreSQL\b/g, "PG")
+    .replace(
+      /\b([A-Z_]{5,})\b/g,
+      "<span style='font-variant: small-caps; text-transform: lowercase'>$1</span>"
+    )
+    .replace(/(&#x3C;\/?code[^>]*>[^()]+)\([^)]*\)(&#)/g, "$1(...)$2")
+    .replace(/&#x3C;\/?code[^>]*>/g, "");
+}
 
 function htmlerize(text) {
   return text
@@ -129,7 +141,9 @@ class Page extends React.Component {
       data: {
         remark: {
           html: rawHTML,
-          frontmatter: { title, showExamples },
+          tableOfContents: rawTableOfContents,
+          timeToRead,
+          frontmatter: { title, fullTitle, showExamples },
         },
         nav,
         examples,
@@ -137,6 +151,8 @@ class Page extends React.Component {
       location,
       history,
     } = this.props;
+    const tableOfContents =
+      timeToRead > 1 ? processTableOfContents(rawTableOfContents) : null;
     const html = processHTML(rawHTML);
     const [, navSection] = location.pathname.split("/");
     const thisNavEdge = nav.edges.find(
@@ -222,6 +238,19 @@ class Page extends React.Component {
                   <div className="col-xs-12 col-md-9 first-xs main-content">
                     <div className="row">
                       <div className="col-xs-12" style={{ width: "100%" }}>
+                        {tableOfContents && (
+                          <div
+                            key={String(this.state.hack) + "_toc"}
+                            className="toc"
+                          >
+                            <h4>Table of Contents</h4>
+                            <div
+                              dangerouslySetInnerHTML={{
+                                __html: tableOfContents,
+                              }}
+                            />
+                          </div>
+                        )}
                         <div
                           className="edit-this-page"
                           style={{
@@ -236,9 +265,10 @@ class Page extends React.Component {
                               location.pathname.length - 1
                             )}.md`}
                           >
-                            📝 Suggest improvements to this page
+                            📝 Suggest improvement/edit this page
                           </a>
                         </div>
+                        <h2 className="mt3">{fullTitle || title}</h2>
                         <div
                           key={this.state.hack}
                           dangerouslySetInnerHTML={{ __html: html }}
@@ -306,9 +336,12 @@ export const pageQuery = graphql`
   query PageByPath($slug: String!) {
     remark: markdownRemark(frontmatter: { path: { eq: $slug } }) {
       html
+      tableOfContents
+      timeToRead
       frontmatter {
         path
         title
+        fullTitle
         showExamples
       }
     }

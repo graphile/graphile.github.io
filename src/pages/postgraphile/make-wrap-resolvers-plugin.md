@@ -1,10 +1,8 @@
 ---
 layout: page
 path: /postgraphile/make-wrap-resolvers-plugin/
-title: makeWrapResolversPlugin
+title: makeWrapResolversPlugin (graphile-utils)
 ---
-
-## makeWrapResolversPlugin
 
 **NOTE: this documentation applies to PostGraphile v4.1.0+**
 

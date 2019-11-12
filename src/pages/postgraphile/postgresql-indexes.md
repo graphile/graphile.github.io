@@ -4,8 +4,6 @@ path: /postgraphile/postgresql-indexes/
 title: PostgreSQL Indexes
 ---
 
-## Indexes
-
 It’s important that your queries stay fast for your users, this section
 outlines some resources to help you optimize you queries with indexes.
 

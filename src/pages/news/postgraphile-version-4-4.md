@@ -1,10 +1,8 @@
 ---
 layout: page
 path: /news/postgraphile-version-4-4/
-title: PostGraphile Version 4.4 is released
+title: PostGraphile Releases Version 4.4 - Real-time!
 ---
-
-## PostGraphile Releases Version 4.4 - Real-time!
 
 _Announced 2019-05-03_
 

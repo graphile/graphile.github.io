@@ -1,10 +1,8 @@
 ---
 layout: page
 path: /postgraphile/namespaces/
-title: Namespaces
+title: Namespaces (PostgreSQL "schemas")
 ---
-
-## Namespaces (PostgreSQL "schemas")
 
 In PostgreSQL, each database consists of a number of "schemas". The default
 schema is named "public" and many users only ever deal with this one schema.

@@ -1,10 +1,8 @@
 ---
 layout: page
 path: /news/press-kit/
-title: About PostGraphile
+title: About PostGraphile and Graphile Engine
 ---
-
-## About PostGraphile and Graphile Engine
 
 PostGraphile helps developers expose the powerful next generation features of PostgreSQL as an extensible GraphQL API. Developers can use their existing PostgreSQL knowledge to build secure and highly performant GraphQL APIs in record time, without having to learn a complex new toolkit, and without lock-in. The powerful Graphile Engine plugin system enables developers to add functionality to their API without compromising performance and latency, leading to incredibly smooth experiences for their customers - even on mobile. The growing ecosystem of plugins and reliance on familiar PostgreSQL enables developers to get a prototype up and running in minutes.
 

@@ -4,8 +4,6 @@ path: /postgraphile/realtime/
 title: PostGraphile Realtime
 ---
 
-## PostGraphile Realtime
-
 Every application is different, and no more so than when it comes to their
 realtime requirements. Some applications are read-heavy, others write-heavy,
 and others are collaborative and need to put in effort to avoid conflicts
