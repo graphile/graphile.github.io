@@ -70,6 +70,11 @@ function processHTML(html, noLink) {
     .replace(/\[ENTERPRISE\]/g, tag("enterprise", "enterprise", noLink))
     .replace(/^.* Gallery$/g, "<strong>$&</strong>");
 }
+function processTableOfContents(html) {
+  if (!html) return null;
+  console.dir(html);
+  return html.replace(/&#x3C;\/?code[^>]*>/g, "");
+}
 
 function htmlerize(text) {
   return text
@@ -129,7 +134,7 @@ class Page extends React.Component {
       data: {
         remark: {
           html: rawHTML,
-          tableOfContents,
+          tableOfContents: rawTableOfContents,
           frontmatter: { title, fullTitle, showExamples },
         },
         nav,
@@ -138,6 +143,7 @@ class Page extends React.Component {
       location,
       history,
     } = this.props;
+    const tableOfContents = processTableOfContents(rawTableOfContents);
     const html = processHTML(rawHTML);
     const [, navSection] = location.pathname.split("/");
     const thisNavEdge = nav.edges.find(
@@ -198,6 +204,19 @@ class Page extends React.Component {
                   <div className="col-xs-12 col-md-9 first-xs main-content">
                     <div className="row">
                       <div className="col-xs-12" style={{ width: "100%" }}>
+                        {tableOfContents && (
+                          <div
+                            key={String(this.state.hack) + "_toc"}
+                            className="toc"
+                          >
+                            <h4>Table of Contents</h4>
+                            <div
+                              dangerouslySetInnerHTML={{
+                                __html: tableOfContents,
+                              }}
+                            />
+                          </div>
+                        )}
                         <div
                           className="edit-this-page"
                           style={{
@@ -215,18 +234,7 @@ class Page extends React.Component {
                             📝 Suggest improvement/edit this page
                           </a>
                         </div>
-                        <div
-                          key={String(this.state.hack) + "_toc"}
-                          className="toc"
-                        >
-                          <h4>Table of Contents</h4>
-                          <div
-                            dangerouslySetInnerHTML={{
-                              __html: tableOfContents,
-                            }}
-                          />
-                        </div>
-                        <h2>{fullTitle || title}</h2>
+                        <h2 className="mt0">{fullTitle || title}</h2>
                         <div
                           key={this.state.hack}
                           dangerouslySetInnerHTML={{ __html: html }}

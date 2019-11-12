@@ -1,8 +1,7 @@
 ---
 layout: page
 path: /postgraphile/usage-cli/
-title: PostGraphile CLI
-fullTitle: Command Line Interface
+title: Command Line Interface
 ---
 
 The easiest way to get up and running with PostGraphile is to use the Command Line Interface.
