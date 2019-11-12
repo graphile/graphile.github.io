@@ -243,7 +243,7 @@ class Page extends React.Component {
                             📝 Suggest improvement/edit this page
                           </a>
                         </div>
-                        <h2 className="mt0">{fullTitle || title}</h2>
+                        <h2 className="mt3">{fullTitle || title}</h2>
                         <div
                           key={this.state.hack}
                           dangerouslySetInnerHTML={{ __html: html }}
