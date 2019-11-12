@@ -198,15 +198,15 @@ class Page extends React.Component {
                   style={{
                     backgroundColor: "#2d80d3",
                     color: "white",
-                    padding: 5,
+                    padding: "0.25rem",
                   }}
                 >
-                  Need one-to-one support? Support plans with one-to-one calls
-                  now available
+                  Need help or advice? Our Standard Support plan now includes
+                  consultancy calls{" "}
                   <Link
                     className="button--outline"
                     to="/support/"
-                    style={{ backgroundColor: "white", margin: 10 }}
+                    style={{ backgroundColor: "white", margin: "0.25rem" }}
                   >
                     Get support
                   </Link>
