@@ -36,6 +36,11 @@ We recommend you install the `@graphile-contrib/pg-simplify-inflector` plugin.
 
 #### For Development
 
+**NOTE**: if something you're expecting to see doesn't appear, try removing
+`--no-ignore-indexes` and/or `--no-ignore-rbac`, this should give you a hint
+as to what you need to fix in your database (you should only expose fields
+through GraphQL that are inexpensive for users to use).
+
 ```bash
 postgraphile \
   --subscriptions \
@@ -43,6 +48,7 @@ postgraphile \
   --dynamic-json \
   --no-setof-functions-contain-nulls \
   --no-ignore-rbac \
+  --no-ignore-indexes \
   --show-error-stack=json \
   --extended-errors hint,detail,errcode \
   --append-plugins @graphile-contrib/pg-simplify-inflector \
@@ -65,6 +71,7 @@ postgraphile \
   --dynamic-json \
   --no-setof-functions-contain-nulls \
   --no-ignore-rbac \
+  --no-ignore-indexes \
   --extended-errors errcode \
   --append-plugins @graphile-contrib/pg-simplify-inflector \
   --disable-graphiql \

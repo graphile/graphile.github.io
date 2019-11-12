@@ -82,6 +82,11 @@ We recommend you install the `@graphile-contrib/pg-simplify-inflector` plugin.
 
 #### For Development
 
+**NOTE**: if something you're expecting to see doesn't appear, try removing
+`ignoreRBAC: false` and/or `ignoreIndexes: false`, this should give you a hint
+as to what you need to fix in your database (you should only expose fields
+through GraphQL that are inexpensive for users to use).
+
 ```js
 const postgraphileOptions = {
   subscriptions: true,
@@ -89,6 +94,7 @@ const postgraphileOptions = {
   dynamicJson: true,
   setofFunctionsContainNulls: false,
   ignoreRBAC: false,
+  ignoreIndexes: false,
   showErrorStack: "json",
   extendedErrors: ["hint", "detail", "errcode"],
   appendPlugins: [require("@graphile-contrib/pg-simplify-inflector")],
@@ -116,6 +122,7 @@ const postgraphileOptions = {
   dynamicJson: true,
   setofFunctionsContainNulls: false,
   ignoreRBAC: false,
+  ignoreIndexes: false,
   extendedErrors: ["errcode"],
   appendPlugins: [require("@graphile-contrib/pg-simplify-inflector")],
   graphiql: false,
