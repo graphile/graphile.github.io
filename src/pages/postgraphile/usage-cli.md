@@ -24,6 +24,57 @@ where `-c` is the connection string (defaults to `postgres:///`), `-s` is the sc
 
 PostGraphile also reads options from a `.postgraphilerc.js` file from the current working directory.
 
+### Recommended options
+
+As PostGraphile evolves, we add more features; however we can't always enable
+these features by default as they may be breaking changes. There are also
+options that may have security repurcussions. For this reason, many features
+are behind flags. We understand this page is very long, so we've included
+some default option sets you might like to use:
+
+We recommend you install the `@graphile-contrib/pg-simplify-inflector` plugin.
+
+#### For Development
+
+```bash
+postgraphile \
+  --subscriptions \
+  --watch \
+  --dynamic-json \
+  --no-setof-functions-contain-nulls \
+  --no-ignore-rbac \
+  --show-error-stack=json \
+  --extended-errors hint,detail,errcode \
+  --append-plugins @graphile-contrib/pg-simplify-inflector \
+  --export-schema-graphql schema.graphql \
+  --graphiql "/" \
+  --enhance-graphiql \
+  --allow-explain \
+  --enable-query-batching \
+  --legacy-relations omit \
+  --connection $DATABASE_URL \
+  --schema app_public
+```
+
+#### For Production
+
+```bash
+postgraphile \
+  --subscriptions \
+  --retry-on-init-fail \
+  --dynamic-json \
+  --no-setof-functions-contain-nulls \
+  --no-ignore-rbac \
+  --extended-errors errcode \
+  --append-plugins @graphile-contrib/pg-simplify-inflector \
+  --disable-graphiql \
+  --enable-query-batching \
+  --disable-query-log \ # our default logging has performance issues, but do make sure you have a logging system in place!
+  --legacy-relations omit \
+  --connection $DATABASE_URL \
+  --schema app_public
+```
+
 ### CLI options
 
 There are more CLI options available to customise the GraphQL server (these are from <tt>postgraphile@<!-- CLI_VERSION_BEGIN -->4.4.3<!-- CLI_VERSION_END --></tt>):
