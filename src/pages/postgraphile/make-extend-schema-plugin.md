@@ -278,6 +278,20 @@ On top of these methods, `QueryBuilder` has the following useful properties:
 There are many other internal properties and methods, but you probably
 shouldn't call them. Only rely on the methods and properties documented above.
 
+##### QueryBuilder named children
+
+In very rare circumstances you might also need to use the following methods:
+
+- `buildChild()`; builds a child query builder, automatically passing through the relevant options and setting `parentQueryBuilder` for you - useful for constructing subqueries (normally you'd use `build.pgQueryFromResolveData` rather than using the `buildChild` method directly)
+- `buildNamedChildSelecting(name, from, selectExpression)`; creates a child query builder that's named `name`, selecting only `selectExpression` using the table (or subquery) described in `from`.
+- `getNamedChild(name)`; gets the named child created by `buildNamedChildSelecting`
+
+An example of these methods being used can be found here: https://github.com/singingwolfboy/graphile-engine/blob/44a2496102267ce664c1286860b6368283463063/packages/postgraphile-core/__tests__/integration/ToyCategoriesPlugin.js
+
+In this example we have a many-to-many relationship with three tables: `toys`, `categories` and the join table between them: `toy_categories`. We add a `categories` field onto the `Toy` type, which constructs a subquery called `toyCategoriesSubquery` to determine the categories the current toy is in from the join table `toy_categories`. Later, in a different plugin (just a different hook in this example), we want to be able to filter this list of `categories` to only the list of categories where the join table's `toy_categories.approved` field is true; to do so we need to be able to get access to this "named" subquery so that we can add conditions to it's `WHERE` clause.
+
+In most cases you're only dealing with one or two tables so you won't need this level of complexity.
+
 #### Query Example
 
 The below is a simple example which would have been better served by [Custom
