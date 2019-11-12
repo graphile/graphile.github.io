@@ -659,6 +659,22 @@ h6 code {
     word-break: break-word;
     margin-top: 0.5rem;
   }
+  .allcaps {
+    font-variant: small-caps;
+    text-transform: lowercase;
+  }
+  code {
+    .allcaps {
+      font-variant: initial;
+      text-transform: initial;
+    }
+    padding: initial;
+    border-radius: initial;
+    background: inherit;
+    text-decoration: inherit;
+    font-size: 0.84em;
+    letter-spacing: -0.5px;
+  }
 }
 @media screen and (max-width: 46rem) {
   .toc {

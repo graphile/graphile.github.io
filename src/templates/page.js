@@ -75,12 +75,9 @@ function processTableOfContents(html) {
   console.dir(html);
   return html
     .replace(/\bPostgreSQL\b/g, "PG")
-    .replace(
-      /\b([A-Z_]{5,})\b/g,
-      "<span style='font-variant: small-caps; text-transform: lowercase'>$1</span>"
-    )
+    .replace(/\b([A-Z_]{5,})\b(?!<)/g, "<span class='allcaps'>$1</span>")
     .replace(/(&#x3C;\/?code[^>]*>[^()]+)\([^)]*\)(&#)/g, "$1(...)$2")
-    .replace(/&#x3C;\/?code[^>]*>/g, "");
+    .replace(/&#x3C;(\/?code)[^>]*>/g, "<$1>");
 }
 
 function htmlerize(text) {
