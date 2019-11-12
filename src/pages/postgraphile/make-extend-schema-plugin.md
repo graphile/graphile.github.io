@@ -4,8 +4,6 @@ path: /postgraphile/make-extend-schema-plugin/
 title: graphile-utils makeExtendSchemaPlugin
 ---
 
-## makeExtendSchemaPlugin (graphile-utils)
-
 **NOTE: this documentation applies to PostGraphile v4.1.0+**
 
 The `graphile-utils` module contains some helpers for extending your

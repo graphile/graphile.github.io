@@ -4,8 +4,6 @@ path: /postgraphile/deploying-docker/
 title: Deploying with Docker
 ---
 
-## Deploying with Docker
-
 PostGraphile has an official Docker image which is suitable to use if you
 don't need custom plugins and are deploying PostGraphile as standalone:
 

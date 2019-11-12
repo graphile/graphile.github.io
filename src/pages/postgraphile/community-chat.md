@@ -4,8 +4,6 @@ path: /postgraphile/community-chat/
 title: PostGraphile chat
 ---
 
-## PostGraphile Chat
-
 We have a fairly active chat room on Discord:
 
 http://discord.gg/graphile

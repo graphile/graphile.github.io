@@ -4,8 +4,6 @@ path: /postgraphile/why-nullable/
 title: Why is it nullable?
 ---
 
-## FAQ: Why is it nullable?
-
 It's common for people, particularly those using strongly typed GraphQL
 implementations such as ReasonML or TypeScript, to ask why certain elements in
 a PostGraphile schema are nullable. A lot of thought has gone into which parts

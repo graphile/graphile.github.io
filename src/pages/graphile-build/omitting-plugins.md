@@ -4,8 +4,6 @@ path: /graphile-build/omitting-plugins/
 title: Omitting Plugins
 ---
 
-## Omitting Plugins
-
 <p class="intro">
 Whilst `graphile-build` and `graphile-build-pg` come with a lot of useful
 plugins enabled by default, you might not want all of them. It's easy to

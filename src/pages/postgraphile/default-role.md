@@ -4,8 +4,6 @@ path: /postgraphile/default-role/
 title: Default Role
 ---
 
-## The Default Role
-
 PostGraphile makes full use of PostgreSQL roles, so in this article we will explain briefly how PostgreSQL roles and users work and how that relates to how we use them in PostGraphile.
 
 You can make any number of PostgreSQL roles with [`CREATE ROLE`](https://www.postgresql.org/docs/current/static/sql-createrole.html) command and assign permissions to those roles with the [`GRANT`](https://www.postgresql.org/docs/current/static/sql-grant.html) command. Permissions like select from the table `post` or insert rows into the `person` table.

@@ -4,8 +4,6 @@ path: /postgraphile/inflection/
 title: Inflection
 ---
 
-## Inflection
-
 In PostGraphile, we have the concept of "inflection" which details how things
 in PostgreSQL are named in the generated GraphQL schema.
 

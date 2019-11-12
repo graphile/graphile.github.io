@@ -4,8 +4,6 @@ path: /graphile-build/build-object/
 title: The Build Object
 ---
 
-## The `Build` Object
-
 The build object contains a number of helpers and sources of information
 relevant to the current build of the GraphQL API. If you're in watch mode then
 every time a new schema is generated a new build object will be used.

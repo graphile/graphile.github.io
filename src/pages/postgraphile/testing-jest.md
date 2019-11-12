@@ -4,8 +4,6 @@ path: /postgraphile/testing-jest/
 title: Testing with Jest
 ---
 
-## Testing with Jest
-
 ### Testing the database functions
 
 You can think of this as your "unit tests" - simply spin up a transaction, set
@@ -415,10 +413,11 @@ test("GraphQL query nodeId", async () => {
       // If you need to, you can query the DB within the context of this
       // function - e.g. to check that your mutation made the changes you'd
       // expect.
-      const { rows } = await pgClient.query(
-        `SELECT * FROM app_public.users WHERE id = $1`,
-        [17]
-      );
+      const {
+        rows,
+      } = await pgClient.query(`SELECT * FROM app_public.users WHERE id = $1`, [
+        17,
+      ]);
       if (rows.length !== 1) {
         throw new Error("User not found!");
       }

@@ -4,8 +4,6 @@ path: /postgraphile/views/
 title: Views
 ---
 
-## Views
-
 Views are a great solution for abstraction.
 PostGraphile supports reading from and writing to views; however PostgreSQL
 lacks the powerful introspection capabilities on views that it has on tables,

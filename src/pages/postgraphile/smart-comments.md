@@ -4,8 +4,6 @@ path: /postgraphile/smart-comments/
 title: Smart Comments
 ---
 
-## Smart Comments
-
 You can customise your PostGraphile GraphQL schema by adding comments to tables, columns, functions, relations, etc. within your PostgreSQL database. These changes could be renaming something (via `@name newNameHere`), or omitting things from your GraphQL schema (via `@omit`), or anything else a plugin supports!
 
 We call this functionality "Smart Comments" and it allows you to easily customise the generated GraphQL schema without making breaking changes to your database.

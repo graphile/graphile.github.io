@@ -4,8 +4,6 @@ path: /postgraphile/debugging/
 title: Debugging
 ---
 
-## Debugging
-
 When something's wrong with your app it can be hugely frustrating; so we want to make
 it as easy as we can for you to get to the bottom of these issues!
 

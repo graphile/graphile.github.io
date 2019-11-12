@@ -4,8 +4,6 @@ path: /postgraphile/best-practices/
 title: PostGraphile best practices
 ---
 
-## Best Practices
-
 This guide is a work in progress. If you have ideas for best practices, please use the "Suggest improvements to this page" link above to submit them, or discuss them in #documentation on [the PostGraphile Discord chat](http://discord.gg/graphile).
 
 ### Foreign Key Indexes

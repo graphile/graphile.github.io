@@ -4,8 +4,6 @@ path: /postgraphile/custom-queries/
 title: Custom Queries
 ---
 
-## Custom Queries
-
 You can add root-level `Query` fields to your GraphQL schema using "Custom
 Queries". These are PostgreSQL functions, similar to [computed
 columns](/postgraphile/computed-columns/), that can return scalars,

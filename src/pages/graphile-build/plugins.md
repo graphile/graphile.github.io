@@ -4,8 +4,6 @@ path: /graphile-build/plugins/
 title: Plugins
 ---
 
-# Plugins
-
 <p class="intro">
 Almost everything in Graphile Engine is accomplished through plugins. You can
 add plugins, remove plugins, even replace the entire stack if you so desire.

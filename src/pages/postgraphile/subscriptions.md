@@ -4,8 +4,6 @@ path: /postgraphile/subscriptions/
 title: GraphQL Subscriptions
 ---
 
-## Subscriptions
-
 <p class='intro'>
 Subscriptions notify you when an event occurs on the server side.
 </p>
@@ -92,9 +90,7 @@ module.exports = makeExtendSchemaPlugin(({ pgSql: sql }) => ({
         event,
         _args,
         _context,
-        {
-          graphile: { selectGraphQLResultFromTable },
-        }
+        { graphile: { selectGraphQLResultFromTable } }
       ) {
         const rows = await selectGraphQLResultFromTable(
           sql.fragment`app_public.users`,

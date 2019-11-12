@@ -4,8 +4,6 @@ path: /postgraphile/quick-start-guide/
 title: Quick Start Guide
 ---
 
-## Quick Start Guide
-
 This quick start guide will walk you through spinning up your first PostGraphile server, including installing the prerequisites such as Node and PostgreSQL.
 
 ### Table of Contents

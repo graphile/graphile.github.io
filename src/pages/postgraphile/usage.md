@@ -1,10 +1,8 @@
 ---
 layout: page
 path: /postgraphile/usage/
-title: PostGraphile Usage
+title: Usage
 ---
-
-## Usage
 
 PostGraphile is formed of three layers.
 

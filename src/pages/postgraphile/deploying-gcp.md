@@ -4,8 +4,6 @@ path: /postgraphile/deploying-gcp/
 title: Deploying to GCP
 ---
 
-## Deploying to GCP
-
 _aka Google Cloud Platform (App Engine)_
 
 _This post is a work in progress. Please see [#161](https://github.com/graphile/graphile.github.io/issues/161) for notes._

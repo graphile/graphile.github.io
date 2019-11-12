@@ -4,8 +4,6 @@ path: /graphile-build/context-object/
 title: The Context Object
 ---
 
-## The `Context` Object
-
 Whereas the `Build` object is the same for all hooks (except the `build` hook
 which constructs it) within an individual build, the `Context` object changes for
 each hook. Different hooks have different values available to them on the `Context`

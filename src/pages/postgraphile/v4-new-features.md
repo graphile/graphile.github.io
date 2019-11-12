@@ -4,8 +4,6 @@ path: /postgraphile/v4-new-features/
 title: v4 Feature Guide
 ---
 
-## v4 Feature Guide
-
 Though the entry point to v4 is almost identical to v3 (with a few additional
 options!), the guts of PostGraphile have been re-written from the ground up -
 about 80% of the codebase has been replaced with the new Graphile Engine

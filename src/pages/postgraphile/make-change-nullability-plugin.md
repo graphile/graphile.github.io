@@ -1,10 +1,8 @@
 ---
 layout: page
 path: /postgraphile/make-change-nullability-plugin/
-title: makeChangeNullabilityPlugin
+title: makeChangeNullabilityPlugin (graphile-utils)
 ---
-
-## makeChangeNullabilityPlugin
 
 **NOTE: this documentation applies to PostGraphile v4.1.0+**
 

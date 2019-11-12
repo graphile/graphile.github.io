@@ -4,8 +4,6 @@ path: /postgraphile/community-contributions/
 title: Community contributions
 ---
 
-## Community contributions
-
 The community contributes to PostGraphile development in many ways.
 
 One of the common ways of contributing is to write a plugin, see [Community Plugins](/postgraphile/community-plugins/) for a list of some of the plugins that have been made open source by the community.

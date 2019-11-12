@@ -4,8 +4,6 @@ path: /postgraphile/connections/
 title: Connections
 ---
 
-## Connections
-
 When a GraphQL field is expected to return a large list of database records,
 we typically implement a connection adhering to the [Relay Cursor
 Connections

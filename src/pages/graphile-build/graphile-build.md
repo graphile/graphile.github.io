@@ -1,10 +1,8 @@
 ---
 layout: page
 path: /graphile-build/graphile-build/
-title: graphile-build
+title: The graphile-build module
 ---
-
-## The `graphile-build` module
 
 We export two methods, both of which take the same arguments:
 

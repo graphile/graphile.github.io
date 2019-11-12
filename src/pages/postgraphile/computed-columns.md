@@ -4,8 +4,6 @@ path: /postgraphile/computed-columns/
 title: Computed Columns
 ---
 
-## Computed Columns
-
 "Computed columns" add what appears to be an extra column (field) to the
 GraphQL table type, but, unlike an actual column, the value for this field is the result of
 calling a function defined in the PostgreSQL schema.

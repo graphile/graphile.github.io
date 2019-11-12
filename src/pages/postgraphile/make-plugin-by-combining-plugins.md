@@ -1,10 +1,8 @@
 ---
 layout: page
 path: /postgraphile/make-plugin-by-combining-plugins/
-title: graphile-utils makePluginByCombiningPlugins
+title: makePluginByCombiningPlugins (graphile-utils)
 ---
-
-## makePluginByCombiningPlugins (graphile-utils)
 
 **NOTE: this documentation applies to PostGraphile v4.1.0+**
 

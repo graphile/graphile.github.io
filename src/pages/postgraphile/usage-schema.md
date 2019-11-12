@@ -1,10 +1,8 @@
 ---
 layout: page
 path: /postgraphile/usage-schema/
-title: Graphile-Build-PG Usage
+title: Usage - Schema Only
 ---
-
-## Usage - Schema Only
 
 The PostGraphile middleware gives you a lot of excellent features for running
 your own GraphQL server. However, if you want to execute a PostGraphile query

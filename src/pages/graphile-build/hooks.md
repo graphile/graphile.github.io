@@ -4,8 +4,6 @@ path: /graphile-build/hooks/
 title: Hooks
 ---
 
-## Hooks
-
 The most common thing for a plugin to do is to add hooks to the builder.
 
 The GraphQL hooks ran by [`newWithHooks`](/graphile-build/build-object/#newwithhookstype-spec-scope)

@@ -1,10 +1,8 @@
 ---
 layout: page
 path: /postgraphile/required-knowledge/
-title: PostGraphile Required Knowledge
+title: Required Knowledge
 ---
-
-## Required Knowledge
 
 **WORK IN PROGRESS**: PR's welcome!
 
