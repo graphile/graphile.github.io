@@ -59,38 +59,41 @@ hook and to add our new field:
 const fetch = require("node-fetch");
 
 function AddHttpBinPlugin(builder, { pgExtendedTypes }) {
-  builder.hook("GraphQLObjectType:fields", (
-    fields, // Input object - the fields for this GraphQLObjectType
-    { extend, getTypeByName }, // Build object - handy utils
-    { scope: { isRootQuery } } // Context object - used for filtering
-  ) => {
-    if (!isRootQuery) {
-      // This isn't the object we want to modify:
-      // return the input object unmodified
-      return fields;
-    }
+  builder.hook(
+    "GraphQLObjectType:fields",
+    (
+      fields, // Input object - the fields for this GraphQLObjectType
+      { extend, getTypeByName }, // Build object - handy utils
+      { scope: { isRootQuery } } // Context object - used for filtering
+    ) => {
+      if (!isRootQuery) {
+        // This isn't the object we want to modify:
+        // return the input object unmodified
+        return fields;
+      }
 
-    // We don't want to introduce a new JSON type as that will clash,
-    // so let's find the JSON type that other fields use:
-    const JSONType = getTypeByName("JSON");
+      // We don't want to introduce a new JSON type as that will clash,
+      // so let's find the JSON type that other fields use:
+      const JSONType = getTypeByName("JSON");
 
-    return extend(fields, {
-      httpBinHeaders: {
-        type: JSONType,
-        async resolve() {
-          const response = await fetch("https://httpbin.org/headers");
-          if (pgExtendedTypes) {
-            // This setting is enabled through postgraphile's
-            // `--dynamic-json` option, if enabled return JSON:
-            return response.json();
-          } else {
-            // If Dynamic JSON is not enabled, we want a JSON string instead
-            return response.text();
-          }
+      return extend(fields, {
+        httpBinHeaders: {
+          type: JSONType,
+          async resolve() {
+            const response = await fetch("https://httpbin.org/headers");
+            if (pgExtendedTypes) {
+              // This setting is enabled through postgraphile's
+              // `--dynamic-json` option, if enabled return JSON:
+              return response.json();
+            } else {
+              // If Dynamic JSON is not enabled, we want a JSON string instead
+              return response.text();
+            }
+          },
         },
-      },
-    });
-  });
+      });
+    }
+  );
 }
 
 module.exports = AddHttpBinPlugin;
