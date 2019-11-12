@@ -187,6 +187,31 @@ class Page extends React.Component {
           <SiteHeader location={location} history={history} />
           <div className="page-content">
             <section>
+              <div
+                style={{
+                  display: location.pathname.match(/^\/news\//) ? "none" : "",
+                  textAlign: "center",
+                }}
+              >
+                <div
+                  className="book-a-call"
+                  style={{
+                    backgroundColor: "#2d80d3",
+                    color: "white",
+                    padding: "0.25rem",
+                  }}
+                >
+                  Need help or advice? Our Standard Support plan now includes
+                  consultancy calls{" "}
+                  <Link
+                    className="button--outline"
+                    to="/support/"
+                    style={{ backgroundColor: "white", margin: "0.25rem" }}
+                  >
+                    Get support
+                  </Link>
+                </div>
+              </div>
               <div className="container">
                 <div className="row between-xs">
                   <Nav
