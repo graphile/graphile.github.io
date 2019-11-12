@@ -36,10 +36,10 @@ Some tags only support one or two of these types of values.
 
 There's multiple ways of adding tags to entities:
 
-- [postgraphile.tags.json5](/postgraphile/smart-tags-file/) file
+- The [postgraphile.tags.json5](/postgraphile/smart-tags-file/) file
 - [Smart Comments](/postgraphile/smart-comments/) in the database via `COMMENT`
-- [`makePgSmartTagsPlugin`](/postgraphile/make-pg-smart-tags-plugin/)
-- your own custom [Graphile Engine plugin](/postgraphile/extending-raw/)
+- A [`makePgSmartTagsPlugin`](/postgraphile/make-pg-smart-tags-plugin/) instance
+- Your own custom [Graphile Engine plugin](/postgraphile/extending-raw/)
 
 ### Example
 
