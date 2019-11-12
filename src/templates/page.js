@@ -76,7 +76,7 @@ function processTableOfContents(html) {
   return html
     .replace(/\bPostgreSQL\b/g, "PG")
     .replace(
-      /\b([A-Z]{5,})\b/g,
+      /\b([A-Z_]{5,})\b/g,
       "<span style='font-variant: small-caps; text-transform: lowercase'>$1</span>"
     )
     .replace(/(&#x3C;\/?code[^>]*>[^()]+)\([^)]*\)(&#)/g, "$1(...)$2")
