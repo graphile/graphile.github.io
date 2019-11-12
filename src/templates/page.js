@@ -73,7 +73,9 @@ function processHTML(html, noLink) {
 function processTableOfContents(html) {
   if (!html) return null;
   console.dir(html);
-  return html.replace(/&#x3C;\/?code[^>]*>/g, "");
+  return html
+    .replace(/(&#x3C;\/?code[^>]*>[^()]+)\([^)]*\)(&#)/g, "$1(...)$2")
+    .replace(/&#x3C;\/?code[^>]*>/g, "");
 }
 
 function htmlerize(text) {

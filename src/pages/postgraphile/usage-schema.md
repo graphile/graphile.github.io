@@ -71,7 +71,7 @@ export async function performQuery(
 
 (The `await` keywords after the `return` statements aren't required, they're just there to clarify the results are promises.)
 
-#### API: `createPostGraphileSchema(pgConfig, schemaName, options)`
+### API: `createPostGraphileSchema(pgConfig, schemaName, options)`
 
 This function takes three arguments (all are optional) and returns a promise to a GraphQLSchema object.
 
@@ -107,7 +107,7 @@ The returned GraphQLSchema will **not** be updated when your database changes - 
 
 <!-- SCHEMA_DOCBLOCK_END -->
 
-#### API: `watchPostGraphileSchema(pgConfig, schemaName, options, onNewSchema)`
+### API: `watchPostGraphileSchema(pgConfig, schemaName, options, onNewSchema)`
 
 This function is takes the same options as `createPostGraphileSchema`; but with
 one addition: a function `onNewSchema` that is called every time a new schema
@@ -138,7 +138,7 @@ async function main() {
 }
 ```
 
-#### API: `withPostGraphileContext(options, callback)`
+### API: `withPostGraphileContext(options, callback)`
 
 This function sets up a PostGraphile context, calls (and resolves) the callback
 function within this context, and then tears the context back down again
