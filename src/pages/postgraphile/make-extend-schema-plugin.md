@@ -1,7 +1,7 @@
 ---
 layout: page
 path: /postgraphile/make-extend-schema-plugin/
-title: graphile-utils makeExtendSchemaPlugin
+title: makeExtendSchemaPlugin (graphile-utils)
 ---
 
 **NOTE: this documentation applies to PostGraphile v4.1.0+**
