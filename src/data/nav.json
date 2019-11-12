@@ -365,10 +365,17 @@
         "subpages": []
       },
       {
-        "to": "/postgraphile/smart-comments/",
-        "title": "Smart Comments",
+        "to": "/postgraphile/smart-tags/",
+        "title": "Smart Tags",
         "sectionId": "customising",
-        "subpages": []
+        "subpages": [
+          {
+            "to": "/postgraphile/smart-comments/",
+            "title": "Smart Comments",
+            "sectionId": "customising",
+            "subpages": []
+          }
+        ]
       },
       {
         "to": "/postgraphile/extending/",

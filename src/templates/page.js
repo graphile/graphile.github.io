@@ -129,7 +129,8 @@ class Page extends React.Component {
       data: {
         remark: {
           html: rawHTML,
-          frontmatter: { title, showExamples },
+          tableOfContents,
+          frontmatter: { title, fullTitle, showExamples },
         },
         nav,
         examples,
@@ -211,9 +212,21 @@ class Page extends React.Component {
                               location.pathname.length - 1
                             )}.md`}
                           >
-                            📝 Suggest improvements to this page
+                            📝 Suggest improvement/edit this page
                           </a>
                         </div>
+                        <div
+                          key={String(this.state.hack) + "_toc"}
+                          className="toc"
+                        >
+                          <h4>Table of Contents</h4>
+                          <div
+                            dangerouslySetInnerHTML={{
+                              __html: tableOfContents,
+                            }}
+                          />
+                        </div>
+                        <h2>{fullTitle || title}</h2>
                         <div
                           key={this.state.hack}
                           dangerouslySetInnerHTML={{ __html: html }}
@@ -281,9 +294,11 @@ export const pageQuery = graphql`
   query PageByPath($slug: String!) {
     remark: markdownRemark(frontmatter: { path: { eq: $slug } }) {
       html
+      tableOfContents
       frontmatter {
         path
         title
+        fullTitle
         showExamples
       }
     }

@@ -2,9 +2,8 @@
 layout: page
 path: /postgraphile/usage-library/
 title: PostGraphile as a Library
+fullTitle: Using PostGraphile as a Library
 ---
-
-## Using PostGraphile as a Library
 
 Some people may want to use PostGraphile as a dependency of their current
 Node.js projects instead of as a CLI tool. If this is the approach you want to
