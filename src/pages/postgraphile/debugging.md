@@ -75,9 +75,30 @@ extendedErrors: ['severity', 'code', 'detail', 'hint', 'position', 'internalPosi
 ### Step 4: viewing the generated SQL
 
 Assuming that the error is coming from within the database, you can see what
-SQL statements PostGraphile is generating. To do so, restart PostGraphile,
-being sure to set the relevant [DEBUG](https://github.com/visionmedia/debug)
-environmental variable first. For example:
+SQL statements PostGraphile is generating.
+
+#### Via PostGraphiQL 'Explain'
+
+One way to do so is via the "Explain" feature available in PostGraphiQL since
+PostGraphile v4.5. To use this, you must run PostGraphile with
+`--enhance-graphiql --allow-explain` (or for the library
+`enhanceGraphiql: true, allowExplain: (req) => { return true; }`). It is
+recommended that you do not use this functionality in production; however if
+you choose to do so you can use the `allowExplain` callback to determine
+which requests can use this functionality.
+
+Once enabled, visit GraphiQL (by default this will be at
+http://localhost:5000/graphiql) and click the 'Explain disabled' button to
+toggle it into 'Explain ON'. You should see the query that was executed and
+the associated query plan:
+
+![PostGraphiQL with Explain ON](https://user-images.githubusercontent.com/129910/68597446-df861a00-0494-11ea-801c-8741362dafa4.png)
+
+#### Via `DEBUG` envvar
+
+Another way is to set the relevant
+[DEBUG](https://github.com/visionmedia/debug) environmental variable before
+running PostGraphile. For example:
 
 ```bash
 # Bash (Linux, macOS, etc)
@@ -115,7 +136,7 @@ $env:DEBUG = "postgraphile:postgres,postgraphile:postgres:error"; postgraphile -
 $env:DEBUG = "postgraphile:postgres*"; postgraphile -c postgres://...
 ```
 
-### DEBUG envvars
+### Other `DEBUG` envvars
 
 We use a lot of DEBUG envvars for different parts of the system. Here's some of the ones you might care about:
 
