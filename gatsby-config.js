@@ -27,7 +27,7 @@ module.exports = {
       options: {
         tableOfContents: {
           heading: null,
-          maxDepth: 4,
+          maxDepth: 5,
         },
         plugins: [
           "gatsby-remark-autolink-headers",

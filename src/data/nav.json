@@ -370,8 +370,14 @@
         "sectionId": "customising",
         "subpages": [
           {
+            "to": "/postgraphile/smart-tags-file/",
+            "title": "The postgraphile.tags.json5 file",
+            "sectionId": "customising",
+            "subpages": []
+          },
+          {
             "to": "/postgraphile/smart-comments/",
-            "title": "Smart Comments",
+            "title": "Database Smart Comments",
             "sectionId": "customising",
             "subpages": []
           }
