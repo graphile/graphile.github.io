@@ -657,9 +657,7 @@ h6 code {
   li {
     word-break: break-all;
     word-break: break-word;
-    -webkit-hyphens: auto;
-    -moz-hyphens: auto;
-    hyphens: auto;
+    margin-top: 0.5rem;
   }
 }
 @media screen and (max-width: 46rem) {

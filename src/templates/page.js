@@ -74,6 +74,11 @@ function processTableOfContents(html) {
   if (!html) return null;
   console.dir(html);
   return html
+    .replace(/\bPostgreSQL\b/g, "PG")
+    .replace(
+      /\b([A-Z]{5,})\b/g,
+      "<span style='font-variant: small-caps; text-transform: lowercase'>$1</span>"
+    )
     .replace(/(&#x3C;\/?code[^>]*>[^()]+)\([^)]*\)(&#)/g, "$1(...)$2")
     .replace(/&#x3C;\/?code[^>]*>/g, "");
 }
@@ -137,6 +142,7 @@ class Page extends React.Component {
         remark: {
           html: rawHTML,
           tableOfContents: rawTableOfContents,
+          timeToRead,
           frontmatter: { title, fullTitle, showExamples },
         },
         nav,
@@ -145,7 +151,8 @@ class Page extends React.Component {
       location,
       history,
     } = this.props;
-    const tableOfContents = processTableOfContents(rawTableOfContents);
+    const tableOfContents =
+      timeToRead > 1 ? processTableOfContents(rawTableOfContents) : null;
     const html = processHTML(rawHTML);
     const [, navSection] = location.pathname.split("/");
     const thisNavEdge = nav.edges.find(
@@ -305,6 +312,7 @@ export const pageQuery = graphql`
     remark: markdownRemark(frontmatter: { path: { eq: $slug } }) {
       html
       tableOfContents
+      timeToRead
       frontmatter {
         path
         title
