@@ -55,6 +55,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><a href="/postgraphile/plugins/#enabling-via-middleware-options">Enabling via middleware options</a></li>
 <li><a href="/postgraphile/plugins/#writing-your-own-plugins">Writing your own plugins</a></li>
 <li><a href="/postgraphile/plugins/#inline-tweaks-via-pluginhook">Inline tweaks via pluginHook</a></li>
+<li>
+<p><a href="/postgraphile/plugins/#examples">Examples</a></p>
+<ul>
+<li><a href="/postgraphile/plugins/#origin-specific-cors">Origin specific CORS</a></li>
+</ul>
+</li>
 </ul></div></div><div class="edit-this-page" style="display:"><a href="https://github.com/graphile/graphile.github.io/edit/develop/src/pages/postgraphile/plugins.md">📝 Suggest improvement/edit this page</a></div><h2 class="mt3">PostGraphile Server Plugins</h2><div><p>Stability: experimental, may change in <strong>semver minor</strong> versions.</p>
 <p><em>NOTE: This page relates to changing how the PostGraphile HTTP server and CLI
 work. If you're instead looking to change the generated GraphQL schema (e.g.
@@ -186,6 +192,56 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> pluginHook <span class="token operator">=</span> <span class="token function">makePluginHook</span><span class="token punctuation">(</span><span class="token punctuation">[</span>graphiqlBrandingTweak<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> postGraphileMiddleware <span class="token operator">=</span> <span class="token function">postgraphile</span><span class="token punctuation">(</span>databaseUrl<span class="token punctuation">,</span> <span class="token string">"app_public"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  pluginHook<span class="token punctuation">,</span>
+  <span class="token comment">// ...</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<h3 id="examples"><a href="#examples" aria-label="examples permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Examples</h3>
+<h4 id="origin-specific-cors"><a href="#origin-specific-cors" aria-label="origin specific cors permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Origin specific CORS</h4>
+<p>You can enable <em>generous</em> CORS by <a href="https://www.graphile.org/postgraphile/usage-cli/#cli-options">adding the <code class="language-text">-o,--cors</code> flag to the CLI</a> or by <a href="https://www.graphile.org/postgraphile/usage-library/#api-postgraphilepgconfig-schemaname-options">adding a <code class="language-text">enableCors: true</code> option when using PostGraphile as a library</a>.</p>
+<p>However, by being <em>generous</em>, you allow <strong>any</strong> origin to communicate with you PostGraphile instance. If you want to allow just one specific origin, and using a <code class="language-text">cors</code> middleware before PostGraphile is not an option, then you can make a server plugin such as this one:</p>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token comment">/**
+ * This server plugin injects CORS headers to allow requests only from a specific origin.
+ */</span>
+
+<span class="token keyword">function</span> <span class="token function">makeAllowedOriginTweak</span><span class="token punctuation">(</span><span class="token parameter">origin</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">[</span><span class="token string">"postgraphile:http:handler"</span><span class="token punctuation">]</span><span class="token punctuation">(</span>req<span class="token punctuation">,</span> <span class="token punctuation">{</span> res <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      res<span class="token punctuation">.</span><span class="token function">setHeader</span><span class="token punctuation">(</span><span class="token string">"Access-Control-Allow-Origin"</span><span class="token punctuation">,</span> origin<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      res<span class="token punctuation">.</span><span class="token function">setHeader</span><span class="token punctuation">(</span><span class="token string">"Access-Control-Allow-Methods"</span><span class="token punctuation">,</span> <span class="token string">"HEAD, GET, POST"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      res<span class="token punctuation">.</span><span class="token function">setHeader</span><span class="token punctuation">(</span>
+        <span class="token string">"Access-Control-Allow-Headers"</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span>
+          <span class="token string">"Origin"</span><span class="token punctuation">,</span>
+          <span class="token string">"X-Requested-With"</span><span class="token punctuation">,</span>
+          <span class="token comment">// Used by `express-graphql` to determine whether to expose the GraphiQL</span>
+          <span class="token comment">// interface (`text/html`) or not.</span>
+          <span class="token string">"Accept"</span><span class="token punctuation">,</span>
+          <span class="token comment">// Used by PostGraphile for auth purposes.</span>
+          <span class="token string">"Authorization"</span><span class="token punctuation">,</span>
+          <span class="token comment">// Used by GraphQL Playground and other Apollo-enabled servers</span>
+          <span class="token string">"X-Apollo-Tracing"</span><span class="token punctuation">,</span>
+          <span class="token comment">// The `Content-*` headers are used when making requests with a body,</span>
+          <span class="token comment">// like in a POST request.</span>
+          <span class="token string">"Content-Type"</span><span class="token punctuation">,</span>
+          <span class="token string">"Content-Length"</span><span class="token punctuation">,</span>
+          <span class="token comment">// For our 'Explain' feature</span>
+          <span class="token string">"X-PostGraphile-Explain"</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">", "</span><span class="token punctuation">)</span>
+      <span class="token punctuation">)</span><span class="token punctuation">;</span>
+      res<span class="token punctuation">.</span><span class="token function">setHeader</span><span class="token punctuation">(</span>
+        <span class="token string">"Access-Control-Expose-Headers"</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token string">"X-GraphQL-Event-Stream"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">", "</span><span class="token punctuation">)</span>
+      <span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span> req<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<p>Using the plugin would look like this:</p>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> pluginHook <span class="token operator">=</span> <span class="token function">makePluginHook</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+  <span class="token function">makeAllowedOriginTweak</span><span class="token punctuation">(</span><span class="token string">"https://graphql.rocks"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> postGraphileMiddleware <span class="token operator">=</span> <span class="token function">postgraphile</span><span class="token punctuation">(</span>databaseUrl<span class="token punctuation">,</span> <span class="token string">"app_public"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
   pluginHook<span class="token punctuation">,</span>
