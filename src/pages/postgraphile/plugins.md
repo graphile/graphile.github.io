@@ -191,4 +191,60 @@ const postGraphileMiddleware = postgraphile(databaseUrl, "app_public", {
 });
 ```
 
+### Examples
+
+#### Origin specific CORS
+
+You can enable *generous* CORS by [adding the `-o,--cors` flag to the CLI](https://www.graphile.org/postgraphile/usage-cli/#cli-options) or by [adding a `enableCors: true` option when using PostGraphile as a library](https://www.graphile.org/postgraphile/usage-library/#api-postgraphilepgconfig-schemaname-options).
+
+However, by being *generous*, you allow **any** origin to communicate with you PostGraphile instance. If you want to allow just one specific origin, and using a `cors` middleware before PostGraphile is not an option, then you can make a server plugin such as this one:
+
+```js
+/**
+ * This server plugin injects CORS headers to allow requests only from a specific origin.
+ */
+
+function makeAllowedOriginTweak(origin) {
+  return {
+    ['postgraphile:http:handler'](req, { res }) {
+      res.setHeader('Access-Control-Allow-Origin', origin);
+      res.setHeader('Access-Control-Allow-Methods', 'HEAD, GET, POST');
+      res.setHeader(
+        'Access-Control-Allow-Headers',
+        [
+          'Origin',
+          'X-Requested-With',
+          // Used by `express-graphql` to determine whether to expose the GraphiQL
+          // interface (`text/html`) or not.
+          'Accept',
+          // Used by PostGraphile for auth purposes.
+          'Authorization',
+          // Used by GraphQL Playground and other Apollo-enabled servers
+          'X-Apollo-Tracing',
+          // The `Content-*` headers are used when making requests with a body,
+          // like in a POST request.
+          'Content-Type',
+          'Content-Length',
+          // For our 'Explain' feature
+          'X-PostGraphile-Explain',
+        ].join(', '),
+      );
+      res.setHeader('Access-Control-Expose-Headers', ['X-GraphQL-Event-Stream'].join(', '));
+      return req;
+    },
+  };
+}
+```
+
+Using the plugin would look like this:
+
+```js
+const pluginHook = makePluginHook([makeAllowedOriginTweak('https://graphql.rocks')]);
+
+const postGraphileMiddleware = postgraphile(databaseUrl, "app_public", {
+  pluginHook,
+  // ...
+});
+```
+
 If you need help writing your own PostGraphile server plugins, [ask in our Discord chat](http://discord.gg/graphile).
