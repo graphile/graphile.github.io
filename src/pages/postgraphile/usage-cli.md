@@ -82,7 +82,7 @@ postgraphile \
 
 ### CLI options
 
-There are more CLI options available to customise the GraphQL server (these are from <tt>postgraphile@<!-- CLI_VERSION_BEGIN -->4.5.0-rc.3<!-- CLI_VERSION_END --></tt>):
+There are more CLI options available to customise the GraphQL server (these are from <tt>postgraphile@<!-- CLI_VERSION_BEGIN -->4.5.0-rc.4<!-- CLI_VERSION_END --></tt>):
 
 <!-- CLI_DOCBLOCK_BEGIN -->
 
