@@ -136,7 +136,7 @@ const postgraphileOptions = {
 
 ### API: `postgraphile(pgConfig, schemaName, options)`
 
-The `postgraphile` middleware factory function takes three arguments, all of which are optional. The below options are valid for <tt>postgraphile@<!-- LIBRARY_VERSION_BEGIN -->4.4.3<!-- LIBRARY_VERSION_END --></tt>.
+The `postgraphile` middleware factory function takes three arguments, all of which are optional. The below options are valid for <tt>postgraphile@<!-- LIBRARY_VERSION_BEGIN -->4.5.0-rc.3<!-- LIBRARY_VERSION_END --></tt>.
 
 - **`pgConfig`**: An object or string that will be passed to the [`pg`][] library and used to connect to a PostgreSQL backend, OR a pg.Pool to use.
 - **`schemaName`**: A string, or array of strings, which specifies the PostgreSQL schema(s) you to expose via PostGraphile; defaults to 'public'
@@ -184,6 +184,7 @@ The `postgraphile` middleware factory function takes three arguments, all of whi
   - `legacyJsonUuid`: ONLY use this option if you require the v3 typenames 'Json' and 'Uuid' over 'JSON' and 'UUID'.
   - `disableQueryLog`: Turns off GraphQL query logging. By default PostGraphile will log every GraphQL query it processes along with some other information. Set this to `true` (recommended in production) to disable that feature.
   - `pgSettings`: A plain object specifying custom config values to set in the PostgreSQL transaction (accessed via `current_setting('my.custom.setting')`) **or** an (optionally asynchronous) function which will return the same (or a Promise to the same) based on the incoming web request (e.g. to extract session data).
+  - `allowExplain`: [Experimental] Determines if the 'Explain' feature in GraphiQL can be used to show the user the SQL statements that were executed. Set to a boolean to enable all users to use this, or to a function that filters each request to determine if the request may use Explain. DO NOT USE IN PRODUCTION unless you're comfortable with the security repurcussions of doing so.
   - `additionalGraphQLContextFromRequest`: Some Graphile Engine schema plugins may need additional information available on the `context` argument to the resolver - you can use this function to provide such information based on the incoming request - you can even use this to change the response [experimental], e.g. setting cookies.
   - `pluginHook`: [experimental] Plugin hook function, enables functionality within PostGraphile to be expanded with plugins. Generate with `makePluginHook(plugins)` passing a list of plugin objects.
   - `simpleCollections`: Should we use relay pagination, or simple collections? "omit" (default) - relay connections only, "only" (not recommended) - simple collections only (no Relay connections), "both" - both.

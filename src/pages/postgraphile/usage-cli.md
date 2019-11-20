@@ -82,7 +82,7 @@ postgraphile \
 
 ### CLI options
 
-There are more CLI options available to customise the GraphQL server (these are from <tt>postgraphile@<!-- CLI_VERSION_BEGIN -->4.4.3<!-- CLI_VERSION_END --></tt>):
+There are more CLI options available to customise the GraphQL server (these are from <tt>postgraphile@<!-- CLI_VERSION_BEGIN -->4.5.0-rc.3<!-- CLI_VERSION_END --></tt>):
 
 <!-- CLI_DOCBLOCK_BEGIN -->
 
@@ -120,7 +120,7 @@ There are more CLI options available to customise the GraphQL server (these are 
   use classic global id field name. required to support Relay 1
 - `-M`, `--disable-default-mutations`  
   disable default mutations, mutation will only be possible through Postgres functions
-- `--simple-collections [omit|both|only]`  
+- `--simple-collections <omit|both|only>`  
   "omit" (default) - relay connections only, "only" - simple collections only (no Relay connections), "both" - both
 - `--no-ignore-rbac`  
   [RECOMMENDED] set this to exclude fields, queries and mutations that are not available to any possible user (determined from the user in connection string and any role they can become); this will be enabled by default in v5
@@ -128,7 +128,7 @@ There are more CLI options available to customise the GraphQL server (these are 
   [RECOMMENDED] set this to exclude filters, orderBy, and relations that would be expensive to access due to missing indexes
 - `--include-extension-resources`  
   by default, tables and functions that come from extensions are excluded; use this flag to include them (not recommended)
-- `--show-error-stack`  
+- `--show-error-stack [json|string]`  
   show JavaScript error stacks in the GraphQL result errors (recommended in development)
 - `--extended-errors <string>`  
   a comma separated list of extended Postgres error fields to display in the GraphQL result. Recommended in development: 'hint,detail,errcode'. Default: none
@@ -170,6 +170,8 @@ There are more CLI options available to customise the GraphQL server (these are 
   [experimental] enable the server to process multiple GraphQL queries in one request
 - `--disable-query-log`  
   disable logging queries to console (recommended in production)
+- `--allow-explain`  
+  [EXPERIMENTAL] allows users to use the Explain button in GraphiQL to view the plan for the SQL that is executed (DO NOT USE IN PRODUCTION)
 - `-e`, `--jwt-secret <string>`  
   the secret to be used when creating and verifying JWTs. if none is provided auth will be disabled
 - `--jwt-verify-algorithms <string>`  
