@@ -6,7 +6,7 @@ title: The postgraphile.tags.json5 file
 
 When running PostGraphile in CLI mode, PostGraphile will automatically look for a `postgraphile.tags.json5` file in the current directory, and will process the tags and descriptions therein.
 
-In library mode, you must add a plugin (see below) to source this file.
+In library mode, you can add a plugin to load the `postgraphile.tags.json5` file (see below for details).
 
 ### Merging/Overriding
 
@@ -80,14 +80,40 @@ The file is in JSON5 (you can just use regular JSON if you prefer, but the exten
 
 ### Library usage
 
-PostGraphile library mode doesn't automatically import the `postgraphile.tags.json5` file for you, so you need to do a little more work.
+Unlike the CLI, PostGraphile library mode doesn't automatically import the `postgraphile.tags.json5` file for you, so you need to do a little extra work.
 
-For an example of a plugin that supports `postgraphile.tags.json5` and automatically detects changes to the file in **watch mode**, see [cli-tags.ts](https://github.com/graphile/postgraphile/blob/master/src/postgraphile/cli-tags.ts) in PostGraphile.
-
-A basic smart tags plugin that doesn't require importing a JSON file might
-look something like this:
+The easiest solution is to use our pre-build plugin bundled with `postgraphile`:
 
 ```js
+app.use(
+  postgraphile(DATABASE_URL, SCHEMAS, {
+    // ...
+    appendPlugins: [
+      // Automatically loads and watches the 'postgraphile.tags.json5' file:
+      require("postgraphile/plugins").TagsFilePlugin,
+    ],
+  })
+);
+```
+
+You could also pass an alternative path to your tags file, e.g.:
+
+```js
+const postGraphileOptions = {
+  appendPlugins: [
+    require("postgraphile/plugins").makePgSmartTagsFromFilePlugin(
+      // JSON and JSONC are also JSON5 compatible, so you can use these extensions if you prefer:
+      "/path/to/my/tags.file.json"
+    ),
+  ],
+};
+```
+
+If you're trying to avoid the `fs` module (e.g. because you're using webpack) then a basic smart tags plugin that doesn't read from the file system would look something like this:
+
+```js
+// MySmartTagsPlugin.js
+
 const { makeJSONPgSmartTagsPlugin } = require("graphile-utils");
 
 module.exports = makeJSONPgSmartTagsPlugin({
@@ -104,18 +130,7 @@ module.exports = makeJSONPgSmartTagsPlugin({
 });
 ```
 
-A basic plugin that imports `postgraphile.tags.json5` might look something like this:
-
-```js
-const { readFileSync } = require("fs");
-const { parse } = require("json5");
-const { makeJSONPgSmartTagsPlugin } = require("graphile-utils");
-
-const tagsJSON = parse(readFileSync("./postgraphile.tags.json5", "utf8"));
-module.exports = makeJSONPgSmartTagsPlugin(tagsJSON);
-```
-
-You can load any of these plugins with the `appendPlugins` library option:
+You can load this plugin with the `appendPlugins` library option:
 
 ```js
 const MySmartTagsPlugin = require("./MySmartTagsPlugin");
