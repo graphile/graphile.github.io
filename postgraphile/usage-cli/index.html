@@ -110,7 +110,7 @@ through GraphQL that are inexpensive for users to use).</p>
   --connection <span class="token variable">$DATABASE_URL</span> <span class="token punctuation">\</span>
   --schema app_public</code></pre></div>
 <h3 id="cli-options"><a href="#cli-options" aria-label="cli options permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>CLI options</h3>
-<p>There are more CLI options available to customise the GraphQL server (these are from <tt>postgraphile@<!-- CLI_VERSION_BEGIN -->4.4.3<!-- CLI_VERSION_END --></tt>):</p>
+<p>There are more CLI options available to customise the GraphQL server (these are from <tt>postgraphile@<!-- CLI_VERSION_BEGIN -->4.5.0-rc.3<!-- CLI_VERSION_END --></tt>):</p>
 <!-- CLI_DOCBLOCK_BEGIN -->
 <ul>
 <li><code class="language-text">-V</code>, <code class="language-text">--version</code><br>
@@ -147,7 +147,7 @@ if an error occurs building the initial schema, this flag will cause PostGraphil
 use classic global id field name. required to support Relay 1</li>
 <li><code class="language-text">-M</code>, <code class="language-text">--disable-default-mutations</code><br>
 disable default mutations, mutation will only be possible through Postgres functions</li>
-<li><code class="language-text">--simple-collections [omit|both|only]</code><br>
+<li><code class="language-text">--simple-collections &lt;omit|both|only&gt;</code><br>
 "omit" (default) - relay connections only, "only" - simple collections only (no Relay connections), "both" - both</li>
 <li><code class="language-text">--no-ignore-rbac</code><br>
 [RECOMMENDED] set this to exclude fields, queries and mutations that are not available to any possible user (determined from the user in connection string and any role they can become); this will be enabled by default in v5</li>
@@ -155,7 +155,7 @@ disable default mutations, mutation will only be possible through Postgres funct
 [RECOMMENDED] set this to exclude filters, orderBy, and relations that would be expensive to access due to missing indexes</li>
 <li><code class="language-text">--include-extension-resources</code><br>
 by default, tables and functions that come from extensions are excluded; use this flag to include them (not recommended)</li>
-<li><code class="language-text">--show-error-stack</code><br>
+<li><code class="language-text">--show-error-stack [json|string]</code><br>
 show JavaScript error stacks in the GraphQL result errors (recommended in development)</li>
 <li><code class="language-text">--extended-errors &lt;string&gt;</code><br>
 a comma separated list of extended Postgres error fields to display in the GraphQL result. Recommended in development: 'hint,detail,errcode'. Default: none</li>
@@ -197,6 +197,8 @@ set the timeout value in milliseconds for sockets</li>
 [experimental] enable the server to process multiple GraphQL queries in one request</li>
 <li><code class="language-text">--disable-query-log</code><br>
 disable logging queries to console (recommended in production)</li>
+<li><code class="language-text">--allow-explain</code><br>
+[EXPERIMENTAL] allows users to use the Explain button in GraphiQL to view the plan for the SQL that is executed (DO NOT USE IN PRODUCTION)</li>
 <li><code class="language-text">-e</code>, <code class="language-text">--jwt-secret &lt;string&gt;</code><br>
 the secret to be used when creating and verifying JWTs. if none is provided auth will be disabled</li>
 <li><code class="language-text">--jwt-verify-algorithms &lt;string&gt;</code><br>

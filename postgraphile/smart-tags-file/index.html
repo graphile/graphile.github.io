@@ -51,7 +51,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><a href="/postgraphile/smart-tags-file/#file-format">File format</a></li>
 <li><a href="/postgraphile/smart-tags-file/#library-usage">Library usage</a></li>
 </ul></div></div><div class="edit-this-page" style="display:"><a href="https://github.com/graphile/graphile.github.io/edit/develop/src/pages/postgraphile/smart-tags-file.md">📝 Suggest improvement/edit this page</a></div><h2 class="mt3">The postgraphile.tags.json5 file</h2><div><p>When running PostGraphile in CLI mode, PostGraphile will automatically look for a <code class="language-text">postgraphile.tags.json5</code> file in the current directory, and will process the tags and descriptions therein.</p>
-<p>In library mode, you must add a plugin (see below) to source this file.</p>
+<p>In library mode, you can add a plugin to load the <code class="language-text">postgraphile.tags.json5</code> file (see below for details).</p>
 <h3 id="mergingoverriding"><a href="#mergingoverriding" aria-label="mergingoverriding permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Merging/Overriding</h3>
 <p>If you provide a description for an entity in <code class="language-text">postgraphile.tags.json5</code> then that description will override any previous descriptions.</p>
 <p>If you provide tags for an entity in <code class="language-text">postgraphile.tags.json5</code>, those tags will be <em>merged</em> with previous tags overriding tags with the same names but retaining other tags.</p>
@@ -115,11 +115,30 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span></code></pre></div>
 <h3 id="library-usage"><a href="#library-usage" aria-label="library usage permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Library usage</h3>
-<p>PostGraphile library mode doesn't automatically import the <code class="language-text">postgraphile.tags.json5</code> file for you, so you need to do a little more work.</p>
-<p>For an example of a plugin that supports <code class="language-text">postgraphile.tags.json5</code> and automatically detects changes to the file in <strong>watch mode</strong>, see <a href="https://github.com/graphile/postgraphile/blob/master/src/postgraphile/cli-tags.ts">cli-tags.ts</a> in PostGraphile.</p>
-<p>A basic smart tags plugin that doesn't require importing a JSON file might
-look something like this:</p>
-<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> <span class="token punctuation">{</span> makeJSONPgSmartTagsPlugin <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"graphile-utils"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<p>Unlike the CLI, PostGraphile library mode doesn't automatically import the <code class="language-text">postgraphile.tags.json5</code> file for you, so you need to do a little extra work.</p>
+<p>The easiest solution is to use our pre-build plugin bundled with <code class="language-text">postgraphile</code>:</p>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js">app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>
+  <span class="token function">postgraphile</span><span class="token punctuation">(</span><span class="token constant">DATABASE_URL</span><span class="token punctuation">,</span> <span class="token constant">SCHEMAS</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token comment">// ...</span>
+    appendPlugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+      <span class="token comment">// Automatically loads and watches the 'postgraphile.tags.json5' file:</span>
+      <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"postgraphile/plugins"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>TagsFilePlugin<span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<p>You could also pass an alternative path to your tags file, e.g.:</p>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> postGraphileOptions <span class="token operator">=</span> <span class="token punctuation">{</span>
+  appendPlugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"postgraphile/plugins"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">makePgSmartTagsFromFilePlugin</span><span class="token punctuation">(</span>
+      <span class="token comment">// JSON and JSONC are also JSON5 compatible, so you can use these extensions if you prefer:</span>
+      <span class="token string">"/path/to/my/tags.file.json"</span>
+    <span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
+<p>If you're trying to avoid the <code class="language-text">fs</code> module (e.g. because you're using webpack) then a basic smart tags plugin that doesn't read from the file system would look something like this:</p>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token comment">// MySmartTagsPlugin.js</span>
+
+<span class="token keyword">const</span> <span class="token punctuation">{</span> makeJSONPgSmartTagsPlugin <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"graphile-utils"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token function">makeJSONPgSmartTagsPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
   version<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
@@ -133,14 +152,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
-<p>A basic plugin that imports <code class="language-text">postgraphile.tags.json5</code> might look something like this:</p>
-<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> <span class="token punctuation">{</span> readFileSync <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"fs"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> <span class="token punctuation">{</span> parse <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"json5"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> <span class="token punctuation">{</span> makeJSONPgSmartTagsPlugin <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"graphile-utils"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">const</span> tagsJSON <span class="token operator">=</span> <span class="token function">parse</span><span class="token punctuation">(</span><span class="token function">readFileSync</span><span class="token punctuation">(</span><span class="token string">"./postgraphile.tags.json5"</span><span class="token punctuation">,</span> <span class="token string">"utf8"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token function">makeJSONPgSmartTagsPlugin</span><span class="token punctuation">(</span>tagsJSON<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
-<p>You can load any of these plugins with the <code class="language-text">appendPlugins</code> library option:</p>
+<p>You can load this plugin with the <code class="language-text">appendPlugins</code> library option:</p>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> MySmartTagsPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"./MySmartTagsPlugin"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>
   <span class="token function">postgraphile</span><span class="token punctuation">(</span><span class="token constant">DATABASE_URL</span><span class="token punctuation">,</span> <span class="token constant">SCHEMAS</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
