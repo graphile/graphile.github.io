@@ -255,6 +255,7 @@ here at this time) via the <code class="language-text">websocketMiddlewares</cod
 <span class="token keyword">const</span> postgraphileOptions <span class="token operator">=</span> <span class="token punctuation">{</span>
   pluginHook<span class="token punctuation">,</span> <span class="token comment">// add the plugin hook. This will make the @pgSubscription avaiable in our schema definitions</span>
   subscriptions<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// start the websocket server</span>
+  appendPlugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>MySubscriptionPlugin<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">// Load our plugin</span>
   websocketMiddlewares<span class="token punctuation">:</span> <span class="token punctuation">[</span>
     <span class="token comment">// Add whatever middlewares you need here, note that they should only</span>
     <span class="token comment">// manipulate properties on req/res, they must not sent response data. e.g.:</span>
