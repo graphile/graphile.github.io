@@ -220,6 +220,7 @@ const pluginHook = makePluginHook([PgPubsub]);
 const postgraphileOptions = {
   pluginHook, // add the plugin hook. This will make the @pgSubscription avaiable in our schema definitions
   subscriptions: true, // start the websocket server
+  appendPlugins: [MySubscriptionPlugin], // Load our plugin
   websocketMiddlewares: [
     // Add whatever middlewares you need here, note that they should only
     // manipulate properties on req/res, they must not sent response data. e.g.:
