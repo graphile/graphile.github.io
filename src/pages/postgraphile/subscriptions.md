@@ -96,7 +96,7 @@ module.exports = makeExtendSchemaPlugin(({ pgSql: sql }) => ({
           sql.fragment`app_public.users`,
           (tableAlias, sqlBuilder) => {
             sqlBuilder.where(
-              sql.fragment`${sqlBuilder.getTableAlias()}.id = ${sql.value(
+              sql.fragment`${tableAlias}.id = ${sql.value(
                 event.subject
               )}`
             );
