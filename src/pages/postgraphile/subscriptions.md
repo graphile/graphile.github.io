@@ -96,7 +96,7 @@ module.exports = makeExtendSchemaPlugin(({ pgSql: sql }) => ({
           sql.fragment`app_public.users`,
           (tableAlias, sqlBuilder) => {
             sqlBuilder.where(
-              sql.fragment`${tableAlias}.id = ${sql.value(event.subject)}`
+              sql.fragment`${tableAlias}.id = ${sql.value(event.row.id)}`
             );
           }
         );
@@ -122,7 +122,7 @@ declare
   v_topic_template text = TG_ARGV[1];
   v_attribute text = TG_ARGV[2];
   v_record record;
-  v_sub text;
+  v_topic_subject text;
   v_topic text;
   v_i int = 0;
   v_last_topic text;
@@ -138,10 +138,10 @@ begin
      if v_attribute is not null then
       execute 'select $1.' || quote_ident(v_attribute)
         using v_record
-        into v_sub;
+        into v_topic_subject;
     end if;
-    if v_sub is not null then
-      v_topic = replace(v_topic_template, '$1', v_sub);
+    if v_topic_subject is not null then
+      v_topic = replace(v_topic_template, '$1', v_topic_subject);
     else
       v_topic = v_topic_template;
     end if;
@@ -150,7 +150,7 @@ begin
       v_last_topic = v_topic;
       perform pg_notify(v_topic, json_build_object(
         'event', v_event,
-        'subject', v_sub
+        'row', row_to_json(v_record)
       )::text);
     end if;
   end loop;
