@@ -46,7 +46,7 @@ Version 4.5 is here, and among other things it adds a cool explain button!
 
 </div>
 </div>
-<div class='text-center col-xs-12 col-md-3 col-lg-5 postgraphile-logo-bg'>
+<div class='text-center col-xs-12 col-md-3 col-lg-5 postgraphile-v4-5-explain'>
 </div>
 </div>
 
@@ -92,6 +92,8 @@ Building upon the huge performance gains found in Version 4, the release of Vers
 [Read more about PostGraphile Version 4.1 here](/news/postgraphile-version-4-1/)
 
 </div>
+</div>
+<div class='text-center col-xs-12 col-md-3 col-lg-5 postgraphile-v4-4-contributions'>
 </div>
 </div>
 
