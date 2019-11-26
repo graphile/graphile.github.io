@@ -896,13 +896,20 @@ h6 code {
 .postgraphile-graphs-requests-per-second,
 .postgraphile-graphs-memory-usage,
 .postgraphile-graphs-average-latency,
-.postgraphile-graphs-average-latency-label,
+.postgraphile-graphs-average-latency-label {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: 50% 20%;
+  min-height: 240px;
+}
+
 .postgraphile-v4-4-contributions,
 .postgraphile-v4-5-explain {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: 50% 20%;
-  min-height: 240px;
+  min-height: 140px;
+  max-height: 200px;
 }
 
 .postgraphile-graphs-average-latency {
