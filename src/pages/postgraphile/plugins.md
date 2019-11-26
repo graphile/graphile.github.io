@@ -1,7 +1,7 @@
 ---
 layout: page
 path: /postgraphile/plugins/
-title: PostGraphile Server Plugins
+title: Server Plugins
 ---
 
 Stability: experimental, may change in **semver minor** versions.
