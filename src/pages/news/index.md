@@ -20,7 +20,7 @@ title: News
 
 <br />
 <div class='flex'>
-<a class='button--solid-light' href='/news/postgraphile-version-4-4/'>Latest Announcement <span class='fas fa-fw fa-arrow-right' /></a>
+<a class='button--solid-light' href='/news/postgraphile-version-4-5/'>Latest Announcement <span class='fas fa-fw fa-arrow-right' /></a>
 </div>
 
 </div>
@@ -28,6 +28,30 @@ title: News
 </div>
 </div>
 </header>
+
+<!-- **************************************** -->
+
+<section>
+<div class='container'>
+
+<div class='row flex-wrap-reverse'>
+<div class='text-center col-xs-12 col-md-9 col-lg-7'>
+<div class='hero-block'>
+
+## PostGraphile Version 4.5 released
+
+Version 4.5 is here, and among other things it adds a cool explain button!
+
+[Read more about the latest PostGraphile version here](/news/postgraphile-version-4-5/)
+
+</div>
+</div>
+<div class='text-center col-xs-12 col-md-3 col-lg-5 postgraphile-logo-bg'>
+</div>
+</div>
+
+</div>
+</section>
 
 <!-- **************************************** -->
 
