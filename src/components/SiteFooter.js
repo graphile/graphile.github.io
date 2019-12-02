@@ -61,6 +61,7 @@ const SiteFooter = () => {
                   <i className="fab fa-discord" /> Chat (discord)
                 </a>
               </li>
+
               <li>
                 <a href="https://twitter.com/graphilehq">
                   <i className="fab fa-twitter" /> Twitter
@@ -70,6 +71,11 @@ const SiteFooter = () => {
                 <Link to="/news/press-kit/">
                   <i className="fas fa-file-archive" /> Logos/etc
                 </Link>
+              </li>
+              <li>
+                <a href="https://learn.graphile.org/">
+                  <i className="fab" /> Learn
+                </a>
               </li>
             </ul>
           </div>
