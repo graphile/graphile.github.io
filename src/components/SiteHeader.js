@@ -234,6 +234,20 @@ export default class SiteHeader extends React.Component {
                   path={POSTGRAPHILE_ROUTES}
                   render={() => (
                     <li className="navbar-item">
+                      <a
+                        className="nav-link"
+                        href="https://learn.graphile.org/"
+                      >
+                        Learn{" "}
+                        <span className="fas fa-external-link-square-alt" />{" "}
+                      </a>
+                    </li>
+                  )}
+                />
+                <Route
+                  path={POSTGRAPHILE_ROUTES}
+                  render={() => (
+                    <li className="navbar-item">
                       <Link
                         className={`hide-when-small nav-link ${
                           location.pathname.match(
