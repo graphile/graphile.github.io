@@ -143,6 +143,21 @@ export default class SiteHeader extends React.Component {
                     </li>
                   )}
                 />
+                <Route
+                  path="/"
+                  exact
+                  render={() => (
+                    <li className="navbar-item">
+                      <a
+                        className="nav-link"
+                        href="https://learn.graphile.org/"
+                      >
+                        Learn{" "}
+                        <span className="fas fa-external-link-square-alt" />{" "}
+                      </a>
+                    </li>
+                  )}
+                />
 
                 {/* PostGraphile pages */}
 
