@@ -74,7 +74,8 @@ const SiteFooter = () => {
               </li>
               <li>
                 <a href="https://learn.graphile.org/">
-                  <i className="fab" /> Learn
+                  <i class="fas fa-graduation-cap" />
+                  Learn
                 </a>
               </li>
             </ul>
