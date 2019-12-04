@@ -8,12 +8,14 @@ noToc: true
 _Announced 2019-12-03_
 
 <p class='intro'>
-Graphile is very excited to released Graphile Starter - opinionated quick-start project for full-stack application development in React, Node.js, GraphQL and PostgreSQL..
+The team behind Graphile are excited to release Graphile Starter - an opinionated quick-start project for full-stack application development in React, Node.js, GraphQL and PostgreSQL. It includes the foundations of a modern web application, with a full user registration system, session management, optimised job queue, a significant amount of pre-configured tooling, tests and much more.
 </p>
 
-### Quick Start a GraphQL & Node project without writing the boilerplate
+Graphile Starter is designed for client projects, hack days, side hustles, SaaS projects, and many other uses we haven't even thought of yet. The boilerplate for a React, GraphQL and Postgres stack is already there, just add your idea and you're ready to go.
 
-Here's some amazing copy
+
+<div class="tc starter-lightbulb">
+</div>
 
 ### Some of the amazing stuff already included
 
