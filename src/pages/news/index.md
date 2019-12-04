@@ -38,9 +38,36 @@ title: News
 <div class='text-center col-xs-12 col-md-9 col-lg-7'>
 <div class='hero-block'>
 
-## PostGraphile Version 4.5 released
+## Graphile Starter released
+_2019-12-03_
 
-Version 4.5 is here, and among other things it adds a cool explain button!
+Wow this is so very very exciting! 
+
+[Read more about Graphile Starter](/news/postgraphile-version-4-5/)
+
+</div>
+</div>
+<div class='text-center col-xs-12 col-md-3 col-lg-5 starter-seed'>
+</div>
+</div>
+
+</div>
+</section>
+
+
+<!-- **************************************** -->
+
+<section>
+<div class='container'>
+
+<div class='row flex-wrap-reverse'>
+<div class='text-center col-xs-12 col-md-9 col-lg-7'>
+<div class='hero-block'>
+
+## PostGraphile 4.5 - Explain feature
+_2019-11-24_
+
+Version 4.5 is here, and with it comes an enhanced Graph*i*QL with a query explain feature. 
 
 [Read more about the latest PostGraphile version here](/news/postgraphile-version-4-5/)
 
@@ -62,11 +89,12 @@ Version 4.5 is here, and among other things it adds a cool explain button!
 <div class='text-center col-xs-12 col-md-9 col-lg-7'>
 <div class='hero-block'>
 
-## PostGraphile Version 4.4 released
+## PostGraphile 4.4 - real time features
+_2019-05-03_
 
-Version 4.4 is here, and among other things it adds real-time features including GraphQL subscriptions and live queries!
+Version 4.4 has been released, and among other things it adds real-time features including GraphQL subscriptions and live queries!
 
-[Read more about the latest PostGraphile version here](/news/postgraphile-version-4-4/)
+[Read more about the real time features in PostGraphile 4.4 here](/news/postgraphile-version-4-4/)
 
 </div>
 </div>
@@ -85,7 +113,8 @@ Version 4.4 is here, and among other things it adds real-time features including
 <div class='text-center col-xs-12 col-md-9 col-lg-7'>
 <div class='hero-block'>
 
-## PostGraphile Version 4.1 - better webpackability!
+## PostGraphile 4.1 - better webpackability!
+_2018-12-06_
 
 Building upon the huge performance gains found in Version 4, the release of Version 4.1 has a huge improvement to startup performance in serverless environments. This update also brings a large number of enhancements including much broader PostgreSQL function support, an enhanced GraphiQL interface, and a lot more helpers for writing plugins.
 
@@ -110,6 +139,7 @@ Building upon the huge performance gains found in Version 4, the release of Vers
 <div class='hero-block'>
 
 ## PostGraphile Version 4 is here
+_2018-10-02_
 
 Version 4 has launched! More performant, more extensible and more customisable than ever before. Easily extend PostGraphile's functionality with plugins developed and shared by the community.
 
