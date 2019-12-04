@@ -140,7 +140,7 @@ class Page extends React.Component {
           html: rawHTML,
           tableOfContents: rawTableOfContents,
           timeToRead,
-          frontmatter: { title, fullTitle, showExamples },
+          frontmatter: { title, fullTitle, showExamples, noToc },
         },
         nav,
         examples,
@@ -149,7 +149,9 @@ class Page extends React.Component {
       history,
     } = this.props;
     const tableOfContents =
-      timeToRead > 1 ? processTableOfContents(rawTableOfContents) : null;
+      !noToc && timeToRead > 1
+        ? processTableOfContents(rawTableOfContents)
+        : null;
     const html = processHTML(rawHTML);
     const [, navSection] = location.pathname.split("/");
     const thisNavEdge = nav.edges.find(
@@ -340,6 +342,7 @@ export const pageQuery = graphql`
         title
         fullTitle
         showExamples
+        noToc
       }
     }
     nav: allNavJson {
