@@ -904,7 +904,8 @@ h6 code {
 }
 
 .postgraphile-v4-4-contributions,
-.postgraphile-v4-5-explain {
+.postgraphile-v4-5-explain,
+.starter-seed {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: 50% 20%;
@@ -933,7 +934,9 @@ h6 code {
 .postgraphile-v4-5-explain {
   background-image: url("../../../static/images/v4-5-explain.png");
 }
-
+.starter-seed {
+  background-image: url("../../../static/images/undraw/seed.png");
+}
 .postgraphile-logo-bg {
   background-image: url("../../../logos/postgraphile.optimized.svg");
   background-size: contain;

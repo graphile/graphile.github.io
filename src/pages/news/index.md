@@ -43,7 +43,7 @@ _2019-12-03_
 
 Wow this is so very very exciting! 
 
-[Read more about Graphile Starter](/news/postgraphile-version-4-5/)
+[Read more about Graphile Starter](/news/graphile-starter/)
 
 </div>
 </div>

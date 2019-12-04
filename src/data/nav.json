@@ -13,6 +13,11 @@
     ],
     "pages": [
       {
+        "to": "/news/graphile-starter/",
+        "title": "Graphile Starter is here",
+        "sectionId": "main"
+      },
+      {
         "to": "/news/postgraphile-version-4-5/",
         "title": "Version 4.5 - Explain feature",
         "sectionId": "main"
