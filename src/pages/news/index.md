@@ -20,7 +20,7 @@ title: News
 
 <br />
 <div class='flex'>
-<a class='button--solid-light' href='/news/postgraphile-version-4-5/'>Latest Announcement <span class='fas fa-fw fa-arrow-right' /></a>
+<a class='button--solid-light' href='/news/graphile-starter/'>Latest Announcement <span class='fas fa-fw fa-arrow-right'></a>
 </div>
 
 </div>
@@ -38,16 +38,16 @@ title: News
 <div class='text-center col-xs-12 col-md-9 col-lg-7'>
 <div class='hero-block'>
 
-## Graphile Starter released
+## Graphile Starter is here
 _2019-12-03_
 
-Wow this is so very very exciting! 
+Graphile Starter has been released today; a new opinionated quick-start project which is designed to be built upon. Take your project idea and rapidly prototype it without having to think about session management, job queues, user registration system, testing or a design framework - all of that is included for you!
 
-[Read more about Graphile Starter](/news/graphile-starter/)
+[Read the Graphile Starter announcement](/news/graphile-starter/)
 
 </div>
 </div>
-<div class='text-center col-xs-12 col-md-3 col-lg-5 starter-seed'>
+<div class='text-center col-xs-12 col-md-3 col-lg-5 starter-lightbulb'>
 </div>
 </div>
 
@@ -64,7 +64,7 @@ Wow this is so very very exciting!
 <div class='text-center col-xs-12 col-md-9 col-lg-7'>
 <div class='hero-block'>
 
-## PostGraphile 4.5 - Explain feature
+## PostGraphile 4.5 - explain feature
 _2019-11-24_
 
 Version 4.5 is here, and with it comes an enhanced Graph*i*QL with a query explain feature. 

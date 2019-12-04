@@ -2,6 +2,7 @@
 layout: page
 path: /news/postgraphile-version-4-5/
 title: PostGraphile Releases Version 4.5
+noToc: true
 ---
 
 _Announced 2019-11-24_
@@ -13,7 +14,7 @@ Graphile is pleased to announce the release of PostGraphile version 4.5.0, an up
 
 ### New Feature: Explain in Graph*i*QL
 
-The headline feature in 4.5 is the addition of the new Explain feature in Graph*i*QL, visible by using the `--allow-explain` flag. In Graph*i*QL you'll see a new section in your return statement, plus new panel on the right which will show what the executed query is in a prettier format.
+The headline feature in 4.5 is the addition of the new Explain feature in Graph*i*QL, visible by using the `--allow-explain` flag. In Graph*i*QL you'll see a new section in your return statement, plus new panel on the right which will show executed query in a readable format.
 
 <div class="tc">
 <img alt="Demo of the new GraphiQL Explain feature in PostGraphile" src="/images/graphiqlexplainbutton.png" />

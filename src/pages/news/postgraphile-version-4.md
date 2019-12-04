@@ -2,6 +2,7 @@
 layout: page
 path: /news/postgraphile-version-4/
 title: PostGraphile Launches Version 4
+noToc: true
 ---
 
 _Announced 2018-10-02_

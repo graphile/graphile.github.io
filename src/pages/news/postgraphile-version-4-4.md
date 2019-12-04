@@ -2,6 +2,7 @@
 layout: page
 path: /news/postgraphile-version-4-4/
 title: PostGraphile Releases Version 4.4 - Real-time!
+noToc: true
 ---
 
 _Announced 2019-05-03_
