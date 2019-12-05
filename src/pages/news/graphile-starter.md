@@ -17,31 +17,26 @@ Graphile Starter is designed for client projects, hack days, side hustles, SaaS 
 <div class="tc starter-lightbulb">
 </div>
 
-### Some of the amazing stuff already included
+Some of the things included with the starter, ready for you to take and extend:
 
-No more suffering through writing the same logic again and again. 
+**Batteries included:** full user system and OAuth, AntD design framework, jest and Cypress end-to-end testing, security, email templating and transport, pre-configured linting and code formatting, deployment instructions, and more
 
-Starter includes:
+**Speedy development:** easy debugging, Graphile's idempotent migration system, job queue and server middleware ready to use, hot reloading; not to mention deep integration with VSCode: plugin recommendations, preconfigured settings, ESLint and Prettier integration and debugging profiles
 
-- this
-- and this
-- and another
-- and so much
+**Type safety:** pre-configured type checking, strongly typed throughout with TypeScript
 
-### Thank you
+**Best practices:** React, GraphQL, PostGraphile, Node, jest and Cypress best practices
 
+Full instructions and technical detail can be found on GitHub:
 
+- [Graphile Starter - github.com/graphile/starter](https://github.com/graphile/starter)
+
+### Thank you Graphile Sponsors
+
+Graphile Starter has been a labour of love, and would not be possible without our sponsors. We have recently joined the GitHub sponsors program and that, alongside Patreon, has been invaluable in giving us paid time to work on open source projects. **Take Graphile Starter, go make some money, and then give back** to help support further development on both the Starter and the Graphile suite of tools.
 
 [Click here to find out more about why and how you should sponsor PostGraphile development.](/sponsor/)
 
 <div class="tc">
 <img alt="Thank you" src="/images/undraw/undraw_super_thank_you_small.png" />
 </div>
-
-### Full details
-
-Full technical detail can be found on GitHub:
-
-- [Graphile Starter](https://github.com/graphile/starter)
-
-Don't forget to join our discord community to find others using Graphile software: [Graphile Discord](https://discord.gg/graphile)
