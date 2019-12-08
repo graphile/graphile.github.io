@@ -119,7 +119,7 @@ to pass via the PostGraphile options:
 
 ```js
 // Only include as many plugins as you need. An empty array is also valid.
-const pluginHook = makePluginHook([OperationHooks, PgPubsub, PostGraphilePro]);
+const pluginHook = makePluginHook([OperationHooks, PgPubsub, GraphilePro]);
 
 const postGraphileMiddleware = postgraphile(databaseUrl, "app_public", {
   pluginHook,
