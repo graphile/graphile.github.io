@@ -24,17 +24,21 @@ The headline feature in 4.5 is the addition of the new Explain feature in Graph*
 
 No longer do you need to put `COMMENT` commands in the database ("smart comments") to customise your schema, you can now use a tags file to gather these "smart tags" into one, version controlled, easy-to-diff place. Smart comments and smart tags can be used in unison, and both will be supported going forward so you can pick whichever works best for your team.
 
-### Thank you for your contributions
+### Big contributions from the Graphile community
+
+Thanks to everyone in the Graphile community who has contributed to this release; it's been a good release for community involvement as you can see in the [release notes](https://github.com/graphile/postgraphile/releases/tag/v4.5.0). Contributions from the community include improvements to QueryBuilder, better JWT support and bug fixes for types.
+
+<div class="tc">
+<img alt="Thank you" src="/images/thanks.png" />
+</div>
+
+### Thank you for your sponsorship
 
 By significantly reducing the amount of work needed to achieve business goals, PostGraphile results in huge savings for users. If your organization contributes some of these savings back then everyone can benefit from more frequent releases with better performance, better compatibility, better documentation, easier customization, and more features — leading to even greater savings or profits for your organization.
 
 We now have 84 sponsors across GitHub and Patreon and that means we're funded to spend an average of nearly 2 days per week on Open Source; this is brilliant!
 
 [Click here to find out more about why and how you should sponsor PostGraphile development.](/sponsor/)
-
-<div class="tc">
-<img alt="Thank you" src="/images/thanks.png" />
-</div>
 
 ### Full release notes
 
