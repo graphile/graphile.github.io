@@ -40,7 +40,7 @@ We now have 84 sponsors across GitHub and Patreon and that means we're funded to
 
 Full detailed technical release notes can be found on GitHub:
 
-- [v4.4.5 release notes](https://github.com/graphile/postgraphile/releases/tag/v4.5.0)
+- [v4.5.0 release notes](https://github.com/graphile/postgraphile/releases/tag/v4.5.0)
 - [v4.4.4 release notes](https://github.com/graphile/postgraphile/releases/tag/v4.4.4)
 - [v4.4.3 release notes](https://github.com/graphile/postgraphile/releases/tag/v4.4.3)
 - [v4.4.2 release notes](https://github.com/graphile/postgraphile/releases/tag/v4.4.2)
