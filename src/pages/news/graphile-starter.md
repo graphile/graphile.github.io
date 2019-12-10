@@ -13,7 +13,6 @@ The team behind Graphile are excited to release Graphile Starter - an opinionate
 
 Graphile Starter is designed for client projects, hack days, side hustles, SaaS projects, and many other uses we haven't even thought of yet. The boilerplate for a React, GraphQL and Postgres stack is already there, just add your idea and you're ready to go.
 
-
 <div class="tc starter-lightbulb">
 </div>
 
