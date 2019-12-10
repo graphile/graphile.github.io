@@ -127,6 +127,8 @@ declare
   v_i int = 0;
   v_last_topic text;
 begin
+  -- On UPDATE sometimes topic may be changed for NEW record,
+  -- so we need notify to both topics NEW and OLD.
   for v_i in 0..1 loop
     if (v_i = 0) and v_process_new is true then
       v_record = new;
