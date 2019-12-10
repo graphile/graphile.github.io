@@ -2,6 +2,7 @@
 layout: page
 path: /news/postgraphile-version-4-4/
 title: PostGraphile Releases Version 4.4 - Real-time!
+noToc: true
 ---
 
 _Announced 2019-05-03_
@@ -67,7 +68,7 @@ Huge thanks to the 70 individuals and companies already sponsoring PostGraphile!
 [Click here to find out more about why and how you should sponsor PostGraphile development.](/sponsor/)
 
 <div class="tc">
-<img alt="Real-time subscriptions" src="/images/thanks.png" />
+<img alt="Thank you" src="/images/thanks.png" />
 </div>
 
 ### Full release notes

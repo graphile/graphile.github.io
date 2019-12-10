@@ -903,6 +903,16 @@ h6 code {
   min-height: 240px;
 }
 
+.postgraphile-v4-4-contributions,
+.postgraphile-v4-5-explain,
+.starter-lightbulb {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: 50% 20%;
+  min-height: 140px;
+  max-height: 200px;
+}
+
 .postgraphile-graphs-average-latency {
   background-image: url("../../../static/images/v4-average-latency.png");
 }
@@ -918,7 +928,15 @@ h6 code {
 .postgraphile-graphs-memory-usage {
   background-image: url("../../../static/images/v4-memory-usage.png");
 }
-
+.postgraphile-v4-4-contributions {
+  background-image: url("../../../static/images/undraw_developer_activity.png");
+}
+.postgraphile-v4-5-explain {
+  background-image: url("../../../static/images/v4-5-explain.png");
+}
+.starter-lightbulb {
+  background-image: url("../../../static/images/undraw/lightbulb.png");
+}
 .postgraphile-logo-bg {
   background-image: url("../../../logos/postgraphile.optimized.svg");
   background-size: contain;
