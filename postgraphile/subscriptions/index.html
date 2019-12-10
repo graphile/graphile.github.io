@@ -179,6 +179,8 @@ each trigger. Click this paragraph to expand and see the function.
   v_i <span class="token keyword">int</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
   v_last_topic <span class="token keyword">text</span><span class="token punctuation">;</span>
 <span class="token keyword">begin</span>
+  <span class="token comment">-- On UPDATE sometimes topic may be changed for NEW record,</span>
+  <span class="token comment">-- so we need notify to both topics NEW and OLD.</span>
   <span class="token keyword">for</span> v_i <span class="token operator">in</span> <span class="token number">0.</span><span class="token number">.1</span> <span class="token keyword">loop</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>v_i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">and</span> v_process_new <span class="token operator">is</span> <span class="token boolean">true</span> <span class="token keyword">then</span>
       v_record <span class="token operator">=</span> new<span class="token punctuation">;</span>
