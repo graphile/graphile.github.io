@@ -353,6 +353,12 @@
         ]
       },
       {
+        "to": "/postgraphile/background-tasks/",
+        "title": "Background Tasks",
+        "sectionId": "basics",
+        "subpages": []
+      },
+      {
         "to": "/postgraphile/reserved-keywords/",
         "title": "Reserved Keywords",
         "sectionId": "basics",
