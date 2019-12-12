@@ -4,7 +4,7 @@ path: /postgraphile/background-tasks/
 title: Background Tasks in PostGraphile 
 ---
 
-In your GraphQL server typically most processing will be done in the "frontground", as part of the request-response cycle. HTTP is a blocking protocol: once a client sends a request, it will wait for a reponse. This blocking nature requires the server to be fast at serving responses, to avoid keeping the client waiting for ever.
+In your GraphQL server typically most processing will be done in the "foreground", as part of the request-response cycle. However, since clients typically wait for this request cycle to complete before allowing the user to continue to the next task, if this processing is slow it will make your application feel sluggish and can frustrate your users. Because of this desire for low-latency APIs, it's good practice to only perform essential calculations during the request-response cycle, and to "queue" additional tasks for background processing. 
 
 But sometimes it is impossible to serve the response fast, for example we might need to do some heavy task like creating PDFs, calling an external API that takes a long time to respond, big calculations, or doing flaky tasks that need retries like sending an email. Or you might want to run some code periodically, detached from a user action. This are all good cases for background processing: the code runs outside of main request-response cycle, storing the result somewhere (typically on the database) and (optionally) notifying the client once it has finished.
 
