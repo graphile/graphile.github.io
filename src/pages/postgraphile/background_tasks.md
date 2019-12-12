@@ -22,7 +22,7 @@ There are several exisiting solutions that can integrate with a PostgreSQL datab
 
 #### Choosing your Task Queue
 
-An important bit you will need to consider is how are tasks created in your queue.
+An important topic you will need to consider is how tasks are created in your queue.
 
 What else should we add here???
 
