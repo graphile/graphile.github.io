@@ -31,7 +31,7 @@ The recommend approach is to use Graphile Worker or Graphile Woker + another tas
 ### Graphile Worker
 The deepest integration with a PostGraphile stack is Graphile Worker. It is a simple library that allows to run Node.js code reactively to database events thanks to `LISTEN/NOTIFY` (similar to how Subscriptions work).
 
-Tasks are backed in Postgres (it uses its own schema), and offers a simple SQL API to create jobs. It is as simple as 
+Graphile Worker stores tasks into it's own schema within PostgreSQL, and offers a simple SQL API to create jobs. Queueing a job might look like:
 
 ```sql
 SELECT graphile_worker.add_job('hello', json_build_object('name', 'Bobby Tables'));
