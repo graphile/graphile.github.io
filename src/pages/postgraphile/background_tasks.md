@@ -29,7 +29,7 @@ What else should we add here???
 The recommend approach is to use Graphile Worker or Graphile Woker + another task queue through task delegation.
 
 ### Graphile Worker
-The deepest integration with a PostGraphile stack is Graphile Worker. It is a simple library that allows to run Node.js code reactively to database events thanks to `LISTEN/NOTIFY` (similar to how Subscriptions work).
+Graphile Worker is a natural fit for a PostGraphile stack due to it's PostgreSQL-first nature. It is a simple library that runs Node.js code (or any code Node.js can delegate to) when a task is queued within the database. Thanks to PostgreSQL's `LISTEN/NOTIFY` pubsub features, Graphile Worker is notified when a task is queued and can fetch, execute, and complete a trivial task in 2-3ms from when it was queued; this results in your system feeling very snappy.
 
 Graphile Worker stores tasks into it's own schema within PostgreSQL, and offers a simple SQL API to create jobs. Queueing a job might look like:
 
