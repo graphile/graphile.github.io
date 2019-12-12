@@ -37,7 +37,7 @@ Graphile Worker stores tasks into it's own schema within PostgreSQL, and offers 
 SELECT graphile_worker.add_job('hello', json_build_object('name', 'Bobby Tables'));
 ```
 
-Tasks are created in JavaScript/Typescript, so it fits directly into your PostGraphile stack
+Tasks are created in JavaScript/TypeScript, so it fits directly into your PostGraphile stack
 
 ```js
 // tasks/hello.js
