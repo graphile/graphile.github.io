@@ -14,11 +14,11 @@ Task queues are systems that enable background processing for an application. Th
 
 There are several exisiting solutions that can integrate with a PostgreSQL database or expose a Node.js-friendly API.
 
-- Graphile Worker
-- GCP Cloud Tasks
-- Faktory
-- RabbitMQ
-- ???
+- [Graphile Worker](https://github.com/graphile/worker)
+- [GCP Cloud Tasks](https://cloud.google.com/tasks/)
+- [Faktory](http://contribsys.com/faktory/)
+- [RabbitMQ](https://www.rabbitmq.com/)
+- [pg-boss](https://www.npmjs.com/package/pg-boss)
 
 #### Choosing your Task Queue
 
@@ -47,7 +47,7 @@ module.exports = async (payload, helpers) => {
 };
 ```
 
-Check the [Graphile Worker docs]() for details on how to set up and use it.
+Check the [Graphile Worker docs](https://github.com/graphile/worker) for details on how to set up and use it.
 
 #### Limitations
 Despite all the benefits, Graphile Worker stills lacks some features provided by other more mature tasks queues
