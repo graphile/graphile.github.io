@@ -52,5 +52,5 @@ Check the [Graphile Worker docs]() for details on how to set up and use it.
 #### Limitations
 Despite all the benefits, Graphile Worker stills lacks some features provided by other more mature tasks queues
 
-- Currently Graphile Worker doesn't expose a GUI to monitor or manage tasks. You could create your own using PostGraphile and some client framework.
+- Currently Graphile Worker doesn't expose a GUI to monitor or manage tasks.
 - ??
