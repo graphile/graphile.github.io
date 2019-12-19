@@ -15,8 +15,8 @@ Task queues are systems that enable background processing for an application. Th
 There are several exisiting solutions that can integrate with a PostgreSQL database or expose a Node.js-friendly API.
 
 - [Graphile Worker](https://github.com/graphile/worker)
-- [GCP Cloud Tasks](https://cloud.google.com/tasks/)
-- [Faktory](http://contribsys.com/faktory/)
+- [GCP Cloud Tasks](https://cloud.google.com/tasks/) (via Graphile Worker)
+- [Faktory](http://contribsys.com/faktory/) (via Graphile Worker)
 - [RabbitMQ](https://www.rabbitmq.com/)
 - [pg-boss](https://www.npmjs.com/package/pg-boss)
 
@@ -24,9 +24,14 @@ There are several exisiting solutions that can integrate with a PostgreSQL datab
 
 An important topic you will need to consider is how tasks are created in your queue.
 
-What else should we add here???
-
 Since we generally recommend database-driven development, the recommend approach is to use Graphile Worker (or Graphile Worker + another task queue through task delegation) since you can add jobs to the queue both from inside PostgreSQL functions (and thus triggers) and from any other source.
+
+Other important considerations when choosing a task queue would be:
+- Complexity
+- Throughput requirements
+- DevOps complexity
+- Tracability
+- Privacy
 
 ### Graphile Worker
 Graphile Worker is a natural fit for a PostGraphile stack due to it's PostgreSQL-first nature. It is a simple library that runs Node.js code (or any code Node.js can delegate to) when a task is queued within the database. Thanks to PostgreSQL's `LISTEN/NOTIFY` pubsub features, Graphile Worker is notified when a task is queued and can fetch, execute, and complete a trivial task in 2-3ms from when it was queued; this results in your system feeling very snappy.
