@@ -3,12 +3,22 @@ const fs = require("fs");
 const path = require("path");
 const glob = require("glob");
 const chalk = require("chalk");
+const fetch = require("node-fetch");
+const pMap = require("p-map");
+const memoize = require("memoizee");
+const Entities = require("html-entities").AllHtmlEntities;
+
+const entities = new Entities();
 
 const base = `${__dirname}/public`;
 const files = glob.sync(`${base}/**/*.html`);
 const validLinks = files.map(f =>
   f.substr(base.length).replace(/index.html$/, "")
 );
+
+const checkLinkResolution = memoize(function checkLinkResolution(url) {
+  return fetch(url);
+});
 
 function allMatches(str, regex) {
   const all = [];
@@ -23,37 +33,48 @@ function allMatches(str, regex) {
 
 let invalid = 0;
 
-for (const file of files) {
-  const filePretty = chalk.bold(
-    path
-      .relative(__dirname, file)
-      .replace(/^public/, "")
-      .replace(/index.html$/, "")
-  );
-  const contents = fs.readFileSync(file, "utf8");
-  if (contents.indexOf("Postgraphile") >= 0) {
-    invalid++;
-    console.error(
-      `${filePretty} mentions 'Postgraphile'; please change to 'PostGraphile' or 'postgraphile' for consistency.`
+const fileLinks = files
+  .map(file => {
+    const filePretty = chalk.bold(
+      path
+        .relative(__dirname, file)
+        .replace(/^public/, "")
+        .replace(/index.html$/, "")
     );
-  }
-  const links = allMatches(contents, /<a[^>]+href="([^"]+)"/g);
-  for (const link of links) {
-    const trimmed = link.replace(/[?#].*$/, "");
-    if (trimmed.match(/\.(js|css|png|svg|webmanifest)$/)) {
-      // Meh, resources
-      continue;
+    const contents = fs.readFileSync(file, "utf8");
+    if (contents.indexOf("Postgraphile") >= 0) {
+      invalid++;
+      console.error(
+        `${filePretty} mentions 'Postgraphile'; please change to 'PostGraphile' or 'postgraphile' for consistency.`
+      );
     }
-    const isGitHub = trimmed.match(/^https?:\/\/(?:www\.)?github\.com/);
-    const isLearnDotGraphile = trimmed.match(
-      /^https?:\/\/learn\.graphile\.org\//
-    );
-    const isGraphile = trimmed.match(/^https?:\/\/graphile\.(org|meh)/);
-    const isLocalhost = trimmed.match(
-      /^https?:\/\/(localhost|127\.0\.0\.1|0\.0\.0\.0):(?:[^5]|5[^0]|50[^0]|500[^0])/
+
+    // WARNING! Cardinal sin below, shield eyes
+    return allMatches(contents, /<a[^>]+href="([^"]+)"/g).map(link => {
+      return {
+        link: entities.decode(link),
+        filePretty,
+      };
+    });
+  })
+  .reduce((flattened, toFlatten) => flattened.concat(toFlatten), []);
+
+pMap(
+  fileLinks,
+  async ({ filePretty, link }) => {
+    const trimmed = link.replace(/[?#].*$/, "");
+
+    if (trimmed.match(/\.(css|png|svg|webmanifest)$/)) {
+      // Meh, resources
+      return;
+    }
+    const isAbsolute = /^[a-z]+:\/\//.test(trimmed);
+    const isGraphile = /^https?:\/\/graphile\.(org|meh)/.test(trimmed);
+    const isLocalhost = /^https?:\/\/(localhost|127\.0\.0\.1|0\.0\.0\.0):(?:[^5]|5[^0]|50[^0]|500[^0])/.test(
+      trimmed
     );
     const isGraphileOrLocalhost = isGraphile || isLocalhost;
-    if (isGitHub || isLearnDotGraphile || !isGraphileOrLocalhost) {
+    if (isAbsolute && !isGraphileOrLocalhost) {
       const matches = trimmed.match(
         /^https?:\/\/(?:www\.)?postgresql.org\/docs\/([^\/]+)\/[^#]*(#.*)?$/
       );
@@ -81,35 +102,66 @@ for (const file of files) {
             );
           }
           // Handled above
-          continue;
+          return;
         }
       }
-      // TODO: check the link resolves
 
-      // Absolute, continue
-      continue;
+      if (/^https?:\/\/(localhost|127\.0\.0\.1|0\.0\.0\.0)/.test(trimmed)) {
+        return;
+      }
+
+      return checkLinkResolution(trimmed)
+        .then(res => {
+          if (!res.ok) {
+            invalid++;
+            console.error(
+              `${filePretty} has broken link to '${link}' (link is returning a disallowed status code of ${res.status})`
+            );
+          }
+        })
+        .catch(err => {
+          if (err.code === "ENOTFOUND") {
+            invalid++;
+            console.error(
+              `${filePretty} has broken link to '${link}' (there may be nothing wrong with the link, but the host is currently not resolving as expected)`
+            );
+          } else if (err.code === "ECONNREFUSED") {
+            invalid++;
+            console.error(
+              `${filePretty} has broken link to '${link}' (there may be nothing wrong with the link, but the host is current refusing the connection)`
+            );
+          } else if (err.code === "ECONNRESET") {
+            invalid++;
+            console.error(
+              `${filePretty} has broken link to '${link}' (some network instability has been detected between this device and the host, maybe just try again)`
+            );
+          } else {
+            throw err;
+          }
+        });
     }
     if (trimmed.match(/^mailto:/)) {
       // mailto:, continue
-      continue;
+      return;
     }
     if (trimmed === "") {
       // Anchor link
-      continue;
+      return;
     }
     if (validLinks.indexOf(trimmed) >= 0) {
       // Cool, looks legit
-      continue;
+      return;
     }
     invalid++;
     console.error(
       `${filePretty} has disallowed link to '${link}' (please ensure links start with '/' if possible, do not include https://graphile.org)`
     );
+  },
+  { concurrency: 6 }
+).then(() => {
+  if (invalid > 0) {
+    console.log();
+    console.log(`${invalid} errors found 😔`);
+    process.exit(1);
   }
-}
-
-if (invalid > 0) {
-  console.log();
-  console.log(`${invalid} errors found 😔`);
-  process.exit(1);
-}
+});
