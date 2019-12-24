@@ -12,4 +12,4 @@ via the `pgSchemas` setting, e.g. `pgSchemas: ["public"]`.
 
 If you're interested to see how we do this, the introspection query can be
 found [in our
-GitHub](https://github.com/graphile/graphile-engine/blob/master/packages/graphile-build-pg/src/plugins/introspectionQuery.ts).
+GitHub](https://github.com/graphile/graphile-engine/blob/master/packages/graphile-build-pg/src/plugins/introspectionQuery.js).
