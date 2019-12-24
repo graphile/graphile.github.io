@@ -70,8 +70,11 @@
   },
   "devDependencies": {
     "eslint_d": "8.0.0",
+    "html-entities": "^1.2.1",
+    "memoizee": "^0.4.14",
     "node-fetch": "^2.6.0",
     "nodemon": "1.19.4",
+    "p-map": "^3.0.0",
     "prettier": "1.19.1"
   },
   "optionalDependencies": {
