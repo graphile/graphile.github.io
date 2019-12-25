@@ -637,7 +637,7 @@ Now, let’s use the JWT to define permissions.
 
 #### Grants
 
-The highest level of permission that can be given to roles using the Postgres are access privileges assigned using the [`GRANT`](https://www.postgresql.org/docs/current/static/sql-grant.html) command. The access privileges defined by `GRANT` work on no smaller level than the table level. As you can allow a role to select an value from a table, or delete any value in a table. We will look at how to restrict access on a row level next.
+The highest level of permission that can be given to roles using the Postgres are access privileges assigned using the [`GRANT`](https://www.postgresql.org/docs/current/static/sql-grant.html) command. The access privileges defined by `GRANT` work on no smaller level than the table level. As you can allow a role to select any value from a table, or delete any value in a table. We will look at how to restrict access on a row level next.
 
 ```sql
 -- after schema creation and before function creation
