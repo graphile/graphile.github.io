@@ -720,7 +720,7 @@ create policy delete_post on forum_example.post for delete to forum_example_pers
 
 These policies are very similar to the ones before, except that the `insert_post` policy uses `with check` instead of `using` like our other policies. The difference between `with check` and `using` is roughly that `using` is applied _before_ any operation occurs to the table’s rows. So in the case of updating a post, one could not update a row that does not have the appropriate `author_id` in the first place. `with check` is run _after_ an operation is applied. If the `with check` fails the operation will be rejected. So in the case of an insert, Postgres sets all of the columns as specified and then compares against `with check` on the new row. You must use `with check` with `INSERT` commands because there are no rows to compare against before insertion, and you must use `using` with `DELETE` commands because a delete changes no rows only removes current ones.
 
-That’s it! We have successfully creating a Postgres schema embedded with our business logic. When we use this schema with PostGraphile we will get a well designed GraphQL API that we can be used in our frontend application.
+That’s it! We have successfully creating a Postgres schema embedded with our business logic. When we use this schema with PostGraphile we will get a well designed GraphQL API that we can use in our frontend application.
 
 The final argument list for starting our PostGraphile server using the CLI would be as follows:
 
