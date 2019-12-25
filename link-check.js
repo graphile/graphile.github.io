@@ -110,7 +110,7 @@ pMap(
         return;
       }
 
-      return checkLinkResolution(trimmed)
+      return checkLinkResolution(link)
         .then(res => {
           if (!res.ok) {
             invalid++;

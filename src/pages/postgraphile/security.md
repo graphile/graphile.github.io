@@ -130,7 +130,7 @@ JWTs are sent via the best practice `Authorization` header:
 Authorization: Bearer JWT_TOKEN_HERE
 ```
 
-e.g. [with Apollo](https://www.apollographql.com/docs/react/recipes/authentication.html#Header):
+e.g. [with Apollo](https://www.apollographql.com/docs/react/networking/authentication/#header):
 
 ```js{7,12}
 const httpLink = createHttpLink({
