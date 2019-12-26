@@ -62,6 +62,7 @@ const fileLinks = files
 pMap(
   fileLinks,
   async ({ filePretty, link }) => {
+
     const trimmed = link.replace(/[?#].*$/, "");
 
     if (trimmed.match(/\.(css|png|svg|webmanifest)$/)) {
@@ -112,7 +113,21 @@ pMap(
 
       return checkLinkResolution(link)
         .then(res => {
-          if (!res.ok) {
+          if (res.ok) {
+            return;
+          }
+
+          /*
+           * New pages that are added will generate this link in the template for
+           * the current branch, but will not be available over http in github
+           * until the merge is complete. So here we allow for the test to pass
+           * but output a warning.
+           */
+          if (/github\.com\/graphile\/graphile\.github\.io\/edit/.test(link)) {
+            console.warn(
+              `${filePretty} has broken link to '${link}', however, the assumption is this is a newly added page and will resolve after the merge.`
+            );
+          } else {
             invalid++;
             console.error(
               `${filePretty} has broken link to '${link}' (link is returning a disallowed status code of ${res.status})`
