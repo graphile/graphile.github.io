@@ -33,36 +33,33 @@ function allMatches(str, regex) {
 
 let invalid = 0;
 
-const fileLinks = files
-  .map(file => {
-    const filePretty = chalk.bold(
-      path
-        .relative(__dirname, file)
-        .replace(/^public/, "")
-        .replace(/index.html$/, "")
+const fileLinks = files.flatMap(file => {
+  const filePretty = chalk.bold(
+    path
+      .relative(__dirname, file)
+      .replace(/^public/, "")
+      .replace(/index.html$/, "")
+  );
+  const contents = fs.readFileSync(file, "utf8");
+  if (contents.indexOf("Postgraphile") >= 0) {
+    invalid++;
+    console.error(
+      `${filePretty} mentions 'Postgraphile'; please change to 'PostGraphile' or 'postgraphile' for consistency.`
     );
-    const contents = fs.readFileSync(file, "utf8");
-    if (contents.indexOf("Postgraphile") >= 0) {
-      invalid++;
-      console.error(
-        `${filePretty} mentions 'Postgraphile'; please change to 'PostGraphile' or 'postgraphile' for consistency.`
-      );
-    }
+  }
 
-    // WARNING! Cardinal sin below, shield eyes
-    return allMatches(contents, /<a[^>]+href="([^"]+)"/g).map(link => {
-      return {
-        link: entities.decode(link),
-        filePretty,
-      };
-    });
-  })
-  .reduce((flattened, toFlatten) => flattened.concat(toFlatten), []);
+  // WARNING! Cardinal sin below, shield eyes
+  return allMatches(contents, /<a[^>]+href="([^"]+)"/g).map(link => {
+    return {
+      link: entities.decode(link),
+      filePretty,
+    };
+  });
+});
 
 pMap(
   fileLinks,
   async ({ filePretty, link }) => {
-
     const trimmed = link.replace(/[?#].*$/, "");
 
     if (trimmed.match(/\.(css|png|svg|webmanifest)$/)) {
@@ -143,7 +140,7 @@ pMap(
           } else if (err.code === "ECONNREFUSED") {
             invalid++;
             console.error(
-              `${filePretty} has broken link to '${link}' (there may be nothing wrong with the link, but the host is current refusing the connection)`
+              `${filePretty} has broken link to '${link}' (there may be nothing wrong with the link, but the host is currently refusing the connection)`
             );
           } else if (err.code === "ECONNRESET") {
             invalid++;
