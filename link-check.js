@@ -108,11 +108,13 @@ pMap(
       console.error(
         `${filePretty} has disallowed link to '${link}' (no localhost links allowed, except localhost:5000)`
       );
+      return;
     } else if (isGraphile) {
       invalid++;
       console.error(
         `${filePretty} has disallowed link to '${link}' (Graphile internal links should start with \`/\` so that they point to the correct location in development/staging, do not include https://graphile.org)`
       );
+      return;
     } else if (isMailto) {
       // mailto:, continue
       return;
@@ -166,30 +168,34 @@ pMap(
         console.error(
           `${filePretty} has broken link to '${link}' (link is returning a disallowed status code of ${res.status})`
         );
+        return;
       } catch (err) {
         if (err.code === "ENOTFOUND") {
           invalid++;
           console.error(
             `${filePretty} has broken link to '${link}' (there may be nothing wrong with the link, but the host is currently not resolving as expected)`
           );
+          return;
         } else if (err.code === "ECONNREFUSED") {
           invalid++;
           console.error(
             `${filePretty} has broken link to '${link}' (there may be nothing wrong with the link, but the host is currently refusing the connection)`
           );
+          return;
         } else if (err.code === "ECONNRESET") {
           invalid++;
           console.error(
             `${filePretty} has broken link to '${link}' (some network instability has been detected between this device and the host, maybe just try again)`
           );
+          return;
         } else {
           invalid++;
           console.error(
             `${filePretty} has broken link to '${link}' (an error we didn't understand occurred: ${err.message})`
           );
+          return;
         }
       }
-      return;
     } else if (validLinks.indexOf(trimmed) >= 0) {
       // Cool, looks legit
       return;
