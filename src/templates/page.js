@@ -72,7 +72,6 @@ function processHTML(html, noLink) {
 }
 function processTableOfContents(html) {
   if (!html) return null;
-  console.dir(html);
   return html
     .replace(/\bPostgreSQL\b/g, "PG")
     .replace(/\b([A-Z_]{5,})\b(?!<)/g, "<span class='allcaps'>$1</span>")
