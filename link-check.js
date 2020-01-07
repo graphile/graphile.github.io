@@ -5,7 +5,6 @@ const glob = require("glob");
 const chalk = require("chalk");
 const fetch = require("node-fetch");
 const pMap = require("p-map");
-const memoize = require("memoizee");
 const Entities = require("html-entities").AllHtmlEntities;
 
 const entities = new Entities();
@@ -15,6 +14,19 @@ const files = glob.sync(`${base}/**/*.html`);
 const validLinks = files.map(f =>
   f.substr(base.length).replace(/index.html$/, "")
 );
+
+const memoize = fn => {
+  const cache = new Map();
+  return function memoized(arg) {
+    if (cache.has(arg)) {
+      return cache.get(arg);
+    } else {
+      const res = fn.call(this, arg);
+      cache.set(arg, res);
+      return res;
+    }
+  };
+};
 
 /**
  * This prevents us placing multiple fetches to the same URL
