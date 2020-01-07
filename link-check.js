@@ -16,9 +16,10 @@ const validLinks = files.map(f =>
   f.substr(base.length).replace(/index.html$/, "")
 );
 
-const checkLinkResolution = memoize(function checkLinkResolution(url) {
-  return fetch(url);
-});
+/**
+ * This prevents us placing multiple fetches to the same URL
+ */
+const checkLinkResolution = memoize(url => fetch(url));
 
 function allMatches(str, regex) {
   const all = [];
