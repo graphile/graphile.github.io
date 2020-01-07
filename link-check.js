@@ -72,6 +72,9 @@ pMap(
     const isLocalhost5000 = /^https?:\/\/(localhost|127\.0\.0\.1|0\.0\.0\.0):5000/.test(
       trimmed
     );
+    const isGitHubEditLink = /^https?:\/\/github\.com\/graphile\/graphile\.github\.io\/edit/.test(
+      trimmed
+    );
     if (trimmed === "") {
       // Anchor link (#section-name), continue
       return;
@@ -85,6 +88,9 @@ pMap(
        * invalid.
        */
       return;
+    } else if (isGitHubEditLink) {
+      // Don't check this since the page may not exist yet
+      return;
     } else if (isLocalhost) {
       invalid++;
       console.error(
@@ -93,7 +99,7 @@ pMap(
     } else if (isGraphile) {
       invalid++;
       console.error(
-        `${filePretty} has disallowed link to '${link}' (Graphile internal links should start with \`/\` so that they point to the correct location in development/staging too)`
+        `${filePretty} has disallowed link to '${link}' (Graphile internal links should start with \`/\` so that they point to the correct location in development/staging, do not include https://graphile.org)`
       );
     } else if (isMailto) {
       // mailto:, continue
@@ -134,56 +140,51 @@ pMap(
         return;
       }
 
-      return checkLinkResolution(link)
-        .then(res => {
-          if (res.ok) {
-            return;
-          }
+      try {
+        /*
+         * We use 'trimmed' rather than 'link' here since our check doesn't
+         * factor in anchors yet.
+         */
+        const res = await checkLinkResolution(trimmed);
+        if (res.ok) {
+          return;
+        }
 
-          /*
-           * New pages that are added will generate this link in the template for
-           * the current branch, but will not be available over http in github
-           * until the merge is complete. So here we allow for the test to pass
-           * but output a warning.
-           */
-          if (/github\.com\/graphile\/graphile\.github\.io\/edit/.test(link)) {
-            console.warn(
-              `${filePretty} has broken link to '${link}', however, the assumption is this is a newly added page and will resolve after the merge.`
-            );
-          } else {
-            invalid++;
-            console.error(
-              `${filePretty} has broken link to '${link}' (link is returning a disallowed status code of ${res.status})`
-            );
-          }
-        })
-        .catch(err => {
-          if (err.code === "ENOTFOUND") {
-            invalid++;
-            console.error(
-              `${filePretty} has broken link to '${link}' (there may be nothing wrong with the link, but the host is currently not resolving as expected)`
-            );
-          } else if (err.code === "ECONNREFUSED") {
-            invalid++;
-            console.error(
-              `${filePretty} has broken link to '${link}' (there may be nothing wrong with the link, but the host is currently refusing the connection)`
-            );
-          } else if (err.code === "ECONNRESET") {
-            invalid++;
-            console.error(
-              `${filePretty} has broken link to '${link}' (some network instability has been detected between this device and the host, maybe just try again)`
-            );
-          } else {
-            throw err;
-          }
-        });
+        invalid++;
+        console.error(
+          `${filePretty} has broken link to '${link}' (link is returning a disallowed status code of ${res.status})`
+        );
+      } catch (err) {
+        if (err.code === "ENOTFOUND") {
+          invalid++;
+          console.error(
+            `${filePretty} has broken link to '${link}' (there may be nothing wrong with the link, but the host is currently not resolving as expected)`
+          );
+        } else if (err.code === "ECONNREFUSED") {
+          invalid++;
+          console.error(
+            `${filePretty} has broken link to '${link}' (there may be nothing wrong with the link, but the host is currently refusing the connection)`
+          );
+        } else if (err.code === "ECONNRESET") {
+          invalid++;
+          console.error(
+            `${filePretty} has broken link to '${link}' (some network instability has been detected between this device and the host, maybe just try again)`
+          );
+        } else {
+          invalid++;
+          console.error(
+            `${filePretty} has broken link to '${link}' (an error we didn't understand occurred: ${err.message})`
+          );
+        }
+      }
+      return;
     } else if (validLinks.indexOf(trimmed) >= 0) {
       // Cool, looks legit
       return;
     }
     invalid++;
     console.error(
-      `${filePretty} has disallowed link to '${link}' (please ensure links start with '/' if possible, do not include https://graphile.org)`
+      `${filePretty} has disallowed link to '${link}' (none of the other validation rules matched)`
     );
   },
   { concurrency: 6 }
