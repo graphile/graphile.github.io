@@ -62,17 +62,42 @@ pMap(
   async ({ filePretty, link }) => {
     const trimmed = link.replace(/[?#].*$/, "");
 
-    if (trimmed.match(/\.(css|png|svg|webmanifest)$/)) {
-      // Meh, resources
-      return;
-    }
-    const isAbsolute = /^[a-z]+:\/\//.test(trimmed);
-    const isGraphile = /^https?:\/\/graphile\.(org|meh)/.test(trimmed);
-    const isLocalhost = /^https?:\/\/(localhost|127\.0\.0\.1|0\.0\.0\.0):(?:[^5]|5[^0]|50[^0]|500[^0])/.test(
+    const isHTTP = /^https?:\/\//.test(trimmed);
+    const isMailto = /^mailto:/.test(trimmed);
+    const isGraphile = /^https?:\/\/(www\.)?graphile\.(org|meh)/.test(trimmed);
+    const isLocalhost = /^https?:\/\/(localhost|127\.0\.0\.1|0\.0\.0\.0)/.test(
       trimmed
     );
-    const isGraphileOrLocalhost = isGraphile || isLocalhost;
-    if (isAbsolute && !isGraphileOrLocalhost) {
+    const isLocalhost5000 = /^https?:\/\/(localhost|127\.0\.0\.1|0\.0\.0\.0):5000/.test(
+      trimmed
+    );
+    if (trimmed === "") {
+      // Anchor link (#section-name), continue
+      return;
+    } else if (trimmed.match(/\.(css|png|svg|webmanifest)$/)) {
+      // Resources
+      return;
+    } else if (isLocalhost5000) {
+      /*
+       * PostGraphile serves at http://localhost:5000 by default, so this will
+       * be legitimately referenced in the docs. All other localhost URLs are
+       * invalid.
+       */
+      return;
+    } else if (isLocalhost) {
+      invalid++;
+      console.error(
+        `${filePretty} has disallowed link to '${link}' (no localhost links allowed, except localhost:5000)`
+      );
+    } else if (isGraphile) {
+      invalid++;
+      console.error(
+        `${filePretty} has disallowed link to '${link}' (Graphile internal links should start with \`/\` so that they point to the correct location in development/staging too)`
+      );
+    } else if (isMailto) {
+      // mailto:, continue
+      return;
+    } else if (isHTTP) {
       const matches = trimmed.match(
         /^https?:\/\/(?:www\.)?postgresql.org\/docs\/([^\/]+)\/[^#]*(#.*)?$/
       );
@@ -151,16 +176,7 @@ pMap(
             throw err;
           }
         });
-    }
-    if (trimmed.match(/^mailto:/)) {
-      // mailto:, continue
-      return;
-    }
-    if (trimmed === "") {
-      // Anchor link
-      return;
-    }
-    if (validLinks.indexOf(trimmed) >= 0) {
+    } else if (validLinks.indexOf(trimmed) >= 0) {
       // Cool, looks legit
       return;
     }
