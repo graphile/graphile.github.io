@@ -195,7 +195,7 @@ const postGraphileMiddleware = postgraphile(databaseUrl, "app_public", {
 
 #### Origin specific CORS
 
-You can enable _generous_ CORS by [adding the `-o,--cors` flag to the CLI](https://www.graphile.org/postgraphile/usage-cli/#cli-options) or by [adding a `enableCors: true` option when using PostGraphile as a library](https://www.graphile.org/postgraphile/usage-library/#api-postgraphilepgconfig-schemaname-options).
+You can enable _generous_ CORS by [adding the `-o,--cors` flag to the CLI](/postgraphile/usage-cli/#cli-options) or by [adding a `enableCors: true` option when using PostGraphile as a library](/postgraphile/usage-library/#api-postgraphilepgconfig-schemaname-options).
 
 However, by being _generous_, you allow **any** origin to communicate with you PostGraphile instance. If you want to allow just one specific origin, and using a `cors` middleware before PostGraphile is not an option, then you can make a server plugin such as this one:
 
