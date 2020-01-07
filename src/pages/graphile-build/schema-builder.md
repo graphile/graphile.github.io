@@ -76,7 +76,7 @@ Registers two functions: one to be called if/when schema watching begins (see
 clean up). Each function is passed one argument: the function to call when a
 change occurs.
 
-TODO: document further (ref: https://github.com/graphile/graphile-engine/blob/master/packages/graphile-build/__tests__/watch.test.js#L28-L35)
+TODO: document further (ref: https://github.com/graphile/graphile-engine/blob/83ee6948c5ab9f202773bf7518ea4d2cca3ec349/packages/graphile-build/__tests__/watch.test.js#L28-L35)
 
 ```js
 builder.registerWatcher(
