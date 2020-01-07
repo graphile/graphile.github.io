@@ -188,10 +188,17 @@ pMap(
     );
   },
   { concurrency: 6 }
-).then(() => {
-  if (invalid > 0) {
-    console.log();
-    console.log(`${invalid} errors found 😔`);
-    process.exit(1);
-  }
-});
+)
+  .catch(e => {
+    console.error();
+    console.error(`An uncaught error occurred during link validation:`);
+    console.error(e);
+    process.exit(2);
+  })
+  .then(() => {
+    if (invalid > 0) {
+      console.log();
+      console.log(`${invalid} errors found 😔`);
+      process.exit(1);
+    }
+  });
