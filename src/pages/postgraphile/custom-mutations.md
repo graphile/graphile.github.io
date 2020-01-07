@@ -19,7 +19,7 @@ it must obey the following rules:
 - must be marked as `VOLATILE` (which is the default for PostgreSQL functions)
 - must be defined in one of the introspected schemas
 
-Functions matching these requirements will be represented in GraphQL in a way that is compatible with the [Relay Input Object Mutations Specification](https://facebook.github.io/relay/graphql/mutations.htm). For example the function
+Functions matching these requirements will be represented in GraphQL in a way that is compatible with the [Relay Input Object Mutations Specification](https://relay.dev/docs/en/mutations). For example the function
 
 ```sql
 CREATE FUNCTION my_function(a int, b int) RETURNS text AS $$ … $$ LANGUAGE sql VOLATILE;

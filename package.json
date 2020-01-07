@@ -21,7 +21,7 @@
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.14.3",
     "flow-bin": "^0.111.3",
-    "gatsby": "^2.15.3",
+    "gatsby": "^2.18.17",
     "gatsby-link": "^2.2.11",
     "gatsby-plugin-catch-links": "^2.1.7",
     "gatsby-plugin-mdx": "^1.0.36",
@@ -70,8 +70,10 @@
   },
   "devDependencies": {
     "eslint_d": "8.0.0",
+    "html-entities": "^1.2.1",
     "node-fetch": "^2.6.0",
     "nodemon": "1.19.4",
+    "p-map": "^3.0.0",
     "prettier": "1.19.1"
   },
   "optionalDependencies": {

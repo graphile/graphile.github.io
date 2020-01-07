@@ -31,7 +31,7 @@ buildSchema(defaultPlugins).then(schema => {
 // ES2017: const schema = await buildSchema(defaultPlugins);
 ```
 
-This will generate a basic schema which supports the [Relay `Node` interface](https://facebook.github.io/relay/docs/graphql-relay-specification.html).
+This will generate a basic schema which supports the [Relay `Node` interface](https://relay.dev/docs/en/graphql-server-specification).
 
 ```graphql
 # An object with a globally unique `ID`.

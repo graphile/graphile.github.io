@@ -119,7 +119,7 @@ certain clients might have a problem with this?
 
 **Solution**: in most cases this should _not_ cause an issue for existing queries -
 according to [3.1.7 in the GraphQL
-specification](http://facebook.github.io/graphql/October2016/#sec-Lists):
+specification](https://graphql.github.io/graphql-spec/October2016/#sec-Lists):
 
 > If the value passed as an input to a list type is not a list and not the null
 > value, it should be coerced as though the input was a list of size one, where

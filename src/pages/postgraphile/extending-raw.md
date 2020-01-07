@@ -12,7 +12,7 @@ https://github.com/graphile/graphile-engine/tree/master/packages/graphile-build-
 These plugins introduce small amounts of functionality, and build upon each
 other. The order in which the plugins are loaded is significant, and can be
 found from the `defaultPlugins` export in
-[`src/index.js`](https://github.com/graphile/graphile-engine/blob/master/packages/graphile-build-pg/src/index.js)
+[`src/index.ts`](https://github.com/graphile/graphile-engine/blob/master/packages/graphile-build-pg/src/index.ts)
 of the `graphile-build-pg` module.
 
 You can extend PostGraphile's GraphQL schema by adding plugins before or after
@@ -240,9 +240,9 @@ If you want to remove a class of things from the schema then you can remove
 the plugin that adds them; for example if you no longer wanted to allow
 ordering by all the columns of a table (i.e. only allow ordering by the primary
 key) you could omit
-[PgOrderAllColumnsPlugin](https://github.com/graphile/graphile-engine/blob/master/packages/graphile-build-pg/src/plugins/PgOrderAllColumnsPlugin.js).
+[PgOrderAllColumnsPlugin](https://github.com/graphile/graphile-engine/blob/master/packages/graphile-build-pg/src/plugins/PgOrderAllColumnsPlugin.ts).
 If you didn't want computed columns added you could omit
-[PgComputedColumnsPlugin](https://github.com/graphile/graphile-engine/blob/master/packages/graphile-build-pg/src/plugins/PgComputedColumnsPlugin.js).
+[PgComputedColumnsPlugin](https://github.com/graphile/graphile-engine/blob/master/packages/graphile-build-pg/src/plugins/PgComputedColumnsPlugin.ts).
 
 However, sometimes you need more surgical precision, and you only want to
 remove one specific type of thing. To achieve this you need to add a hook to the
