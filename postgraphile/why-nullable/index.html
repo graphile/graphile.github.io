@@ -55,8 +55,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><a href="/postgraphile/why-nullable/#what-about-computed-fields">What about computed fields?</a></li>
 <li><a href="/postgraphile/why-nullable/#ive-read-the-above-but-i-still-want-this-particular-thing-to-be-non-nullable">I've read the above, but I still want this particular thing to be non-nullable!</a></li>
 </ul></div></div><div class="edit-this-page" style="display:"><a href="https://github.com/graphile/graphile.github.io/edit/develop/src/pages/postgraphile/why-nullable.md">📝 Suggest improvement/edit this page</a></div><h2 class="mt3">Why is it nullable?</h2><div><p>It's common for people, particularly those using strongly typed GraphQL
-implementations such as ReasonML or TypeScript, to ask why certain elements in
-a PostGraphile schema are nullable. A lot of thought has gone into which parts
+implementations such as ReasonML or TypeScript, to ask why certain elements in a
+PostGraphile schema are nullable. A lot of thought has gone into which parts
 should/should not be nullable, but the reasoning behind these decisions is not
 always obvious to users, so hopefully this article will help to explain.</p>
 <h3 id="nulls-in-graphql"><a href="#nulls-in-graphql" aria-label="nulls in graphql permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Nulls in GraphQL</h3>
@@ -100,11 +100,11 @@ because it's not nullable, so it would then try and make the parent field
 to make nullable would be the entire query itself. This means that all the
 letters, despite producing no errors, would also be omitted from the result.</p>
 <p>One of the key aims of GraphQL is to deal smoothly with temporary errors - i.e.
-when an error occurs it aims to not <a href="https://en.wikipedia.org/wiki/Don%27t_throw_the_baby_out_with_the_bathwater">"throw the baby out with the
-bathwater"</a>.
+when an error occurs it aims to not
+<a href="https://en.wikipedia.org/wiki/Don%27t_throw_the_baby_out_with_the_bathwater">"throw the baby out with the bathwater"</a>.
 This is one of the reasons (the main reason, really) that GraphQL treats all
-fields as nullable by default ("errors happen") and allows you to mark things
-as not null, rather than the other way around which is more common in typed
+fields as nullable by default ("errors happen") and allows you to mark things as
+not null, rather than the other way around which is more common in typed
 languages. GraphQL wants you to think about where errors may occur and where
 they should be limited to, preventing them from flowing over into unrelated
 areas.</p>
@@ -117,13 +117,12 @@ return a null that would cascade and cause the field itself to be null.</p>
 <p>In PostGraphile, two of our <code class="language-text">Query</code> fields are not nullable because they adhere
 to this check:</p>
 <ul>
-<li><code class="language-text">nodeId</code> returns a set value (the string 'query') so it can never
-error</li>
+<li><code class="language-text">nodeId</code> returns a set value (the string 'query') so it can never error</li>
 <li><code class="language-text">query</code> returns the <code class="language-text">Query</code> object again (it's a Relay 1 hack) and so it has
 all the same guarantees as the Query object</li>
 </ul>
-<p>Everything else is nullable, because <strong>errors happen</strong> and we don't want them
-to cascade to sibling fields.</p>
+<p>Everything else is nullable, because <strong>errors happen</strong> and we don't want them to
+cascade to sibling fields.</p>
 <p>To make this even clearer: if our mutation fields were "not nullable" and you
 performed a mutation such as this:</p>
 <div class="gatsby-highlight" data-language="graphql"><pre class="language-graphql"><code class="language-graphql"><span class="token keyword">mutation</span> <span class="token punctuation">{</span>
@@ -132,11 +131,12 @@ performed a mutation such as this:</p>
 <span class="token punctuation">}</span></code></pre></div>
 <p>If mutations were marked non-nullable and yet for some reason
 <code class="language-text">someOtherMutation</code> threw an error, then the entire GraphQL response would come
-back null and you wouldn't see the result of the <code class="language-text">createSecret</code> mutation. As
-per the GraphQL spec: mutations are independent, thus the <code class="language-text">createSecret</code>
-mutation would not be rolled back and the value would be created but never shown.</p>
+back null and you wouldn't see the result of the <code class="language-text">createSecret</code> mutation. As per
+the GraphQL spec: mutations are independent, thus the <code class="language-text">createSecret</code> mutation
+would not be rolled back and the value would be created but never shown.</p>
 <h3 id="relations-rls-visibility"><a href="#relations-rls-visibility" aria-label="relations rls visibility permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Relations: RLS visibility</h3>
-<p>PostgreSQL uses foreign keys to assert that relations exist. Take this SQL schema:</p>
+<p>PostgreSQL uses foreign keys to assert that relations exist. Take this SQL
+schema:</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">table</span> person <span class="token punctuation">(</span>
   id <span class="token keyword">serial</span> <span class="token keyword">primary</span> <span class="token keyword">key</span><span class="token punctuation">,</span>
   username citext <span class="token operator">not</span> <span class="token boolean">null</span>
@@ -149,14 +149,15 @@ mutation would not be rolled back and the value would be created but never shown
 <span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>From this we know that given a <code class="language-text">Post</code> record exists, then the associated
 <code class="language-text">Person</code> object must also exist - PostgreSQL guarantees this. So why does
-PostGraphile mark the <code class="language-text">Post.personByAuthorId</code> field as nullable? Well, consider this:</p>
+PostGraphile mark the <code class="language-text">Post.personByAuthorId</code> field as nullable? Well, consider
+this:</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token comment">-- Users can only see their own 'Person'</span>
 <span class="token keyword">create</span> policy select_self <span class="token keyword">on</span> person <span class="token keyword">for</span> <span class="token keyword">select</span> <span class="token keyword">using</span> <span class="token punctuation">(</span>id <span class="token operator">=</span> current_user_id<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment">-- Users can see all Posts</span>
 <span class="token keyword">create</span> policy select_all <span class="token keyword">on</span> post <span class="token keyword">for</span> <span class="token keyword">select</span> <span class="token keyword">using</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
-<p>Given the above, it's possible for you to be able to see a Post without you being
-allowed to see the associated Person. So even though the person definitely exists,
-that doesn't guarantee that you can see them.</p>
+<p>Given the above, it's possible for you to be able to see a Post without you
+being allowed to see the associated Person. So even though the person definitely
+exists, that doesn't guarantee that you can see them.</p>
 <h3 id="fields-under-mutation-payloads"><a href="#fields-under-mutation-payloads" aria-label="fields under mutation payloads permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Fields under mutation payloads</h3>
 <p>For similar reasons to the Relations above, it's possible for you to be able to
 create something but then not see the result of that - it really depends how
@@ -180,16 +181,16 @@ if none of your RETURNS SETOF compound_type functions mix NULLs with the results
 then you may enable this to reduce the nullables in the GraphQL schema</code></pre></div>
 <h3 id="what-about-computed-fields"><a href="#what-about-computed-fields" aria-label="what about computed fields permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>What about computed fields?</h3>
 <p>It's very easy for computed fields (functions) to throw an error due to a logic
-issue in the function. We don't want that bringing down the entire schema so
-we leave these as nullable.</p>
-<p>I'd be happy to accept a Pull Request that adds functionality marking a
-function as non-nullable via a smart comment (e.g.
-<code class="language-text">COMMENT ON FUNCTION foo_func(foo) IS E&#39;@notNull&#39;;</code>) - do raise an issue if
-this is of interest to you. Even with this, though, it would be unwise to mark
+issue in the function. We don't want that bringing down the entire schema so we
+leave these as nullable.</p>
+<p>I'd be happy to accept a Pull Request that adds functionality marking a function
+as non-nullable via a smart comment (e.g.
+<code class="language-text">COMMENT ON FUNCTION foo_func(foo) IS E&#39;@notNull&#39;;</code>) - do raise an issue if this
+is of interest to you. Even with this, though, it would be unwise to mark
 root-level functions as non-nullable - what if the PostgreSQL connection is
-terminated when resolving that field, should that make all the other fields
-null too? GraphQL best practices suggest that we should keep errors as
-localised as we can.</p>
+terminated when resolving that field, should that make all the other fields null
+too? GraphQL best practices suggest that we should keep errors as localised as
+we can.</p>
 <h3 id="ive-read-the-above-but-i-still-want-this-particular-thing-to-be-non-nullable"><a href="#ive-read-the-above-but-i-still-want-this-particular-thing-to-be-non-nullable" aria-label="ive read the above but i still want this particular thing to be non nullable permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>I've read the above, but I still want this particular thing to be non-nullable!</h3>
 <p>Sure! PostGraphile is built with extensibility and customisability in mind - you
 can fix that with a plugin.</p>

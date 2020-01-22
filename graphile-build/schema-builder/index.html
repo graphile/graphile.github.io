@@ -87,12 +87,12 @@ made to <code class="language-text">listener</code>.</p>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre></div>
 <h4 id="createbuild"><a href="#createbuild" aria-label="createbuild permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code class="language-text">createBuild()</code></h4>
-<p>This synchronous function returns a fresh <a href="/graphile-build/build-object/"><code class="language-text">Build</code>
-object</a> which you can use to build other objects
-(such as the <code class="language-text">GraphQLSchema</code> created above). Be aware the the build will store
-created objects, so it is not safe to use the same <code class="language-text">build</code> object to create a
-GraphQL object with the same name multiple times - each time should use a fresh
-build object.</p>
+<p>This synchronous function returns a fresh
+<a href="/graphile-build/build-object/"><code class="language-text">Build</code> object</a> which you can use to build other
+objects (such as the <code class="language-text">GraphQLSchema</code> created above). Be aware the the build will
+store created objects, so it is not safe to use the same <code class="language-text">build</code> object to
+create a GraphQL object with the same name multiple times - each time should use
+a fresh build object.</p>
 <h3 id="plugin-methods"><a href="#plugin-methods" aria-label="plugin methods permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Plugin methods</h3>
 <p>Use these methods from plugins.</p>
 <h4 id="hookhookname-hookfunction"><a href="#hookhookname-hookfunction" aria-label="hookhookname hookfunction permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code class="language-text">hook(hookName, hookFunction)</code></h4>
@@ -111,7 +111,8 @@ build object.</p>
 <code class="language-text">watchSchema</code> above), and another to be called if/when schema watching ends (to
 clean up). Each function is passed one argument: the function to call when a
 change occurs.</p>
-<p>TODO: document further (ref: <a href="https://github.com/graphile/graphile-engine/blob/83ee6948c5ab9f202773bf7518ea4d2cca3ec349/packages/graphile-build/__tests__/watch.test.js#L28-L35">https://github.com/graphile/graphile-engine/blob/83ee6948c5ab9f202773bf7518ea4d2cca3ec349/packages/graphile-build/__tests__/watch.test.js#L28-L35</a>)</p>
+<p>TODO: document further (ref:
+<a href="https://github.com/graphile/graphile-engine/blob/83ee6948c5ab9f202773bf7518ea4d2cca3ec349/packages/graphile-build/__tests__/watch.test.js#L28-L35">https://github.com/graphile/graphile-engine/blob/83ee6948c5ab9f202773bf7518ea4d2cca3ec349/packages/graphile-build/__tests__/watch.test.js#L28-L35</a>)</p>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js">builder<span class="token punctuation">.</span><span class="token function">registerWatcher</span><span class="token punctuation">(</span>
   <span class="token parameter">triggerRebuild</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
     eventEmitter<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">"change"</span><span class="token punctuation">,</span> triggerRebuild<span class="token punctuation">)</span><span class="token punctuation">;</span>

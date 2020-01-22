@@ -78,11 +78,28 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul>
 </li>
 <li><a href="/postgraphile/postgresql-schema-design/#conclusion">Conclusion</a></li>
-</ul></div></div><div class="edit-this-page" style="display:"><a href="https://github.com/graphile/graphile.github.io/edit/develop/src/pages/postgraphile/postgresql-schema-design.md">📝 Suggest improvement/edit this page</a></div><h2 class="mt3">PostgreSQL Schema Design</h2><div><p>The Postgres database is rich with features well beyond that of any other database. However, most developers do not know the extent to which they can leverage the features in Postgres to completely express their application business logic in the database.</p>
-<p>Often developers may find themselves re-implementing authentication and authorization in their apps, when Postgres comes with application level security features out of the box. Or perhaps developers may rewrite basic insert functions with some extra app logic where that too may be handled in the database.</p>
-<p>This reimplementation of features that come with Postgres is not just an inefficient way to spend developer resources, but may also result in an interface that is slower than if the logic was implemented in Postgres itself. PostGraphile aims to make developers more efficient and their APIs faster by packaging the repeatable work in one open source project that encourages community contributions.</p>
-<p>In this tutorial we will walk through the Postgres schema design for a forum application with users who can login and write forum posts. While we will discuss how you can use the schema we create with PostGraphile, this article should be useful for anyone designing a Postgres schema.</p>
-<p>If you haven't installed PostGraphile already, you can follow our <a href="/postgraphile/quick-start-guide/">Quick Start Guide</a> to get PostGraphile up and running.</p>
+</ul></div></div><div class="edit-this-page" style="display:"><a href="https://github.com/graphile/graphile.github.io/edit/develop/src/pages/postgraphile/postgresql-schema-design.md">📝 Suggest improvement/edit this page</a></div><h2 class="mt3">PostgreSQL Schema Design</h2><div><p>The Postgres database is rich with features well beyond that of any other
+database. However, most developers do not know the extent to which they can
+leverage the features in Postgres to completely express their application
+business logic in the database.</p>
+<p>Often developers may find themselves re-implementing authentication and
+authorization in their apps, when Postgres comes with application level security
+features out of the box. Or perhaps developers may rewrite basic insert
+functions with some extra app logic where that too may be handled in the
+database.</p>
+<p>This reimplementation of features that come with Postgres is not just an
+inefficient way to spend developer resources, but may also result in an
+interface that is slower than if the logic was implemented in Postgres itself.
+PostGraphile aims to make developers more efficient and their APIs faster by
+packaging the repeatable work in one open source project that encourages
+community contributions.</p>
+<p>In this tutorial we will walk through the Postgres schema design for a forum
+application with users who can login and write forum posts. While we will
+discuss how you can use the schema we create with PostGraphile, this article
+should be useful for anyone designing a Postgres schema.</p>
+<p>If you haven't installed PostGraphile already, you can follow our
+<a href="/postgraphile/quick-start-guide/">Quick Start Guide</a> to get PostGraphile up and
+running.</p>
 <h3 id="table-of-contents"><a href="#table-of-contents" aria-label="table of contents permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Table of Contents</h3>
 <ul>
 <li>
@@ -118,17 +135,42 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul>
 <h3 id="the-basics"><a href="#the-basics" aria-label="the basics permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The Basics</h3>
 <h4 id="setting-up-your-schemas"><a href="#setting-up-your-schemas" aria-label="setting up your schemas permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Setting Up Your Schemas</h4>
-<p>All of our database objects will go into one or two custom Postgres schemas. A schema is essentially a namespace, it allows you to create tables with the same name like <code class="language-text">a.person</code> and <code class="language-text">b.person</code>.</p>
-<p>You can name your schema anything, we recommend naming your schema after your app. This way if you are working on multiple apps in the same database (this might only realistically happen in development), you can easily query the databases of the different apps. We are going to create two schemas: <code class="language-text">forum_example</code>, and <code class="language-text">forum_example_private</code>. To create these schemas we use the <a href="https://www.postgresql.org/docs/current/static/sql-createschema.html"><code class="language-text">CREATE SCHEMA</code></a> command.</p>
+<p>All of our database objects will go into one or two custom Postgres schemas. A
+schema is essentially a namespace, it allows you to create tables with the same
+name like <code class="language-text">a.person</code> and <code class="language-text">b.person</code>.</p>
+<p>You can name your schema anything, we recommend naming your schema after your
+app. This way if you are working on multiple apps in the same database (this
+might only realistically happen in development), you can easily query the
+databases of the different apps. We are going to create two schemas:
+<code class="language-text">forum_example</code>, and <code class="language-text">forum_example_private</code>. To create these schemas we use the
+<a href="https://www.postgresql.org/docs/current/static/sql-createschema.html"><code class="language-text">CREATE SCHEMA</code></a>
+command.</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">schema</span> forum_example<span class="token punctuation">;</span>
 <span class="token keyword">create</span> <span class="token keyword">schema</span> forum_example_private<span class="token punctuation">;</span></code></pre></div>
-<p>You could create more or less schemas, it is all up to you and how you want to structure your database. We decided to create two schemas. One of which, <code class="language-text">forum_example</code>, is meant to hold data users can see, whereas <code class="language-text">forum_example_private</code> will never be directly accessible to users.</p>
-<p>Theoretically we want a user to be able to log in directly to our Postgres database, and only be able to create, read, update, and delete data for their user all within SQL. This is a mindshift from how we traditionally use a SQL database. Normally, we assume whoever is querying the database has full visibility into the system as the only one with database access is our application. In this tutorial, we want to restrict access at the database level. Don’t worry though! Postgres is very secure about this, users will have no more permissions then that which you explicitly grant.</p>
+<p>You could create more or less schemas, it is all up to you and how you want to
+structure your database. We decided to create two schemas. One of which,
+<code class="language-text">forum_example</code>, is meant to hold data users can see, whereas
+<code class="language-text">forum_example_private</code> will never be directly accessible to users.</p>
+<p>Theoretically we want a user to be able to log in directly to our Postgres
+database, and only be able to create, read, update, and delete data for their
+user all within SQL. This is a mindshift from how we traditionally use a SQL
+database. Normally, we assume whoever is querying the database has full
+visibility into the system as the only one with database access is our
+application. In this tutorial, we want to restrict access at the database level.
+Don’t worry though! Postgres is very secure about this, users will have no more
+permissions then that which you explicitly grant.</p>
 <blockquote>
-<p><strong>Note:</strong> When starting PostGraphile, you will want to use the name of the schema you created with the <code class="language-text">--schema</code> option, like so: <code class="language-text">postgraphile --schema forum_example</code>. Also, don’t forget to add the <code class="language-text">--watch</code> flag, with watch mode enabled PostGraphile will update your API as we add tables and types throughout this tutorial.</p>
+<p><strong>Note:</strong> When starting PostGraphile, you will want to use the name of the
+schema you created with the <code class="language-text">--schema</code> option, like so:
+<code class="language-text">postgraphile --schema forum_example</code>. Also, don’t forget to add the <code class="language-text">--watch</code>
+flag, with watch mode enabled PostGraphile will update your API as we add
+tables and types throughout this tutorial.</p>
 </blockquote>
 <h4 id="the-person-table"><a href="#the-person-table" aria-label="the person table permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The Person Table</h4>
-<p>Now we are going to create the tables in our database which will correspond to our users. We will do this by running the Postgres <a href="https://www.postgresql.org/docs/current/static/sql-createtable.html"><code class="language-text">CREATE TABLE</code></a> command. Here is the definition for our person table:</p>
+<p>Now we are going to create the tables in our database which will correspond to
+our users. We will do this by running the Postgres
+<a href="https://www.postgresql.org/docs/current/static/sql-createtable.html"><code class="language-text">CREATE TABLE</code></a>
+command. Here is the definition for our person table:</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">table</span> forum_example<span class="token punctuation">.</span>person <span class="token punctuation">(</span>
   id               <span class="token keyword">serial</span> <span class="token keyword">primary</span> <span class="token keyword">key</span><span class="token punctuation">,</span>
   first_name       <span class="token keyword">text</span> <span class="token operator">not</span> <span class="token boolean">null</span> <span class="token keyword">check</span> <span class="token punctuation">(</span>char_length<span class="token punctuation">(</span>first_name<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">80</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
@@ -136,22 +178,55 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   about            <span class="token keyword">text</span><span class="token punctuation">,</span>
   created_at       <span class="token keyword">timestamp</span> <span class="token keyword">default</span> <span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
-<p>Now we have created a table with <code class="language-text">id</code>, <code class="language-text">first_name</code>, <code class="language-text">last_name</code>, <code class="language-text">about</code>, and <code class="language-text">created_at</code> columns (we will add an <code class="language-text">updated_at</code> column later). Let’s break down exactly what each line in this command does, we will only do this once. If you already understand, you can skip ahead.</p>
+<p>Now we have created a table with <code class="language-text">id</code>, <code class="language-text">first_name</code>, <code class="language-text">last_name</code>, <code class="language-text">about</code>, and
+<code class="language-text">created_at</code> columns (we will add an <code class="language-text">updated_at</code> column later). Let’s break
+down exactly what each line in this command does, we will only do this once. If
+you already understand, you can skip ahead.</p>
 <ol>
-<li><code class="language-text">create table forum_example.person</code>: This tells Postgres that we are creating a table in the <code class="language-text">forum_example</code> schema named <code class="language-text">person</code>. This table will represent all of our forum’s users.</li>
-<li><code class="language-text">id serial primary key</code>: This line establishes an auto-incrementing id field which is always guaranteed to be unique. The first person we create will have an id of 1, the second user will have an id of 2, and so on. The <code class="language-text">primary key</code> bit is also very important. PostGraphile will use the <code class="language-text">primary key</code> of a table in many places to uniquely identify an object, including the globally unique id field.</li>
-<li><code class="language-text">first_name text not null check (char_length(first_name) &lt; 80)</code>: We want all of our users to enter their first name and last name seperately, so this column definition will create a column named <code class="language-text">first_name</code>, of type <code class="language-text">text</code>, that is required (<code class="language-text">not null</code>), and that must be less than 80 characters long (<code class="language-text">check (char_length(first_name) &lt; 80)</code>). <a href="https://www.postgresql.org/docs/current/static/ddl-constraints.html">Check constraints</a> are a very powerful feature in Postgres for data validation.</li>
-<li><code class="language-text">last_name text check (char_length(last_name) &lt; 80)</code>: This is very similar to our column definition for <code class="language-text">first_name</code>, except it is missing <code class="language-text">not null</code>. This means that unlike the <code class="language-text">first_name</code> column, <code class="language-text">last_name</code> is not required.</li>
-<li><code class="language-text">about text</code>: We want users to be able to express themselves! So they get to write a mini forum post which will go on their profile page.</li>
-<li><code class="language-text">created_at timestamp default now()</code>: This final column definition will provide us with some extra meta-information about their user. If not specified explicitly, the <code class="language-text">created_at</code> timestamp will default to the time the row was inserted.</li>
+<li><code class="language-text">create table forum_example.person</code>: This tells Postgres that we are
+creating a table in the <code class="language-text">forum_example</code> schema named <code class="language-text">person</code>. This table
+will represent all of our forum’s users.</li>
+<li><code class="language-text">id serial primary key</code>: This line establishes an auto-incrementing id field
+which is always guaranteed to be unique. The first person we create will
+have an id of 1, the second user will have an id of 2, and so on. The
+<code class="language-text">primary key</code> bit is also very important. PostGraphile will use the
+<code class="language-text">primary key</code> of a table in many places to uniquely identify an object,
+including the globally unique id field.</li>
+<li><code class="language-text">first_name text not null check (char_length(first_name) &lt; 80)</code>: We want all
+of our users to enter their first name and last name seperately, so this
+column definition will create a column named <code class="language-text">first_name</code>, of type <code class="language-text">text</code>,
+that is required (<code class="language-text">not null</code>), and that must be less than 80 characters long
+(<code class="language-text">check (char_length(first_name) &lt; 80)</code>).
+<a href="https://www.postgresql.org/docs/current/static/ddl-constraints.html">Check constraints</a>
+are a very powerful feature in Postgres for data validation.</li>
+<li><code class="language-text">last_name text check (char_length(last_name) &lt; 80)</code>: This is very similar
+to our column definition for <code class="language-text">first_name</code>, except it is missing <code class="language-text">not null</code>.
+This means that unlike the <code class="language-text">first_name</code> column, <code class="language-text">last_name</code> is not required.</li>
+<li><code class="language-text">about text</code>: We want users to be able to express themselves! So they get to
+write a mini forum post which will go on their profile page.</li>
+<li><code class="language-text">created_at timestamp default now()</code>: This final column definition will
+provide us with some extra meta-information about their user. If not
+specified explicitly, the <code class="language-text">created_at</code> timestamp will default to the time
+the row was inserted.</li>
 </ol>
 <p>And that’s our person table! Pretty simple, right?</p>
-<p>The syntax and features of the Postgres <a href="https://www.postgresql.org/docs/current/static/sql-createtable.html"><code class="language-text">CREATE TABLE</code></a> command are fairly easy to learn and understand. Creating tables is the easiest, but also the most fundamental part of your schema design.</p>
+<p>The syntax and features of the Postgres
+<a href="https://www.postgresql.org/docs/current/static/sql-createtable.html"><code class="language-text">CREATE TABLE</code></a>
+command are fairly easy to learn and understand. Creating tables is the easiest,
+but also the most fundamental part of your schema design.</p>
 <blockquote>
-<p><strong>Note:</strong> We prefer singular identifers like <code class="language-text">forum_example.person</code> over <code class="language-text">forum_example.people</code> because when you create a table, it is like you are creating a class in a statically typed language. Classes have singular names like “Person” while collections will often have plural names like “People.” Table as a class is a better analogy than table as a collection because Postgres itself will internally call tables “classes.”</p>
+<p><strong>Note:</strong> We prefer singular identifers like <code class="language-text">forum_example.person</code> over
+<code class="language-text">forum_example.people</code> because when you create a table, it is like you are
+creating a class in a statically typed language. Classes have singular names
+like “Person” while collections will often have plural names like “People.”
+Table as a class is a better analogy than table as a collection because
+Postgres itself will internally call tables “classes.”</p>
 </blockquote>
 <blockquote>
-<p><strong>Note:</strong> In case you don’t like serial id of our table above, an alternative to the <code class="language-text">serial</code> primary key is UUIDs. To use UUIDs you would just need to add the popular UUID extension, <code class="language-text">uuid-ossp</code>, in your database setup, and specify a default in your table creation. Like so:</p>
+<p><strong>Note:</strong> In case you don’t like serial id of our table above, an alternative
+to the <code class="language-text">serial</code> primary key is UUIDs. To use UUIDs you would just need to add
+the popular UUID extension, <code class="language-text">uuid-ossp</code>, in your database setup, and specify a
+default in your table creation. Like so:</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> extension <span class="token keyword">if</span> <span class="token operator">not</span> <span class="token keyword">exists</span> <span class="token string">"uuid-ossp"</span><span class="token punctuation">;</span>
 
 <span class="token keyword">create</span> <span class="token keyword">table</span> forum_example<span class="token punctuation">.</span>person <span class="token punctuation">(</span>
@@ -165,10 +240,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   id uuid <span class="token keyword">primary</span> <span class="token keyword">key</span> <span class="token keyword">default</span> gen_random_uuid<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
-<p>There are pros and cons to both approaches, choose what works best for your application!</p>
+<p>There are pros and cons to both approaches, choose what works best for your
+application!</p>
 </blockquote>
 <h4 id="table-documentation"><a href="#table-documentation" aria-label="table documentation permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Table Documentation</h4>
-<p>Now that we have created our table, we want to document it within the Postgres database. By adding comments to our table and its columns using the Postgres <a href="https://www.postgresql.org/docs/current/static/sql-comment.html"><code class="language-text">COMMENT</code></a> command, we will allow tools like PostGraphile to display rich domain specific documentation.</p>
+<p>Now that we have created our table, we want to document it within the Postgres
+database. By adding comments to our table and its columns using the Postgres
+<a href="https://www.postgresql.org/docs/current/static/sql-comment.html"><code class="language-text">COMMENT</code></a>
+command, we will allow tools like PostGraphile to display rich domain specific
+documentation.</p>
 <p>To add comments, just see the SQL below:</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">table</span> forum_example<span class="token punctuation">.</span>person <span class="token operator">is</span> <span class="token string">'A user of the forum.'</span><span class="token punctuation">;</span>
 <span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">column</span> forum_example<span class="token punctuation">.</span>person<span class="token punctuation">.</span>id <span class="token operator">is</span> <span class="token string">'The primary unique identifier for the person.'</span><span class="token punctuation">;</span>
@@ -178,28 +258,49 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">column</span> forum_example<span class="token punctuation">.</span>person<span class="token punctuation">.</span>created_at <span class="token operator">is</span> <span class="token string">'The time this person was created.'</span><span class="token punctuation">;</span></code></pre></div>
 <p>Incredibly simple, yet also incredibly powerful.</p>
 <blockquote>
-<p><strong>Note:</strong> Feel free to write your comments in Markdown! Most tools, including GraphiQL which PostGraphile uses, will render your comments with the appropriate styles.</p>
+<p><strong>Note:</strong> Feel free to write your comments in Markdown! Most tools, including
+GraphiQL which PostGraphile uses, will render your comments with the
+appropriate styles.</p>
 </blockquote>
-<p>With this we have completed our person table, now let’s create a table for our forum posts.</p>
+<p>With this we have completed our person table, now let’s create a table for our
+forum posts.</p>
 <h4 id="the-post-table"><a href="#the-post-table" aria-label="the post table permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The Post Table</h4>
-<p>The users of our forum will want to be able to create posts. That’s the entire reason we have a forum after all. To create the post table we go through a very similar process as creating our <code class="language-text">forum_example.person</code> table, but first we want to create a type we will use in one of the columns. See the SQL below:</p>
+<p>The users of our forum will want to be able to create posts. That’s the entire
+reason we have a forum after all. To create the post table we go through a very
+similar process as creating our <code class="language-text">forum_example.person</code> table, but first we want
+to create a type we will use in one of the columns. See the SQL below:</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">type</span> forum_example<span class="token punctuation">.</span>post_topic <span class="token keyword">as</span> <span class="token keyword">enum</span> <span class="token punctuation">(</span>
   <span class="token string">'discussion'</span><span class="token punctuation">,</span>
   <span class="token string">'inspiration'</span><span class="token punctuation">,</span>
   <span class="token string">'help'</span><span class="token punctuation">,</span>
   <span class="token string">'showcase'</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
-<p>The Postgres <a href="https://www.postgresql.org/docs/current/static/sql-createtype.html"><code class="language-text">CREATE TYPE</code></a> command will let you create a custom type in your database which will allow you to do some really cool things. You can create a <a href="https://www.postgresql.org/docs/current/static/rowtypes.html">composite type</a> which is basically a typed object in GraphQL terms, you can create a <a href="https://www.postgresql.org/docs/current/static/rangetypes.html">range type</a> which represents exactly what you might think, or you can create an <a href="https://www.postgresql.org/docs/current/static/datatype-enum.html">enum type</a> which is what we did here.</p>
-<p>Enum types are a static set of values, you <em>must</em> use one of the string values that make up the enum in any column of the enum’s type. Having this type is useful for us, because we want our forum posts to have one, or none, topics so user’s may easily see what a post is about.</p>
+<p>The Postgres
+<a href="https://www.postgresql.org/docs/current/static/sql-createtype.html"><code class="language-text">CREATE TYPE</code></a>
+command will let you create a custom type in your database which will allow you
+to do some really cool things. You can create a
+<a href="https://www.postgresql.org/docs/current/static/rowtypes.html">composite type</a>
+which is basically a typed object in GraphQL terms, you can create a
+<a href="https://www.postgresql.org/docs/current/static/rangetypes.html">range type</a>
+which represents exactly what you might think, or you can create an
+<a href="https://www.postgresql.org/docs/current/static/datatype-enum.html">enum type</a>
+which is what we did here.</p>
+<p>Enum types are a static set of values, you <em>must</em> use one of the string values
+that make up the enum in any column of the enum’s type. Having this type is
+useful for us, because we want our forum posts to have one, or none, topics so
+user’s may easily see what a post is about.</p>
 <blockquote>
-<p><strong>Note:</strong> PostGraphile implements custom handling for user-defined types. An enum type like that defined above will be turned into a GraphQL enum that looks like:</p>
+<p><strong>Note:</strong> PostGraphile implements custom handling for user-defined types. An
+enum type like that defined above will be turned into a GraphQL enum that
+looks like:</p>
 <div class="gatsby-highlight" data-language="graphql"><pre class="language-graphql"><code class="language-graphql"><span class="token keyword">enum</span> <span class="token class-name">PostTopic</span> <span class="token punctuation">{</span>
   <span class="token constant">DISCUSSION</span>
   <span class="token constant">INSPIRATION</span>
   <span class="token constant">HELP</span>
   <span class="token constant">SHOWCASE</span>
 <span class="token punctuation">}</span></code></pre></div>
-<p>You can also create custom composite types which will turn into GraphQL object types with PostGraphile.</p>
+<p>You can also create custom composite types which will turn into GraphQL object
+types with PostGraphile.</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">type</span> my_schema<span class="token punctuation">.</span>my_type <span class="token keyword">as</span> <span class="token punctuation">(</span>
   foo <span class="token keyword">integer</span><span class="token punctuation">,</span>
   bar <span class="token keyword">integer</span>
@@ -227,20 +328,40 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">column</span> forum_example<span class="token punctuation">.</span>post<span class="token punctuation">.</span>topic <span class="token operator">is</span> <span class="token string">'The topic this has been posted in.'</span><span class="token punctuation">;</span>
 <span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">column</span> forum_example<span class="token punctuation">.</span>post<span class="token punctuation">.</span>body <span class="token operator">is</span> <span class="token string">'The main body text of our post.'</span><span class="token punctuation">;</span>
 <span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">column</span> forum_example<span class="token punctuation">.</span>post<span class="token punctuation">.</span>created_at <span class="token operator">is</span> <span class="token string">'The time this post was created.'</span><span class="token punctuation">;</span></code></pre></div>
-<p>Pretty basic. Our <code class="language-text">headline</code> is twice as long as a tweet, and to use our <code class="language-text">forum_example.post_topic</code> type we wrote it as the column type just as we may write <code class="language-text">integer</code> as the column type. We also made sure to include comments.</p>
-<p>Now that we have gone over the basics, let’s explore Postgres functions and see how we can use them to extend the functionality of our database.</p>
+<p>Pretty basic. Our <code class="language-text">headline</code> is twice as long as a tweet, and to use our
+<code class="language-text">forum_example.post_topic</code> type we wrote it as the column type just as we may
+write <code class="language-text">integer</code> as the column type. We also made sure to include comments.</p>
+<p>Now that we have gone over the basics, let’s explore Postgres functions and see
+how we can use them to extend the functionality of our database.</p>
 <h3 id="database-functions"><a href="#database-functions" aria-label="database functions permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Database Functions</h3>
-<p>The Postgres <a href="https://www.postgresql.org/docs/current/static/sql-createfunction.html"><code class="language-text">CREATE FUNCTION</code></a> command is truly amazing. It allows us to write functions for our database in SQL, and other languages including JavaScript and Ruby!</p>
+<p>The Postgres
+<a href="https://www.postgresql.org/docs/current/static/sql-createfunction.html"><code class="language-text">CREATE FUNCTION</code></a>
+command is truly amazing. It allows us to write functions for our database in
+SQL, and other languages including JavaScript and Ruby!</p>
 <p>The following is a basic Postgres function:</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">function</span> <span class="token keyword">add</span><span class="token punctuation">(</span>a <span class="token keyword">int</span><span class="token punctuation">,</span> b <span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token keyword">returns</span> <span class="token keyword">int</span> <span class="token keyword">as</span> $$
  <span class="token keyword">select</span> a <span class="token operator">+</span> b
 $$ <span class="token keyword">language</span> <span class="token keyword">sql</span> stable<span class="token punctuation">;</span></code></pre></div>
-<p>Note the form. The double dollar signs (<code class="language-text">$$</code>) open and close the function, and at the very end we have <code class="language-text">language sql stable</code>. <code class="language-text">language sql</code> means that the function is written in SQL, pretty obvious. If you wrote your function in Ruby it may be <code class="language-text">language plruby</code>. The next word, <code class="language-text">stable</code>, means that this function <em>does not</em> mutate the database. By default Postgres assumes all functions will mutate the database, you must mark your function with <code class="language-text">stable</code> for Postgres, and PostGraphile, to know your function is a query and not a mutation.</p>
+<p>Note the form. The double dollar signs (<code class="language-text">$$</code>) open and close the function, and
+at the very end we have <code class="language-text">language sql stable</code>. <code class="language-text">language sql</code> means that the
+function is written in SQL, pretty obvious. If you wrote your function in Ruby
+it may be <code class="language-text">language plruby</code>. The next word, <code class="language-text">stable</code>, means that this function
+<em>does not</em> mutate the database. By default Postgres assumes all functions will
+mutate the database, you must mark your function with <code class="language-text">stable</code> for Postgres, and
+PostGraphile, to know your function is a query and not a mutation.</p>
 <blockquote>
-<p><strong>Note:</strong> If you are interested in running JavaScript or Ruby in Postgres, check out <a href="https://blog.heroku.com/javascript_in_your_postgres">PL/V8</a> and <a href="https://github.com/knu/postgresql-plruby">PL/ruby</a> respectively. It is recommended that you use SQL and PL/pgSQL (which comes native with Postgres) whenever you can (even if they are a pain). There is plenty of documentation and StackOverflow answers on both SQL and PL/pgSQL. However, there are alternatives if you so choose.</p>
+<p><strong>Note:</strong> If you are interested in running JavaScript or Ruby in Postgres,
+check out <a href="https://blog.heroku.com/javascript_in_your_postgres">PL/V8</a> and
+<a href="https://github.com/knu/postgresql-plruby">PL/ruby</a> respectively. It is
+recommended that you use SQL and PL/pgSQL (which comes native with Postgres)
+whenever you can (even if they are a pain). There is plenty of documentation
+and StackOverflow answers on both SQL and PL/pgSQL. However, there are
+alternatives if you so choose.</p>
 </blockquote>
-<p>That function above isn’t so useful for us in our schema, so let’s write some functions which will be useful. We will define three.</p>
-<p>First, a function which will concatenate the users first and last name to return their full name:</p>
+<p>That function above isn’t so useful for us in our schema, so let’s write some
+functions which will be useful. We will define three.</p>
+<p>First, a function which will concatenate the users first and last name to return
+their full name:</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">function</span> forum_example<span class="token punctuation">.</span>person_full_name<span class="token punctuation">(</span>person forum_example<span class="token punctuation">.</span>person<span class="token punctuation">)</span> <span class="token keyword">returns</span> <span class="token keyword">text</span> <span class="token keyword">as</span> $$
   <span class="token keyword">select</span> person<span class="token punctuation">.</span>first_name <span class="token operator">||</span> <span class="token string">' '</span> <span class="token operator">||</span> person<span class="token punctuation">.</span>last_name
 $$ <span class="token keyword">language</span> <span class="token keyword">sql</span> stable<span class="token punctuation">;</span>
@@ -269,16 +390,25 @@ $$ <span class="token keyword">language</span> <span class="token keyword">sql</
 $$ <span class="token keyword">language</span> <span class="token keyword">sql</span> stable<span class="token punctuation">;</span>
 
 <span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">function</span> forum_example<span class="token punctuation">.</span>person_latest_post<span class="token punctuation">(</span>forum_example<span class="token punctuation">.</span>person<span class="token punctuation">)</span> <span class="token operator">is</span> <span class="token string">'Get’s the latest post written by the person.'</span><span class="token punctuation">;</span></code></pre></div>
-<p>Don’t get too stuck on the function implementations. It is fairly easy to discover how to express what you want in SQL through a quick search of the Postgres documentation (which is excellent!). These functions are here to give you some examples of what functions in Postgres look like. Also note how we added comments to our functions with the <a href="https://www.postgresql.org/docs/current/static/sql-comment.html"><code class="language-text">COMMENT</code></a> command, just like we add comments to our tables.</p>
+<p>Don’t get too stuck on the function implementations. It is fairly easy to
+discover how to express what you want in SQL through a quick search of the
+Postgres documentation (which is excellent!). These functions are here to give
+you some examples of what functions in Postgres look like. Also note how we
+added comments to our functions with the
+<a href="https://www.postgresql.org/docs/current/static/sql-comment.html"><code class="language-text">COMMENT</code></a>
+command, just like we add comments to our tables.</p>
 <blockquote>
-<p><strong>Note:</strong> Any function which meets the following conditions will be treated as a computed field by PostGraphile:</p>
+<p><strong>Note:</strong> Any function which meets the following conditions will be treated as
+a computed field by PostGraphile:</p>
 <ol>
 <li>The function has a table row as the first argument.</li>
 <li>The function is in the same schema as the table of the first argument.</li>
 <li>The function’s name is prefixed by the table’s name.</li>
-<li>The function is marked as <code class="language-text">stable</code> or <code class="language-text">immutable</code> which makes it a query and not a mutation.</li>
+<li>The function is marked as <code class="language-text">stable</code> or <code class="language-text">immutable</code> which makes it a query
+and not a mutation.</li>
 </ol>
-<p>All three of the above functions meet these conditions and as such will be computed fields. In GraphQL this ends up looking like:</p>
+<p>All three of the above functions meet these conditions and as such will be
+computed fields. In GraphQL this ends up looking like:</p>
 <div class="gatsby-highlight" data-language="graphql"><pre class="language-graphql"><code class="language-graphql"><span class="token keyword">type</span> <span class="token class-name">Person</span> <span class="token punctuation">{</span>
   <span class="token attr-name">id</span><span class="token punctuation">:</span> Int<span class="token operator">!</span>
   <span class="token attr-name">firstName</span><span class="token punctuation">:</span> String<span class="token operator">!</span>
@@ -289,7 +419,11 @@ $$ <span class="token keyword">language</span> <span class="token keyword">sql</
 <span class="token punctuation">}</span></code></pre></div>
 </blockquote>
 <h4 id="set-returning-functions"><a href="#set-returning-functions" aria-label="set returning functions permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Set Returning Functions</h4>
-<p>Sometimes it is useful to not just return single values from your function, but perhaps entire tables. What returning a table from a function could mean is you could define a custom ordering, hide rows that were archived, or return a user’s activity feed perhaps. In our case, this Postgres feature makes it easy for us to implement search:</p>
+<p>Sometimes it is useful to not just return single values from your function, but
+perhaps entire tables. What returning a table from a function could mean is you
+could define a custom ordering, hide rows that were archived, or return a user’s
+activity feed perhaps. In our case, this Postgres feature makes it easy for us
+to implement search:</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">function</span> forum_example<span class="token punctuation">.</span>search_posts<span class="token punctuation">(</span>search <span class="token keyword">text</span><span class="token punctuation">)</span> <span class="token keyword">returns</span> setof forum_example<span class="token punctuation">.</span>post <span class="token keyword">as</span> $$
   <span class="token keyword">select</span> post<span class="token punctuation">.</span><span class="token operator">*</span>
   <span class="token keyword">from</span> forum_example<span class="token punctuation">.</span>post <span class="token keyword">as</span> post
@@ -297,9 +431,13 @@ $$ <span class="token keyword">language</span> <span class="token keyword">sql</
 $$ <span class="token keyword">language</span> <span class="token keyword">sql</span> stable<span class="token punctuation">;</span>
 
 <span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">function</span> forum_example<span class="token punctuation">.</span>search_posts<span class="token punctuation">(</span><span class="token keyword">text</span><span class="token punctuation">)</span> <span class="token operator">is</span> <span class="token string">'Returns posts containing a given search term.'</span><span class="token punctuation">;</span></code></pre></div>
-<p>The difference with this function and the ones before is the return signature reads <code class="language-text">returns setof forum_example.post</code>. This function will therefore return all of the posts that match our search condition and not just one.</p>
+<p>The difference with this function and the ones before is the return signature
+reads <code class="language-text">returns setof forum_example.post</code>. This function will therefore return
+all of the posts that match our search condition and not just one.</p>
 <blockquote>
-<p><strong>Note:</strong> PostGraphile will treat set returning functions as connections. This is what makes them so powerful for PostGraphile users. The function above would be queryable like so:</p>
+<p><strong>Note:</strong> PostGraphile will treat set returning functions as connections. This
+is what makes them so powerful for PostGraphile users. The function above
+would be queryable like so:</p>
 <div class="gatsby-highlight" data-language="graphql"><pre class="language-graphql"><code class="language-graphql"><span class="token punctuation">{</span>
   searchPosts<span class="token punctuation">(</span><span class="token attr-name">search</span><span class="token punctuation">:</span> <span class="token string">"Hello, world!"</span><span class="token punctuation">,</span> <span class="token attr-name">first</span><span class="token punctuation">:</span> <span class="token number">5</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     edges <span class="token punctuation">{</span>
@@ -313,17 +451,38 @@ $$ <span class="token keyword">language</span> <span class="token keyword">sql</
 <span class="token punctuation">}</span></code></pre></div>
 </blockquote>
 <blockquote>
-<p><strong>Note:</strong> Postgres has awesome text searching capabilities - if you want high quality full text searching you don’t need to look outside Postgres. Instead look into the Postgres <a href="https://www.postgresql.org/docs/current/static/textsearch.html">Full Text Search</a> functionality. It is a great feature, but a bit much for our simple example, so we just used a simple string position function instead.</p>
+<p><strong>Note:</strong> Postgres has awesome text searching capabilities - if you want high
+quality full text searching you don’t need to look outside Postgres. Instead
+look into the Postgres
+<a href="https://www.postgresql.org/docs/current/static/textsearch.html">Full Text Search</a>
+functionality. It is a great feature, but a bit much for our simple example,
+so we just used a simple string position function instead.</p>
 </blockquote>
 <blockquote>
-<p><strong>Note:</strong> Returning an array (<code class="language-text">returns post[]</code>), and returning a set (<code class="language-text">returns setof post</code>) are two very different things. When you return an array, every single value in the array will always be returned. However, when you return a set it is like returning a table. Users can paginate through a set using <code class="language-text">limit</code> and <code class="language-text">offset</code>, but not an array.</p>
+<p><strong>Note:</strong> Returning an array (<code class="language-text">returns post[]</code>), and returning a set
+(<code class="language-text">returns setof post</code>) are two very different things. When you return an
+array, every single value in the array will always be returned. However, when
+you return a set it is like returning a table. Users can paginate through a
+set using <code class="language-text">limit</code> and <code class="language-text">offset</code>, but not an array.</p>
 </blockquote>
 <h4 id="triggers"><a href="#triggers" aria-label="triggers permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Triggers</h4>
-<p>You can also use Postgres functions to define triggers. Triggers in Postgres allow you to hook into events that are happening on your tables such as inserts, updates, or deletes. You define your triggers with the <a href="https://www.postgresql.org/docs/current/static/sql-createtrigger.html"><code class="language-text">CREATE TRIGGER</code></a> command, and all trigger functions must return the special type <code class="language-text">trigger</code>.</p>
-<p>To demonstrate how triggers work, we will define a trigger that sets an <code class="language-text">updated_at</code> column on our <code class="language-text">forum_example.person</code> and <code class="language-text">forum_example.post</code> tables whenever a row is updated. Before we can write the trigger, we need to make sure <code class="language-text">forum_example.person</code> and <code class="language-text">forum_example.post</code> have an <code class="language-text">updated_at</code> column! To do this we will use the <a href="https://www.postgresql.org/docs/current/static/sql-altertable.html"><code class="language-text">ALTER TABLE</code></a> command.</p>
+<p>You can also use Postgres functions to define triggers. Triggers in Postgres
+allow you to hook into events that are happening on your tables such as inserts,
+updates, or deletes. You define your triggers with the
+<a href="https://www.postgresql.org/docs/current/static/sql-createtrigger.html"><code class="language-text">CREATE TRIGGER</code></a>
+command, and all trigger functions must return the special type <code class="language-text">trigger</code>.</p>
+<p>To demonstrate how triggers work, we will define a trigger that sets an
+<code class="language-text">updated_at</code> column on our <code class="language-text">forum_example.person</code> and <code class="language-text">forum_example.post</code>
+tables whenever a row is updated. Before we can write the trigger, we need to
+make sure <code class="language-text">forum_example.person</code> and <code class="language-text">forum_example.post</code> have an <code class="language-text">updated_at</code>
+column! To do this we will use the
+<a href="https://www.postgresql.org/docs/current/static/sql-altertable.html"><code class="language-text">ALTER TABLE</code></a>
+command.</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">alter</span> <span class="token keyword">table</span> forum_example<span class="token punctuation">.</span>person <span class="token keyword">add</span> <span class="token keyword">column</span> updated_at <span class="token keyword">timestamp</span> <span class="token keyword">default</span> <span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">alter</span> <span class="token keyword">table</span> forum_example<span class="token punctuation">.</span>post <span class="token keyword">add</span> <span class="token keyword">column</span> updated_at <span class="token keyword">timestamp</span> <span class="token keyword">default</span> <span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
-<p>Our <code class="language-text">updated_at</code> column has now been added to our tables and looks exactly like our <code class="language-text">created_at</code> column. It’s a timestamp which defaults to the time the row was created. Next, let us define our triggers:</p>
+<p>Our <code class="language-text">updated_at</code> column has now been added to our tables and looks exactly like
+our <code class="language-text">created_at</code> column. It’s a timestamp which defaults to the time the row was
+created. Next, let us define our triggers:</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">function</span> forum_example_private<span class="token punctuation">.</span>set_updated_at<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">returns</span> <span class="token keyword">trigger</span> <span class="token keyword">as</span> $$
 <span class="token keyword">begin</span>
   new<span class="token punctuation">.</span>updated_at :<span class="token operator">=</span> <span class="token keyword">current_timestamp</span><span class="token punctuation">;</span>
@@ -340,13 +499,34 @@ $$ <span class="token keyword">language</span> plpgsql<span class="token punctua
   <span class="token keyword">on</span> forum_example<span class="token punctuation">.</span>post
   <span class="token keyword">for each row</span>
   <span class="token keyword">execute</span> <span class="token keyword">procedure</span> forum_example_private<span class="token punctuation">.</span>set_updated_at<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
-<p>To define our trigger we ran three commands. First we created a function named <code class="language-text">set_updated_at</code> in our <code class="language-text">forum_example_private</code> schema because we want no one to directly call this function as it is simply a utility. <code class="language-text">forum_example_private.set_updated_at</code> also returns a <code class="language-text">trigger</code> and is implemented in <a href="https://www.postgresql.org/docs/current/static/plpgsql.html">PL/pgSQL</a>.</p>
-<p>After we define our <code class="language-text">forum_example_private.set_updated_at</code> function, we can use it in the triggers we create with the <a href="https://www.postgresql.org/docs/current/static/sql-createtrigger.html"><code class="language-text">CREATE TRIGGER</code></a> command. The triggers will run before a row is updated by the <a href="https://www.postgresql.org/docs/current/static/sql-update.html"><code class="language-text">UPDATE</code></a> command and will execute the function on every row being updated.</p>
+<p>To define our trigger we ran three commands. First we created a function named
+<code class="language-text">set_updated_at</code> in our <code class="language-text">forum_example_private</code> schema because we want no one to
+directly call this function as it is simply a utility.
+<code class="language-text">forum_example_private.set_updated_at</code> also returns a <code class="language-text">trigger</code> and is
+implemented in
+<a href="https://www.postgresql.org/docs/current/static/plpgsql.html">PL/pgSQL</a>.</p>
+<p>After we define our <code class="language-text">forum_example_private.set_updated_at</code> function, we can use
+it in the triggers we create with the
+<a href="https://www.postgresql.org/docs/current/static/sql-createtrigger.html"><code class="language-text">CREATE TRIGGER</code></a>
+command. The triggers will run before a row is updated by the
+<a href="https://www.postgresql.org/docs/current/static/sql-update.html"><code class="language-text">UPDATE</code></a>
+command and will execute the function on every row being updated.</p>
 <blockquote>
-<p><strong>Note:</strong> If you want to do some CPU intensive work in triggers, perhaps consider using Postgres’s pub/sub functionality by running the <a href="https://www.postgresql.org/docs/current/static/sql-notify.html"><code class="language-text">NOTIFY</code></a> command in triggers and then use the <a href="https://www.postgresql.org/docs/current/static/sql-listen.html"><code class="language-text">LISTEN</code></a> command in a worker service. If Node.js is your platform of choice, you could use the <a href="https://www.npmjs.com/package/pg-pubsub"><code class="language-text">pg-pubsub</code></a> package to make listening easier.</p>
+<p><strong>Note:</strong> If you want to do some CPU intensive work in triggers, perhaps
+consider using Postgres’s pub/sub functionality by running the
+<a href="https://www.postgresql.org/docs/current/static/sql-notify.html"><code class="language-text">NOTIFY</code></a>
+command in triggers and then use the
+<a href="https://www.postgresql.org/docs/current/static/sql-listen.html"><code class="language-text">LISTEN</code></a>
+command in a worker service. If Node.js is your platform of choice, you could
+use the <a href="https://www.npmjs.com/package/pg-pubsub"><code class="language-text">pg-pubsub</code></a> package to make
+listening easier.</p>
 </blockquote>
 <hr>
-<p>That’s about it as far as Postgres functions go! They are a fun, interesting, and useful topic to understand when it comes to good Postgres schema design. Always remember, the Postgres documentation is your best friend as you try to write your own functions. Some important documentation articles we mentioned for your reference are as follows:</p>
+<p>That’s about it as far as Postgres functions go! They are a fun, interesting,
+and useful topic to understand when it comes to good Postgres schema design.
+Always remember, the Postgres documentation is your best friend as you try to
+write your own functions. Some important documentation articles we mentioned for
+your reference are as follows:</p>
 <ul>
 <li><a href="https://www.postgresql.org/docs/current/static/sql-createfunction.html"><code class="language-text">CREATE FUNCTION</code></a></li>
 <li><a href="https://www.postgresql.org/docs/current/static/sql-createtrigger.html"><code class="language-text">CREATE TRIGGER</code></a></li>
@@ -354,10 +534,19 @@ $$ <span class="token keyword">language</span> plpgsql<span class="token punctua
 </ul>
 <p>Next up, we are going to learn about auth in Postgres and PostGraphile!</p>
 <h3 id="authentication-and-authorization"><a href="#authentication-and-authorization" aria-label="authentication and authorization permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Authentication and Authorization</h3>
-<p>Authentication and authorization is incredibly important whenever you build an application. You want your users to be able to login and out of your service, and only edit the content your platform has given them permission to edit. Postgres already has great support for authentication and authorization using a secure role based system, so PostGraphile just bridges the gap between the Postgres role mechanisms and HTTP based authorization.</p>
-<p>However, before we can dive into implementing authentication, we are missing some pretty important data in our schema. How are users supposed to even login? Not by guessing their first and last name one would hope, so we will define another table which will store user emails and passwords.</p>
+<p>Authentication and authorization is incredibly important whenever you build an
+application. You want your users to be able to login and out of your service,
+and only edit the content your platform has given them permission to edit.
+Postgres already has great support for authentication and authorization using a
+secure role based system, so PostGraphile just bridges the gap between the
+Postgres role mechanisms and HTTP based authorization.</p>
+<p>However, before we can dive into implementing authentication, we are missing
+some pretty important data in our schema. How are users supposed to even login?
+Not by guessing their first and last name one would hope, so we will define
+another table which will store user emails and passwords.</p>
 <h4 id="storing-emails-and-passwords"><a href="#storing-emails-and-passwords" aria-label="storing emails and passwords permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Storing Emails and Passwords</h4>
-<p>To store user emails and passwords we will create another table in the <code class="language-text">forum_example_private</code> schema.</p>
+<p>To store user emails and passwords we will create another table in the
+<code class="language-text">forum_example_private</code> schema.</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">table</span> forum_example_private<span class="token punctuation">.</span>person_account <span class="token punctuation">(</span>
   person_id        <span class="token keyword">integer</span> <span class="token keyword">primary</span> <span class="token keyword">key</span> <span class="token keyword">references</span> forum_example<span class="token punctuation">.</span>person<span class="token punctuation">(</span>id<span class="token punctuation">)</span> <span class="token keyword">on</span> <span class="token keyword">delete</span> <span class="token keyword">cascade</span><span class="token punctuation">,</span>
   email            <span class="token keyword">text</span> <span class="token operator">not</span> <span class="token boolean">null</span> <span class="token keyword">unique</span> <span class="token keyword">check</span> <span class="token punctuation">(</span>email <span class="token operator">~</span><span class="token operator">*</span> <span class="token string">'^.+@.+\..+$'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
@@ -369,21 +558,54 @@ $$ <span class="token keyword">language</span> plpgsql<span class="token punctua
 <span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">column</span> forum_example_private<span class="token punctuation">.</span>person_account<span class="token punctuation">.</span>email <span class="token operator">is</span> <span class="token string">'The email address of the person.'</span><span class="token punctuation">;</span>
 <span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">column</span> forum_example_private<span class="token punctuation">.</span>person_account<span class="token punctuation">.</span>password_hash <span class="token operator">is</span> <span class="token string">'An opaque hash of the person’s password.'</span><span class="token punctuation">;</span></code></pre></div>
 <blockquote>
-<p><strong>Warning:</strong> Never store passwords in plaintext! The <code class="language-text">password_hash</code> column will contain the user’s password <em>after</em> it has gone through a secure hashing algorithm like <a href="https://codahale.com/how-to-safely-store-a-password/">Bcrypt</a>. Later in this tutorial we will show you how to securely hash a password in Postgres.</p>
+<p><strong>Warning:</strong> Never store passwords in plaintext! The <code class="language-text">password_hash</code> column
+will contain the user’s password <em>after</em> it has gone through a secure hashing
+algorithm like <a href="https://codahale.com/how-to-safely-store-a-password/">Bcrypt</a>.
+Later in this tutorial we will show you how to securely hash a password in
+Postgres.</p>
 </blockquote>
-<p>Why would we choose to create a new table in the <code class="language-text">forum_example_private</code> schema instead of just adding columns to <code class="language-text">forum_example.person</code>? There are a couple of answers to this question. The first and most fundamental is seperation of concerns. By moving <code class="language-text">email</code> and <code class="language-text">password_hash</code> to a second table we make it much harder to accidently select those values when reading <code class="language-text">forum_example.person</code>. Also, users will not have the permission to directly query data from <code class="language-text">forum_example_private</code> (as we will see) making this approach more secure. This approach is also good for PostGraphile as the <code class="language-text">forum_example_private</code> schema is never exposed in PostGraphile, so you will never accidently expose password hashes in GraphQL.</p>
-<p>Besides those arguments, moving the person’s account to a seperate table is also good database design in general. Say you have multiple types of users. Perhaps normal person users, and then ’brand‘ or ‘organization’ users. This pattern could easily allow you to go in that direction.</p>
+<p>Why would we choose to create a new table in the <code class="language-text">forum_example_private</code> schema
+instead of just adding columns to <code class="language-text">forum_example.person</code>? There are a couple of
+answers to this question. The first and most fundamental is seperation of
+concerns. By moving <code class="language-text">email</code> and <code class="language-text">password_hash</code> to a second table we make it
+much harder to accidently select those values when reading
+<code class="language-text">forum_example.person</code>. Also, users will not have the permission to directly
+query data from <code class="language-text">forum_example_private</code> (as we will see) making this approach
+more secure. This approach is also good for PostGraphile as the
+<code class="language-text">forum_example_private</code> schema is never exposed in PostGraphile, so you will
+never accidently expose password hashes in GraphQL.</p>
+<p>Besides those arguments, moving the person’s account to a seperate table is also
+good database design in general. Say you have multiple types of users. Perhaps
+normal person users, and then ’brand‘ or ‘organization’ users. This pattern
+could easily allow you to go in that direction.</p>
 <blockquote>
-<p><strong>Note:</strong> The <code class="language-text">forum_example_private.person_account</code> shares its primary key with <code class="language-text">forum_example.person</code>. This way there can only be one <code class="language-text">forum_example_private.person_account</code> for every <code class="language-text">forum_example.person</code>, a one-to-one relationship.</p>
+<p><strong>Note:</strong> The <code class="language-text">forum_example_private.person_account</code> shares its primary key
+with <code class="language-text">forum_example.person</code>. This way there can only be one
+<code class="language-text">forum_example_private.person_account</code> for every <code class="language-text">forum_example.person</code>, a
+one-to-one relationship.</p>
 </blockquote>
 <blockquote>
-<p><strong>Note:</strong> For an example of a much richer user profile/account/login schema, use <a href="https://github.com/membership/membership.db/tree/master/postgres">Membership.db</a> as a reference.</p>
+<p><strong>Note:</strong> For an example of a much richer user profile/account/login schema,
+use
+<a href="https://github.com/membership/membership.db/tree/master/postgres">Membership.db</a>
+as a reference.</p>
 </blockquote>
 <h4 id="registering-users"><a href="#registering-users" aria-label="registering users permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Registering Users</h4>
-<p>Before a user can log in, they need to have an account in our database. To register a user we are going to implement a Postgres function in PL/pgSQL which will create two rows. The first row will be the user’s profile inserted into <code class="language-text">forum_example.person</code>, and the second will be an account inserted into <code class="language-text">forum_example_private.person_account</code>.</p>
-<p>Before we define the function, we know that we will want to hash the passwords coming into the function before inserting them into <code class="language-text">forum_example_private.person_account</code>. To hash passwords we will need the Postgres <a href="https://www.postgresql.org/docs/current/static/pgcrypto.html"><code class="language-text">pgcrypto</code></a> extension. To add the extension, just do the following:</p>
+<p>Before a user can log in, they need to have an account in our database. To
+register a user we are going to implement a Postgres function in PL/pgSQL which
+will create two rows. The first row will be the user’s profile inserted into
+<code class="language-text">forum_example.person</code>, and the second will be an account inserted into
+<code class="language-text">forum_example_private.person_account</code>.</p>
+<p>Before we define the function, we know that we will want to hash the passwords
+coming into the function before inserting them into
+<code class="language-text">forum_example_private.person_account</code>. To hash passwords we will need the
+Postgres
+<a href="https://www.postgresql.org/docs/current/static/pgcrypto.html"><code class="language-text">pgcrypto</code></a>
+extension. To add the extension, just do the following:</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> extension <span class="token keyword">if</span> <span class="token operator">not</span> <span class="token keyword">exists</span> <span class="token string">"pgcrypto"</span><span class="token punctuation">;</span></code></pre></div>
-<p>The <code class="language-text">pgcrypto</code> extension should come with your Postgres distribution and gives us access to hashing functions like <code class="language-text">crypt</code> and <code class="language-text">gen_salt</code> which were specifically designed for hashing passwords.</p>
+<p>The <code class="language-text">pgcrypto</code> extension should come with your Postgres distribution and gives
+us access to hashing functions like <code class="language-text">crypt</code> and <code class="language-text">gen_salt</code> which were
+specifically designed for hashing passwords.</p>
 <p>Now that we have added <code class="language-text">pgcrypto</code> to our database, let us define our function:</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">function</span> forum_example<span class="token punctuation">.</span>register_person<span class="token punctuation">(</span>
   first_name <span class="token keyword">text</span><span class="token punctuation">,</span>
@@ -406,38 +628,122 @@ $$ <span class="token keyword">language</span> plpgsql<span class="token punctua
 $$ <span class="token keyword">language</span> plpgsql strict security <span class="token keyword">definer</span><span class="token punctuation">;</span>
 
 <span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">function</span> forum_example<span class="token punctuation">.</span>register_person<span class="token punctuation">(</span><span class="token keyword">text</span><span class="token punctuation">,</span> <span class="token keyword">text</span><span class="token punctuation">,</span> <span class="token keyword">text</span><span class="token punctuation">,</span> <span class="token keyword">text</span><span class="token punctuation">)</span> <span class="token operator">is</span> <span class="token string">'Registers a single user and creates an account in our forum.'</span><span class="token punctuation">;</span></code></pre></div>
-<p>If you do not understand what is going on here, do not worry, writing PL/pgSQL requires some trial and error along with some StackOverflow searching. What’s new here compared to our other functions is that we have a new block, <code class="language-text">declare</code>, above our function implementation which starts with <code class="language-text">begin</code>. In that block we declare our intention to use a variable called <code class="language-text">person</code> of type <code class="language-text">forum_example.person</code>. Then, in our first insert statement, the row we insert will be saved into that <code class="language-text">person</code> variable.</p>
-<p>After we insert a profile into <code class="language-text">forum_example.person</code>, we use the <code class="language-text">pgcrypto</code> extension in the expression <code class="language-text">crypt(password, gen_salt(&#39;bf&#39;))</code> to hash the user’s password before inserting into <code class="language-text">forum_example_private.person_account</code>. This way we aren’t storing the password in plaintext. Read the documentation for <code class="language-text">pgcrypto</code> on <a href="https://www.postgresql.org/docs/current/static/pgcrypto.html#AEN178870">Password Hashing Functions</a> to learn more about these functions and their characteristics.</p>
+<p>If you do not understand what is going on here, do not worry, writing PL/pgSQL
+requires some trial and error along with some StackOverflow searching. What’s
+new here compared to our other functions is that we have a new block, <code class="language-text">declare</code>,
+above our function implementation which starts with <code class="language-text">begin</code>. In that block we
+declare our intention to use a variable called <code class="language-text">person</code> of type
+<code class="language-text">forum_example.person</code>. Then, in our first insert statement, the row we insert
+will be saved into that <code class="language-text">person</code> variable.</p>
+<p>After we insert a profile into <code class="language-text">forum_example.person</code>, we use the <code class="language-text">pgcrypto</code>
+extension in the expression <code class="language-text">crypt(password, gen_salt(&#39;bf&#39;))</code> to hash the user’s
+password before inserting into <code class="language-text">forum_example_private.person_account</code>. This way
+we aren’t storing the password in plaintext. Read the documentation for
+<code class="language-text">pgcrypto</code> on
+<a href="https://www.postgresql.org/docs/current/static/pgcrypto.html#AEN178870">Password Hashing Functions</a>
+to learn more about these functions and their characteristics.</p>
 <blockquote>
-<p><strong>Warning:</strong> Be very careful with logging, while we encrypt our passwords here it may be possible that in a query or server log the password will be recorded in plain text! Be careful to configure your Postgres logs so this isn’t the case. PostGraphile will never log the value of any variables the client gives it. Being careful with your logs and passwords is true in any system, but especially this one.</p>
-<p>For an overview of passwords in Postgres past the <code class="language-text">pgcrypto</code> documentation, see the answer to the StackOverflow question “<a href="http://stackoverflow.com/a/18687445/1568890">How can I hash passwords in Postgres?</a>”</p>
+<p><strong>Warning:</strong> Be very careful with logging, while we encrypt our passwords here
+it may be possible that in a query or server log the password will be recorded
+in plain text! Be careful to configure your Postgres logs so this isn’t the
+case. PostGraphile will never log the value of any variables the client gives
+it. Being careful with your logs and passwords is true in any system, but
+especially this one.</p>
+<p>For an overview of passwords in Postgres past the <code class="language-text">pgcrypto</code> documentation,
+see the answer to the StackOverflow question
+“<a href="http://stackoverflow.com/a/18687445/1568890">How can I hash passwords in Postgres?</a>”</p>
 </blockquote>
-<p>At the end of the implementation you will see <code class="language-text">language plpgsql strict security definer</code>. <code class="language-text">language plpgsql</code> we already understand, but the other words are new. The word <code class="language-text">strict</code> means that if the function gets null input, then the output will be automatically null as well and Postgres won’t call the function. That is <code class="language-text">password</code> cannot be null or <code class="language-text">first_name</code> cannot be null otherwise the result will also be null and nothing will be executed. The words <code class="language-text">security definer</code> mean that this function is executed with the privileges of the Postgres user who created it. Remember how we said users would never be able to insert into <code class="language-text">forum_example_private.person_account</code>? Well this function can insert into <code class="language-text">forum_example_private.person_account</code> because it uses the privileges of the definer.</p>
+<p>At the end of the implementation you will see
+<code class="language-text">language plpgsql strict security definer</code>. <code class="language-text">language plpgsql</code> we already
+understand, but the other words are new. The word <code class="language-text">strict</code> means that if the
+function gets null input, then the output will be automatically null as well and
+Postgres won’t call the function. That is <code class="language-text">password</code> cannot be null or
+<code class="language-text">first_name</code> cannot be null otherwise the result will also be null and nothing
+will be executed. The words <code class="language-text">security definer</code> mean that this function is
+executed with the privileges of the Postgres user who created it. Remember how
+we said users would never be able to insert into
+<code class="language-text">forum_example_private.person_account</code>? Well this function can insert into
+<code class="language-text">forum_example_private.person_account</code> because it uses the privileges of the
+definer.</p>
 <blockquote>
-<p><strong>Warning:</strong> Make sure that when you create a function with <code class="language-text">security definer</code> there are no ‘holes’ a user could use to see or mutate more data than they are not allowed to. Since the above is a simple function, we are fine. If you don’t need <code class="language-text">security definer</code>, try not to use it.</p>
+<p><strong>Warning:</strong> Make sure that when you create a function with <code class="language-text">security definer</code>
+there are no ‘holes’ a user could use to see or mutate more data than they are
+not allowed to. Since the above is a simple function, we are fine. If you
+don’t need <code class="language-text">security definer</code>, try not to use it.</p>
 </blockquote>
-<p>This function will create a user and their account, but how will we log the user in? Before we define a function which allows users to login, sign-in, authenticate, whatever you want to call it let us go over how auth works at a high level in PostGraphile. While this article is trying to be somewhat PostGraphile agnostic, the next two sections will be specific to PostGraphile, but useful to anyone wanting to learn just a little bit more about Postgres and JSON Web Tokens (JWTs).</p>
+<p>This function will create a user and their account, but how will we log the user
+in? Before we define a function which allows users to login, sign-in,
+authenticate, whatever you want to call it let us go over how auth works at a
+high level in PostGraphile. While this article is trying to be somewhat
+PostGraphile agnostic, the next two sections will be specific to PostGraphile,
+but useful to anyone wanting to learn just a little bit more about Postgres and
+JSON Web Tokens (JWTs).</p>
 <h4 id="postgres-roles"><a href="#postgres-roles" aria-label="postgres roles permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Postgres Roles</h4>
-<p>When a user logs in, we want them to make their queries using a specific PostGraphile role. Using that role we can define rules that restrict what data the user may access. So what roles do we need to define for our forum example? Remember when we were connecting to Postgres and we used a URL like <code class="language-text">postgres:///mydb</code>? Well, when you use a connection string like that, you are logging into Postgres using your computer account’s username and no password. Say your computer account username is <code class="language-text">buddy</code>, then connecting with the URL <code class="language-text">postgres:///mydb</code>, would be the same as connecting with the URL <code class="language-text">postgres://buddy@localhost/mydb</code> or even specifying the port explicitly: <code class="language-text">postgres://buddy@localhost:5432/mydb</code>. If you wanted to connect to your Postgres database with a password it would look like <code class="language-text">postgres://buddy:password@localhost/mydb</code>. When you run Postgres locally, this account will probably be the superuser. So when you run <code class="language-text">postgraphile -c postgres:///mydb</code>, you are running PostGraphile with superuser privileges. To change that let’s create a role that PostGraphile can use to connect to our database:</p>
+<p>When a user logs in, we want them to make their queries using a specific
+PostGraphile role. Using that role we can define rules that restrict what data
+the user may access. So what roles do we need to define for our forum example?
+Remember when we were connecting to Postgres and we used a URL like
+<code class="language-text">postgres:///mydb</code>? Well, when you use a connection string like that, you are
+logging into Postgres using your computer account’s username and no password.
+Say your computer account username is <code class="language-text">buddy</code>, then connecting with the URL
+<code class="language-text">postgres:///mydb</code>, would be the same as connecting with the URL
+<code class="language-text">postgres://buddy@localhost/mydb</code> or even specifying the port explicitly:
+<code class="language-text">postgres://buddy@localhost:5432/mydb</code>. If you wanted to connect to your
+Postgres database with a password it would look like
+<code class="language-text">postgres://buddy:password@localhost/mydb</code>. When you run Postgres locally, this
+account will probably be the superuser. So when you run
+<code class="language-text">postgraphile -c postgres:///mydb</code>, you are running PostGraphile with superuser
+privileges. To change that let’s create a role that PostGraphile can use to
+connect to our database:</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> role forum_example_postgraphile login password <span class="token string">'xyz'</span><span class="token punctuation">;</span></code></pre></div>
-<p>We create this <code class="language-text">forum_example_postgraphile</code> role with the <a href="https://www.postgresql.org/docs/current/static/sql-createrole.html"><code class="language-text">CREATE ROLE</code></a> command. We want to make sure our PostGraphile role can login so we specify that with the <code class="language-text">login</code> option and we give the user a password of ‘xyz’ with the <code class="language-text">password</code> option. Now we will start PostGraphile as such:</p>
+<p>We create this <code class="language-text">forum_example_postgraphile</code> role with the
+<a href="https://www.postgresql.org/docs/current/static/sql-createrole.html"><code class="language-text">CREATE ROLE</code></a>
+command. We want to make sure our PostGraphile role can login so we specify that
+with the <code class="language-text">login</code> option and we give the user a password of ‘xyz’ with the
+<code class="language-text">password</code> option. Now we will start PostGraphile as such:</p>
 <div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash">postgraphile -c postgres://forum_example_postgraphile:xyz@localhost/mydb</code></pre></div>
-<p>When a user who does not have a JWT token makes a request to Postgres, we do not want that user to have the privileges we will give to the <code class="language-text">forum_example_postgraphile</code> role, so instead we will create another role.</p>
+<p>When a user who does not have a JWT token makes a request to Postgres, we do not
+want that user to have the privileges we will give to the
+<code class="language-text">forum_example_postgraphile</code> role, so instead we will create another role.</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> role forum_example_anonymous<span class="token punctuation">;</span>
 <span class="token keyword">grant</span> forum_example_anonymous <span class="token keyword">to</span> forum_example_postgraphile<span class="token punctuation">;</span></code></pre></div>
-<p>Here we use <a href="https://www.postgresql.org/docs/current/static/sql-createrole.html"><code class="language-text">CREATE ROLE</code></a> again. This role cannot login so it does not have the <code class="language-text">login</code> option, or a password. We also use the <a href="https://www.postgresql.org/docs/current/static/sql-grant.html"><code class="language-text">GRANT</code></a> command to grant access to the <code class="language-text">forum_example_anonymous</code> role to the <code class="language-text">forum_example_postgraphile</code> role. Now, the <code class="language-text">forum_example_postgraphile</code> role can control and become the <code class="language-text">forum_example_anonymous</code> role. If we did not use that grant, we could not change into the <code class="language-text">forum_example_anonymous</code> role in PostGraphile. Now we will start our server like so:</p>
+<p>Here we use
+<a href="https://www.postgresql.org/docs/current/static/sql-createrole.html"><code class="language-text">CREATE ROLE</code></a>
+again. This role cannot login so it does not have the <code class="language-text">login</code> option, or a
+password. We also use the
+<a href="https://www.postgresql.org/docs/current/static/sql-grant.html"><code class="language-text">GRANT</code></a> command
+to grant access to the <code class="language-text">forum_example_anonymous</code> role to the
+<code class="language-text">forum_example_postgraphile</code> role. Now, the <code class="language-text">forum_example_postgraphile</code> role
+can control and become the <code class="language-text">forum_example_anonymous</code> role. If we did not use
+that grant, we could not change into the <code class="language-text">forum_example_anonymous</code> role in
+PostGraphile. Now we will start our server like so:</p>
 <div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash">postgraphile <span class="token punctuation">\</span>
   --connection postgres://forum_example_postgraphile:xyz@localhost/mydb <span class="token punctuation">\</span>
   --default-role forum_example_anonymous</code></pre></div>
-<p>There is one more role we want to create. When a user logs in we don’t want them to use the <code class="language-text">forum_example_postgraphile</code> role, or the basic <code class="language-text">forum_example_anonymous</code> role. So instead we will create a role that all of our logged in users will authorize with. We will call it <code class="language-text">forum_example_person</code> and similarly grant it to the <code class="language-text">forum_example_postgraphile</code> role.</p>
+<p>There is one more role we want to create. When a user logs in we don’t want them
+to use the <code class="language-text">forum_example_postgraphile</code> role, or the basic
+<code class="language-text">forum_example_anonymous</code> role. So instead we will create a role that all of our
+logged in users will authorize with. We will call it <code class="language-text">forum_example_person</code> and
+similarly grant it to the <code class="language-text">forum_example_postgraphile</code> role.</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> role forum_example_person<span class="token punctuation">;</span>
 <span class="token keyword">grant</span> forum_example_person <span class="token keyword">to</span> forum_example_postgraphile<span class="token punctuation">;</span></code></pre></div>
 <blockquote>
-<p><strong>Warning:</strong> The <code class="language-text">forum_example_postgraphile</code> role will have all of the permissions of the roles granted to it. So it can do everything <code class="language-text">forum_example_anonymous</code> can do and everything <code class="language-text">forum_example_person</code> can do. This is why having a default role is important. We would not want an anonymous user to have admin access level because we have granted an admin role to <code class="language-text">forum_example_postgraphile</code>.</p>
+<p><strong>Warning:</strong> The <code class="language-text">forum_example_postgraphile</code> role will have all of the
+permissions of the roles granted to it. So it can do everything
+<code class="language-text">forum_example_anonymous</code> can do and everything <code class="language-text">forum_example_person</code> can do.
+This is why having a default role is important. We would not want an anonymous
+user to have admin access level because we have granted an admin role to
+<code class="language-text">forum_example_postgraphile</code>.</p>
 </blockquote>
-<p>Ok, so now we have three roles. <code class="language-text">forum_example_postgraphile</code>, <code class="language-text">forum_example_anonymous</code>, and <code class="language-text">forum_example_person</code>. We know how <code class="language-text">forum_example_postgraphile</code> and <code class="language-text">forum_example_anonymous</code> get used, but how do we know when a user is logged in and should be using <code class="language-text">forum_example_person</code>? The answer is JSON Web Tokens.</p>
+<p>Ok, so now we have three roles. <code class="language-text">forum_example_postgraphile</code>,
+<code class="language-text">forum_example_anonymous</code>, and <code class="language-text">forum_example_person</code>. We know how
+<code class="language-text">forum_example_postgraphile</code> and <code class="language-text">forum_example_anonymous</code> get used, but how do
+we know when a user is logged in and should be using <code class="language-text">forum_example_person</code>? The
+answer is JSON Web Tokens.</p>
 <h4 id="json-web-tokens"><a href="#json-web-tokens" aria-label="json web tokens permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JSON Web Tokens</h4>
-<p>PostGraphile uses <a href="https://jwt.io/">JSON Web Tokens (JWTs)</a> for authorization. A JWT is just a JSON object that has been hashed and cryptographically signed to confirm the identity of its contents. So an object like:</p>
+<p>PostGraphile uses <a href="https://jwt.io/">JSON Web Tokens (JWTs)</a> for authorization. A
+JWT is just a JSON object that has been hashed and cryptographically signed to
+confirm the identity of its contents. So an object like:</p>
 <div class="gatsby-highlight" data-language="json"><pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
   <span class="token property">"a"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
   <span class="token property">"b"</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
@@ -446,34 +752,68 @@ $$ <span class="token keyword">language</span> plpgsql strict security <span cla
 <p>Would turn into a token that looks like:</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhIjoxLCJiIjoyLCJjIjozfQ.hxhGCCCmGV9nT1slief1WgEsOsfdnlVizNrODxfh1M8</code></pre></div>
 <blockquote>
-<p><strong>Warning:</strong> The information in a JWT can be read by anyone, so do not put private information in a JWT. What makes JWTs secure is that unless they were signed by our secret, we can not accept the information inside the JWT as truth.</p>
+<p><strong>Warning:</strong> The information in a JWT can be read by anyone, so do not put
+private information in a JWT. What makes JWTs secure is that unless they were
+signed by our secret, we can not accept the information inside the JWT as
+truth.</p>
 </blockquote>
-<p>This allows PostGraphile to securely make claims about who a user is. Attackers would not be able to fake a claim unless they had access to the private ‘secret’ you define when you start PostGraphile with the <code class="language-text">--jwt-secret</code> option.</p>
-<p>When PostGraphile gets a JWT from an HTTP request’s <code class="language-text">Authorization</code> header, like so:</p>
+<p>This allows PostGraphile to securely make claims about who a user is. Attackers
+would not be able to fake a claim unless they had access to the private ‘secret’
+you define when you start PostGraphile with the <code class="language-text">--jwt-secret</code> option.</p>
+<p>When PostGraphile gets a JWT from an HTTP request’s <code class="language-text">Authorization</code> header, like
+so:</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhIjoxLCJiIjoyLCJjIjozfQ.hxhGCCCmGV9nT1slief1WgEsOsfdnlVizNrODxfh1M8</code></pre></div>
-<p>It will verify the token using the secret, and then will serialize the claims in that token to the database. So for our token above PostGraphile would effectively run:</p>
+<p>It will verify the token using the secret, and then will serialize the claims in
+that token to the database. So for our token above PostGraphile would
+effectively run:</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">set</span> <span class="token keyword">local</span> jwt<span class="token punctuation">.</span>claims<span class="token punctuation">.</span>a <span class="token keyword">to</span> <span class="token number">1</span><span class="token punctuation">;</span>
 <span class="token keyword">set</span> <span class="token keyword">local</span> jwt<span class="token punctuation">.</span>claims<span class="token punctuation">.</span>b <span class="token keyword">to</span> <span class="token number">2</span><span class="token punctuation">;</span>
 <span class="token keyword">set</span> <span class="token keyword">local</span> jwt<span class="token punctuation">.</span>claims<span class="token punctuation">.</span>c <span class="token keyword">to</span> <span class="token number">3</span><span class="token punctuation">;</span></code></pre></div>
-<p>This way your JWT is accessible in your database rules. To get these values back out in SQL, just run the following function:</p>
+<p>This way your JWT is accessible in your database rules. To get these values back
+out in SQL, just run the following function:</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">select</span> current_setting<span class="token punctuation">(</span><span class="token string">'jwt.claims.a'</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
-<p>All of the ‘claims’ or properties on the JWT are serialized to the database in this way, with one exception. If you have a <code class="language-text">role</code> property in your JWT, PostGraphile will also set the Postgres role of the local transaction. So say you had a <code class="language-text">role</code> of <code class="language-text">forum_example_person</code>. PostGraphile would run:</p>
+<p>All of the ‘claims’ or properties on the JWT are serialized to the database in
+this way, with one exception. If you have a <code class="language-text">role</code> property in your JWT,
+PostGraphile will also set the Postgres role of the local transaction. So say
+you had a <code class="language-text">role</code> of <code class="language-text">forum_example_person</code>. PostGraphile would run:</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">set</span> <span class="token keyword">local</span> role <span class="token keyword">to</span> <span class="token string">'forum_example_person'</span>
 <span class="token keyword">set</span> <span class="token keyword">local</span> jwt<span class="token punctuation">.</span>claims<span class="token punctuation">.</span>role <span class="token keyword">to</span> <span class="token string">'forum_example_person'</span></code></pre></div>
-<p>Now, the user would have the permissions of the <code class="language-text">forum_example_person</code> role as they execute their query.</p>
+<p>Now, the user would have the permissions of the <code class="language-text">forum_example_person</code> role as
+they execute their query.</p>
 <blockquote>
-<p><strong>Warning:</strong> Unless explicitly set, JWTs never expire. Once they have been issued they may never be invalidated. This is both good and bad, good in that JWTs are fast in not requiring a database lookup. Bad in that if an attacker gets their hands on a JWT you can’t stop them from using it until the token expires. If you do not override <code class="language-text">exp</code> then <strong>PostGraphile's defaults set JWTs to expire after one day</strong>.</p>
-<p>A solution to this is to use very short expiration times on your tokens and/or to use refresh tokens. A refresh token you would use whenever your JWT expires to get a new JWT without prompting the user for their password again. Refresh tokens would be stored in the database so you could easily invalidate refresh tokens.</p>
+<p><strong>Warning:</strong> Unless explicitly set, JWTs never expire. Once they have been
+issued they may never be invalidated. This is both good and bad, good in that
+JWTs are fast in not requiring a database lookup. Bad in that if an attacker
+gets their hands on a JWT you can’t stop them from using it until the token
+expires. If you do not override <code class="language-text">exp</code> then <strong>PostGraphile's defaults set JWTs
+to expire after one day</strong>.</p>
+<p>A solution to this is to use very short expiration times on your tokens and/or
+to use refresh tokens. A refresh token you would use whenever your JWT expires
+to get a new JWT without prompting the user for their password again. Refresh
+tokens would be stored in the database so you could easily invalidate refresh
+tokens.</p>
 </blockquote>
-<p>We now know how PostGraphile uses JWTs to authorize the user, but how does PostGraphile create a JWT? Stay tuned.</p>
+<p>We now know how PostGraphile uses JWTs to authorize the user, but how does
+PostGraphile create a JWT? Stay tuned.</p>
 <h4 id="logging-in"><a href="#logging-in" aria-label="logging in permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Logging In</h4>
-<p>You can pass an option to PostGraphile, called <code class="language-text">--jwt-token-identifier &lt;identifier&gt;</code> in the CLI, which takes a composite type identifier. PostGraphile will turn this type into a JWT wherever you see it in the GraphQL output. So let’s define the type we will use for our JWTs:</p>
+<p>You can pass an option to PostGraphile, called
+<code class="language-text">--jwt-token-identifier &lt;identifier&gt;</code> in the CLI, which takes a composite type
+identifier. PostGraphile will turn this type into a JWT wherever you see it in
+the GraphQL output. So let’s define the type we will use for our JWTs:</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">type</span> forum_example<span class="token punctuation">.</span>jwt_token <span class="token keyword">as</span> <span class="token punctuation">(</span>
   role <span class="token keyword">text</span><span class="token punctuation">,</span>
   person_id <span class="token keyword">integer</span><span class="token punctuation">,</span>
   exp <span class="token keyword">bigint</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
-<p>That’s it. We are using the <a href="https://www.postgresql.org/docs/current/static/sql-createtype.html"><code class="language-text">CREATE TYPE</code></a> command again as we did before to create an enum type. This time we are creating a composite type. The definition for a composite type looks very much like the definition of a table type, except a composite type cannot store rows. i.e. you can’t <code class="language-text">INSERT</code>, <code class="language-text">SELECT</code>, <code class="language-text">UPDATE</code>, or <code class="language-text">DELETE</code> from a composite type. While you can’t store rows in a composite type, PostGraphile can turn a composite type into a JWT. Now that we’ve defined this type we will want to start PostGraphile with the <code class="language-text">--jwt-token-identifier</code> flag:</p>
+<p>That’s it. We are using the
+<a href="https://www.postgresql.org/docs/current/static/sql-createtype.html"><code class="language-text">CREATE TYPE</code></a>
+command again as we did before to create an enum type. This time we are creating
+a composite type. The definition for a composite type looks very much like the
+definition of a table type, except a composite type cannot store rows. i.e. you
+can’t <code class="language-text">INSERT</code>, <code class="language-text">SELECT</code>, <code class="language-text">UPDATE</code>, or <code class="language-text">DELETE</code> from a composite type. While you
+can’t store rows in a composite type, PostGraphile can turn a composite type
+into a JWT. Now that we’ve defined this type we will want to start PostGraphile
+with the <code class="language-text">--jwt-token-identifier</code> flag:</p>
 <div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash">postgraphile --jwt-token-identifier forum_example.jwt_token</code></pre></div>
 <p>Next we need to create the function which will actually return the token:</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">function</span> forum_example<span class="token punctuation">.</span>authenticate<span class="token punctuation">(</span>
@@ -496,25 +836,60 @@ $$ <span class="token keyword">language</span> plpgsql strict security <span cla
 $$ <span class="token keyword">language</span> plpgsql strict security <span class="token keyword">definer</span><span class="token punctuation">;</span>
 
 <span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">function</span> forum_example<span class="token punctuation">.</span>authenticate<span class="token punctuation">(</span><span class="token keyword">text</span><span class="token punctuation">,</span> <span class="token keyword">text</span><span class="token punctuation">)</span> <span class="token operator">is</span> <span class="token string">'Creates a JWT token that will securely identify a person and give them certain permissions. This token expires in 2 days.'</span><span class="token punctuation">;</span></code></pre></div>
-<p>This function will return null if the user failed to authenticate, and a JWT token if the user succeeds. Returning null could mean that the password was incorrect, a user with their email doesn’t exist, or the client forgot to pass <code class="language-text">email</code> and/or <code class="language-text">password</code> arguments. It is then up to the client to raise an error when encountering <code class="language-text">null</code>. If a user with the provided email <em>does</em> exist, and the provided password checks out with <code class="language-text">password_hash</code> in <code class="language-text">forum_example_private.person_account</code> then we return an instance of <code class="language-text">forum_example.jwt_token</code> which will then be converted into an actual JWT by PostGraphile.</p>
+<p>This function will return null if the user failed to authenticate, and a JWT
+token if the user succeeds. Returning null could mean that the password was
+incorrect, a user with their email doesn’t exist, or the client forgot to pass
+<code class="language-text">email</code> and/or <code class="language-text">password</code> arguments. It is then up to the client to raise an
+error when encountering <code class="language-text">null</code>. If a user with the provided email <em>does</em> exist,
+and the provided password checks out with <code class="language-text">password_hash</code> in
+<code class="language-text">forum_example_private.person_account</code> then we return an instance of
+<code class="language-text">forum_example.jwt_token</code> which will then be converted into an actual JWT by
+PostGraphile.</p>
 <p>There are two main parts to our function body. The first is:</p>
 <div class="gatsby-highlight" data-language="plpgsql"><pre class="language-plpgsql"><code class="language-plpgsql">select a.* into account
 from forum_example_private.person_account as a
 where a.email = $1;</code></pre></div>
-<p>This code will select a single account from <code class="language-text">forum_example_private.person_account</code> using the provided email value. The <code class="language-text">$1</code> here is just another way to write the <code class="language-text">email</code> argument. If we had wrote <code class="language-text">email = email</code> or even <code class="language-text">a.email = email</code>, Postgres would not have known which email we were referring to, so instead we just used a substitute for the <code class="language-text">email</code> argument which depends on its placement in the identifer <code class="language-text">$1</code>. If we successfully find a person with that email, we store it in the <code class="language-text">account</code> variable. If we do not find anything, <code class="language-text">account</code> will be null. The second part of our function is:</p>
+<p>This code will select a single account from
+<code class="language-text">forum_example_private.person_account</code> using the provided email value. The <code class="language-text">$1</code>
+here is just another way to write the <code class="language-text">email</code> argument. If we had wrote
+<code class="language-text">email = email</code> or even <code class="language-text">a.email = email</code>, Postgres would not have known which
+email we were referring to, so instead we just used a substitute for the <code class="language-text">email</code>
+argument which depends on its placement in the identifer <code class="language-text">$1</code>. If we
+successfully find a person with that email, we store it in the <code class="language-text">account</code>
+variable. If we do not find anything, <code class="language-text">account</code> will be null. The second part of
+our function is:</p>
 <div class="gatsby-highlight" data-language="plpgsql"><pre class="language-plpgsql"><code class="language-plpgsql">if account.password_hash = crypt(password, account.password_hash) then
   return (&#39;forum_example_person&#39;, account.person_id)::forum_example.jwt_token;
 else
   return null;
 end if;</code></pre></div>
-<p>This is an if/else statement that checks to see if the plaintext <code class="language-text">password</code> argument we were provided matches the password hash that was stored in our <code class="language-text">forum_example_private.person_account</code>’s <code class="language-text">password_hash</code> table. If there is a match, then we return a JWT token. Otherwise we return null. The password match check is done in the code <code class="language-text">account.password_hash = crypt(password, account.password_hash)</code>. To better understand how this works, read the documentation for <code class="language-text">pgcrypto</code> on <a href="https://www.postgresql.org/docs/current/static/pgcrypto.html#AEN178870">password hashing functions</a>.</p>
-<p>In order to construct a <code class="language-text">forum_example.jwt_token</code> we use the Postgres <a href="https://www.postgresql.org/docs/11/rowtypes.html#id-1.5.7.24.6">composite value input</a> syntax which looks like: <code class="language-text">(&#39;forum_example_person&#39;, account.person_id, extract(epoch from (now() + interval &#39;2 days&#39;)))</code>. Then we cast that composite value with <code class="language-text">::forum_example.jwt_token</code>. We use Postgres <a href="https://www.postgresql.org/docs/current/functions-datetime.html">date/time functions</a> to generate a date that is two days from the current date, and then convert it to a POSIX timestamp. The order in which the values go is the order in which they were originally defined. Since we defined <code class="language-text">role</code>, <code class="language-text">person_id</code> and <code class="language-text">exp</code>, this JWT will have a <code class="language-text">role</code> of <code class="language-text">forum_example_person</code>, a <code class="language-text">person_id</code> of <code class="language-text">account.person_id</code>, and an <code class="language-text">exp</code> that is two days from now.</p>
+<p>This is an if/else statement that checks to see if the plaintext <code class="language-text">password</code>
+argument we were provided matches the password hash that was stored in our
+<code class="language-text">forum_example_private.person_account</code>’s <code class="language-text">password_hash</code> table. If there is a
+match, then we return a JWT token. Otherwise we return null. The password match
+check is done in the code
+<code class="language-text">account.password_hash = crypt(password, account.password_hash)</code>. To better
+understand how this works, read the documentation for <code class="language-text">pgcrypto</code> on
+<a href="https://www.postgresql.org/docs/current/static/pgcrypto.html#AEN178870">password hashing functions</a>.</p>
+<p>In order to construct a <code class="language-text">forum_example.jwt_token</code> we use the Postgres
+<a href="https://www.postgresql.org/docs/11/rowtypes.html#id-1.5.7.24.6">composite value input</a>
+syntax which looks like:
+<code class="language-text">(&#39;forum_example_person&#39;, account.person_id, extract(epoch from (now() + interval &#39;2 days&#39;)))</code>.
+Then we cast that composite value with <code class="language-text">::forum_example.jwt_token</code>. We use
+Postgres
+<a href="https://www.postgresql.org/docs/current/functions-datetime.html">date/time functions</a>
+to generate a date that is two days from the current date, and then convert it
+to a POSIX timestamp. The order in which the values go is the order in which
+they were originally defined. Since we defined <code class="language-text">role</code>, <code class="language-text">person_id</code> and <code class="language-text">exp</code>,
+this JWT will have a <code class="language-text">role</code> of <code class="language-text">forum_example_person</code>, a <code class="language-text">person_id</code> of
+<code class="language-text">account.person_id</code>, and an <code class="language-text">exp</code> that is two days from now.</p>
 <blockquote>
 <p><strong>Warning:</strong> Be careful about logging around this function too.</p>
 </blockquote>
 <p>Now that we know how to get JWTs for our users, let’s use the JWTs.</p>
 <h4 id="using-the-authorized-user"><a href="#using-the-authorized-user" aria-label="using the authorized user permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Using the Authorized User</h4>
-<p>Before we define permissions for our user, let’s utilize the fact that they are logged in by defining a quick Postgres function.</p>
+<p>Before we define permissions for our user, let’s utilize the fact that they are
+logged in by defining a quick Postgres function.</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">function</span> forum_example<span class="token punctuation">.</span>current_person<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">returns</span> forum_example<span class="token punctuation">.</span>person <span class="token keyword">as</span> $$
   <span class="token keyword">select</span> <span class="token operator">*</span>
   <span class="token keyword">from</span> forum_example<span class="token punctuation">.</span>person
@@ -522,10 +897,25 @@ end if;</code></pre></div>
 $$ <span class="token keyword">language</span> <span class="token keyword">sql</span> stable<span class="token punctuation">;</span>
 
 <span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">function</span> forum_example<span class="token punctuation">.</span>current_person<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">is</span> <span class="token string">'Gets the person who was identified by our JWT.'</span><span class="token punctuation">;</span></code></pre></div>
-<p>This is a simple function that we can use in PostGraphile or our database to get the person who is currently executing the query — by means of the token in the request header. The one new concept here is <code class="language-text">nullif(current_setting(&#39;jwt.claims.person_id&#39;, true), &#39;&#39;)::integer</code>. As we discussed before, PostGraphile will serialize your JWT to the database in the form of transaction local settings. Using the <code class="language-text">current_setting</code> function is how we access those settings. Also note that we cast the value to an integer with <code class="language-text">::integer</code>. This is because the Postgres <code class="language-text">current_setting</code> function will always return a string, if you need another data type, you will likely need to cast to that data type.</p>
+<p>This is a simple function that we can use in PostGraphile or our database to get
+the person who is currently executing the query — by means of the token in the
+request header. The one new concept here is
+<code class="language-text">nullif(current_setting(&#39;jwt.claims.person_id&#39;, true), &#39;&#39;)::integer</code>. As we
+discussed before, PostGraphile will serialize your JWT to the database in the
+form of transaction local settings. Using the <code class="language-text">current_setting</code> function is how
+we access those settings. Also note that we cast the value to an integer with
+<code class="language-text">::integer</code>. This is because the Postgres <code class="language-text">current_setting</code> function will always
+return a string, if you need another data type, you will likely need to cast to
+that data type.</p>
 <p>Now, let’s use the JWT to define permissions.</p>
 <h4 id="grants"><a href="#grants" aria-label="grants permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Grants</h4>
-<p>The highest level of permission that can be given to roles using the Postgres are access privileges assigned using the <a href="https://www.postgresql.org/docs/current/static/sql-grant.html"><code class="language-text">GRANT</code></a> command. The access privileges defined by <code class="language-text">GRANT</code> work on no smaller level than the table level. As you can allow a role to select any value from a table, or delete any value in a table. We will look at how to restrict access on a row level next.</p>
+<p>The highest level of permission that can be given to roles using the Postgres
+are access privileges assigned using the
+<a href="https://www.postgresql.org/docs/current/static/sql-grant.html"><code class="language-text">GRANT</code></a>
+command. The access privileges defined by <code class="language-text">GRANT</code> work on no smaller level than
+the table level. As you can allow a role to select any value from a table, or
+delete any value in a table. We will look at how to restrict access on a row
+level next.</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token comment">-- after schema creation and before function creation</span>
 <span class="token keyword">alter</span> <span class="token keyword">default</span> <span class="token keyword">privileges</span> <span class="token keyword">revoke</span> <span class="token keyword">execute</span> <span class="token keyword">on</span> functions <span class="token keyword">from</span> <span class="token keyword">public</span><span class="token punctuation">;</span>
 
@@ -546,35 +936,87 @@ $$ <span class="token keyword">language</span> <span class="token keyword">sql</
 <span class="token keyword">grant</span> <span class="token keyword">execute</span> <span class="token keyword">on</span> <span class="token keyword">function</span> forum_example<span class="token punctuation">.</span>current_person<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">to</span> forum_example_anonymous<span class="token punctuation">,</span> forum_example_person<span class="token punctuation">;</span>
 
 <span class="token keyword">grant</span> <span class="token keyword">execute</span> <span class="token keyword">on</span> <span class="token keyword">function</span> forum_example<span class="token punctuation">.</span>register_person<span class="token punctuation">(</span><span class="token keyword">text</span><span class="token punctuation">,</span> <span class="token keyword">text</span><span class="token punctuation">,</span> <span class="token keyword">text</span><span class="token punctuation">,</span> <span class="token keyword">text</span><span class="token punctuation">)</span> <span class="token keyword">to</span> forum_example_anonymous<span class="token punctuation">;</span></code></pre></div>
-<p>See how we had to grant permissions on every single Postgres object we have defined so far? Postgres permissions work as a whitelist and not a blacklist (except for functions), so therefore no one has more access than you explicitly give them. Let’s walk through the grants:</p>
+<p>See how we had to grant permissions on every single Postgres object we have
+defined so far? Postgres permissions work as a whitelist and not a blacklist
+(except for functions), so therefore no one has more access than you explicitly
+give them. Let’s walk through the grants:</p>
 <ol>
-<li><code class="language-text">alter default privileges ...</code>: By default, functions can be executable by public. Since we're applying our fine-grained control over function permissions here, we remove the default grant. Note that this line needs to be placed before any function definition.</li>
-<li><code class="language-text">grant usage on schema forum_example to forum_example_anonymous, forum_example_person</code>: We say that anonymous users (<code class="language-text">forum_example_anonymous</code>) and logged in users (<code class="language-text">forum_example_person</code>) may use the objects in the <code class="language-text">forum_example</code> schema. This does not mean that those roles can use anything they want in the schema, it just allows the roles to know the schema exists. Also note that we did not grant usage for the <code class="language-text">forum_example_private</code> schema.</li>
-<li><code class="language-text">grant select on table forum_example.person to forum_example_anonymous, forum_example_person</code>: We give anonymous users and logged in users the ability to read all of the rows in the <code class="language-text">forum_example.person</code> table.</li>
-<li><code class="language-text">grant update, delete on table forum_example.person to forum_example_person</code>: Here we give <em>only</em> logged in users the ability to update and delete rows from the <code class="language-text">forum_example.person</code> table. This means that anonymous users can never update or delete a person. However, it does mean that users can update and delete any rows in the table. We will fix this later.</li>
-<li><code class="language-text">grant select ...</code> and <code class="language-text">grant insert, update, delete ...</code>: We do the same thing with these two grants as we did with the grants above. The only difference here is that we also give signed in users the ability to <code class="language-text">insert</code> into <code class="language-text">forum_example.post</code>. We do not allow anyone to insert directly into <code class="language-text">forum_example.person</code>, instead users should use the <code class="language-text">forum_example.register_person</code> function.</li>
-<li><code class="language-text">grant usage on sequence forum_example.post_id_seq to forum_example_person</code>: When a user creates a new <code class="language-text">forum_example.post</code> they will also need to get the next value in the <code class="language-text">forum_example.post_id_seq</code> because we use the <code class="language-text">serial</code> data type for the <code class="language-text">id</code> column. A sequence also exists for our person table (<code class="language-text">forum_example.person_id_seq</code>), but since we are only creating people through <code class="language-text">forum_example.register_person</code> and that function specifies <code class="language-text">security definer</code>, we don’t need to grant access to the person id sequence.</li>
-<li><code class="language-text">grant execute ...</code>: We have to give the anonymous user and logged in users access to all of the Postgres functions we define. All of the functions are executable by both types of users, except <code class="language-text">forum_example.register_person</code> which we only let anonymous users execute. There’s no need for logged in users to register a new user!</li>
+<li><code class="language-text">alter default privileges ...</code>: By default, functions can be executable by
+public. Since we're applying our fine-grained control over function
+permissions here, we remove the default grant. Note that this line needs to
+be placed before any function definition.</li>
+<li><code class="language-text">grant usage on schema forum_example to forum_example_anonymous, forum_example_person</code>:
+We say that anonymous users (<code class="language-text">forum_example_anonymous</code>) and logged in users
+(<code class="language-text">forum_example_person</code>) may use the objects in the <code class="language-text">forum_example</code> schema.
+This does not mean that those roles can use anything they want in the
+schema, it just allows the roles to know the schema exists. Also note that
+we did not grant usage for the <code class="language-text">forum_example_private</code> schema.</li>
+<li><code class="language-text">grant select on table forum_example.person to forum_example_anonymous, forum_example_person</code>:
+We give anonymous users and logged in users the ability to read all of the
+rows in the <code class="language-text">forum_example.person</code> table.</li>
+<li><code class="language-text">grant update, delete on table forum_example.person to forum_example_person</code>:
+Here we give <em>only</em> logged in users the ability to update and delete rows
+from the <code class="language-text">forum_example.person</code> table. This means that anonymous users can
+never update or delete a person. However, it does mean that users can update
+and delete any rows in the table. We will fix this later.</li>
+<li><code class="language-text">grant select ...</code> and <code class="language-text">grant insert, update, delete ...</code>: We do the same
+thing with these two grants as we did with the grants above. The only
+difference here is that we also give signed in users the ability to <code class="language-text">insert</code>
+into <code class="language-text">forum_example.post</code>. We do not allow anyone to insert directly into
+<code class="language-text">forum_example.person</code>, instead users should use the
+<code class="language-text">forum_example.register_person</code> function.</li>
+<li><code class="language-text">grant usage on sequence forum_example.post_id_seq to forum_example_person</code>:
+When a user creates a new <code class="language-text">forum_example.post</code> they will also need to get
+the next value in the <code class="language-text">forum_example.post_id_seq</code> because we use the
+<code class="language-text">serial</code> data type for the <code class="language-text">id</code> column. A sequence also exists for our
+person table (<code class="language-text">forum_example.person_id_seq</code>), but since we are only creating
+people through <code class="language-text">forum_example.register_person</code> and that function specifies
+<code class="language-text">security definer</code>, we don’t need to grant access to the person id sequence.</li>
+<li><code class="language-text">grant execute ...</code>: We have to give the anonymous user and logged in users
+access to all of the Postgres functions we define. All of the functions are
+executable by both types of users, except <code class="language-text">forum_example.register_person</code>
+which we only let anonymous users execute. There’s no need for logged in
+users to register a new user!</li>
 </ol>
-<p>This provides basic permissions for all of our Postgres objects, but as we mentioned before users can update and delete all and any persons or posts. For obvious reasons we don’t want this, so let’s define row level security next.</p>
+<p>This provides basic permissions for all of our Postgres objects, but as we
+mentioned before users can update and delete all and any persons or posts. For
+obvious reasons we don’t want this, so let’s define row level security next.</p>
 <h4 id="row-level-security"><a href="#row-level-security" aria-label="row level security permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Row Level Security</h4>
-<p>In Postgres 9.5 (released January 2016) <a href="https://www.postgresql.org/docs/current/static/ddl-rowsecurity.html">Row Level Security (RLS)</a> was introduced. RLS allows us to specify access to the data in our Postgres databases on a row level instead of a table level. In order to enable row level security on our tables we first need to run the following:</p>
+<p>In Postgres 9.5 (released January 2016)
+<a href="https://www.postgresql.org/docs/current/static/ddl-rowsecurity.html">Row Level Security (RLS)</a>
+was introduced. RLS allows us to specify access to the data in our Postgres
+databases on a row level instead of a table level. In order to enable row level
+security on our tables we first need to run the following:</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">alter</span> <span class="token keyword">table</span> forum_example<span class="token punctuation">.</span>person <span class="token keyword">enable</span> <span class="token keyword">row</span> <span class="token keyword">level</span> security<span class="token punctuation">;</span>
 <span class="token keyword">alter</span> <span class="token keyword">table</span> forum_example<span class="token punctuation">.</span>post <span class="token keyword">enable</span> <span class="token keyword">row</span> <span class="token keyword">level</span> security<span class="token punctuation">;</span></code></pre></div>
-<p>Before running these commands, the <code class="language-text">forum_example_person</code> and <code class="language-text">forum_example_anonymous</code> roles could see every row in the table with a <code class="language-text">select * from forum_example.person</code> query. After running these two commands those same roles can’t. By enabling row level security, our roles don’t have any access to read or write to a table that you don’t explicitly give, so to re-enable access to all the rows we will define RLS policies with the <a href="https://www.postgresql.org/docs/current/static/sql-createpolicy.html"><code class="language-text">CREATE POLICY</code></a> command.</p>
+<p>Before running these commands, the <code class="language-text">forum_example_person</code> and
+<code class="language-text">forum_example_anonymous</code> roles could see every row in the table with a
+<code class="language-text">select * from forum_example.person</code> query. After running these two commands
+those same roles can’t. By enabling row level security, our roles don’t have any
+access to read or write to a table that you don’t explicitly give, so to
+re-enable access to all the rows we will define RLS policies with the
+<a href="https://www.postgresql.org/docs/current/static/sql-createpolicy.html"><code class="language-text">CREATE POLICY</code></a>
+command.</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> policy select_person <span class="token keyword">on</span> forum_example<span class="token punctuation">.</span>person <span class="token keyword">for</span> <span class="token keyword">select</span>
   <span class="token keyword">using</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">create</span> policy select_post <span class="token keyword">on</span> forum_example<span class="token punctuation">.</span>post <span class="token keyword">for</span> <span class="token keyword">select</span>
   <span class="token keyword">using</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
-<p>Now both anonymous users and logged in users can see all of our <code class="language-text">forum_example.person</code> and <code class="language-text">forum_example.post</code> rows again. We also want signed in users to be able to only update and delete their own row in <code class="language-text">forum_example.person</code>.</p>
+<p>Now both anonymous users and logged in users can see all of our
+<code class="language-text">forum_example.person</code> and <code class="language-text">forum_example.post</code> rows again. We also want signed
+in users to be able to only update and delete their own row in
+<code class="language-text">forum_example.person</code>.</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> policy update_person <span class="token keyword">on</span> forum_example<span class="token punctuation">.</span>person <span class="token keyword">for</span> <span class="token keyword">update</span> <span class="token keyword">to</span> forum_example_person
   <span class="token keyword">using</span> <span class="token punctuation">(</span>id <span class="token operator">=</span> <span class="token keyword">nullif</span><span class="token punctuation">(</span>current_setting<span class="token punctuation">(</span><span class="token string">'jwt.claims.person_id'</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span>::<span class="token keyword">integer</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">create</span> policy delete_person <span class="token keyword">on</span> forum_example<span class="token punctuation">.</span>person <span class="token keyword">for</span> <span class="token keyword">delete</span> <span class="token keyword">to</span> forum_example_person
   <span class="token keyword">using</span> <span class="token punctuation">(</span>id <span class="token operator">=</span> <span class="token keyword">nullif</span><span class="token punctuation">(</span>current_setting<span class="token punctuation">(</span><span class="token string">'jwt.claims.person_id'</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span>::<span class="token keyword">integer</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
-<p>We use the current <code class="language-text">person_id</code> from our JWT and only allow updates and deletes on rows with the same id. Also note how we added to <code class="language-text">forum_example_person</code>. This is because we only want these policies to apply for the <code class="language-text">forum_example_person</code> role.</p>
-<p>That’s all we need to define for our person table. Now let’s define three policies for our posts table. One for <code class="language-text">INSERT</code>, <code class="language-text">UPDATE</code>, and <code class="language-text">DELETE</code>.</p>
+<p>We use the current <code class="language-text">person_id</code> from our JWT and only allow updates and deletes
+on rows with the same id. Also note how we added to <code class="language-text">forum_example_person</code>. This
+is because we only want these policies to apply for the <code class="language-text">forum_example_person</code>
+role.</p>
+<p>That’s all we need to define for our person table. Now let’s define three
+policies for our posts table. One for <code class="language-text">INSERT</code>, <code class="language-text">UPDATE</code>, and <code class="language-text">DELETE</code>.</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> policy insert_post <span class="token keyword">on</span> forum_example<span class="token punctuation">.</span>post <span class="token keyword">for</span> <span class="token keyword">insert</span> <span class="token keyword">to</span> forum_example_person
   <span class="token keyword">with</span> <span class="token keyword">check</span> <span class="token punctuation">(</span>author_id <span class="token operator">=</span> <span class="token keyword">nullif</span><span class="token punctuation">(</span>current_setting<span class="token punctuation">(</span><span class="token string">'jwt.claims.person_id'</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span>::<span class="token keyword">integer</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -583,9 +1025,23 @@ $$ <span class="token keyword">language</span> <span class="token keyword">sql</
 
 <span class="token keyword">create</span> policy delete_post <span class="token keyword">on</span> forum_example<span class="token punctuation">.</span>post <span class="token keyword">for</span> <span class="token keyword">delete</span> <span class="token keyword">to</span> forum_example_person
   <span class="token keyword">using</span> <span class="token punctuation">(</span>author_id <span class="token operator">=</span> <span class="token keyword">nullif</span><span class="token punctuation">(</span>current_setting<span class="token punctuation">(</span><span class="token string">'jwt.claims.person_id'</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span>::<span class="token keyword">integer</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
-<p>These policies are very similar to the ones before, except that the <code class="language-text">insert_post</code> policy uses <code class="language-text">with check</code> instead of <code class="language-text">using</code> like our other policies. The difference between <code class="language-text">with check</code> and <code class="language-text">using</code> is roughly that <code class="language-text">using</code> is applied <em>before</em> any operation occurs to the table’s rows. So in the case of updating a post, one could not update a row that does not have the appropriate <code class="language-text">author_id</code> in the first place. <code class="language-text">with check</code> is run <em>after</em> an operation is applied. If the <code class="language-text">with check</code> fails the operation will be rejected. So in the case of an insert, Postgres sets all of the columns as specified and then compares against <code class="language-text">with check</code> on the new row. You must use <code class="language-text">with check</code> with <code class="language-text">INSERT</code> commands because there are no rows to compare against before insertion, and you must use <code class="language-text">using</code> with <code class="language-text">DELETE</code> commands because a delete changes no rows only removes current ones.</p>
-<p>That’s it! We have successfully creating a Postgres schema embedded with our business logic. When we use this schema with PostGraphile we will get a well designed GraphQL API that we can use in our frontend application.</p>
-<p>The final argument list for starting our PostGraphile server using the CLI would be as follows:</p>
+<p>These policies are very similar to the ones before, except that the
+<code class="language-text">insert_post</code> policy uses <code class="language-text">with check</code> instead of <code class="language-text">using</code> like our other
+policies. The difference between <code class="language-text">with check</code> and <code class="language-text">using</code> is roughly that
+<code class="language-text">using</code> is applied <em>before</em> any operation occurs to the table’s rows. So in the
+case of updating a post, one could not update a row that does not have the
+appropriate <code class="language-text">author_id</code> in the first place. <code class="language-text">with check</code> is run <em>after</em> an
+operation is applied. If the <code class="language-text">with check</code> fails the operation will be rejected.
+So in the case of an insert, Postgres sets all of the columns as specified and
+then compares against <code class="language-text">with check</code> on the new row. You must use <code class="language-text">with check</code>
+with <code class="language-text">INSERT</code> commands because there are no rows to compare against before
+insertion, and you must use <code class="language-text">using</code> with <code class="language-text">DELETE</code> commands because a delete
+changes no rows only removes current ones.</p>
+<p>That’s it! We have successfully creating a Postgres schema embedded with our
+business logic. When we use this schema with PostGraphile we will get a well
+designed GraphQL API that we can use in our frontend application.</p>
+<p>The final argument list for starting our PostGraphile server using the CLI would
+be as follows:</p>
 <div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash">postgraphile <span class="token punctuation">\</span>
   --connection postgres://forum_example_postgraphile:xyz@localhost <span class="token punctuation">\</span>
   --schema forum_example <span class="token punctuation">\</span>
@@ -594,6 +1050,12 @@ $$ <span class="token keyword">language</span> <span class="token keyword">sql</
   --jwt-token-identifier forum_example.jwt_token</code></pre></div>
 <hr>
 <h3 id="conclusion"><a href="#conclusion" aria-label="conclusion permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Conclusion</h3>
-<p>You should now be equipped with the knowledge to go out and design your own Postgres schema. If you have any questions, encounter a bug, or just want to say thank you, don’t hesitate to <a href="https://github.com/graphile/postgraphile/issues">open an issue</a>, we’d love to hear from you. The PostGraphile community wants to invest in making you a productive developer so that you can invest back into PostGraphile.</p>
+<p>You should now be equipped with the knowledge to go out and design your own
+Postgres schema. If you have any questions, encounter a bug, or just want to say
+thank you, don’t hesitate to
+<a href="https://github.com/graphile/postgraphile/issues">open an issue</a>, we’d love to
+hear from you. The PostGraphile community wants to invest in making you a
+productive developer so that you can invest back into PostGraphile.</p>
 <!-- TODO: More next steps and calls to action -->
-<p><em>This article was originally written by <a href="https://twitter.com/calebmer">Caleb Meredith</a>.</em></p></div></div><br/><br/><div class="col-xs-12 mt3 mb5"><div class="row between-xs"><div class="col-xs-6"><a class="" href="/postgraphile/plugins/"><span class="fas fa-fw fa-arrow-left"></span> <span>Server Plugins</span></a></div><div class="col-xs-6 tr"><a class="" href="/postgraphile/evaluating/"><span>Evaluating for your Project</span> <span class="fas fa-fw fa-arrow-right"></span></a></div></div></div></div></div></div></div></section><section class="mailinglist"><div class="container"><div class="row"><div class="col-xs-12"><div class="hero-block"><h3>Questions, comments or feedback?<br/>Email<!-- --> <a href="mailto:info@graphile.org?subject=Documentation%20question/comment/feedback:)">info@graphile.org</a></h3><form action="//graphile.us16.list-manage.com/subscribe/post?u=d103f710cf00a9273b55e8e9b&amp;id=c3a9eb5c4e" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate=""><div id="mc_embed_signup_scroll" class="center hero-block"><p>Keep up to date on Graphile and PostGraphile features/changes. Subscribe to our occasional announcements newsletter:</p><div class="mc-field-group form-inline justify-content-center"><div class="form-group"><div class="mb2"><label class="label--small" for="mce-EMAIL">Email address:</label></div><input type="email" autoCapitalize="off" autoComplete="off" autoCorrect="off" class="input-text mb0-ns mb1" id="mce-EMAIL" name="EMAIL" spellcheck="false" value=""/><div style="position:absolute;left:-5000px" aria-hidden="true"><input type="text" name="b_d103f710cf00a9273b55e8e9b_c3a9eb5c4e" tabindex="-1" value=""/></div><input type="submit" class="button--solid" id="mc-embedded-subscribe" name="subscribe" value="Subscribe"/></div><div id="mce-responses" class="clear"><div class="response" id="mce-error-response" style="display:none"></div><div class="response" id="mce-success-response" style="display:none"></div></div></div></div></form></div></div></div></div></section></div><footer class="bg-white pv5 bt b--black f6 lh-copy"><div class="container"><div class="row"><div class="col-xs-12 col-md-2 nested-list-reset "><h6>PostGraphile</h6><ul><li><a href="/postgraphile/introduction/">Documentation</a></li><li><a href="/postgraphile/">About</a></li><li><a href="/postgraphile/community-plugins/">Community Plugins</a></li><li><a href="https://github.com/graphile/postgraphile/releases"><i class="fab fa-github"></i> Changelog</a></li></ul></div><div class="col-xs-12 col-md-2 nested-list-reset "><h6>Graphile Engine</h6><ul><li><a href="/graphile-build/getting-started/">Documentation</a></li><li><a href="/graphile-build/">About</a></li><li><a href="/graphile-build/plugins/">Plugins</a></li></ul></div><div class="col-xs-12 col-md-2 nested-list-reset"><h6>Resources</h6><ul><li><a href="/news/"><i class="fas fa-bullhorn"></i> News</a></li><li><a href="https://github.com/graphile"><i class="fab fa-github"></i> GitHub</a></li><li><a href="http://discord.gg/graphile"><i class="fab fa-discord"></i> Chat (discord)</a></li><li><a href="https://twitter.com/graphilehq"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="/news/press-kit/"><i class="fas fa-file-archive"></i> Press Kit</a></li><li><a to="https://learn.graphile.org/"><i class="fas fa-graduation-cap"></i> Learn</a></li></ul></div><div class="col-xs-12 col-md-offset-1 col-md-5"><h6>About</h6>PostGraphile and Graphile Build are crowd-funded Open Source Software, developed and maintained primarily by<!-- --> <a href="https://twitter.com/benjie">@Benjie</a> with the help of the community.<br/><br/>You can support the projects via<!-- --> <a href="/sponsor/">sponsorship</a>, by<!-- --> <a href="/postgraphile/pricing/">going Pro</a>, or by paying for<!-- --> <a href="/support/">Professional Services</a>. Your support is gratefully received 🙏<br/><br/>This site is copyright © Benjie Gillam <!-- -->2020<!-- -->. Design and logos copyright © Benjie Gillam and Jof Arnold<!-- --> <!-- -->2020<!-- -->.<br/><br/>Corrections and contributions to this website are gratefully received via<!-- --> <a href="https://github.com/graphile/graphile.github.io">its GitHub repository</a>.<br/><br/>PostGraphile was <a href="/history/">originally authored</a> as PostGraphQL by<!-- --> <a href="https://twitter.com/calebmer">Caleb Meredith</a>.</div></div></div></footer></div></div></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/postgraphile/postgresql-schema-design/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"app":["/app-3811488cdc505470599d.js"],"component---src-templates-page-js":["/component---src-templates-page-js-4e9c47ca47407d74b319.js"],"component---src-templates-marketing-js":["/component---src-templates-marketing-js-47ecb6f44415ddd59cee.js"],"component---src-pages-contribute-mdx":["/component---src-pages-contribute-mdx-a8a07713f79eeff0c5e5.js"],"component---src-pages-index-mdx":["/component---src-pages-index-mdx-14d5dd2f121680c1224d.js"],"component---src-pages-postgraphile-index-mdx":["/component---src-pages-postgraphile-index-mdx-779831059dc64516213f.js"],"component---src-pages-sponsor-mdx":["/component---src-pages-sponsor-mdx-98d95a5bb43e2c88b31b.js"],"component---src-pages-support-index-mdx":["/component---src-pages-support-index-mdx-0d5d3ba54128e3216e72.js"]};/*]]>*/</script><script src="/component---src-templates-page-js-4e9c47ca47407d74b319.js" async=""></script><script src="/app-3811488cdc505470599d.js" async=""></script><script src="/commons-9e8a853d07f1cd13bee8.js" async=""></script><script src="/styles-cd8cc4bf0fa3d324a179.js" async=""></script><script src="/webpack-runtime-d329dd4dcbed31aa3262.js" async=""></script><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script></body></html>
+<p><em>This article was originally written by
+<a href="https://twitter.com/calebmer">Caleb Meredith</a>.</em></p></div></div><br/><br/><div class="col-xs-12 mt3 mb5"><div class="row between-xs"><div class="col-xs-6"><a class="" href="/postgraphile/plugins/"><span class="fas fa-fw fa-arrow-left"></span> <span>Server Plugins</span></a></div><div class="col-xs-6 tr"><a class="" href="/postgraphile/evaluating/"><span>Evaluating for your Project</span> <span class="fas fa-fw fa-arrow-right"></span></a></div></div></div></div></div></div></div></section><section class="mailinglist"><div class="container"><div class="row"><div class="col-xs-12"><div class="hero-block"><h3>Questions, comments or feedback?<br/>Email<!-- --> <a href="mailto:info@graphile.org?subject=Documentation%20question/comment/feedback:)">info@graphile.org</a></h3><form action="//graphile.us16.list-manage.com/subscribe/post?u=d103f710cf00a9273b55e8e9b&amp;id=c3a9eb5c4e" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate=""><div id="mc_embed_signup_scroll" class="center hero-block"><p>Keep up to date on Graphile and PostGraphile features/changes. Subscribe to our occasional announcements newsletter:</p><div class="mc-field-group form-inline justify-content-center"><div class="form-group"><div class="mb2"><label class="label--small" for="mce-EMAIL">Email address:</label></div><input type="email" autoCapitalize="off" autoComplete="off" autoCorrect="off" class="input-text mb0-ns mb1" id="mce-EMAIL" name="EMAIL" spellcheck="false" value=""/><div style="position:absolute;left:-5000px" aria-hidden="true"><input type="text" name="b_d103f710cf00a9273b55e8e9b_c3a9eb5c4e" tabindex="-1" value=""/></div><input type="submit" class="button--solid" id="mc-embedded-subscribe" name="subscribe" value="Subscribe"/></div><div id="mce-responses" class="clear"><div class="response" id="mce-error-response" style="display:none"></div><div class="response" id="mce-success-response" style="display:none"></div></div></div></div></form></div></div></div></div></section></div><footer class="bg-white pv5 bt b--black f6 lh-copy"><div class="container"><div class="row"><div class="col-xs-12 col-md-2 nested-list-reset "><h6>PostGraphile</h6><ul><li><a href="/postgraphile/introduction/">Documentation</a></li><li><a href="/postgraphile/">About</a></li><li><a href="/postgraphile/community-plugins/">Community Plugins</a></li><li><a href="https://github.com/graphile/postgraphile/releases"><i class="fab fa-github"></i> Changelog</a></li></ul></div><div class="col-xs-12 col-md-2 nested-list-reset "><h6>Graphile Engine</h6><ul><li><a href="/graphile-build/getting-started/">Documentation</a></li><li><a href="/graphile-build/">About</a></li><li><a href="/graphile-build/plugins/">Plugins</a></li></ul></div><div class="col-xs-12 col-md-2 nested-list-reset"><h6>Resources</h6><ul><li><a href="/news/"><i class="fas fa-bullhorn"></i> News</a></li><li><a href="https://github.com/graphile"><i class="fab fa-github"></i> GitHub</a></li><li><a href="http://discord.gg/graphile"><i class="fab fa-discord"></i> Chat (discord)</a></li><li><a href="https://twitter.com/graphilehq"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="/news/press-kit/"><i class="fas fa-file-archive"></i> Press Kit</a></li><li><a to="https://learn.graphile.org/"><i class="fas fa-graduation-cap"></i> Learn</a></li></ul></div><div class="col-xs-12 col-md-offset-1 col-md-5"><h6>About</h6>PostGraphile and Graphile Build are crowd-funded Open Source Software, developed and maintained primarily by<!-- --> <a href="https://twitter.com/benjie">@Benjie</a> with the help of the community.<br/><br/>You can support the projects via<!-- --> <a href="/sponsor/">sponsorship</a>, by<!-- --> <a href="/postgraphile/pricing/">going Pro</a>, or by paying for<!-- --> <a href="/support/">Professional Services</a>. Your support is gratefully received 🙏<br/><br/>This site is copyright © Benjie Gillam <!-- -->2020<!-- -->. Design and logos copyright © Benjie Gillam and Jof Arnold<!-- --> <!-- -->2020<!-- -->.<br/><br/>Corrections and contributions to this website are gratefully received via<!-- --> <a href="https://github.com/graphile/graphile.github.io">its GitHub repository</a>.<br/><br/>PostGraphile was <a href="/history/">originally authored</a> as PostGraphQL by<!-- --> <a href="https://twitter.com/calebmer">Caleb Meredith</a>.</div></div></div></footer></div></div></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/postgraphile/postgresql-schema-design/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"app":["/app-3811488cdc505470599d.js"],"component---src-templates-page-js":["/component---src-templates-page-js-4e9c47ca47407d74b319.js"],"component---src-templates-marketing-js":["/component---src-templates-marketing-js-47ecb6f44415ddd59cee.js"],"component---src-pages-contribute-mdx":["/component---src-pages-contribute-mdx-a8a07713f79eeff0c5e5.js"],"component---src-pages-index-mdx":["/component---src-pages-index-mdx-14d5dd2f121680c1224d.js"],"component---src-pages-postgraphile-index-mdx":["/component---src-pages-postgraphile-index-mdx-779831059dc64516213f.js"],"component---src-pages-sponsor-mdx":["/component---src-pages-sponsor-mdx-98d95a5bb43e2c88b31b.js"],"component---src-pages-support-index-mdx":["/component---src-pages-support-index-mdx-0d5d3ba54128e3216e72.js"]};/*]]>*/</script><script src="/component---src-templates-page-js-4e9c47ca47407d74b319.js" async=""></script><script src="/app-3811488cdc505470599d.js" async=""></script><script src="/commons-9e8a853d07f1cd13bee8.js" async=""></script><script src="/styles-cd8cc4bf0fa3d324a179.js" async=""></script><script src="/webpack-runtime-d329dd4dcbed31aa3262.js" async=""></script><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script></body></html>

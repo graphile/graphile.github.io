@@ -58,12 +58,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul></div></div><div class="edit-this-page" style="display:"><a href="https://github.com/graphile/graphile.github.io/edit/develop/src/pages/postgraphile/make-add-pg-table-order-by-plugin.md">📝 Suggest improvement/edit this page</a></div><h2 class="mt3">makeAddPgTableOrderByPlugin (graphile-utils v4.4.5+)</h2><div><p><strong>WARNING</strong>: <em>this plugin generator doesn't currently have any tests, so it's
 status is <strong>experimental</strong>. If you can spare the time to write some tests (or
 sponsor me to do so) then we can promote it to stable.</em></p>
-<p>PostGraphile adds <code class="language-text">orderBy</code> arguments to various of the table collection
-fields it builds so that you can control the order in which you receive the
-results. By default we add the table's columns (or, if <code class="language-text">--no-ignore-indexes</code>
-is enabled, only the columns <em>that are indexed</em>) in both ascending and
-descending order. For example, you could request the list of all forums
-ordered from newest to oldest:</p>
+<p>PostGraphile adds <code class="language-text">orderBy</code> arguments to various of the table collection fields
+it builds so that you can control the order in which you receive the results. By
+default we add the table's columns (or, if <code class="language-text">--no-ignore-indexes</code> is enabled,
+only the columns <em>that are indexed</em>) in both ascending and descending order. For
+example, you could request the list of all forums ordered from newest to oldest:</p>
 <div class="gatsby-highlight" data-language="graphql"><pre class="language-graphql"><code class="language-graphql"><span class="token keyword">query</span> ForumsNewestToOldest <span class="token punctuation">{</span>
   allForums<span class="token punctuation">(</span><span class="token attr-name">orderBy</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token constant">CREATED_AT_DESC</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     nodes <span class="token punctuation">{</span>
@@ -72,17 +71,16 @@ ordered from newest to oldest:</p>
     <span class="token punctuation">}</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre></div>
-<p>Sometimes, however, you want to order by something a little more
-complex than the fields on that table; maybe you want to order by a field on
-a related table, or by a computation, or something else.</p>
-<p>This plugin generator helps you build new <code class="language-text">orderBy</code> enum values so that you
-can sort more flexibly (though you should keep in mind that they are enum
-values so they cannot accept arguments). Let's make this clearer with an
-example:</p>
+<p>Sometimes, however, you want to order by something a little more complex than
+the fields on that table; maybe you want to order by a field on a related table,
+or by a computation, or something else.</p>
+<p>This plugin generator helps you build new <code class="language-text">orderBy</code> enum values so that you can
+sort more flexibly (though you should keep in mind that they are enum values so
+they cannot accept arguments). Let's make this clearer with an example:</p>
 <h2 id="example"><a href="#example" aria-label="example permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h2>
-<p>To sort a list of forums (stored in the table <code class="language-text">app_public.forums</code>) by the
-date of their latest post (posts are stored in <code class="language-text">app_public.posts</code>) you might
-create a plugin like this:</p>
+<p>To sort a list of forums (stored in the table <code class="language-text">app_public.forums</code>) by the date
+of their latest post (posts are stored in <code class="language-text">app_public.posts</code>) you might create a
+plugin like this:</p>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token comment">/* TODO: test this plugin works! */</span>
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token function">makeAddPgTableOrderByPlugin</span><span class="token punctuation">(</span>
   <span class="token string">"app_public"</span><span class="token punctuation">,</span>
@@ -101,11 +99,11 @@ module<span class="token punctuation">.</span>exports <span class="token operato
     <span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
-<p>(Note: we used the <code class="language-text">orderByAscDesc</code> helper to easily create the <code class="language-text">_ASC</code> and <code class="language-text">_DESC</code>
-variants without needing redundant code.)</p>
+<p>(Note: we used the <code class="language-text">orderByAscDesc</code> helper to easily create the <code class="language-text">_ASC</code> and
+<code class="language-text">_DESC</code> variants without needing redundant code.)</p>
 <p>The above plugin adds the <code class="language-text">LAST_POST_CREATED_AT_ASC</code> and
-<code class="language-text">LAST_POST_CREATED_AT_DESC</code> enum values to the <code class="language-text">ForumOrderBy</code> enum, so you
-can now order forums by these values from another table, e.g.:</p>
+<code class="language-text">LAST_POST_CREATED_AT_DESC</code> enum values to the <code class="language-text">ForumOrderBy</code> enum, so you can
+now order forums by these values from another table, e.g.:</p>
 <div class="gatsby-highlight" data-language="graphql"><pre class="language-graphql"><code class="language-graphql"><span class="token keyword">query</span> ForumsOrderedByMostRecentPost <span class="token punctuation">{</span>
   allForums<span class="token punctuation">(</span><span class="token attr-name">orderBy</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token constant">LAST_POST_CREATED_AT_DESC</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     nodes <span class="token punctuation">{</span>
@@ -137,21 +135,20 @@ can now order forums by these values from another table, e.g.:</p>
 <span class="token keyword">type</span> OrderSpec <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token builtin">string</span> <span class="token operator">|</span> <span class="token constant">SQL</span><span class="token punctuation">,</span> <span class="token builtin">boolean</span><span class="token punctuation">]</span> <span class="token operator">|</span> <span class="token punctuation">[</span><span class="token builtin">string</span> <span class="token operator">|</span> <span class="token constant">SQL</span><span class="token punctuation">,</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> <span class="token builtin">boolean</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></div>
 <p>The <code class="language-text">OrderSpec</code> here is a 2- or 3-tuple, with the following entries:</p>
 <ol>
-<li>the first entry (<code class="language-text">string | SQL</code>) is
-the value to order by; if a string then it's assumed to be a column from the
-table, otherwise it must be an SQL fragment from <code class="language-text">pg-sql2</code>.</li>
+<li>the first entry (<code class="language-text">string | SQL</code>) is the value to order by; if a string then
+it's assumed to be a column from the table, otherwise it must be an SQL
+fragment from <code class="language-text">pg-sql2</code>.</li>
 <li>whether the order should be ascending (<code class="language-text">true</code>) or descending (<code class="language-text">false</code>).</li>
-<li>(optional) whether the order is unique (<code class="language-text">true</code>) or not (<code class="language-text">false</code>) ─ if in doubt, pass
-<code class="language-text">false</code> and PostGraphile will make it unique by adding the primary key as the
-last sort field invisibly.</li>
+<li>(optional) whether the order is unique (<code class="language-text">true</code>) or not (<code class="language-text">false</code>) ─ if in
+doubt, pass <code class="language-text">false</code> and PostGraphile will make it unique by adding the
+primary key as the last sort field invisibly.</li>
 </ol>
 <p><code class="language-text">MakeAddPgTableOrderByPluginOrders</code> is a hash (POJO ─ plain old JavaScript
-object) which maps from the name of the enum value to <a href="https://graphql.org/graphql-js/type/#graphqlenumtype">a
-<code class="language-text">GraphQLEnumValueConfig</code>
-spec</a>. We have a
-defined format for the value of an orderBy enum as shown above. In addition
-to the <code class="language-text">value</code> entry detailed above, you could also provide a <code class="language-text">description</code>
-or <code class="language-text">deprecationReason</code> (both strings).</p>
+object) which maps from the name of the enum value to
+<a href="https://graphql.org/graphql-js/type/#graphqlenumtype">a <code class="language-text">GraphQLEnumValueConfig</code> spec</a>.
+We have a defined format for the value of an orderBy enum as shown above. In
+addition to the <code class="language-text">value</code> entry detailed above, you could also provide a
+<code class="language-text">description</code> or <code class="language-text">deprecationReason</code> (both strings).</p>
 <h3 id="orderbyascdesc"><a href="#orderbyascdesc" aria-label="orderbyascdesc permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code class="language-text">orderByAscDesc</code></h3>
 <p>We also expose the <code class="language-text">orderByAscDesc</code> helper which makes it easier to build the
 <code class="language-text">_ASC</code> and <code class="language-text">_DESC</code> orders which are typically identical except for name and

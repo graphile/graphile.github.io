@@ -57,16 +57,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul></div></div><div class="edit-this-page" style="display:"><a href="https://github.com/graphile/graphile.github.io/edit/develop/src/pages/graphile-build/build-object.md">📝 Suggest improvement/edit this page</a></div><h2 class="mt3">The Build Object</h2><div><p>The build object contains a number of helpers and sources of information
 relevant to the current build of the GraphQL API. If you're in watch mode then
 every time a new schema is generated a new build object will be used.</p>
-<p>The following properties/methods are available on the initial build object
-(more may be added by plugins via the <code class="language-text">build</code> hook):</p>
+<p>The following properties/methods are available on the initial build object (more
+may be added by plugins via the <code class="language-text">build</code> hook):</p>
 <h2 id="newwithhookstype-spec-scope"><a href="#newwithhookstype-spec-scope" aria-label="newwithhookstype spec scope permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code class="language-text">newWithHooks(type, spec, scope)</code></h2>
-<p>The bread-and-butter of Graphile Engine, this method is how we build hooked GraphQL objects:</p>
+<p>The bread-and-butter of Graphile Engine, this method is how we build hooked
+GraphQL objects:</p>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> MyType <span class="token operator">=</span> <span class="token function">newWithHooks</span><span class="token punctuation">(</span>type<span class="token punctuation">,</span> spec<span class="token punctuation">,</span> scope<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <ul>
-<li><code class="language-text">type</code> is a GraphQL object type, such as <code class="language-text">GraphQLEnumType</code> or <code class="language-text">GraphQLInputObjectType</code></li>
-<li><code class="language-text">spec</code> is a valid specification that will be passed through the relevant
-hooks before ultimately being passed to the constructor of the aforementioned
-<code class="language-text">type</code> and returning an instance of that type</li>
+<li><code class="language-text">type</code> is a GraphQL object type, such as <code class="language-text">GraphQLEnumType</code> or
+<code class="language-text">GraphQLInputObjectType</code></li>
+<li><code class="language-text">spec</code> is a valid specification that will be passed through the relevant hooks
+before ultimately being passed to the constructor of the aforementioned <code class="language-text">type</code>
+and returning an instance of that type</li>
 <li><code class="language-text">scope</code> is where you can add scope information that will be available through
 the <code class="language-text">scope</code> property in the context object passed to hooks (see <code class="language-text">Context</code>
 below)</li>
@@ -78,23 +80,25 @@ advisable to use this instead of <code class="language-text">Object.assign</code
 because it will warn you if you're accidentally overwriting something.</p>
 <h2 id="graphql"><a href="#graphql" aria-label="graphql permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code class="language-text">graphql</code></h2>
 <p>Equivalent to <code class="language-text">require(&#39;graphql&#39;)</code>, by using this property you don't have to
-import graphql and you're less likely to get version conflicts which are hard
-to diagnose and resolve. Use of this property over importing <code class="language-text">graphql</code> yourself
-is highly recommended.</p>
+import graphql and you're less likely to get version conflicts which are hard to
+diagnose and resolve. Use of this property over importing <code class="language-text">graphql</code> yourself is
+highly recommended.</p>
 <h2 id="gettypebynametypename"><a href="#gettypebynametypename" aria-label="gettypebynametypename permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code class="language-text">getTypeByName(typeName)</code></h2>
 <p>Returns the GraphQL type associated with the given name, if it is known to the
 current build, or <code class="language-text">null</code> otherwise. Objects built with <code class="language-text">newWithHooks</code> are
 automatically registered, but external objects must be registered via:</p>
 <h2 id="addtypetype-graphqlnamedtype"><a href="#addtypetype-graphqlnamedtype" aria-label="addtypetype graphqlnamedtype permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code class="language-text">addType(type: GraphQLNamedType)</code></h2>
-<p>Registers an external (un-hooked) GraphQL type with the system so that it may
-be referenced via <code class="language-text">getTypeByName()</code></p>
+<p>Registers an external (un-hooked) GraphQL type with the system so that it may be
+referenced via <code class="language-text">getTypeByName()</code></p>
 <h2 id="getaliasfromresolveinforesolveinfo"><a href="#getaliasfromresolveinforesolveinfo" aria-label="getaliasfromresolveinforesolveinfo permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code class="language-text">getAliasFromResolveInfo(resolveInfo)</code></h2>
 <p>Use this in your resolver to quickly retrieve the alias that this field was
 requested as.</p>
-<p>From <a href="https://github.com/graphile/graphile-engine/tree/master/packages/graphql-parse-resolve-info#getaliasfromresolveinforesolveinfo"><code class="language-text">graphql-parse-resolve-info</code></a></p>
+<p>From
+<a href="https://github.com/graphile/graphile-engine/tree/master/packages/graphql-parse-resolve-info#getaliasfromresolveinforesolveinfo"><code class="language-text">graphql-parse-resolve-info</code></a></p>
 <!-- TODO: example -->
 <h2 id="resolvealias"><a href="#resolvealias" aria-label="resolvealias permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code class="language-text">resolveAlias</code></h2>
-<p>Can be used in place of the <code class="language-text">resolve</code> method for a field if you wish it to resolve to the alias the field was requested as (as opposed to its name).</p>
+<p>Can be used in place of the <code class="language-text">resolve</code> method for a field if you wish it to
+resolve to the alias the field was requested as (as opposed to its name).</p>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token function">resolveAlias</span><span class="token punctuation">(</span><span class="token parameter">data<span class="token punctuation">,</span> _args<span class="token punctuation">,</span> _context<span class="token punctuation">,</span> resolveInfo</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">const</span> alias <span class="token operator">=</span> <span class="token function">getAliasFromResolveInfo</span><span class="token punctuation">(</span>resolveInfo<span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">return</span> data<span class="token punctuation">[</span>alias<span class="token punctuation">]</span><span class="token punctuation">;</span>

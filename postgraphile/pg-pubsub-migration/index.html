@@ -62,26 +62,34 @@ subscriptions available only to <a href="/sponsor/">Patreon supporters</a> via "
 supporter plugin" which was originally only available over a custom <code class="language-text">git</code> URL,
 but later was moved to <code class="language-text">npm</code> for easier installation. <strong>If you were not one of
 these users then this article isn't for you.</strong></p>
-<p>With v4.4.0, PostGraphile's subscriptions support was extended and
-open-sourced. Users of <code class="language-text">@graphile/supporter</code> are encouraged to move
-to using the open source subscriptions plugin, which should only
-take a few minutes.</p>
+<p>With v4.4.0, PostGraphile's subscriptions support was extended and open-sourced.
+Users of <code class="language-text">@graphile/supporter</code> are encouraged to move to using the open source
+subscriptions plugin, which should only take a few minutes.</p>
 <h3 id="step-1-uninstall-the-outdated-module"><a href="#step-1-uninstall-the-outdated-module" aria-label="step 1 uninstall the outdated module permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 1: uninstall the outdated module</h3>
 <p>For the npm module:</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">yarn remove @graphile/supporter</code></pre></div>
-<p>For the <code class="language-text">git</code> module, edit your <code class="language-text">package.json</code> and remove the relevant line and then run <code class="language-text">yarn</code> or <code class="language-text">npm install</code></p>
+<p>For the <code class="language-text">git</code> module, edit your <code class="language-text">package.json</code> and remove the relevant line and
+then run <code class="language-text">yarn</code> or <code class="language-text">npm install</code></p>
 <h3 id="step-2-install-the-new-module"><a href="#step-2-install-the-new-module" aria-label="step 2 install the new module permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 2: install the new module</h3>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">yarn add @graphile/pg-pubsub</code></pre></div>
 <h3 id="step-3-switch-to-using-the-new-module"><a href="#step-3-switch-to-using-the-new-module" aria-label="step 3 switch to using the new module permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 3: switch to using the new module</h3>
 <h4 id="library"><a href="#library" aria-label="library permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Library</h4>
 <ul>
-<li>Your <code class="language-text">makePluginHook</code> line should now reference the <code class="language-text">@graphile/pg-pubsub</code> plugin rather than the supporter plugin</li>
+<li>Your <code class="language-text">makePluginHook</code> line should now reference the <code class="language-text">@graphile/pg-pubsub</code>
+plugin rather than the supporter plugin</li>
 <li>Add the <code class="language-text">subscriptions: true</code> PostGraphile option</li>
-<li><strong>If</strong> you use <code class="language-text">enhanceHttpServerWithSubscriptions</code> then instead of importing it from the supporter plugin, now import it from <code class="language-text">postgraphile</code> directly. The call signature is now <code class="language-text">enhanceHttpServerWithSubscriptions(httpServer, postgraphileMiddleware)</code> - see <a href="/postgraphile/subscriptions/#advanced-setup">Subscriptions Advanced Setup</a>.</li>
-<li><strong>If</strong> you were passing <code class="language-text">middlewares</code> to <code class="language-text">enhanceHttpServerWithSubscriptions</code>; you should instead pass these middlewares as <code class="language-text">websocketMiddlewares</code> via the <code class="language-text">postgraphile</code> options.</li>
+<li><strong>If</strong> you use <code class="language-text">enhanceHttpServerWithSubscriptions</code> then instead of importing
+it from the supporter plugin, now import it from <code class="language-text">postgraphile</code> directly. The
+call signature is now
+<code class="language-text">enhanceHttpServerWithSubscriptions(httpServer, postgraphileMiddleware)</code> - see
+<a href="/postgraphile/subscriptions/#advanced-setup">Subscriptions Advanced Setup</a>.</li>
+<li><strong>If</strong> you were passing <code class="language-text">middlewares</code> to <code class="language-text">enhanceHttpServerWithSubscriptions</code>;
+you should instead pass these middlewares as <code class="language-text">websocketMiddlewares</code> via the
+<code class="language-text">postgraphile</code> options.</li>
 </ul>
 <h4 id="cli"><a href="#cli" aria-label="cli permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>CLI</h4>
-<p>Change <code class="language-text">--plugins @graphile/supporter</code> to <code class="language-text">--plugins @graphile/pg-pubsub</code> and add the <code class="language-text">--subscriptions</code> flag.</p>
+<p>Change <code class="language-text">--plugins @graphile/supporter</code> to <code class="language-text">--plugins @graphile/pg-pubsub</code> and
+add the <code class="language-text">--subscriptions</code> flag.</p>
 <h3 id="additional-information"><a href="#additional-information" aria-label="additional information permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Additional information</h3>
 <p>Now PostGraphile natively supports subscriptions, our built in GraphiQL
 (<a href="http://localhost:5000/graphiql">http://localhost:5000/graphiql</a> by default) now supports subscriptions too, so

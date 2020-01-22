@@ -55,14 +55,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><a href="/postgraphile/best-practices/#protect-your-api">Protect Your API</a></li>
 <li><a href="/postgraphile/best-practices/#use-language-sql-over-language-plpgsql-where-possible">Use <code><span class='allcaps'>LANGUAGE</span> sql</code> Over <code><span class='allcaps'>LANGUAGE</span> plpgsql</code> Where Possible</a></li>
 <li><a href="/postgraphile/best-practices/#name-triggers-with-a-numeric-prefix">Name Triggers With A Numeric Prefix</a></li>
-</ul></div></div><div class="edit-this-page" style="display:"><a href="https://github.com/graphile/graphile.github.io/edit/develop/src/pages/postgraphile/best-practices.md">📝 Suggest improvement/edit this page</a></div><h2 class="mt3">PostGraphile best practices</h2><div><p>This guide is a work in progress. If you have ideas for best practices, please use the "Suggest improvements to this page" link above to submit them, or discuss them in #documentation on <a href="http://discord.gg/graphile">the PostGraphile Discord chat</a>.</p>
+</ul></div></div><div class="edit-this-page" style="display:"><a href="https://github.com/graphile/graphile.github.io/edit/develop/src/pages/postgraphile/best-practices.md">📝 Suggest improvement/edit this page</a></div><h2 class="mt3">PostGraphile best practices</h2><div><p>This guide is a work in progress. If you have ideas for best practices, please
+use the "Suggest improvements to this page" link above to submit them, or
+discuss them in #documentation on
+<a href="http://discord.gg/graphile">the PostGraphile Discord chat</a>.</p>
 <h3 id="foreign-key-indexes"><a href="#foreign-key-indexes" aria-label="foreign key indexes permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Foreign Key Indexes</h3>
 <p>PostgreSQL does <em>NOT</em> add indexes to foreign keys by default. This isn't an
-issue for the forward relation (<code class="language-text">user_id</code> → user), but for the reverse
-relation (user → things by <code class="language-text">user_id</code>) it can make the lookup very expensive.
-Always add indexes to your foreign keys.</p>
+issue for the forward relation (<code class="language-text">user_id</code> → user), but for the reverse relation
+(user → things by <code class="language-text">user_id</code>) it can make the lookup very expensive. Always add
+indexes to your foreign keys.</p>
 <h3 id="row-level-security"><a href="#row-level-security" aria-label="row level security permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Row Level Security</h3>
-<p>If you're using RLS, it's best to enable it on every table in your database. You should at least enable it on every table in your exposed schemas.</p>
+<p>If you're using RLS, it's best to enable it on every table in your database. You
+should at least enable it on every table in your exposed schemas.</p>
 <h3 id="use-table-grant-for-selectdelete-and-column-grant-for-insertupdate"><a href="#use-table-grant-for-selectdelete-and-column-grant-for-insertupdate" aria-label="use table grant for selectdelete and column grant for insertupdate permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Use Table GRANT for SELECT/DELETE and Column GRANT for INSERT/UPDATE</h3>
 <p>The following are fine:</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token comment">-- ✅ Fine</span>
@@ -90,16 +94,16 @@ Always add indexes to your foreign keys.</p>
 <p>Table-level INSERT/UPDATE grants are not advisable because they lack the
 explicitness that should come from such operations.</p>
 <h3 id="simplify-your-graphql-field-names"><a href="#simplify-your-graphql-field-names" aria-label="simplify your graphql field names permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Simplify Your GraphQL Field Names</h3>
-<p>You can get a leg up on this <a href="https://github.com/graphile-contrib/pg-simplify-inflector">using
-<code class="language-text">@graphile-contrib/pg-simplify-inflector</code></a>.
-The long names PostGraphile uses by default are to try and avoid people
-getting naming conflicts when they run PostGraphile for the first time. Once
-you're more comfortable you should move to using shorter names as it's a
-GraphQL best practice.</p>
+<p>You can get a leg up on this
+<a href="https://github.com/graphile-contrib/pg-simplify-inflector">using <code class="language-text">@graphile-contrib/pg-simplify-inflector</code></a>.
+The long names PostGraphile uses by default are to try and avoid people getting
+naming conflicts when they run PostGraphile for the first time. Once you're more
+comfortable you should move to using shorter names as it's a GraphQL best
+practice.</p>
 <h3 id="enable-the-postgraphile-recommended-options"><a href="#enable-the-postgraphile-recommended-options" aria-label="enable the postgraphile recommended options permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Enable the PostGraphile Recommended Options</h3>
-<p>(Scan the docs for <code class="language-text">[RECOMMENDED]</code>, but take a moment to understand why
-they're recommended and yet not enabled by default - they often require
-greater knowledge of PostGraphile and your database.)</p>
+<p>(Scan the docs for <code class="language-text">[RECOMMENDED]</code>, but take a moment to understand why they're
+recommended and yet not enabled by default - they often require greater
+knowledge of PostGraphile and your database.)</p>
 <h3 id="protect-your-api"><a href="#protect-your-api" aria-label="protect your api permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Protect Your API</h3>
 <p>See <a href="/postgraphile/production/">Production Considerations</a>.</p>
 <h3 id="use-language-sql-over-language-plpgsql-where-possible"><a href="#use-language-sql-over-language-plpgsql-where-possible" aria-label="use language sql over language plpgsql where possible permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Use <code class="language-text">LANGUAGE sql</code> Over <code class="language-text">LANGUAGE plpgsql</code> Where Possible</h3>

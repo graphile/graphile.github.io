@@ -79,18 +79,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
 </ul>
 </li>
-</ul></div></div><div class="edit-this-page" style="display:"><a href="https://github.com/graphile/graphile.github.io/edit/develop/src/pages/postgraphile/smart-tags.md">📝 Suggest improvement/edit this page</a></div><h2 class="mt3">Smart Tags</h2><div><p>You can customise your PostGraphile GraphQL schema by tagging tables, columns, functions, relations, etc. These changes could be renaming something, omitting things from your GraphQL schema, or anything else a plugin supports!</p>
-<p>We call this functionality "Smart Tags" and it allows you to easily customise the generated GraphQL schema without making breaking changes to your database.</p>
-<p>If you're using PostGraphile in <code class="language-text">--watch</code> mode, you should be able to see in PostGraphile's GraphiQL client that the related types and fields will reflect the change almost immediately. If you're not using <code class="language-text">--watch</code> then you may need to restart the server for smart tag changes to take effect.</p>
+</ul></div></div><div class="edit-this-page" style="display:"><a href="https://github.com/graphile/graphile.github.io/edit/develop/src/pages/postgraphile/smart-tags.md">📝 Suggest improvement/edit this page</a></div><h2 class="mt3">Smart Tags</h2><div><p>You can customise your PostGraphile GraphQL schema by tagging tables, columns,
+functions, relations, etc. These changes could be renaming something, omitting
+things from your GraphQL schema, or anything else a plugin supports!</p>
+<p>We call this functionality "Smart Tags" and it allows you to easily customise
+the generated GraphQL schema without making breaking changes to your database.</p>
+<p>If you're using PostGraphile in <code class="language-text">--watch</code> mode, you should be able to see in
+PostGraphile's GraphiQL client that the related types and fields will reflect
+the change almost immediately. If you're not using <code class="language-text">--watch</code> then you may need
+to restart the server for smart tag changes to take effect.</p>
 <h3 id="the--character"><a href="#the--character" aria-label="the  character permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The @ character</h3>
 <p>We often refer to things like the <code class="language-text">@omit</code> smart tag or the <code class="language-text">@name</code> smart tag;
-really these tags are just <code class="language-text">omit</code> and <code class="language-text">name</code> respectively; but in the <a href="/postgraphile/smart-comments/">Smart
-Comment</a> syntax (the oldest form of smart tags
-in PostGraphile) the <code class="language-text">@</code> is required to denote a smart tag, and this pattern
-has stuck when referring to smart tags.</p>
-<p>You will also often see the smart comment syntax used to refer to smart tags
-in general, it's because the syntax is a little easier to write quickly -
-you'll soon learn to translate <code class="language-text">@omit update,delete</code> to <code class="language-text">omit: &quot;update,delete&quot;</code> (and vice-versa) in your head.</p>
+really these tags are just <code class="language-text">omit</code> and <code class="language-text">name</code> respectively; but in the
+<a href="/postgraphile/smart-comments/">Smart Comment</a> syntax (the oldest form of smart
+tags in PostGraphile) the <code class="language-text">@</code> is required to denote a smart tag, and this
+pattern has stuck when referring to smart tags.</p>
+<p>You will also often see the smart comment syntax used to refer to smart tags in
+general, it's because the syntax is a little easier to write quickly - you'll
+soon learn to translate <code class="language-text">@omit update,delete</code> to <code class="language-text">omit: &quot;update,delete&quot;</code> (and
+vice-versa) in your head.</p>
 <h3 id="valid-values"><a href="#valid-values" aria-label="valid values permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Valid values</h3>
 <p>Tags have a limited set of valid values:</p>
 <ul>
@@ -108,8 +115,10 @@ you'll soon learn to translate <code class="language-text">@omit update,delete</
 <li>Your own custom <a href="/postgraphile/extending-raw/">Graphile Engine plugin</a></li>
 </ul>
 <h3 id="example"><a href="#example" aria-label="example permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h3>
-<p><em>In this example we're going to use Smart Comments for brevity, but this works with all the ways of adding smart tags.</em></p>
-<p>Here is a basic table, with the name changed from <code class="language-text">original_table</code> to <code class="language-text">renamed_table</code>:</p>
+<p><em>In this example we're going to use Smart Comments for brevity, but this works
+with all the ways of adding smart tags.</em></p>
+<p>Here is a basic table, with the name changed from <code class="language-text">original_table</code> to
+<code class="language-text">renamed_table</code>:</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">table</span> original_table <span class="token punctuation">(</span>
   col1 <span class="token keyword">int</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -126,7 +135,8 @@ $$ <span class="token keyword">language</span> <span class="token keyword">sql</
 
 <span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">type</span> flibble <span class="token operator">is</span> E<span class="token string">'@name flamble'</span><span class="token punctuation">;</span>
 <span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">function</span> getFlamble<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">is</span> E<span class="token string">'@name allFlambles'</span><span class="token punctuation">;</span></code></pre></div>
-<p>Smart comments are also reflected in GraphiQL. Here, we are querying the table <code class="language-text">original_table</code> by looking at <code class="language-text">allOriginalTables</code>:</p>
+<p>Smart comments are also reflected in GraphiQL. Here, we are querying the table
+<code class="language-text">original_table</code> by looking at <code class="language-text">allOriginalTables</code>:</p>
 <div class="full-width">
 <p><span
       class="gatsby-resp-image-wrapper"
@@ -158,7 +168,8 @@ $$ <span class="token keyword">language</span> <span class="token keyword">sql</
   </a>
     </span></p>
 </div>
-<p>Next, we add the smart comment <code class="language-text">@name renamed_table</code> on <code class="language-text">original_table</code> and the rename is instantly reflected in GraphiQL:</p>
+<p>Next, we add the smart comment <code class="language-text">@name renamed_table</code> on <code class="language-text">original_table</code> and the
+rename is instantly reflected in GraphiQL:</p>
 <div class="full-width">
 <p><span
       class="gatsby-resp-image-wrapper"
@@ -228,7 +239,9 @@ $$ <span class="token keyword">language</span> <span class="token keyword">sql</
 <p>Any plugin may implement support for smart tags, so refer to those plugins'
 documentation. The following are smart tags built into PostGraphile.</p>
 <h4 id="deprecated"><a href="#deprecated" aria-label="deprecated permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>@deprecated</h4>
-<p>You can deprecate a database column using the <code class="language-text">deprecated</code> tag. If you need multiple lines, you can specify the tag multiple times, one per line of output text.</p>
+<p>You can deprecate a database column using the <code class="language-text">deprecated</code> tag. If you need
+multiple lines, you can specify the tag multiple times, one per line of output
+text.</p>
 <p>Applies to:</p>
 <ul>
 <li>columns</li>
@@ -243,7 +256,10 @@ documentation. The following are smart tags built into PostGraphile.</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">column</span> my_schema<span class="token punctuation">.</span>my_table<span class="token punctuation">.</span>my_column <span class="token operator">is</span>
   E<span class="token string">'@deprecated Use myOtherColumn instead.'</span><span class="token punctuation">;</span></code></pre></div>
 <h4 id="name"><a href="#name" aria-label="name permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>@name</h4>
-<p>You can add a smart tag to an entity to rename that entity. For tables, columns, custom types and many functions you can use the <code class="language-text">name</code> tag. For more complex things we use different tags, such as for foreign key constraints we have <code class="language-text">fieldName</code> and <code class="language-text">foreignFieldName</code>.</p>
+<p>You can add a smart tag to an entity to rename that entity. For tables, columns,
+custom types and many functions you can use the <code class="language-text">name</code> tag. For more complex
+things we use different tags, such as for foreign key constraints we have
+<code class="language-text">fieldName</code> and <code class="language-text">foreignFieldName</code>.</p>
 <p>Applies to:</p>
 <ul>
 <li>Tables</li>
@@ -252,8 +268,10 @@ documentation. The following are smart tags built into PostGraphile.</p>
 <li>Composite types (one direction only)</li>
 <li>Columns</li>
 <li>Types</li>
-<li><a href="/postgraphile/custom-queries/">Custom Query</a> functions: the <code class="language-text">Query</code> field name</li>
-<li><a href="/postgraphile/custom-mutations/">Custom Mutation</a> functions: the <code class="language-text">Mutation</code> field name</li>
+<li><a href="/postgraphile/custom-queries/">Custom Query</a> functions: the <code class="language-text">Query</code> field
+name</li>
+<li><a href="/postgraphile/custom-mutations/">Custom Mutation</a> functions: the <code class="language-text">Mutation</code>
+field name</li>
 </ul>
 <div class="gatsby-highlight" data-language="json5"><pre class="language-json5"><code class="language-json5"><span class="token property unquoted">class</span><span class="token operator">:</span> <span class="token punctuation">{</span>
   <span class="token property unquoted">post</span><span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -276,14 +294,16 @@ documentation. The following are smart tags built into PostGraphile.</p>
 <h4 id="fieldname"><a href="#fieldname" aria-label="fieldname permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>@fieldName</h4>
 <p>Applies to:</p>
 <ul>
-<li>foreign key constraints: the local field name for the relationship (see also <code class="language-text">@foreignFieldName</code>)</li>
+<li>foreign key constraints: the local field name for the relationship (see also
+<code class="language-text">@foreignFieldName</code>)</li>
 <li>unique constraints: the root finder field name</li>
 <li>computed column functions: the field name this function creates</li>
 </ul>
 <h4 id="foreignfieldname"><a href="#foreignfieldname" aria-label="foreignfieldname permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>@foreignFieldName</h4>
 <p><code class="language-text">foreignFieldName</code> applies to</p>
 <ul>
-<li>foreign key constraints: the field on the remote type (the "backwards" relation)</li>
+<li>foreign key constraints: the field on the remote type (the "backwards"
+relation)</li>
 </ul>
 <div class="gatsby-highlight" data-language="json5"><pre class="language-json5"><code class="language-json5"><span class="token property unquoted">foreignFieldName</span><span class="token operator">:</span> <span class="token string">"threads"</span><span class="token punctuation">,</span>
 <span class="token property unquoted">fieldName</span><span class="token operator">:</span> <span class="token string">"author"</span></code></pre></div>
@@ -291,7 +311,8 @@ documentation. The following are smart tags built into PostGraphile.</p>
 <h4 id="resultfieldname"><a href="#resultfieldname" aria-label="resultfieldname permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>@resultFieldName</h4>
 <p>Applies to:</p>
 <ul>
-<li><a href="/postgraphile/custom-mutations/">Custom Mutation</a> functions: the field on the mutation payload type</li>
+<li><a href="/postgraphile/custom-mutations/">Custom Mutation</a> functions: the field on the
+mutation payload type</li>
 </ul>
 <div class="gatsby-highlight" data-language="json5"><pre class="language-json5"><code class="language-json5"><span class="token property unquoted">procedure</span><span class="token operator">:</span> <span class="token punctuation">{</span>
   <span class="token property unquoted">authenticate</span><span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -304,8 +325,15 @@ documentation. The following are smart tags built into PostGraphile.</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">function</span> authenticate<span class="token punctuation">(</span><span class="token keyword">text</span><span class="token punctuation">,</span> <span class="token keyword">text</span><span class="token punctuation">)</span> <span class="token operator">is</span>
   E<span class="token string">'@resultFieldName token\n@name login'</span><span class="token punctuation">;</span></code></pre></div>
 <h4 id="omit"><a href="#omit" aria-label="omit permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>@omit</h4>
-<p>To remove an entity from your API, you can use the 'omit' smart tag. If you only want to omit the entity from certain operations you can list them. For example, <code class="language-text">@omit update</code> on a table would prevent the table from having an update-related functionality whilst still including queries, create and delete. <code class="language-text">@omit update</code> on a column would prevent the column appearing in the <code class="language-text">Patch</code> type, so it cannot be updated (but can still be created) via GraphQL.</p>
-<p>Here's a quick-reference for the operations we currently support (you'll want to experiment with them as there wasn't space to put all the caveats in the table!):</p>
+<p>To remove an entity from your API, you can use the 'omit' smart tag. If you only
+want to omit the entity from certain operations you can list them. For example,
+<code class="language-text">@omit update</code> on a table would prevent the table from having an update-related
+functionality whilst still including queries, create and delete. <code class="language-text">@omit update</code>
+on a column would prevent the column appearing in the <code class="language-text">Patch</code> type, so it cannot
+be updated (but can still be created) via GraphQL.</p>
+<p>Here's a quick-reference for the operations we currently support (you'll want to
+experiment with them as there wasn't space to put all the caveats in the
+table!):</p>
 <div class='big-table'>
 <table>
 <thead>
@@ -385,9 +413,12 @@ documentation. The following are smart tags built into PostGraphile.</p>
 </table>
 </div>
 <blockquote>
-<p><strong>Warning:</strong> This functionality is not intended for implementing permissions, it's for removing things from your API that you don't need. You should back these up with database permissions if needed.</p>
+<p><strong>Warning:</strong> This functionality is not intended for implementing permissions,
+it's for removing things from your API that you don't need. You should back
+these up with database permissions if needed.</p>
 </blockquote>
-<p>Multiple actions can be listed using commas (no spaces!), as in the following example which disables mutations on a table:</p>
+<p>Multiple actions can be listed using commas (no spaces!), as in the following
+example which disables mutations on a table:</p>
 <div class="gatsby-highlight" data-language="json5"><pre class="language-json5"><code class="language-json5"><span class="token property unquoted">class</span><span class="token operator">:</span> <span class="token punctuation">{</span>
   <span class="token property unquoted">table_name</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token property unquoted">tags</span><span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -410,15 +441,19 @@ documentation. The following are smart tags built into PostGraphile.</p>
 <li>Foreign key constraints</li>
 </ul>
 <h6 id="example-1"><a href="#example-1" aria-label="example 1 permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h6>
-<p>On a simple table called <code class="language-text">book</code> we have added a smart comment omitting the <code class="language-text">update</code> and <code class="language-text">delete</code> operations:</p>
+<p>On a simple table called <code class="language-text">book</code> we have added a smart comment omitting the
+<code class="language-text">update</code> and <code class="language-text">delete</code> operations:</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">table</span> forum_example<span class="token punctuation">.</span>book <span class="token punctuation">(</span>
   col1 <span class="token keyword">int</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">table</span> forum_example<span class="token punctuation">.</span>book <span class="token operator">is</span> E<span class="token string">'@omit update,delete'</span><span class="token punctuation">;</span></code></pre></div>
-<p>The results are immediately reflected in GraphiQL. We can also disable <code class="language-text">create</code> operations:</p>
+<p>The results are immediately reflected in GraphiQL. We can also disable <code class="language-text">create</code>
+operations:</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">table</span> forum_example<span class="token punctuation">.</span>book <span class="token operator">is</span> E<span class="token string">'@omit create,update,delete'</span><span class="token punctuation">;</span></code></pre></div>
-<p>On the left, you can see the documentation for all the fields and types regarding <code class="language-text">book</code> before the <code class="language-text">create</code> operation was omitted. On the right, you can see the reduced fields and types once the <code class="language-text">create</code> operation is omitted.</p>
+<p>On the left, you can see the documentation for all the fields and types
+regarding <code class="language-text">book</code> before the <code class="language-text">create</code> operation was omitted. On the right, you
+can see the reduced fields and types once the <code class="language-text">create</code> operation is omitted.</p>
 <p><span
       class="gatsby-resp-image-wrapper"
       style="position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 650px;"
@@ -449,11 +484,13 @@ documentation. The following are smart tags built into PostGraphile.</p>
   </a>
     </span></p>
 <h4 id="sortable"><a href="#sortable" aria-label="sortable permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>@sortable</h4>
-<p>Since version <a href="https://github.com/graphile/postgraphile/releases/tag/v4.3.1">v4.3.1</a></p>
+<p>Since version
+<a href="https://github.com/graphile/postgraphile/releases/tag/v4.3.1">v4.3.1</a></p>
 <p>Applies to:</p>
 <ul>
 <li>Functions returning <code class="language-text">SETOF</code>: adds the <code class="language-text">orderBy</code> argument to this field</li>
-<li>Computed column functions with no required parameters: allows this function to be used as an order in the <code class="language-text">orderBy</code> argument for the parent table</li>
+<li>Computed column functions with no required parameters: allows this function to
+be used as an order in the <code class="language-text">orderBy</code> argument for the parent table</li>
 </ul>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">function</span> foo<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">is</span> E<span class="token string">'@sortable'</span><span class="token punctuation">;</span>
 <span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">function</span> users_foo<span class="token punctuation">(</span>users<span class="token punctuation">)</span> <span class="token operator">is</span> E<span class="token string">'@sortable'</span><span class="token punctuation">;</span></code></pre></div>
@@ -468,11 +505,13 @@ documentation. The following are smart tags built into PostGraphile.</p>
   allUsers<span class="token punctuation">(</span><span class="token attr-name">orderBy</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token constant">FOO_ASC</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token operator">...</span> <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre></div>
 <h4 id="filterable"><a href="#filterable" aria-label="filterable permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>@filterable</h4>
-<p>Since version <a href="https://github.com/graphile/postgraphile/releases/tag/v4.3.1">v4.3.1</a>.</p>
+<p>Since version
+<a href="https://github.com/graphile/postgraphile/releases/tag/v4.3.1">v4.3.1</a>.</p>
 <p>Applies to:</p>
 <ul>
 <li>Functions returning <code class="language-text">SETOF</code>: adds the <code class="language-text">condition</code> argument to this field</li>
-<li>Computed column functions with no required parameters: allows this function to be used as a field in the <code class="language-text">condition</code> argument for the parent table</li>
+<li>Computed column functions with no required parameters: allows this function to
+be used as a field in the <code class="language-text">condition</code> argument for the parent table</li>
 </ul>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">function</span> foo<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">is</span> E<span class="token string">'@filterable'</span><span class="token punctuation">;</span>
 <span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">function</span> users_foo<span class="token punctuation">(</span>users<span class="token punctuation">)</span> <span class="token operator">is</span> E<span class="token string">'@filterable'</span><span class="token punctuation">;</span></code></pre></div>
@@ -484,7 +523,9 @@ documentation. The following are smart tags built into PostGraphile.</p>
   allUsers<span class="token punctuation">(</span><span class="token attr-name">condition</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token attr-name">foo</span><span class="token punctuation">:</span> <span class="token string">"FOO_VALUE"</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token operator">...</span> <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre></div>
 <h5 id="sorting-and-filtering-non-scalar-computed-columns"><a href="#sorting-and-filtering-non-scalar-computed-columns" aria-label="sorting and filtering non scalar computed columns permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Sorting and filtering non-scalar computed columns</h5>
-<p>If your computed column is returning a composite type, the recommended approach is to wrap it with a computed column that returns the scalar field you want to sort and/or filter by. For example:</p>
+<p>If your computed column is returning a composite type, the recommended approach
+is to wrap it with a computed column that returns the scalar field you want to
+sort and/or filter by. For example:</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token comment">-- non scalar function</span>
 <span class="token keyword">CREATE</span> <span class="token operator">OR</span> <span class="token keyword">REPLACE</span> <span class="token keyword">FUNCTION</span> user_object<span class="token punctuation">(</span><span class="token keyword">user</span> <span class="token keyword">user</span><span class="token punctuation">)</span> <span class="token keyword">RETURNS</span> object <span class="token keyword">AS</span> $$
 <span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> object <span class="token keyword">where</span> id <span class="token operator">=</span> <span class="token keyword">user</span><span class="token punctuation">.</span>object_id<span class="token punctuation">;</span>
@@ -499,10 +540,11 @@ $$ <span class="token keyword">language</span> <span class="token keyword">SQL</
 <span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">function</span> user_object_field<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">is</span> E<span class="token string">'@sortable'</span><span class="token punctuation">;</span></code></pre></div>
 <h4 id="simplecollections"><a href="#simplecollections" aria-label="simplecollections permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>@simpleCollections</h4>
 <p>You can control whether simple collections are enabled by default using
-<code class="language-text">--simple-collections omit|both|only</code> (or <code class="language-text">simpleCollections: &quot;omit&quot;|&quot;both&quot;|&quot;only&quot;</code>); however sometimes you want to override this on a case
-by case setting - for example if you want relay connections for almost all
-collections, except when it comes to a user's email addresses where you want to
-use a simple list.</p>
+<code class="language-text">--simple-collections omit|both|only</code> (or
+<code class="language-text">simpleCollections: &quot;omit&quot;|&quot;both&quot;|&quot;only&quot;</code>); however sometimes you want to
+override this on a case by case setting - for example if you want relay
+connections for almost all collections, except when it comes to a user's email
+addresses where you want to use a simple list.</p>
 <p>You can do this with the <code class="language-text">@simpleCollections omit</code>, <code class="language-text">@simpleCollections both</code>
 and <code class="language-text">@simpleCollections only</code> smart comments.</p>
 <p>Applies to:</p>
@@ -520,7 +562,9 @@ and <code class="language-text">@simpleCollections only</code> smart comments.</
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">function</span> search_people<span class="token punctuation">(</span>query <span class="token keyword">text</span><span class="token punctuation">)</span> <span class="token operator">is</span>
   E<span class="token string">'@simpleCollections both'</span><span class="token punctuation">;</span></code></pre></div>
 <h4 id="arg0variant-arg1variant-"><a href="#arg0variant-arg1variant-" aria-label="arg0variant arg1variant  permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>@arg0variant, @arg1variant, ...</h4>
-<p>When building a custom mutation, you probably want to use the composite type that is generated when creating a table in PostgreSQL as a function argument, like this (note this is just an example for illustrative purposes):</p>
+<p>When building a custom mutation, you probably want to use the composite type
+that is generated when creating a table in PostgreSQL as a function argument,
+like this (note this is just an example for illustrative purposes):</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">table</span> example<span class="token punctuation">(</span>
   id uuid <span class="token keyword">primary</span> <span class="token keyword">key</span><span class="token punctuation">,</span>
   name <span class="token keyword">text</span> <span class="token operator">not</span> <span class="token boolean">null</span>
@@ -529,7 +573,13 @@ and <code class="language-text">@simpleCollections only</code> smart comments.</
 <span class="token keyword">create</span> <span class="token keyword">function</span> new_example<span class="token punctuation">(</span>input example<span class="token punctuation">)</span> <span class="token keyword">returns</span> example <span class="token keyword">as</span> $$
   <span class="token keyword">insert</span> <span class="token keyword">into</span> example <span class="token punctuation">(</span>id<span class="token punctuation">,</span> name<span class="token punctuation">)</span> <span class="token keyword">values</span> <span class="token punctuation">(</span>input<span class="token punctuation">.</span>id<span class="token punctuation">,</span> input<span class="token punctuation">.</span>name<span class="token punctuation">)</span> returning <span class="token operator">*</span><span class="token punctuation">;</span>
 $$ <span class="token keyword">language</span> <span class="token keyword">sql</span> volatile<span class="token punctuation">;</span></code></pre></div>
-<p>By default, composite types will be translated into a GraphQL types by PostGraphile with the same characteristics, i.e. all <code class="language-text">not null</code> columns will become non-nullable fields. You can let PostGraphile know that you want to convert the composite type into another "variant" GraphQL type with a smart comment. Variants include <code class="language-text">patch</code> (which is equivalent to the argument to <code class="language-text">update*</code> mutations) and <code class="language-text">base</code> (which makes every column both available (ignores permissions) and nullable). For example:</p>
+<p>By default, composite types will be translated into a GraphQL types by
+PostGraphile with the same characteristics, i.e. all <code class="language-text">not null</code> columns will
+become non-nullable fields. You can let PostGraphile know that you want to
+convert the composite type into another "variant" GraphQL type with a smart
+comment. Variants include <code class="language-text">patch</code> (which is equivalent to the argument to
+<code class="language-text">update*</code> mutations) and <code class="language-text">base</code> (which makes every column both available
+(ignores permissions) and nullable). For example:</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">table</span> example<span class="token punctuation">(</span>
   id uuid <span class="token keyword">primary</span> <span class="token keyword">key</span><span class="token punctuation">,</span>
   name <span class="token keyword">text</span> <span class="token operator">not</span> <span class="token boolean">null</span>
@@ -541,7 +591,11 @@ $$ <span class="token keyword">language</span> <span class="token keyword">sql</
 
 <span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">function</span> new_example_with_auto_id<span class="token punctuation">(</span>input example<span class="token punctuation">)</span> <span class="token operator">is</span>
   E<span class="token string">'@arg0variant patch'</span><span class="token punctuation">;</span></code></pre></div>
-<p>This uses the <code class="language-text">patch</code> variant from PostGraphile's update mutations which has all the fields except <code class="language-text">id</code>. This will mean that the custom mutation will not ask for the <code class="language-text">id</code> on the client-side anymore (because it will generate it itself). Note how <code class="language-text">arg0</code> refers to the first function parameter (we use a 0-indexed counter of the arguments), thus <code class="language-text">arg2</code> would be the third parameter.</p>
+<p>This uses the <code class="language-text">patch</code> variant from PostGraphile's update mutations which has all
+the fields except <code class="language-text">id</code>. This will mean that the custom mutation will not ask for
+the <code class="language-text">id</code> on the client-side anymore (because it will generate it itself). Note
+how <code class="language-text">arg0</code> refers to the first function parameter (we use a 0-indexed counter of
+the arguments), thus <code class="language-text">arg2</code> would be the third parameter.</p>
 <p>Applies to:</p>
 <ul>
 <li>Custom Query functions</li>
@@ -549,10 +603,10 @@ $$ <span class="token keyword">language</span> <span class="token keyword">sql</
 <li>Computed Column functions</li>
 </ul>
 <h4 id="tags-to-add-virtual-constraint"><a href="#tags-to-add-virtual-constraint" aria-label="tags to add virtual constraint permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tags to add virtual constraint</h4>
-<p>You can add "virtual" (fake) constraints to types in PostgreSQL using smart comments.
-The primary use case for this is to make views act more table-like - allowing
-you to express the connections between tables and views. It's also useful
-on composite types.</p>
+<p>You can add "virtual" (fake) constraints to types in PostgreSQL using smart
+comments. The primary use case for this is to make views act more table-like -
+allowing you to express the connections between tables and views. It's also
+useful on composite types.</p>
 <h5 id="notnull"><a href="#notnull" aria-label="notnull permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>@notNull</h5>
 <p>Allows marking the column as non-nullable.</p>
 <p>Applies to:</p>
@@ -568,8 +622,11 @@ on composite types.</p>
 <span class="token punctuation">}</span></code></pre></div>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">column</span> my_view<span class="token punctuation">.</span>my_column <span class="token operator">is</span> E'<span class="token variable">@notNull</span><span class="token punctuation">`</span><span class="token punctuation">;</span></code></pre></div>
 <h5 id="primarykey"><a href="#primarykey" aria-label="primarykey permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>@primaryKey</h5>
-<p>Primary key columns will automatically be marked as <code class="language-text">@notNull</code>, as they would in PostgreSQL.</p>
-<p>If you declare something as a primary key it <em>must</em> be unique. We do not check it's unique - we trust you - but if it isn't unique then we're not sure what will happen...</p>
+<p>Primary key columns will automatically be marked as <code class="language-text">@notNull</code>, as they would in
+PostgreSQL.</p>
+<p>If you declare something as a primary key it <em>must</em> be unique. We do not check
+it's unique - we trust you - but if it isn't unique then we're not sure what
+will happen...</p>
 <div class="gatsby-highlight" data-language="json5"><pre class="language-json5"><code class="language-json5"><span class="token property unquoted">class</span><span class="token operator">:</span> <span class="token punctuation">{</span>
   <span class="token property unquoted">my_view</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token property unquoted">tags</span><span class="token operator">:</span> <span class="token punctuation">{</span>

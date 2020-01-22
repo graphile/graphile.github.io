@@ -55,9 +55,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><a href="/postgraphile/relations/#many-to-many-relations">Many-to-many relations</a></li>
 </ul>
 </li>
-</ul></div></div><div class="edit-this-page" style="display:"><a href="https://github.com/graphile/graphile.github.io/edit/develop/src/pages/postgraphile/relations.md">📝 Suggest improvement/edit this page</a></div><h2 class="mt3">Relations</h2><div><p>We automatically discover relations between database tables by inspecting
-their foreign keys, and use this to build relations into the generated
-GraphQL schema.</p>
+</ul></div></div><div class="edit-this-page" style="display:"><a href="https://github.com/graphile/graphile.github.io/edit/develop/src/pages/postgraphile/relations.md">📝 Suggest improvement/edit this page</a></div><h2 class="mt3">Relations</h2><div><p>We automatically discover relations between database tables by inspecting their
+foreign keys, and use this to build relations into the generated GraphQL schema.</p>
 <p>An example of a foreign key constraint when defining a table would be the
 <code class="language-text">REFERENCES</code> keyword below:</p>
 <div class="gatsby-highlight has-highlighted-lines" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> app_public<span class="token punctuation">.</span>users <span class="token punctuation">(</span>
@@ -71,19 +70,19 @@ GraphQL schema.</p>
   <span class="token keyword">FOREIGN</span> <span class="token keyword">KEY</span> <span class="token punctuation">(</span>organization_id<span class="token punctuation">)</span>
   <span class="token keyword">REFERENCES</span> organizations
   <span class="token keyword">ON</span> <span class="token keyword">DELETE</span> <span class="token keyword">CASCADE</span><span class="token punctuation">;</span></code></pre></div>
-<p>You can read more about defining foreign key constraints, including
-constraints that utilise multiple columns, in the <a href="https://www.postgresql.org/docs/current/static/ddl-constraints.html#DDL-CONSTRAINTS-FK">PostgreSQL
-documentation</a>.</p>
+<p>You can read more about defining foreign key constraints, including constraints
+that utilise multiple columns, in the
+<a href="https://www.postgresql.org/docs/current/static/ddl-constraints.html#DDL-CONSTRAINTS-FK">PostgreSQL documentation</a>.</p>
 <p>PostGraphile detects and exposes one-to-one, one-to-many and many-to-one
-relations automatically. Many-to-many relationships can be handled with the <a href="https://github.com/graphile-contrib/pg-many-to-many">many-to-many relations plugin</a>.</p>
+relations automatically. Many-to-many relationships can be handled with the
+<a href="https://github.com/graphile-contrib/pg-many-to-many">many-to-many relations plugin</a>.</p>
 <p>By default, relations are exposed as GraphQL fields using a camelCase
 combination of the target type and the source fields (inflectors:
 <code class="language-text">singleRelationByKeys</code>, <code class="language-text">singleRelationByKeysBackwards</code>, and
-<code class="language-text">manyRelationByKeys</code>). Unique constraints expose a GraphQL table type
-directly, non-unique constraints expose a
-<a href="/postgraphile/connections/">connection</a>. The GraphQL connections that these
-relations expose support pagination, <a href="/postgraphile/filtering/">filtering</a>,
-and ordering.</p>
+<code class="language-text">manyRelationByKeys</code>). Unique constraints expose a GraphQL table type directly,
+non-unique constraints expose a <a href="/postgraphile/connections/">connection</a>. The
+GraphQL connections that these relations expose support pagination,
+<a href="/postgraphile/filtering/">filtering</a>, and ordering.</p>
 <h3 id="examples"><a href="#examples" aria-label="examples permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Examples</h3>
 <h4 id="example-database-schema-for-one-to-many-relation"><a href="#example-database-schema-for-one-to-many-relation" aria-label="example database schema for one to many relation permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example database schema for one-to-many relation</h4>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">schema</span> a<span class="token punctuation">;</span>
@@ -121,7 +120,9 @@ and ordering.</p>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre></div>
 <h4 id="many-to-many-relations"><a href="#many-to-many-relations" aria-label="many to many relations permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Many-to-many relations</h4>
-<p>Many-to-many relations can be handled with the <a href="https://github.com/graphile-contrib/pg-many-to-many">many-to-many relations plugin</a> or by using a computed column that returns <code class="language-text">setof</code>:</p>
+<p>Many-to-many relations can be handled with the
+<a href="https://github.com/graphile-contrib/pg-many-to-many">many-to-many relations plugin</a>
+or by using a computed column that returns <code class="language-text">setof</code>:</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">table</span> post <span class="token punctuation">(</span>
   id <span class="token keyword">serial</span> <span class="token keyword">primary</span> <span class="token keyword">key</span><span class="token punctuation">,</span>
   headline <span class="token keyword">text</span><span class="token punctuation">,</span>

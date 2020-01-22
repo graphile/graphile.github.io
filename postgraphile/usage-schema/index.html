@@ -52,25 +52,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><a href="/postgraphile/usage-schema/#api-withpostgraphilecontextoptions-callback">API: <code>withPostGraphileContext(...)</code></a></li>
 <li><a href="/postgraphile/usage-schema/#even-lower-level-access">Even lower level access</a></li>
 </ul></div></div><div class="edit-this-page" style="display:"><a href="https://github.com/graphile/graphile.github.io/edit/develop/src/pages/postgraphile/usage-schema.md">📝 Suggest improvement/edit this page</a></div><h2 class="mt3">Usage - Schema Only</h2><div><p>The PostGraphile middleware gives you a lot of excellent features for running
-your own GraphQL server. However, if you want to execute a PostGraphile query
-in Node.js without having to go through HTTP you can use some other exported
+your own GraphQL server. However, if you want to execute a PostGraphile query in
+Node.js without having to go through HTTP you can use some other exported
 functions that PostGraphile provides.</p>
 <p>The first function you will need is <code class="language-text">createPostGraphileSchema</code> (or
-<code class="language-text">watchPostGraphileSchema</code> if you want to get a new schema each time the
-database is updated) which creates your PostGraphile GraphQL schema by
-introspecting your database.</p>
-<p>The function takes very similar arguments to <a href="/postgraphile/usage-library/">the <code class="language-text">postgraphile</code>
-middleware</a>.</p>
+<code class="language-text">watchPostGraphileSchema</code> if you want to get a new schema each time the database
+is updated) which creates your PostGraphile GraphQL schema by introspecting your
+database.</p>
+<p>The function takes very similar arguments to
+<a href="/postgraphile/usage-library/">the <code class="language-text">postgraphile</code> middleware</a>.</p>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token function">createPostGraphileSchema</span><span class="token punctuation">(</span>
   process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">DATABASE_URL</span> <span class="token operator">||</span> <span class="token string">'postgres:///'</span>
 <span class="token punctuation">)</span>
   <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">schema</span> <span class="token operator">=></span> <span class="token punctuation">{</span> <span class="token operator">...</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
   <span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token parameter">error</span> <span class="token operator">=></span> <span class="token punctuation">{</span> <span class="token operator">...</span> <span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre></div>
 <p>Now that you have your schema, in order to execute a GraphQL query you must
-supply an (authenticated) <code class="language-text">pgClient</code> on the context object. The preferred way
-to do this is via the asynchronous <code class="language-text">withPostGraphileContext</code> function. The
-context object will contain a PostgreSQL client which has its own transaction
-with the correct permission levels for the associated user.</p>
+supply an (authenticated) <code class="language-text">pgClient</code> on the context object. The preferred way to
+do this is via the asynchronous <code class="language-text">withPostGraphileContext</code> function. The context
+object will contain a PostgreSQL client which has its own transaction with the
+correct permission levels for the associated user.</p>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> <span class="token punctuation">{</span> Pool <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'pg'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> <span class="token punctuation">{</span> graphql <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'graphql'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> <span class="token punctuation">{</span> withPostGraphileContext <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'postgraphile'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -106,48 +106,114 @@ with the correct permission levels for the associated user.</p>
     <span class="token punctuation">}</span>
   <span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
-<p>(The <code class="language-text">await</code> keywords after the <code class="language-text">return</code> statements aren't required, they're just there to clarify the results are promises.)</p>
+<p>(The <code class="language-text">await</code> keywords after the <code class="language-text">return</code> statements aren't required, they're
+just there to clarify the results are promises.)</p>
 <h3 id="api-createpostgraphileschemapgconfig-schemaname-options"><a href="#api-createpostgraphileschemapgconfig-schemaname-options" aria-label="api createpostgraphileschemapgconfig schemaname options permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>API: <code class="language-text">createPostGraphileSchema(pgConfig, schemaName, options)</code></h3>
-<p>This function takes three arguments (all are optional) and returns a promise to a GraphQLSchema object.</p>
-<p>The returned GraphQLSchema will <strong>not</strong> be updated when your database changes - if you require "watch" functionality, please use <code class="language-text">watchPostGraphileSchema</code> instead (see below). The below options are valid for <tt>postgraphile@<!-- SCHEMA_VERSION_BEGIN -->4.5.0-rc.4<!-- SCHEMA_VERSION_END --></tt>.</p>
+<p>This function takes three arguments (all are optional) and returns a promise to
+a GraphQLSchema object.</p>
+<p>The returned GraphQLSchema will <strong>not</strong> be updated when your database changes -
+if you require "watch" functionality, please use <code class="language-text">watchPostGraphileSchema</code>
+instead (see below). The below options are valid for
+<tt>postgraphile@<!-- SCHEMA_VERSION_BEGIN -->4.5.0-rc.4<!-- SCHEMA_VERSION_END --></tt>.</p>
 <ul>
-<li><strong><code class="language-text">pgConfig</code></strong>: An object or string that will be passed to the [<code class="language-text">pg</code>][] library and used to connect to a PostgreSQL backend. If you already have a client or pool instance, when using this function you may also pass a <code class="language-text">pg</code> client or a <code class="language-text">pg-pool</code> instance directly instead of a config.</li>
-<li><strong><code class="language-text">schemaName</code></strong>: A string which specifies the PostgreSQL schema that PostGraphile will use to create a GraphQL schema. The default schema is the <code class="language-text">public</code> schema. May be an array for multiple schemas. For users who want to run the Postgres introspection query ahead of time, you may also pass in a <code class="language-text">PgCatalog</code> instance directly.</li>
+<li><strong><code class="language-text">pgConfig</code></strong>: An object or string that will be passed to the [<code class="language-text">pg</code>][]
+library and used to connect to a PostgreSQL backend. If you already have a
+client or pool instance, when using this function you may also pass a <code class="language-text">pg</code>
+client or a <code class="language-text">pg-pool</code> instance directly instead of a config.</li>
+<li><strong><code class="language-text">schemaName</code></strong>: A string which specifies the PostgreSQL schema that
+PostGraphile will use to create a GraphQL schema. The default schema is the
+<code class="language-text">public</code> schema. May be an array for multiple schemas. For users who want to
+run the Postgres introspection query ahead of time, you may also pass in a
+<code class="language-text">PgCatalog</code> instance directly.</li>
 <li>
-<p><strong><code class="language-text">options</code></strong>: An object containing other miscellaneous options. Most options are shared with the <code class="language-text">postgraphile</code> middleware function. Options could be: <!-- SCHEMA_DOCBLOCK_BEGIN --></p>
+<p><strong><code class="language-text">options</code></strong>: An object containing other miscellaneous options. Most options
+are shared with the <code class="language-text">postgraphile</code> middleware function. Options could be:</p>
+<!-- prettier-ignore-start --><!-- SCHEMA_DOCBLOCK_BEGIN -->
 <ul>
-<li><code class="language-text">ownerConnectionString</code>: Connection string to use to connect to the database as a privileged user (e.g. for setting up watch fixtures, logical decoding, etc).</li>
-<li><code class="language-text">subscriptions</code>: Enable GraphQL websocket transport support for subscriptions (you still need a subscriptions plugin currently)</li>
-<li><code class="language-text">live</code>: [EXPERIMENTAL] Enables live-query support via GraphQL subscriptions (sends updated payload any time nested collections/records change)</li>
-<li><code class="language-text">pgDefaultRole</code>: The default Postgres role to use. If no role was provided in a provided JWT token, this role will be used.</li>
-<li><code class="language-text">dynamicJson</code>: By default, JSON and JSONB fields are presented as strings (JSON encoded) from the GraphQL schema. Setting this to <code class="language-text">true</code> (recommended) enables raw JSON input and output, saving the need to parse / stringify JSON manually.</li>
-<li><code class="language-text">setofFunctionsContainNulls</code>: If none of your <code class="language-text">RETURNS SETOF compound_type</code> functions mix NULLs with the results then you may set this false to reduce the nullables in the GraphQL schema.</li>
-<li><code class="language-text">classicIds</code>: Enables classic ids for Relay support. Instead of using the field name <code class="language-text">nodeId</code> for globally unique ids, PostGraphile will instead use the field name <code class="language-text">id</code> for its globally unique ids. This means that table <code class="language-text">id</code> columns will also get renamed to <code class="language-text">rowId</code>.</li>
-<li><code class="language-text">disableDefaultMutations</code>: Setting this to <code class="language-text">true</code> will prevent the creation of the default mutation types &#x26; fields. Database mutation will only be possible through Postgres functions.</li>
-<li><code class="language-text">ignoreRBAC</code>: Set false (recommended) to exclude fields, queries and mutations that are not available to any possible user (determined from the user in connection string and any role they can become); set this option true to skip these checks and create GraphQL fields and types for everything. The default is <code class="language-text">true</code>, in v5 the default will change to <code class="language-text">false</code>.</li>
-<li><code class="language-text">ignoreIndexes</code>: Set false (recommended) to exclude filters, orderBy, and relations that would be expensive to access due to missing indexes. Changing this from true to false is a breaking change, but false to true is not, so we recommend you start with it set to <code class="language-text">false</code>. The default is <code class="language-text">true</code>, in v5 the default may change to <code class="language-text">false</code>.</li>
-<li><code class="language-text">includeExtensionResources</code>: By default, tables and functions that come from extensions are excluded from the generated GraphQL schema as general applications don't need them to be exposed to the end user. You can use this flag to include them in the generated schema (not recommended).</li>
-<li><code class="language-text">showErrorStack</code>: Enables adding a <code class="language-text">stack</code> field to the error response. Can be either the boolean <code class="language-text">true</code> (which results in a single stack string) or the string <code class="language-text">json</code> (which causes the stack to become an array with elements for each line of the stack). Recommended in development, not recommended in production.</li>
-<li><code class="language-text">extendedErrors</code>: Extends the error response with additional details from the Postgres error. Can be any combination of <code class="language-text">[&#39;hint&#39;, &#39;detail&#39;, &#39;errcode&#39;]</code>. Default is <code class="language-text">[]</code>.</li>
-<li><code class="language-text">appendPlugins</code>: An array of <a href="/graphile-build/plugins/">Graphile Engine</a> schema plugins to load after the default plugins.</li>
-<li><code class="language-text">prependPlugins</code>: An array of <a href="/graphile-build/plugins/">Graphile Engine</a> schema plugins to load before the default plugins (you probably don't want this).</li>
-<li><code class="language-text">replaceAllPlugins</code>: The full array of <a href="/graphile-build/plugins/">Graphile Engine</a> schema plugins to use for schema generation (you almost definitely don't want this!).</li>
-<li><code class="language-text">skipPlugins</code>: An array of <a href="/graphile-build/plugins/">Graphile Engine</a> schema plugins to skip.</li>
-<li><code class="language-text">readCache</code>: A file path string. Reads cached values from local cache file to improve startup time (you may want to do this in production).</li>
-<li><code class="language-text">writeCache</code>: A file path string. Writes computed values to local cache file so startup can be faster (do this during the build phase).</li>
-<li><code class="language-text">jwtSecret</code>: The secret for your JSON web tokens. This will be used to verify tokens in the <code class="language-text">Authorization</code> header, and signing JWT tokens you return in procedures.</li>
-<li><code class="language-text">jwtPgTypeIdentifier</code>: The Postgres type identifier for the compound type which will be signed as a JWT token if ever found as the return type of a procedure. Can be of the form: <code class="language-text">my_schema.my_type</code>. You may use quotes as needed: <code class="language-text">&quot;my-special-schema&quot;.my_type</code>.</li>
-<li><code class="language-text">legacyRelations</code>: Some one-to-one relations were previously detected as one-to-many - should we export 'only' the old relation shapes, both new and old but mark the old ones as 'deprecated' (default), or 'omit' (recommended) the old relation shapes entirely.</li>
-<li><code class="language-text">legacyJsonUuid</code>: ONLY use this option if you require the v3 typenames 'Json' and 'Uuid' over 'JSON' and 'UUID'.</li>
-<li><code class="language-text">simpleCollections</code>: Should we use relay pagination, or simple collections? "omit" (default) - relay connections only, "only" (not recommended) - simple collections only (no Relay connections), "both" - both.</li>
+<li><code class="language-text">ownerConnectionString</code>: Connection string to use to connect to the database
+as a privileged user (e.g. for setting up watch fixtures, logical decoding,
+etc).</li>
+<li><code class="language-text">subscriptions</code>: Enable GraphQL websocket transport support for
+subscriptions (you still need a subscriptions plugin currently)</li>
+<li><code class="language-text">live</code>: [EXPERIMENTAL] Enables live-query support via GraphQL subscriptions
+(sends updated payload any time nested collections/records change)</li>
+<li><code class="language-text">pgDefaultRole</code>: The default Postgres role to use. If no role was provided
+in a provided JWT token, this role will be used.</li>
+<li><code class="language-text">dynamicJson</code>: By default, JSON and JSONB fields are presented as strings
+(JSON encoded) from the GraphQL schema. Setting this to <code class="language-text">true</code> (recommended)
+enables raw JSON input and output, saving the need to parse / stringify JSON
+manually.</li>
+<li><code class="language-text">setofFunctionsContainNulls</code>: If none of your <code class="language-text">RETURNS SETOF compound_type</code>
+functions mix NULLs with the results then you may set this false to reduce
+the nullables in the GraphQL schema.</li>
+<li><code class="language-text">classicIds</code>: Enables classic ids for Relay support. Instead of using the
+field name <code class="language-text">nodeId</code> for globally unique ids, PostGraphile will instead use
+the field name <code class="language-text">id</code> for its globally unique ids. This means that table <code class="language-text">id</code>
+columns will also get renamed to <code class="language-text">rowId</code>.</li>
+<li><code class="language-text">disableDefaultMutations</code>: Setting this to <code class="language-text">true</code> will prevent the creation
+of the default mutation types &#x26; fields. Database mutation will only be
+possible through Postgres functions.</li>
+<li><code class="language-text">ignoreRBAC</code>: Set false (recommended) to exclude fields, queries and
+mutations that are not available to any possible user (determined from the
+user in connection string and any role they can become); set this option
+true to skip these checks and create GraphQL fields and types for
+everything. The default is <code class="language-text">true</code>, in v5 the default will change to <code class="language-text">false</code>.</li>
+<li><code class="language-text">ignoreIndexes</code>: Set false (recommended) to exclude filters, orderBy, and
+relations that would be expensive to access due to missing indexes. Changing
+this from true to false is a breaking change, but false to true is not, so
+we recommend you start with it set to <code class="language-text">false</code>. The default is <code class="language-text">true</code>, in v5
+the default may change to <code class="language-text">false</code>.</li>
+<li><code class="language-text">includeExtensionResources</code>: By default, tables and functions that come from
+extensions are excluded from the generated GraphQL schema as general
+applications don't need them to be exposed to the end user. You can use this
+flag to include them in the generated schema (not recommended).</li>
+<li><code class="language-text">showErrorStack</code>: Enables adding a <code class="language-text">stack</code> field to the error response. Can
+be either the boolean <code class="language-text">true</code> (which results in a single stack string) or the
+string <code class="language-text">json</code> (which causes the stack to become an array with elements for
+each line of the stack). Recommended in development, not recommended in
+production.</li>
+<li><code class="language-text">extendedErrors</code>: Extends the error response with additional details from
+the Postgres error. Can be any combination of
+<code class="language-text">[&#39;hint&#39;, &#39;detail&#39;, &#39;errcode&#39;]</code>. Default is <code class="language-text">[]</code>.</li>
+<li><code class="language-text">appendPlugins</code>: An array of <a href="/graphile-build/plugins/">Graphile Engine</a>
+schema plugins to load after the default plugins.</li>
+<li><code class="language-text">prependPlugins</code>: An array of <a href="/graphile-build/plugins/">Graphile Engine</a>
+schema plugins to load before the default plugins (you probably don't want
+this).</li>
+<li><code class="language-text">replaceAllPlugins</code>: The full array of
+<a href="/graphile-build/plugins/">Graphile Engine</a> schema plugins to use for schema
+generation (you almost definitely don't want this!).</li>
+<li><code class="language-text">skipPlugins</code>: An array of <a href="/graphile-build/plugins/">Graphile Engine</a>
+schema plugins to skip.</li>
+<li><code class="language-text">readCache</code>: A file path string. Reads cached values from local cache file
+to improve startup time (you may want to do this in production).</li>
+<li><code class="language-text">writeCache</code>: A file path string. Writes computed values to local cache file
+so startup can be faster (do this during the build phase).</li>
+<li><code class="language-text">jwtSecret</code>: The secret for your JSON web tokens. This will be used to
+verify tokens in the <code class="language-text">Authorization</code> header, and signing JWT tokens you
+return in procedures.</li>
+<li><code class="language-text">jwtPgTypeIdentifier</code>: The Postgres type identifier for the compound type
+which will be signed as a JWT token if ever found as the return type of a
+procedure. Can be of the form: <code class="language-text">my_schema.my_type</code>. You may use quotes as
+needed: <code class="language-text">&quot;my-special-schema&quot;.my_type</code>.</li>
+<li><code class="language-text">legacyRelations</code>: Some one-to-one relations were previously detected as
+one-to-many - should we export 'only' the old relation shapes, both new and
+old but mark the old ones as 'deprecated' (default), or 'omit' (recommended)
+the old relation shapes entirely.</li>
+<li><code class="language-text">legacyJsonUuid</code>: ONLY use this option if you require the v3 typenames
+'Json' and 'Uuid' over 'JSON' and 'UUID'.</li>
+<li><code class="language-text">simpleCollections</code>: Should we use relay pagination, or simple collections?
+"omit" (default) - relay connections only, "only" (not recommended) - simple
+collections only (no Relay connections), "both" - both.</li>
 </ul>
 </li>
 </ul>
 <!-- SCHEMA_DOCBLOCK_END -->
+<!-- prettier-ignore-end -->
 <h3 id="api-watchpostgraphileschemapgconfig-schemaname-options-onnewschema"><a href="#api-watchpostgraphileschemapgconfig-schemaname-options-onnewschema" aria-label="api watchpostgraphileschemapgconfig schemaname options onnewschema permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>API: <code class="language-text">watchPostGraphileSchema(pgConfig, schemaName, options, onNewSchema)</code></h3>
 <p>This function is takes the same options as <code class="language-text">createPostGraphileSchema</code>; but with
-one addition: a function <code class="language-text">onNewSchema</code> that is called every time a new schema
-is generated, passing the new schema as the first argument. <code class="language-text">onNewSchema</code> is
+one addition: a function <code class="language-text">onNewSchema</code> that is called every time a new schema is
+generated, passing the new schema as the first argument. <code class="language-text">onNewSchema</code> is
 guaranteed to be called before the <code class="language-text">watchPostGraphileSchema</code> promise resolves.
 It resolves to an asynchronus function that can be called to stop listening for
 schema changes.</p>
@@ -171,24 +237,33 @@ schema changes.</p>
 <span class="token punctuation">}</span></code></pre></div>
 <h3 id="api-withpostgraphilecontextoptions-callback"><a href="#api-withpostgraphilecontextoptions-callback" aria-label="api withpostgraphilecontextoptions callback permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>API: <code class="language-text">withPostGraphileContext(options, callback)</code></h3>
 <p>This function sets up a PostGraphile context, calls (and resolves) the callback
-function within this context, and then tears the context back down again
-finally resolving to the result of your function (which should be a
+function within this context, and then tears the context back down again finally
+resolving to the result of your function (which should be a
 GraphQLExecutionResult from executing a <code class="language-text">graphql()</code> query).</p>
 <ul>
 <li>
-<p><strong><code class="language-text">options</code></strong>: An object of options that are used to create the context object that gets passed into <code class="language-text">callback</code>.</p>
+<p><strong><code class="language-text">options</code></strong>: An object of options that are used to create the context object
+that gets passed into <code class="language-text">callback</code>.</p>
 <ul>
-<li><code class="language-text">pgPool</code>: A required instance of a Postgres pool from <a href="https://www.npmjs.com/package/pg-pool"><code class="language-text">pg-pool</code></a>. A Postgres client will be connected from this pool.</li>
-<li><code class="language-text">jwtToken</code>: An optional JWT token string. This JWT token represents the viewer of your PostGraphile schema. You might get this from the Authorization header.</li>
+<li><code class="language-text">pgPool</code>: A required instance of a Postgres pool from <a href="https://www.npmjs.com/package/pg-pool"><code class="language-text">pg-pool</code></a>. A
+Postgres client will be connected from this pool.</li>
+<li><code class="language-text">jwtToken</code>: An optional JWT token string. This JWT token represents the
+viewer of your PostGraphile schema. You might get this from the
+Authorization header.</li>
 <li><code class="language-text">jwtSecret</code>: see 'jwtSecret' above</li>
 <li><code class="language-text">jwtAudiences</code>: see 'jwtAudiences' above</li>
 <li><code class="language-text">jwtRole</code>: see 'jwtRole' in the library documentation</li>
 <li><code class="language-text">jwtVerifyOptions</code>: see 'jwtVerifyOptions' in the library documentation</li>
 <li><code class="language-text">pgDefaultRole</code>: see 'pgDefaultRole' in the library documentation</li>
-<li><code class="language-text">pgSettings</code>: A plain object specifying custom config values to set in the PostgreSQL transaction (accessed via <code class="language-text">current_setting(&#39;my.custom.setting&#39;)</code>) - do <em>NOT</em> provide a function unlike with the library options</li>
+<li><code class="language-text">pgSettings</code>: A plain object specifying custom config values to set in the
+PostgreSQL transaction (accessed via
+<code class="language-text">current_setting(&#39;my.custom.setting&#39;)</code>) - do <em>NOT</em> provide a function unlike
+with the library options</li>
 </ul>
 </li>
-<li><strong><code class="language-text">callback</code></strong>: The function which is called with the <code class="language-text">context</code> object which was created. Whatever the return value of this function is will be the return value of <code class="language-text">withPostGraphileContext</code>.</li>
+<li><strong><code class="language-text">callback</code></strong>: The function which is called with the <code class="language-text">context</code> object which
+was created. Whatever the return value of this function is will be the return
+value of <code class="language-text">withPostGraphileContext</code>.</li>
 </ul>
 <h3 id="even-lower-level-access"><a href="#even-lower-level-access" aria-label="even lower level access permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Even lower level access</h3>
 <p>If you really want to get into the nitty-gritty of what's going on, then take a

@@ -60,35 +60,35 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul>
 </li>
 </ul></div></div><div class="edit-this-page" style="display:"><a href="https://github.com/graphile/graphile.github.io/edit/develop/src/pages/postgraphile/required-knowledge.md">📝 Suggest improvement/edit this page</a></div><h2 class="mt3">Required Knowledge</h2><div><p><strong>WORK IN PROGRESS</strong>: PR's welcome!</p>
-<p>PostGraphile builds upon other technologies such as PostgreSQL and GraphQL,
-and the PostGraphile documentation doesn't cover these topics in depth as
-they are well documented elsewhere.</p>
+<p>PostGraphile builds upon other technologies such as PostgreSQL and GraphQL, and
+the PostGraphile documentation doesn't cover these topics in depth as they are
+well documented elsewhere.</p>
 <p>This page aims to outline some of the things you might want to do with
-PostGraphile and what knowledge you may need (and where to get it) to do
-those things well.</p>
+PostGraphile and what knowledge you may need (and where to get it) to do those
+things well.</p>
 <h3 id="database---basics"><a href="#database---basics" aria-label="database   basics permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Database - basics</h3>
-<p>Below outlines some of the SQL syntax and features you will probably want to
-be familiar with to make the most of your PostGraphile usage. PostGraphile
-is unopinionated in how you manage your database, so you may not need to
-be able to write this syntax depending on what technologies you use to manage
-your DB (for example, you might use a graphical tool), but if you can read
-it then it will help you to read the PostGraphile documentation.</p>
+<p>Below outlines some of the SQL syntax and features you will probably want to be
+familiar with to make the most of your PostGraphile usage. PostGraphile is
+unopinionated in how you manage your database, so you may not need to be able to
+write this syntax depending on what technologies you use to manage your DB (for
+example, you might use a graphical tool), but if you can read it then it will
+help you to read the PostGraphile documentation.</p>
 <h4 id="case-insensitive-unless-quoted"><a href="#case-insensitive-unless-quoted" aria-label="case insensitive unless quoted permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Case insensitive unless quoted</h4>
-<p>SQL is case insensitive, both keywords and identifiers, so the following are
-all equivalent:</p>
+<p>SQL is case insensitive, both keywords and identifiers, so the following are all
+equivalent:</p>
 <ul>
 <li><code class="language-text">select * from users</code></li>
 <li><code class="language-text">SELECT * FROM USERS</code></li>
 <li><code class="language-text">SeLeCt * FrOm UsErS</code></li>
 </ul>
-<p>This means a column like <code class="language-text">userId</code> will actually come out as <code class="language-text">userid</code>. To make
-an identifier (table/column/function/etc name) case sensitive, wrap it in
-double quotes:</p>
+<p>This means a column like <code class="language-text">userId</code> will actually come out as <code class="language-text">userid</code>. To make an
+identifier (table/column/function/etc name) case sensitive, wrap it in double
+quotes:</p>
 <ul>
 <li><code class="language-text">select * from &quot;Users&quot;</code></li>
 </ul>
-<p>Benjie tends to prefer the lowercase syntax because it's easier to read and
-not as "shouty".</p>
+<p>Benjie tends to prefer the lowercase syntax because it's easier to read and not
+as "shouty".</p>
 <p>It's common to use snake_case as the naming convention in SQL because of this
 case-insensitivity, to save having to escape all the identifiers.</p>
 <h4 id="the-word-user-is-reserved"><a href="#the-word-user-is-reserved" aria-label="the word user is reserved permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The word <code class="language-text">user</code> is reserved</h4>
@@ -101,13 +101,12 @@ naming tables as it helps avoid potential keyword clashes.</p>
 <h4 id="postgresql-doc-versioning"><a href="#postgresql-doc-versioning" aria-label="postgresql doc versioning permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>PostgreSQL doc versioning</h4>
 <p>PostgreSQL docs are found at <code class="language-text">https://postgresql.org/docs/VERSION/...</code>. Often
 when you google you will be taken to out of date docs, like those for version
-9.1 or 8.3 or similar. At the top of every documentation page are links to
-jump to the same page in the different PostgreSQL versions. Always make sure
-you are referring to the docs in the version of PostgreSQL that you are
-using.</p>
+9.1 or 8.3 or similar. At the top of every documentation page are links to jump
+to the same page in the different PostgreSQL versions. Always make sure you are
+referring to the docs in the version of PostgreSQL that you are using.</p>
 <p>In our documentation, we always try and link to <code class="language-text">/docs/current/...</code> which is a
-special URL that always shows the latest stable version of PostgreSQL. If
-you are using an older version you should make sure to switch to the older docs.</p>
+special URL that always shows the latest stable version of PostgreSQL. If you
+are using an older version you should make sure to switch to the older docs.</p>
 <h4 id="defining-tables"><a href="#defining-tables" aria-label="defining tables permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Defining tables</h4>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">table</span> users <span class="token punctuation">(</span>
   id <span class="token keyword">serial</span> <span class="token keyword">primary</span> <span class="token keyword">key</span><span class="token punctuation">,</span>
@@ -118,14 +117,26 @@ you are using an older version you should make sure to switch to the older docs.
   updated_at timestamptz <span class="token operator">not</span> <span class="token boolean">null</span> <span class="token keyword">default</span> <span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <ul>
-<li><code class="language-text">create table</code> statement: <a href="https://www.postgresql.org/docs/current/sql-createtable.html">https://www.postgresql.org/docs/current/sql-createtable.html</a></li>
-<li><code class="language-text">serial</code> data type is effectively an "auto-increment" field (for primary key): <a href="https://www.postgresql.org/docs/current/datatype-numeric.html#DATATYPE-SERIAL">https://www.postgresql.org/docs/current/datatype-numeric.html#DATATYPE-SERIAL</a></li>
-<li><code class="language-text">not null</code>: <a href="https://www.postgresql.org/docs/current/ddl-constraints.html#id-1.5.4.6.6">https://www.postgresql.org/docs/current/ddl-constraints.html#id-1.5.4.6.6</a></li>
-<li><code class="language-text">unique</code> is a shorthand for creating a unique constraint on the column: <a href="https://www.postgresql.org/docs/current/ddl-constraints.html#DDL-CONSTRAINTS-UNIQUE-CONSTRAINTS">https://www.postgresql.org/docs/current/ddl-constraints.html#DDL-CONSTRAINTS-UNIQUE-CONSTRAINTS</a></li>
-<li><code class="language-text">check</code> is a shorthand for creating a check constraint on the table: <a href="https://www.postgresql.org/docs/current/ddl-constraints.html#DDL-CONSTRAINTS-CHECK-CONSTRAINTS">https://www.postgresql.org/docs/current/ddl-constraints.html#DDL-CONSTRAINTS-CHECK-CONSTRAINTS</a></li>
-<li><code class="language-text">~</code> is the case-sensitive POSIX regexp comparison operator: <a href="https://www.postgresql.org/docs/current/functions-matching.html#FUNCTIONS-POSIX-REGEXP">https://www.postgresql.org/docs/current/functions-matching.html#FUNCTIONS-POSIX-REGEXP</a></li>
-<li><code class="language-text">timestamptz</code> is short for <code class="language-text">timestamp with time zone</code> which reads the offset you provide and converts to UTC for storage. Note the timezone you save is LOST (despite the name of the type) so if you wish to store the timezone offset itself you should do so in a separate column. You should always use this date type: <a href="https://wiki.postgresql.org/wiki/Don&#x27;t_Do_This#Don.27t_use_timestamp_.28without_time_zone.29">https://wiki.postgresql.org/wiki/Don't_Do_This#Don.27t_use_timestamp_.28without_time_zone.29</a></li>
-<li><code class="language-text">default</code> if the column is not specified, what should it's value default to (only applies to <code class="language-text">INSERT</code>)</li>
+<li><code class="language-text">create table</code> statement:
+<a href="https://www.postgresql.org/docs/current/sql-createtable.html">https://www.postgresql.org/docs/current/sql-createtable.html</a></li>
+<li><code class="language-text">serial</code> data type is effectively an "auto-increment" field (for primary key):
+<a href="https://www.postgresql.org/docs/current/datatype-numeric.html#DATATYPE-SERIAL">https://www.postgresql.org/docs/current/datatype-numeric.html#DATATYPE-SERIAL</a></li>
+<li><code class="language-text">not null</code>:
+<a href="https://www.postgresql.org/docs/current/ddl-constraints.html#id-1.5.4.6.6">https://www.postgresql.org/docs/current/ddl-constraints.html#id-1.5.4.6.6</a></li>
+<li><code class="language-text">unique</code> is a shorthand for creating a unique constraint on the column:
+<a href="https://www.postgresql.org/docs/current/ddl-constraints.html#DDL-CONSTRAINTS-UNIQUE-CONSTRAINTS">https://www.postgresql.org/docs/current/ddl-constraints.html#DDL-CONSTRAINTS-UNIQUE-CONSTRAINTS</a></li>
+<li><code class="language-text">check</code> is a shorthand for creating a check constraint on the table:
+<a href="https://www.postgresql.org/docs/current/ddl-constraints.html#DDL-CONSTRAINTS-CHECK-CONSTRAINTS">https://www.postgresql.org/docs/current/ddl-constraints.html#DDL-CONSTRAINTS-CHECK-CONSTRAINTS</a></li>
+<li><code class="language-text">~</code> is the case-sensitive POSIX regexp comparison operator:
+<a href="https://www.postgresql.org/docs/current/functions-matching.html#FUNCTIONS-POSIX-REGEXP">https://www.postgresql.org/docs/current/functions-matching.html#FUNCTIONS-POSIX-REGEXP</a></li>
+<li><code class="language-text">timestamptz</code> is short for <code class="language-text">timestamp with time zone</code> which reads the offset
+you provide and converts to UTC for storage. Note the timezone you save is
+LOST (despite the name of the type) so if you wish to store the timezone
+offset itself you should do so in a separate column. You should always use
+this date type:
+<a href="https://wiki.postgresql.org/wiki/Don&#x27;t_Do_This#Don.27t_use_timestamp_.28without_time_zone.29">https://wiki.postgresql.org/wiki/Don't_Do_This#Don.27t_use_timestamp_.28without_time_zone.29</a></li>
+<li><code class="language-text">default</code> if the column is not specified, what should it's value default to
+(only applies to <code class="language-text">INSERT</code>)</li>
 </ul>
 <h4 id="creating-roles"><a href="#creating-roles" aria-label="creating roles permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Creating roles</h4>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> role my_superuser <span class="token keyword">with</span> login password <span class="token string">'password here'</span> superuser<span class="token punctuation">;</span>
@@ -133,10 +144,16 @@ you are using an older version you should make sure to switch to the older docs.
 <span class="token keyword">create</span> role app_visitor<span class="token punctuation">;</span>
 <span class="token keyword">grant</span> app_visitor <span class="token keyword">to</span> app_authenticator<span class="token punctuation">;</span></code></pre></div>
 <ul>
-<li><code class="language-text">create role</code> statement: <a href="https://www.postgresql.org/docs/current/sql-createrole.html">https://www.postgresql.org/docs/current/sql-createrole.html</a></li>
+<li><code class="language-text">create role</code> statement:
+<a href="https://www.postgresql.org/docs/current/sql-createrole.html">https://www.postgresql.org/docs/current/sql-createrole.html</a></li>
 <li><code class="language-text">login</code> - enables login</li>
 <li><code class="language-text">password &#39;...&#39;</code> - sets the password (note passwords are encrypted by default)</li>
-<li><code class="language-text">noinherit</code> - if you are a role with noinherit then you do not inherit the permissions from the roles that you have been granted, though you may still switch into them (via <code class="language-text">set [local] role other_role;</code>) to use those privileges. This is useful for the PostGraphile user because it means that it cannot actually take any actions without first switching into another role (e.g. <code class="language-text">app_visitor</code> or <code class="language-text">app_admin</code>).</li>
+<li><code class="language-text">noinherit</code> - if you are a role with noinherit then you do not inherit the
+permissions from the roles that you have been granted, though you may still
+switch into them (via <code class="language-text">set [local] role other_role;</code>) to use those privileges.
+This is useful for the PostGraphile user because it means that it cannot
+actually take any actions without first switching into another role (e.g.
+<code class="language-text">app_visitor</code> or <code class="language-text">app_admin</code>).</li>
 </ul>
 <h4 id="granting-permissions"><a href="#granting-permissions" aria-label="granting permissions permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Granting permissions</h4>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">grant</span>
@@ -147,12 +164,19 @@ you are using an older version you should make sure to switch to the older docs.
 <span class="token keyword">on</span> my_table <span class="token keyword">to</span> app_visitor<span class="token punctuation">;</span></code></pre></div>
 <ul>
 <li><code class="language-text">grant</code> statement: <a href="https://www.postgresql.org/docs/current/sql-grant.html">https://www.postgresql.org/docs/current/sql-grant.html</a></li>
-<li><code class="language-text">select</code>: we don't recommend using column-level select grants (because it prevents <code class="language-text">select *</code> from working, and has knock-on consequences for mutations and functions)</li>
-<li><code class="language-text">insert (col1, col2)</code> / <code class="language-text">update (col1, col2)</code>: we recommend that you always whitelist the writable columns; do not <code class="language-text">grant insert on my_table</code> as that will allow inserting into any column including primary key, timestamps, etc. Combine this with PostGraphile's <code class="language-text">--no-ignore-rbac</code> to have a more carefully honed GraphQL schema.</li>
+<li><code class="language-text">select</code>: we don't recommend using column-level select grants (because it
+prevents <code class="language-text">select *</code> from working, and has knock-on consequences for mutations
+and functions)</li>
+<li><code class="language-text">insert (col1, col2)</code> / <code class="language-text">update (col1, col2)</code>: we recommend that you always
+whitelist the writable columns; do not <code class="language-text">grant insert on my_table</code> as that will
+allow inserting into any column including primary key, timestamps, etc.
+Combine this with PostGraphile's <code class="language-text">--no-ignore-rbac</code> to have a more carefully
+honed GraphQL schema.</li>
 <li><code class="language-text">delete</code>: column-level grants don't make sense on delete.</li>
 </ul>
 <h4 id="creating-security-policies"><a href="#creating-security-policies" aria-label="creating security policies permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Creating security policies</h4>
-<p>Check out our Row-Level security infosheet here: <a href="https://learn.graphile.org/docs/PostgreSQL_Row_Level_Security_Infosheet.pdf">https://learn.graphile.org/docs/PostgreSQL_Row_Level_Security_Infosheet.pdf</a></p>
+<p>Check out our Row-Level security infosheet here:
+<a href="https://learn.graphile.org/docs/PostgreSQL_Row_Level_Security_Infosheet.pdf">https://learn.graphile.org/docs/PostgreSQL_Row_Level_Security_Infosheet.pdf</a></p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token comment">-- Without this line, even if you define security policies, they will not be enforced</span>
 <span class="token keyword">alter</span> <span class="token keyword">table</span> my_table <span class="token keyword">enable</span> <span class="token keyword">row</span> <span class="token keyword">level</span> security<span class="token punctuation">;</span>
 
@@ -161,10 +185,19 @@ you are using an older version you should make sure to switch to the older docs.
 <span class="token keyword">create</span> policy admin_delete <span class="token keyword">on</span> my_table <span class="token keyword">for</span> <span class="token keyword">delete</span> <span class="token keyword">using</span> <span class="token punctuation">(</span> current_user_is_admin<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">create</span> policy friend_insert <span class="token keyword">on</span> my_other_table <span class="token keyword">for</span> <span class="token keyword">insert</span> <span class="token keyword">with</span> <span class="token keyword">check</span> <span class="token punctuation">(</span> are_friends<span class="token punctuation">(</span>author_id<span class="token punctuation">,</span> user_id<span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <ul>
-<li><code class="language-text">create policy</code> statement: <a href="https://www.postgresql.org/docs/current/sql-createpolicy.html">https://www.postgresql.org/docs/current/sql-createpolicy.html</a></li>
-<li><code class="language-text">as restrictive</code>: by default policies are 'permissive' and only one must pass; restrictive policies require at least one permissive policy to pass and <em>all</em> restrictive policies to pass</li>
-<li><code class="language-text">for all</code> / <code class="language-text">for select</code> / <code class="language-text">for insert</code> / <code class="language-text">for update</code> / <code class="language-text">for delete</code>: what operations does this policy apply to (note: there's no <code class="language-text">FOR INSERT AND UPDATE</code> - you either have to use <code class="language-text">ALL</code> or define multiple policies, one per operation)</li>
-<li><code class="language-text">using</code> - check to apply against PRE-EXISTING ROW to see if you can do the action (doesn't make sense for <code class="language-text">INSERT</code>)</li>
-<li><code class="language-text">with check</code> - check to apply against NEWLY-UPDATED ROW to see if you can do that action (doesn't make sense for <code class="language-text">SELECT</code> or <code class="language-text">DELETE</code>)</li>
-<li>NOTE: if <code class="language-text">with check</code> is not specified then the <code class="language-text">using</code> clause will also be used for <code class="language-text">with check</code> automatically.</li>
+<li><code class="language-text">create policy</code> statement:
+<a href="https://www.postgresql.org/docs/current/sql-createpolicy.html">https://www.postgresql.org/docs/current/sql-createpolicy.html</a></li>
+<li><code class="language-text">as restrictive</code>: by default policies are 'permissive' and only one must pass;
+restrictive policies require at least one permissive policy to pass and <em>all</em>
+restrictive policies to pass</li>
+<li><code class="language-text">for all</code> / <code class="language-text">for select</code> / <code class="language-text">for insert</code> / <code class="language-text">for update</code> / <code class="language-text">for delete</code>: what
+operations does this policy apply to (note: there's no
+<code class="language-text">FOR INSERT AND UPDATE</code> - you either have to use <code class="language-text">ALL</code> or define multiple
+policies, one per operation)</li>
+<li><code class="language-text">using</code> - check to apply against PRE-EXISTING ROW to see if you can do the
+action (doesn't make sense for <code class="language-text">INSERT</code>)</li>
+<li><code class="language-text">with check</code> - check to apply against NEWLY-UPDATED ROW to see if you can do
+that action (doesn't make sense for <code class="language-text">SELECT</code> or <code class="language-text">DELETE</code>)</li>
+<li>NOTE: if <code class="language-text">with check</code> is not specified then the <code class="language-text">using</code> clause will also be
+used for <code class="language-text">with check</code> automatically.</li>
 </ul></div></div><br/><br/><div class="col-xs-12 mt3 mb5"><div class="row between-xs"><div class="col-xs-6"><a class="" href="/postgraphile/requirements/"><span class="fas fa-fw fa-arrow-left"></span> <span>Requirements</span></a></div><div class="col-xs-6 tr"><a class="" href="/postgraphile/quick-start-guide/"><span>Quick Start Guide</span> <span class="fas fa-fw fa-arrow-right"></span></a></div></div></div></div></div></div></div></section><section class="mailinglist"><div class="container"><div class="row"><div class="col-xs-12"><div class="hero-block"><h3>Questions, comments or feedback?<br/>Email<!-- --> <a href="mailto:info@graphile.org?subject=Documentation%20question/comment/feedback:)">info@graphile.org</a></h3><form action="//graphile.us16.list-manage.com/subscribe/post?u=d103f710cf00a9273b55e8e9b&amp;id=c3a9eb5c4e" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate=""><div id="mc_embed_signup_scroll" class="center hero-block"><p>Keep up to date on Graphile and PostGraphile features/changes. Subscribe to our occasional announcements newsletter:</p><div class="mc-field-group form-inline justify-content-center"><div class="form-group"><div class="mb2"><label class="label--small" for="mce-EMAIL">Email address:</label></div><input type="email" autoCapitalize="off" autoComplete="off" autoCorrect="off" class="input-text mb0-ns mb1" id="mce-EMAIL" name="EMAIL" spellcheck="false" value=""/><div style="position:absolute;left:-5000px" aria-hidden="true"><input type="text" name="b_d103f710cf00a9273b55e8e9b_c3a9eb5c4e" tabindex="-1" value=""/></div><input type="submit" class="button--solid" id="mc-embedded-subscribe" name="subscribe" value="Subscribe"/></div><div id="mce-responses" class="clear"><div class="response" id="mce-error-response" style="display:none"></div><div class="response" id="mce-success-response" style="display:none"></div></div></div></div></form></div></div></div></div></section></div><footer class="bg-white pv5 bt b--black f6 lh-copy"><div class="container"><div class="row"><div class="col-xs-12 col-md-2 nested-list-reset "><h6>PostGraphile</h6><ul><li><a href="/postgraphile/introduction/">Documentation</a></li><li><a href="/postgraphile/">About</a></li><li><a href="/postgraphile/community-plugins/">Community Plugins</a></li><li><a href="https://github.com/graphile/postgraphile/releases"><i class="fab fa-github"></i> Changelog</a></li></ul></div><div class="col-xs-12 col-md-2 nested-list-reset "><h6>Graphile Engine</h6><ul><li><a href="/graphile-build/getting-started/">Documentation</a></li><li><a href="/graphile-build/">About</a></li><li><a href="/graphile-build/plugins/">Plugins</a></li></ul></div><div class="col-xs-12 col-md-2 nested-list-reset"><h6>Resources</h6><ul><li><a href="/news/"><i class="fas fa-bullhorn"></i> News</a></li><li><a href="https://github.com/graphile"><i class="fab fa-github"></i> GitHub</a></li><li><a href="http://discord.gg/graphile"><i class="fab fa-discord"></i> Chat (discord)</a></li><li><a href="https://twitter.com/graphilehq"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="/news/press-kit/"><i class="fas fa-file-archive"></i> Press Kit</a></li><li><a to="https://learn.graphile.org/"><i class="fas fa-graduation-cap"></i> Learn</a></li></ul></div><div class="col-xs-12 col-md-offset-1 col-md-5"><h6>About</h6>PostGraphile and Graphile Build are crowd-funded Open Source Software, developed and maintained primarily by<!-- --> <a href="https://twitter.com/benjie">@Benjie</a> with the help of the community.<br/><br/>You can support the projects via<!-- --> <a href="/sponsor/">sponsorship</a>, by<!-- --> <a href="/postgraphile/pricing/">going Pro</a>, or by paying for<!-- --> <a href="/support/">Professional Services</a>. Your support is gratefully received 🙏<br/><br/>This site is copyright © Benjie Gillam <!-- -->2020<!-- -->. Design and logos copyright © Benjie Gillam and Jof Arnold<!-- --> <!-- -->2020<!-- -->.<br/><br/>Corrections and contributions to this website are gratefully received via<!-- --> <a href="https://github.com/graphile/graphile.github.io">its GitHub repository</a>.<br/><br/>PostGraphile was <a href="/history/">originally authored</a> as PostGraphQL by<!-- --> <a href="https://twitter.com/calebmer">Caleb Meredith</a>.</div></div></div></footer></div></div></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/postgraphile/required-knowledge/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"app":["/app-3811488cdc505470599d.js"],"component---src-templates-page-js":["/component---src-templates-page-js-4e9c47ca47407d74b319.js"],"component---src-templates-marketing-js":["/component---src-templates-marketing-js-47ecb6f44415ddd59cee.js"],"component---src-pages-contribute-mdx":["/component---src-pages-contribute-mdx-a8a07713f79eeff0c5e5.js"],"component---src-pages-index-mdx":["/component---src-pages-index-mdx-14d5dd2f121680c1224d.js"],"component---src-pages-postgraphile-index-mdx":["/component---src-pages-postgraphile-index-mdx-779831059dc64516213f.js"],"component---src-pages-sponsor-mdx":["/component---src-pages-sponsor-mdx-98d95a5bb43e2c88b31b.js"],"component---src-pages-support-index-mdx":["/component---src-pages-support-index-mdx-0d5d3ba54128e3216e72.js"]};/*]]>*/</script><script src="/component---src-templates-page-js-4e9c47ca47407d74b319.js" async=""></script><script src="/app-3811488cdc505470599d.js" async=""></script><script src="/commons-9e8a853d07f1cd13bee8.js" async=""></script><script src="/styles-cd8cc4bf0fa3d324a179.js" async=""></script><script src="/webpack-runtime-d329dd4dcbed31aa3262.js" async=""></script><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script></body></html>

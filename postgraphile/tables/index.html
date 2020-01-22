@@ -65,12 +65,17 @@ schema based on the tables and columns found in the inspected schema.</p>
 <p>For a table like this, PostGraphile will:</p>
 <ul>
 <li>
-<p>Create a GraphQL type, <code class="language-text">User</code>, for the table, named in UpperCamelCase &#x26; singularized (<a href="https://github.com/graphile/graphile-engine/blob/f332cb11fc32c7b50428c8d19d88121ead00d95d/packages/graphile-build-pg/src/plugins/PgBasicsPlugin.js#L485-L487">inflector: <code class="language-text">tableType</code></a>).</p>
+<p>Create a GraphQL type, <code class="language-text">User</code>, for the table, named in UpperCamelCase &#x26;
+singularized
+(<a href="https://github.com/graphile/graphile-engine/blob/f332cb11fc32c7b50428c8d19d88121ead00d95d/packages/graphile-build-pg/src/plugins/PgBasicsPlugin.js#L485-L487">inflector: <code class="language-text">tableType</code></a>).</p>
 <ul>
-<li>Add fields to this type for the columns (e.g. <code class="language-text">id</code>, <code class="language-text">username</code>, <code class="language-text">about</code>, <code class="language-text">organizationId</code>, <code class="language-text">isAdmin</code>, <code class="language-text">createdAt</code>, <code class="language-text">updatedAt</code>), named in camelCase (<a href="https://github.com/graphile/graphile-engine/blob/f332cb11fc32c7b50428c8d19d88121ead00d95d/packages/graphile-build-pg/src/plugins/PgBasicsPlugin.js#L488-L490">inflector:
-<code class="language-text">tableType</code></a>).</li>
-<li>Add a <code class="language-text">nodeId</code> <a href="/postgraphile/node-id/">globally unique identifier</a> field if the table has a primary key.</li>
-<li>Add <a href="/postgraphile/relations/">fields for the relevant relations</a> (e.g. <code class="language-text">organizationByOrganizationId</code>*).</li>
+<li>Add fields to this type for the columns (e.g. <code class="language-text">id</code>, <code class="language-text">username</code>, <code class="language-text">about</code>,
+<code class="language-text">organizationId</code>, <code class="language-text">isAdmin</code>, <code class="language-text">createdAt</code>, <code class="language-text">updatedAt</code>), named in camelCase
+(<a href="https://github.com/graphile/graphile-engine/blob/f332cb11fc32c7b50428c8d19d88121ead00d95d/packages/graphile-build-pg/src/plugins/PgBasicsPlugin.js#L488-L490">inflector: <code class="language-text">tableType</code></a>).</li>
+<li>Add a <code class="language-text">nodeId</code> <a href="/postgraphile/node-id/">globally unique identifier</a> field if
+the table has a primary key.</li>
+<li>Add <a href="/postgraphile/relations/">fields for the relevant relations</a> (e.g.
+<code class="language-text">organizationByOrganizationId</code>*).</li>
 </ul>
 </li>
 <li>
@@ -104,30 +109,38 @@ schema based on the tables and columns found in the inspected schema.</p>
 <span class="token punctuation">}</span></code></pre></div>
 <p>--></p>
 <ul>
-<li>An <code class="language-text">allUsers</code> <a href="/postgraphile/connections/">connection</a> field with pagination, filtering, and ordering (inflector: <code class="language-text">allRows</code>)</li>
-<li>A number of <code class="language-text">userByKey(key: ...)</code> fields (e.g. <code class="language-text">userById</code>, <code class="language-text">userByUsername</code>), one for each of the unique constraints on the table (inflector: <code class="language-text">rowByUniqueKeys</code>)</li>
+<li>An <code class="language-text">allUsers</code> <a href="/postgraphile/connections/">connection</a> field with pagination,
+filtering, and ordering (inflector: <code class="language-text">allRows</code>)</li>
+<li>A number of <code class="language-text">userByKey(key: ...)</code> fields (e.g. <code class="language-text">userById</code>, <code class="language-text">userByUsername</code>),
+one for each of the unique constraints on the table (inflector:
+<code class="language-text">rowByUniqueKeys</code>)</li>
 <li>A <code class="language-text">foo(nodeId: ID!)</code> field to get the row by its <code class="language-text">nodeId</code></li>
-<li>Add <a href="/postgraphile/crud-mutations/">CRUD Mutations</a> to the root <code class="language-text">Mutation</code> type</li>
+<li>Add <a href="/postgraphile/crud-mutations/">CRUD Mutations</a> to the root <code class="language-text">Mutation</code>
+type</li>
 </ul>
-<p>* Remember these fields can be simplified by loading the <code class="language-text">@graphile-contrib/pg-simplify-inflector</code> plugin.</p>
-<p>Read more about <a href="/postgraphile/relations/">relations</a>, <a href="/postgraphile/connections/">connections</a>, <a href="/postgraphile/filtering/">filtering</a> and <a href="/postgraphile/crud-mutations/">CRUD Mutations</a>.</p>
+<p>* Remember these fields can be simplified by loading the
+<code class="language-text">@graphile-contrib/pg-simplify-inflector</code> plugin.</p>
+<p>Read more about <a href="/postgraphile/relations/">relations</a>,
+<a href="/postgraphile/connections/">connections</a>, <a href="/postgraphile/filtering/">filtering</a>
+and <a href="/postgraphile/crud-mutations/">CRUD Mutations</a>.</p>
 <h3 id="permissions"><a href="#permissions" aria-label="permissions permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Permissions</h3>
-<p>If you're using <code class="language-text">--no-ignore-rbac</code> or <code class="language-text">ignoreRBAC: false</code> (highly
-recommended) then PostGraphile will only expose the tables/columns/fields you
-have access to. For example if you perform <code class="language-text">GRANT UPDATE (username, name) ON users TO graphql_visitor;</code> then the <code class="language-text">updateUser</code> mutations will only accept
-<code class="language-text">username</code> and <code class="language-text">name</code> fields - the other columns will not be present.</p>
-<p>Note that the <code class="language-text">--no-ignore-rbac</code> (or <code class="language-text">ignoreRBAC: false</code> in the library) inspects the
-RBAC (GRANT / REVOKE) privileges in the database and reflects these in your GraphQL
-schema. As is GraphQL best practices, this still only results in one GraphQL schema
-(not one per user), so it takes the user account you connect to PostgreSQL with
-(from your connection string) and walks all the roles that this user can become
-within the database, and uses the union of all these permissions. Using this flag is
-recommended, as it results in a much leaner schema that doesn't contain functionality
-that you can't actually use.</p>
+<p>If you're using <code class="language-text">--no-ignore-rbac</code> or <code class="language-text">ignoreRBAC: false</code> (highly recommended)
+then PostGraphile will only expose the tables/columns/fields you have access to.
+For example if you perform
+<code class="language-text">GRANT UPDATE (username, name) ON users TO graphql_visitor;</code> then the
+<code class="language-text">updateUser</code> mutations will only accept <code class="language-text">username</code> and <code class="language-text">name</code> fields - the other
+columns will not be present.</p>
+<p>Note that the <code class="language-text">--no-ignore-rbac</code> (or <code class="language-text">ignoreRBAC: false</code> in the library)
+inspects the RBAC (GRANT / REVOKE) privileges in the database and reflects these
+in your GraphQL schema. As is GraphQL best practices, this still only results in
+one GraphQL schema (not one per user), so it takes the user account you connect
+to PostgreSQL with (from your connection string) and walks all the roles that
+this user can become within the database, and uses the union of all these
+permissions. Using this flag is recommended, as it results in a much leaner
+schema that doesn't contain functionality that you can't actually use.</p>
 <p>* <strong><em>NOTE: We strongly <a href="/postgraphile/requirements/">advise against</a> using
-column-based <code class="language-text">SELECT</code> grants with PostGraphile. Instead, split your
-permission concerns into separate tables and join them with one-to-one
-relations.</em></strong></p>
+column-based <code class="language-text">SELECT</code> grants with PostGraphile. Instead, split your permission
+concerns into separate tables and join them with one-to-one relations.</em></strong></p>
 <!--!RUN
 dropdb test
 createdb test

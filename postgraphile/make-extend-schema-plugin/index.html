@@ -101,35 +101,33 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <li>Library: <code class="language-text">appendPlugins: [require(&#39;./MySchemaExtensionPlugin&#39;)]</code></li>
 </ul>
 <p>The <code class="language-text">build</code> argument to the makeExtendSchemaPlugin callback contains lots of
-information and helpers defined by various plugins, most importantly it
-includes the introspection results (<code class="language-text">build.pgIntrospectionResultsByKind</code>),
-inflection functions (<code class="language-text">build.inflection</code>), and SQL helper (<code class="language-text">build.pgSql</code>, which
-is an instance of <a href="https://www.npmjs.com/package/pg-sql2">pg-sql2</a>).</p>
+information and helpers defined by various plugins, most importantly it includes
+the introspection results (<code class="language-text">build.pgIntrospectionResultsByKind</code>), inflection
+functions (<code class="language-text">build.inflection</code>), and SQL helper (<code class="language-text">build.pgSql</code>, which is an
+instance of <a href="https://www.npmjs.com/package/pg-sql2">pg-sql2</a>).</p>
 <p>The callback should return an object with two keys:</p>
 <ul>
 <li><code class="language-text">typeDefs</code>: a GraphQL AST generated with the <code class="language-text">gql</code> helper from
 <code class="language-text">graphile-utils</code> (note this is NOT from the <code class="language-text">graphql-tag</code> library, ours works
 in a slightly different way).</li>
-<li><code class="language-text">resolvers</code>: an object that's keyed by the GraphQL type names of types
-defined (or extended) in <code class="language-text">typeDefs</code>, the values of which are objects keyed by
-the field names with values that are resolver functions.</li>
+<li><code class="language-text">resolvers</code>: an object that's keyed by the GraphQL type names of types defined
+(or extended) in <code class="language-text">typeDefs</code>, the values of which are objects keyed by the
+field names with values that are resolver functions.</li>
 </ul>
 <p>For a larger example of how typeDefs and resolvers work, have a look at the
-<a href="https://www.apollographql.com/docs/graphql-tools/generate-schema.html">graphql-tools
-docs</a> -
+<a href="https://www.apollographql.com/docs/graphql-tools/generate-schema.html">graphql-tools docs</a> -
 ours work in a similar way.</p>
-<p>Note that the resolve functions defined in <code class="language-text">resolvers</code> will be sent the
-standard 4 GraphQL resolve arguments (<code class="language-text">parent</code>, <code class="language-text">args</code>, <code class="language-text">context</code>,
-<code class="language-text">resolveInfo</code>); but the 4th argument (<code class="language-text">resolveInfo</code>) will also contain
-graphile-specific helpers.</p>
+<p>Note that the resolve functions defined in <code class="language-text">resolvers</code> will be sent the standard
+4 GraphQL resolve arguments (<code class="language-text">parent</code>, <code class="language-text">args</code>, <code class="language-text">context</code>, <code class="language-text">resolveInfo</code>); but
+the 4th argument (<code class="language-text">resolveInfo</code>) will also contain graphile-specific helpers.</p>
 <h3 id="the-gql-and-embed-helpers"><a href="#the-gql-and-embed-helpers" aria-label="the gql and embed helpers permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The <code class="language-text">gql</code> and <code class="language-text">embed</code> helpers</h3>
 <p>The <code class="language-text">gql</code> helper is responsible for turning the human-readable GraphQL schema
 language you write into an abstract syntax tree (AST) that the application can
 understand. Our <code class="language-text">gql</code> help differs slightly from the one you may be familiar
 with in the <code class="language-text">graphql-tag</code> npm module, namely in how the placeholders work. Ours
-is designed to work with PostGraphile's <a href="/postgraphile/inflection/">inflection
-system</a>, so you can embed strings directly. You may
-also embed other gql tags directly. For example:</p>
+is designed to work with PostGraphile's
+<a href="/postgraphile/inflection/">inflection system</a>, so you can embed strings
+directly. You may also embed other gql tags directly. For example:</p>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> nameOfType <span class="token operator">=</span> <span class="token string">"MyType"</span><span class="token punctuation">;</span> <span class="token comment">// Or use the inflection system to generate a type</span>
 
 <span class="token comment">// This tag interpolates the string `nameOfType` to allow dynamic naming of the</span>
@@ -149,11 +147,10 @@ also embed other gql tags directly. For example:</p>
     fieldName: Type
   }
 </span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span></code></pre></div>
-<p>The <code class="language-text">embed</code> helper is for use with <code class="language-text">gql</code> when you want to embed a raw
-JavaScript value (anything: regexp, function, string, object, etc) into the
-document; for example to pass it to a directive. We use this with the
-<code class="language-text">@pgQuery</code> directive further down this page. Here's a simple example of
-embedding an object.</p>
+<p>The <code class="language-text">embed</code> helper is for use with <code class="language-text">gql</code> when you want to embed a raw JavaScript
+value (anything: regexp, function, string, object, etc) into the document; for
+example to pass it to a directive. We use this with the <code class="language-text">@pgQuery</code> directive
+further down this page. Here's a simple example of embedding an object.</p>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> meta <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">/* arbitrary data */</span>
   name<span class="token punctuation">:</span> <span class="token string">"fieldName"</span><span class="token punctuation">,</span>
@@ -166,35 +163,41 @@ embedding an object.</p>
 </span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span></code></pre></div>
 <h3 id="querying-the-database-inside-a-resolver"><a href="#querying-the-database-inside-a-resolver" aria-label="querying the database inside a resolver permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Querying the database inside a resolver</h3>
 <p>PostGraphile provisions, sets up and tears down a PostgreSQL client
-automatically for each GraphQL query. Setup involves beginning a transaction
-and setting the relevant session variables, e.g. using your JWT or the
-<code class="language-text">pgSettings</code> function. You can access this client on <code class="language-text">context.pgClient</code>; it's
-currently an instance of <a href="https://node-postgres.com/api/client"><code class="language-text">pg.Client</code> from the <code class="language-text">pg</code>
-module</a>; however you should only use it
-like this to maintain future compatibility:</p>
+automatically for each GraphQL query. Setup involves beginning a transaction and
+setting the relevant session variables, e.g. using your JWT or the <code class="language-text">pgSettings</code>
+function. You can access this client on <code class="language-text">context.pgClient</code>; it's currently an
+instance of
+<a href="https://node-postgres.com/api/client"><code class="language-text">pg.Client</code> from the <code class="language-text">pg</code> module</a>;
+however you should only use it like this to maintain future compatibility:</p>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> <span class="token punctuation">{</span> rows <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword">await</span> context<span class="token punctuation">.</span>pgClient<span class="token punctuation">.</span><span class="token function">query</span><span class="token punctuation">(</span>
   sqlText<span class="token punctuation">,</span> <span class="token comment">// e.g. "select * from users where id = $1"</span>
   optionalVariables <span class="token comment">// e.g. [27]</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
-<p>NOTE: <code class="language-text">context</code> is the third argument passed to a GraphQL resolver (<code class="language-text">function myResolver(parentObject, args, context, info) { /* ... */ }</code>).</p>
-<p>Since you're already in a transaction, issuing <code class="language-text">BEGIN;</code> or <code class="language-text">COMMIT;</code> inside
-your resolver is a Really Bad Idea™. Should you need a sub-transaction, <a href="https://www.postgresql.org/docs/current/sql-savepoint.html">use
-a SAVEPOINT</a>.
+<p>NOTE: <code class="language-text">context</code> is the third argument passed to a GraphQL resolver
+(<code class="language-text">function myResolver(parentObject, args, context, info) { /* ... */ }</code>).</p>
+<p>Since you're already in a transaction, issuing <code class="language-text">BEGIN;</code> or <code class="language-text">COMMIT;</code> inside your
+resolver is a Really Bad Idea™. Should you need a sub-transaction,
+<a href="https://www.postgresql.org/docs/current/sql-savepoint.html">use a SAVEPOINT</a>.
 However, please be aware that PostGraphile only sets up a transaction when it
 needs to (e.g. when it's a mutation, or when there are config variables or a
-role to set); so you cannot rely on SAVEPOINT working inside of queries
-unless you know these conditions are met.</p>
-<p>Because the entire GraphQL operation is executed within a single transaction, be very wary that you don't cause an SQL error which causes the entire transaction to fail. This could leave things in a very odd state - particularly for mutations - e.g. where you return a partial success to the user, but actually roll back the results. It's recommended that all mutations are wrapped in <code class="language-text">SAVEPOINT</code> / <code class="language-text">RELEASE SAVEPOINT</code> / <code class="language-text">ROLLBACK TO SAVEPOINT</code> calls.</p>
-<p>When your resolver returns results that will be used by autogenerated types
-and fields, you must not return query results such as these directly. Instead
-use <a href="#the-selectgraphqlresultfromtable-helper">the <code class="language-text">selectGraphQLResultFromTable</code> helper</a> documented below. The results
-of your <code class="language-text">pgClient.query</code> should be used within the resolver only, and should
-not "leak" (in general).</p>
+role to set); so you cannot rely on SAVEPOINT working inside of queries unless
+you know these conditions are met.</p>
+<p>Because the entire GraphQL operation is executed within a single transaction, be
+very wary that you don't cause an SQL error which causes the entire transaction
+to fail. This could leave things in a very odd state - particularly for
+mutations - e.g. where you return a partial success to the user, but actually
+roll back the results. It's recommended that all mutations are wrapped in
+<code class="language-text">SAVEPOINT</code> / <code class="language-text">RELEASE SAVEPOINT</code> / <code class="language-text">ROLLBACK TO SAVEPOINT</code> calls.</p>
+<p>When your resolver returns results that will be used by autogenerated types and
+fields, you must not return query results such as these directly. Instead use
+<a href="#the-selectgraphqlresultfromtable-helper">the <code class="language-text">selectGraphQLResultFromTable</code> helper</a>
+documented below. The results of your <code class="language-text">pgClient.query</code> should be used within the
+resolver only, and should not "leak" (in general).</p>
 <h3 id="reading-database-column-values"><a href="#reading-database-column-values" aria-label="reading database column values permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Reading database column values</h3>
 <p>When extending a schema, it's often because you want to expose data from Node.js
-that would be too difficult (or impossible) to access from PostgreSQL.
-When defining a field on an existing table-backed type defined by PostGraphile,
-it's useful to access data from the underlying table in the resolver.</p>
+that would be too difficult (or impossible) to access from PostgreSQL. When
+defining a field on an existing table-backed type defined by PostGraphile, it's
+useful to access data from the underlying table in the resolver.</p>
 <p>To do this you can use the <code class="language-text">@requires(columns: […])</code> field directive to declare
 the data dependencies of your resolver. This guarantees that when the resolver
 is executed, the data is immediately available.</p>
@@ -231,63 +234,83 @@ app<span class="token punctuation">.</span><span class="token function">listen</
 <h3 id="the-selectgraphqlresultfromtable-helper"><a href="#the-selectgraphqlresultfromtable-helper" aria-label="the selectgraphqlresultfromtable helper permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The <code class="language-text">selectGraphQLResultFromTable</code> helper</h3>
 <p>Resolvers are passed 4 arguments: <code class="language-text">parent, args, context, resolveInfo</code>. In the
 <code class="language-text">context.pgClient</code> is an instance of a database client from the <code class="language-text">pg</code> module
-that's already in a transaction configured with the settings for this
-particular GraphQL request. You can use this client to make requests to the
-database within this transaction.</p>
+that's already in a transaction configured with the settings for this particular
+GraphQL request. You can use this client to make requests to the database within
+this transaction.</p>
 <p>However, because PostGraphile uses Graphile Engine's look-ahead features, you
 will not be able to easily build a query that will return the data PostGraphile
 requires to represent nested relations/etc using <code class="language-text">pgClient</code> directly. That is
 why <code class="language-text">resolveInfo.graphile.selectGraphQLResultFromTable</code> exists.</p>
-<p>The <code class="language-text">resolveInfo.graphile.selectGraphQLResultFromTable</code> function is vital if
-you want to return PostGraphile database table/view/function/etc-related types
-from your GraphQL field. It is responsible for hooking into the query
-look-ahead features of Graphile Engine to inspect the incoming GraphQL query
-and pull down the relevant data from the database (including nested relations).
-You are then expected to return the result of this fetch via your resolver. You
-can use the <code class="language-text">queryBuilder</code> object to customise the generated query, changing
-the order, adding <code class="language-text">where</code> clauses, <code class="language-text">limit</code>s, etc (see below). Note that if you
-are not returning a record type directly (for example you're returning a
-mutation payload, or a connection interface), you should use the <code class="language-text">@pgField</code>
-directive as shown below so that the Look Ahead feature continues to work.</p>
+<p>The <code class="language-text">resolveInfo.graphile.selectGraphQLResultFromTable</code> function is vital if you
+want to return PostGraphile database table/view/function/etc-related types from
+your GraphQL field. It is responsible for hooking into the query look-ahead
+features of Graphile Engine to inspect the incoming GraphQL query and pull down
+the relevant data from the database (including nested relations). You are then
+expected to return the result of this fetch via your resolver. You can use the
+<code class="language-text">queryBuilder</code> object to customise the generated query, changing the order,
+adding <code class="language-text">where</code> clauses, <code class="language-text">limit</code>s, etc (see below). Note that if you are not
+returning a record type directly (for example you're returning a mutation
+payload, or a connection interface), you should use the <code class="language-text">@pgField</code> directive as
+shown below so that the Look Ahead feature continues to work.</p>
 <h4 id="querybuilder"><a href="#querybuilder" aria-label="querybuilder permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>QueryBuilder</h4>
 <p><code class="language-text">queryBuilder</code> is an instance of <code class="language-text">QueryBuilder</code>, a helper that uses an SQL AST
-constructed via <a href="https://github.com/graphile/pg-sql2/blob/master/README.md"><code class="language-text">pg-sql2</code>
-methods</a> to
-dynamically create powerful SQL queries without risking SQL injection attacks.
-The <code class="language-text">queryBuilder</code> has a number of methods which affect the query which will be
-generated. The main ones you're likely to want are:</p>
+constructed via
+<a href="https://github.com/graphile/pg-sql2/blob/master/README.md"><code class="language-text">pg-sql2</code> methods</a>
+to dynamically create powerful SQL queries without risking SQL injection
+attacks. The <code class="language-text">queryBuilder</code> has a number of methods which affect the query which
+will be generated. The main ones you're likely to want are:</p>
 <ul>
-<li><code class="language-text">where(sqlFragment)</code>; e.g. <code class="language-text">queryBuilder.where(build.pgSql.fragment`is_admin is true`)</code></li>
-<li><code class="language-text">orderBy(() =&gt; sqlFragment, ascending)</code>; e.g. <code class="language-text">queryBuilder.orderBy(() =&gt; build.pgSql.fragment`created_at`, false)</code></li>
+<li><code class="language-text">where(sqlFragment)</code>; e.g.
+<code class="language-text">queryBuilder.where(build.pgSql.fragment`is_admin is true`)</code></li>
+<li><code class="language-text">orderBy(() =&gt; sqlFragment, ascending)</code>; e.g.
+<code class="language-text">queryBuilder.orderBy(() =&gt; build.pgSql.fragment`created_at`, false)</code></li>
 <li><code class="language-text">limit(number)</code>; e.g. <code class="language-text">queryBuilder.limit(1)</code></li>
 <li><code class="language-text">offset(number)</code>; e.g. <code class="language-text">queryBuilder.offset(1)</code></li>
-<li><code class="language-text">select(() =&gt; sqlFragment, alias)</code>; e.g. <code class="language-text">queryBuilder.select(() =&gt; build.pgSql.fragment`gen_random_uuid()`, &#39;__my_random_uuid&#39;)</code> - it's advised to start your alias with two underscores to prevent it clashing with any potential columns exposed as GraphQL fields.</li>
+<li><code class="language-text">select(() =&gt; sqlFragment, alias)</code>; e.g.
+<code class="language-text">queryBuilder.select(() =&gt; build.pgSql.fragment`gen_random_uuid()`, &#39;__my_random_uuid&#39;)</code> -
+it's advised to start your alias with two underscores to prevent it clashing
+with any potential columns exposed as GraphQL fields.</li>
 </ul>
 <p>On top of these methods, <code class="language-text">QueryBuilder</code> has the following useful properties:</p>
 <ul>
 <li><code class="language-text">parentQueryBuilder</code>: gives access to the parent QueryBuilder instance;
 primarily (and possibly only) useful for executing
-<code class="language-text">queryBuilder.parentQueryBuilder.getTableAlias()</code> so you can reference a
-field on the parent record (e.g. to perform filtering based on a relation).</li>
+<code class="language-text">queryBuilder.parentQueryBuilder.getTableAlias()</code> so you can reference a field
+on the parent record (e.g. to perform filtering based on a relation).</li>
 </ul>
-<p>There are many other internal properties and methods, but you probably
-shouldn't call them. Only rely on the methods and properties documented above.</p>
+<p>There are many other internal properties and methods, but you probably shouldn't
+call them. Only rely on the methods and properties documented above.</p>
 <h5 id="querybuilder-named-children"><a href="#querybuilder-named-children" aria-label="querybuilder named children permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>QueryBuilder named children</h5>
 <p>In very rare circumstances you might also need to use the following methods:</p>
 <ul>
-<li><code class="language-text">buildChild()</code>; builds a child query builder, automatically passing through the relevant options and setting <code class="language-text">parentQueryBuilder</code> for you - useful for constructing subqueries (normally you'd use <code class="language-text">build.pgQueryFromResolveData</code> rather than using the <code class="language-text">buildChild</code> method directly)</li>
-<li><code class="language-text">buildNamedChildSelecting(name, from, selectExpression)</code>; creates a child query builder that's named <code class="language-text">name</code>, selecting only <code class="language-text">selectExpression</code> using the table (or subquery) described in <code class="language-text">from</code>.</li>
-<li><code class="language-text">getNamedChild(name)</code>; gets the named child created by <code class="language-text">buildNamedChildSelecting</code></li>
+<li><code class="language-text">buildChild()</code>; builds a child query builder, automatically passing through
+the relevant options and setting <code class="language-text">parentQueryBuilder</code> for you - useful for
+constructing subqueries (normally you'd use <code class="language-text">build.pgQueryFromResolveData</code>
+rather than using the <code class="language-text">buildChild</code> method directly)</li>
+<li><code class="language-text">buildNamedChildSelecting(name, from, selectExpression)</code>; creates a child
+query builder that's named <code class="language-text">name</code>, selecting only <code class="language-text">selectExpression</code> using the
+table (or subquery) described in <code class="language-text">from</code>.</li>
+<li><code class="language-text">getNamedChild(name)</code>; gets the named child created by
+<code class="language-text">buildNamedChildSelecting</code></li>
 </ul>
-<p>An example of these methods being used can be found here: <a href="https://github.com/singingwolfboy/graphile-engine/blob/44a2496102267ce664c1286860b6368283463063/packages/postgraphile-core/__tests__/integration/ToyCategoriesPlugin.js">https://github.com/singingwolfboy/graphile-engine/blob/44a2496102267ce664c1286860b6368283463063/packages/postgraphile-core/__tests__/integration/ToyCategoriesPlugin.js</a></p>
-<p>In this example we have a many-to-many relationship with three tables: <code class="language-text">toys</code>, <code class="language-text">categories</code> and the join table between them: <code class="language-text">toy_categories</code>. We add a <code class="language-text">categories</code> field onto the <code class="language-text">Toy</code> type, which constructs a subquery called <code class="language-text">toyCategoriesSubquery</code> to determine the categories the current toy is in from the join table <code class="language-text">toy_categories</code>. Later, in a different plugin (just a different hook in this example), we want to be able to filter this list of <code class="language-text">categories</code> to only the list of categories where the join table's <code class="language-text">toy_categories.approved</code> field is true; to do so we need to be able to get access to this "named" subquery so that we can add conditions to it's <code class="language-text">WHERE</code> clause.</p>
-<p>In most cases you're only dealing with one or two tables so you won't need this level of complexity.</p>
+<p>An example of these methods being used can be found here:
+<a href="https://github.com/singingwolfboy/graphile-engine/blob/44a2496102267ce664c1286860b6368283463063/packages/postgraphile-core/__tests__/integration/ToyCategoriesPlugin.js">https://github.com/singingwolfboy/graphile-engine/blob/44a2496102267ce664c1286860b6368283463063/packages/postgraphile-core/__tests__/integration/ToyCategoriesPlugin.js</a></p>
+<p>In this example we have a many-to-many relationship with three tables: <code class="language-text">toys</code>,
+<code class="language-text">categories</code> and the join table between them: <code class="language-text">toy_categories</code>. We add a
+<code class="language-text">categories</code> field onto the <code class="language-text">Toy</code> type, which constructs a subquery called
+<code class="language-text">toyCategoriesSubquery</code> to determine the categories the current toy is in from
+the join table <code class="language-text">toy_categories</code>. Later, in a different plugin (just a different
+hook in this example), we want to be able to filter this list of <code class="language-text">categories</code> to
+only the list of categories where the join table's <code class="language-text">toy_categories.approved</code>
+field is true; to do so we need to be able to get access to this "named"
+subquery so that we can add conditions to it's <code class="language-text">WHERE</code> clause.</p>
+<p>In most cases you're only dealing with one or two tables so you won't need this
+level of complexity.</p>
 <h4 id="query-example"><a href="#query-example" aria-label="query example permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Query Example</h4>
-<p>The below is a simple example which would have been better served by <a href="/postgraphile/custom-queries/#custom-query-sql-procedures">Custom
-Query SQL
-Procedures</a>; however
-it demonstrates using <code class="language-text">makeExtendSchemaPlugin</code> with a database record, table
-connection, and list of database records.</p>
+<p>The below is a simple example which would have been better served by
+<a href="/postgraphile/custom-queries/#custom-query-sql-procedures">Custom Query SQL Procedures</a>;
+however it demonstrates using <code class="language-text">makeExtendSchemaPlugin</code> with a database record,
+table connection, and list of database records.</p>
 <p>You can also use this system to define mutations or to call out to external
 services — see below.</p>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> <span class="token punctuation">{</span> postgraphile <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"postgraphile"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -364,8 +387,8 @@ app<span class="token punctuation">.</span><span class="token function">use</spa
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
 app<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">3030</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <h4 id="mutation-example"><a href="#mutation-example" aria-label="mutation example permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Mutation Example</h4>
-<p>For example, you might want to add a custom <code class="language-text">registerUser</code> mutation
-which inserts the new user into the database and also sends them an email:</p>
+<p>For example, you might want to add a custom <code class="language-text">registerUser</code> mutation which
+inserts the new user into the database and also sends them an email:</p>
 <div class="gatsby-highlight has-highlighted-lines" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> MyRegisterUserMutationPlugin <span class="token operator">=</span> <span class="token function">makeExtendSchemaPlugin</span><span class="token punctuation">(</span><span class="token parameter">build</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
   <span class="token keyword">const</span> <span class="token punctuation">{</span> pgSql<span class="token punctuation">:</span> sql <span class="token punctuation">}</span> <span class="token operator">=</span> build<span class="token punctuation">;</span>
   <span class="token keyword">return</span> <span class="token punctuation">{</span>
@@ -395,29 +418,29 @@ ahead" and determine what to request from the database.</p>
 not defined at the root level) then for performance reasons you should hook into
 the "look-ahead" system when adding a custom connection/list/record, rather than
 using a resolver. You can achieve this with the <code class="language-text">@pgQuery</code> directive, as shown
-below. Alternative approaches you may wish to consider are <a href="/postgraphile/smart-comments/">Smart
-Comments</a> and <a href="/postgraphile/computed-columns/">Computed
-Columns</a>.</p>
+below. Alternative approaches you may wish to consider are
+<a href="/postgraphile/smart-comments/">Smart Comments</a> and
+<a href="/postgraphile/computed-columns/">Computed Columns</a>.</p>
 <h4 id="pgquery-with-an-object-type"><a href="#pgquery-with-an-object-type" aria-label="pgquery with an object type permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>@pgQuery with an object type</h4>
 <p><strong>NOTE: this section applies to PostGraphile v4.4.0+</strong></p>
 <p>When returning an object type (e.g. a table/composite type, connection, etc),
 the <code class="language-text">@pgQuery</code> directive accepts the following inputs:</p>
 <ul>
 <li><code class="language-text">source</code>: the source of the row(s) used in the result; can be a table name,
-subquery, or function call (but must always return the relevant table type
-and nothing more); currently this requires the boilerplate syntax below,
-but this may be simplified in future</li>
-<li><code class="language-text">withQueryBuilder(queryBuilder, args)</code>: this optional callback function is
-how you customise which rows will be returned from the <code class="language-text">source</code>; you may
-add <code class="language-text">where</code>, <code class="language-text">orderBy</code>, <code class="language-text">limit</code> and <code class="language-text">offset</code> constraints. The <code class="language-text">args</code>
-argument contains the arguments that the field was passed, if any. This may
-be useful when constructing the query constraints.</li>
+subquery, or function call (but must always return the relevant table type and
+nothing more); currently this requires the boilerplate syntax below, but this
+may be simplified in future</li>
+<li><code class="language-text">withQueryBuilder(queryBuilder, args)</code>: this optional callback function is how
+you customise which rows will be returned from the <code class="language-text">source</code>; you may add
+<code class="language-text">where</code>, <code class="language-text">orderBy</code>, <code class="language-text">limit</code> and <code class="language-text">offset</code> constraints. The <code class="language-text">args</code> argument
+contains the arguments that the field was passed, if any. This may be useful
+when constructing the query constraints.</li>
 </ul>
 <p>The <code class="language-text">@pgQuery</code> directive may be used with connections, lists of table records,
 or individual table records. (When used with individual records you must ensure
 that at most one row is returned; you can do so with the <code class="language-text">queryBuilder.limit</code>
-constraint.) You can see examples of these three use cases <a href="https://github.com/graphile/graphile-engine/blob/5211758b7a48191ffd7600f9f5ae572672ffd221/packages/graphile-utils/__tests__/ExtendSchemaPlugin-pg.test.js#L507-L720">in the
-tests</a>.</p>
+constraint.) You can see examples of these three use cases
+<a href="https://github.com/graphile/graphile-engine/blob/5211758b7a48191ffd7600f9f5ae572672ffd221/packages/graphile-utils/__tests__/ExtendSchemaPlugin-pg.test.js#L507-L720">in the tests</a>.</p>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> <span class="token punctuation">{</span> makeExtendSchemaPlugin<span class="token punctuation">,</span> gql<span class="token punctuation">,</span> embed <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"graphile-utils"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token function">makeExtendSchemaPlugin</span><span class="token punctuation">(</span><span class="token parameter">build</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
@@ -440,16 +463,23 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>Notes:</p>
 <ul>
 <li><code class="language-text">PetsConnection</code> is just one type from the schema, as an example</li>
-<li><code class="language-text">queryBuilder.getTableAlias()</code> refers to the <code class="language-text">app_public.pets</code> referenced in the <code class="language-text">source</code> field</li>
-<li><code class="language-text">queryBuilder.parentQueryBuilder.getTableAlias()</code> refers to the table/function/view/etc from which the <code class="language-text">User</code> (the parent type) was retrieved</li>
-<li>Regular connection arguments are added automatically thanks to the plugin system</li>
+<li><code class="language-text">queryBuilder.getTableAlias()</code> refers to the <code class="language-text">app_public.pets</code> referenced in
+the <code class="language-text">source</code> field</li>
+<li><code class="language-text">queryBuilder.parentQueryBuilder.getTableAlias()</code> refers to the
+table/function/view/etc from which the <code class="language-text">User</code> (the parent type) was retrieved</li>
+<li>Regular connection arguments are added automatically thanks to the plugin
+system</li>
 </ul>
 <h4 id="pgquery-with-a-leaf-type"><a href="#pgquery-with-a-leaf-type" aria-label="pgquery with a leaf type permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>@pgQuery with a leaf type</h4>
 <p><strong>NOTE: this section applies to PostGraphile v4.4.6+</strong></p>
-<p>The @pgQuery directive can also be used with leaf fields (those returning a scalar or list thereof). To do so, we pass <code class="language-text">@pgQuery</code> a <code class="language-text">fragment:</code> argument. This argument can take two forms:</p>
+<p>The @pgQuery directive can also be used with leaf fields (those returning a
+scalar or list thereof). To do so, we pass <code class="language-text">@pgQuery</code> a <code class="language-text">fragment:</code> argument.
+This argument can take two forms:</p>
 <ol>
 <li>an <code class="language-text">sql.fragment</code></li>
-<li>a function <code class="language-text">f(queryBuilder, args)</code> that returns a <code class="language-text">sql.fragment</code>. <code class="language-text">queryBuilder</code> is a <code class="language-text">QueryBuilder</code> instance, and <code class="language-text">args</code> is the arguments that were passed to the GraphQL field.</li>
+<li>a function <code class="language-text">f(queryBuilder, args)</code> that returns a <code class="language-text">sql.fragment</code>.
+<code class="language-text">queryBuilder</code> is a <code class="language-text">QueryBuilder</code> instance, and <code class="language-text">args</code> is the arguments that
+were passed to the GraphQL field.</li>
 </ol>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> <span class="token punctuation">{</span> makeExtendSchemaPlugin<span class="token punctuation">,</span> gql<span class="token punctuation">,</span> embed <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"graphile-utils"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -472,10 +502,17 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>Notes:</p>
 <ul>
-<li><code class="language-text">queryBuilder.getTableAlias()</code> refers to the table/function/view/etc from which the <code class="language-text">User</code> (the parent type) was retrieved</li>
+<li><code class="language-text">queryBuilder.getTableAlias()</code> refers to the table/function/view/etc from
+which the <code class="language-text">User</code> (the parent type) was retrieved</li>
 <li>there is no <code class="language-text">queryBuilder.parentQueryBuilder</code></li>
 </ul>
-<p>You can see more examples of these use cases <a href="https://github.com/graphile/graphile-engine/blob/49259c291d651ab8b70d1f1785cf273bdd97fcf1/packages/graphile-utils/__tests__/ExtendSchemaPlugin-pg.test.js#L713-L832">in the
-tests</a>.</p>
+<p>You can see more examples of these use cases
+<a href="https://github.com/graphile/graphile-engine/blob/49259c291d651ab8b70d1f1785cf273bdd97fcf1/packages/graphile-utils/__tests__/ExtendSchemaPlugin-pg.test.js#L713-L832">in the tests</a>.</p>
 <h3 id="plugin-sql-privileges"><a href="#plugin-sql-privileges" aria-label="plugin sql privileges permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Plugin SQL Privileges</h3>
-<p>Plugins access the database with the same privileges as everything else - they are subject to RLS/RBAC/etc. If your user does not have privileges to perform the action your plugin is attempting to achieve then you may need to create a companion database function that is marked as <code class="language-text">SECURITY DEFINER</code> in order to perform the action with elevated privileges; alternatively you could use this database function directly - see <a href="/postgraphile/custom-mutations/">Custom Mutations</a> for more details.</p></div></div><br/><br/><div class="col-xs-12 mt3 mb5"><div class="row between-xs"><div class="col-xs-6"><a class="" href="/postgraphile/make-change-nullability-plugin/"><span class="fas fa-fw fa-arrow-left"></span> <span>makeChangeNullabilityPlugin</span></a></div><div class="col-xs-6 tr"><a class="" href="/postgraphile/make-process-schema-plugin/"><span>makeProcessSchemaPlugin</span> <span class="fas fa-fw fa-arrow-right"></span></a></div></div></div></div></div></div></div></section><section class="mailinglist"><div class="container"><div class="row"><div class="col-xs-12"><div class="hero-block"><h3>Questions, comments or feedback?<br/>Email<!-- --> <a href="mailto:info@graphile.org?subject=Documentation%20question/comment/feedback:)">info@graphile.org</a></h3><form action="//graphile.us16.list-manage.com/subscribe/post?u=d103f710cf00a9273b55e8e9b&amp;id=c3a9eb5c4e" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate=""><div id="mc_embed_signup_scroll" class="center hero-block"><p>Keep up to date on Graphile and PostGraphile features/changes. Subscribe to our occasional announcements newsletter:</p><div class="mc-field-group form-inline justify-content-center"><div class="form-group"><div class="mb2"><label class="label--small" for="mce-EMAIL">Email address:</label></div><input type="email" autoCapitalize="off" autoComplete="off" autoCorrect="off" class="input-text mb0-ns mb1" id="mce-EMAIL" name="EMAIL" spellcheck="false" value=""/><div style="position:absolute;left:-5000px" aria-hidden="true"><input type="text" name="b_d103f710cf00a9273b55e8e9b_c3a9eb5c4e" tabindex="-1" value=""/></div><input type="submit" class="button--solid" id="mc-embedded-subscribe" name="subscribe" value="Subscribe"/></div><div id="mce-responses" class="clear"><div class="response" id="mce-error-response" style="display:none"></div><div class="response" id="mce-success-response" style="display:none"></div></div></div></div></form></div></div></div></div></section></div><footer class="bg-white pv5 bt b--black f6 lh-copy"><div class="container"><div class="row"><div class="col-xs-12 col-md-2 nested-list-reset "><h6>PostGraphile</h6><ul><li><a href="/postgraphile/introduction/">Documentation</a></li><li><a href="/postgraphile/">About</a></li><li><a href="/postgraphile/community-plugins/">Community Plugins</a></li><li><a href="https://github.com/graphile/postgraphile/releases"><i class="fab fa-github"></i> Changelog</a></li></ul></div><div class="col-xs-12 col-md-2 nested-list-reset "><h6>Graphile Engine</h6><ul><li><a href="/graphile-build/getting-started/">Documentation</a></li><li><a href="/graphile-build/">About</a></li><li><a href="/graphile-build/plugins/">Plugins</a></li></ul></div><div class="col-xs-12 col-md-2 nested-list-reset"><h6>Resources</h6><ul><li><a href="/news/"><i class="fas fa-bullhorn"></i> News</a></li><li><a href="https://github.com/graphile"><i class="fab fa-github"></i> GitHub</a></li><li><a href="http://discord.gg/graphile"><i class="fab fa-discord"></i> Chat (discord)</a></li><li><a href="https://twitter.com/graphilehq"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="/news/press-kit/"><i class="fas fa-file-archive"></i> Press Kit</a></li><li><a to="https://learn.graphile.org/"><i class="fas fa-graduation-cap"></i> Learn</a></li></ul></div><div class="col-xs-12 col-md-offset-1 col-md-5"><h6>About</h6>PostGraphile and Graphile Build are crowd-funded Open Source Software, developed and maintained primarily by<!-- --> <a href="https://twitter.com/benjie">@Benjie</a> with the help of the community.<br/><br/>You can support the projects via<!-- --> <a href="/sponsor/">sponsorship</a>, by<!-- --> <a href="/postgraphile/pricing/">going Pro</a>, or by paying for<!-- --> <a href="/support/">Professional Services</a>. Your support is gratefully received 🙏<br/><br/>This site is copyright © Benjie Gillam <!-- -->2020<!-- -->. Design and logos copyright © Benjie Gillam and Jof Arnold<!-- --> <!-- -->2020<!-- -->.<br/><br/>Corrections and contributions to this website are gratefully received via<!-- --> <a href="https://github.com/graphile/graphile.github.io">its GitHub repository</a>.<br/><br/>PostGraphile was <a href="/history/">originally authored</a> as PostGraphQL by<!-- --> <a href="https://twitter.com/calebmer">Caleb Meredith</a>.</div></div></div></footer></div></div></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/postgraphile/make-extend-schema-plugin/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"app":["/app-3811488cdc505470599d.js"],"component---src-templates-page-js":["/component---src-templates-page-js-4e9c47ca47407d74b319.js"],"component---src-templates-marketing-js":["/component---src-templates-marketing-js-47ecb6f44415ddd59cee.js"],"component---src-pages-contribute-mdx":["/component---src-pages-contribute-mdx-a8a07713f79eeff0c5e5.js"],"component---src-pages-index-mdx":["/component---src-pages-index-mdx-14d5dd2f121680c1224d.js"],"component---src-pages-postgraphile-index-mdx":["/component---src-pages-postgraphile-index-mdx-779831059dc64516213f.js"],"component---src-pages-sponsor-mdx":["/component---src-pages-sponsor-mdx-98d95a5bb43e2c88b31b.js"],"component---src-pages-support-index-mdx":["/component---src-pages-support-index-mdx-0d5d3ba54128e3216e72.js"]};/*]]>*/</script><script src="/component---src-templates-page-js-4e9c47ca47407d74b319.js" async=""></script><script src="/app-3811488cdc505470599d.js" async=""></script><script src="/commons-9e8a853d07f1cd13bee8.js" async=""></script><script src="/styles-cd8cc4bf0fa3d324a179.js" async=""></script><script src="/webpack-runtime-d329dd4dcbed31aa3262.js" async=""></script><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script></body></html>
+<p>Plugins access the database with the same privileges as everything else - they
+are subject to RLS/RBAC/etc. If your user does not have privileges to perform
+the action your plugin is attempting to achieve then you may need to create a
+companion database function that is marked as <code class="language-text">SECURITY DEFINER</code> in order to
+perform the action with elevated privileges; alternatively you could use this
+database function directly - see
+<a href="/postgraphile/custom-mutations/">Custom Mutations</a> for more details.</p></div></div><br/><br/><div class="col-xs-12 mt3 mb5"><div class="row between-xs"><div class="col-xs-6"><a class="" href="/postgraphile/make-change-nullability-plugin/"><span class="fas fa-fw fa-arrow-left"></span> <span>makeChangeNullabilityPlugin</span></a></div><div class="col-xs-6 tr"><a class="" href="/postgraphile/make-process-schema-plugin/"><span>makeProcessSchemaPlugin</span> <span class="fas fa-fw fa-arrow-right"></span></a></div></div></div></div></div></div></div></section><section class="mailinglist"><div class="container"><div class="row"><div class="col-xs-12"><div class="hero-block"><h3>Questions, comments or feedback?<br/>Email<!-- --> <a href="mailto:info@graphile.org?subject=Documentation%20question/comment/feedback:)">info@graphile.org</a></h3><form action="//graphile.us16.list-manage.com/subscribe/post?u=d103f710cf00a9273b55e8e9b&amp;id=c3a9eb5c4e" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate=""><div id="mc_embed_signup_scroll" class="center hero-block"><p>Keep up to date on Graphile and PostGraphile features/changes. Subscribe to our occasional announcements newsletter:</p><div class="mc-field-group form-inline justify-content-center"><div class="form-group"><div class="mb2"><label class="label--small" for="mce-EMAIL">Email address:</label></div><input type="email" autoCapitalize="off" autoComplete="off" autoCorrect="off" class="input-text mb0-ns mb1" id="mce-EMAIL" name="EMAIL" spellcheck="false" value=""/><div style="position:absolute;left:-5000px" aria-hidden="true"><input type="text" name="b_d103f710cf00a9273b55e8e9b_c3a9eb5c4e" tabindex="-1" value=""/></div><input type="submit" class="button--solid" id="mc-embedded-subscribe" name="subscribe" value="Subscribe"/></div><div id="mce-responses" class="clear"><div class="response" id="mce-error-response" style="display:none"></div><div class="response" id="mce-success-response" style="display:none"></div></div></div></div></form></div></div></div></div></section></div><footer class="bg-white pv5 bt b--black f6 lh-copy"><div class="container"><div class="row"><div class="col-xs-12 col-md-2 nested-list-reset "><h6>PostGraphile</h6><ul><li><a href="/postgraphile/introduction/">Documentation</a></li><li><a href="/postgraphile/">About</a></li><li><a href="/postgraphile/community-plugins/">Community Plugins</a></li><li><a href="https://github.com/graphile/postgraphile/releases"><i class="fab fa-github"></i> Changelog</a></li></ul></div><div class="col-xs-12 col-md-2 nested-list-reset "><h6>Graphile Engine</h6><ul><li><a href="/graphile-build/getting-started/">Documentation</a></li><li><a href="/graphile-build/">About</a></li><li><a href="/graphile-build/plugins/">Plugins</a></li></ul></div><div class="col-xs-12 col-md-2 nested-list-reset"><h6>Resources</h6><ul><li><a href="/news/"><i class="fas fa-bullhorn"></i> News</a></li><li><a href="https://github.com/graphile"><i class="fab fa-github"></i> GitHub</a></li><li><a href="http://discord.gg/graphile"><i class="fab fa-discord"></i> Chat (discord)</a></li><li><a href="https://twitter.com/graphilehq"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="/news/press-kit/"><i class="fas fa-file-archive"></i> Press Kit</a></li><li><a to="https://learn.graphile.org/"><i class="fas fa-graduation-cap"></i> Learn</a></li></ul></div><div class="col-xs-12 col-md-offset-1 col-md-5"><h6>About</h6>PostGraphile and Graphile Build are crowd-funded Open Source Software, developed and maintained primarily by<!-- --> <a href="https://twitter.com/benjie">@Benjie</a> with the help of the community.<br/><br/>You can support the projects via<!-- --> <a href="/sponsor/">sponsorship</a>, by<!-- --> <a href="/postgraphile/pricing/">going Pro</a>, or by paying for<!-- --> <a href="/support/">Professional Services</a>. Your support is gratefully received 🙏<br/><br/>This site is copyright © Benjie Gillam <!-- -->2020<!-- -->. Design and logos copyright © Benjie Gillam and Jof Arnold<!-- --> <!-- -->2020<!-- -->.<br/><br/>Corrections and contributions to this website are gratefully received via<!-- --> <a href="https://github.com/graphile/graphile.github.io">its GitHub repository</a>.<br/><br/>PostGraphile was <a href="/history/">originally authored</a> as PostGraphQL by<!-- --> <a href="https://twitter.com/calebmer">Caleb Meredith</a>.</div></div></div></footer></div></div></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/postgraphile/make-extend-schema-plugin/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"app":["/app-3811488cdc505470599d.js"],"component---src-templates-page-js":["/component---src-templates-page-js-4e9c47ca47407d74b319.js"],"component---src-templates-marketing-js":["/component---src-templates-marketing-js-47ecb6f44415ddd59cee.js"],"component---src-pages-contribute-mdx":["/component---src-pages-contribute-mdx-a8a07713f79eeff0c5e5.js"],"component---src-pages-index-mdx":["/component---src-pages-index-mdx-14d5dd2f121680c1224d.js"],"component---src-pages-postgraphile-index-mdx":["/component---src-pages-postgraphile-index-mdx-779831059dc64516213f.js"],"component---src-pages-sponsor-mdx":["/component---src-pages-sponsor-mdx-98d95a5bb43e2c88b31b.js"],"component---src-pages-support-index-mdx":["/component---src-pages-support-index-mdx-0d5d3ba54128e3216e72.js"]};/*]]>*/</script><script src="/component---src-templates-page-js-4e9c47ca47407d74b319.js" async=""></script><script src="/app-3811488cdc505470599d.js" async=""></script><script src="/commons-9e8a853d07f1cd13bee8.js" async=""></script><script src="/styles-cd8cc4bf0fa3d324a179.js" async=""></script><script src="/webpack-runtime-d329dd4dcbed31aa3262.js" async=""></script><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script></body></html>

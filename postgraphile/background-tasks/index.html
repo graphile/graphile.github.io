@@ -59,11 +59,31 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><a href="/postgraphile/background-tasks/#limitations">Limitations</a></li>
 </ul>
 </li>
-</ul></div></div><div class="edit-this-page" style="display:"><a href="https://github.com/graphile/graphile.github.io/edit/develop/src/pages/postgraphile/background-tasks.md">📝 Suggest improvement/edit this page</a></div><h2 class="mt3">Background Tasks in PostGraphile</h2><div><p>In your GraphQL server typically most processing will be done in the "foreground", as part of the request-response cycle. However, since clients typically wait for this request cycle to complete before allowing the user to continue to the next task, if this processing is slow it will make your application feel sluggish and can frustrate your users. Because of this desire for low-latency APIs, it's good practice to only perform essential calculations during the request-response cycle, and to "queue" additional tasks for background processing.</p>
-<p>Examples of potential background tasks include creating PDFs, sending emails, calling an external API that may be slow, performing big calculations, and the like. Background tasks are also a good way of dealing with tasks where temporary failures are expected, for example you might not be able to send an email immediately - rather than failing the request-response cycle we can just try again (and again, and again) over the coming seconds, minutes, and hours. Another task you might want to solve with background tasks is running code periodically, detached from a user action. These are all good cases for background processing: the code runs outside of main request-response cycle, storing the result somewhere (typically on the database) and (optionally) notifying the client once it has finished.</p>
-<p>Task queues are systems that enable background processing for an application. They enable a way to persist this background processing tasks, notify the workers and handle errors and re-tries.</p>
+</ul></div></div><div class="edit-this-page" style="display:"><a href="https://github.com/graphile/graphile.github.io/edit/develop/src/pages/postgraphile/background-tasks.md">📝 Suggest improvement/edit this page</a></div><h2 class="mt3">Background Tasks in PostGraphile</h2><div><p>In your GraphQL server typically most processing will be done in the
+"foreground", as part of the request-response cycle. However, since clients
+typically wait for this request cycle to complete before allowing the user to
+continue to the next task, if this processing is slow it will make your
+application feel sluggish and can frustrate your users. Because of this desire
+for low-latency APIs, it's good practice to only perform essential calculations
+during the request-response cycle, and to "queue" additional tasks for
+background processing.</p>
+<p>Examples of potential background tasks include creating PDFs, sending emails,
+calling an external API that may be slow, performing big calculations, and the
+like. Background tasks are also a good way of dealing with tasks where temporary
+failures are expected, for example you might not be able to send an email
+immediately - rather than failing the request-response cycle we can just try
+again (and again, and again) over the coming seconds, minutes, and hours.
+Another task you might want to solve with background tasks is running code
+periodically, detached from a user action. These are all good cases for
+background processing: the code runs outside of main request-response cycle,
+storing the result somewhere (typically on the database) and (optionally)
+notifying the client once it has finished.</p>
+<p>Task queues are systems that enable background processing for an application.
+They enable a way to persist this background processing tasks, notify the
+workers and handle errors and re-tries.</p>
 <h3 id="tasks-queues-and-workers-for-postgres"><a href="#tasks-queues-and-workers-for-postgres" aria-label="tasks queues and workers for postgres permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tasks queues and workers for Postgres</h3>
-<p>There are several exisiting solutions that can integrate with a PostgreSQL database or expose a Node.js-friendly API.</p>
+<p>There are several exisiting solutions that can integrate with a PostgreSQL
+database or expose a Node.js-friendly API.</p>
 <ul>
 <li><a href="https://github.com/graphile/worker">Graphile Worker</a></li>
 <li><a href="https://cloud.google.com/tasks/">GCP Cloud Tasks</a> (via Graphile Worker)</li>
@@ -72,8 +92,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><a href="https://www.npmjs.com/package/pg-boss">pg-boss</a></li>
 </ul>
 <h4 id="choosing-your-task-queue"><a href="#choosing-your-task-queue" aria-label="choosing your task queue permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Choosing your Task Queue</h4>
-<p>An important topic you will need to consider is how tasks are created in your queue.</p>
-<p>Since we generally recommend database-driven development, the recommend approach is to use Graphile Worker (or Graphile Worker + another task queue through task delegation) since you can add jobs to the queue both from inside PostgreSQL functions (and thus triggers) and from any other source.</p>
+<p>An important topic you will need to consider is how tasks are created in your
+queue.</p>
+<p>Since we generally recommend database-driven development, the recommend approach
+is to use Graphile Worker (or Graphile Worker + another task queue through task
+delegation) since you can add jobs to the queue both from inside PostgreSQL
+functions (and thus triggers) and from any other source.</p>
 <p>Other important considerations when choosing a task queue would be:</p>
 <ul>
 <li>Complexity</li>
@@ -83,18 +107,27 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li>Privacy</li>
 </ul>
 <h3 id="graphile-worker"><a href="#graphile-worker" aria-label="graphile worker permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Graphile Worker</h3>
-<p>Graphile Worker is a natural fit for a PostGraphile stack due to it's PostgreSQL-first nature. It is a simple library that runs Node.js code (or any code Node.js can delegate to) when a task is queued within the database. Thanks to PostgreSQL's <code class="language-text">LISTEN/NOTIFY</code> pubsub features, Graphile Worker is notified when a task is queued and can fetch, execute, and complete a trivial task in 2-3ms from when it was queued; this results in your system feeling very snappy.</p>
-<p>Graphile Worker stores tasks into it's own schema within PostgreSQL, and offers a simple SQL API to create jobs. Queueing a job might look like:</p>
+<p>Graphile Worker is a natural fit for a PostGraphile stack due to it's
+PostgreSQL-first nature. It is a simple library that runs Node.js code (or any
+code Node.js can delegate to) when a task is queued within the database. Thanks
+to PostgreSQL's <code class="language-text">LISTEN/NOTIFY</code> pubsub features, Graphile Worker is notified
+when a task is queued and can fetch, execute, and complete a trivial task in
+2-3ms from when it was queued; this results in your system feeling very snappy.</p>
+<p>Graphile Worker stores tasks into it's own schema within PostgreSQL, and offers
+a simple SQL API to create jobs. Queueing a job might look like:</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">SELECT</span> graphile_worker<span class="token punctuation">.</span>add_job<span class="token punctuation">(</span><span class="token string">'hello'</span><span class="token punctuation">,</span> json_build_object<span class="token punctuation">(</span><span class="token string">'name'</span><span class="token punctuation">,</span> <span class="token string">'Bobby Tables'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
-<p>Tasks are created in JavaScript/TypeScript, so it fits directly into your PostGraphile stack</p>
+<p>Tasks are created in JavaScript/TypeScript, so it fits directly into your
+PostGraphile stack</p>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token comment">// tasks/hello.js</span>
 module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">payload<span class="token punctuation">,</span> helpers</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
   <span class="token keyword">const</span> <span class="token punctuation">{</span> name <span class="token punctuation">}</span> <span class="token operator">=</span> payload<span class="token punctuation">;</span>
   helpers<span class="token punctuation">.</span>logger<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Hello, </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
-<p>Check the <a href="https://github.com/graphile/worker">Graphile Worker docs</a> for details on how to set up and use it.</p>
+<p>Check the <a href="https://github.com/graphile/worker">Graphile Worker docs</a> for details
+on how to set up and use it.</p>
 <h4 id="limitations"><a href="#limitations" aria-label="limitations permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Limitations</h4>
-<p>Despite all the benefits, Graphile Worker stills lacks some features provided by other more mature tasks queues</p>
+<p>Despite all the benefits, Graphile Worker stills lacks some features provided by
+other more mature tasks queues</p>
 <ul>
 <li>Currently Graphile Worker doesn't expose a GUI to monitor or manage tasks.</li>
 <li>??</li>

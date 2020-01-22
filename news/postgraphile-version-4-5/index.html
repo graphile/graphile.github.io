@@ -52,20 +52,38 @@ Graphile is pleased to announce the release of PostGraphile version 4.5.0, an up
 </p>
 <strong>🚨Beware:</strong> previously the CLI would ignore arguments it didn't understand, now it exits stating the arguments it wasn't expecting. If you were relying on this old behaviour, you will need to update your code to pass valid arguments.
 <h3 id="new-feature-explain-in-graphiql"><a href="#new-feature-explain-in-graphiql" aria-label="new feature explain in graphiql permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>New Feature: Explain in Graph<em>i</em>QL</h3>
-<p>The headline feature in 4.5 is the addition of the new Explain feature in Graph<em>i</em>QL, visible by using the <code class="language-text">--allow-explain</code> flag. In Graph<em>i</em>QL you'll see a new section in your return statement, plus new panel on the right which will show executed query in a readable format.</p>
+<p>The headline feature in 4.5 is the addition of the new Explain feature in
+Graph<em>i</em>QL, visible by using the <code class="language-text">--allow-explain</code> flag. In Graph<em>i</em>QL you'll
+see a new section in your return statement, plus new panel on the right which
+will show executed query in a readable format.</p>
 <div class="tc">
 <img alt="Demo of the new GraphiQL Explain feature in PostGraphile" src="/images/graphiqlexplainbutton.png" />
 </div>
 <h3 id="smart-tags"><a href="#smart-tags" aria-label="smart tags permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Smart Tags</h3>
-<p>No longer do you need to put <code class="language-text">COMMENT</code> commands in the database ("smart comments") to customise your schema, you can now use a tags file to gather these "smart tags" into one, version controlled, easy-to-diff place. Smart comments and smart tags can be used in unison, and both will be supported going forward so you can pick whichever works best for your team.</p>
+<p>No longer do you need to put <code class="language-text">COMMENT</code> commands in the database ("smart
+comments") to customise your schema, you can now use a tags file to gather these
+"smart tags" into one, version controlled, easy-to-diff place. Smart comments
+and smart tags can be used in unison, and both will be supported going forward
+so you can pick whichever works best for your team.</p>
 <h3 id="big-contributions-from-the-graphile-community"><a href="#big-contributions-from-the-graphile-community" aria-label="big contributions from the graphile community permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Big contributions from the Graphile community</h3>
-<p>Thanks to everyone in the Graphile community who has contributed to this release; it's been a good release for community involvement as you can see in the <a href="https://github.com/graphile/postgraphile/releases/tag/v4.5.0">release notes</a>. Contributions from the community include improvements to QueryBuilder, better JWT support and bug fixes for types.</p>
+<p>Thanks to everyone in the Graphile community who has contributed to this
+release; it's been a good release for community involvement as you can see in
+the
+<a href="https://github.com/graphile/postgraphile/releases/tag/v4.5.0">release notes</a>.
+Contributions from the community include improvements to QueryBuilder, better
+JWT support and bug fixes for types.</p>
 <div class="tc">
 <img alt="Thank you" src="/images/thanks.png" />
 </div>
 <h3 id="thank-you-for-your-sponsorship"><a href="#thank-you-for-your-sponsorship" aria-label="thank you for your sponsorship permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Thank you for your sponsorship</h3>
-<p>By significantly reducing the amount of work needed to achieve business goals, PostGraphile results in huge savings for users. If your organization contributes some of these savings back then everyone can benefit from more frequent releases with better performance, better compatibility, better documentation, easier customization, and more features — leading to even greater savings or profits for your organization.</p>
-<p>We now have 84 sponsors across GitHub and Patreon and that means we're funded to spend an average of nearly 2 days per week on Open Source; this is brilliant!</p>
+<p>By significantly reducing the amount of work needed to achieve business goals,
+PostGraphile results in huge savings for users. If your organization contributes
+some of these savings back then everyone can benefit from more frequent releases
+with better performance, better compatibility, better documentation, easier
+customization, and more features — leading to even greater savings or profits
+for your organization.</p>
+<p>We now have 84 sponsors across GitHub and Patreon and that means we're funded to
+spend an average of nearly 2 days per week on Open Source; this is brilliant!</p>
 <p><a href="/sponsor/">Click here to find out more about why and how you should sponsor PostGraphile development.</a></p>
 <h3 id="full-release-notes"><a href="#full-release-notes" aria-label="full release notes permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Full release notes</h3>
 <p>Full detailed technical release notes can be found on GitHub:</p>

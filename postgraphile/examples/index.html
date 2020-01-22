@@ -51,11 +51,12 @@ introduction to GraphQL <a href="https://graphql.org/learn/">here</a> before con
 through the PostGraphile documentation.</em></p>
 <p>Below, you'll find the result of running various GraphQL queries against the
 <a href="https://github.com/graphile/examples/tree/master/db">examples repo schema</a>.
-This is intended to be an introduction and quick reference, for full
-information please use the documentation links.</p>
+This is intended to be an introduction and quick reference, for full information
+please use the documentation links.</p>
 <p>Please be aware that these examples use the
 <a href="https://github.com/graphile-contrib/pg-simplify-inflector">@graphile-contrib/pg-simplify-inflector</a>
-plugin to simplify the field names over the defaults. You can use this via the following commands:</p>
+plugin to simplify the field names over the defaults. You can use this via the
+following commands:</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">yarn add postgraphile @graphile-contrib/pg-simplify-inflector
 yarn postgraphile --append-plugins @graphile-contrib/pg-simplify-inflector</code></pre></div></div></div><br/><div class="flex bg-black h7 w-100 border-box"><div class="w-25 bg-white-20 h-100 pa0 ma0 white w5"><ul class="list h-100 ma0 pa1 pa2-ns"><li class="ma0 pa0"><span class="f7 f6-ns pointer white">▾<!-- --> <!-- -->Basic</span><ul class="list pl2 pl3-ns"><li class="f6 pl1-ns"><span class="f7 f6-ns pointer white">Forums</span></li><li class="f6 pl1-ns"><span class="f7 f6-ns pointer white-60">Forum by slug</span></li></ul></li><li class="ma0 pa0"><span class="f7 f6-ns pointer white-60">▸<!-- --> <!-- -->Collections</span></li><li class="ma0 pa0"><span class="f7 f6-ns pointer white-60">▸<!-- --> <!-- -->Relations</span></li><li class="ma0 pa0"><span class="f7 f6-ns pointer white-60">▸<!-- --> <!-- -->Mutations</span></li><li class="ma0 pa0"><span class="f7 f6-ns pointer white-60">▸<!-- --> <!-- -->Custom queries</span></li><li class="ma0 pa0"><span class="f7 f6-ns pointer white-60">▸<!-- --> <!-- -->Custom mutations</span></li><li class="ma0 pa0"><span class="f7 f6-ns pointer white-60">▸<!-- --> <!-- -->Computed columns</span></li></ul></div><div class="w-75 flex flex-column flex-row-l ba br0 b--silver"><div class="w-100 w-50-l h-50 h-100-l flex-auto"><pre class="no-shadow f7 pa1 bn br0 h-100 overflow-auto language-graphql">{
   forums {

@@ -84,8 +84,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
 </ul></div></div><div class="edit-this-page" style="display:"><a href="https://github.com/graphile/graphile.github.io/edit/develop/src/pages/postgraphile/v3-migration.md">📝 Suggest improvement/edit this page</a></div><h2 class="mt3">Migrating from PostGraphQL v3</h2><div><p>Despite the fact that PostGraphile v4 has rewritten the <em>entire</em> GraphQL schema
 generation from scratch it is still broadly compatible with version 3. This
-document aims to outline solutions to issues you might face whilst upgrading.
-If you face issues that you cannot solve, please do reach out!</p>
+document aims to outline solutions to issues you might face whilst upgrading. If
+you face issues that you cannot solve, please do reach out!</p>
 <h3 id="short-list-of-breaking-changes"><a href="#short-list-of-breaking-changes" aria-label="short list of breaking changes permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Short list of breaking changes</h3>
 <p>These are things that can't be easily solved by just adding a command-line
 switch or configuration parameter - if these are a problem for you then please
@@ -93,31 +93,30 @@ get in touch and we'll discuss how one might go about fixing them (please read
 the below first though!)</p>
 <ul>
 <li>Per-function <code class="language-text">returns setof &lt;table&gt;</code> connection names have been removed in
-favour of a shared connection with the tables themselves - only affects you
-if you have referenced the type name in queries/fragments</li>
-<li>What's nullable and what isn't has changed slightly - shouldn't cause an
-issue in most cases (please read <a href="/postgraphile/why-nullable/">Why is it
-nullable?</a> for an explanation of why each
-thing is nullable)</li>
-<li>JWTs now have an audience of 'postgraphile' rather than 'postgraphql', but
-you can change this with the <code class="language-text">--jwt-verify-audience</code> option</li>
-<li>If you have any tables ending with <code class="language-text">_input</code>, <code class="language-text">_patch</code>, <code class="language-text">Input</code> or <code class="language-text">Patch</code>
-they will be renamed (see bottom of this article)</li>
+favour of a shared connection with the tables themselves - only affects you if
+you have referenced the type name in queries/fragments</li>
+<li>What's nullable and what isn't has changed slightly - shouldn't cause an issue
+in most cases (please read <a href="/postgraphile/why-nullable/">Why is it nullable?</a>
+for an explanation of why each thing is nullable)</li>
+<li>JWTs now have an audience of 'postgraphile' rather than 'postgraphql', but you
+can change this with the <code class="language-text">--jwt-verify-audience</code> option</li>
+<li>If you have any tables ending with <code class="language-text">_input</code>, <code class="language-text">_patch</code>, <code class="language-text">Input</code> or <code class="language-text">Patch</code> they
+will be renamed (see bottom of this article)</li>
 </ul>
 <h3 id="aside-project-financial-status"><a href="#aside-project-financial-status" aria-label="aside project financial status permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Aside: project financial status</h3>
-<p><strong>If your business uses PostGraphile, please invest in <a href="https://www.patreon.com/benjie">our
-Patreon</a></strong> - you'll benefit from faster fixes,
-more features, and better performance. If you need a more commercially
-justifiable way of funding the project then please <a href="mailto:team@graphile.org?subject=Giving%20back">get in
-touch</a>.</p>
+<p><strong>If your business uses PostGraphile, please invest in
+<a href="https://www.patreon.com/benjie">our Patreon</a></strong> - you'll benefit from faster
+fixes, more features, and better performance. If you need a more commercially
+justifiable way of funding the project then please
+<a href="mailto:team@graphile.org?subject=Giving%20back">get in touch</a>.</p>
 <h3 id="deprecations"><a href="#deprecations" aria-label="deprecations permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Deprecations</h3>
 <h4 id="one-to-one-backward-relations"><a href="#one-to-one-backward-relations" aria-label="one to one backward relations permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>One-to-one backward relations</h4>
 <p>These are now supported, so the previous one-to-many approximation for them has
 been deprecated. If you can do so we encourage you to remove the old API via
-<code class="language-text">--legacy-relations=omit</code> (or <code class="language-text">legacyRelations: &#39;omit&#39;</code> in the library
-version); however by default we include both relations. If for some reason you
-don't want the deprecation and you don't want the new behaviour (why?! It's so
-much better!) then you can enable the old behaviour only via
+<code class="language-text">--legacy-relations=omit</code> (or <code class="language-text">legacyRelations: &#39;omit&#39;</code> in the library version);
+however by default we include both relations. If for some reason you don't want
+the deprecation and you don't want the new behaviour (why?! It's so much
+better!) then you can enable the old behaviour only via
 <code class="language-text">--legacy-relations=only</code>.</p>
 <p>Example:</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">table</span> foo <span class="token punctuation">(</span>
@@ -149,20 +148,22 @@ much better!) then you can enable the old behaviour only via
 <span class="token punctuation">}</span></code></pre></div>
 <h3 id="breakdown-of-issues-you-might-face"><a href="#breakdown-of-issues-you-might-face" aria-label="breakdown of issues you might face permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Breakdown of issues you might face</h3>
 <h4 id="new-minimum-requirements"><a href="#new-minimum-requirements" aria-label="new minimum requirements permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>New minimum requirements</h4>
-<p><strong>Problem</strong>: the system fails to start (or even install) because the requirements
-are not met.</p>
+<p><strong>Problem</strong>: the system fails to start (or even install) because the
+requirements are not met.</p>
 <p><strong>Solution</strong>: upgrade your software</p>
 <ul>
 <li>Node.js v8.6+ required</li>
 <li>PostgreSQL 9.4+ required (v9.6+ recommended)</li>
 <li>GraphQL v0.9+ required</li>
 </ul>
-<p><strong>Reasoning</strong>: Node.js v8 is the current active LTS, v6 will be leaving active LTS
-status for maintenance mode in April 2018 (next month at time of writing), and
-supporting 8.6+ as the base level gives us longevity whilst also allowing us to
-leverage native support for some of the powerful features of ES2017 and ES2018.</p>
+<p><strong>Reasoning</strong>: Node.js v8 is the current active LTS, v6 will be leaving active
+LTS status for maintenance mode in April 2018 (next month at time of writing),
+and supporting 8.6+ as the base level gives us longevity whilst also allowing us
+to leverage native support for some of the powerful features of ES2017 and
+ES2018.</p>
 <h4 id="type-json-or-uuid-is-not-recognized"><a href="#type-json-or-uuid-is-not-recognized" aria-label="type json or uuid is not recognized permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Type 'Json' or 'Uuid' is not recognized</h4>
-<p><strong>Problem</strong>: <code class="language-text">Json</code> and <code class="language-text">Uuid</code> have been renamed to <code class="language-text">JSON</code> and <code class="language-text">UUID</code> respectively</p>
+<p><strong>Problem</strong>: <code class="language-text">Json</code> and <code class="language-text">Uuid</code> have been renamed to <code class="language-text">JSON</code> and <code class="language-text">UUID</code>
+respectively</p>
 <p><strong>Solution</strong>: either modify your queries, or if you cannot do that then use the
 <code class="language-text">--legacy-json-uuid</code> command line flag (or <code class="language-text">legacyJsonUuid: true</code> library
 option) to change back to the old naming.</p>
@@ -171,9 +172,9 @@ option) to change back to the old naming.</p>
 <p><strong>Problem</strong>: <code class="language-text">orderBy</code> in connection fields now allows an array of order
 specifications, so you can order by multiple things (like in SQL). However
 certain clients might have a problem with this?</p>
-<p><strong>Solution</strong>: in most cases this should <em>not</em> cause an issue for existing queries -
-according to <a href="https://graphql.github.io/graphql-spec/October2016/#sec-Lists">3.1.7 in the GraphQL
-specification</a>:</p>
+<p><strong>Solution</strong>: in most cases this should <em>not</em> cause an issue for existing
+queries - according to
+<a href="https://graphql.github.io/graphql-spec/October2016/#sec-Lists">3.1.7 in the GraphQL specification</a>:</p>
 <blockquote>
 <p>If the value passed as an input to a list type is not a list and not the null
 value, it should be coerced as though the input was a list of size one, where
@@ -188,22 +189,24 @@ with a non-breaking change (according to the above) we did!</p>
 <p><strong>Reasoning</strong>: named types are helpful</p>
 <h4 id="jwts-now-have-audience-postgraphile--issuer-postgraphile"><a href="#jwts-now-have-audience-postgraphile--issuer-postgraphile" aria-label="jwts now have audience postgraphile  issuer postgraphile permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JWTs now have audience 'postgraphile' / issuer 'postgraphile'</h4>
 <p><strong>Problem</strong>: we changed the audience with the rename of the library</p>
-<p><strong>Solution</strong>: if you can't update your config you can make sure your token objects
-returned in the DB have <code class="language-text">aud: &#39;postgraphql&#39;, iss: &#39;postgraphql&#39;</code> (solution
-untested - if you used this please let <a href="https://twitter.com/benjie">me</a> know
-whether it worked or not)</p>
-<p><strong>Reasoning</strong>: we renamed the library, it'd be confusing for new users to reference
-the old name.</p>
+<p><strong>Solution</strong>: if you can't update your config you can make sure your token
+objects returned in the DB have <code class="language-text">aud: &#39;postgraphql&#39;, iss: &#39;postgraphql&#39;</code>
+(solution untested - if you used this please let
+<a href="https://twitter.com/benjie">me</a> know whether it worked or not)</p>
+<p><strong>Reasoning</strong>: we renamed the library, it'd be confusing for new users to
+reference the old name.</p>
 <h4 id="functions-now-use-table-connections-where-possible-again"><a href="#functions-now-use-table-connections-where-possible-again" aria-label="functions now use table connections where possible again permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Functions now use table connections where possible (again!)</h4>
-<p><strong>Problem</strong>: functions that return setof a table type now use the same connection
-class as the tables themselves do (just like PostGraphQL v2 did)</p>
+<p><strong>Problem</strong>: functions that return setof a table type now use the same
+connection class as the tables themselves do (just like PostGraphQL v2 did)</p>
 <p><strong>Solution</strong>: if this is a problem for you and you're unable to fix the queries,
 please do get in touch!</p>
 <p><strong>Reasoning</strong>: performing pagination against multiple sources of the same table
 type is much more complex if the connection types differ.</p>
-<p><strong>Potential future solution</strong>: have the connections implement a shared interface.</p>
+<p><strong>Potential future solution</strong>: have the connections implement a shared
+interface.</p>
 <h4 id="issues-with-nullables"><a href="#issues-with-nullables" aria-label="issues with nullables permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Issues with nullables</h4>
-<p><strong>Problem</strong>: some things are nullable that weren't, some things aren't nullable that were.</p>
+<p><strong>Problem</strong>: some things are nullable that weren't, some things aren't nullable
+that were.</p>
 <p><strong>Solution</strong>: you can enable the <code class="language-text">--no-setof-functions-contain-nulls</code> CLI option
 (or <code class="language-text">setofFunctionsContainNulls: false</code> library option) to reduce the nullables
 in the generated schema.</p>
@@ -217,76 +220,78 @@ in the generated schema.</p>
 <span class="token keyword">end</span><span class="token punctuation">;</span>
 $$ <span class="token keyword">language</span> plpgsql stable<span class="token punctuation">;</span></code></pre></div>
 <p>This function returns an array of <code class="language-text">[{person}, null, {person}]</code> where <code class="language-text">{person}</code>
-is a Person object. In PostGraphile because it is a <code class="language-text">setof</code> function we treat
-it as a connection. As explained above, we now (like in version 2) use the same
+is a Person object. In PostGraphile because it is a <code class="language-text">setof</code> function we treat it
+as a connection. As explained above, we now (like in version 2) use the same
 connections for functions as for tables - as such these connections now have to
 support that the entries within them are nullable.</p>
 <p>If you don't like the nulls everywhere, I encourage you to use the <code class="language-text">-N</code> /
 <code class="language-text">--no-setof-functions-contain-nulls</code> option mentioned above. Enabling this is a
-non-breaking change, but disabling it <strong>is</strong> a breaking change - hence why it
-is not the default behaviour.</p>
+non-breaking change, but disabling it <strong>is</strong> a breaking change - hence why it is
+not the default behaviour.</p>
 <h4 id="fields-in-create-mutations-now-respect-defaults"><a href="#fields-in-create-mutations-now-respect-defaults" aria-label="fields in create mutations now respect defaults permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Fields in create mutations now respect defaults</h4>
-<p>In v3, omitting a field from a create mutation would cause it to be set to <code class="language-text">NULL</code>,
-ignoring the column default. We fixed this in v4, now if you want to set the
-column null you must specify NULL in the mutation (rather than omitting the key).</p>
+<p>In v3, omitting a field from a create mutation would cause it to be set to
+<code class="language-text">NULL</code>, ignoring the column default. We fixed this in v4, now if you want to set
+the column null you must specify NULL in the mutation (rather than omitting the
+key).</p>
 <h4 id="query-procedures-that-returns-setof-scalar-no-longer-have-pageinfo-nor-totalcount"><a href="#query-procedures-that-returns-setof-scalar-no-longer-have-pageinfo-nor-totalcount" aria-label="query procedures that returns setof scalar no longer have pageinfo nor totalcount permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Query procedures that <code class="language-text">returns setof &lt;scalar&gt;</code> no longer have <code class="language-text">pageInfo</code> nor <code class="language-text">totalCount</code></h4>
 <p><strong>Problem</strong>: as heading.</p>
-<p><strong>Solution</strong>: it's possibly to re-introduce support via a plugin - get in touch if
-you need this</p>
+<p><strong>Solution</strong>: it's possibly to re-introduce support via a plugin - get in touch
+if you need this</p>
 <p><strong>Reasoning</strong>: I did not feel it was particularly necessary and I've only got
 limited time to work on the project...</p>
 <h4 id="watch-schema-has-changed"><a href="#watch-schema-has-changed" aria-label="watch schema has changed permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Watch schema has changed</h4>
 <p><em>Note that changes to the watch schema are NOT deemed to be breaking changes.</em></p>
 <p><strong>Problem</strong>: watch schema has changed to fix issues with dropping objects</p>
-<p><strong>Solution</strong>: most people shouldn't be affected by this (though they might want to
-drop the old watch schema) because <code class="language-text">--watch</code> is only intended for development
+<p><strong>Solution</strong>: most people shouldn't be affected by this (though they might want
+to drop the old watch schema) because <code class="language-text">--watch</code> is only intended for development
 use and the new schema should install itself just fine. But if you had to
-manually install the old watch schema, you'll need to manually install the <a href="https://github.com/graphile/graphile-engine/blob/master/packages/graphile-build-pg/res/watch-fixtures.sql">new
-one</a>
+manually install the old watch schema, you'll need to manually install the
+<a href="https://github.com/graphile/graphile-engine/blob/master/packages/graphile-build-pg/res/watch-fixtures.sql">new one</a>
 in the same way</p>
 <p><strong>Reasoning</strong>: the old schema did not detect certain <code class="language-text">DROP</code> commands and so
 adding tables, columns, functions, etc. to your schema was fine, but removing
 them did not result in a refresh.</p>
 <h3 id="other-changes-that-may-affect-you"><a href="#other-changes-that-may-affect-you" aria-label="other changes that may affect you permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Other changes that may affect you</h3>
-<p>These are things that I doubt affect many people (if any) but I want to raise
-so you can check your own applications.</p>
+<p>These are things that I doubt affect many people (if any) but I want to raise so
+you can check your own applications.</p>
 <h4 id="introspection-query-has-changed"><a href="#introspection-query-has-changed" aria-label="introspection query has changed permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Introspection query has changed</h4>
-<p>And will probably continue to change. Changes to the introspection query are
-not deemed to be breaking changes. The introspection query is now
-programatically generated so that we can support PG10 and PG11 features.</p>
+<p>And will probably continue to change. Changes to the introspection query are not
+deemed to be breaking changes. The introspection query is now programatically
+generated so that we can support PG10 and PG11 features.</p>
 <h4 id="field-descriptions-have-changed-a-little"><a href="#field-descriptions-have-changed-a-little" aria-label="field descriptions have changed a little permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Field descriptions have changed a little</h4>
 <p>Field description changes are not deemed to be breaking changes.</p>
 <h4 id="case-changing-library-has-changed"><a href="#case-changing-library-has-changed" aria-label="case changing library has changed permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Case changing library has changed</h4>
-<p>We replaced the library but this doesn't affect any of the tests. If this
-causes you pain please submit an issue so we can add your fields/table names/etc to the tests
-to ensure this doesn't happen again.</p>
+<p>We replaced the library but this doesn't affect any of the tests. If this causes
+you pain please submit an issue so we can add your fields/table names/etc to the
+tests to ensure this doesn't happen again.</p>
 <p>Workaround: you can change the inflection engine back to the old one with a
-plugin - <a href="/postgraphile/make-add-inflectors-plugin/">see
-<code class="language-text">makeAddInflectorsPlugin</code></a>.</p>
+plugin -
+<a href="/postgraphile/make-add-inflectors-plugin/">see <code class="language-text">makeAddInflectorsPlugin</code></a>.</p>
 <h4 id="procedures-that-only-supported-orderby-natural-now-do-not-have-orderby-at-all"><a href="#procedures-that-only-supported-orderby-natural-now-do-not-have-orderby-at-all" aria-label="procedures that only supported orderby natural now do not have orderby at all permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Procedures that only supported <code class="language-text">orderBy: NATURAL</code> now <strong>do not have <code class="language-text">orderBy</code> at all</strong>.</h4>
-<p>Though technically a breaking change, I'm not deeming it as such because I
-don't understand why you'd explicitly set the orderBy for a field that only has
-one value and that value is enabled by default.</p>
-<p>If this is a problem for you please get in touch and we can add support back
-via a simple plugin.</p>
+<p>Though technically a breaking change, I'm not deeming it as such because I don't
+understand why you'd explicitly set the orderBy for a field that only has one
+value and that value is enabled by default.</p>
+<p>If this is a problem for you please get in touch and we can add support back via
+a simple plugin.</p>
 <h4 id="using-a-return-type-postgraphile-user-cant-access"><a href="#using-a-return-type-postgraphile-user-cant-access" aria-label="using a return type postgraphile user cant access permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Using a return type PostGraphile user can't access</h4>
 <p><code class="language-text">security definer</code> mutations that return a type from a schema that the
-requesting PostgreSQL user is not allowed to view may now result in <code class="language-text">permission denied for schema xxxx</code>.</p>
+requesting PostgreSQL user is not allowed to view may now result in
+<code class="language-text">permission denied for schema xxxx</code>.</p>
 <p><strong>Solution</strong>: don't do that 😉</p>
 <h4 id="conflicting-tables-names---_input-_patch"><a href="#conflicting-tables-names---_input-_patch" aria-label="conflicting tables names   _input _patch permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Conflicting tables names - <code class="language-text">*_input</code>, <code class="language-text">*_patch</code></h4>
 <p>Tables that end in <code class="language-text">_input</code> or <code class="language-text">_patch</code> such as <code class="language-text">foo_input</code> will no longer be
 exported as <code class="language-text">FooInput</code> but as <code class="language-text">FooInputRecord</code> - this prevents collisions with
-mutation types on tables that share the prefix (e.g. table <code class="language-text">foo</code>/<code class="language-text">foos</code>
-requires <code class="language-text">FooInput</code> for its create mutation).</p>
+mutation types on tables that share the prefix (e.g. table <code class="language-text">foo</code>/<code class="language-text">foos</code> requires
+<code class="language-text">FooInput</code> for its create mutation).</p>
 <p>Even if they don't clash <em>right now</em> there's a risk that they will clash in
-future; e.g. if you create the table <code class="language-text">foo_bar_input</code> then creating
-<code class="language-text">FooBarInput</code> and <code class="language-text">FooBarInputInput</code> and <code class="language-text">FooBarInputPatch</code> is fine... But if
-you later add the table <code class="language-text">foo_bar</code> then <code class="language-text">FooBarInput</code> will clash. So renaming
-the tables up front means that whether or not you add that table later it'll
-still be fine without breaking existing functionality.</p>
+future; e.g. if you create the table <code class="language-text">foo_bar_input</code> then creating <code class="language-text">FooBarInput</code>
+and <code class="language-text">FooBarInputInput</code> and <code class="language-text">FooBarInputPatch</code> is fine... But if you later add
+the table <code class="language-text">foo_bar</code> then <code class="language-text">FooBarInput</code> will clash. So renaming the tables up
+front means that whether or not you add that table later it'll still be fine
+without breaking existing functionality.</p>
 <p>You can rename tables directly, or if you prefer not to change your database
-layout you can use <a href="/postgraphile/smart-comments/">smart comments</a> or write
-a custom <a href="/postgraphile/inflection/">inflector</a>.</p>
+layout you can use <a href="/postgraphile/smart-comments/">smart comments</a> or write a
+custom <a href="/postgraphile/inflection/">inflector</a>.</p>
 <h4 id="very-large-numbers"><a href="#very-large-numbers" aria-label="very large numbers permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Very large numbers</h4>
 <p>Large integers (over 4 bytes) are still referred to as <code class="language-text">BigInt</code>, large floats
 (those beyond IEEE754) are now called <code class="language-text">BigFloat</code>. The specific boundaries in

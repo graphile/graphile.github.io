@@ -54,43 +54,40 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul></div></div><div class="edit-this-page" style="display:"><a href="https://github.com/graphile/graphile.github.io/edit/develop/src/pages/postgraphile/security.md">📝 Suggest improvement/edit this page</a></div><h2 class="mt3">Security</h2><div><p>Traditionally in web application architectures the security is implemented in
 the server layer and the database is treated as a simple store of data. Partly
 this was due to necessity (the security policies offered by databases such as
-PostgreSQL were simply not granular enough), and partly this was people
-figuring it would reduce the workload on the database thus increases
-scalability. However, as applications grow, they start needing more advanced
-features or additional services to interact with the database. There's a
-couple options they have here: duplicate the authentication/authorization logic
-in multiple places (which can lead to discrepancies and increases the surface
-area for potential issues), or make sure everything goes through the original
-application layer (which then becomes both the development and performance
-bottleneck).</p>
+PostgreSQL were simply not granular enough), and partly this was people figuring
+it would reduce the workload on the database thus increases scalability.
+However, as applications grow, they start needing more advanced features or
+additional services to interact with the database. There's a couple options they
+have here: duplicate the authentication/authorization logic in multiple places
+(which can lead to discrepancies and increases the surface area for potential
+issues), or make sure everything goes through the original application layer
+(which then becomes both the development and performance bottleneck).</p>
 <p>However, this is no longer necessary since PostgreSQL introduced much more
-granular permissions in the form of <a href="https://www.postgresql.org/docs/current/static/ddl-rowsecurity.html">Row-Level Security (RLS)
-policies</a> in
-PostgreSQL 9.5 back at the beginning of 2016. Now you can combine this with
+granular permissions in the form of
+<a href="https://www.postgresql.org/docs/current/static/ddl-rowsecurity.html">Row-Level Security (RLS) policies</a>
+in PostgreSQL 9.5 back at the beginning of 2016. Now you can combine this with
 PostgreSQL established permissions system (based on roles) allowing your
-application to be considerably more specific about permissions: adding
-row-level permission constraints to the existing table- and column-based
-permissions.</p>
+application to be considerably more specific about permissions: adding row-level
+permission constraints to the existing table- and column-based permissions.</p>
 <p>Now that this functionality is stable and proven (and especially with the
-performance improvements in the latest PostgreSQL releases), we advise that
-you protect your lowest level - the data itself. By doing so you can be sure
-that no matter how many services interact with your database they will all be
-protected by the same underlying permissions logic, which you only need to
-maintain in one place. You can add as many microservices as you like, and
-they can talk to the database directly!</p>
-<p>When Row Level Security (RLS) is enabled, all rows are by default not visible
-to any roles (except database administration roles and the role who created
-the database/table); and permission is selectively granted with the use of
-policies.</p>
-<p>If you already have a secure database schema that implements these
-technologies to protect your data at the lowest levels then you can leverage
-<code class="language-text">postgraphile</code> to generate a powerful, secure and fast API very rapidly. You
-just need to generate JWT tokens for your users (and we even help you with
-that), or use <a href="/postgraphile/usage-library/#pgsettings-function">pgSettings</a>
-to indicate the current user.</p>
+performance improvements in the latest PostgreSQL releases), we advise that you
+protect your lowest level - the data itself. By doing so you can be sure that no
+matter how many services interact with your database they will all be protected
+by the same underlying permissions logic, which you only need to maintain in one
+place. You can add as many microservices as you like, and they can talk to the
+database directly!</p>
+<p>When Row Level Security (RLS) is enabled, all rows are by default not visible to
+any roles (except database administration roles and the role who created the
+database/table); and permission is selectively granted with the use of policies.</p>
+<p>If you already have a secure database schema that implements these technologies
+to protect your data at the lowest levels then you can leverage <code class="language-text">postgraphile</code>
+to generate a powerful, secure and fast API very rapidly. You just need to
+generate JWT tokens for your users (and we even help you with that), or use
+<a href="/postgraphile/usage-library/#pgsettings-function">pgSettings</a> to indicate the
+current user.</p>
 <h3 id="processing-jwts"><a href="#processing-jwts" aria-label="processing jwts permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Processing JWTs</h3>
-<p>To enable the JWT functionality you must provide a <code class="language-text">--jwt-secret</code> on the CLI
-(or <code class="language-text">jwtSecret</code> to the library options). This will allow PostGraphile to
+<p>To enable the JWT functionality you must provide a <code class="language-text">--jwt-secret</code> on the CLI (or
+<code class="language-text">jwtSecret</code> to the library options). This will allow PostGraphile to
 authenticate incoming JWTs and set the granted claims on the database
 transaction.</p>
 <p>You should also supply a <code class="language-text">--default-role</code> which is used for requests that don't
@@ -147,7 +144,8 @@ $$ <span class="token keyword">language</span> plpgsql strict security <span cla
 <h3 id="sending-jwts-to-the-server"><a href="#sending-jwts-to-the-server" aria-label="sending jwts to the server permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Sending JWTs to the server</h3>
 <p>JWTs are sent via the best practice <code class="language-text">Authorization</code> header:</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">Authorization: Bearer JWT_TOKEN_HERE</code></pre></div>
-<p>e.g. <a href="https://www.apollographql.com/docs/react/networking/authentication/#header">with Apollo</a>:</p>
+<p>e.g.
+<a href="https://www.apollographql.com/docs/react/networking/authentication/#header">with Apollo</a>:</p>
 <div class="gatsby-highlight has-highlighted-lines" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> httpLink <span class="token operator">=</span> <span class="token function">createHttpLink</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
   uri<span class="token punctuation">:</span> <span class="token string">"/graphql"</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -166,7 +164,8 @@ $$ <span class="token keyword">language</span> plpgsql strict security <span cla
   link<span class="token punctuation">:</span> authLink<span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span>httpLink<span class="token punctuation">)</span><span class="token punctuation">,</span>
   cache<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">InMemoryCache</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
-<p>or <a href="https://facebook.github.io/relay/docs/en/network-layer.html">with Relay Modern</a>:</p>
+<p>or
+<a href="https://facebook.github.io/relay/docs/en/network-layer.html">with Relay Modern</a>:</p>
 <div class="gatsby-highlight has-highlighted-lines" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">fetchQuery</span><span class="token punctuation">(</span> <span class="token parameter">operation<span class="token punctuation">,</span> variables<span class="token punctuation">,</span> cacheConfig<span class="token punctuation">,</span> uploadables</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token comment">// get the authentication token from wherever you store it</span>
 <span class="gatsby-highlight-code-line">  <span class="token keyword">const</span> token <span class="token operator">=</span> <span class="token function">getJWTToken</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>  <span class="token keyword">return</span> <span class="token function">fetch</span><span class="token punctuation">(</span><span class="token string">'/graphql'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
@@ -195,8 +194,8 @@ $$ <span class="token keyword">language</span> plpgsql strict security <span cla
   <span class="token property">"user_id"</span><span class="token operator">:</span> <span class="token number">27</span>
 <span class="token punctuation">}</span></code></pre></div>
 <p>When we verify that the JWT token is for us (via <code class="language-text">aud: &quot;postgraphile&quot;</code>) we can
-authenticate the PostgreSQL client that is used to perform the GraphQL query.
-We do this as follows:</p>
+authenticate the PostgreSQL client that is used to perform the GraphQL query. We
+do this as follows:</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">begin</span><span class="token punctuation">;</span>
 <span class="token keyword">set</span> <span class="token keyword">local</span> role app_user<span class="token punctuation">;</span>
 <span class="token keyword">set</span> <span class="token keyword">local</span> jwt<span class="token punctuation">.</span>claims<span class="token punctuation">.</span>role <span class="token keyword">to</span> <span class="token string">'app_user'</span><span class="token punctuation">;</span>
@@ -206,8 +205,8 @@ We do this as follows:</p>
 
 <span class="token keyword">commit</span><span class="token punctuation">;</span></code></pre></div>
 <blockquote>
-<p><em>Actually, to save roundtrips we perform just one query to set all configs
-via ...</em></p>
+<p><em>Actually, to save roundtrips we perform just one query to set all configs via
+...</em></p>
 </blockquote>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">select</span> set_config<span class="token punctuation">(</span><span class="token string">'role'</span><span class="token punctuation">,</span> <span class="token string">'app_user'</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">,</span> set_config<span class="token punctuation">(</span><span class="token string">'user_id'</span><span class="token punctuation">,</span> <span class="token string">'2'</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span></code></pre></div>
 <blockquote>

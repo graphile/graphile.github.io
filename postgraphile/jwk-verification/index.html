@@ -55,23 +55,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
 <li><a href="/postgraphile/jwk-verification/#getting-started">Getting Started</a></li>
 <li><a href="/postgraphile/jwk-verification/#basic-error-handling">Basic Error Handling</a></li>
-</ul></div></div><div class="edit-this-page" style="display:"><a href="https://github.com/graphile/graphile.github.io/edit/develop/src/pages/postgraphile/jwk-verification.md">📝 Suggest improvement/edit this page</a></div><h2 class="mt3">PostGraphile JWT/JWK Verification Quickstart</h2><div><p>This guide is an adaption of the official quickstart tutorial
-for Node (Express) provided by
-<a href="https://auth0.com/docs/quickstart/backend/nodejs/01-authorization">Auth0</a>.
-The code illustrates how to intercept and verify a
+</ul></div></div><div class="edit-this-page" style="display:"><a href="https://github.com/graphile/graphile.github.io/edit/develop/src/pages/postgraphile/jwk-verification.md">📝 Suggest improvement/edit this page</a></div><h2 class="mt3">PostGraphile JWT/JWK Verification Quickstart</h2><div><p>This guide is an adaption of the official quickstart tutorial for Node (Express)
+provided by
+<a href="https://auth0.com/docs/quickstart/backend/nodejs/01-authorization">Auth0</a>. The
+code illustrates how to intercept and verify a
 <a href="https://auth0.com/docs/tokens/concepts/jwts">JWT Access Token</a> via a
 <a href="https://auth0.com/docs/jwks">JWKS (JSON Web Key Set)</a> using
 <a href="https://auth0.com/">Auth0</a>.</p>
-<p>Although this code should work, we make no claims as to its validity
-or fit for production use. We disclaim all liability.</p>
+<p>Although this code should work, we make no claims as to its validity or fit for
+production use. We disclaim all liability.</p>
 <h3 id="dependencies"><a href="#dependencies" aria-label="dependencies permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dependencies</h3>
-<p>This guide uses the <a href="https://www.npmjs.com/package/express"><code class="language-text">express</code></a>
-HTTP framework and supporting Node packages authored and maintained by Auth0:</p>
+<p>This guide uses the <a href="https://www.npmjs.com/package/express"><code class="language-text">express</code></a> HTTP
+framework and supporting Node packages authored and maintained by Auth0:</p>
 <ul>
-<li><a href="https://github.com/auth0/express-jwt"><code class="language-text">express-jwt</code></a> -
-<em>Middleware that validates a JWT and copies its contents to <code class="language-text">req.user</code></em></li>
-<li><a href="https://github.com/auth0/node-jwks-rsa"><code class="language-text">jwks-rsa</code></a> -
-<em>A library to retrieve RSA public keys from a JWKS (JSON Web Key Set) endpoint</em></li>
+<li><a href="https://github.com/auth0/express-jwt"><code class="language-text">express-jwt</code></a> - <em>Middleware that
+validates a JWT and copies its contents to <code class="language-text">req.user</code></em></li>
+<li><a href="https://github.com/auth0/node-jwks-rsa"><code class="language-text">jwks-rsa</code></a> - <em>A library to retrieve
+RSA public keys from a JWKS (JSON Web Key Set) endpoint</em></li>
 </ul>
 <div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token function">yarn</span> <span class="token function">add</span> express express-jwt jwks-rsa
 <span class="token comment"># Or:</span>
@@ -81,16 +81,16 @@ HTTP framework and supporting Node packages authored and maintained by Auth0:</p
 <ul>
 <li><a href="https://auth0.com/docs/apis"><em>APIs</em></a> and
 <a href="https://auth0.com/docs/applications"><em>Applications</em></a></li>
-<li><a href="https://auth0.com/docs/tokens"><em>JWT types</em></a>
-(e.g. <em>ID Token</em> vs. <em>Access Token</em>)</li>
+<li><a href="https://auth0.com/docs/tokens"><em>JWT types</em></a> (e.g. <em>ID Token</em> vs. <em>Access
+Token</em>)</li>
 <li>Authentication and Authorization <a href="https://auth0.com/docs/flows"><em>Flows</em></a></li>
 </ul>
 <p>To keep it simple, in this guide we will be dealing with an
-<a href="https://auth0.com/docs/tokens/overview-access-tokens">Access Token</a>
-granted by an API which we will need to verify.</p>
+<a href="https://auth0.com/docs/tokens/overview-access-tokens">Access Token</a> granted by
+an API which we will need to verify.</p>
 <h2 id="getting-started"><a href="#getting-started" aria-label="getting started permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Getting Started</h2>
-<p>You will need two values from your Auth0 configuration: The Auth0 <em>tenant
-domain name</em>, and the API <em>identifier.</em></p>
+<p>You will need two values from your Auth0 configuration: The Auth0 <em>tenant domain
+name</em>, and the API <em>identifier.</em></p>
 <div class="gatsby-highlight has-highlighted-lines" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="gatsby-highlight-code-line"><span class="token keyword">const</span> jwt <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"express-jwt"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><span class="gatsby-highlight-code-line"><span class="token keyword">const</span> jwksRsa <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"jwks-rsa"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
 <span class="token comment">// ...</span>
 
@@ -113,11 +113,13 @@ domain name</em>, and the API <em>identifier.</em></p>
   <span class="token comment">// Validate the audience and the issuer.</span>
 <span class="gatsby-highlight-code-line">  audience<span class="token punctuation">:</span> <span class="token string">"YOUR_API_IDENTIFIER"</span><span class="token punctuation">,</span></span><span class="gatsby-highlight-code-line">  issuer<span class="token punctuation">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">https://YOUR_DOMAIN/</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span></span>  algorithms<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"RS256"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
-<p>(note: if we were processing an <a href="https://auth0.com/docs/tokens/id-token">ID Token</a>
-instead of an Access Token, the <em>audience</em> would be the <em>Client ID</em> instead)</p>
-<p>Remember that a JWT has <a href="https://jwt.io/introduction/">three <em>period-separated</em> sections</a>: header, payload,
-and signature. On successful verification, the payload will be available for
-us to save inside the PostGraphile request via the
+<p>(note: if we were processing an
+<a href="https://auth0.com/docs/tokens/id-token">ID Token</a> instead of an Access Token,
+the <em>audience</em> would be the <em>Client ID</em> instead)</p>
+<p>Remember that a JWT has
+<a href="https://jwt.io/introduction/">three <em>period-separated</em> sections</a>: header,
+payload, and signature. On successful verification, the payload will be
+available for us to save inside the PostGraphile request via the
 <a href="/postgraphile/usage-library/#exposing-http-request-data-to-postgresql"><code class="language-text">pgSettings</code></a>
 function.</p>
 <p>Let's look at an example payload:</p>
@@ -132,9 +134,9 @@ function.</p>
 <span class="token punctuation">}</span></code></pre></div>
 <p>In this example payload, we can see that the only scope the API has made
 available is <code class="language-text">read:schema</code>. Our user can perform no mutations, nor can they
-perform any queries, they are limited to fetching the schema.
-Not all tokens will have such simple payloads, but, in this example, the only
-meaningful data is in the <code class="language-text">scope</code> value.</p>
+perform any queries, they are limited to fetching the schema. Not all tokens
+will have such simple payloads, but, in this example, the only meaningful data
+is in the <code class="language-text">scope</code> value.</p>
 <p>Now let's make use of the <code class="language-text">checkJwt</code> middleware function:</p>
 <div class="gatsby-highlight has-highlighted-lines" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> express <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"express"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> <span class="token punctuation">{</span> postgraphile <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"postgraphile"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -165,17 +167,18 @@ app<span class="token punctuation">.</span><span class="token function">use</spa
 <p>PostGraphile applies everything returned by
 <a href="/postgraphile/usage-library/#pgsettings-function">pgSettings</a> to the
 <a href="https://www.postgresql.org/docs/current/functions-admin.html#FUNCTIONS-ADMIN-SET">current session</a>
-with <code class="language-text">set_config($key, $value, true)</code>. So inside Postgres we can read
-the current value of <code class="language-text">user.permissions</code> by
+with <code class="language-text">set_config($key, $value, true)</code>. So inside Postgres we can read the
+current value of <code class="language-text">user.permissions</code> by
 <code class="language-text">select current_setting(&#39;user.permissions&#39;, true)::text;</code>.</p>
 <h2 id="basic-error-handling"><a href="#basic-error-handling" aria-label="basic error handling permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Basic Error Handling</h2>
-<p>By default, if there is an error in the JWT verification process,
-the <code class="language-text">express-jwt</code> package will send a 401 status with an
-HTML-formatted error message as a response.
-Instead, we want to follow the pattern of PostGraphile and return errors
-properly formatted in a <a href="http://graphql.github.io/graphql-spec/June2018/#sec-Errors">GraphQL-compliant</a> JSON response.</p>
-<p>Let's create a basic Express middleware for handling the errors which
-our <code class="language-text">checkJwt</code> function will throw:</p>
+<p>By default, if there is an error in the JWT verification process, the
+<code class="language-text">express-jwt</code> package will send a 401 status with an HTML-formatted error
+message as a response. Instead, we want to follow the pattern of PostGraphile
+and return errors properly formatted in a
+<a href="http://graphql.github.io/graphql-spec/June2018/#sec-Errors">GraphQL-compliant</a>
+JSON response.</p>
+<p>Let's create a basic Express middleware for handling the errors which our
+<code class="language-text">checkJwt</code> function will throw:</p>
 <div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">authErrors</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> req<span class="token punctuation">,</span> res<span class="token punctuation">,</span> next</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
   <span class="token keyword">if</span> <span class="token punctuation">(</span>err<span class="token punctuation">.</span>name <span class="token operator">===</span> <span class="token string">"UnauthorizedError"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// You will still want to log the error...</span>
@@ -188,9 +191,9 @@ our <code class="language-text">checkJwt</code> function will throw:</p>
 
 <span class="token comment">// Apply error handling to the graphql endpoint</span>
 app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token string">"/graphql"</span><span class="token punctuation">,</span> authErrors<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
-<p>So, now, for example, if someone tries to connect to our GraphQL service
-without any token at all, we still get a 401 status, but with the
-appropriate and succinct response:</p>
+<p>So, now, for example, if someone tries to connect to our GraphQL service without
+any token at all, we still get a 401 status, but with the appropriate and
+succinct response:</p>
 <div class="gatsby-highlight" data-language="json"><pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
   <span class="token property">"errors"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token punctuation">{</span>

@@ -59,14 +59,17 @@ found from the <code class="language-text">defaultPlugins</code> export in
 <a href="https://github.com/graphile/graphile-engine/blob/master/packages/graphile-build-pg/src/index.ts"><code class="language-text">src/index.ts</code></a>
 of the <code class="language-text">graphile-build-pg</code> module.</p>
 <p>You can extend PostGraphile's GraphQL schema by adding plugins before or after
-the default plugins. You may even opt to replace the entire list of plugins
-used to build the schema. Graphile Engine plugins are built on top of the
+the default plugins. You may even opt to replace the entire list of plugins used
+to build the schema. Graphile Engine plugins are built on top of the
 <a href="http://graphql.org/graphql-js/">GraphQL reference JS implementation</a>, so it is
 recommended that you have familiarity with that before attempting to write your
 own plugins.</p>
 <h3 id="adding-root-querymutation-fields"><a href="#adding-root-querymutation-fields" aria-label="adding root querymutation fields permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Adding root query/mutation fields</h3>
 <p>A common request is to add additional root-level fields to your schema, for
-example to integrate external services. The easiest way to do this is to <a href="/postgraphile/make-extend-schema-plugin/">use <code class="language-text">makeExtendSchemaPlugin</code></a> to generate a plugin that will extend your schema (this can be used to add fields anywhere, not just at the root-level):</p>
+example to integrate external services. The easiest way to do this is to
+<a href="/postgraphile/make-extend-schema-plugin/">use <code class="language-text">makeExtendSchemaPlugin</code></a> to
+generate a plugin that will extend your schema (this can be used to add fields
+anywhere, not just at the root-level):</p>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token comment">// add-http-bin-plugin.js</span>
 <span class="token keyword">const</span> <span class="token punctuation">{</span> makeExtendSchemaPlugin<span class="token punctuation">,</span> gql <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"graphile-utils"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> fetch <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"node-fetch"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -132,20 +135,23 @@ hook and to add our new field:</p>
 <span class="token punctuation">}</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> AddHttpBinPlugin<span class="token punctuation">;</span></code></pre></div>
-<p>(If you wanted to add a mutation you'd use <code class="language-text">isRootMutation</code> rather than <code class="language-text">isRootQuery</code>.)</p>
+<p>(If you wanted to add a mutation you'd use <code class="language-text">isRootMutation</code> rather than
+<code class="language-text">isRootQuery</code>.)</p>
 <p>We can then load our plugin into PostGraphile via:</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">postgraphile --append-plugins `pwd`/add-http-bin-plugin.js -c postgres:///mydb</code></pre></div>
-<p>Note that the types of added fields do not need to be implemented via
-Graphile Engine's
+<p>Note that the types of added fields do not need to be implemented via Graphile
+Engine's
 <a href="/graphile-build/build-object/#newwithhookstype-spec-scope"><code class="language-text">newWithHooks</code></a> -
 you can use standard GraphQL objects too, as we have demonstrated with the
 <code class="language-text">JSONType</code> above. (However, if you do not use <code class="language-text">newWithHooks</code> then the objects
 referenced cannot be extended via plugins.)</p>
 <h3 id="wrapping-an-existing-resolver"><a href="#wrapping-an-existing-resolver" aria-label="wrapping an existing resolver permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Wrapping an existing resolver</h3>
-<p>Sometimes you might want to override what an existing field does. Due to the
-way that PostGraphile works (where the root Query field resolvers are the only
-ones who perform SQL queries) this is generally most useful at the top level.</p>
-<p>In PostGraphile version 4.1 and above, you can <a href="/postgraphile/make-wrap-resolvers-plugin/">use <code class="language-text">makeWrapResolversPlugin</code></a> to easily wrap a resolver:</p>
+<p>Sometimes you might want to override what an existing field does. Due to the way
+that PostGraphile works (where the root Query field resolvers are the only ones
+who perform SQL queries) this is generally most useful at the top level.</p>
+<p>In PostGraphile version 4.1 and above, you can
+<a href="/postgraphile/make-wrap-resolvers-plugin/">use <code class="language-text">makeWrapResolversPlugin</code></a> to
+easily wrap a resolver:</p>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token function">makeWrapResolversPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
   User<span class="token punctuation">:</span> <span class="token punctuation">{</span>
     <span class="token keyword">async</span> <span class="token function">email</span><span class="token punctuation">(</span><span class="token parameter">resolve<span class="token punctuation">,</span> source<span class="token punctuation">,</span> args<span class="token punctuation">,</span> context<span class="token punctuation">,</span> resolveInfo</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -154,17 +160,23 @@ ones who perform SQL queries) this is generally most useful at the top level.</p
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
-<p>If you need to process the resolvers in a more powerful way than possible via <code class="language-text">makeWrapResolversPlugin</code>, then you can drop down to the raw plugin API.
-The following example modifies the 'createLink' mutation so that it performs
-some additional validation (thrown an error if the link's <code class="language-text">title</code> is too short)
-and performs an action after the link has been saved. You could use a plugin
-like this to achieve many different tasks, including emailing a user after
-their account is created or logging failed authentication attempts.</p>
+<p>If you need to process the resolvers in a more powerful way than possible via
+<code class="language-text">makeWrapResolversPlugin</code>, then you can drop down to the raw plugin API. The
+following example modifies the 'createLink' mutation so that it performs some
+additional validation (thrown an error if the link's <code class="language-text">title</code> is too short) and
+performs an action after the link has been saved. You could use a plugin like
+this to achieve many different tasks, including emailing a user after their
+account is created or logging failed authentication attempts.</p>
 <p>Previously we used <code class="language-text">GraphQLObjectType:fields</code> to add a field, as that
 manipulates the list of fields. This time we are manipulating an individual
-field, so we will use the <code class="language-text">GraphQLObjectType:fields:field</code> hook. This makes
-our intent clear, and also grants us access to <a href="/graphile-build/look-ahead/#when-processing-arguments-addargdatagenerator">the <code class="language-text">addArgDataGenerator</code></a>
-function which we need to request the record id. The following example also uses an instance of <a href="/postgraphile/make-extend-schema-plugin/#querybuilder"><code class="language-text">queryBuilder.</code></a> (Read more about the different hooks <a href="/graphile-build/all-hooks/">in the Graphile Engine docs</a>.)</p>
+field, so we will use the <code class="language-text">GraphQLObjectType:fields:field</code> hook. This makes our
+intent clear, and also grants us access to
+<a href="/graphile-build/look-ahead/#when-processing-arguments-addargdatagenerator">the <code class="language-text">addArgDataGenerator</code></a>
+function which we need to request the record id. The following example also uses
+an instance of
+<a href="/postgraphile/make-extend-schema-plugin/#querybuilder"><code class="language-text">queryBuilder.</code></a> (Read
+more about the different hooks
+<a href="/graphile-build/all-hooks/">in the Graphile Engine docs</a>.)</p>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">performAnotherTask</span><span class="token punctuation">(</span><span class="token parameter">linkId</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">We created link </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>linkId<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">!</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
@@ -246,22 +258,21 @@ module<span class="token punctuation">.</span><span class="token function-variab
 unintended consequences - especially if you add back a field or type with the
 same name as that which you removed. It's advised that rather than removing
 things, you instead avoid them being generated in the first place.</p>
-<p><strong>If you're looking for an easy way to prevent certain tables, fields,
-functions or relations being added to your GraphQL schema, check out <a href="/postgraphile/smart-comments/">smart
-comments</a>.</strong></p>
-<p>If you want to remove a class of things from the schema then you can remove
-the plugin that adds them; for example if you no longer wanted to allow
-ordering by all the columns of a table (i.e. only allow ordering by the primary
-key) you could omit
+<p><strong>If you're looking for an easy way to prevent certain tables, fields, functions
+or relations being added to your GraphQL schema, check out
+<a href="/postgraphile/smart-comments/">smart comments</a>.</strong></p>
+<p>If you want to remove a class of things from the schema then you can remove the
+plugin that adds them; for example if you no longer wanted to allow ordering by
+all the columns of a table (i.e. only allow ordering by the primary key) you
+could omit
 <a href="https://github.com/graphile/graphile-engine/blob/master/packages/graphile-build-pg/src/plugins/PgOrderAllColumnsPlugin.ts">PgOrderAllColumnsPlugin</a>.
 If you didn't want computed columns added you could omit
 <a href="https://github.com/graphile/graphile-engine/blob/master/packages/graphile-build-pg/src/plugins/PgComputedColumnsPlugin.ts">PgComputedColumnsPlugin</a>.</p>
-<p>However, sometimes you need more surgical precision, and you only want to
-remove one specific type of thing. To achieve this you need to add a hook to the
-thing that owns the thing you wish to remove - for example if you
-want to remove a field <code class="language-text">bar</code> from an object type <code class="language-text">Foo</code> you could hook
-<code class="language-text">GraphQLObjectType:fields</code> and return the set of fields less the one you want
-removed.</p>
+<p>However, sometimes you need more surgical precision, and you only want to remove
+one specific type of thing. To achieve this you need to add a hook to the thing
+that owns the thing you wish to remove - for example if you want to remove a
+field <code class="language-text">bar</code> from an object type <code class="language-text">Foo</code> you could hook <code class="language-text">GraphQLObjectType:fields</code>
+and return the set of fields less the one you want removed.</p>
 <p>Here's an example of a plugin generator you could use to generate plugins to
 remove individual fields. This is just to demonstrate how a plugin to do this
 might work, <a href="/postgraphile/smart-comments/">smart comments</a> are likely a better

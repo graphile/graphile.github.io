@@ -51,15 +51,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><a href="/postgraphile/views/#flatten-joined-tables">Flatten joined tables</a></li>
 <li><a href="/postgraphile/views/#authorization">Authorization</a></li>
 <li><a href="/postgraphile/views/#api-layer">API Layer</a></li>
-</ul></div></div><div class="edit-this-page" style="display:"><a href="https://github.com/graphile/graphile.github.io/edit/develop/src/pages/postgraphile/views.md">📝 Suggest improvement/edit this page</a></div><h2 class="mt3">Views</h2><div><p>Views are a great solution for abstraction.
-PostGraphile supports reading from and writing to views; however PostgreSQL
-lacks the powerful introspection capabilities on views that it has on tables,
-so we cannot easily automatically infer the relations. However, you can <a href="/postgraphile/smart-comments/#constraints">use
-our "smart comments" functionality to add constraints to
-views</a> which will make them a lot
-more table-like (giving them a primary key so you can get a <code class="language-text">nodeId</code>, adding
-foreign key references between views and other views or tables, setting
-columns as non-null).</p>
+</ul></div></div><div class="edit-this-page" style="display:"><a href="https://github.com/graphile/graphile.github.io/edit/develop/src/pages/postgraphile/views.md">📝 Suggest improvement/edit this page</a></div><h2 class="mt3">Views</h2><div><p>Views are a great solution for abstraction. PostGraphile supports reading from
+and writing to views; however PostgreSQL lacks the powerful introspection
+capabilities on views that it has on tables, so we cannot easily automatically
+infer the relations. However, you can
+<a href="/postgraphile/smart-comments/#constraints">use our "smart comments" functionality to add constraints to views</a>
+which will make them a lot more table-like (giving them a primary key so you can
+get a <code class="language-text">nodeId</code>, adding foreign key references between views and other views or
+tables, setting columns as non-null).</p>
 <h3 id="abstract-business-logic"><a href="#abstract-business-logic" aria-label="abstract business logic permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Abstract Business Logic</h3>
 <p>We can prepare certain queries in advance and expose the results through
 GraphQL. For example, say we want just the <code class="language-text">Comedy</code> films from our <code class="language-text">films</code>
@@ -83,7 +82,8 @@ table, we can create a view that contains this specific film type.</p>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre></div>
 <h3 id="flatten-joined-tables"><a href="#flatten-joined-tables" aria-label="flatten joined tables permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Flatten joined tables</h3>
-<p>Views enable you to expose a simple "flattened" object built from multiple tables.</p>
+<p>Views enable you to expose a simple "flattened" object built from multiple
+tables.</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> app_public<span class="token punctuation">.</span>person <span class="token punctuation">(</span>
   id <span class="token keyword">serial</span> <span class="token keyword">PRIMARY</span> <span class="token keyword">KEY</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -99,7 +99,8 @@ table, we can create a view that contains this specific film type.</p>
   <span class="token keyword">FROM</span> app_public<span class="token punctuation">.</span>person person
   <span class="token keyword">INNER</span> <span class="token keyword">JOIN</span> app_public<span class="token punctuation">.</span>address
   <span class="token keyword">ON</span> person<span class="token punctuation">.</span>id <span class="token operator">=</span> address<span class="token punctuation">.</span>person_id<span class="token punctuation">;</span></code></pre></div>
-<p>The GraphQL query using this view is flatter than the query using the underlying tables:</p>
+<p>The GraphQL query using this view is flatter than the query using the underlying
+tables:</p>
 <div class="gatsby-highlight" data-language="graphql"><pre class="language-graphql"><code class="language-graphql"><span class="token keyword">query</span> Before <span class="token punctuation">{</span>
   person <span class="token punctuation">{</span>
     id
@@ -117,9 +118,11 @@ table, we can create a view that contains this specific film type.</p>
     street
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre></div>
-<p><strong><em>NOTE: you can use <a href="/postgraphile/smart-comments/">smart comments</a> to change the GraphQL field name</em></strong></p>
+<p><strong><em>NOTE: you can use <a href="/postgraphile/smart-comments/">smart comments</a> to change
+the GraphQL field name</em></strong></p>
 <h3 id="authorization"><a href="#authorization" aria-label="authorization permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Authorization</h3>
-<p>Authorization can be enforced using <code class="language-text">views</code> as well, for example, exposing some data only to authenticated users:</p>
+<p>Authorization can be enforced using <code class="language-text">views</code> as well, for example, exposing some
+data only to authenticated users:</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> app_public<span class="token punctuation">.</span>person <span class="token punctuation">(</span>
   id <span class="token keyword">serial</span> <span class="token keyword">PRIMARY</span> <span class="token keyword">KEY</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -137,7 +140,8 @@ table, we can create a view that contains this specific film type.</p>
     <span class="token keyword">SELECT</span> personal_data<span class="token punctuation">.</span><span class="token operator">*</span>
     <span class="token keyword">FROM</span> app_public<span class="token punctuation">.</span>personal_data personal_data
     <span class="token keyword">WHERE</span> person_id <span class="token operator">=</span> current_user_id<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre></div>
-<p>(<code class="language-text">current_user_id()</code> here is a function that might return something like <code class="language-text">nullif(current_setting(&#39;jwt.claims.user_id&#39;, true), &#39;&#39;)::int</code>)</p>
+<p>(<code class="language-text">current_user_id()</code> here is a function that might return something like
+<code class="language-text">nullif(current_setting(&#39;jwt.claims.user_id&#39;, true), &#39;&#39;)::int</code>)</p>
 <h3 id="api-layer"><a href="#api-layer" aria-label="api layer permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>API Layer</h3>
 <p>Using views, one can create an access layer that will remain consistent even
 while making changes to the underlying tables - for example when splitting

@@ -126,15 +126,15 @@ latency and massive performance increase.</p>
 <div class='hero-block'>
 <h2 id="automatically-build-graphql-objects-and-fields-through-database-introspection"><a href="#automatically-build-graphql-objects-and-fields-through-database-introspection" aria-label="automatically build graphql objects and fields through database introspection permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Automatically build GraphQL objects and fields through database introspection</h2>
 <p>The core <code class="language-text">graphile-build</code> library treats GraphQL as a first-class target, and
-out of the box does not discriminate between your datastore. By using plugins
-to introspect your datastore you can automatically build your GraphQL objects
-and eliminate the development work required to keep your codebase and database
+out of the box does not discriminate between your datastore. By using plugins to
+introspect your datastore you can automatically build your GraphQL objects and
+eliminate the development work required to keep your codebase and database
 schema in sync.</p>
 <p><code class="language-text">graphile-build-pg</code> is a collection of plugins which adds extensive support for
 the popular PostgreSQL database system by performing introspection of your
 database schema and <strong>automatically</strong> building the relevant GraphQL objects and
-fields based on the tables, columns, functions, relations that it finds. This
-is the core of <a href="/postgraphile/">PostGraphile</a>.</p>
+fields based on the tables, columns, functions, relations that it finds. This is
+the core of <a href="/postgraphile/">PostGraphile</a>.</p>
 <p>You can build plugins for anything that Node.js can communicate with.</p>
 </div>
 </div>
@@ -196,8 +196,8 @@ implementation too).</p>
 <div class='hero-block'>
 <h2 id="automatically-update-your-running-graphql-schema-without-the-need-to-restart"><a href="#automatically-update-your-running-graphql-schema-without-the-need-to-restart" aria-label="automatically update your running graphql schema without the need to restart permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Automatically update your running GraphQL schema without the need to restart</h2>
 <p>For example: when your underlying data structure changes your Graphile Engine
-plugins can <a href="/graphile-build/schema-builder/#registerwatcherwatcher-unwatcher">trigger a
-rebuild</a>
+plugins can
+<a href="/graphile-build/schema-builder/#registerwatcherwatcher-unwatcher">trigger a rebuild</a>
 event and you'll automatically be supplied with a fresh new GraphQL schema to
 replace the out-of-date one - no need to restart your server!</p>
 </div>
