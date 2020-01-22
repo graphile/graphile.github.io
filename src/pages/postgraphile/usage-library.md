@@ -140,7 +140,7 @@ The `postgraphile` middleware factory function takes three arguments, all of whi
 
 - **`pgConfig`**: An object or string that will be passed to the [`pg`][] library and used to connect to a PostgreSQL backend, OR a pg.Pool to use.
 - **`schemaName`**: A string, or array of strings, which specifies the PostgreSQL schema(s) you to expose via PostGraphile; defaults to 'public'
-- **`options`**: An object containing other miscellaneous options. Options include: <!-- LIBRARY_DOCBLOCK_BEGIN -->
+- **`options`**: An object containing other miscellaneous options. Options include: <!-- prettier-ignore-start --><!-- LIBRARY_DOCBLOCK_BEGIN -->
   - `watchPg`: When true, PostGraphile will update the GraphQL API whenever your database schema changes. This feature requires some changes to your database in the form of the [`postgraphile_watch`](https://github.com/graphile/graphile-engine/blob/master/packages/graphile-build-pg/res/watch-fixtures.sql) schema; PostGraphile will try to add this itself but requires DB superuser privileges to do so. If PostGraphile can't install it, you can do so manually. PostGraphile will not drop the schema when it exits, to remove it you can execute: `DROP SCHEMA postgraphile_watch CASCADE;`
   - `retryOnInitFail`: When false (default), PostGraphile will exit if it fails to build the initial schema (for example if it cannot connect to the database, or if there are fatal naming conflicts in the schema). When true, PostGraphile will keep trying to rebuild the schema indefinitely, using an exponential backoff between attempts, starting at 100ms and increasing up to 30s delay between retries.
   - `ownerConnectionString`: Connection string to use to connect to the database as a privileged user (e.g. for setting up watch fixtures, logical decoding, etc).
@@ -191,6 +191,7 @@ The `postgraphile` middleware factory function takes three arguments, all of whi
   - `queryCacheMaxSize`: Max query cache size in bytes (extremely approximate, not accurate at all). Default `50000000` (~50MB). Set to 0 to disable.
 
 <!-- LIBRARY_DOCBLOCK_END -->
+<!-- prettier-ignore-end -->
 
 The following options are not part of PostGraphile core, but are available from the Supporter and/or Pro plugins - see [Go Pro!](/postgraphile/pricing/) for more information.
 

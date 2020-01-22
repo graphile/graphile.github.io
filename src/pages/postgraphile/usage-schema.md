@@ -79,7 +79,7 @@ The returned GraphQLSchema will **not** be updated when your database changes - 
 
 - **`pgConfig`**: An object or string that will be passed to the [`pg`][] library and used to connect to a PostgreSQL backend. If you already have a client or pool instance, when using this function you may also pass a `pg` client or a `pg-pool` instance directly instead of a config.
 - **`schemaName`**: A string which specifies the PostgreSQL schema that PostGraphile will use to create a GraphQL schema. The default schema is the `public` schema. May be an array for multiple schemas. For users who want to run the Postgres introspection query ahead of time, you may also pass in a `PgCatalog` instance directly.
-- **`options`**: An object containing other miscellaneous options. Most options are shared with the `postgraphile` middleware function. Options could be: <!-- SCHEMA_DOCBLOCK_BEGIN -->
+- **`options`**: An object containing other miscellaneous options. Most options are shared with the `postgraphile` middleware function. Options could be: <!-- prettier-ignore-start --><!-- SCHEMA_DOCBLOCK_BEGIN -->
   - `ownerConnectionString`: Connection string to use to connect to the database as a privileged user (e.g. for setting up watch fixtures, logical decoding, etc).
   - `subscriptions`: Enable GraphQL websocket transport support for subscriptions (you still need a subscriptions plugin currently)
   - `live`: [EXPERIMENTAL] Enables live-query support via GraphQL subscriptions (sends updated payload any time nested collections/records change)
@@ -106,6 +106,7 @@ The returned GraphQLSchema will **not** be updated when your database changes - 
   - `simpleCollections`: Should we use relay pagination, or simple collections? "omit" (default) - relay connections only, "only" (not recommended) - simple collections only (no Relay connections), "both" - both.
 
 <!-- SCHEMA_DOCBLOCK_END -->
+<!-- prettier-ignore-end -->
 
 ### API: `watchPostGraphileSchema(pgConfig, schemaName, options, onNewSchema)`
 
