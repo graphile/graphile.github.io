@@ -8,7 +8,7 @@ This guide is an adaption of the official quickstart tutorial
 for Node (Express) provided by
 [Auth0](https://auth0.com/docs/quickstart/backend/nodejs/01-authorization).
 The code illustrates how to intercept and verify a
-[JWT Access Token](https://auth0.com/docs/jwt) via a
+[JWT Access Token](https://auth0.com/docs/tokens/concepts/jwts) via a
 [JWKS (JSON Web Key Set)](https://auth0.com/docs/jwks) using
 [Auth0](https://auth0.com/).
 
