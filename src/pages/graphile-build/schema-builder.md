@@ -41,12 +41,12 @@ class SchemaBuilder {
 
 #### `createBuild()`
 
-This synchronous function returns a fresh [`Build`
-object](/graphile-build/build-object/) which you can use to build other objects
-(such as the `GraphQLSchema` created above). Be aware the the build will store
-created objects, so it is not safe to use the same `build` object to create a
-GraphQL object with the same name multiple times - each time should use a fresh
-build object.
+This synchronous function returns a fresh
+[`Build` object](/graphile-build/build-object/) which you can use to build other
+objects (such as the `GraphQLSchema` created above). Be aware the the build will
+store created objects, so it is not safe to use the same `build` object to
+create a GraphQL object with the same name multiple times - each time should use
+a fresh build object.
 
 ### Plugin methods
 
@@ -76,7 +76,8 @@ Registers two functions: one to be called if/when schema watching begins (see
 clean up). Each function is passed one argument: the function to call when a
 change occurs.
 
-TODO: document further (ref: https://github.com/graphile/graphile-engine/blob/83ee6948c5ab9f202773bf7518ea4d2cca3ec349/packages/graphile-build/__tests__/watch.test.js#L28-L35)
+TODO: document further (ref:
+https://github.com/graphile/graphile-engine/blob/83ee6948c5ab9f202773bf7518ea4d2cca3ec349/packages/graphile-build/__tests__/watch.test.js#L28-L35)
 
 ```js
 builder.registerWatcher(

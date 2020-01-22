@@ -17,17 +17,17 @@ generic enough that it can be used for many use-cases.
 
 ### Seeing which sub-fields were requested
 
-The [`resolve` method in
-GraphQL](http://graphql.org/graphql-js/type/#graphqlobjecttype) is actually
-called with 4 arguments:
+The
+[`resolve` method in GraphQL](http://graphql.org/graphql-js/type/#graphqlobjecttype)
+is actually called with 4 arguments:
 
 - source - the data provided by the parent field
 - args - the arguments passed to the field in the query
 - context - the context object used throughout the resolvers
 - resolveInfo - an instance of GraphQLResolveInfo
 
-This 4th argument is the one we're interested in because it contains a number
-of goodies. But some of these are hard to digest, so we give you some helpers...
+This 4th argument is the one we're interested in because it contains a number of
+goodies. But some of these are hard to digest, so we give you some helpers...
 
 ##### `parseResolveInfo(resolveInfo)`
 
@@ -40,12 +40,13 @@ object consisting of:
 - fieldsByTypeName - the sub-fields that were requested on the current object
   broken down by the names of the GraphQL types that could be returned.
 
-Because GraphQL supports Union and other complex types, it's possible to
-request different sub-fields depending on the type of data that's returned from
-a field, hence `fieldsByTypeName`. If you happen to know the type that's going
-to be returned then you can simplify with the next method...
+Because GraphQL supports Union and other complex types, it's possible to request
+different sub-fields depending on the type of data that's returned from a field,
+hence `fieldsByTypeName`. If you happen to know the type that's going to be
+returned then you can simplify with the next method...
 
-From [`graphql-parse-resolve-info`](https://github.com/graphile/graphile-engine/tree/master/packages/graphql-parse-resolve-info#parseresolveinforesolveinfo)
+From
+[`graphql-parse-resolve-info`](https://github.com/graphile/graphile-engine/tree/master/packages/graphql-parse-resolve-info#parseresolveinforesolveinfo)
 
 <!-- TODO: example -->
 
@@ -53,11 +54,11 @@ From [`graphql-parse-resolve-info`](https://github.com/graphile/graphile-engine/
 
 If you know the precise named type that your field will return you can pass the
 result of `parseResolveInfo(resolveInfo)` to this method along with the named
-type `graphQLType` and we'll return a similar object with an additional
-`fields` property that are only the fields that are compatible with
-the `graphQLType`.
+type `graphQLType` and we'll return a similar object with an additional `fields`
+property that are only the fields that are compatible with the `graphQLType`.
 
-From [`graphql-parse-resolve-info`](https://github.com/graphile/graphile-engine/tree/master/packages/graphql-parse-resolve-info#simplifyparsedresolveinfofragmentwithtypeparsedresolveinfofragment-returntype)
+From
+[`graphql-parse-resolve-info`](https://github.com/graphile/graphile-engine/tree/master/packages/graphql-parse-resolve-info#simplifyparsedresolveinfofragmentwithtypeparsedresolveinfofragment-returntype)
 
 <!-- TODO: example -->
 
@@ -75,7 +76,8 @@ There are three ways to declare meta-data with a field:
 
 #### When initially defining the object fields
 
-Instead of passing an object to `fields`, you can pass a function. This function will be passed the methods:
+Instead of passing an object to `fields`, you can pass a function. This function
+will be passed the methods:
 
 - `addDataGeneratorForField(fieldName, generatorFn)` - will associate the data
   generator with the field
@@ -196,7 +198,8 @@ const MyObject = newWithHooks(GraphQLObjectType, {
 
 #### In a `GraphQLObjectType:fields:field` hook
 
-Hooks can also associate metadata with a field; they are passed `addDataGenerator` on the Context argument, for example:
+Hooks can also associate metadata with a field; they are passed
+`addDataGenerator` on the Context argument, for example:
 
 ```js{10-14}
 function MyObjectAddIdDataGeneratorPlugin(builder) {
@@ -227,7 +230,8 @@ method:
 
 #### `getDataFromParsedResolveInfoFragment(parsedResolveInfoFragment, type)`
 
-Given a `parseResolveInfoFragment` and an expected return type, this will return the metadata associated with this field.
+Given a `parseResolveInfoFragment` and an expected return type, this will return
+the metadata associated with this field.
 
 ```js{9,21-24,30-32}
 const Query = newWithHooks(GraphQLObjectType, {

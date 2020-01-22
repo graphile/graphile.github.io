@@ -4,26 +4,28 @@ path: /postgraphile/computed-columns/
 title: Computed Columns
 ---
 
-"Computed columns" add what appears to be an extra column (field) to the
-GraphQL table type, but, unlike an actual column, the value for this field is the result of
-calling a function defined in the PostgreSQL schema.
-This function will automatically be exposed to the resultant GraphQL schema
-as a field on the type; it can accept arguments that influence its result,
-and may return either a scalar, record, list or a set.
-Sets (denoted by `RETURNS SETOF ...`) are exposed as
-[connections](/postgraphile/connections/).
+"Computed columns" add what appears to be an extra column (field) to the GraphQL
+table type, but, unlike an actual column, the value for this field is the result
+of calling a function defined in the PostgreSQL schema. This function will
+automatically be exposed to the resultant GraphQL schema as a field on the type;
+it can accept arguments that influence its result, and may return either a
+scalar, record, list or a set. Sets (denoted by `RETURNS SETOF ...`) are exposed
+as [connections](/postgraphile/connections/).
 
 _Performance note: we inline these function calls into the original `SELECT`
 statement, so there's no N+1 issues - it's very efficient._
 
-To create a function that PostGraphile will recognise as a computed column,
-it must obey the following rules:
+To create a function that PostGraphile will recognise as a computed column, it
+must obey the following rules:
 
-- adhere to [common PostGraphile function restrictions](/postgraphile/function-restrictions/)
-- name must begin with the name of the table it applies to, followed by an underscore (`_`)
+- adhere to
+  [common PostGraphile function restrictions](/postgraphile/function-restrictions/)
+- name must begin with the name of the table it applies to, followed by an
+  underscore (`_`)
 - first parameter must be the table type
 - must NOT return `VOID`
-- must be marked as `STABLE` (or `IMMUTABLE`, though that tends to be less common)
+- must be marked as `STABLE` (or `IMMUTABLE`, though that tends to be less
+  common)
 - must be defined in the same PostgreSQL schema as the table
 
 For example, assuming a table called `person` exists, the function:
@@ -34,7 +36,8 @@ CREATE FUNCTION person_full_name(person person) RETURNS text AS $$
 $$ LANGUAGE sql STABLE;
 ```
 
-Will create a computed column for your table named `person`, which can be queried like this:
+Will create a computed column for your table named `person`, which can be
+queried like this:
 
 ```graphql{5}
 {
@@ -81,7 +84,8 @@ returns setof my_schema.users as $$
 $$ language sql stable;
 ```
 
-You can add parameters to your computed column field by declaring additional parameters in your PostgreSQL function:
+You can add parameters to your computed column field by declaring additional
+parameters in your PostgreSQL function:
 
 ```sql{1,4}
 -- Creates `User.greet(greeting: String!)` string field
@@ -105,4 +109,5 @@ which can be queried like:
 
 ### Advice
 
-See the advice in [the Custom Queries article](/postgraphile/custom-queries/#advice).
+See the advice in
+[the Custom Queries article](/postgraphile/custom-queries/#advice).

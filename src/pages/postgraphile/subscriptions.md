@@ -14,36 +14,48 @@ _This feature requires PostGraphile v4.4.0 or higher._
 
 Pass `--subscriptions` (or `subscriptions: true`) to PostGraphile and we'll
 enhance GraphiQL with subscription capabilities and give your PostGraphile
-server the power of websocket communications. This will enable the websocket endpoint.
+server the power of websocket communications. This will enable the websocket
+endpoint.
 
-Although you can now use `makeExtendSchemaPlugin` to add your own subscription fields using your own realtime events, it's likely that you'll want to add the [`@graphile/pg-pubsub` realtime provider plugin](https://www.npmjs.com/package/@graphile/pg-pubsub) so that you can leverage PostgreSQL's built-in pubsub support. For example, this plugin will allow `makeExtendSchemaPlugin` to use the `@pgSubscriptions` directive to easily define your own subscriptions using PostgreSQL's `LISTEN`/`NOTIFY` (recommended for production). This plugin also adds the `--simple-subscriptions` flag that can be used to add a simple listen subscription field to your GraphQL API (useful for experimentation). See below how to enable the plugin for each approach.
+Although you can now use `makeExtendSchemaPlugin` to add your own subscription
+fields using your own realtime events, it's likely that you'll want to add the
+[`@graphile/pg-pubsub` realtime provider plugin](https://www.npmjs.com/package/@graphile/pg-pubsub)
+so that you can leverage PostgreSQL's built-in pubsub support. For example, this
+plugin will allow `makeExtendSchemaPlugin` to use the `@pgSubscriptions`
+directive to easily define your own subscriptions using PostgreSQL's
+`LISTEN`/`NOTIFY` (recommended for production). This plugin also adds the
+`--simple-subscriptions` flag that can be used to add a simple listen
+subscription field to your GraphQL API (useful for experimentation). See below
+how to enable the plugin for each approach.
 
-If you just use the `--subscriptions` flag alone, you'll notice that your
-schema still only has `query` and `mutation` operation types. To add subscriptions to
-your GraphQL schema you'll need a plugin to provide the relevant
-`subscription` fields (by extending the `Subscription` type) - or you can write your own [with
-`makeExtendSchemaPlugin`](/postgraphile/make-extend-schema-plugin/).
+If you just use the `--subscriptions` flag alone, you'll notice that your schema
+still only has `query` and `mutation` operation types. To add subscriptions to
+your GraphQL schema you'll need a plugin to provide the relevant `subscription`
+fields (by extending the `Subscription` type) - or you can write your own
+[with `makeExtendSchemaPlugin`](/postgraphile/make-extend-schema-plugin/).
 
-The easiest way to get started is with Simple Subscriptions (see below) but
-we recommend that you take the Custom Subscriptions approach as it allows you
-to be much more expressive about the realtime features of your GraphQL API.
+The easiest way to get started is with Simple Subscriptions (see below) but we
+recommend that you take the Custom Subscriptions approach as it allows you to be
+much more expressive about the realtime features of your GraphQL API.
 
-NOTE: the endpoint for subscriptions is the same as for GraphQL, except the protocol is changed from `http` or `https` to `ws` or `wss` respectively.
+NOTE: the endpoint for subscriptions is the same as for GraphQL, except the
+protocol is changed from `http` or `https` to `ws` or `wss` respectively.
 
 ---
 
 ### Custom Subscriptions
 
-In this implementation, you use PostGraphile's extensibility to define the
-exact subscriptions you need.
+In this implementation, you use PostGraphile's extensibility to define the exact
+subscriptions you need.
 
 #### Writing the plugin
 
 Using `makeExtendSchemaPlugin` we can define a new subscription field and the
-subscription payload type that it returns. Using the `@pgSubscription(topic: ...)`
-directive provided by `@graphile/pg-pubsub` we can embed a function that will
-calculate the PostgreSQL topic to subscribe to based on the arguments and
-context passed to the GraphQL field (in this case factoring in the user ID).
+subscription payload type that it returns. Using the
+`@pgSubscription(topic: ...)` directive provided by `@graphile/pg-pubsub` we can
+embed a function that will calculate the PostgreSQL topic to subscribe to based
+on the arguments and context passed to the GraphQL field (in this case factoring
+in the user ID).
 
 ```js
 // MySubscriptionPlugin.js
@@ -163,7 +175,8 @@ $$ language plpgsql volatile set search_path from current;
 
 </details>
 
-Hooking the database up to a GraphQL subscription is now just the case of `CREATE TRIGGER`:
+Hooking the database up to a GraphQL subscription is now just the case of
+`CREATE TRIGGER`:
 
 ```sql
 CREATE TRIGGER _500_gql_update
@@ -183,11 +196,10 @@ CREATE TRIGGER _500_gql_update_member
 
 #### Enabling with the CLI
 
-Load the `@graphile/pg-pubsub` _server_ plugin (`--plugins`, or `pluginHook`
-for the library), our custom subscription _schema_ plugin
-(`--append-plugins`, or `appendPlugins` for the library), and enable
-PostGraphile server's websockets support with `--subscriptions` (or
-`subscriptions: true` for the library).
+Load the `@graphile/pg-pubsub` _server_ plugin (`--plugins`, or `pluginHook` for
+the library), our custom subscription _schema_ plugin (`--append-plugins`, or
+`appendPlugins` for the library), and enable PostGraphile server's websockets
+support with `--subscriptions` (or `subscriptions: true` for the library).
 
 ```
 postgraphile \
@@ -200,8 +212,8 @@ postgraphile \
 #### Enabling with an Express app
 
 When using PostGraphile as a library, you may enable Custom Subscriptions by
-passing the `pluginHook` with the `@graphile/pg-pubsub` plugin, setting `subscriptions: true`
-and adding your custom plugin.
+passing the `pluginHook` with the `@graphile/pg-pubsub` plugin, setting
+`subscriptions: true` and adding your custom plugin.
 
 We emulate part of the Express stack, so if you require sessions you can pass
 additional Connect/Express middlewares (sorry, we don't support Koa middlewares
@@ -253,8 +265,8 @@ subscription MySubscription {
 
 You should get the answer: `"Waiting for subscription to yield data…"`
 
-To trigger the subscription, _in another GraphiQL tab_ run a mutation that changes the user. This
-will depend on your implementation, for example:
+To trigger the subscription, _in another GraphiQL tab_ run a mutation that
+changes the user. This will depend on your implementation, for example:
 
 ```graphql
 mutation MyMutation {
@@ -264,8 +276,8 @@ mutation MyMutation {
 }
 ```
 
-In this tab you will get the regular mutation answer. Going back to the previous tab,
-you will see the subscription payload. You are good to go! This should
+In this tab you will get the regular mutation answer. Going back to the previous
+tab, you will see the subscription payload. You are good to go! This should
 serve as the basis to implement your own custom subscriptions.
 
 ---
@@ -273,14 +285,13 @@ serve as the basis to implement your own custom subscriptions.
 ### Simple Subscriptions
 
 In this implementation, we have `@graphile/pg-pubsub` automatically expose a
-generic `listen` handler that can be used with arbitrary topics in PostgreSQL
-— it requires very little ahead-of-time planning.
+generic `listen` handler that can be used with arbitrary topics in PostgreSQL —
+it requires very little ahead-of-time planning.
 
 #### Enabling with the CLI
 
-To enable Simple Subscriptions via the CLI, just load the
-`@graphile/pg-pubsub` plugin and pass the `--subscriptions` and
-`--simple-subscriptions` flags.
+To enable Simple Subscriptions via the CLI, just load the `@graphile/pg-pubsub`
+plugin and pass the `--subscriptions` and `--simple-subscriptions` flags.
 
 ```
 postgraphile \
@@ -332,8 +343,8 @@ app.listen(parseInt(process.env.PORT, 10) || 3000);
 
 Simple subscriptions exposes a `listen` field to the `Subscription` type that
 can be used for generic subscriptions to a named topic. This topic can be
-triggered using PostgreSQL's built in LISTEN/NOTIFY functionality (but
-remember to add the prefix - see below).
+triggered using PostgreSQL's built in LISTEN/NOTIFY functionality (but remember
+to add the prefix - see below).
 
 ```graphql
 type ListenPayload {
@@ -347,8 +358,8 @@ type Subscription {
 }
 ```
 
-PostGraphile's built in GraphiQL now supports subscriptions, so you can use
-it directly to test your application.
+PostGraphile's built in GraphiQL now supports subscriptions, so you can use it
+directly to test your application.
 
 #### Topic prefix
 
@@ -359,7 +370,11 @@ All topics requested from GraphQL are automatically prefixed with
   remember to add it to the topic when you perform `NOTIFY` otherwise
   subscribers will not see the messages.
 
-\* _This is applied by default, but you can override it via `pgSubscriptionPrefix` setting in the `graphileBuildOptions` object; e.g. `postgraphile(DATABASE_URL, SCHEMAS, {pluginHook, subscriptions: true, graphileBuildOptions: { pgSubscriptionPrefix: "MyPrefix:"}})`. Note further that this setting only applies to simple subscriptions, custom subscriptions have no automatic prefix._
+\* _This is applied by default, but you can override it via
+`pgSubscriptionPrefix` setting in the `graphileBuildOptions` object; e.g.
+`postgraphile(DATABASE_URL, SCHEMAS, {pluginHook, subscriptions: true, graphileBuildOptions: { pgSubscriptionPrefix: "MyPrefix:"}})`.
+Note further that this setting only applies to simple subscriptions, custom
+subscriptions have no automatic prefix._
 
 For example a user may perform the following subscription:
 
@@ -378,8 +393,8 @@ subscription {
 }
 ```
 
-To cause the subscription to receive a message, you could run the following
-in PostgreSQL:
+To cause the subscription to receive a message, you could run the following in
+PostgreSQL:
 
 ```sql
 select pg_notify(
@@ -402,16 +417,16 @@ Resulting in this GraphQL payload:
 }
 ```
 
-Which is sufficient to know that the event _occurred_. Chances are that you
-want to know more than this...
+Which is sufficient to know that the event _occurred_. Chances are that you want
+to know more than this...
 
 It's also possible to send a `Node` along with your GraphQL payload using the
 `__node__` field on the `pg_notify` body (which is interpreted as JSON). The
-`__node__` field is similar to the `nodeId` (or `id` if you use
-`--classic-ids`) field in your GraphQL requests, except it's the raw JSON
-before it gets stringified and base64 encoded. (The reason for this is that
-Postgres' JSON functions leave some optional spaces in, so when they are base64
-encoded the strings do not match.)
+`__node__` field is similar to the `nodeId` (or `id` if you use `--classic-ids`)
+field in your GraphQL requests, except it's the raw JSON before it gets
+stringified and base64 encoded. (The reason for this is that Postgres' JSON
+functions leave some optional spaces in, so when they are base64 encoded the
+strings do not match.)
 
 Assuming that you have a table of the form
 `foos(id serial primary key, title text, ...)` you can add the `__node__` field
@@ -444,10 +459,10 @@ Resulting in this GraphQL payload:
 }
 ```
 
-> **NOTE**: This solution is still taking shape, so it's not yet certain how other fields
-> on the NOTIFY message JSON will be exposed via GraphQL. You are advised to
-> treat the content of this message JSON as if it's visible to the user, as at
-> some point it may be.
+> **NOTE**: This solution is still taking shape, so it's not yet certain how
+> other fields on the NOTIFY message JSON will be exposed via GraphQL. You are
+> advised to treat the content of this message JSON as if it's visible to the
+> user, as at some point it may be.
 
 > **NOTE**: In PostgreSQL the channel is an "identifier" which by default is
 > limited to 63 characters. Subtracting the `postgraphile:` prefix leaves 50
@@ -456,15 +471,15 @@ Resulting in this GraphQL payload:
 #### Subscription security
 
 By default, any user may subscribe to any topic, whether logged in or not, and
-they will remain subscribed until they close the connection themselves. This
-can cause a number of security issues; so we give you a method to implement
-security around subscriptions.
+they will remain subscribed until they close the connection themselves. This can
+cause a number of security issues; so we give you a method to implement security
+around subscriptions.
 
-By specifying `--subscription-authorization-function [fn]` on the PostGraphile CLI (or using the
-`subscriptionAuthorizationFunction` option) you can have PostGraphile call the
-function you specified to ensure that the user is
-allowed to subscribe to the relevant topic. The function must accept one text
-argument `topic` and must return a string or raise an exception (note: the `topic`
+By specifying `--subscription-authorization-function [fn]` on the PostGraphile
+CLI (or using the `subscriptionAuthorizationFunction` option) you can have
+PostGraphile call the function you specified to ensure that the user is allowed
+to subscribe to the relevant topic. The function must accept one text argument
+`topic` and must return a string or raise an exception (note: the `topic`
 argument WILL be sent including the `postgraphile:` prefix).
 
 A typical implementation will look like this:
@@ -508,17 +523,17 @@ $$ LANGUAGE plpgsql VOLATILE SECURITY DEFINER;
 
 When a message is published to the topic identified by the return value of this
 function (NOTE: this topic will NOT be prefixed with `postgraphile:` because it
-should be private), the associated subscription will automatically be terminated.
+should be private), the associated subscription will automatically be
+terminated.
 
 #### Naming your topics
 
 You might want to make the topic a combination of things, for example the
 subject type and identifier - e.g. 'channel:123'. If you do this then your
 function could determine which subject the user is attempting to subscribe to,
-check the user has access to that subject, and finally return a PostgreSQL
-topic that will be published to in the event the user is kicked from the
-channel, e.g. `'channel:123:kick:987'` (assuming '987' is the id
-of the current user).
+check the user has access to that subject, and finally return a PostgreSQL topic
+that will be published to in the event the user is kicked from the channel, e.g.
+`'channel:123:kick:987'` (assuming '987' is the id of the current user).
 
 #### Example walk-through
 
@@ -561,8 +576,9 @@ $$
 $$ language sql stable;
 ```
 
-Then using a GraphQL client that supports subscriptions, such as [GraphQL Playground](https://github.com/graphcool/graphql-playground),
-perform the following subscription:
+Then using a GraphQL client that supports subscriptions, such as
+[GraphQL Playground](https://github.com/graphcool/graphql-playground), perform
+the following subscription:
 
 ```graphql
 subscription {
@@ -579,7 +595,8 @@ subscription {
 }
 ```
 
-You are not expecting an immediate result; first you have to trigger the event. To do so, back in your `psql` session in terminal 2, execute:
+You are not expecting an immediate result; first you have to trigger the event.
+To do so, back in your `psql` session in terminal 2, execute:
 
 ```sql
 insert into app_public.foo (title) values ('Howdy!') returning *;
@@ -609,8 +626,8 @@ select pg_notify(
 
 You should notice that your client is no longer subscribed.
 
-**Bonus**: the SQL commands in this walk-through can be automated with this handy
-bash script:
+**Bonus**: the SQL commands in this walk-through can be automated with this
+handy bash script:
 
 ```bash
 #!/bin/bash
@@ -718,4 +735,5 @@ rawHTTPServer.listen(parseInt(process.env.PORT, 10) || 3000);
 The `enhanceHttpServerWithSubscriptions` takes two arguments:
 
 1.  the raw HTTP server from `require('http').createServer()`
-2.  the postgraphile middleware (this should be the _same_ middleware that you mount into your Express app)
+2.  the postgraphile middleware (this should be the _same_ middleware that you
+    mount into your Express app)

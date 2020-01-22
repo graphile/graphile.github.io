@@ -68,9 +68,9 @@ query prisma_deeplyNested {
 }
 ```
 
-To read about how PostGraphile's performance compares to that of Prisma, and
-how to validate the results for yourself, check out [this
-post](https://medium.com/@Benjie/how-i-made-postgraphile-faster-than-prisma-graphql-server-in-8-hours-e66b4c511160)
+To read about how PostGraphile's performance compares to that of Prisma, and how
+to validate the results for yourself, check out
+[this post](https://medium.com/@Benjie/how-i-made-postgraphile-faster-than-prisma-graphql-server-in-8-hours-e66b4c511160)
 on Medium.
 
 ### How is it so fast?
@@ -79,8 +79,8 @@ We leverage graphile-build's [look-ahead](/graphile-build/look-ahead/) features
 when resolving a GraphQL request so that a single root level query, no matter
 how nested, is compiled into just one SQL query. PostgreSQL has an excellent
 query planner which optimises and executes this query for us, avoiding the need
-for multiple round-trips to the database and thus solving the N+1 problem
-that is found in many GraphQL APIs.
+for multiple round-trips to the database and thus solving the N+1 problem that
+is found in many GraphQL APIs.
 
 For example the following query would be compiled into one SQL statement:
 
@@ -134,12 +134,19 @@ things you might want to try:
 
 - Throw more RAM at your database server
 - Make sure your database server is using an SSD
-- Make sure you have added the correct type of database indexes in the correct places (references, filters, order-by)
-- Note: making a column a reference to a foreign key does **not** add an index to that column, so for example `User.postsByAuthorId` will be slow unless you've manually added an index to `posts.author_id`
+- Make sure you have added the correct type of database indexes in the correct
+  places (references, filters, order-by)
+- Note: making a column a reference to a foreign key does **not** add an index
+  to that column, so for example `User.postsByAuthorId` will be slow unless
+  you've manually added an index to `posts.author_id`
 - `VACUUM` your database tables
 - Check your RLS policies aren't too expensive, consider optimising them
 - Optimise your computed column functions
-- Consider `security definer` on functions to bypass RLS (but make sure you add your own auth checks!)
-- Use the envvar `DEBUG=graphile-build-pg:sql` to show the SQL statements that are being executed; e.g. `DEBUG=graphile-build-pg:sql postgraphile -c postgres:///mydb`
+- Consider `security definer` on functions to bypass RLS (but make sure you add
+  your own auth checks!)
+- Use the envvar `DEBUG=graphile-build-pg:sql` to show the SQL statements that
+  are being executed; e.g.
+  `DEBUG=graphile-build-pg:sql postgraphile -c postgres:///mydb`
 
-If you need help optimising your PostgreSQL database or PostGraphile API, please [get in touch](/support/).
+If you need help optimising your PostgreSQL database or PostGraphile API, please
+[get in touch](/support/).

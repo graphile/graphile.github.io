@@ -4,23 +4,30 @@ path: /postgraphile/smart-tags/
 title: Smart Tags
 ---
 
-You can customise your PostGraphile GraphQL schema by tagging tables, columns, functions, relations, etc. These changes could be renaming something, omitting things from your GraphQL schema, or anything else a plugin supports!
+You can customise your PostGraphile GraphQL schema by tagging tables, columns,
+functions, relations, etc. These changes could be renaming something, omitting
+things from your GraphQL schema, or anything else a plugin supports!
 
-We call this functionality "Smart Tags" and it allows you to easily customise the generated GraphQL schema without making breaking changes to your database.
+We call this functionality "Smart Tags" and it allows you to easily customise
+the generated GraphQL schema without making breaking changes to your database.
 
-If you're using PostGraphile in `--watch` mode, you should be able to see in PostGraphile's GraphiQL client that the related types and fields will reflect the change almost immediately. If you're not using `--watch` then you may need to restart the server for smart tag changes to take effect.
+If you're using PostGraphile in `--watch` mode, you should be able to see in
+PostGraphile's GraphiQL client that the related types and fields will reflect
+the change almost immediately. If you're not using `--watch` then you may need
+to restart the server for smart tag changes to take effect.
 
 ### The @ character
 
 We often refer to things like the `@omit` smart tag or the `@name` smart tag;
-really these tags are just `omit` and `name` respectively; but in the [Smart
-Comment](/postgraphile/smart-comments/) syntax (the oldest form of smart tags
-in PostGraphile) the `@` is required to denote a smart tag, and this pattern
-has stuck when referring to smart tags.
+really these tags are just `omit` and `name` respectively; but in the
+[Smart Comment](/postgraphile/smart-comments/) syntax (the oldest form of smart
+tags in PostGraphile) the `@` is required to denote a smart tag, and this
+pattern has stuck when referring to smart tags.
 
-You will also often see the smart comment syntax used to refer to smart tags
-in general, it's because the syntax is a little easier to write quickly -
-you'll soon learn to translate `@omit update,delete` to `omit: "update,delete"` (and vice-versa) in your head.
+You will also often see the smart comment syntax used to refer to smart tags in
+general, it's because the syntax is a little easier to write quickly - you'll
+soon learn to translate `@omit update,delete` to `omit: "update,delete"` (and
+vice-versa) in your head.
 
 ### Valid values
 
@@ -43,9 +50,11 @@ There's multiple ways of adding tags to entities:
 
 ### Example
 
-_In this example we're going to use Smart Comments for brevity, but this works with all the ways of adding smart tags._
+_In this example we're going to use Smart Comments for brevity, but this works
+with all the ways of adding smart tags._
 
-Here is a basic table, with the name changed from `original_table` to `renamed_table`:
+Here is a basic table, with the name changed from `original_table` to
+`renamed_table`:
 
 ```sql
 create table original_table (
@@ -74,7 +83,8 @@ comment on type flibble is E'@name flamble';
 comment on function getFlamble() is E'@name allFlambles';
 ```
 
-Smart comments are also reflected in GraphiQL. Here, we are querying the table `original_table` by looking at `allOriginalTables`:
+Smart comments are also reflected in GraphiQL. Here, we are querying the table
+`original_table` by looking at `allOriginalTables`:
 
 <div class="full-width">
 
@@ -82,7 +92,8 @@ Smart comments are also reflected in GraphiQL. Here, we are querying the table `
 
 </div>
 
-Next, we add the smart comment `@name renamed_table` on `original_table` and the rename is instantly reflected in GraphiQL:
+Next, we add the smart comment `@name renamed_table` on `original_table` and the
+rename is instantly reflected in GraphiQL:
 
 <div class="full-width">
 
@@ -105,7 +116,9 @@ documentation. The following are smart tags built into PostGraphile.
 
 #### @deprecated
 
-You can deprecate a database column using the `deprecated` tag. If you need multiple lines, you can specify the tag multiple times, one per line of output text.
+You can deprecate a database column using the `deprecated` tag. If you need
+multiple lines, you can specify the tag multiple times, one per line of output
+text.
 
 Applies to:
 
@@ -128,7 +141,10 @@ comment on column my_schema.my_table.my_column is
 
 #### @name
 
-You can add a smart tag to an entity to rename that entity. For tables, columns, custom types and many functions you can use the `name` tag. For more complex things we use different tags, such as for foreign key constraints we have `fieldName` and `foreignFieldName`.
+You can add a smart tag to an entity to rename that entity. For tables, columns,
+custom types and many functions you can use the `name` tag. For more complex
+things we use different tags, such as for foreign key constraints we have
+`fieldName` and `foreignFieldName`.
 
 Applies to:
 
@@ -138,8 +154,10 @@ Applies to:
 - Composite types (one direction only)
 - Columns
 - Types
-- [Custom Query](/postgraphile/custom-queries/) functions: the `Query` field name
-- [Custom Mutation](/postgraphile/custom-mutations/) functions: the `Mutation` field name
+- [Custom Query](/postgraphile/custom-queries/) functions: the `Query` field
+  name
+- [Custom Mutation](/postgraphile/custom-mutations/) functions: the `Mutation`
+  field name
 
 ```json5
 class: {
@@ -169,7 +187,8 @@ comment on function search_posts(text) is
 
 Applies to:
 
-- foreign key constraints: the local field name for the relationship (see also `@foreignFieldName`)
+- foreign key constraints: the local field name for the relationship (see also
+  `@foreignFieldName`)
 - unique constraints: the root finder field name
 - computed column functions: the field name this function creates
 
@@ -177,7 +196,8 @@ Applies to:
 
 `foreignFieldName` applies to
 
-- foreign key constraints: the field on the remote type (the "backwards" relation)
+- foreign key constraints: the field on the remote type (the "backwards"
+  relation)
 
 ```json5
 foreignFieldName: "threads",
@@ -190,7 +210,8 @@ See also: `@fieldName`
 
 Applies to:
 
-- [Custom Mutation](/postgraphile/custom-mutations/) functions: the field on the mutation payload type
+- [Custom Mutation](/postgraphile/custom-mutations/) functions: the field on the
+  mutation payload type
 
 ```json5
 procedure: {
@@ -210,9 +231,16 @@ comment on function authenticate(text, text) is
 
 #### @omit
 
-To remove an entity from your API, you can use the 'omit' smart tag. If you only want to omit the entity from certain operations you can list them. For example, `@omit update` on a table would prevent the table from having an update-related functionality whilst still including queries, create and delete. `@omit update` on a column would prevent the column appearing in the `Patch` type, so it cannot be updated (but can still be created) via GraphQL.
+To remove an entity from your API, you can use the 'omit' smart tag. If you only
+want to omit the entity from certain operations you can list them. For example,
+`@omit update` on a table would prevent the table from having an update-related
+functionality whilst still including queries, create and delete. `@omit update`
+on a column would prevent the column appearing in the `Patch` type, so it cannot
+be updated (but can still be created) via GraphQL.
 
-Here's a quick-reference for the operations we currently support (you'll want to experiment with them as there wasn't space to put all the caveats in the table!):
+Here's a quick-reference for the operations we currently support (you'll want to
+experiment with them as there wasn't space to put all the caveats in the
+table!):
 
 <div class='big-table'>
 
@@ -230,9 +258,12 @@ Here's a quick-reference for the operations we currently support (you'll want to
 
 </div>
 
-> **Warning:** This functionality is not intended for implementing permissions, it's for removing things from your API that you don't need. You should back these up with database permissions if needed.
+> **Warning:** This functionality is not intended for implementing permissions,
+> it's for removing things from your API that you don't need. You should back
+> these up with database permissions if needed.
 
-Multiple actions can be listed using commas (no spaces!), as in the following example which disables mutations on a table:
+Multiple actions can be listed using commas (no spaces!), as in the following
+example which disables mutations on a table:
 
 ```json5
 class: {
@@ -263,7 +294,8 @@ Applies to:
 
 ###### Example
 
-On a simple table called `book` we have added a smart comment omitting the `update` and `delete` operations:
+On a simple table called `book` we have added a smart comment omitting the
+`update` and `delete` operations:
 
 ```sql
 create table forum_example.book (
@@ -273,24 +305,29 @@ create table forum_example.book (
 comment on table forum_example.book is E'@omit update,delete';
 ```
 
-The results are immediately reflected in GraphiQL. We can also disable `create` operations:
+The results are immediately reflected in GraphiQL. We can also disable `create`
+operations:
 
 ```sql
 comment on table forum_example.book is E'@omit create,update,delete';
 ```
 
-On the left, you can see the documentation for all the fields and types regarding `book` before the `create` operation was omitted. On the right, you can see the reduced fields and types once the `create` operation is omitted.
+On the left, you can see the documentation for all the fields and types
+regarding `book` before the `create` operation was omitted. On the right, you
+can see the reduced fields and types once the `create` operation is omitted.
 
 ![GraphiQL displaying an omit smart comment example](./smart-comments-omit-example.png)
 
 #### @sortable
 
-Since version [v4.3.1](https://github.com/graphile/postgraphile/releases/tag/v4.3.1)
+Since version
+[v4.3.1](https://github.com/graphile/postgraphile/releases/tag/v4.3.1)
 
 Applies to:
 
 - Functions returning `SETOF`: adds the `orderBy` argument to this field
-- Computed column functions with no required parameters: allows this function to be used as an order in the `orderBy` argument for the parent table
+- Computed column functions with no required parameters: allows this function to
+  be used as an order in the `orderBy` argument for the parent table
 
 ```sql
 comment on function foo() is E'@sortable';
@@ -312,12 +349,14 @@ comment on function users_foo(users) is E'@sortable';
 
 #### @filterable
 
-Since version [v4.3.1](https://github.com/graphile/postgraphile/releases/tag/v4.3.1).
+Since version
+[v4.3.1](https://github.com/graphile/postgraphile/releases/tag/v4.3.1).
 
 Applies to:
 
 - Functions returning `SETOF`: adds the `condition` argument to this field
-- Computed column functions with no required parameters: allows this function to be used as a field in the `condition` argument for the parent table
+- Computed column functions with no required parameters: allows this function to
+  be used as a field in the `condition` argument for the parent table
 
 ```sql
 comment on function foo() is E'@filterable';
@@ -336,7 +375,9 @@ comment on function users_foo(users) is E'@filterable';
 
 ##### Sorting and filtering non-scalar computed columns
 
-If your computed column is returning a composite type, the recommended approach is to wrap it with a computed column that returns the scalar field you want to sort and/or filter by. For example:
+If your computed column is returning a composite type, the recommended approach
+is to wrap it with a computed column that returns the scalar field you want to
+sort and/or filter by. For example:
 
 ```sql
 -- non scalar function
@@ -356,10 +397,11 @@ comment on function user_object_field() is E'@sortable';
 #### @simpleCollections
 
 You can control whether simple collections are enabled by default using
-`--simple-collections omit|both|only` (or `simpleCollections: "omit"|"both"|"only"`); however sometimes you want to override this on a case
-by case setting - for example if you want relay connections for almost all
-collections, except when it comes to a user's email addresses where you want to
-use a simple list.
+`--simple-collections omit|both|only` (or
+`simpleCollections: "omit"|"both"|"only"`); however sometimes you want to
+override this on a case by case setting - for example if you want relay
+connections for almost all collections, except when it comes to a user's email
+addresses where you want to use a simple list.
 
 You can do this with the `@simpleCollections omit`, `@simpleCollections both`
 and `@simpleCollections only` smart comments.
@@ -389,7 +431,9 @@ comment on function search_people(query text) is
 
 #### @arg0variant, @arg1variant, ...
 
-When building a custom mutation, you probably want to use the composite type that is generated when creating a table in PostgreSQL as a function argument, like this (note this is just an example for illustrative purposes):
+When building a custom mutation, you probably want to use the composite type
+that is generated when creating a table in PostgreSQL as a function argument,
+like this (note this is just an example for illustrative purposes):
 
 ```sql
 create table example(
@@ -402,7 +446,13 @@ create function new_example(input example) returns example as $$
 $$ language sql volatile;
 ```
 
-By default, composite types will be translated into a GraphQL types by PostGraphile with the same characteristics, i.e. all `not null` columns will become non-nullable fields. You can let PostGraphile know that you want to convert the composite type into another "variant" GraphQL type with a smart comment. Variants include `patch` (which is equivalent to the argument to `update*` mutations) and `base` (which makes every column both available (ignores permissions) and nullable). For example:
+By default, composite types will be translated into a GraphQL types by
+PostGraphile with the same characteristics, i.e. all `not null` columns will
+become non-nullable fields. You can let PostGraphile know that you want to
+convert the composite type into another "variant" GraphQL type with a smart
+comment. Variants include `patch` (which is equivalent to the argument to
+`update*` mutations) and `base` (which makes every column both available
+(ignores permissions) and nullable). For example:
 
 ```sql
 create table example(
@@ -418,7 +468,11 @@ comment on function new_example_with_auto_id(input example) is
   E'@arg0variant patch';
 ```
 
-This uses the `patch` variant from PostGraphile's update mutations which has all the fields except `id`. This will mean that the custom mutation will not ask for the `id` on the client-side anymore (because it will generate it itself). Note how `arg0` refers to the first function parameter (we use a 0-indexed counter of the arguments), thus `arg2` would be the third parameter.
+This uses the `patch` variant from PostGraphile's update mutations which has all
+the fields except `id`. This will mean that the custom mutation will not ask for
+the `id` on the client-side anymore (because it will generate it itself). Note
+how `arg0` refers to the first function parameter (we use a 0-indexed counter of
+the arguments), thus `arg2` would be the third parameter.
 
 Applies to:
 
@@ -428,10 +482,10 @@ Applies to:
 
 #### Tags to add virtual constraint
 
-You can add "virtual" (fake) constraints to types in PostgreSQL using smart comments.
-The primary use case for this is to make views act more table-like - allowing
-you to express the connections between tables and views. It's also useful
-on composite types.
+You can add "virtual" (fake) constraints to types in PostgreSQL using smart
+comments. The primary use case for this is to make views act more table-like -
+allowing you to express the connections between tables and views. It's also
+useful on composite types.
 
 ##### @notNull
 
@@ -457,9 +511,12 @@ comment on column my_view.my_column is E'@notNull`;
 
 ##### @primaryKey
 
-Primary key columns will automatically be marked as `@notNull`, as they would in PostgreSQL.
+Primary key columns will automatically be marked as `@notNull`, as they would in
+PostgreSQL.
 
-If you declare something as a primary key it _must_ be unique. We do not check it's unique - we trust you - but if it isn't unique then we're not sure what will happen...
+If you declare something as a primary key it _must_ be unique. We do not check
+it's unique - we trust you - but if it isn't unique then we're not sure what
+will happen...
 
 ```json5
 class: {

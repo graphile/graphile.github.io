@@ -201,7 +201,8 @@ title: PostGraphile Pro!
 
 ##### <sup>‡</sup> These features integrate deeply with PostGraphile and have been optimised for its nuances by the maintainer. If you wish to build and maintain protections yourself rather than using the Pro plugin, refer to [Running in Production](/postgraphile/production/) for information on how you might go about doing this. Purchasing the Pro plugin helps fund ongoing development and maintenance on the open source PostGraphile project.
 
-Questions, comments or feedback? Email <a href="mailto:info@graphile.org?subject=Pricing%20question/comment/feedback:)">info@graphile.org</a>
+Questions, comments or feedback? Email
+<a href="mailto:info@graphile.org?subject=Pricing%20question/comment/feedback:)">info@graphile.org</a>
 
 </div>
 </div>
@@ -218,9 +219,9 @@ Questions, comments or feedback? Email <a href="mailto:info@graphile.org?subject
 ### PostGraphile core is OSS under the MIT license
 
 PostGraphile core is sufficient for many peoples needs; it's the only version
-that existed for the first 2 years of the project and many people are running
-it with great success in production. No features in PostGraphile core have
-been removed or obscured, and it continues to be advanced and enhanced.
+that existed for the first 2 years of the project and many people are running it
+with great success in production. No features in PostGraphile core have been
+removed or obscured, and it continues to be advanced and enhanced.
 
 Development and maintenance of PostGraphile core is ongoing, supported by
 contributions from the community, [professional services](/support/) contracts,
@@ -242,51 +243,55 @@ dissuade your developers from building expensive queries!)
 
 ### Does the licenses cover my production cluster?
 
-The [Pro plugin EULA](https://store.graphile.com/eulas/postgraphile-pro/) states you may:
+The [Pro plugin EULA](https://store.graphile.com/eulas/postgraphile-pro/) states
+you may:
 
-> use up to four Production Instances and up to 100 Development Instances of the Software
+> use up to four Production Instances and up to 100 Development Instances of the
+> Software
 
-This is enough to cover a small cluster of 4 PostGraphile servers. If you
-will be running a larger cluster than this, please [get in
-touch](mailto:team@graphile.org?subject=Large%20cluster) for custom
+This is enough to cover a small cluster of 4 PostGraphile servers. If you will
+be running a larger cluster than this, please
+[get in touch](mailto:team@graphile.org?subject=Large%20cluster) for custom
 licensing.
 
 ### How many licenses do I need to cover my multiple development/testing stages?
 
-The [Pro plugin EULA](https://store.graphile.com/eulas/postgraphile-pro/) states you may:
+The [Pro plugin EULA](https://store.graphile.com/eulas/postgraphile-pro/) states
+you may:
 
-> use up to four Production Instances and up to 100 Development Instances of the Software
+> use up to four Production Instances and up to 100 Development Instances of the
+> Software
 
 "Development Instance" is defined as "an Instance that is used to support
 development, testing or deployment of a Production Instance", which covers
 standard development, staging, QA and similar environments.
 
-If you have larger needs than this, please [get in
-touch](mailto:team@graphile.org?subject=Large%20cluster) for custom
+If you have larger needs than this, please
+[get in touch](mailto:team@graphile.org?subject=Large%20cluster) for custom
 licensing.
 
 ### Where are the @graphile/pro docs/changelog?
 
-You can read the [@graphile/pro README on
-npm](https://www.npmjs.com/package/@graphile/pro). There's also a lot more
-information in the [Production Considerations](/postgraphile/production/) page
-on this website.
+You can read the
+[@graphile/pro README on npm](https://www.npmjs.com/package/@graphile/pro).
+There's also a lot more information in the
+[Production Considerations](/postgraphile/production/) page on this website.
 
 ### Is the fulfillment of the license key automated?
 
-Yes, license keys are issued automatically by our store software upon
-completion of the payment process.
+Yes, license keys are issued automatically by our store software upon completion
+of the payment process.
 
 ### Do license keys "phone home"?
 
-No, license keys are static and contain all the necessary claims, not
-dissimilar to JWTs. Our software does not "phone home."
+No, license keys are static and contain all the necessary claims, not dissimilar
+to JWTs. Our software does not "phone home."
 
-You are not permitted to use the software once the EULA terminates (e.g. if
-you stop paying). We trust you, and want to minimise your maintenance burden,
-so the automated keys expire after one year rather than one month. You will
-be able to issue new keys via the store when your key is near to expiry.
-Please do not abuse our trust.
+You are not permitted to use the software once the EULA terminates (e.g. if you
+stop paying). We trust you, and want to minimise your maintenance burden, so the
+automated keys expire after one year rather than one month. You will be able to
+issue new keys via the store when your key is near to expiry. Please do not
+abuse our trust.
 
 ### Commercial plugins help fund development on PostGraphile
 
@@ -297,8 +302,8 @@ fixes to be developed and released faster.
 
 ### I'm an enterprise user and need X, Y and Z
 
-Please [get in touch](mailto:team@graphile.org?subject=Enterprise%20enquiry) and I'll
-be happy to help!
+Please [get in touch](mailto:team@graphile.org?subject=Enterprise%20enquiry) and
+I'll be happy to help!
 
 </div>
 </div>

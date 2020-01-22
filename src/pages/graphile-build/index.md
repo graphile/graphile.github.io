@@ -132,16 +132,16 @@ latency and massive performance increase.
 ## Automatically build GraphQL objects and fields through database introspection
 
 The core `graphile-build` library treats GraphQL as a first-class target, and
-out of the box does not discriminate between your datastore. By using plugins
-to introspect your datastore you can automatically build your GraphQL objects
-and eliminate the development work required to keep your codebase and database
+out of the box does not discriminate between your datastore. By using plugins to
+introspect your datastore you can automatically build your GraphQL objects and
+eliminate the development work required to keep your codebase and database
 schema in sync.
 
 `graphile-build-pg` is a collection of plugins which adds extensive support for
 the popular PostgreSQL database system by performing introspection of your
 database schema and **automatically** building the relevant GraphQL objects and
-fields based on the tables, columns, functions, relations that it finds. This
-is the core of [PostGraphile](/postgraphile/).
+fields based on the tables, columns, functions, relations that it finds. This is
+the core of [PostGraphile](/postgraphile/).
 
 You can build plugins for anything that Node.js can communicate with.
 
@@ -239,8 +239,8 @@ implementation too).
 ## Automatically update your running GraphQL schema without the need to restart
 
 For example: when your underlying data structure changes your Graphile Engine
-plugins can [trigger a
-rebuild](/graphile-build/schema-builder/#registerwatcherwatcher-unwatcher)
+plugins can
+[trigger a rebuild](/graphile-build/schema-builder/#registerwatcherwatcher-unwatcher)
 event and you'll automatically be supplied with a fresh new GraphQL schema to
 replace the out-of-date one - no need to restart your server!
 

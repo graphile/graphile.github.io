@@ -5,23 +5,26 @@ title: CRUD Mutations
 ---
 
 CRUD, or "Create, Read, Update, Delete", is a common paradigm in data
-manipulation APIs; "CRUD Mutations" refer to all but the "R". PostGraphile
-will automatically add CRUD mutations to the schema for each table; this
-behaviour can be disabled via the `--disable-default-mutations` CLI setting
-(or the `disableDefaultMutations: true` library setting) if you prefer to
-define all of your mutations yourself (e.g. with [custom
-mutations](/postgraphile/custom-mutations/)).
+manipulation APIs; "CRUD Mutations" refer to all but the "R". PostGraphile will
+automatically add CRUD mutations to the schema for each table; this behaviour
+can be disabled via the `--disable-default-mutations` CLI setting (or the
+`disableDefaultMutations: true` library setting) if you prefer to define all of
+your mutations yourself (e.g. with
+[custom mutations](/postgraphile/custom-mutations/)).
 
 Using the `users` table from the [parent article](/postgraphile/tables/),
 depending on the PostGraphile settings you use (and the permissions you've
 granted), you might get the following mutations:
 
-- createUser - Creates a single `User`. [See example](/postgraphile/examples/#Mutations__Create).
+- createUser - Creates a single `User`.
+  [See example](/postgraphile/examples/#Mutations__Create).
 - updateUser - Updates a single `User` using its globally unique id and a patch.
-- updateUserById - Updates a single `User` using a unique key and a patch. [See example](/postgraphile/examples/#Mutations__Update).
+- updateUserById - Updates a single `User` using a unique key and a patch.
+  [See example](/postgraphile/examples/#Mutations__Update).
 - updateUserByUsername - Updates a single `User` using a unique key and a patch.
 - deleteUser - Deletes a single `User` using its globally unique id.
-- deleteUserById - Deletes a single `User` using a unique key. [See example](/postgraphile/examples/#Mutations__Delete).
+- deleteUserById - Deletes a single `User` using a unique key.
+  [See example](/postgraphile/examples/#Mutations__Delete).
 - deleteUserByUsername - Deletes a single `User` using a unique key.
 
 **The `update` and `delete` mutations are created only if the table contains a
@@ -78,23 +81,24 @@ mutation {
 ### If mutations don't show up...
 
 First of all, check for errors being output from your PostGraphile server. If
-there are no errors, here's some reasons that mutations might not show up in
-the generated schema:
+there are no errors, here's some reasons that mutations might not show up in the
+generated schema:
 
 - `--disable-default-mutations` (or `-M`) specified (or library equivalent)
 - `@omit create,update,delete` smart comments on the tables
 - Insufficient permissions on the tables and `--no-ignore-rbac` specified
 - Tables not in an exposed schema
 - Views instead of tables
-- Missing primary keys (though 'create' mutations will still be added in this case)
+- Missing primary keys (though 'create' mutations will still be added in this
+  case)
 
 Don't forget to check any associated `.postgraphilerc` for these settings too!
 
 If you're new to GraphQL, perhaps you're looking in the wrong place? In the
 GraphiQL interface, open the docs on the right and go to the root. Select the
-`Mutation` type to see the available mutations. If you try to execute a
-mutation (e.g. using autocomplete) you must use the `mutation` operation type
-when composing the request:
+`Mutation` type to see the available mutations. If you try to execute a mutation
+(e.g. using autocomplete) you must use the `mutation` operation type when
+composing the request:
 
 ```graphql
 mutation {

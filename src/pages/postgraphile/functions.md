@@ -4,12 +4,18 @@ path: /postgraphile/functions/
 title: Database Functions
 ---
 
-One of the easiest ways to add more capabilities to your PostGraphile schema
-is with PostgreSQL functions. The three main methods are:
+One of the easiest ways to add more capabilities to your PostGraphile schema is
+with PostgreSQL functions. The three main methods are:
 
-- [Computed Columns](/postgraphile/computed-columns/) enable you to add a computed field to a table type
-- [Custom Queries](/postgraphile/custom-queries/) enable you to add a root level Query field which can return a scalar, list, custom type, table row or even a table connection
-- [Custom Mutations](/postgraphile/custom-mutations/) enable you to add a root level Mutation field which can cause modifications to your database and return nothing (`void`), a scalar, list, custom type, table row or list of table rows (but not a connection, since you cannot paginate over a mutation)
+- [Computed Columns](/postgraphile/computed-columns/) enable you to add a
+  computed field to a table type
+- [Custom Queries](/postgraphile/custom-queries/) enable you to add a root level
+  Query field which can return a scalar, list, custom type, table row or even a
+  table connection
+- [Custom Mutations](/postgraphile/custom-mutations/) enable you to add a root
+  level Mutation field which can cause modifications to your database and return
+  nothing (`void`), a scalar, list, custom type, table row or list of table rows
+  (but not a connection, since you cannot paginate over a mutation)
 
 ### Understanding Functions
 
@@ -17,35 +23,38 @@ In order to make the most powerful PostGraphile server you can, it's very
 important to understand PostgreSQL functions. Functions allow you to define
 business logic in the database using SQL or one of many other scripting
 languages. Putting your business logic in the database will often be more
-performant then doing so in the application layer as PostgreSQL is finely
-tuned for data intensive uses.
+performant then doing so in the application layer as PostgreSQL is finely tuned
+for data intensive uses.
 
-For some function examples, you can refer to the [forum example SQL
-schema][].
+For some function examples, you can refer to the [forum example SQL schema][].
 
-[forum example sql schema]: https://github.com/graphile/postgraphile/blob/master/examples/forum/schema.sql
+[forum example sql schema]:
+  https://github.com/graphile/postgraphile/blob/master/examples/forum/schema.sql
 
 ### Recommended Reading
 
-- PostgreSQL [`CREATE FUNCTION`][] documentation for actually creating functions.
+- PostgreSQL [`CREATE FUNCTION`][] documentation for actually creating
+  functions.
 - PostgreSQL [`CREATE TRIGGER`][] documentation.
 - StackOverflow answer describing [computed columns in PostgreSQL][].
 
-[`create function`]: http://www.postgresql.org/docs/current/static/sql-createfunction.html
-[`create trigger`]: http://www.postgresql.org/docs/current/static/sql-createtrigger.html
+[`create function`]:
+  http://www.postgresql.org/docs/current/static/sql-createfunction.html
+[`create trigger`]:
+  http://www.postgresql.org/docs/current/static/sql-createtrigger.html
 [computed columns in postgresql]: http://stackoverflow.com/a/11166268/1568890
 
 ### Procedural Languages
 
-Functions in PostgreSQL require you to use either SQL or a procedural
-language. The most common procedural language in PostgreSQL is
-[PL/pgSQL][pl/pgsql]. SQL is probably the easiest to use as you are most
-likely already familiar with it. PL/pgSQL is PostgreSQL’s custom procedural
-language, it's fairly easy to pick up and there are plenty of StackOverflow
-and other resources for this language. You’ll need to learn PL/pgSQL (or one
-of the other procedural languages) if you want to write any triggers, because
-SQL can’t be used for triggers. Don’t worry - you can definitely make awesome
-applications without a deep knowledge of PL/pgSQL.
+Functions in PostgreSQL require you to use either SQL or a procedural language.
+The most common procedural language in PostgreSQL is [PL/pgSQL][pl/pgsql]. SQL
+is probably the easiest to use as you are most likely already familiar with it.
+PL/pgSQL is PostgreSQL’s custom procedural language, it's fairly easy to pick up
+and there are plenty of StackOverflow and other resources for this language.
+You’ll need to learn PL/pgSQL (or one of the other procedural languages) if you
+want to write any triggers, because SQL can’t be used for triggers. Don’t
+worry - you can definitely make awesome applications without a deep knowledge of
+PL/pgSQL.
 
 A simple function written with `LANGUAGE sql` looks like this:
 
@@ -65,7 +74,9 @@ END;
 $$ LANGUAGE plpgsql IMMUTABLE STRICT;
 ```
 
-If you don’t want to use PL/pgSQL or SQL, many popular scripting languages can be used _inside_ PostgreSQL to write your functions! You can see a few of these projects here:
+If you don’t want to use PL/pgSQL or SQL, many popular scripting languages can
+be used _inside_ PostgreSQL to write your functions! You can see a few of these
+projects here:
 
 - [JavaScript (plv8)][]
 - [Ruby (plruby)][]
@@ -94,7 +105,10 @@ $$ LANGUAGE plv8 IMMUTABLE STRICT;
 
 ### Named Arguments
 
-PostgreSQL allows you to mix named and positional (unnamed) arguments in your functions. However, GraphQL will _only_ allow named arguments. So if you don’t name an argument, PostGraphile will give it a name like `arg1`, `arg2`, `arg3`, and so on. An example of a function with unnamed arguments is as follows:
+PostgreSQL allows you to mix named and positional (unnamed) arguments in your
+functions. However, GraphQL will _only_ allow named arguments. So if you don’t
+name an argument, PostGraphile will give it a name like `arg1`, `arg2`, `arg3`,
+and so on. An example of a function with unnamed arguments is as follows:
 
 ```sql
 CREATE FUNCTION add(int, int) RETURNS int AS $$
@@ -126,20 +140,31 @@ CREATE FUNCTION my_function(a int, b int) RETURNS int AS $$ … $$ LANGUAGE sql 
 
 From the PostgreSQL docs:
 
-> `VOLATILE` indicates that the function value can change even within a single table scan, so no optimizations can be made… But note that any function that has side-effects must be classified volatile, even if its result is quite predictable, to prevent calls from being optimized away; an example is `setval()`.
+> `VOLATILE` indicates that the function value can change even within a single
+> table scan, so no optimizations can be made… But note that any function that
+> has side-effects must be classified volatile, even if its result is quite
+> predictable, to prevent calls from being optimized away; an example is
+> `setval()`.
 
-In simpler terms `VOLATILE` basically means you are changing data or storing state.
+In simpler terms `VOLATILE` basically means you are changing data or storing
+state.
 
-Anyone familiar with HTTP could compare a `VOLATILE` function to “unsafe” HTTP methods like `POST`, `PUT`, `PATCH`, and `DELETE`.
+Anyone familiar with HTTP could compare a `VOLATILE` function to “unsafe” HTTP
+methods like `POST`, `PUT`, `PATCH`, and `DELETE`.
 
-Certain VOLATILE functions will be exposed by PostGraphile as [custom mutations](/postgraphile/custom-mutations/).
+Certain VOLATILE functions will be exposed by PostGraphile as
+[custom mutations](/postgraphile/custom-mutations/).
 
 ### STABLE/IMMUTABLE (Query) Functions
 
-If your function does not modify any data or state, you should declare it as `STABLE`. (If your function depends only on its arguments and does not fetch data from other sources such as tables, then you can declare it as `IMMUTABLE` which is a stricter form of `STABLE`.)
+If your function does not modify any data or state, you should declare it as
+`STABLE`. (If your function depends only on its arguments and does not fetch
+data from other sources such as tables, then you can declare it as `IMMUTABLE`
+which is a stricter form of `STABLE`.)
 
-By marking your function as `STABLE` or `IMMUTABLE`, PostgreSQL knows that it can apply a number of optimisations,
-including memoization to avoiding calling it multiple times for the same inputs during the same statement.
+By marking your function as `STABLE` or `IMMUTABLE`, PostgreSQL knows that it
+can apply a number of optimisations, including memoization to avoiding calling
+it multiple times for the same inputs during the same statement.
 
 Here's examples of defining functions as STABLE/IMMUTABLE:
 
@@ -157,25 +182,37 @@ CREATE FUNCTION my_function(a int, b int) RETURNS my_table AS $$ … $$ LANGUAGE
 
 From the PostgreSQL docs:
 
-> `IMMUTABLE` indicates that the function cannot modify the database and always returns the same result when given the same argument values; that is, it does not do database lookups or otherwise use information not directly present in its argument list. If this option is given, any call of the function with all-constant arguments can be immediately replaced with the function value.
+> `IMMUTABLE` indicates that the function cannot modify the database and always
+> returns the same result when given the same argument values; that is, it does
+> not do database lookups or otherwise use information not directly present in
+> its argument list. If this option is given, any call of the function with
+> all-constant arguments can be immediately replaced with the function value.
 
 and…
 
-> `STABLE` indicates that the function cannot modify the database, and that within a single table scan it will consistently return the same result for the same argument values, but that its result could change across SQL statements. This is the appropriate selection for functions whose results depend on database lookups, parameter variables (such as the current time zone), etc. (It is inappropriate for AFTER triggers that wish to query rows modified by the current command).
+> `STABLE` indicates that the function cannot modify the database, and that
+> within a single table scan it will consistently return the same result for the
+> same argument values, but that its result could change across SQL statements.
+> This is the appropriate selection for functions whose results depend on
+> database lookups, parameter variables (such as the current time zone), etc.
+> (It is inappropriate for AFTER triggers that wish to query rows modified by
+> the current command).
 
-To use the HTTP analogy again, `IMMUTABLE` and `STABLE` are comparable to “safe” HTTP methods like `GET` and `HEAD`.
+To use the HTTP analogy again, `IMMUTABLE` and `STABLE` are comparable to “safe”
+HTTP methods like `GET` and `HEAD`.
 
-Certain STABLE/IMMUTABLE functions will be exposed by PostGraphile as [custom queries](/postgraphile/custom-queries/) or [computed columns](/postgraphile/computed-columns/).
+Certain STABLE/IMMUTABLE functions will be exposed by PostGraphile as
+[custom queries](/postgraphile/custom-queries/) or
+[computed columns](/postgraphile/computed-columns/).
 
 ### SETOF Functions - Connections
 
 As well as scalars, compound types, and arrays of these, PostgreSQL functions
-can also return sets. Sets emulate tables, and so it's natural for
-PostGraphile to expose these to GraphQL using
-[connections](/postgraphile/connections/).
+can also return sets. Sets emulate tables, and so it's natural for PostGraphile
+to expose these to GraphQL using [connections](/postgraphile/connections/).
 
-SETOF functions can be a powerful way of exposing data to the user that may
-be too much for them to handle all at once and require pagination.
+SETOF functions can be a powerful way of exposing data to the user that may be
+too much for them to handle all at once and require pagination.
 
 To create a function that returns a connection, you could use SQL such as this:
 
@@ -184,8 +221,8 @@ To create a function that returns a connection, you could use SQL such as this:
 CREATE FUNCTION my_function(a int, b int) RETURNS SETOF person AS $$ … $$ LANGUAGE sql;
 ```
 
-This function would be recognised as a [custom
-query](/postgraphile/custom-queries/), and could be queried like this:
+This function would be recognised as a
+[custom query](/postgraphile/custom-queries/), and could be queried like this:
 
 ```graphql{2}
 {
@@ -207,8 +244,11 @@ query](/postgraphile/custom-queries/), and could be queried like this:
 More information on constructing advanced queries can be found
 [here](/postgraphile/custom-queries/).
 
-[forum example sql schema]: https://github.com/graphile/postgraphile/blob/master/examples/forum/schema.sql
+[forum example sql schema]:
+  https://github.com/graphile/postgraphile/blob/master/examples/forum/schema.sql
 
 ---
 
-_This article was originally written by [Caleb Meredith](https://twitter.com/calebmer) but has been heavily edited since._
+_This article was originally written by
+[Caleb Meredith](https://twitter.com/calebmer) but has been heavily edited
+since._

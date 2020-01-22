@@ -7,8 +7,8 @@ title: Testing with Jest
 ### Testing the database functions
 
 You can think of this as your "unit tests" - simply spin up a transaction, set
-any relevant Postgres settings (e.g. `jwt.claims.user_id`), run the SQL you
-want to test, check the results, and then rollback the transaction.
+any relevant Postgres settings (e.g. `jwt.claims.user_id`), run the SQL you want
+to test, check the results, and then rollback the transaction.
 
 <details>
 <summary>(Click to expand.) Create some helpers in <tt>test_helpers.js</tt>. </summary>
@@ -122,8 +122,7 @@ test("can delete self", () =>
 ### Testing the GraphQL middleware
 
 These are more integration tests - they pretend to go through the middleware
-(exercising pgSettings / JWT / etc) and you can place assertions on the
-results.
+(exercising pgSettings / JWT / etc) and you can place assertions on the results.
 
 In your `server.js` (or wherever), export your PostGraphile options:
 

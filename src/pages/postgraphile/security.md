@@ -7,49 +7,46 @@ title: Security
 Traditionally in web application architectures the security is implemented in
 the server layer and the database is treated as a simple store of data. Partly
 this was due to necessity (the security policies offered by databases such as
-PostgreSQL were simply not granular enough), and partly this was people
-figuring it would reduce the workload on the database thus increases
-scalability. However, as applications grow, they start needing more advanced
-features or additional services to interact with the database. There's a
-couple options they have here: duplicate the authentication/authorization logic
-in multiple places (which can lead to discrepancies and increases the surface
-area for potential issues), or make sure everything goes through the original
-application layer (which then becomes both the development and performance
-bottleneck).
+PostgreSQL were simply not granular enough), and partly this was people figuring
+it would reduce the workload on the database thus increases scalability.
+However, as applications grow, they start needing more advanced features or
+additional services to interact with the database. There's a couple options they
+have here: duplicate the authentication/authorization logic in multiple places
+(which can lead to discrepancies and increases the surface area for potential
+issues), or make sure everything goes through the original application layer
+(which then becomes both the development and performance bottleneck).
 
 However, this is no longer necessary since PostgreSQL introduced much more
-granular permissions in the form of [Row-Level Security (RLS)
-policies](https://www.postgresql.org/docs/current/static/ddl-rowsecurity.html) in
-PostgreSQL 9.5 back at the beginning of 2016. Now you can combine this with
+granular permissions in the form of
+[Row-Level Security (RLS) policies](https://www.postgresql.org/docs/current/static/ddl-rowsecurity.html)
+in PostgreSQL 9.5 back at the beginning of 2016. Now you can combine this with
 PostgreSQL established permissions system (based on roles) allowing your
-application to be considerably more specific about permissions: adding
-row-level permission constraints to the existing table- and column-based
-permissions.
+application to be considerably more specific about permissions: adding row-level
+permission constraints to the existing table- and column-based permissions.
 
 Now that this functionality is stable and proven (and especially with the
-performance improvements in the latest PostgreSQL releases), we advise that
-you protect your lowest level - the data itself. By doing so you can be sure
-that no matter how many services interact with your database they will all be
-protected by the same underlying permissions logic, which you only need to
-maintain in one place. You can add as many microservices as you like, and
-they can talk to the database directly!
+performance improvements in the latest PostgreSQL releases), we advise that you
+protect your lowest level - the data itself. By doing so you can be sure that no
+matter how many services interact with your database they will all be protected
+by the same underlying permissions logic, which you only need to maintain in one
+place. You can add as many microservices as you like, and they can talk to the
+database directly!
 
-When Row Level Security (RLS) is enabled, all rows are by default not visible
-to any roles (except database administration roles and the role who created
-the database/table); and permission is selectively granted with the use of
-policies.
+When Row Level Security (RLS) is enabled, all rows are by default not visible to
+any roles (except database administration roles and the role who created the
+database/table); and permission is selectively granted with the use of policies.
 
-If you already have a secure database schema that implements these
-technologies to protect your data at the lowest levels then you can leverage
-`postgraphile` to generate a powerful, secure and fast API very rapidly. You
-just need to generate JWT tokens for your users (and we even help you with
-that), or use [pgSettings](/postgraphile/usage-library/#pgsettings-function)
-to indicate the current user.
+If you already have a secure database schema that implements these technologies
+to protect your data at the lowest levels then you can leverage `postgraphile`
+to generate a powerful, secure and fast API very rapidly. You just need to
+generate JWT tokens for your users (and we even help you with that), or use
+[pgSettings](/postgraphile/usage-library/#pgsettings-function) to indicate the
+current user.
 
 ### Processing JWTs
 
-To enable the JWT functionality you must provide a `--jwt-secret` on the CLI
-(or `jwtSecret` to the library options). This will allow PostGraphile to
+To enable the JWT functionality you must provide a `--jwt-secret` on the CLI (or
+`jwtSecret` to the library options). This will allow PostGraphile to
 authenticate incoming JWTs and set the granted claims on the database
 transaction.
 
@@ -130,7 +127,8 @@ JWTs are sent via the best practice `Authorization` header:
 Authorization: Bearer JWT_TOKEN_HERE
 ```
 
-e.g. [with Apollo](https://www.apollographql.com/docs/react/networking/authentication/#header):
+e.g.
+[with Apollo](https://www.apollographql.com/docs/react/networking/authentication/#header):
 
 ```js{7,12}
 const httpLink = createHttpLink({
@@ -155,7 +153,8 @@ const client = new ApolloClient({
 });
 ```
 
-or [with Relay Modern](https://facebook.github.io/relay/docs/en/network-layer.html):
+or
+[with Relay Modern](https://facebook.github.io/relay/docs/en/network-layer.html):
 
 ```js{3,8}
 function fetchQuery( operation, variables, cacheConfig, uploadables) {
@@ -195,8 +194,8 @@ Your JWT token will include a number of claims, something like:
 ```
 
 When we verify that the JWT token is for us (via `aud: "postgraphile"`) we can
-authenticate the PostgreSQL client that is used to perform the GraphQL query.
-We do this as follows:
+authenticate the PostgreSQL client that is used to perform the GraphQL query. We
+do this as follows:
 
 ```sql
 begin;
@@ -209,8 +208,8 @@ set local jwt.claims.user_id to '2';
 commit;
 ```
 
-> _Actually, to save roundtrips we perform just one query to set all configs
-> via ..._
+> _Actually, to save roundtrips we perform just one query to set all configs via
+> ..._
 
 ```sql
 select set_config('role', 'app_user', true), set_config('user_id', '2', true), ...

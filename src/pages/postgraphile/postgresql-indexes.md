@@ -4,30 +4,38 @@ path: /postgraphile/postgresql-indexes/
 title: PostgreSQL Indexes
 ---
 
-It’s important that your queries stay fast for your users, this section
-outlines some resources to help you optimize you queries with indexes.
+It’s important that your queries stay fast for your users, this section outlines
+some resources to help you optimize you queries with indexes.
 
-- Heroku’s [Efficient Use of PostgreSQL Indexes][] outlines how to best use indexes to optimize you queries. The entire article is a helpful read, but if nothing else read the last section [Managing and Maintaining Indexes][] for a better understanding of how indexes work.
+- Heroku’s [Efficient Use of PostgreSQL Indexes][] outlines how to best use
+  indexes to optimize you queries. The entire article is a helpful read, but if
+  nothing else read the last section [Managing and Maintaining Indexes][] for a
+  better understanding of how indexes work.
 
-- The PostgreSQL documentation has a great article describing the relationship between [Indexes and `ORDER BY`][].
+- The PostgreSQL documentation has a great article describing the relationship
+  between [Indexes and `ORDER BY`][].
 
-[efficient use of postgresql indexes]: https://devcenter.heroku.com/articles/postgresql-indexes
-[managing and maintaining indexes]: https://devcenter.heroku.com/articles/postgresql-indexes#managing-and-maintaining-indexes
-[indexes and `order by`]: http://www.postgresql.org/docs/current/static/indexes-ordering.html
+[efficient use of postgresql indexes]:
+  https://devcenter.heroku.com/articles/postgresql-indexes
+[managing and maintaining indexes]:
+  https://devcenter.heroku.com/articles/postgresql-indexes#managing-and-maintaining-indexes
+[indexes and `order by`]:
+  http://www.postgresql.org/docs/current/static/indexes-ordering.html
 
-_This article was originally written by [Caleb Meredith](https://twitter.com/calebmer)._
+_This article was originally written by
+[Caleb Meredith](https://twitter.com/calebmer)._
 
 ### Advice - Foreign Key Indexes
 
-Many people don't realise that when you create a [foreign key
-relation](/postgraphile/relations/), PostgreSQL does NOT automatically create
-an index on the referencing column(s). That can mean that when you query
-based on that relation, which PostGraphile does a lot when traversing
-relationships, it can involve a full table scan which is very expensive.
+Many people don't realise that when you create a
+[foreign key relation](/postgraphile/relations/), PostgreSQL does NOT
+automatically create an index on the referencing column(s). That can mean that
+when you query based on that relation, which PostGraphile does a lot when
+traversing relationships, it can involve a full table scan which is very
+expensive.
 
-Cameron Ellis has written a short article on [finding missing indexes on
-foreign
-keys](https://medium.com/@awesboss/how-to-find-missing-indexes-on-foreign-keys-2faffd7e6958)
+Cameron Ellis has written a short article on
+[finding missing indexes on foreign keys](https://medium.com/@awesboss/how-to-find-missing-indexes-on-foreign-keys-2faffd7e6958)
 which utilises SQL similar to the following to automatically detect missing
 foreign key indexes:
 
@@ -78,5 +86,5 @@ AND NOT EXISTS(
 ORDER BY reltuples DESC;
 ```
 
-You should consider integrating something like this into your CI tests to
-ensure that all your foreign keys are indexed.
+You should consider integrating something like this into your CI tests to ensure
+that all your foreign keys are indexed.

@@ -4,18 +4,22 @@ path: /postgraphile/best-practices/
 title: PostGraphile best practices
 ---
 
-This guide is a work in progress. If you have ideas for best practices, please use the "Suggest improvements to this page" link above to submit them, or discuss them in #documentation on [the PostGraphile Discord chat](http://discord.gg/graphile).
+This guide is a work in progress. If you have ideas for best practices, please
+use the "Suggest improvements to this page" link above to submit them, or
+discuss them in #documentation on
+[the PostGraphile Discord chat](http://discord.gg/graphile).
 
 ### Foreign Key Indexes
 
 PostgreSQL does _NOT_ add indexes to foreign keys by default. This isn't an
-issue for the forward relation (`user_id` → user), but for the reverse
-relation (user → things by `user_id`) it can make the lookup very expensive.
-Always add indexes to your foreign keys.
+issue for the forward relation (`user_id` → user), but for the reverse relation
+(user → things by `user_id`) it can make the lookup very expensive. Always add
+indexes to your foreign keys.
 
 ### Row Level Security
 
-If you're using RLS, it's best to enable it on every table in your database. You should at least enable it on every table in your exposed schemas.
+If you're using RLS, it's best to enable it on every table in your database. You
+should at least enable it on every table in your exposed schemas.
 
 ### Use Table GRANT for SELECT/DELETE and Column GRANT for INSERT/UPDATE
 
@@ -55,18 +59,18 @@ explicitness that should come from such operations.
 
 ### Simplify Your GraphQL Field Names
 
-You can get a leg up on this [using
-`@graphile-contrib/pg-simplify-inflector`](https://github.com/graphile-contrib/pg-simplify-inflector).
-The long names PostGraphile uses by default are to try and avoid people
-getting naming conflicts when they run PostGraphile for the first time. Once
-you're more comfortable you should move to using shorter names as it's a
-GraphQL best practice.
+You can get a leg up on this
+[using `@graphile-contrib/pg-simplify-inflector`](https://github.com/graphile-contrib/pg-simplify-inflector).
+The long names PostGraphile uses by default are to try and avoid people getting
+naming conflicts when they run PostGraphile for the first time. Once you're more
+comfortable you should move to using shorter names as it's a GraphQL best
+practice.
 
 ### Enable the PostGraphile Recommended Options
 
-(Scan the docs for `[RECOMMENDED]`, but take a moment to understand why
-they're recommended and yet not enabled by default - they often require
-greater knowledge of PostGraphile and your database.)
+(Scan the docs for `[RECOMMENDED]`, but take a moment to understand why they're
+recommended and yet not enabled by default - they often require greater
+knowledge of PostGraphile and your database.)
 
 ### Protect Your API
 

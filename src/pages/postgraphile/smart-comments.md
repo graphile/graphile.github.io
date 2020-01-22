@@ -4,17 +4,32 @@ path: /postgraphile/smart-comments/
 title: Smart Comments
 ---
 
-_Ensure you've read the [Smart Tags](/postgraphile/smart-tags/) page before referring here._
+_Ensure you've read the [Smart Tags](/postgraphile/smart-tags/) page before
+referring here._
 
-You can customise your PostGraphile GraphQL schema without making breaking changes to your database schema by adding specially formatted comments to tables, columns, functions, relations, etc. within your PostgreSQL database. We call these "smart comments".
+You can customise your PostGraphile GraphQL schema without making breaking
+changes to your database schema by adding specially formatted comments to
+tables, columns, functions, relations, etc. within your PostgreSQL database. We
+call these "smart comments".
 
 ### Smart comment spec
 
-Comments can be added to various entities within PostgreSQL using [the `COMMENT` statement](https://www.postgresql.org/docs/current/sql-comment.html); we add a special syntax to these comments that enables PostGraphile to treat them as smart comments.
+Comments can be added to various entities within PostgreSQL using
+[the `COMMENT` statement](https://www.postgresql.org/docs/current/sql-comment.html);
+we add a special syntax to these comments that enables PostGraphile to treat
+them as smart comments.
 
-A smart comment is made up of one or more "tags" and optionally followed by the remaining comment. Tags may have a string payload (which follows a the tag and a space, and must not contain newline characters) and are separated by newlines. Tags always start with an `@` symbol and must always come before the remaining comment, hence all smart comments start with an `@` symbol. If a tag has no payload then its value will be the boolean `true`, otherwise it will be a string. If the same tag is present more than once in a smart comment then its final value will become an array of the individual values for that tag.
+A smart comment is made up of one or more "tags" and optionally followed by the
+remaining comment. Tags may have a string payload (which follows a the tag and a
+space, and must not contain newline characters) and are separated by newlines.
+Tags always start with an `@` symbol and must always come before the remaining
+comment, hence all smart comments start with an `@` symbol. If a tag has no
+payload then its value will be the boolean `true`, otherwise it will be a
+string. If the same tag is present more than once in a smart comment then its
+final value will become an array of the individual values for that tag.
 
-The following text could be parsed as a smart comment (**the smart comment values shown are examples only, and don't have any meaning**):
+The following text could be parsed as a smart comment (**the smart comment
+values shown are examples only, and don't have any meaning**):
 
 ```
 @name meta
@@ -35,20 +50,29 @@ and would result in the following JSON tags object:
 }
 ```
 
-and the description on the last line (`This field has a load of arbitrary tags.`) would be made available as documentation as regular comments are.
+and the description on the last line
+(`This field has a load of arbitrary tags.`) would be made available as
+documentation as regular comments are.
 
-Note that the parser is deliberately very strict currently, we might make it more flexible in future; you might want to check out the [test suite](https://github.com/graphile/graphile-engine/blob/master/packages/graphile-build-pg/__tests__/tags.test.js).
+Note that the parser is deliberately very strict currently, we might make it
+more flexible in future; you might want to check out the
+[test suite](https://github.com/graphile/graphile-engine/blob/master/packages/graphile-build-pg/__tests__/tags.test.js).
 
 ### Adding newlines
 
-To put newlines in smart comments we recommend the use of the [`E` "escape" string constants](https://www.postgresql.org/docs/current/static/sql-syntax-lexical.html#SQL-SYNTAX-CONSTANTS), wherein you can use `\n` for newlines. For example the text above could be added to a comment on a field via:
+To put newlines in smart comments we recommend the use of the
+[`E` "escape" string constants](https://www.postgresql.org/docs/current/static/sql-syntax-lexical.html#SQL-SYNTAX-CONSTANTS),
+wherein you can use `\n` for newlines. For example the text above could be added
+to a comment on a field via:
 
 ```sql
 comment on column my_schema.my_table.my_column is
   E'@name meta\n@isImportant\n@jsonField date timestamp\n@jsonField name text\n@jsonField episode enum ONE=1 TWO=2\nThis field has a load of arbitrary tags.';
 ```
 
-You can use newlines verbatim but this can cause issues with some tooling, particularly if you have developers on both Windows and Unix-based operating systems.
+You can use newlines verbatim but this can cause issues with some tooling,
+particularly if you have developers on both Windows and Unix-based operating
+systems.
 
 ### Applying smart tags to database entities
 
@@ -104,10 +128,10 @@ comment on function my_function(arg_type_1, arg_type_2) is
 ### Adding smart tags to fake constraints
 
 If you need to apply any smart comments to a fake constraint, you cannot use
-newlines (`\n`) because they will be interpretted as separate smart comments
-on the original entity. We've added a workaround for this: you can use the
-pipe (`|`) symbol to assign smart comments to the fake constraint, for example
-to rename the fake constraint:
+newlines (`\n`) because they will be interpretted as separate smart comments on
+the original entity. We've added a workaround for this: you can use the pipe
+(`|`) symbol to assign smart comments to the fake constraint, for example to
+rename the fake constraint:
 
 ```sql
 comment on materialized view my_materialized_view is

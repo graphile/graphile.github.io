@@ -4,7 +4,8 @@ path: /postgraphile/usage-cli/
 title: Command Line Interface
 ---
 
-The easiest way to get up and running with PostGraphile is to use the Command Line Interface.
+The easiest way to get up and running with PostGraphile is to use the Command
+Line Interface.
 
 Install PostGraphile globally via npm:
 
@@ -18,26 +19,29 @@ This will make the `postgraphile` command available. You can then run:
 postgraphile -c postgres:///mydb -s public -a -j
 ```
 
-where `-c` is the connection string (defaults to `postgres:///`), `-s` is the schema name (defaults to "public"), `-a` enables Relay support and `-j` enables dynamic JSON.
+where `-c` is the connection string (defaults to `postgres:///`), `-s` is the
+schema name (defaults to "public"), `-a` enables Relay support and `-j` enables
+dynamic JSON.
 
-PostGraphile also reads options from a `.postgraphilerc.js` file from the current working directory.
+PostGraphile also reads options from a `.postgraphilerc.js` file from the
+current working directory.
 
 ### Recommended options
 
 As PostGraphile evolves, we add more features; however we can't always enable
 these features by default as they may be breaking changes. There are also
-options that may have security repurcussions. For this reason, many features
-are behind flags. We understand this page is very long, so we've included
-some default option sets you might like to use:
+options that may have security repurcussions. For this reason, many features are
+behind flags. We understand this page is very long, so we've included some
+default option sets you might like to use:
 
 We recommend you install the `@graphile-contrib/pg-simplify-inflector` plugin.
 
 #### For Development
 
 **NOTE**: if something you're expecting to see doesn't appear, try removing
-`--no-ignore-indexes` and/or `--no-ignore-rbac`, this should give you a hint
-as to what you need to fix in your database (you should only expose fields
-through GraphQL that are inexpensive for users to use).
+`--no-ignore-indexes` and/or `--no-ignore-rbac`, this should give you a hint as
+to what you need to fix in your database (you should only expose fields through
+GraphQL that are inexpensive for users to use).
 
 ```bash
 postgraphile \
@@ -82,7 +86,9 @@ postgraphile \
 
 ### CLI options
 
-There are more CLI options available to customise the GraphQL server (these are from <tt>postgraphile@<!-- CLI_VERSION_BEGIN -->4.5.0-rc.4<!-- CLI_VERSION_END --></tt>):
+There are more CLI options available to customise the GraphQL server (these are
+from
+<tt>postgraphile@<!-- CLI_VERSION_BEGIN -->4.5.0-rc.4<!-- CLI_VERSION_END --></tt>):
 
 <!-- prettier-ignore-start -->
 <!-- CLI_DOCBLOCK_BEGIN -->
@@ -213,24 +219,31 @@ There are more CLI options available to customise the GraphQL server (these are 
 <!-- CLI_DOCBLOCK_END -->
 <!-- prettier-ignore-end -->
 
-The following features and not part of PostGraphile core, but are available from the Supporter and/or Pro plugins - see [Go Pro!](/postgraphile/pricing/) for more information.
+The following features and not part of PostGraphile core, but are available from
+the Supporter and/or Pro plugins - see [Go Pro!](/postgraphile/pricing/) for
+more information.
 
-- `-S`, `--simple-subscriptions`
-  [SUPPORTER] ⚡️[experimental] add simple subscription support
-- `--subscription-authorization-function [fn]`
-  [SUPPORTER] ⚡️[experimental] PG function to call to check user is allowed to subscribe
-- `--read-only-connection <string>`
-  [PRO] ⚡️[experimental] a PostgreSQL connection string to use for read-only queries (i.e. not mutations)
-- `--default-pagination-cap [int]`
-  [PRO] ⚡️[experimental] Ensures all connections have first/last specified and are no large than this value (default: 50), set to -1 to disable; override via smart comment `@paginationCap 50`
-- `--graphql-depth-limit [int]`
-  [PRO] ⚡️[experimental] Validates GraphQL queries cannot be deeper than the specified int (default: 16), set to -1 to disable
-- `--graphql-cost-limit [int]`
-  [PRO] ⚡️[experimental] Only allows queries with a computed cost below the specified int (default: 1000), set to -1 to disable
+- `-S`, `--simple-subscriptions` [SUPPORTER] ⚡️[experimental] add simple
+  subscription support
+- `--subscription-authorization-function [fn]` [SUPPORTER] ⚡️[experimental] PG
+  function to call to check user is allowed to subscribe
+- `--read-only-connection <string>` [PRO] ⚡️[experimental] a PostgreSQL
+  connection string to use for read-only queries (i.e. not mutations)
+- `--default-pagination-cap [int]` [PRO] ⚡️[experimental] Ensures all
+  connections have first/last specified and are no large than this value
+  (default: 50), set to -1 to disable; override via smart comment
+  `@paginationCap 50`
+- `--graphql-depth-limit [int]` [PRO] ⚡️[experimental] Validates GraphQL
+  queries cannot be deeper than the specified int (default: 16), set to -1 to
+  disable
+- `--graphql-cost-limit [int]` [PRO] ⚡️[experimental] Only allows queries with
+  a computed cost below the specified int (default: 1000), set to -1 to disable
 
 ### RC file options
 
-The CLI options can also be specified in a `.postgraphilerc.js` file in the current working directory. Any command line comma separated options (eg. `schema`) must be entered as Javascript arrays.
+The CLI options can also be specified in a `.postgraphilerc.js` file in the
+current working directory. Any command line comma separated options (eg.
+`schema`) must be entered as Javascript arrays.
 
 ```javascript
 module.exports = {
@@ -245,7 +258,8 @@ module.exports = {
 };
 ```
 
-Here is the list of keys and their default values, or types, supported in the `options` object returned by `.postgraphilerc.js`.
+Here is the list of keys and their default values, or types, supported in the
+`options` object returned by `.postgraphilerc.js`.
 
 ```
   appendPlugins: <string>
@@ -296,4 +310,6 @@ Here is the list of keys and their default values, or types, supported in the `o
   writeCache: <path string>
 ```
 
-Please note that this interface is deprecated and will be removed in v5 (but its replacement hasn't been built yet...). You're encouraged to use PostGraphile as a library rather than using a `.postgraphilerc.js`.
+Please note that this interface is deprecated and will be removed in v5 (but its
+replacement hasn't been built yet...). You're encouraged to use PostGraphile as
+a library rather than using a `.postgraphilerc.js`.

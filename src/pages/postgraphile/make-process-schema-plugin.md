@@ -14,10 +14,15 @@ Use cases include:
 - Uploading the schema SDL to a network service
 - Checking the schema against your persisted queries
 - Validating the schema against your custom logic
-- Replacing the schema with a mocked version or a derivative version (e.g. stitching it with another schema)
-- Integrating with third-party libraries such as `graphql-middleware` or `graphql-shield` which mutate the GraphQLSchema after it has been constructed
+- Replacing the schema with a mocked version or a derivative version (e.g.
+  stitching it with another schema)
+- Integrating with third-party libraries such as `graphql-middleware` or
+  `graphql-shield` which mutate the GraphQLSchema after it has been constructed
 
-The plugin accepts one argument: a schema processing function which will be called with the generated schema and must either return the same schema (e.g. if you're doing a read-only operation, or mutating the schema directly) or return an alternative schema (e.g. a derivative).
+The plugin accepts one argument: a schema processing function which will be
+called with the generated schema and must either return the same schema (e.g. if
+you're doing a read-only operation, or mutating the schema directly) or return
+an alternative schema (e.g. a derivative).
 
 ### Example
 
@@ -29,7 +34,8 @@ module.exports = makeProcessSchemaPlugin(schema => {
 });
 ```
 
-You can also use `makeProcessSchemaPlugin` to replace the current schema with a stitched schema and run it from within the PostGraphile server:
+You can also use `makeProcessSchemaPlugin` to replace the current schema with a
+stitched schema and run it from within the PostGraphile server:
 
 ```js
 require("graphile-utils");

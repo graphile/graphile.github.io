@@ -6,23 +6,24 @@ title: Deploying to GCP
 
 _aka Google Cloud Platform (App Engine)_
 
-_This post is a work in progress. Please see [#161](https://github.com/graphile/graphile.github.io/issues/161) for notes._
+_This post is a work in progress. Please see
+[#161](https://github.com/graphile/graphile.github.io/issues/161) for notes._
 
 ### PostGraphile CLI and CloudSQL
 
 _Section author: @redaikidoka_
 
 Deploying PostGraphile with nothing more than command-line arguments to the
-cloud to serve between PostgreSQL hosted in Google Cloud SQL and an Angular
-App hosted in Google App Engine.
+cloud to serve between PostgreSQL hosted in Google Cloud SQL and an Angular App
+hosted in Google App Engine.
 
-Need to use `cloud_sql_instances` to connect to the PostgreSQL instance, and
-set the host and port in the command line.
+Need to use `cloud_sql_instances` to connect to the PostgreSQL instance, and set
+the host and port in the command line.
 
-Make sure you've got a project with your [Cloud SQL PostgreSQL
-database](https://cloud.google.com/sql/docs/postgres/connect-app-engine),
-with the Google Cloud Admin SQL turned on, and App Engine turned on. Reserve
-the default service in App Engine for whatever your frontend is.
+Make sure you've got a project with your
+[Cloud SQL PostgreSQL database](https://cloud.google.com/sql/docs/postgres/connect-app-engine),
+with the Google Cloud Admin SQL turned on, and App Engine turned on. Reserve the
+default service in App Engine for whatever your frontend is.
 
 Example deployment file `app.yaml`:
 
@@ -64,13 +65,20 @@ skip_files:
   - ^errors\.log
 ```
 
-Under `beta_settings`, `cloud_sql_instances: webstr-dev-######:us-central1:webstr-dev=tcp:5432` tells us that we are opening a unix pipe to a cloud instance in the GCP project, in this case `webstr-dev-######` in 'central region 1', connecting to Cloud SQL instance `websr-dev`.
+Under `beta_settings`,
+`cloud_sql_instances: webstr-dev-######:us-central1:webstr-dev=tcp:5432` tells
+us that we are opening a unix pipe to a cloud instance in the GCP project, in
+this case `webstr-dev-######` in 'central region 1', connecting to Cloud SQL
+instance `websr-dev`.
 
 - The `=tcp:5432` maps that unix socket to tcp port 5432.
-- _I couldn't get using the unix port directly working, which is why the tcp port piece is in there_
-- You can get the full instance name from your Cloud SQL Instance in the area of the Cloud SQL interface titled "Connect to this instance"
+- _I couldn't get using the unix port directly working, which is why the tcp
+  port piece is in there_
+- You can get the full instance name from your Cloud SQL Instance in the area of
+  the Cloud SQL interface titled "Connect to this instance"
 
-In `package.json` specify `postgraphile`, some project details, and the `start` script. E.g.:
+In `package.json` specify `postgraphile`, some project details, and the `start`
+script. E.g.:
 
 ```json
 {
@@ -98,8 +106,11 @@ In `package.json` specify `postgraphile`, some project details, and the `start` 
 Regarding the `start` command, the flags are:
 
 - `--host 0.0.0.0` allows GAE's nginx to successfully bind to the service
-- `--port 8080` binds to port 8080, which is a special port number that Google cloud will automatically expose via the service name, so you can access your PostGraphile service directly at **`https://[project-name].appspot.com/`**
-- `--graphql /` puts the GraphQL endpoint at the root `/` (rather than `/graphql` as is the default)
+- `--port 8080` binds to port 8080, which is a special port number that Google
+  cloud will automatically expose via the service name, so you can access your
+  PostGraphile service directly at **`https://[project-name].appspot.com/`**
+- `--graphql /` puts the GraphQL endpoint at the root `/` (rather than
+  `/graphql` as is the default)
 - `--cors` circumvents annoying CORS nonsense
 
 #### Deploying
@@ -130,8 +141,12 @@ beta_settings:
   cloud_sql_instances: your-cloudsql-instance-connection-string
 ```
 
-1. You will need `flexible` environment for websocket support (subscriptions and live queries). If you are not interested in real-time features you can use `standard` environment and save some bucks. In that case, remove the `beta_settings` section
-1. This requires using postgraphile as a library. Minimum setup would be something like
+1. You will need `flexible` environment for websocket support (subscriptions and
+   live queries). If you are not interested in real-time features you can use
+   `standard` environment and save some bucks. In that case, remove the
+   `beta_settings` section
+1. This requires using postgraphile as a library. Minimum setup would be
+   something like
 
 ```
 /project
@@ -180,6 +195,9 @@ app.listen(8080);
 
 ### Helpful resources
 
-See https://github.com/GoogleCloudPlatform/nodejs-docs-samples/tree/master/appengine/hello-world/flexible for example Node.js project on GCP.
+See
+https://github.com/GoogleCloudPlatform/nodejs-docs-samples/tree/master/appengine/hello-world/flexible
+for example Node.js project on GCP.
 
-See information about configuring port forwarding: https://cloud.google.com/appengine/docs/flexible/custom-runtimes/configuring-your-app-with-app-yaml
+See information about configuring port forwarding:
+https://cloud.google.com/appengine/docs/flexible/custom-runtimes/configuring-your-app-with-app-yaml

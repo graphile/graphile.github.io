@@ -4,9 +4,8 @@ path: /postgraphile/relations/
 title: Relations
 ---
 
-We automatically discover relations between database tables by inspecting
-their foreign keys, and use this to build relations into the generated
-GraphQL schema.
+We automatically discover relations between database tables by inspecting their
+foreign keys, and use this to build relations into the generated GraphQL schema.
 
 An example of a foreign key constraint when defining a table would be the
 `REFERENCES` keyword below:
@@ -30,21 +29,21 @@ ALTER TABLE users
   ON DELETE CASCADE;
 ```
 
-You can read more about defining foreign key constraints, including
-constraints that utilise multiple columns, in the [PostgreSQL
-documentation](https://www.postgresql.org/docs/current/static/ddl-constraints.html#DDL-CONSTRAINTS-FK).
+You can read more about defining foreign key constraints, including constraints
+that utilise multiple columns, in the
+[PostgreSQL documentation](https://www.postgresql.org/docs/current/static/ddl-constraints.html#DDL-CONSTRAINTS-FK).
 
 PostGraphile detects and exposes one-to-one, one-to-many and many-to-one
-relations automatically. Many-to-many relationships can be handled with the [many-to-many relations plugin](https://github.com/graphile-contrib/pg-many-to-many).
+relations automatically. Many-to-many relationships can be handled with the
+[many-to-many relations plugin](https://github.com/graphile-contrib/pg-many-to-many).
 
 By default, relations are exposed as GraphQL fields using a camelCase
 combination of the target type and the source fields (inflectors:
 `singleRelationByKeys`, `singleRelationByKeysBackwards`, and
-`manyRelationByKeys`). Unique constraints expose a GraphQL table type
-directly, non-unique constraints expose a
-[connection](/postgraphile/connections/). The GraphQL connections that these
-relations expose support pagination, [filtering](/postgraphile/filtering/),
-and ordering.
+`manyRelationByKeys`). Unique constraints expose a GraphQL table type directly,
+non-unique constraints expose a [connection](/postgraphile/connections/). The
+GraphQL connections that these relations expose support pagination,
+[filtering](/postgraphile/filtering/), and ordering.
 
 ### Examples
 
@@ -93,7 +92,9 @@ create table a.post (
 
 #### Many-to-many relations
 
-Many-to-many relations can be handled with the [many-to-many relations plugin](https://github.com/graphile-contrib/pg-many-to-many) or by using a computed column that returns `setof`:
+Many-to-many relations can be handled with the
+[many-to-many relations plugin](https://github.com/graphile-contrib/pg-many-to-many)
+or by using a computed column that returns `setof`:
 
 ```sql
 

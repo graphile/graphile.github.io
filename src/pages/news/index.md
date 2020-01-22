@@ -42,7 +42,11 @@ title: News
 
 _2019-12-03_
 
-Graphile Starter has been released today; a new opinionated quick-start project which is designed to be built upon. Take your project idea and rapidly prototype it without having to think about session management, job queues, user registration system, testing or a design framework - all of that is included for you!
+Graphile Starter has been released today; a new opinionated quick-start project
+which is designed to be built upon. Take your project idea and rapidly prototype
+it without having to think about session management, job queues, user
+registration system, testing or a design framework - all of that is included for
+you!
 
 [Read the Graphile Starter announcement](/news/graphile-starter/)
 
@@ -68,7 +72,8 @@ Graphile Starter has been released today; a new opinionated quick-start project 
 
 _2019-11-24_
 
-Version 4.5 is here, and with it comes an enhanced Graph*i*QL with a query explain feature.
+Version 4.5 is here, and with it comes an enhanced Graph*i*QL with a query
+explain feature.
 
 [Read more about the latest PostGraphile version here](/news/postgraphile-version-4-5/)
 
@@ -94,7 +99,8 @@ Version 4.5 is here, and with it comes an enhanced Graph*i*QL with a query expla
 
 _2019-05-03_
 
-Version 4.4 has been released, and among other things it adds real-time features including GraphQL subscriptions and live queries!
+Version 4.4 has been released, and among other things it adds real-time features
+including GraphQL subscriptions and live queries!
 
 [Read more about the real time features in PostGraphile 4.4 here](/news/postgraphile-version-4-4/)
 
@@ -119,7 +125,11 @@ Version 4.4 has been released, and among other things it adds real-time features
 
 _2018-12-06_
 
-Building upon the huge performance gains found in Version 4, the release of Version 4.1 has a huge improvement to startup performance in serverless environments. This update also brings a large number of enhancements including much broader PostgreSQL function support, an enhanced GraphiQL interface, and a lot more helpers for writing plugins.
+Building upon the huge performance gains found in Version 4, the release of
+Version 4.1 has a huge improvement to startup performance in serverless
+environments. This update also brings a large number of enhancements including
+much broader PostgreSQL function support, an enhanced GraphiQL interface, and a
+lot more helpers for writing plugins.
 
 [Read more about PostGraphile Version 4.1 here](/news/postgraphile-version-4-1/)
 
@@ -145,7 +155,9 @@ Building upon the huge performance gains found in Version 4, the release of Vers
 
 _2018-10-02_
 
-Version 4 has launched! More performant, more extensible and more customisable than ever before. Easily extend PostGraphile's functionality with plugins developed and shared by the community.
+Version 4 has launched! More performant, more extensible and more customisable
+than ever before. Easily extend PostGraphile's functionality with plugins
+developed and shared by the community.
 
 [Read more about PostGraphile Version 4 here](/news/postgraphile-version-4/)
 

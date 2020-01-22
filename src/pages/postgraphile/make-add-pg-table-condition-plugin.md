@@ -9,17 +9,17 @@ status is **experimental**. If you can spare the time to write some tests (or
 sponsor me to do so) then we can promote it to stable._
 
 PostGraphile adds `condition` arguments to various of the table collection
-fields it builds so that you can filter the result set down to just the
-records you're interested in. By default we add the table's columns (or, if
+fields it builds so that you can filter the result set down to just the records
+you're interested in. By default we add the table's columns (or, if
 `--no-ignore-indexes` is enabled, only the columns _that are indexed_) to the
-condition input, where you can specify their value, or `null` if you only
-want the records where that column `IS NULL`.
+condition input, where you can specify their value, or `null` if you only want
+the records where that column `IS NULL`.
 
 Many GraphQL experts would opine that GraphQL filters should not be overly
-complicated, and should not reveal too much of the underlying data store.
-This is why we don't have advanced filtering built in by default; however,
-should you desire that, please check out the filter plugin [documented on our
-Filtering page](/postgraphile/filtering/).
+complicated, and should not reveal too much of the underlying data store. This
+is why we don't have advanced filtering built in by default; however, should you
+desire that, please check out the filter plugin
+[documented on our Filtering page](/postgraphile/filtering/).
 
 Here's an example of filtering forums to those created by a particular user:
 
@@ -34,9 +34,9 @@ query ForumsCreatedByUser1 {
 }
 ```
 
-Sometimes, however, you want to filter by something a little more complex
-than the fields on that table; maybe you want to filter by a field on a
-related table, or by a computation, or something else.
+Sometimes, however, you want to filter by something a little more complex than
+the fields on that table; maybe you want to filter by a field on a related
+table, or by a computation, or something else.
 
 This plugin generator helps you build new `condition` values so that you can
 filter more flexibly. Let's make this clearer with an example:
@@ -72,8 +72,8 @@ module.exports = makeAddPgTableConditionPlugin(
 );
 ```
 
-The above plugin adds the `containsPostsByUserId` condition to collection
-fields for the `app_public.forums` table. You might use it like this:
+The above plugin adds the `containsPostsByUserId` condition to collection fields
+for the `app_public.forums` table. You might use it like this:
 
 ```graphql
 query ForumsContainingPostsByUser1 {
@@ -92,9 +92,8 @@ implementation then there's a good chance your plugin is incorrect.
 
 NOTE: for more complex values, you may need to invoke
 `build.gql2pg(value, databaseType)` instead of `sql.value(value)` in order to
-convert the GraphQL value to the equivalent SQL value. If you should need
-this, reach out on [our Discord chat](https://discord.gg/graphile) for
-advice.
+convert the GraphQL value to the equivalent SQL value. If you should need this,
+reach out on [our Discord chat](https://discord.gg/graphile) for advice.
 
 ## Function signature
 
@@ -120,13 +119,13 @@ export default function makeAddPgTableConditionPlugin(
 ): Plugin;
 ```
 
-The table to match is the table named `tableName` in the schema named `schemaName`.
+The table to match is the table named `tableName` in the schema named
+`schemaName`.
 
 A new condition is added, named `conditionFieldName`, whose GraphQL
 representation is specified by the result of `conditionFieldSpecGenerator`.
 
 When the field named in `conditionFieldName` is used in a query, the
 `conditionGenerator` is called with the value passed, and the result of that
-function is used as an additional `WHERE` clause on the generated SQL
-(combined using `AND`). If `null` or `undefined` are returned then no
-condition is added.
+function is used as an additional `WHERE` clause on the generated SQL (combined
+using `AND`). If `null` or `undefined` are returned then no condition is added.

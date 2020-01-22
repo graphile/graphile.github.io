@@ -5,10 +5,10 @@ title: The Context Object
 ---
 
 Whereas the `Build` object is the same for all hooks (except the `build` hook
-which constructs it) within an individual build, the `Context` object changes for
-each hook. Different hooks have different values available to them on the `Context`
-object and sadly we've not documented all these yet so you may have to do some
-inspection!
+which constructs it) within an individual build, the `Context` object changes
+for each hook. Different hooks have different values available to them on the
+`Context` object and sadly we've not documented all these yet so you may have to
+do some inspection!
 
 The main ones are:
 
@@ -46,11 +46,11 @@ builder.hook(
 
 ### `Self`
 
-Whilst only available on hooks that are called after the object is created
-(e.g. `GraphQLObjectType:fields`), this field is useful because it contains the
-object that has been created; allowing circular references to be built. A
-common use-case for this is the root `Query` object referencing itself with the
-`query` field to work around some issues in Relay 1.
+Whilst only available on hooks that are called after the object is created (e.g.
+`GraphQLObjectType:fields`), this field is useful because it contains the object
+that has been created; allowing circular references to be built. A common
+use-case for this is the root `Query` object referencing itself with the `query`
+field to work around some issues in Relay 1.
 
 ### `fieldWithHooks(fieldName, spec, scope = {})`
 
@@ -84,6 +84,7 @@ builder.hook("GraphQLInputObjectType:fields",
 });
 ```
 
-See also: [Look ahead](/graphile-build/look-ahead/#when-creating-an-individual-field).
+See also:
+[Look ahead](/graphile-build/look-ahead/#when-creating-an-individual-field).
 
 <!-- TODO: add more context properties -->

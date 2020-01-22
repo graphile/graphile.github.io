@@ -7,8 +7,8 @@ title: Server Plugins
 Stability: experimental, may change in **semver minor** versions.
 
 _NOTE: This page relates to changing how the PostGraphile HTTP server and CLI
-work. If you're instead looking to change the generated GraphQL schema (e.g.
-to add fields or types), see [Schema Plugins](/postgraphile/extending/)._
+work. If you're instead looking to change the generated GraphQL schema (e.g. to
+add fields or types), see [Schema Plugins](/postgraphile/extending/)._
 
 In addition to the [Graphile Engine plugin system](/postgraphile/extending/)
 which builds the GraphQL schema in PostGraphile, PostGraphile also has a plugin
@@ -17,20 +17,27 @@ documenting it is welcome!
 
 ### First-party open-source plugins
 
-We have some first-party open source plugins that can enhance your PostGraphile experience, or act as a template for writing your own plugins:
+We have some first-party open source plugins that can enhance your PostGraphile
+experience, or act as a template for writing your own plugins:
 
-- `@graphile/operation-hooks` - enables you to add callbacks to certain operations, useful for validation, pre-flight checks, authorization, error handling, notifying users of semi-related information, etc.
-- `@graphile/pg-pubsub` - provides realtime capabilities to schema plugins powered by PostgreSQL's LISTEN/NOTIFY.
+- `@graphile/operation-hooks` - enables you to add callbacks to certain
+  operations, useful for validation, pre-flight checks, authorization, error
+  handling, notifying users of semi-related information, etc.
+- `@graphile/pg-pubsub` - provides realtime capabilities to schema plugins
+  powered by PostgreSQL's LISTEN/NOTIFY.
 
 ### First-party premium plugins
 
-There are also a couple of first-party plugins that may be purchased on the [Graphile Store](https://store.graphile.com):
+There are also a couple of first-party plugins that may be purchased on the
+[Graphile Store](https://store.graphile.com):
 
-- `@graphile/supporter` [SUPPORTER] - all current features have been merged into core
-- `@graphile/pro` [PRO] - includes protections that can be mounted in front of PostGraphile to protect it from malicious actors
+- `@graphile/supporter` [SUPPORTER] - all current features have been merged into
+  core
+- `@graphile/pro` [PRO] - includes protections that can be mounted in front of
+  PostGraphile to protect it from malicious actors
 
-To use these premium plugins you will need a `GRAPHILE_LICENSE` environmental variable
-to be present, as in these examples:
+To use these premium plugins you will need a `GRAPHILE_LICENSE` environmental
+variable to be present, as in these examples:
 
 ```bash
 # GNU/Linux and macOS bash:
@@ -47,8 +54,8 @@ set GRAPHILE_LICENSE="license_key_from_graphile_store" & postgraphile -c postgre
 $env:GRAPHILE_LICENSE="license_key_from_graphile_store"; postgraphile -c postgres://...
 ```
 
-For more information, see the FAQ at the bottom of the [Go
-Pro!](/postgraphile/pricing/) page.
+For more information, see the FAQ at the bottom of the
+[Go Pro!](/postgraphile/pricing/) page.
 
 ### Installing
 
@@ -114,8 +121,8 @@ import PgPubsub from "@graphile/pg-pubsub";
 import GraphilePro from "@graphile/pro";
 ```
 
-To enable the plugins, use `makePluginHook` to create a `pluginHook` function
-to pass via the PostGraphile options:
+To enable the plugins, use `makePluginHook` to create a `pluginHook` function to
+pass via the PostGraphile options:
 
 ```js
 // Only include as many plugins as you need. An empty array is also valid.
@@ -131,20 +138,20 @@ app.use(postGraphileMiddleware);
 
 ### Writing your own plugins
 
-The hook methods available can be viewed [in
-pluginHook.ts](https://github.com/graphile/postgraphile/blob/master/src/postgraphile/pluginHook.ts).
-Note that these may change in **semver minor** releases of PostGraphile as
-this is not an officially stable API yet.
+The hook methods available can be viewed
+[in pluginHook.ts](https://github.com/graphile/postgraphile/blob/master/src/postgraphile/pluginHook.ts).
+Note that these may change in **semver minor** releases of PostGraphile as this
+is not an officially stable API yet.
 
 Each hook method is passed two parameters:
 
 - subject: the thing being hooked
 - context: an object containing some relevant helpers
 
-The hooks are expected to return either the thing being hooked (subject), or
-a derivative of it. Multiple plugins may register for the same hooks, in
-these cases the output of one hook function will be fed as input to the next.
-Hooks are _synchronous_.
+The hooks are expected to return either the thing being hooked (subject), or a
+derivative of it. Multiple plugins may register for the same hooks, in these
+cases the output of one hook function will be fed as input to the next. Hooks
+are _synchronous_.
 
 Your plugin will export a single object which defines the hook methods; e.g.:
 
@@ -160,15 +167,21 @@ module.exports = MyPlugin;
 // export default MyPlugin;
 ```
 
-An example of a PostGraphile server plugin is [@graphile/operation-hooks](https://github.com/graphile/operation-hooks/blob/master/src/index.ts):
+An example of a PostGraphile server plugin is
+[@graphile/operation-hooks](https://github.com/graphile/operation-hooks/blob/master/src/index.ts):
 
-- uses `cli:flags:add:schema` to add `--operation-messages` and `--operation-messages-preflight` CLI options
+- uses `cli:flags:add:schema` to add `--operation-messages` and
+  `--operation-messages-preflight` CLI options
 - uses `cli:library:options` to convert these CLI options to library options
-- uses `postgraphile:options` to a) convert the library options into graphileBuildOptions (Graphile Engine plugin options), and b) load the OperationHooksPlugin
+- uses `postgraphile:options` to a) convert the library options into
+  graphileBuildOptions (Graphile Engine plugin options), and b) load the
+  OperationHooksPlugin
 
 ### Inline tweaks via pluginHook
 
-If you are using postgraphile as a library (i.e. middleware) and you want to make a quick tweak to something using the server plugin hooks, you can do so in your main server.js file:
+If you are using postgraphile as a library (i.e. middleware) and you want to
+make a quick tweak to something using the server plugin hooks, you can do so in
+your main server.js file:
 
 ```js
 /**
@@ -195,9 +208,15 @@ const postGraphileMiddleware = postgraphile(databaseUrl, "app_public", {
 
 #### Origin specific CORS
 
-You can enable _generous_ CORS by [adding the `-o,--cors` flag to the CLI](/postgraphile/usage-cli/#cli-options) or by [adding a `enableCors: true` option when using PostGraphile as a library](/postgraphile/usage-library/#api-postgraphilepgconfig-schemaname-options).
+You can enable _generous_ CORS by
+[adding the `-o,--cors` flag to the CLI](/postgraphile/usage-cli/#cli-options)
+or by
+[adding a `enableCors: true` option when using PostGraphile as a library](/postgraphile/usage-library/#api-postgraphilepgconfig-schemaname-options).
 
-However, by being _generous_, you allow **any** origin to communicate with you PostGraphile instance. If you want to allow just one specific origin, and using a `cors` middleware before PostGraphile is not an option, then you can make a server plugin such as this one:
+However, by being _generous_, you allow **any** origin to communicate with you
+PostGraphile instance. If you want to allow just one specific origin, and using
+a `cors` middleware before PostGraphile is not an option, then you can make a
+server plugin such as this one:
 
 ```js
 /**
@@ -252,4 +271,5 @@ const postGraphileMiddleware = postgraphile(databaseUrl, "app_public", {
 });
 ```
 
-If you need help writing your own PostGraphile server plugins, [ask in our Discord chat](http://discord.gg/graphile).
+If you need help writing your own PostGraphile server plugins,
+[ask in our Discord chat](http://discord.gg/graphile).

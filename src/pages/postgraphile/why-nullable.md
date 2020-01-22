@@ -5,8 +5,8 @@ title: Why is it nullable?
 ---
 
 It's common for people, particularly those using strongly typed GraphQL
-implementations such as ReasonML or TypeScript, to ask why certain elements in
-a PostGraphile schema are nullable. A lot of thought has gone into which parts
+implementations such as ReasonML or TypeScript, to ask why certain elements in a
+PostGraphile schema are nullable. A lot of thought has gone into which parts
 should/should not be nullable, but the reasoning behind these decisions is not
 always obvious to users, so hopefully this article will help to explain.
 
@@ -61,11 +61,11 @@ to make nullable would be the entire query itself. This means that all the
 letters, despite producing no errors, would also be omitted from the result.
 
 One of the key aims of GraphQL is to deal smoothly with temporary errors - i.e.
-when an error occurs it aims to not ["throw the baby out with the
-bathwater"](https://en.wikipedia.org/wiki/Don%27t_throw_the_baby_out_with_the_bathwater).
+when an error occurs it aims to not
+["throw the baby out with the bathwater"](https://en.wikipedia.org/wiki/Don%27t_throw_the_baby_out_with_the_bathwater).
 This is one of the reasons (the main reason, really) that GraphQL treats all
-fields as nullable by default ("errors happen") and allows you to mark things
-as not null, rather than the other way around which is more common in typed
+fields as nullable by default ("errors happen") and allows you to mark things as
+not null, rather than the other way around which is more common in typed
 languages. GraphQL wants you to think about where errors may occur and where
 they should be limited to, preventing them from flowing over into unrelated
 areas.
@@ -81,13 +81,12 @@ return a null that would cascade and cause the field itself to be null.
 In PostGraphile, two of our `Query` fields are not nullable because they adhere
 to this check:
 
-- `nodeId` returns a set value (the string 'query') so it can never
-  error
+- `nodeId` returns a set value (the string 'query') so it can never error
 - `query` returns the `Query` object again (it's a Relay 1 hack) and so it has
   all the same guarantees as the Query object
 
-Everything else is nullable, because **errors happen** and we don't want them
-to cascade to sibling fields.
+Everything else is nullable, because **errors happen** and we don't want them to
+cascade to sibling fields.
 
 To make this even clearer: if our mutation fields were "not nullable" and you
 performed a mutation such as this:
@@ -101,13 +100,14 @@ mutation {
 
 If mutations were marked non-nullable and yet for some reason
 `someOtherMutation` threw an error, then the entire GraphQL response would come
-back null and you wouldn't see the result of the `createSecret` mutation. As
-per the GraphQL spec: mutations are independent, thus the `createSecret`
-mutation would not be rolled back and the value would be created but never shown.
+back null and you wouldn't see the result of the `createSecret` mutation. As per
+the GraphQL spec: mutations are independent, thus the `createSecret` mutation
+would not be rolled back and the value would be created but never shown.
 
 ### Relations: RLS visibility
 
-PostgreSQL uses foreign keys to assert that relations exist. Take this SQL schema:
+PostgreSQL uses foreign keys to assert that relations exist. Take this SQL
+schema:
 
 ```sql
 create table person (
@@ -124,7 +124,8 @@ create table post (
 
 From this we know that given a `Post` record exists, then the associated
 `Person` object must also exist - PostgreSQL guarantees this. So why does
-PostGraphile mark the `Post.personByAuthorId` field as nullable? Well, consider this:
+PostGraphile mark the `Post.personByAuthorId` field as nullable? Well, consider
+this:
 
 ```sql
 -- Users can only see their own 'Person'
@@ -133,9 +134,9 @@ create policy select_self on person for select using (id = current_user_id());
 create policy select_all on post for select using (true);
 ```
 
-Given the above, it's possible for you to be able to see a Post without you being
-allowed to see the associated Person. So even though the person definitely exists,
-that doesn't guarantee that you can see them.
+Given the above, it's possible for you to be able to see a Post without you
+being allowed to see the associated Person. So even though the person definitely
+exists, that doesn't guarantee that you can see them.
 
 ### Fields under mutation payloads
 
@@ -167,17 +168,17 @@ other way is a breaking change).
 ### What about computed fields?
 
 It's very easy for computed fields (functions) to throw an error due to a logic
-issue in the function. We don't want that bringing down the entire schema so
-we leave these as nullable.
+issue in the function. We don't want that bringing down the entire schema so we
+leave these as nullable.
 
-I'd be happy to accept a Pull Request that adds functionality marking a
-function as non-nullable via a smart comment (e.g.
-`COMMENT ON FUNCTION foo_func(foo) IS E'@notNull';`) - do raise an issue if
-this is of interest to you. Even with this, though, it would be unwise to mark
+I'd be happy to accept a Pull Request that adds functionality marking a function
+as non-nullable via a smart comment (e.g.
+`COMMENT ON FUNCTION foo_func(foo) IS E'@notNull';`) - do raise an issue if this
+is of interest to you. Even with this, though, it would be unwise to mark
 root-level functions as non-nullable - what if the PostgreSQL connection is
-terminated when resolving that field, should that make all the other fields
-null too? GraphQL best practices suggest that we should keep errors as
-localised as we can.
+terminated when resolving that field, should that make all the other fields null
+too? GraphQL best practices suggest that we should keep errors as localised as
+we can.
 
 ### I've read the above, but I still want this particular thing to be non-nullable!
 

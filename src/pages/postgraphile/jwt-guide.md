@@ -4,34 +4,42 @@ path: /postgraphile/jwt-guide/
 title: PostGraphile JWT Guide
 ---
 
-> This specification was authored by [Caleb
-> Meredith](https://twitter.com/calebmer) for use in the PostGraphQL project.
-> The language of the specification is meant to be generally applicable and
-> adoptable by any who might want to use it.
+> This specification was authored by
+> [Caleb Meredith](https://twitter.com/calebmer) for use in the PostGraphQL
+> project. The language of the specification is meant to be generally applicable
+> and adoptable by any who might want to use it.
 
 ## PostgreSQL JSON Web Token Serialization Specification
 
-This specification aims to define a standard way to serialize [JSON Web Tokens][jwt] (JWT, [RFC 7519][rfc7519]) to a PostgreSQL database for developers who want to move authentication logic into their PostgreSQL schema.
+This specification aims to define a standard way to serialize [JSON Web
+Tokens][jwt] (JWT, [RFC 7519][rfc7519]) to a PostgreSQL database for developers
+who want to move authentication logic into their PostgreSQL schema.
 
 [Terminology][jwt-terms] from the JSON Web Token specification will be used.
 
-After a JSON Web Token has been verified and decoded, the resulting claims will be serialized to the PostgreSQL database in two ways:
+After a JSON Web Token has been verified and decoded, the resulting claims will
+be serialized to the PostgreSQL database in two ways:
 
-1.  Using the `role` claim, the corresponding role will be set in the database using [`SET ROLE`][set-role]:
+1.  Using the `role` claim, the corresponding role will be set in the database
+    using [`SET ROLE`][set-role]:
 
     ```sql
     set local role $role;
     ```
 
-    Where `$role` is the claim value for the `role` claim. It is not an error if the `role` claim is not set.
+    Where `$role` is the claim value for the `role` claim. It is not an error if
+    the `role` claim is not set.
 
-2.  All remaining claims will be set using the [`SET`][set] command under the `jwt.claims` namespace. Using:
+2.  All remaining claims will be set using the [`SET`][set] command under the
+    `jwt.claims` namespace. Using:
 
     ```sql
     set local jwt.claims.$claim_name to $claim_value;
     ```
 
-    Will be run for every claim including registered claims like `iss`, `sub`, and the claim specified 1 (`role`). `$claim_name` is the name of the claim and `$claim_value` is the associated value.
+    Will be run for every claim including registered claims like `iss`, `sub`,
+    and the claim specified 1 (`role`). `$claim_name` is the name of the claim
+    and `$claim_value` is the associated value.
 
 ### Example
 
@@ -56,7 +64,10 @@ set local jwt.claims.user_id to 2;
 
 ### A Note on `local`
 
-Using `local` for [`SET`][set] and [`SET ROLE`][set-role] is not required, however it is recommended. This is so that every transaction block (beginning with `BEGIN` and ending with `COMMIT` or `ROLLBACK`) will have its own local parameters. See the following demonstration:
+Using `local` for [`SET`][set] and [`SET ROLE`][set-role] is not required,
+however it is recommended. This is so that every transaction block (beginning
+with `BEGIN` and ending with `COMMIT` or `ROLLBACK`) will have its own local
+parameters. See the following demonstration:
 
 ```sql
 begin;
@@ -70,7 +81,9 @@ commit;
 
 ### Retrieving Claims in PostgreSQL
 
-In order to retrieve a claim set by the serialization of a JSON Web Token as defined in this spec, either the `current_setting` function or the [`SHOW`][show] command may be used like so:
+In order to retrieve a claim set by the serialization of a JSON Web Token as
+defined in this spec, either the `current_setting` function or the
+[`SHOW`][show] command may be used like so:
 
 ```sql
 select current_setting('jwt.claims.user_id');

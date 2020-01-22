@@ -7,22 +7,26 @@ title: Bundling PostGraphile with Webpack
 PostGraphile is designed to be ran as a standard Node.js application on the
 server, using the built in `require` functionality which reads code from the
 filesystem. However, if system startup time is a critical metric in your
-environment (for example on serverless environments) this "searching and
-loading from disk" behaviour can be **very** expensive. One way to solve this
-problem is to bundle your code up into a single JavaScript file so that
-no filesystem access is required.
+environment (for example on serverless environments) this "searching and loading
+from disk" behaviour can be **very** expensive. One way to solve this problem is
+to bundle your code up into a single JavaScript file so that no filesystem
+access is required.
 
 Webpack is a tool that you can use to bundle JavaScript code up; there are,
-however, many gotchas to doing so due to the way that a bundler works, and some of these apply to PostGraphile:
+however, many gotchas to doing so due to the way that a bundler works, and some
+of these apply to PostGraphile:
 
-- `__dirname` is less meaningful once the package is bundled, since `__dirname` in the bundle likely refers to a different location than `__dirname` did in the original code.
-- Bundlers have particular problems with conditional `require(...)`s and
-  with native modules. Unfortunately PostGraphile depends on modules that
-  have both of these problems.
+- `__dirname` is less meaningful once the package is bundled, since `__dirname`
+  in the bundle likely refers to a different location than `__dirname` did in
+  the original code.
+- Bundlers have particular problems with conditional `require(...)`s and with
+  native modules. Unfortunately PostGraphile depends on modules that have both
+  of these problems.
 
 Worry not, for we can work around these issues with some configuration!
 
-A minimal webpack config for PostGraphile (depending on what other resources you use) might be this one from [@chadfurman](https://github.com/chadfurman):
+A minimal webpack config for PostGraphile (depending on what other resources you
+use) might be this one from [@chadfurman](https://github.com/chadfurman):
 
 ```js
 module.exports = {
@@ -47,7 +51,10 @@ module.exports = {
 };
 ```
 
-A more invasive and optimised config can be found in our [Lambda example](https://github.com/graphile/postgraphile-lambda-example); note that it cannot be used with watch mode and does not support subscriptions. Here's a simplified and commented version of it:
+A more invasive and optimised config can be found in our
+[Lambda example](https://github.com/graphile/postgraphile-lambda-example); note
+that it cannot be used with watch mode and does not support subscriptions.
+Here's a simplified and commented version of it:
 
 ```js
 const webpack = require("webpack");
@@ -118,4 +125,5 @@ Note this config depends on
 and
 [`postgraphile-http-subscriptions.js`](https://github.com/graphile/postgraphile-lambda-example/blob/master/src/postgraphile-http-subscriptions.js)
 
-Install webpack with `yarn add --dev webpack webpack-cli` and then you can run it as `yarn webpack`.
+Install webpack with `yarn add --dev webpack webpack-cli` and then you can run
+it as `yarn webpack`.

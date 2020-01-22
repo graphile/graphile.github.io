@@ -16,8 +16,8 @@ found from the `defaultPlugins` export in
 of the `graphile-build-pg` module.
 
 You can extend PostGraphile's GraphQL schema by adding plugins before or after
-the default plugins. You may even opt to replace the entire list of plugins
-used to build the schema. Graphile Engine plugins are built on top of the
+the default plugins. You may even opt to replace the entire list of plugins used
+to build the schema. Graphile Engine plugins are built on top of the
 [GraphQL reference JS implementation](http://graphql.org/graphql-js/), so it is
 recommended that you have familiarity with that before attempting to write your
 own plugins.
@@ -25,7 +25,10 @@ own plugins.
 ### Adding root query/mutation fields
 
 A common request is to add additional root-level fields to your schema, for
-example to integrate external services. The easiest way to do this is to [use `makeExtendSchemaPlugin`](/postgraphile/make-extend-schema-plugin/) to generate a plugin that will extend your schema (this can be used to add fields anywhere, not just at the root-level):
+example to integrate external services. The easiest way to do this is to
+[use `makeExtendSchemaPlugin`](/postgraphile/make-extend-schema-plugin/) to
+generate a plugin that will extend your schema (this can be used to add fields
+anywhere, not just at the root-level):
 
 ```js
 // add-http-bin-plugin.js
@@ -99,7 +102,8 @@ function AddHttpBinPlugin(builder, { pgExtendedTypes }) {
 module.exports = AddHttpBinPlugin;
 ```
 
-(If you wanted to add a mutation you'd use `isRootMutation` rather than `isRootQuery`.)
+(If you wanted to add a mutation you'd use `isRootMutation` rather than
+`isRootQuery`.)
 
 We can then load our plugin into PostGraphile via:
 
@@ -107,8 +111,8 @@ We can then load our plugin into PostGraphile via:
 postgraphile --append-plugins `pwd`/add-http-bin-plugin.js -c postgres:///mydb
 ```
 
-Note that the types of added fields do not need to be implemented via
-Graphile Engine's
+Note that the types of added fields do not need to be implemented via Graphile
+Engine's
 [`newWithHooks`](/graphile-build/build-object/#newwithhookstype-spec-scope) -
 you can use standard GraphQL objects too, as we have demonstrated with the
 `JSONType` above. (However, if you do not use `newWithHooks` then the objects
@@ -116,11 +120,13 @@ referenced cannot be extended via plugins.)
 
 ### Wrapping an existing resolver
 
-Sometimes you might want to override what an existing field does. Due to the
-way that PostGraphile works (where the root Query field resolvers are the only
-ones who perform SQL queries) this is generally most useful at the top level.
+Sometimes you might want to override what an existing field does. Due to the way
+that PostGraphile works (where the root Query field resolvers are the only ones
+who perform SQL queries) this is generally most useful at the top level.
 
-In PostGraphile version 4.1 and above, you can [use `makeWrapResolversPlugin`](/postgraphile/make-wrap-resolvers-plugin/) to easily wrap a resolver:
+In PostGraphile version 4.1 and above, you can
+[use `makeWrapResolversPlugin`](/postgraphile/make-wrap-resolvers-plugin/) to
+easily wrap a resolver:
 
 ```js
 module.exports = makeWrapResolversPlugin({
@@ -133,18 +139,24 @@ module.exports = makeWrapResolversPlugin({
 });
 ```
 
-If you need to process the resolvers in a more powerful way than possible via `makeWrapResolversPlugin`, then you can drop down to the raw plugin API.
-The following example modifies the 'createLink' mutation so that it performs
-some additional validation (thrown an error if the link's `title` is too short)
-and performs an action after the link has been saved. You could use a plugin
-like this to achieve many different tasks, including emailing a user after
-their account is created or logging failed authentication attempts.
+If you need to process the resolvers in a more powerful way than possible via
+`makeWrapResolversPlugin`, then you can drop down to the raw plugin API. The
+following example modifies the 'createLink' mutation so that it performs some
+additional validation (thrown an error if the link's `title` is too short) and
+performs an action after the link has been saved. You could use a plugin like
+this to achieve many different tasks, including emailing a user after their
+account is created or logging failed authentication attempts.
 
 Previously we used `GraphQLObjectType:fields` to add a field, as that
 manipulates the list of fields. This time we are manipulating an individual
-field, so we will use the `GraphQLObjectType:fields:field` hook. This makes
-our intent clear, and also grants us access to [the `addArgDataGenerator`](/graphile-build/look-ahead/#when-processing-arguments-addargdatagenerator)
-function which we need to request the record id. The following example also uses an instance of [`queryBuilder.`](/postgraphile/make-extend-schema-plugin/#querybuilder) (Read more about the different hooks [in the Graphile Engine docs](/graphile-build/all-hooks/).)
+field, so we will use the `GraphQLObjectType:fields:field` hook. This makes our
+intent clear, and also grants us access to
+[the `addArgDataGenerator`](/graphile-build/look-ahead/#when-processing-arguments-addargdatagenerator)
+function which we need to request the record id. The following example also uses
+an instance of
+[`queryBuilder.`](/postgraphile/make-extend-schema-plugin/#querybuilder) (Read
+more about the different hooks
+[in the Graphile Engine docs](/graphile-build/all-hooks/).)
 
 ```js
 function performAnotherTask(linkId) {
@@ -232,24 +244,23 @@ unintended consequences - especially if you add back a field or type with the
 same name as that which you removed. It's advised that rather than removing
 things, you instead avoid them being generated in the first place.
 
-**If you're looking for an easy way to prevent certain tables, fields,
-functions or relations being added to your GraphQL schema, check out [smart
-comments](/postgraphile/smart-comments/).**
+**If you're looking for an easy way to prevent certain tables, fields, functions
+or relations being added to your GraphQL schema, check out
+[smart comments](/postgraphile/smart-comments/).**
 
-If you want to remove a class of things from the schema then you can remove
-the plugin that adds them; for example if you no longer wanted to allow
-ordering by all the columns of a table (i.e. only allow ordering by the primary
-key) you could omit
+If you want to remove a class of things from the schema then you can remove the
+plugin that adds them; for example if you no longer wanted to allow ordering by
+all the columns of a table (i.e. only allow ordering by the primary key) you
+could omit
 [PgOrderAllColumnsPlugin](https://github.com/graphile/graphile-engine/blob/master/packages/graphile-build-pg/src/plugins/PgOrderAllColumnsPlugin.ts).
 If you didn't want computed columns added you could omit
 [PgComputedColumnsPlugin](https://github.com/graphile/graphile-engine/blob/master/packages/graphile-build-pg/src/plugins/PgComputedColumnsPlugin.ts).
 
-However, sometimes you need more surgical precision, and you only want to
-remove one specific type of thing. To achieve this you need to add a hook to the
-thing that owns the thing you wish to remove - for example if you
-want to remove a field `bar` from an object type `Foo` you could hook
-`GraphQLObjectType:fields` and return the set of fields less the one you want
-removed.
+However, sometimes you need more surgical precision, and you only want to remove
+one specific type of thing. To achieve this you need to add a hook to the thing
+that owns the thing you wish to remove - for example if you want to remove a
+field `bar` from an object type `Foo` you could hook `GraphQLObjectType:fields`
+and return the set of fields less the one you want removed.
 
 Here's an example of a plugin generator you could use to generate plugins to
 remove individual fields. This is just to demonstrate how a plugin to do this

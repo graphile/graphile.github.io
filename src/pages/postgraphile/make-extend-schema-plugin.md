@@ -41,29 +41,27 @@ And would be added to your PostGraphile instance via
 - Library: `appendPlugins: [require('./MySchemaExtensionPlugin')]`
 
 The `build` argument to the makeExtendSchemaPlugin callback contains lots of
-information and helpers defined by various plugins, most importantly it
-includes the introspection results (`build.pgIntrospectionResultsByKind`),
-inflection functions (`build.inflection`), and SQL helper (`build.pgSql`, which
-is an instance of [pg-sql2](https://www.npmjs.com/package/pg-sql2)).
+information and helpers defined by various plugins, most importantly it includes
+the introspection results (`build.pgIntrospectionResultsByKind`), inflection
+functions (`build.inflection`), and SQL helper (`build.pgSql`, which is an
+instance of [pg-sql2](https://www.npmjs.com/package/pg-sql2)).
 
 The callback should return an object with two keys:
 
 - `typeDefs`: a GraphQL AST generated with the `gql` helper from
   `graphile-utils` (note this is NOT from the `graphql-tag` library, ours works
   in a slightly different way).
-- `resolvers`: an object that's keyed by the GraphQL type names of types
-  defined (or extended) in `typeDefs`, the values of which are objects keyed by
-  the field names with values that are resolver functions.
+- `resolvers`: an object that's keyed by the GraphQL type names of types defined
+  (or extended) in `typeDefs`, the values of which are objects keyed by the
+  field names with values that are resolver functions.
 
 For a larger example of how typeDefs and resolvers work, have a look at the
-[graphql-tools
-docs](https://www.apollographql.com/docs/graphql-tools/generate-schema.html) -
+[graphql-tools docs](https://www.apollographql.com/docs/graphql-tools/generate-schema.html) -
 ours work in a similar way.
 
-Note that the resolve functions defined in `resolvers` will be sent the
-standard 4 GraphQL resolve arguments (`parent`, `args`, `context`,
-`resolveInfo`); but the 4th argument (`resolveInfo`) will also contain
-graphile-specific helpers.
+Note that the resolve functions defined in `resolvers` will be sent the standard
+4 GraphQL resolve arguments (`parent`, `args`, `context`, `resolveInfo`); but
+the 4th argument (`resolveInfo`) will also contain graphile-specific helpers.
 
 ### The `gql` and `embed` helpers
 
@@ -71,9 +69,9 @@ The `gql` helper is responsible for turning the human-readable GraphQL schema
 language you write into an abstract syntax tree (AST) that the application can
 understand. Our `gql` help differs slightly from the one you may be familiar
 with in the `graphql-tag` npm module, namely in how the placeholders work. Ours
-is designed to work with PostGraphile's [inflection
-system](/postgraphile/inflection/), so you can embed strings directly. You may
-also embed other gql tags directly. For example:
+is designed to work with PostGraphile's
+[inflection system](/postgraphile/inflection/), so you can embed strings
+directly. You may also embed other gql tags directly. For example:
 
 ```js
 const nameOfType = "MyType"; // Or use the inflection system to generate a type
@@ -97,11 +95,10 @@ const typeDefs = gql`
 `;
 ```
 
-The `embed` helper is for use with `gql` when you want to embed a raw
-JavaScript value (anything: regexp, function, string, object, etc) into the
-document; for example to pass it to a directive. We use this with the
-`@pgQuery` directive further down this page. Here's a simple example of
-embedding an object.
+The `embed` helper is for use with `gql` when you want to embed a raw JavaScript
+value (anything: regexp, function, string, object, etc) into the document; for
+example to pass it to a directive. We use this with the `@pgQuery` directive
+further down this page. Here's a simple example of embedding an object.
 
 ```js
 const meta = {
@@ -119,12 +116,12 @@ const typeDefs = gql`
 ### Querying the database inside a resolver
 
 PostGraphile provisions, sets up and tears down a PostgreSQL client
-automatically for each GraphQL query. Setup involves beginning a transaction
-and setting the relevant session variables, e.g. using your JWT or the
-`pgSettings` function. You can access this client on `context.pgClient`; it's
-currently an instance of [`pg.Client` from the `pg`
-module](https://node-postgres.com/api/client); however you should only use it
-like this to maintain future compatibility:
+automatically for each GraphQL query. Setup involves beginning a transaction and
+setting the relevant session variables, e.g. using your JWT or the `pgSettings`
+function. You can access this client on `context.pgClient`; it's currently an
+instance of
+[`pg.Client` from the `pg` module](https://node-postgres.com/api/client);
+however you should only use it like this to maintain future compatibility:
 
 ```js
 const { rows } = await context.pgClient.query(
@@ -133,30 +130,36 @@ const { rows } = await context.pgClient.query(
 );
 ```
 
-NOTE: `context` is the third argument passed to a GraphQL resolver (`function myResolver(parentObject, args, context, info) { /* ... */ }`).
+NOTE: `context` is the third argument passed to a GraphQL resolver
+(`function myResolver(parentObject, args, context, info) { /* ... */ }`).
 
-Since you're already in a transaction, issuing `BEGIN;` or `COMMIT;` inside
-your resolver is a Really Bad Idea™. Should you need a sub-transaction, [use
-a SAVEPOINT](https://www.postgresql.org/docs/current/sql-savepoint.html).
+Since you're already in a transaction, issuing `BEGIN;` or `COMMIT;` inside your
+resolver is a Really Bad Idea™. Should you need a sub-transaction,
+[use a SAVEPOINT](https://www.postgresql.org/docs/current/sql-savepoint.html).
 However, please be aware that PostGraphile only sets up a transaction when it
 needs to (e.g. when it's a mutation, or when there are config variables or a
-role to set); so you cannot rely on SAVEPOINT working inside of queries
-unless you know these conditions are met.
+role to set); so you cannot rely on SAVEPOINT working inside of queries unless
+you know these conditions are met.
 
-Because the entire GraphQL operation is executed within a single transaction, be very wary that you don't cause an SQL error which causes the entire transaction to fail. This could leave things in a very odd state - particularly for mutations - e.g. where you return a partial success to the user, but actually roll back the results. It's recommended that all mutations are wrapped in `SAVEPOINT` / `RELEASE SAVEPOINT` / `ROLLBACK TO SAVEPOINT` calls.
+Because the entire GraphQL operation is executed within a single transaction, be
+very wary that you don't cause an SQL error which causes the entire transaction
+to fail. This could leave things in a very odd state - particularly for
+mutations - e.g. where you return a partial success to the user, but actually
+roll back the results. It's recommended that all mutations are wrapped in
+`SAVEPOINT` / `RELEASE SAVEPOINT` / `ROLLBACK TO SAVEPOINT` calls.
 
-When your resolver returns results that will be used by autogenerated types
-and fields, you must not return query results such as these directly. Instead
-use [the `selectGraphQLResultFromTable` helper](#the-selectgraphqlresultfromtable-helper) documented below. The results
-of your `pgClient.query` should be used within the resolver only, and should
-not "leak" (in general).
+When your resolver returns results that will be used by autogenerated types and
+fields, you must not return query results such as these directly. Instead use
+[the `selectGraphQLResultFromTable` helper](#the-selectgraphqlresultfromtable-helper)
+documented below. The results of your `pgClient.query` should be used within the
+resolver only, and should not "leak" (in general).
 
 ### Reading database column values
 
 When extending a schema, it's often because you want to expose data from Node.js
-that would be too difficult (or impossible) to access from PostgreSQL.
-When defining a field on an existing table-backed type defined by PostGraphile,
-it's useful to access data from the underlying table in the resolver.
+that would be too difficult (or impossible) to access from PostgreSQL. When
+defining a field on an existing table-backed type defined by PostGraphile, it's
+useful to access data from the underlying table in the resolver.
 
 To do this you can use the `@requires(columns: […])` field directive to declare
 the data dependencies of your resolver. This guarantees that when the resolver
@@ -232,73 +235,93 @@ app.listen(3030);
 
 Resolvers are passed 4 arguments: `parent, args, context, resolveInfo`. In the
 `context.pgClient` is an instance of a database client from the `pg` module
-that's already in a transaction configured with the settings for this
-particular GraphQL request. You can use this client to make requests to the
-database within this transaction.
+that's already in a transaction configured with the settings for this particular
+GraphQL request. You can use this client to make requests to the database within
+this transaction.
 
 However, because PostGraphile uses Graphile Engine's look-ahead features, you
 will not be able to easily build a query that will return the data PostGraphile
 requires to represent nested relations/etc using `pgClient` directly. That is
 why `resolveInfo.graphile.selectGraphQLResultFromTable` exists.
 
-The `resolveInfo.graphile.selectGraphQLResultFromTable` function is vital if
-you want to return PostGraphile database table/view/function/etc-related types
-from your GraphQL field. It is responsible for hooking into the query
-look-ahead features of Graphile Engine to inspect the incoming GraphQL query
-and pull down the relevant data from the database (including nested relations).
-You are then expected to return the result of this fetch via your resolver. You
-can use the `queryBuilder` object to customise the generated query, changing
-the order, adding `where` clauses, `limit`s, etc (see below). Note that if you
-are not returning a record type directly (for example you're returning a
-mutation payload, or a connection interface), you should use the `@pgField`
-directive as shown below so that the Look Ahead feature continues to work.
+The `resolveInfo.graphile.selectGraphQLResultFromTable` function is vital if you
+want to return PostGraphile database table/view/function/etc-related types from
+your GraphQL field. It is responsible for hooking into the query look-ahead
+features of Graphile Engine to inspect the incoming GraphQL query and pull down
+the relevant data from the database (including nested relations). You are then
+expected to return the result of this fetch via your resolver. You can use the
+`queryBuilder` object to customise the generated query, changing the order,
+adding `where` clauses, `limit`s, etc (see below). Note that if you are not
+returning a record type directly (for example you're returning a mutation
+payload, or a connection interface), you should use the `@pgField` directive as
+shown below so that the Look Ahead feature continues to work.
 
 #### QueryBuilder
 
 `queryBuilder` is an instance of `QueryBuilder`, a helper that uses an SQL AST
-constructed via [`pg-sql2`
-methods](https://github.com/graphile/pg-sql2/blob/master/README.md) to
-dynamically create powerful SQL queries without risking SQL injection attacks.
-The `queryBuilder` has a number of methods which affect the query which will be
-generated. The main ones you're likely to want are:
+constructed via
+[`pg-sql2` methods](https://github.com/graphile/pg-sql2/blob/master/README.md)
+to dynamically create powerful SQL queries without risking SQL injection
+attacks. The `queryBuilder` has a number of methods which affect the query which
+will be generated. The main ones you're likely to want are:
 
-- `where(sqlFragment)`; e.g. `` queryBuilder.where(build.pgSql.fragment`is_admin is true`) ``
-- `orderBy(() => sqlFragment, ascending)`; e.g. `` queryBuilder.orderBy(() => build.pgSql.fragment`created_at`, false) ``
+- `where(sqlFragment)`; e.g.
+  `` queryBuilder.where(build.pgSql.fragment`is_admin is true`) ``
+- `orderBy(() => sqlFragment, ascending)`; e.g.
+  `` queryBuilder.orderBy(() => build.pgSql.fragment`created_at`, false) ``
 - `limit(number)`; e.g. `queryBuilder.limit(1)`
 - `offset(number)`; e.g. `queryBuilder.offset(1)`
-- `select(() => sqlFragment, alias)`; e.g. `` queryBuilder.select(() => build.pgSql.fragment`gen_random_uuid()`, '__my_random_uuid') `` - it's advised to start your alias with two underscores to prevent it clashing with any potential columns exposed as GraphQL fields.
+- `select(() => sqlFragment, alias)`; e.g.
+  `` queryBuilder.select(() => build.pgSql.fragment`gen_random_uuid()`, '__my_random_uuid') `` -
+  it's advised to start your alias with two underscores to prevent it clashing
+  with any potential columns exposed as GraphQL fields.
 
 On top of these methods, `QueryBuilder` has the following useful properties:
 
 - `parentQueryBuilder`: gives access to the parent QueryBuilder instance;
   primarily (and possibly only) useful for executing
-  `queryBuilder.parentQueryBuilder.getTableAlias()` so you can reference a
-  field on the parent record (e.g. to perform filtering based on a relation).
+  `queryBuilder.parentQueryBuilder.getTableAlias()` so you can reference a field
+  on the parent record (e.g. to perform filtering based on a relation).
 
-There are many other internal properties and methods, but you probably
-shouldn't call them. Only rely on the methods and properties documented above.
+There are many other internal properties and methods, but you probably shouldn't
+call them. Only rely on the methods and properties documented above.
 
 ##### QueryBuilder named children
 
 In very rare circumstances you might also need to use the following methods:
 
-- `buildChild()`; builds a child query builder, automatically passing through the relevant options and setting `parentQueryBuilder` for you - useful for constructing subqueries (normally you'd use `build.pgQueryFromResolveData` rather than using the `buildChild` method directly)
-- `buildNamedChildSelecting(name, from, selectExpression)`; creates a child query builder that's named `name`, selecting only `selectExpression` using the table (or subquery) described in `from`.
-- `getNamedChild(name)`; gets the named child created by `buildNamedChildSelecting`
+- `buildChild()`; builds a child query builder, automatically passing through
+  the relevant options and setting `parentQueryBuilder` for you - useful for
+  constructing subqueries (normally you'd use `build.pgQueryFromResolveData`
+  rather than using the `buildChild` method directly)
+- `buildNamedChildSelecting(name, from, selectExpression)`; creates a child
+  query builder that's named `name`, selecting only `selectExpression` using the
+  table (or subquery) described in `from`.
+- `getNamedChild(name)`; gets the named child created by
+  `buildNamedChildSelecting`
 
-An example of these methods being used can be found here: https://github.com/singingwolfboy/graphile-engine/blob/44a2496102267ce664c1286860b6368283463063/packages/postgraphile-core/__tests__/integration/ToyCategoriesPlugin.js
+An example of these methods being used can be found here:
+https://github.com/singingwolfboy/graphile-engine/blob/44a2496102267ce664c1286860b6368283463063/packages/postgraphile-core/__tests__/integration/ToyCategoriesPlugin.js
 
-In this example we have a many-to-many relationship with three tables: `toys`, `categories` and the join table between them: `toy_categories`. We add a `categories` field onto the `Toy` type, which constructs a subquery called `toyCategoriesSubquery` to determine the categories the current toy is in from the join table `toy_categories`. Later, in a different plugin (just a different hook in this example), we want to be able to filter this list of `categories` to only the list of categories where the join table's `toy_categories.approved` field is true; to do so we need to be able to get access to this "named" subquery so that we can add conditions to it's `WHERE` clause.
+In this example we have a many-to-many relationship with three tables: `toys`,
+`categories` and the join table between them: `toy_categories`. We add a
+`categories` field onto the `Toy` type, which constructs a subquery called
+`toyCategoriesSubquery` to determine the categories the current toy is in from
+the join table `toy_categories`. Later, in a different plugin (just a different
+hook in this example), we want to be able to filter this list of `categories` to
+only the list of categories where the join table's `toy_categories.approved`
+field is true; to do so we need to be able to get access to this "named"
+subquery so that we can add conditions to it's `WHERE` clause.
 
-In most cases you're only dealing with one or two tables so you won't need this level of complexity.
+In most cases you're only dealing with one or two tables so you won't need this
+level of complexity.
 
 #### Query Example
 
-The below is a simple example which would have been better served by [Custom
-Query SQL
-Procedures](/postgraphile/custom-queries/#custom-query-sql-procedures); however
-it demonstrates using `makeExtendSchemaPlugin` with a database record, table
-connection, and list of database records.
+The below is a simple example which would have been better served by
+[Custom Query SQL Procedures](/postgraphile/custom-queries/#custom-query-sql-procedures);
+however it demonstrates using `makeExtendSchemaPlugin` with a database record,
+table connection, and list of database records.
 
 You can also use this system to define mutations or to call out to external
 services — see below.
@@ -381,8 +404,8 @@ app.listen(3030);
 
 #### Mutation Example
 
-For example, you might want to add a custom `registerUser` mutation
-which inserts the new user into the database and also sends them an email:
+For example, you might want to add a custom `registerUser` mutation which
+inserts the new user into the database and also sends them an email:
 
 ```js{17,23-91}
 const MyRegisterUserMutationPlugin = makeExtendSchemaPlugin(build => {
@@ -485,9 +508,9 @@ If your field is not defined on the `Query`/`Mutation` type directly (i.e. it's
 not defined at the root level) then for performance reasons you should hook into
 the "look-ahead" system when adding a custom connection/list/record, rather than
 using a resolver. You can achieve this with the `@pgQuery` directive, as shown
-below. Alternative approaches you may wish to consider are [Smart
-Comments](/postgraphile/smart-comments/) and [Computed
-Columns](/postgraphile/computed-columns/).
+below. Alternative approaches you may wish to consider are
+[Smart Comments](/postgraphile/smart-comments/) and
+[Computed Columns](/postgraphile/computed-columns/).
 
 #### @pgQuery with an object type
 
@@ -497,20 +520,20 @@ When returning an object type (e.g. a table/composite type, connection, etc),
 the `@pgQuery` directive accepts the following inputs:
 
 - `source`: the source of the row(s) used in the result; can be a table name,
-  subquery, or function call (but must always return the relevant table type
-  and nothing more); currently this requires the boilerplate syntax below,
-  but this may be simplified in future
-- `withQueryBuilder(queryBuilder, args)`: this optional callback function is
-  how you customise which rows will be returned from the `source`; you may
-  add `where`, `orderBy`, `limit` and `offset` constraints. The `args`
-  argument contains the arguments that the field was passed, if any. This may
-  be useful when constructing the query constraints.
+  subquery, or function call (but must always return the relevant table type and
+  nothing more); currently this requires the boilerplate syntax below, but this
+  may be simplified in future
+- `withQueryBuilder(queryBuilder, args)`: this optional callback function is how
+  you customise which rows will be returned from the `source`; you may add
+  `where`, `orderBy`, `limit` and `offset` constraints. The `args` argument
+  contains the arguments that the field was passed, if any. This may be useful
+  when constructing the query constraints.
 
 The `@pgQuery` directive may be used with connections, lists of table records,
 or individual table records. (When used with individual records you must ensure
 that at most one row is returned; you can do so with the `queryBuilder.limit`
-constraint.) You can see examples of these three use cases [in the
-tests](https://github.com/graphile/graphile-engine/blob/5211758b7a48191ffd7600f9f5ae572672ffd221/packages/graphile-utils/__tests__/ExtendSchemaPlugin-pg.test.js#L507-L720).
+constraint.) You can see examples of these three use cases
+[in the tests](https://github.com/graphile/graphile-engine/blob/5211758b7a48191ffd7600f9f5ae572672ffd221/packages/graphile-utils/__tests__/ExtendSchemaPlugin-pg.test.js#L507-L720).
 
 ```js
 const { makeExtendSchemaPlugin, gql, embed } = require("graphile-utils");
@@ -537,18 +560,25 @@ module.exports = makeExtendSchemaPlugin(build => {
 Notes:
 
 - `PetsConnection` is just one type from the schema, as an example
-- `queryBuilder.getTableAlias()` refers to the `app_public.pets` referenced in the `source` field
-- `queryBuilder.parentQueryBuilder.getTableAlias()` refers to the table/function/view/etc from which the `User` (the parent type) was retrieved
-- Regular connection arguments are added automatically thanks to the plugin system
+- `queryBuilder.getTableAlias()` refers to the `app_public.pets` referenced in
+  the `source` field
+- `queryBuilder.parentQueryBuilder.getTableAlias()` refers to the
+  table/function/view/etc from which the `User` (the parent type) was retrieved
+- Regular connection arguments are added automatically thanks to the plugin
+  system
 
 #### @pgQuery with a leaf type
 
 **NOTE: this section applies to PostGraphile v4.4.6+**
 
-The @pgQuery directive can also be used with leaf fields (those returning a scalar or list thereof). To do so, we pass `@pgQuery` a `fragment:` argument. This argument can take two forms:
+The @pgQuery directive can also be used with leaf fields (those returning a
+scalar or list thereof). To do so, we pass `@pgQuery` a `fragment:` argument.
+This argument can take two forms:
 
 1. an `sql.fragment`
-2. a function `f(queryBuilder, args)` that returns a `sql.fragment`. `queryBuilder` is a `QueryBuilder` instance, and `args` is the arguments that were passed to the GraphQL field.
+2. a function `f(queryBuilder, args)` that returns a `sql.fragment`.
+   `queryBuilder` is a `QueryBuilder` instance, and `args` is the arguments that
+   were passed to the GraphQL field.
 
 ```js
 const { makeExtendSchemaPlugin, gql, embed } = require("graphile-utils");
@@ -574,12 +604,19 @@ module.exports = makeExtendSchemaPlugin(build => {
 
 Notes:
 
-- `queryBuilder.getTableAlias()` refers to the table/function/view/etc from which the `User` (the parent type) was retrieved
+- `queryBuilder.getTableAlias()` refers to the table/function/view/etc from
+  which the `User` (the parent type) was retrieved
 - there is no `queryBuilder.parentQueryBuilder`
 
-You can see more examples of these use cases [in the
-tests](https://github.com/graphile/graphile-engine/blob/49259c291d651ab8b70d1f1785cf273bdd97fcf1/packages/graphile-utils/__tests__/ExtendSchemaPlugin-pg.test.js#L713-L832).
+You can see more examples of these use cases
+[in the tests](https://github.com/graphile/graphile-engine/blob/49259c291d651ab8b70d1f1785cf273bdd97fcf1/packages/graphile-utils/__tests__/ExtendSchemaPlugin-pg.test.js#L713-L832).
 
 ### Plugin SQL Privileges
 
-Plugins access the database with the same privileges as everything else - they are subject to RLS/RBAC/etc. If your user does not have privileges to perform the action your plugin is attempting to achieve then you may need to create a companion database function that is marked as `SECURITY DEFINER` in order to perform the action with elevated privileges; alternatively you could use this database function directly - see [Custom Mutations](/postgraphile/custom-mutations/) for more details.
+Plugins access the database with the same privileges as everything else - they
+are subject to RLS/RBAC/etc. If your user does not have privileges to perform
+the action your plugin is attempting to achieve then you may need to create a
+companion database function that is marked as `SECURITY DEFINER` in order to
+perform the action with elevated privileges; alternatively you could use this
+database function directly - see
+[Custom Mutations](/postgraphile/custom-mutations/) for more details.

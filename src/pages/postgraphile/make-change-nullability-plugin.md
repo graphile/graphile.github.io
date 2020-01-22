@@ -6,13 +6,16 @@ title: makeChangeNullabilityPlugin (graphile-utils)
 
 **NOTE: this documentation applies to PostGraphile v4.1.0+**
 
-Use this plugin to easily change the nullability of fields in your GraphQL, where true = nullable (e.g. `String`), false = non-nullable (e.g. `String!`).
+Use this plugin to easily change the nullability of fields in your GraphQL,
+where true = nullable (e.g. `String`), false = non-nullable (e.g. `String!`).
 
-For more information about nullability in PostGraphile in general, see the FAQ question ["Why is it nullable?"](/postgraphile/why-nullable/)
+For more information about nullability in PostGraphile in general, see the FAQ
+question ["Why is it nullable?"](/postgraphile/why-nullable/)
 
 ### Example
 
-You can combine this plugin with the use of `makeWrapResolversPlugin` so that only the current user can see their own email address:
+You can combine this plugin with the use of `makeWrapResolversPlugin` so that
+only the current user can see their own email address:
 
 ```js
 const {

@@ -4,15 +4,14 @@ path: /postgraphile/views/
 title: Views
 ---
 
-Views are a great solution for abstraction.
-PostGraphile supports reading from and writing to views; however PostgreSQL
-lacks the powerful introspection capabilities on views that it has on tables,
-so we cannot easily automatically infer the relations. However, you can [use
-our "smart comments" functionality to add constraints to
-views](/postgraphile/smart-comments/#constraints) which will make them a lot
-more table-like (giving them a primary key so you can get a `nodeId`, adding
-foreign key references between views and other views or tables, setting
-columns as non-null).
+Views are a great solution for abstraction. PostGraphile supports reading from
+and writing to views; however PostgreSQL lacks the powerful introspection
+capabilities on views that it has on tables, so we cannot easily automatically
+infer the relations. However, you can
+[use our "smart comments" functionality to add constraints to views](/postgraphile/smart-comments/#constraints)
+which will make them a lot more table-like (giving them a primary key so you can
+get a `nodeId`, adding foreign key references between views and other views or
+tables, setting columns as non-null).
 
 ### Abstract Business Logic
 
@@ -47,7 +46,8 @@ And query this view as if it were a normal table:
 
 ### Flatten joined tables
 
-Views enable you to expose a simple "flattened" object built from multiple tables.
+Views enable you to expose a simple "flattened" object built from multiple
+tables.
 
 ```sql
 CREATE TABLE app_public.person (
@@ -67,7 +67,8 @@ CREATE VIEW person_view AS
   ON person.id = address.person_id;
 ```
 
-The GraphQL query using this view is flatter than the query using the underlying tables:
+The GraphQL query using this view is flatter than the query using the underlying
+tables:
 
 ```graphql
 query Before {
@@ -89,11 +90,13 @@ query After {
 }
 ```
 
-**_NOTE: you can use [smart comments](/postgraphile/smart-comments/) to change the GraphQL field name_**
+**_NOTE: you can use [smart comments](/postgraphile/smart-comments/) to change
+the GraphQL field name_**
 
 ### Authorization
 
-Authorization can be enforced using `views` as well, for example, exposing some data only to authenticated users:
+Authorization can be enforced using `views` as well, for example, exposing some
+data only to authenticated users:
 
 ```sql
 CREATE TABLE app_public.person (
@@ -115,7 +118,8 @@ CREATE VIEW personal_data_view
     WHERE person_id = current_user_id()
 ```
 
-(`current_user_id()` here is a function that might return something like `nullif(current_setting('jwt.claims.user_id', true), '')::int`)
+(`current_user_id()` here is a function that might return something like
+`nullif(current_setting('jwt.claims.user_id', true), '')::int`)
 
 ### API Layer
 

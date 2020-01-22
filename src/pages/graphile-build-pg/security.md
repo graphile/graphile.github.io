@@ -71,5 +71,4 @@ runQuery(
 <!-- TODO: ensure this example works. -->
 
 To see how this works in a real application, check out
-[`withPostGraphileContext` in
-PostGraphile](https://github.com/graphile/postgraphile/blob/master/src/postgraphile/withPostGraphileContext.ts)
+[`withPostGraphileContext` in PostGraphile](https://github.com/graphile/postgraphile/blob/master/src/postgraphile/withPostGraphileContext.ts)

@@ -4,8 +4,8 @@ path: /postgraphile/node-id/
 title: Globally Unique Object Identification ("nodeId" / "id")
 ---
 
-We implement the [Relay Global Object Identification
-Specification](https://facebook.github.io/relay/graphql/objectidentification.htm),
+We implement the
+[Relay Global Object Identification Specification](https://facebook.github.io/relay/graphql/objectidentification.htm),
 so any table that has a primary key will automatically have a unique `nodeId`
 field available for queries and mutations. This is commonly used as the cache
 key for your client library, e.g. with Apollo Client's `dataIdFromObject`:
@@ -25,22 +25,20 @@ export const client = new ApolloClient({
 });
 ```
 
-**WARNING**: by default, we call the Global Object Identifier `nodeId` to
-avoid clashing with the `id` field that's common practice in database design.
-If you wish to call the Global Object Identifier field `id` instead (as is
-mandated by the Relay specification), you can do so with our `--classic-ids`
-CLI flag. In doing so, any `id` column will automatically be renamed to
-`rowId`.
+**WARNING**: by default, we call the Global Object Identifier `nodeId` to avoid
+clashing with the `id` field that's common practice in database design. If you
+wish to call the Global Object Identifier field `id` instead (as is mandated by
+the Relay specification), you can do so with our `--classic-ids` CLI flag. In
+doing so, any `id` column will automatically be renamed to `rowId`.
 
 ### Disabling the Relay Global Object Identifier
 
 You can disable the relay global object identifier throughout your API by
-skipping the `require('graphile-build').NodePlugin` plugin; e.g. from the
-CLI:
+skipping the `require('graphile-build').NodePlugin` plugin; e.g. from the CLI:
 
 ```
 postgraphile --skip-plugins graphile-build:NodePlugin ...
 ```
 
-Ensure that you have a good way of generating cache identifiers for your
-GraphQL client though!
+Ensure that you have a good way of generating cache identifiers for your GraphQL
+client though!
