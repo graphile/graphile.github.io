@@ -124,6 +124,19 @@ CREATE FUNCTION add(a int, b int) RETURNS int AS $$
 $$ LANGUAGE sql IMMUTABLE STRICT;
 ```
 
+### Solving naming conlflicts
+In some cases you may see conflicts when using column names as
+named arguments. To avoid this conflicts you can use numeric arguments `$1` or
+you can name records in statements `select * from users u where u.id=$1`).
+
+This may be not enough in some cases. For example when using `plpgsql` and
+you have `insert ... on conflict (column_1, column_2)` statement. In this case
+you can change language to `SQL` which will treat to columns. Or you can configure
+function to use columns in such cases.
+
+To better understand this conflicts and solutions you can see docs for
+[variable substitution](https://www.postgresql.org/docs/current/plpgsql-implementation.html#PLPGSQL-VAR-SUBST).
+
 ### VOLATILE (Mutation) Functions
 
 By default, a function is “volatile”. For example, a function defined as:
