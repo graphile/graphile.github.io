@@ -131,8 +131,8 @@ with names of columns or other identifiers accessible within your function.
 
 To avoid these conflicts you can use
 [numeric arguments](https://www.postgresql.org/docs/current/xfunc-sql.html#XFUNC-SQL-FUNCTION-ARGUMENTS)
-such as `$1` for the first argument, `$2` for the second, and so on, and use
-the table name to disambiguate:
+such as `$1` for the first argument, `$2` for the second, and so on, and use the
+table name to disambiguate:
 
 ```sql
 create function get_user(id int) returns users as $$
@@ -150,8 +150,8 @@ $$ language sql stable;
 ```
 
 This works well in general, but there are some cases where it is not enough. For
-example when you have an upsert (`INSERT...ON CONFLICT`) statement in a `plpgsql`
-language function, such as:
+example when you have an upsert (`INSERT...ON CONFLICT`) statement in a
+`plpgsql` language function, such as:
 
 ```sql
 create function upsert_value(id int, value text) returns void as $$
@@ -164,9 +164,9 @@ end;
 $$ language plpgsql volatile;
 ```
 
-In this case the `on conflict (id)` causes an issue because PL/pgSQL does not know
-if `id` refers to the table column or the function argument, and adding the table name
-inside the parenthesis is a syntax error.
+In this case the `on conflict (id)` causes an issue because PL/pgSQL does not
+know if `id` refers to the table column or the function argument, and adding the
+table name inside the parenthesis is a syntax error.
 
 To solve this, you can change language to `sql` which will treat columns
 preferentially. Alternatively you can tell the function to solve conflicts by
@@ -184,7 +184,8 @@ end;
 $$ language plpgsql volatile;
 ```
 
-To better understand these conflicts and solutions, refer to the PostgreSQL docs for
+To better understand these conflicts and solutions, refer to the PostgreSQL docs
+for
 [variable substitution](https://www.postgresql.org/docs/current/plpgsql-implementation.html#PLPGSQL-VAR-SUBST).
 
 ### VOLATILE (Mutation) Functions
