@@ -124,7 +124,7 @@ CREATE FUNCTION add(a int, b int) RETURNS int AS $$
 $$ LANGUAGE sql IMMUTABLE STRICT;
 ```
 
-### Solving naming conlflicts
+### Solving naming conflicts
 
 Sometimes the names you have chosen for your function parameters will conflict
 with names of columns or other identifiers accessible within your function.
