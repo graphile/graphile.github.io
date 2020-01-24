@@ -125,16 +125,66 @@ $$ LANGUAGE sql IMMUTABLE STRICT;
 ```
 
 ### Solving naming conlflicts
-In some cases you may see conflicts when using column names as
-named arguments. To avoid this conflicts you can use numeric arguments `$1` or
-you can name records in statements `select * from users u where u.id=$1`).
 
-This may be not enough in some cases. For example when using `plpgsql` and
-you have `insert ... on conflict (column_1, column_2)` statement. In this case
-you can change language to `SQL` which will treat to columns. Or you can configure
-function to use columns in such cases.
+Sometimes the names you have chosen for your function parameters will conflict
+with names of columns or other identifiers accessible within your function.
 
-To better understand this conflicts and solutions you can see docs for
+To avoid these conflicts you can use
+[numeric arguments](https://www.postgresql.org/docs/current/xfunc-sql.html#XFUNC-SQL-FUNCTION-ARGUMENTS)
+such as `$1` for the first argument, `$2` for the second, and so on, and use
+the table name to disambiguate:
+
+```sql
+create function get_user(id int) returns users as $$
+  select * from users where users.id = $1;
+$$ language sql stable;
+```
+
+Alternatively, if you prefer to use the argument names rather than the numeric
+`$n` arguments, you may use the function's name to disambiguate:
+
+```sql
+create function get_user(id int) returns users as $$
+  select * from users where users.id = get_user.id;
+$$ language sql stable;
+```
+
+This works well in general, but there are some cases where it is not enough. For
+example when you have an upsert (`INSERT...ON CONFLICT`) statement in a `plpgsql`
+language function, such as:
+
+```sql
+create function upsert_value(id int, value text) returns void as $$
+begin
+  insert into my_table (id, value)
+    values(id, value)
+    on conflict (id) -- This will error
+    do update set value = excluded.value;
+end;
+$$ language plpgsql volatile;
+```
+
+In this case the `on conflict (id)` causes an issue because PL/pgSQL does not know
+if `id` refers to the table column or the function argument, and adding the table name
+inside the parenthesis is a syntax error.
+
+To solve this, you can change language to `sql` which will treat columns
+preferentially. Alternatively you can tell the function to solve conflicts by
+using the column:
+
+```sql
+create function upsert_value(id int, value text) returns void as $$
+#variable_conflict use_column
+begin
+  insert into my_table (id, value)
+    values(id, value)
+    on conflict (id)
+    do update set value = excluded.value;
+end;
+$$ language plpgsql volatile;
+```
+
+To better understand these conflicts and solutions, refer to the PostgreSQL docs for
 [variable substitution](https://www.postgresql.org/docs/current/plpgsql-implementation.html#PLPGSQL-VAR-SUBST).
 
 ### VOLATILE (Mutation) Functions
