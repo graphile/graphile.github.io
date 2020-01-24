@@ -51,6 +51,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><a href="/postgraphile/functions/#recommended-reading">Recommended Reading</a></li>
 <li><a href="/postgraphile/functions/#procedural-languages">Procedural Languages</a></li>
 <li><a href="/postgraphile/functions/#named-arguments">Named Arguments</a></li>
+<li><a href="/postgraphile/functions/#solving-naming-conflicts">Solving naming conflicts</a></li>
 <li><a href="/postgraphile/functions/#volatile-mutation-functions"><span class='allcaps'>VOLATILE</span> (Mutation) Functions</a></li>
 <li><a href="/postgraphile/functions/#stableimmutable-query-functions"><span class='allcaps'>STABLE</span>/<span class='allcaps'>IMMUTABLE</span> (Query) Functions</a></li>
 <li><a href="/postgraphile/functions/#setof-functions---connections"><span class='allcaps'>SETOF</span> Functions - Connections</a></li>
@@ -135,6 +136,50 @@ $$ <span class="token keyword">LANGUAGE</span> <span class="token keyword">sql</
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">CREATE</span> <span class="token keyword">FUNCTION</span> <span class="token keyword">add</span><span class="token punctuation">(</span>a <span class="token keyword">int</span><span class="token punctuation">,</span> b <span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token keyword">RETURNS</span> <span class="token keyword">int</span> <span class="token keyword">AS</span> $$
   <span class="token keyword">select</span> a <span class="token operator">+</span> b<span class="token punctuation">;</span>
 $$ <span class="token keyword">LANGUAGE</span> <span class="token keyword">sql</span> IMMUTABLE STRICT<span class="token punctuation">;</span></code></pre></div>
+<h3 id="solving-naming-conflicts"><a href="#solving-naming-conflicts" aria-label="solving naming conflicts permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Solving naming conflicts</h3>
+<p>Sometimes the names you have chosen for your function parameters will conflict
+with names of columns or other identifiers accessible within your function.</p>
+<p>To avoid these conflicts you can use
+<a href="https://www.postgresql.org/docs/current/xfunc-sql.html#XFUNC-SQL-FUNCTION-ARGUMENTS">numeric arguments</a>
+such as <code class="language-text">$1</code> for the first argument, <code class="language-text">$2</code> for the second, and so on, and use the
+table name to disambiguate:</p>
+<div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">function</span> get_user<span class="token punctuation">(</span>id <span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token keyword">returns</span> users <span class="token keyword">as</span> $$
+  <span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> users <span class="token keyword">where</span> users<span class="token punctuation">.</span>id <span class="token operator">=</span> $<span class="token number">1</span><span class="token punctuation">;</span>
+$$ <span class="token keyword">language</span> <span class="token keyword">sql</span> stable<span class="token punctuation">;</span></code></pre></div>
+<p>Alternatively, if you prefer to use the argument names rather than the numeric
+<code class="language-text">$n</code> arguments, you may use the function's name to disambiguate:</p>
+<div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">function</span> get_user<span class="token punctuation">(</span>id <span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token keyword">returns</span> users <span class="token keyword">as</span> $$
+  <span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> users <span class="token keyword">where</span> users<span class="token punctuation">.</span>id <span class="token operator">=</span> get_user<span class="token punctuation">.</span>id<span class="token punctuation">;</span>
+$$ <span class="token keyword">language</span> <span class="token keyword">sql</span> stable<span class="token punctuation">;</span></code></pre></div>
+<p>This works well in general, but there are some cases where it is not enough. For
+example when you have an upsert (<code class="language-text">INSERT...ON CONFLICT</code>) statement in a
+<code class="language-text">plpgsql</code> language function, such as:</p>
+<div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">function</span> upsert_value<span class="token punctuation">(</span>id <span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">value</span> <span class="token keyword">text</span><span class="token punctuation">)</span> <span class="token keyword">returns</span> void <span class="token keyword">as</span> $$
+<span class="token keyword">begin</span>
+  <span class="token keyword">insert</span> <span class="token keyword">into</span> my_table <span class="token punctuation">(</span>id<span class="token punctuation">,</span> <span class="token keyword">value</span><span class="token punctuation">)</span>
+    <span class="token keyword">values</span><span class="token punctuation">(</span>id<span class="token punctuation">,</span> <span class="token keyword">value</span><span class="token punctuation">)</span>
+    <span class="token keyword">on</span> conflict <span class="token punctuation">(</span>id<span class="token punctuation">)</span> <span class="token comment">-- This will error</span>
+    <span class="token keyword">do</span> <span class="token keyword">update</span> <span class="token keyword">set</span> <span class="token keyword">value</span> <span class="token operator">=</span> excluded<span class="token punctuation">.</span><span class="token keyword">value</span><span class="token punctuation">;</span>
+<span class="token keyword">end</span><span class="token punctuation">;</span>
+$$ <span class="token keyword">language</span> plpgsql volatile<span class="token punctuation">;</span></code></pre></div>
+<p>In this case the <code class="language-text">on conflict (id)</code> causes an issue because PL/pgSQL does not
+know if <code class="language-text">id</code> refers to the table column or the function argument, and adding the
+table name inside the parenthesis is a syntax error.</p>
+<p>To solve this, you can change language to <code class="language-text">sql</code> which will treat columns
+preferentially. Alternatively you can tell the function to solve conflicts by
+using the column:</p>
+<div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">function</span> upsert_value<span class="token punctuation">(</span>id <span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">value</span> <span class="token keyword">text</span><span class="token punctuation">)</span> <span class="token keyword">returns</span> void <span class="token keyword">as</span> $$
+<span class="token comment">#variable_conflict use_column</span>
+<span class="token keyword">begin</span>
+  <span class="token keyword">insert</span> <span class="token keyword">into</span> my_table <span class="token punctuation">(</span>id<span class="token punctuation">,</span> <span class="token keyword">value</span><span class="token punctuation">)</span>
+    <span class="token keyword">values</span><span class="token punctuation">(</span>id<span class="token punctuation">,</span> <span class="token keyword">value</span><span class="token punctuation">)</span>
+    <span class="token keyword">on</span> conflict <span class="token punctuation">(</span>id<span class="token punctuation">)</span>
+    <span class="token keyword">do</span> <span class="token keyword">update</span> <span class="token keyword">set</span> <span class="token keyword">value</span> <span class="token operator">=</span> excluded<span class="token punctuation">.</span><span class="token keyword">value</span><span class="token punctuation">;</span>
+<span class="token keyword">end</span><span class="token punctuation">;</span>
+$$ <span class="token keyword">language</span> plpgsql volatile<span class="token punctuation">;</span></code></pre></div>
+<p>To better understand these conflicts and solutions, refer to the PostgreSQL docs
+for
+<a href="https://www.postgresql.org/docs/current/plpgsql-implementation.html#PLPGSQL-VAR-SUBST">variable substitution</a>.</p>
 <h3 id="volatile-mutation-functions"><a href="#volatile-mutation-functions" aria-label="volatile mutation functions permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>VOLATILE (Mutation) Functions</h3>
 <p>By default, a function is “volatile”. For example, a function defined as:</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">CREATE</span> <span class="token keyword">FUNCTION</span> my_function<span class="token punctuation">(</span>a <span class="token keyword">int</span><span class="token punctuation">,</span> b <span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token keyword">RETURNS</span> <span class="token keyword">int</span> <span class="token keyword">AS</span> $$ … $$ <span class="token keyword">LANGUAGE</span> <span class="token keyword">sql</span><span class="token punctuation">;</span></code></pre></div>
