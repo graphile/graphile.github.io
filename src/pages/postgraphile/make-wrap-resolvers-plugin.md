@@ -247,7 +247,7 @@ export default makeWrapResolversPlugin(
 
 If you want a mutation to succeed only if some custom code succeeds, you can do
 that plugging into the current PostgreSQL transaction. This allows you to
-'rollback' the SQL transation if the custom code fails.
+'rollback' the SQL transaction if the custom code fails.
 
 ```ts
 export const CreatePostPlugin = makeWrapResolversPlugin({
