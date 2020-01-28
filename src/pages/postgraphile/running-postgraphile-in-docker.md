@@ -10,18 +10,18 @@ The following guide describes how to run a network of Docker containers on a loc
 
 # Table of Contents
 
--   Create PostgreSQL Container
-    -   Setup Environment Variables
-    -   Create Database Initialization Files
-    -   Create PostgreSQL Dockerfile
-    -   Create Docker Compose File
--   Create PostGraphile Container
-    -   Update Environment Variables
-    -   Create PostGraphile Dockerfile
-    -   Update Docker Compose File
--   Build Images And Run Containers
-    -   Build Images
-    -   Run Containers
+-   [Create PostgreSQL Container](#create-postgresql-container)
+    -   [Setup Environment Variables](#setup-environment-variables)
+    -   [Create Database Initialization Files](#create-database-initialization-files)
+    -   [Create PostgreSQL Dockerfile](#create-postgresql-dockerfile)
+    -   [Create Docker Compose File](#create-docker-compose-file)
+-   [Create PostGraphile Container](#create-postgraphile-container)
+    -   [Update Environment Variables](#update-environment-variables)
+    -   [Create PostGraphile Dockerfile](#create-postgraphile-dockerfile)
+    -   [Update Docker Compose File](#update-docker-compose-file)
+-   [Build Images And Run Containers](#build-images-and-run-containers)
+    -   [Build Images](#build-images)
+    -   [Run Containers](#run-containers)
 
 # Create PostgreSQL Container
 
