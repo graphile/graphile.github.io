@@ -4,8 +4,6 @@ path: /postgraphile/running-postgraphile-in-docker/
 title: Running PostGraphile in Docker
 ---
 
-All the files created in this guide are available in the repository [Postgraphile-in-Docker](https://github.com/alexisrolland/postgraphile-in-docker).
-
 The following guide describes how to run a network of Docker containers on a local machine, including one container for a PostgreSQL database and one container for PostGraphile. A the end of this guide, you will have a GraphQL API exposing data from a PostgreSQL database, both running locally on your machine in separate Docker containers. It has been developed and tested on:
 
 -   Linux
