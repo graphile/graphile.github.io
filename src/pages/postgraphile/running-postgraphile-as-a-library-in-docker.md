@@ -1,7 +1,7 @@
 ---
 layout: page
 path: /postgraphile/running-postgraphile-as-a-library-in-docker/
-title: Running PostGraphile as library in Docker
+title: Running PostGraphile as a library in Docker
 ---
 
 The following guide describes how to run a network of Docker containers on a local machine, including one container for a PostgreSQL database and one container running PostGraphile.
