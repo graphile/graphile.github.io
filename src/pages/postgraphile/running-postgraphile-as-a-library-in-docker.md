@@ -6,9 +6,9 @@ title: Running PostGraphile as a library in Docker
 
 The following guide describes how to run a network of Docker containers on a local machine, including one container for a PostgreSQL database and one container running PostGraphile.
 
-It is following the same use case as the guide **[Running PostGraphile in Docker](/src/pages/postgraphile/running-postgraphile-in-docker.md)** with one difference, the PostGraphile container runs a **Node.js application using PostGraphile as library** instead of running PostGraphile via CLI. Running PostGraphile as a library opens doors to greater customization possibilities.
+It is following the same use case as the guide **[Running PostGraphile in Docker](/postgraphile/running-postgraphile-in-docker/)** with one difference, the PostGraphile container runs a **Node.js application using PostGraphile as library** instead of running PostGraphile via CLI. Running PostGraphile as a library opens doors to greater customization possibilities.
 
-Follow the steps provided in the guide **[Running PostGraphile in Docker](/src/pages/postgraphile/running-postgraphile-in-docker.md)** and come back to this guide to create the GraphQL container.
+Follow the steps provided in the guide **[Running PostGraphile in Docker](/postgraphile/running-postgraphile-in-docker/)** and come back to this guide to create the GraphQL container.
 
 # Table of Contents
 
