@@ -570,7 +570,7 @@
       },
       {
         "to": "/postgraphile/running-postgraphile-as-a-library-in-docker/",
-        "title": "Running PostGraphile in Docker",
+        "title": "Running PostGraphile as a library in Docker",
         "sectionId": "guides",
         "subpages": []
       },
