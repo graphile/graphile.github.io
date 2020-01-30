@@ -325,7 +325,7 @@ Since version
 
 Applies to:
 
-- Functions returning `SETOF`: adds the `orderBy` argument to this connection,
+- Functions returning `SETOF` a composite type (e.g. a table type, record type, or another type with "column"-like attributes): adds the `orderBy` argument to this connection,
   allowing to _sort_ the set by any of its scalar fields.
 - Computed column functions with no required parameters and returning a scalar
   or array: allows this function to be used as an order in the `orderBy`
