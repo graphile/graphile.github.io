@@ -329,7 +329,7 @@ Applies to:
   allowing to _sort_ the set by its columns/attributes.
 - Computed column functions with no required parameters and returning a scalar
   or array: allows this function to be used as an order in the `orderBy`
-  argument for the parent table, allowing to _sort by_ this function's value the
+  argument for the parent table, allowing to _sort_ the parent table _by_ this function's return value.
   parent table.
 
 If used on a computed function that returns a SETOF _record type_ it will make
