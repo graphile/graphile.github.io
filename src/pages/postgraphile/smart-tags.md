@@ -325,12 +325,13 @@ Since version
 
 Applies to:
 
-- Functions returning `SETOF` a composite type (e.g. a table type, record type, or another type with "column"-like attributes): adds the `orderBy` argument to this connection,
-  allowing to _sort_ the set by its columns/attributes.
+- Functions returning `SETOF` a composite type (e.g. a table type, record type,
+  or another type with "column"-like attributes): adds the `orderBy` argument to
+  this connection, allowing to _sort_ the set by its columns/attributes.
 - Computed column functions with no required parameters and returning a scalar
   or array: allows this function to be used as an order in the `orderBy`
-  argument for the parent table, allowing to _sort_ the parent table _by_ this function's return value.
-  parent table.
+  argument for the parent table, allowing to _sort_ the parent table _by_ this
+  function's return value. parent table.
 
 If used on a computed function that returns a SETOF _record type_ it will make
 the connection _sortable_ (like it would with any other `SETOF` function) and
