@@ -325,9 +325,16 @@ Since version
 
 Applies to:
 
-- Functions returning `SETOF`: adds the `orderBy` argument to this field
-- Computed column functions with no required parameters: allows this function to
-  be used as an order in the `orderBy` argument for the parent table
+- Functions returning `SETOF` a composite type (e.g. a table type, record type, or another type with "column"-like attributes): adds the `orderBy` argument to this connection,
+  allowing to _sort_ the set by its columns/attributes.
+- Computed column functions with no required parameters and returning a scalar
+  or array: allows this function to be used as an order in the `orderBy`
+  argument for the parent table, allowing to _sort_ the parent table _by_ this function's return value.
+  parent table.
+
+If used on a computed function that returns a SETOF _record type_ it will make
+the connection _sortable_ (like it would with any other `SETOF` function) and
+NOT a _sort by_ for its parent table
 
 ```sql
 comment on function foo() is E'@sortable';
@@ -354,9 +361,16 @@ Since version
 
 Applies to:
 
-- Functions returning `SETOF`: adds the `condition` argument to this field
-- Computed column functions with no required parameters: allows this function to
-  be used as a field in the `condition` argument for the parent table
+- Functions returning `SETOF`: adds the `condition` argument to this connection,
+  allowing to _filter_ the set by any of its scalar fields.
+- Computed column functions with no required parameters and returning a scalar
+  or array: allows this function to be used as field in the `condition` argument
+  for the parent table, allowing to _filter by_ this function's value the parent
+  table.
+
+If used on a computed function that returns a SETOF _record type_ it will make
+the connection _filterable_ (like it would with any other `SETOF` function) and
+NOT a _filter by_ for its parent table
 
 ```sql
 comment on function foo() is E'@filterable';
@@ -392,6 +406,35 @@ $$ language SQL STABLE;
 
 -- don't forget the comments...
 comment on function user_object_field() is E'@sortable';
+```
+
+Note that this will only work with a single composite type. If your computed
+function returns a `SETOF` composite type, you will need to use an `ARRAY` and
+the
+[connection-filter plugin](https://github.com/graphile-contrib/postgraphile-plugin-connection-filter).
+
+```sql
+-- non scalar setof function
+CREATE OR REPLACE FUNCTION user_objects(user user) RETURNS SETOF object AS $$
+SELECT * FROM object where owner_id = user.id; -- one user, many objects
+$$ language SQL STABLE;
+
+-- wrapper. Note the () for notation. Failing to use them will throw an error
+CREATE OR REPLACE FUNCTION user_object_fields(user user) RETURNS varchar[] AS $$
+SELECT ARRAY_AGG((user_objects(user)).field);
+$$ language SQL STABLE;
+
+-- don't forget the comments...
+comment on function user_object_fields() is E'@sortable';
+```
+
+Now you can use the array as a _filter by_, for example:
+
+```gql
+{
+  # get all users who own an object with field == 'foo'
+  allUsers(filter: {object_fields: contains: 'foo'}) { ... }
+}
 ```
 
 #### @simpleCollections
