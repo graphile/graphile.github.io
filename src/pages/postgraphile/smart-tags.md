@@ -410,7 +410,7 @@ comment on function user_object_field() is E'@sortable';
 ```
 
 Note that this will only work with a single composite type. If your computed
-function returns a `SETOF` composite type, you will need to use an `ARRAY` and
+function returns a `SETOF` composite type one option is to use an `ARRAY` and
 the
 [connection-filter plugin](https://github.com/graphile-contrib/postgraphile-plugin-connection-filter).
 
