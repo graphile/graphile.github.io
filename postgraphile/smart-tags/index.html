@@ -488,10 +488,17 @@ can see the reduced fields and types once the <code class="language-text">create
 <a href="https://github.com/graphile/postgraphile/releases/tag/v4.3.1">v4.3.1</a></p>
 <p>Applies to:</p>
 <ul>
-<li>Functions returning <code class="language-text">SETOF</code>: adds the <code class="language-text">orderBy</code> argument to this field</li>
-<li>Computed column functions with no required parameters: allows this function to
-be used as an order in the <code class="language-text">orderBy</code> argument for the parent table</li>
+<li>Functions returning <code class="language-text">SETOF</code> a composite type (e.g. a table type, record type,
+or another type with "column"-like attributes): adds the <code class="language-text">orderBy</code> argument to
+this connection, allowing to <em>sort</em> the set by its columns/attributes.</li>
+<li>Computed column functions with no required parameters and returning a scalar
+or array: allows this function to be used as an order in the <code class="language-text">orderBy</code>
+argument for the parent table, allowing to <em>sort</em> the parent table <em>by</em> this
+function's return value. parent table.</li>
 </ul>
+<p>If used on a computed function that returns a SETOF <em>record type</em> it will make
+the connection <em>sortable</em> (like it would with any other <code class="language-text">SETOF</code> function) and
+NOT a <em>sort by</em> for its parent table</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">function</span> foo<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">is</span> E<span class="token string">'@sortable'</span><span class="token punctuation">;</span>
 <span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">function</span> users_foo<span class="token punctuation">(</span>users<span class="token punctuation">)</span> <span class="token operator">is</span> E<span class="token string">'@sortable'</span><span class="token punctuation">;</span></code></pre></div>
 <div class="gatsby-highlight" data-language="graphql"><pre class="language-graphql"><code class="language-graphql"><span class="token punctuation">{</span>
@@ -509,10 +516,16 @@ be used as an order in the <code class="language-text">orderBy</code> argument f
 <a href="https://github.com/graphile/postgraphile/releases/tag/v4.3.1">v4.3.1</a>.</p>
 <p>Applies to:</p>
 <ul>
-<li>Functions returning <code class="language-text">SETOF</code>: adds the <code class="language-text">condition</code> argument to this field</li>
-<li>Computed column functions with no required parameters: allows this function to
-be used as a field in the <code class="language-text">condition</code> argument for the parent table</li>
+<li>Functions returning <code class="language-text">SETOF</code>: adds the <code class="language-text">condition</code> argument to this connection,
+allowing to <em>filter</em> the set by any of its scalar fields.</li>
+<li>Computed column functions with no required parameters and returning a scalar
+or array: allows this function to be used as field in the <code class="language-text">condition</code> argument
+for the parent table, allowing to <em>filter by</em> this function's value the parent
+table.</li>
 </ul>
+<p>If used on a computed function that returns a SETOF <em>record type</em> it will make
+the connection <em>filterable</em> (like it would with any other <code class="language-text">SETOF</code> function) and
+NOT a <em>filter by</em> for its parent table</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">function</span> foo<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">is</span> E<span class="token string">'@filterable'</span><span class="token punctuation">;</span>
 <span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">function</span> users_foo<span class="token punctuation">(</span>users<span class="token punctuation">)</span> <span class="token operator">is</span> E<span class="token string">'@filterable'</span><span class="token punctuation">;</span></code></pre></div>
 <div class="gatsby-highlight" data-language="graphql"><pre class="language-graphql"><code class="language-graphql"><span class="token punctuation">{</span>
@@ -538,6 +551,27 @@ $$ <span class="token keyword">language</span> <span class="token keyword">SQL</
 
 <span class="token comment">-- don't forget the comments...</span>
 <span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">function</span> user_object_field<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">is</span> E<span class="token string">'@sortable'</span><span class="token punctuation">;</span></code></pre></div>
+<p>Note that this will only work with a single composite type. If your computed
+function returns a <code class="language-text">SETOF</code> composite type one option is to use an <code class="language-text">ARRAY</code> and
+the
+<a href="https://github.com/graphile-contrib/postgraphile-plugin-connection-filter">connection-filter plugin</a>.</p>
+<div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token comment">-- non scalar setof function</span>
+<span class="token keyword">CREATE</span> <span class="token operator">OR</span> <span class="token keyword">REPLACE</span> <span class="token keyword">FUNCTION</span> user_objects<span class="token punctuation">(</span><span class="token keyword">user</span> <span class="token keyword">user</span><span class="token punctuation">)</span> <span class="token keyword">RETURNS</span> SETOF object <span class="token keyword">AS</span> $$
+<span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> object <span class="token keyword">where</span> owner_id <span class="token operator">=</span> <span class="token keyword">user</span><span class="token punctuation">.</span>id<span class="token punctuation">;</span> <span class="token comment">-- one user, many objects</span>
+$$ <span class="token keyword">language</span> <span class="token keyword">SQL</span> STABLE<span class="token punctuation">;</span>
+
+<span class="token comment">-- wrapper. Note the () for notation. Failing to use them will throw an error</span>
+<span class="token keyword">CREATE</span> <span class="token operator">OR</span> <span class="token keyword">REPLACE</span> <span class="token keyword">FUNCTION</span> user_object_fields<span class="token punctuation">(</span><span class="token keyword">user</span> <span class="token keyword">user</span><span class="token punctuation">)</span> <span class="token keyword">RETURNS</span> <span class="token keyword">varchar</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token keyword">AS</span> $$
+<span class="token keyword">SELECT</span> ARRAY_AGG<span class="token punctuation">(</span><span class="token punctuation">(</span>user_objects<span class="token punctuation">(</span><span class="token keyword">user</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>field<span class="token punctuation">)</span><span class="token punctuation">;</span>
+$$ <span class="token keyword">language</span> <span class="token keyword">SQL</span> STABLE<span class="token punctuation">;</span>
+
+<span class="token comment">-- don't forget the comments...</span>
+<span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">function</span> user_object_fields<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">is</span> E<span class="token string">'@sortable'</span><span class="token punctuation">;</span></code></pre></div>
+<p>Now you can use the array as a <em>filter by</em>, for example:</p>
+<div class="gatsby-highlight" data-language="gql"><pre class="language-gql"><code class="language-gql">{
+  # get all users who own an object with field == &#39;foo&#39;
+  allUsers(filter: {object_fields: contains: &#39;foo&#39;}) { ... }
+}</code></pre></div>
 <h4 id="simplecollections"><a href="#simplecollections" aria-label="simplecollections permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>@simpleCollections</h4>
 <p>You can control whether simple collections are enabled by default using
 <code class="language-text">--simple-collections omit|both|only</code> (or
