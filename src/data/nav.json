@@ -563,6 +563,18 @@
         "subpages": []
       },
       {
+        "to": "/postgraphile/running-postgraphile-in-docker/",
+        "title": "Running PostGraphile in Docker",
+        "sectionId": "guides",
+        "subpages": []
+      },
+      {
+        "to": "/postgraphile/running-postgraphile-as-a-library-in-docker/",
+        "title": "Running PostGraphile as a library in Docker",
+        "sectionId": "guides",
+        "subpages": []
+      },
+      {
         "to": "/postgraphile/deploying-heroku/",
         "title": "Deploying to Heroku",
         "sectionId": "deploying",
