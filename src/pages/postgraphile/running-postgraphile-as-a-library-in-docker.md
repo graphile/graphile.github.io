@@ -223,8 +223,8 @@ the command `$ docker-machine ip default`.
 
 | Container | Docker on Linux / Windows Pro | Docker on Windows Home |
 |-----------|-------------------------------|------------------------|
-| GraphQL API Documentation | https://localhost:5433/graphiql | https://your_docker_machine_ip:5433/graphiql |
-| GraphQL API | https://localhost:5433/graphql | https://your_docker_machine_ip:5433/graphql |
+| GraphQL API Documentation | `https://localhost:5433/graphiql` | `https://your_docker_machine_ip:5433/graphiql` |
+| GraphQL API | `https://localhost:5433/graphql` | `https://your_docker_machine_ip:5433/graphql` |
 | PostgreSQL Database | host: `localhost`, port: `5432` | host: `your_docker_machine_ip`, port: `5432` |
 
 #### Re-initialize The Database
