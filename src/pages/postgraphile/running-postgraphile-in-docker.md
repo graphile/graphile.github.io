@@ -37,11 +37,13 @@ The following guide describes how to run a network of Docker containers on a loc
 
 ### Requirements
 
-This requires to have Docker and Docker Compose installed on your workstation. If you are new to Docker and need to install it, you can refer to their [official documentation](https://docs.docker.com/) or follow the steps below. Note if you use Docker Desktop for Windows, it comes automatically with Docker Compose.
+This requires to have Docker and Docker Compose installed on your workstation. If you are new to Docker and need to install it, you can refer to their [official documentation](https://docs.docker.com/) or follow the steps below. 
 
 -   [Install Docker and Docker Compose on Linux](#install-docker-and-docker-compose-on-linux)
 -   [Install Docker on Windows Pro](#install-docker-on-windows-pro)
 -   [Install Docker on Windows Home](#install-docker-on-windows-home)
+
+> Note: If you use Docker Desktop for Windows, it comes automatically with Docker Compose.
 
 #### Install Docker and Docker Compose on Linux
 
@@ -248,7 +250,7 @@ At this stage, the repository should look like this.
 
 #### Update Environment Variables
 
-Update the file `.env` to add the `DATABASE_URL` which will be used by PostGraphile to connect to the PostgreSQL database. Note the `DATABASE_URL` follows the syntax `postgres://<user>:<password>@db:5432/<db_name>`.
+Update the file `.env` to add the `DATABASE_URL` which will be used by PostGraphile to connect to the PostgreSQL database.
 
 ```
 [...]
@@ -256,6 +258,8 @@ Update the file `.env` to add the `DATABASE_URL` which will be used by PostGraph
 # Parameters used by graphql container
 DATABASE_URL=postgres://postgres:change_me@db:5432/forum_example
 ```
+
+> Note: The `DATABASE_URL` follows the syntax `postgres://<user>:<password>@db:5432/<db_name>`.
 
 #### Create PostGraphile Dockerfile
 
@@ -335,7 +339,9 @@ $ docker-compose build graphql
 
 #### Run Containers
 
-You can run the Docker containers by executing the following command from the root of the repository. Note when running the database container for the first time, Docker will automatically create a Docker Volume to persist the data from the database. The Docker Volume is automatically named as `<your_repository_name>_db`.
+You can run the Docker containers by executing the following command from the root of the repository.
+
+> Note: when running the database container for the first time, Docker will automatically create a Docker Volume to persist the data from the database. The Docker Volume is automatically named as `<your_repository_name>_db`.
 
 ```
 # Run containers for all services in docker-compose.yml
@@ -351,13 +357,15 @@ $ docker-compose up -d db
 $ docker-compose up -d graphql
 ```
 
-Each container can be accessed at the following addresses. Note if you run Docker Toolbox on Windows Home, you can get your Docker machine IP address with the command `$ docker-machine ip default`.
+Each container can be accessed at the following addresses.
 
 | Container | Docker on Linux / Windows Pro | Docker on Windows Home |
 |-----------|-------------------------------|------------------------|
 | GraphQL API Documentation | https://localhost:5433/graphiql | https://your_docker_machine_ip:5433/graphiql |
 | GraphQL API | https://localhost:5433/graphql | https://your_docker_machine_ip:5433/graphql |
 | PostgreSQL Database | host: `localhost`, port: `5432` | host: `your_docker_machine_ip`, port: `5432` |
+
+> Note: if you run Docker Toolbox on Windows Home, you can get your Docker machine IP address with the command `$ docker-machine ip default`.
 
 #### Re-initialize The Database
 
