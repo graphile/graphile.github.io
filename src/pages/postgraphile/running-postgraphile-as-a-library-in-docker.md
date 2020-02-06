@@ -10,7 +10,7 @@ It is following the same use case as the guide **[Running PostGraphile in Docker
 
 Follow the steps provided in the guide **[Running PostGraphile in Docker](/postgraphile/running-postgraphile-in-docker/)** and come back to this guide to create the GraphQL container.
 
-# Table of Contents
+### Table of Contents
 
 -   [Create PostGraphile Container](#create-postgraphile-container)
     -   [Update Environment Variables](#update-environment-variables)
@@ -22,7 +22,7 @@ Follow the steps provided in the guide **[Running PostGraphile in Docker](/postg
     -   [Run Containers](#run-containers)
     -   [Re-initialize The Database](#re-initialize-the-database)
 
-# Create PostGraphile Container
+### Create PostGraphile Container
 
 At this stage, the repository should look like this.
 
@@ -37,7 +37,7 @@ At this stage, the repository should look like this.
 └─ docker-compose.yml
 ```
 
-## Update Environment Variables
+#### Update Environment Variables
 
 Update the file `.env` to add the `PORT` and `DATABASE_URL` which will be used by PostGraphile to connect to the PostgreSQL database. Note the `DATABASE_URL` follows the syntax `postgres://<user>:<password>@db:5432/<db_name>`.
 
@@ -49,7 +49,7 @@ DATABASE_URL=postgres://postgres:change_me@db:5432/forum_example
 PORT=5433
 ```
 
-## Create Node.js Application
+#### Create Node.js Application
 
 Create a new folder `graphql` at the root of the repository. It will be used to store the files necessary to create the PostGraphile container. In the `graphql` folder, create a subfolder `src` and add a file `package.json` into it with the following content.
 
@@ -86,7 +86,7 @@ http.createServer(
 ).listen(process.env.PORT);
 ```
 
-## Create PostGraphile Dockerfile
+#### Create PostGraphile Dockerfile
 
 Create a new file `Dockerfile` in the `graphql` folder (not in the folder `src`) with the following content.
 
@@ -112,7 +112,7 @@ EXPOSE 8080
 CMD [ "node", "server.js" ]
 ```
 
-## Update Docker Compose File
+#### Update Docker Compose File
 
 Update the file `docker-compose.yml` under the `services` section to include the GraphQL service.
 
@@ -156,67 +156,51 @@ At this stage, the repository should look like this.
 └─ docker-compose.yml
 ```
 
-# Build Images And Run Containers
+### Build Images And Run Containers
 
-## Build Images
+#### Build Images
 
 You can build the Docker images by executing the following command from the root of the repository.
 
 ```
-# Build all images in docker compose
+# Build images for all services in docker-compose.yml
 $ docker-compose build
 
-# Build database image only
+# You can also build images one by one
+# For instance you can build the database image like this
 $ docker-compose build db
 
-# Build graphql image only
+# And build the graphql image like this
 $ docker-compose build graphql
 ```
 
-## Run Containers
+#### Run Containers
 
 You can run the Docker containers by executing the following command from the root of the repository. Note when running the database container for the first time, Docker will automatically create a Docker Volume to persist the data from the database. The Docker Volume is automatically named as `<your_repository_name>_db`.
 
 ```
-# Run all containers
+# Run containers for all services in docker-compose.yml
 $ docker-compose up
 
-# Run all containers as daemon (in background)
+# Run containers as daemon (in background)
 $ docker-compose up -d
 
-# Run database container as daemon
+# Run only the database container as daemon
 $ docker-compose up -d db
 
-# Run graphql container as daemon
+# Run only the GraphQL container as daemon
 $ docker-compose up -d graphql
 ```
 
 Each container can be accessed at the following addresses. Note if you run Docker Toolbox on Windows Home, you can get your Docker machine IP address with the command `$ docker-machine ip default`.
 
-<table>
-    <tr>
-        <th>Container</th>
-        <th>Docker on Linux / Windows Pro</th>
-        <th>Docker on Windows Home</th>
-    </tr>
-    <tr>
-        <td>GraphQL API Documentation</td>
-        <td>https://localhost:5433/graphiql</td>
-        <td>https://your_docker_machine_ip:5433/graphiql</td>
-    </tr>
-    <tr>
-        <td>GraphQL API</td>
-        <td>https://localhost:5433/graphql</td>
-        <td>https://your_docker_machine_ip:5433/graphql</td>
-    </tr>
-    <tr>
-        <td>PostgreSQL Database</td>
-        <td>host: localhost, port: 5432</td>
-        <td>host: your_docker_machine_ip, port: 5432</td>
-    </tr>
-</table>
+| Container | Docker on Linux / Windows Pro | Docker on Windows Home |
+|-----------|-------------------------------|------------------------|
+| GraphQL API Documentation | https://localhost:5433/graphiql | https://your_docker_machine_ip:5433/graphiql |
+| GraphQL API | https://localhost:5433/graphql | https://your_docker_machine_ip:5433/graphql |
+| PostgreSQL Database | host: `localhost`, port: `5432` | host: `your_docker_machine_ip`, port: `5432` |
 
-## Re-initialize The Database
+#### Re-initialize The Database
 
 In case you do changes to the database schema by modifying the files in `/db/init`, you will need to re-initialize the database to see these changes. This means you need to delete the Docker Volume, the database Docker Image and rebuild it.
 
