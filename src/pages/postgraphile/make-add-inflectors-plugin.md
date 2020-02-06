@@ -13,6 +13,49 @@ do so), you can use `makeAddInflectorsPlugin` from `graphile-utils`.
 Please see the [inflection article](/postgraphile/inflection/) for more
 information on inflection in PostGraphile.
 
+### Syntax
+
+```ts
+interface Inflectors {
+  [str: string]: (...args: Array<any>) => string;
+}
+
+type InflectorsGenerator = (
+  inflection: Inflectors,
+  build: Build,
+  options: Options
+) => Inflectors;
+
+function makeAddInflectorsPlugin(
+  additionalInflectorsOrGenerator: Inflectors | InflectorsGenerator,
+  replace = false
+): Plugin;
+```
+
+By default, this plugin is for adding new inflectors; however if you pass `true`
+as the second argument then it can be used for replacing (or wrapping) existing
+inflectors.
+
+You can pass either a new inflectors object to makeAddInflectorsPlugin, or if
+you need to call the previous inflector you're replacing then you can pass an
+"inflectors generator" function which will be passed the old inflectors you can
+then call into. When you do so, be very careful that you use
+`oldInflectors.INFLECTOR_HERE.call(this, ...args)` to ensure that the `this`
+binding is correct in the old function; e.g.:
+
+```ts
+const { makeAddInflectorsPlugin } = require("graphile-utils");
+
+module.exports = makeAddInflectorsPlugin(
+  oldInflection => ({
+    enumName(value: string) {
+      return oldInflection.enumName.call(this, value.replace(/\./g, "_"));
+    },
+  }),
+  true
+);
+```
+
 ### Example
 
 If you want `*Patch` types to instead be called `*ChangeSet` you could make a

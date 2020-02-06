@@ -6,42 +6,42 @@ title: Running PostGraphile in Docker
 
 The following guide describes how to run a network of Docker containers on a local machine, including one container for a PostgreSQL database and one container for PostGraphile. A the end of this guide, you will have a GraphQL API exposing data from a PostgreSQL database, both running locally on your machine in separate Docker containers. It has been developed and tested on:
 
--   Linux
--   Windows Pro
--   Windows Home
+- Linux
+- Windows Pro
+- Windows Home
 
 ### Table of Contents
 
--   [Requirements](#requirements)
-    -   [Install Docker and Docker Compose on Linux](#install-docker-and-docker-compose-on-linux)
-    -   [Install Docker on Windows Pro](#install-docker-on-windows-pro)
-    -   [Install Docker on Windows Home](#install-docker-on-windows-home)
--   [Create PostgreSQL Container](#create-postgresql-container)
-    -   [Setup Environment Variables](#setup-environment-variables)
-    -   [Create Database Initialization Files](#create-database-initialization-files)
-    -   [Create PostgreSQL Dockerfile](#create-postgresql-dockerfile)
-    -   [Create Docker Compose File](#create-docker-compose-file)
--   [Create PostGraphile Container](#create-postgraphile-container)
-    -   [Update Environment Variables](#update-environment-variables)
-    -   [Create PostGraphile Dockerfile](#create-postgraphile-dockerfile)
-    -   [Update Docker Compose File](#update-docker-compose-file)
--   [Build Images And Run Containers](#build-images-and-run-containers)
-    -   [Build Images](#build-images)
-    -   [Run Containers](#run-containers)
-    -   [Re-initialize The Database](#re-initialize-the-database)
--   [Add Custom Plugin](#add-custom-plugin)
-    -   [makeWrapResolversPlugin](#makewrapresolversplugin)
--   [Queries And Mutations Examples](#queries-and-mutations-examples)
-    -   [Queries](#queries)
-    -   [Mutations](#mutations)
+- [Requirements](#requirements)
+  - [Install Docker and Docker Compose on Linux](#install-docker-and-docker-compose-on-linux)
+  - [Install Docker on Windows Pro](#install-docker-on-windows-pro)
+  - [Install Docker on Windows Home](#install-docker-on-windows-home)
+- [Create PostgreSQL Container](#create-postgresql-container)
+  - [Setup Environment Variables](#setup-environment-variables)
+  - [Create Database Initialization Files](#create-database-initialization-files)
+  - [Create PostgreSQL Dockerfile](#create-postgresql-dockerfile)
+  - [Create Docker Compose File](#create-docker-compose-file)
+- [Create PostGraphile Container](#create-postgraphile-container)
+  - [Update Environment Variables](#update-environment-variables)
+  - [Create PostGraphile Dockerfile](#create-postgraphile-dockerfile)
+  - [Update Docker Compose File](#update-docker-compose-file)
+- [Build Images And Run Containers](#build-images-and-run-containers)
+  - [Build Images](#build-images)
+  - [Run Containers](#run-containers)
+  - [Re-initialize The Database](#re-initialize-the-database)
+- [Add Custom Plugin](#add-custom-plugin)
+  - [makeWrapResolversPlugin](#makewrapresolversplugin)
+- [Queries And Mutations Examples](#queries-and-mutations-examples)
+  - [Queries](#queries)
+  - [Mutations](#mutations)
 
 ### Requirements
 
-This requires to have Docker and Docker Compose installed on your workstation. If you are new to Docker and need to install it, you can refer to their [official documentation](https://docs.docker.com/) or follow the steps below. 
+This requires to have Docker and Docker Compose installed on your workstation. If you are new to Docker and need to install it, you can refer to their [official documentation](https://docs.docker.com/) or follow the steps below.
 
--   [Install Docker and Docker Compose on Linux](#install-docker-and-docker-compose-on-linux)
--   [Install Docker on Windows Pro](#install-docker-on-windows-pro)
--   [Install Docker on Windows Home](#install-docker-on-windows-home)
+- [Install Docker and Docker Compose on Linux](#install-docker-and-docker-compose-on-linux)
+- [Install Docker on Windows Pro](#install-docker-on-windows-pro)
+- [Install Docker on Windows Home](#install-docker-on-windows-home)
 
 > Note: If you use Docker Desktop for Windows, it comes automatically with Docker Compose.
 
@@ -86,9 +86,7 @@ $ docker rmi -f hello-world
 
 ##### Docker Compose
 
-Docker Compose helps you to run a network of several containers at once thanks to configuration files instead of providing all arguments in the command line interface. It makes it easier to manage your containers as command lines can become very long and unreadable due to the high number of arguments.
-
-Execute the following command in a terminal window.
+Docker Compose helps you to run a network of several containers at once thanks to configuration files instead of providing all arguments in the command line interface. It makes it easier to manage your containers as command lines can become very long and unreadable due to the high number of arguments. Execute the following command in a terminal window.
 
 ```shell
 $ sudo apt install docker-compose
@@ -112,9 +110,9 @@ Install Docker Toolbox for Windows from the following the URL: [Docker Toolbox f
 
 Create a new file `.env` at the root of the repository with the content below. This file will be used by Docker to load configuration parameters into environment variables. In particular:
 
--   `POSTGRES_DB`: name of the database to be created in the PostgreSQL container.
--   `POSTGRES_USER`: default admin user created upon database initialization.
--   `POSTGRES_PASSWORD`: password of the default admin user.
+- `POSTGRES_DB`: name of the database to be created in the PostgreSQL container.
+- `POSTGRES_USER`: default admin user created upon database initialization.
+- `POSTGRES_PASSWORD`: password of the default admin user.
 
 ```
 # DB
@@ -124,7 +122,7 @@ POSTGRES_USER=postgres
 POSTGRES_PASSWORD=change_me
 ```
 
-> Note: a better way to manager the database password would be to use [Docker Secrets](https://docs.docker.com/engine/reference/commandline/secret/)
+> Note: a better way to manager the database password would be to use [Docker Secrets](https://docs.docker.com/engine/reference/commandline/secret/).
 
 #### Create Database Initialization Files
 
@@ -196,26 +194,26 @@ Docker command lines can be verbose with a lot of parameters so we will use Dock
 ```yml
 version: "3.3"
 services:
-    db:
-        container_name: forum-example-db
-        restart: always
-        image: forum-example-db
-        build:
-            context: ./db
-        volumes:
-            - db:/var/lib/postgresql/data
-        env_file:
-            - ./.env
-        networks:
-            - network
-        ports:
-            - 5432:5432
+  db:
+    container_name: forum-example-db
+    restart: always
+    image: forum-example-db
+    build:
+      context: ./db
+    volumes:
+      - db:/var/lib/postgresql/data
+    env_file:
+      - ./.env
+    networks:
+      - network
+    ports:
+      - 5432:5432
 
 networks:
-    network:
+  network:
 
 volumes:
-    db:
+  db:
 ```
 
 ##### Parameters description
@@ -396,19 +394,19 @@ This section is optional but describes how to wrap a resolver generated by PostG
 
 ```json
 {
-    "name": "custom-plugin",
-    "version": "0.0.1",
-    "description": "Custom plugin example for PostGraphile.",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "author": "Alexis ROLLAND",
-    "license": "Apache-2.0",
-    "dependencies": {
-        "graphile-utils": "^4.5.6",
-        "postgraphile": "^4.5.5"
-    }
+  "name": "custom-plugin",
+  "version": "0.0.1",
+  "description": "Custom plugin example for PostGraphile.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alexis ROLLAND",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "graphile-utils": "^4.5.6",
+    "postgraphile": "^4.5.5"
+  }
 }
 ```
 
@@ -419,27 +417,27 @@ const { makeWrapResolversPlugin } = require("graphile-utils");
 
 // Create custom wrapper for resolver createUser
 const createUserResolverWrapper = () => {
-    return async (resolve, source, args, context, resolveInfo) => {
-        // You can do something before the resolver executes
-        console.info("Hello world!");
-        console.info(args);
+  return async (resolve, source, args, context, resolveInfo) => {
+    // You can do something before the resolver executes
+    console.info("Hello world!");
+    console.info(args);
 
-        // Let resolver execute against database
-        const result = await resolve();
+    // Let resolver execute against database
+    const result = await resolve();
 
-        // You can do something after the resolver executes
-        console.info("Hello again!");
-        console.info(result);
+    // You can do something after the resolver executes
+    console.info("Hello again!");
+    console.info(result);
 
-        return result;
-    };
+    return result;
+  };
 };
 
 // Register custom resolvers
 module.exports = makeWrapResolversPlugin({
-    Mutation: {
-        createUser: createUserResolverWrapper()
-    }
+  Mutation: {
+    createUser: createUserResolverWrapper(),
+  },
 });
 ```
 
