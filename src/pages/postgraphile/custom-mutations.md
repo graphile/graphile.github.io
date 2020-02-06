@@ -63,7 +63,12 @@ Notes on the above function:
 
 - `STRICT` is optional, it means that if any of the arguments are null then the
   mutation will not be called (and will thus return null with no error) - this
-  allows us to mark `teamId` as a required argument.
+  allows us to mark `teamId` as a required argument. If PostGraphile is run as a
+  library with the option `pgStrictFunctions: true`, argument without default
+  value will be marked mandatory whil arguments with default value will be
+  optional. For example:
+  `CREATE FUNCTION foo(a int, b int, c int = 0, d int = null)...` would give a
+  mutation `foo(a: Int!, b: Int!, c: Int, d: Int)`.
 - `SECURITY INVOKER` is the default, it means the function will run with the
   _security_ of the person who _invoked_ the function
 - `SECURITY DEFINER` means that the function will run with the _security_ of the
