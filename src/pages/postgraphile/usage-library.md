@@ -314,8 +314,7 @@ which are optional. The below options are valid for
   - `queryCacheMaxSize`: Max query cache size in bytes (extremely approximate,
     not accurate at all). Default `50000000` (~50MB). Set to 0 to disable.
   - `pgStrictFunctions`: When true, arguments which do not have a default value
-    in PostgreSQL functions marked as `STRICT` are set mandatory by
-    PostGraphile. See [Custom Mutations](/postgraphile/custom-mutations/).
+    in PostgreSQL functions marked as `STRICT` are set mandatory. See [Custom Mutations](/postgraphile/custom-mutations/).
 
 <!-- LIBRARY_DOCBLOCK_END -->
 <!-- prettier-ignore-end -->
