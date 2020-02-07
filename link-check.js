@@ -78,6 +78,7 @@ pMap(
     const isHTTP = /^https?:\/\//.test(trimmed);
     const isMailto = /^mailto:/.test(trimmed);
     const isGraphile = /^https?:\/\/(www\.)?graphile\.(org|meh)/.test(trimmed);
+    const isYoutube = /^https?:\/\/(www\.)?youtube.com(\/|$)/.test(trimmed);
     const isLocalhost = /^https?:\/\/(localhost|127\.0\.0\.1|0\.0\.0\.0)/.test(
       trimmed
     );
@@ -117,6 +118,9 @@ pMap(
       return;
     } else if (isMailto) {
       // mailto:, continue
+      return;
+    } else if (isYoutube) {
+      // YouTube sometimes gets upset and returns 429; we'll just allow it.
       return;
     } else if (isHTTP) {
       const matches = trimmed.match(
