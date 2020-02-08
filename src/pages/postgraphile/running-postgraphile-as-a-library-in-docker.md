@@ -18,18 +18,6 @@ Follow the steps provided in the guide
 **[Running PostGraphile in Docker](/postgraphile/running-postgraphile-in-docker/)**
 and come back to this guide to create the GraphQL container.
 
-### Table of Contents
-
-- [Create PostGraphile Container](#create-postgraphile-container)
-  - [Update Environment Variables](#update-environment-variables)
-  - [Create Node.js Application](#create-nodejs-application)
-  - [Create PostGraphile Dockerfile](#create-postgraphile-dockerfile)
-  - [Update Docker Compose File](#update-docker-compose-file)
-- [Build Images And Run Containers](#build-images-and-run-containers)
-  - [Build Images](#build-images)
-  - [Run Containers](#run-containers)
-  - [Re-initialize The Database](#re-initialize-the-database)
-
 ### Create PostGraphile Container
 
 At this stage, the repository should look like this.
