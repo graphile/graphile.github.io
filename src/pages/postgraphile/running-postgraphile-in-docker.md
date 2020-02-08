@@ -10,31 +10,6 @@ The following guide describes how to run a network of Docker containers on a loc
 - Windows Pro
 - Windows Home
 
-### Table of Contents
-
-- [Requirements](#requirements)
-  - [Install Docker and Docker Compose on Linux](#install-docker-and-docker-compose-on-linux)
-  - [Install Docker on Windows Pro](#install-docker-on-windows-pro)
-  - [Install Docker on Windows Home](#install-docker-on-windows-home)
-- [Create PostgreSQL Container](#create-postgresql-container)
-  - [Setup Environment Variables](#setup-environment-variables)
-  - [Create Database Initialization Files](#create-database-initialization-files)
-  - [Create PostgreSQL Dockerfile](#create-postgresql-dockerfile)
-  - [Create Docker Compose File](#create-docker-compose-file)
-- [Create PostGraphile Container](#create-postgraphile-container)
-  - [Update Environment Variables](#update-environment-variables)
-  - [Create PostGraphile Dockerfile](#create-postgraphile-dockerfile)
-  - [Update Docker Compose File](#update-docker-compose-file)
-- [Build Images And Run Containers](#build-images-and-run-containers)
-  - [Build Images](#build-images)
-  - [Run Containers](#run-containers)
-  - [Re-initialize The Database](#re-initialize-the-database)
-- [Add Custom Plugin](#add-custom-plugin)
-  - [makeWrapResolversPlugin](#makewrapresolversplugin)
-- [Queries And Mutations Examples](#queries-and-mutations-examples)
-  - [Queries](#queries)
-  - [Mutations](#mutations)
-
 ### Requirements
 
 This requires to have Docker and Docker Compose installed on your workstation. If you are new to Docker and need to install it, you can refer to their [official documentation](https://docs.docker.com/) or follow the steps below.
