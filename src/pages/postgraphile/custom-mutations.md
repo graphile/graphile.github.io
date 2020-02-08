@@ -63,12 +63,7 @@ Notes on the above function:
 
 - `STRICT` is optional, it means that if any of the arguments are null then the
   mutation will not be called (and will thus return null with no error) - this
-  allows us to mark `teamId` as a required argument. If PostGraphile runs as a
-  library with the option `pgStrictFunctions: true`, arguments without default
-  value will be set mandatory while arguments with default value will be
-  optional. For example:
-  `CREATE FUNCTION foo(a int, b int, c int = 0, d int = null)...` would give a
-  mutation `foo(a: Int!, b: Int!, c: Int, d: Int)`.
+  allows us to mark `teamId` as a required argument.
 - `SECURITY INVOKER` is the default, it means the function will run with the
   _security_ of the person who _invoked_ the function
 - `SECURITY DEFINER` means that the function will run with the _security_ of the
@@ -80,6 +75,27 @@ Notes on the above function:
   in a more familiar language you can use `LANGUAGE plv8` (JavaScript, requires
   extension), or one of the built in `LANGUAGE` options such as Python, Perl or
   Tcl
+
+If you'd like PostGraphile to treat all function arguments as required (non-null) 
+unless they have a default then you can use the `graphileBuildOptions.pgStrictFunctions = true`
+setting. This is similar to marking the function as `STRICT` but with the subtle difference that
+arguments with defaults may be specified as `NULL` without necessitating that the function returns
+null. With this setting enabled, arguments without default
+value will be set mandatory while arguments with default value will be
+optional. For example:
+`CREATE FUNCTION foo(a int, b int, c int = 0, d int = null)...` would give a
+mutation `foo(a: Int!, b: Int!, c: Int, d: Int)`. To set this in the library version,
+pass it as part of `graphileBuildOptions`:
+
+```js
+app.use(postgraphile(connectionString, schemaName, {
+  graphileBuildOptions: {
+    pgStrictFunctions: true
+  }
+}));
+```
+
+To use it with the CLI you need to do similar using the `.postgraphilerc.js` file.
 
 A note on **named types**: if you have a function that
 `RETURNS SETOF table(a int, b text)` then PostGraphile will not _currently_ pick
