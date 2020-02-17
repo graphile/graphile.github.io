@@ -156,7 +156,7 @@ INSERT INTO public.post (title, body, author_id) VALUES
 The Dockerfile is used by Docker as a blueprint to build Docker images. Docker containers are later on created based on these Docker images. More information is available on the official [Postgres Docker Images](https://hub.docker.com/_/postgres) but the standard Dockerfile for PostgreSQL is extremely simple. In the folder `db` (not in the folder `init`), create a new file named `Dockerfile` with the following content.
 
 ```dockerfile
-FROM postgres:alpine
+FROM postgres:11.0-alpine
 COPY ./init/ /docker-entrypoint-initdb.d/
 ```
 
