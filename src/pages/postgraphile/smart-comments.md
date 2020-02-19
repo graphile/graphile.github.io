@@ -108,7 +108,7 @@ comment on type my_schema.my_type is
 
 ```sql
 comment on column my_schema.my_table.my_column is
-  E'@name my_new_table\n@omit update,delete\nThis is the documentation.';
+  E'@name my_new_table\n@omit insert,update\nThis is the documentation.';
 ```
 
 #### Constraints
