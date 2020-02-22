@@ -35,11 +35,16 @@ SELECT * FROM app_public.best_user();
 Having built quite a few applications on PostGraphile now, I (Benjie) have
 settled on the following:
 
-
-
-- `app_public` - tables and functions to be exposed to GraphQL (or any other system) - it's your public interface. This is the main part of your database.
-- `app_hidden` - same privileges as `app_public`, but it's not intended to be exposed publicly. It's like "implementation details" of your app_public schema. You may not need it often.
-- `app_private` - SUPER SECRET STUFF 🕵️ No-one should be able to read this without a `SECURITY DEFINER` function letting them selectively do things. This is where you store passwords (bcrypted), access tokens (hopefully encrypted), etc. It should be impossible (thanks to RBAC (`GRANT`/`REVOKE`)) for web users to access this.
+- `app_public` - tables and functions to be exposed to GraphQL (or any other
+  system) - it's your public interface. This is the main part of your database.
+- `app_hidden` - same privileges as `app_public`, but it's not intended to be
+  exposed publicly. It's like "implementation details" of your app_public
+  schema. You may not need it often.
+- `app_private` - SUPER SECRET STUFF 🕵️ No-one should be able to read this
+  without a `SECURITY DEFINER` function letting them selectively do things. This
+  is where you store passwords (bcrypted), access tokens (hopefully encrypted),
+  etc. It should be impossible (thanks to RBAC (`GRANT`/`REVOKE`)) for web users
+  to access this.
 
 I personally don't use the `public` schema for anything other than as the
 [default location that PostgreSQL extensions get installed](https://www.postgresql.org/docs/current/static/sql-createextension.html).
@@ -54,9 +59,18 @@ manually. Other tables and functions can be omitted using the
 
 Here's some other schemas you might see (but should not modify):
 
-- `graphile_worker` - a schema used and managed by https://github.com/graphile/worker
-- `graphile_migrate` - a schema used and managed by https://github.com/graphile/migrate
-- `postgraphile_watch` - if you're using PostGraphile in watch mode (`--watch` or `watchPg: true`), PostGraphile will install this schema to create [PostgreSQL Event Triggers](https://www.postgresql.org/docs/current/sql-createeventtrigger.html) to enable watch mode.
-- `information_schema` - a SQL standard schema for reflection over the database: https://www.postgresql.org/docs/current/information-schema.html
-- `pg_catalog` - the [PostgreSQL system catalog](https://www.postgresql.org/docs/current/catalogs.html), contain details of everything inside the database (a more PG-native form of `information_schema`)
+- `graphile_worker` - a schema used and managed by
+  https://github.com/graphile/worker
+- `graphile_migrate` - a schema used and managed by
+  https://github.com/graphile/migrate
+- `postgraphile_watch` - if you're using PostGraphile in watch mode (`--watch`
+  or `watchPg: true`), PostGraphile will install this schema to create
+  [PostgreSQL Event Triggers](https://www.postgresql.org/docs/current/sql-createeventtrigger.html)
+  to enable watch mode.
+- `information_schema` - a SQL standard schema for reflection over the database:
+  https://www.postgresql.org/docs/current/information-schema.html
+- `pg_catalog` - the
+  [PostgreSQL system catalog](https://www.postgresql.org/docs/current/catalogs.html),
+  contain details of everything inside the database (a more PG-native form of
+  `information_schema`)
 - `pg_*` - various other PostgreSQL reserved schemas
