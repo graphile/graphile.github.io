@@ -220,7 +220,7 @@ Dockerfile for PostgreSQL is extremely simple. In the folder `db` (not in the
 folder `init`), create a new file named `Dockerfile` with the following content.
 
 ```dockerfile
-FROM postgres:alpine
+FROM postgres:11.0-alpine
 COPY ./init/ /docker-entrypoint-initdb.d/
 ```
 
@@ -345,7 +345,7 @@ file `Dockerfile` in the `graphql` folder with the following content. You will
 notice we include the excellent plugin Connection Filter.
 
 ```dockerfile
-FROM node:alpine
+FROM node:12-alpine
 LABEL description="Instant high-performance GraphQL API for your PostgreSQL database https://github.com/graphile/postgraphile"
 
 # Install PostGraphile and PostGraphile connection filter plugin
