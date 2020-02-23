@@ -176,3 +176,45 @@ create policy friend_insert on my_other_table for insert with check ( are_friend
   that action (doesn't make sense for `SELECT` or `DELETE`)
 - NOTE: if `with check` is not specified then the `using` clause will also be
   used for `with check` automatically.
+
+#### Recommended path
+
+A good way to tackle and make a sense of postgraphile is to go through these
+steps:
+
+**Introduction**
+
+https://www.graphile.org/postgraphile/introduction/
+
+Describes why you would want to go with this approach in the first place and
+reap the benefits and features that one solves using postgraphile. If you find
+this all daunting and too much `SQL`, do not worry. We do not usually use the
+database as a application, which it certainly should to reep all the benefits
+from being close to the data as well as the execution of the operations; more on
+the benefits is describe
+
+**Quick start**
+
+https://www.graphile.org/postgraphile/quick-start-guide/
+
+Walks you through installing the proper software like `node` and `postgres` and
+creating of a database that postgraphile will be hooking into.
+
+**Schema Design**
+
+https://www.graphile.org/postgraphile/postgresql-schema-design/
+
+If you have/have not built databases before this section clears out some
+questions about how to structure your process of crafting the database. Such as
+Naming conventions, schema initiation, roles, migrations; if these words are
+unfamiliar to you do not worry it will be clear once you have built one database
+with this schema design.
+
+**Postgraphile-in-docker**
+
+https://www.graphile.org/postgraphile/running-postgraphile-in-docker/
+
+This will run through the making of GraphQL endpoints to build a forum; like
+hackernews. This goes through installation all the way to querying your
+query/mutations built from postgraphile.
+
