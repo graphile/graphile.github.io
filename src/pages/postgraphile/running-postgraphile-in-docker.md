@@ -4,59 +4,27 @@ path: /postgraphile/running-postgraphile-in-docker/
 title: Running PostGraphile in Docker
 ---
 
-The following guide describes how to run a network of Docker containers on a
-local machine, including one container for a PostgreSQL database and one
-container for PostGraphile. A the end of this guide, you will have a GraphQL API
-exposing data from a PostgreSQL database, both running locally on your machine
-in separate Docker containers. It has been developed and tested on:
+The following guide describes how to run a network of Docker containers on a local machine, including one container for a PostgreSQL database and one container for PostGraphile. A the end of this guide, you will have a GraphQL API exposing data from a PostgreSQL database, both running locally on your machine in separate Docker containers. It has been developed and tested on:
 
 - Linux
 - Windows Pro
 - Windows Home
 
-# Table of Contents
+### Requirements
 
-- [Requirements](#requirements)
-  - [Install Docker and Docker Compose on Linux](#install-docker-and-docker-compose-on-linux)
-  - [Install Docker on Windows Pro](#install-docker-on-windows-pro)
-  - [Install Docker on Windows Home](#install-docker-on-windows-home)
-- [Create PostgreSQL Container](#create-postgresql-container)
-  - [Setup Environment Variables](#setup-environment-variables)
-  - [Create Database Initialization Files](#create-database-initialization-files)
-  - [Create PostgreSQL Dockerfile](#create-postgresql-dockerfile)
-  - [Create Docker Compose File](#create-docker-compose-file)
-- [Create PostGraphile Container](#create-postgraphile-container)
-  - [Update Environment Variables](#update-environment-variables)
-  - [Create PostGraphile Dockerfile](#create-postgraphile-dockerfile)
-  - [Update Docker Compose File](#update-docker-compose-file)
-- [Build Images And Run Containers](#build-images-and-run-containers)
-  - [Build Images](#build-images)
-  - [Run Containers](#run-containers)
-  - [Re-initialize The Database](#re-initialize-the-database)
-- [Add Custom Plugin](#add-custom-plugin)
-  - [makeWrapResolversPlugin](#makewrapresolversplugin)
-- [Queries And Mutations Examples](#queries-and-mutations-examples)
-  - [Queries](#queries)
-  - [Mutations](#mutations)
-
-# Requirements
-
-This requires to have Docker and Docker Compose installed on your workstation.
-If you are new to Docker and need to install it, you can refer to their
-[official documentation](https://docs.docker.com/) or follow the steps below.
-Note if you use Docker Desktop for Windows, it comes automatically with Docker
-Compose.
+This requires to have Docker and Docker Compose installed on your workstation. If you are new to Docker and need to install it, you can refer to their [official documentation](https://docs.docker.com/) or follow the steps below.
 
 - [Install Docker and Docker Compose on Linux](#install-docker-and-docker-compose-on-linux)
 - [Install Docker on Windows Pro](#install-docker-on-windows-pro)
 - [Install Docker on Windows Home](#install-docker-on-windows-home)
 
-## Install Docker and Docker Compose on Linux
+> Note: If you use Docker Desktop for Windows, it comes automatically with Docker Compose.
 
-### Docker
+#### Install Docker and Docker Compose on Linux
 
-Add the Docker repository to your Linux repository. Execute the following
-commands in a terminal window.
+##### Docker
+
+Add the Docker repository to your Linux repository. Execute the following commands in a terminal window.
 
 ```shell
 $ sudo apt-get update
@@ -72,16 +40,13 @@ $ sudo apt-get update
 $ sudo apt-get install docker-ce
 ```
 
-Add your user to the docker group to setup its permissions. **Make sure to
-restart your machine after executing this command.**
+Add your user to the docker group to setup its permissions. **Make sure to restart your machine after executing this command.**
 
 ```shell
 $ sudo usermod -a -G docker <username>
 ```
 
-Test your Docker installation. Executing the following command will
-automatically download the `hello-world` Docker image if it does not exist and
-run it.
+Test your Docker installation. Executing the following command will automatically download the `hello-world` Docker image if it does not exist and run it.
 
 ```shell
 $ docker run hello-world
@@ -94,44 +59,31 @@ $ docker image ls
 $ docker rmi -f hello-world
 ```
 
-### Docker Compose
+##### Docker Compose
 
-Docker Compose helps you to run a network of several containers at once thanks
-to configuration files instead of providing all arguments in the command line
-interface. It makes it easier to manage your containers as command lines can
-become very long and unreadable due to the high number of arguments.
-
-Execute the following command in a terminal window.
+Docker Compose helps you to run a network of several containers at once thanks to configuration files instead of providing all arguments in the command line interface. It makes it easier to manage your containers as command lines can become very long and unreadable due to the high number of arguments. Execute the following command in a terminal window.
 
 ```shell
 $ sudo apt install docker-compose
 ```
 
-## Install Docker on Windows Pro
+#### Install Docker on Windows Pro
 
-### Docker Desktop for Windows
+##### Docker Desktop for Windows
 
-Install Docker Community Edition for Windows from the following the URL:
-[Docker Desktop for Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows).
-Just follow the default installation settings. It comes automatically with
-Docker Compose.
+Install Docker Community Edition for Windows from the following the URL: [Docker Desktop for Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows). Just follow the default installation settings. It comes automatically with Docker Compose.
 
-## Install Docker on Windows Home
+#### Install Docker on Windows Home
 
-### Docker Toolbox for Windows
+##### Docker Toolbox for Windows
 
-Install Docker Toolbox for Windows from the following the URL:
-[Docker Toolbox for Windows](https://docs.docker.com/toolbox/overview). Just
-follow the default installation settings. It comes automatically with Docker
-Compose.
+Install Docker Toolbox for Windows from the following the URL: [Docker Toolbox for Windows](https://docs.docker.com/toolbox/overview). Just follow the default installation settings. It comes automatically with Docker Compose.
 
-# Create PostgreSQL Container
+### Create PostgreSQL Container
 
-## Setup Environment Variables
+#### Setup Environment Variables
 
-Create a new file `.env` at the root of the repository with the content below.
-This file will be used by Docker to load configuration parameters into
-environment variables. In particular:
+Create a new file `.env` at the root of the repository with the content below. This file will be used by Docker to load configuration parameters into environment variables. In particular:
 
 - `POSTGRES_DB`: name of the database to be created in the PostgreSQL container.
 - `POSTGRES_USER`: default admin user created upon database initialization.
@@ -145,25 +97,15 @@ POSTGRES_USER=postgres
 POSTGRES_PASSWORD=change_me
 ```
 
-Note a better way to manager the database password would be to use
-[Docker Secrets](https://docs.docker.com/engine/reference/commandline/secret/)
+> Note: a better way to manager the database password would be to use [Docker Secrets](https://docs.docker.com/engine/reference/commandline/secret/).
 
-## Create Database Initialization Files
+#### Create Database Initialization Files
 
-Create a new folder `db` at the root of the repository. It will be used to store
-the files necessary to create the PostgreSQL container. In the `db` folder,
-create a new subfolder `init` which will contain the SQL files used to
-initialize the PostgreSQL database. Files located in the `init` folder will be
-executed in sequence order when PostgreSQL initialize the database.
+Create a new folder `db` at the root of the repository. It will be used to store the files necessary to create the PostgreSQL container. In the `db` folder, create a new subfolder `init` which will contain the SQL files used to initialize the PostgreSQL database. Files located in the `init` folder will be executed in sequence order when PostgreSQL initialize the database.
 
-In this guide we will use a simple forum example. The database will contain two
-tables: `user` and `post`. There is a relationship between `user` and `post` as
-one user can have one or several posts. It is a "one-to-many" relationship (one
-parent, many children). The `author_id` column in the `post` will be used as a
-foreign key of the `user` table.
+In this guide we will use a simple forum example. The database will contain two tables: `user` and `post`. There is a relationship between `user` and `post` as one user can have one or several posts. It is a "one-to-many" relationship (one parent, many children). The `author_id` column in the `post` will be used as a foreign key of the `user` table.
 
-Create a first file `00-database.sql` containing the database schema definition
-as below.
+Create a first file `00-database.sql` containing the database schema definition as below.
 
 ```sql
 \connect forum_example;
@@ -191,8 +133,7 @@ COMMENT ON TABLE public.post IS
 'Forum posts written by a user.';
 ```
 
-For the sake of the example, we will also create a second file `01-data.sql` to
-populate the database with some dummy data.
+For the sake of the example, we will also create a second file `01-data.sql` to populate the database with some dummy data.
 
 ```sql
 \connect forum_example;
@@ -210,32 +151,20 @@ INSERT INTO public.post (title, body, author_id) VALUES
 ('Third post example', 'Aenean blandit felis sodales', 3);
 ```
 
-## Create PostgreSQL Dockerfile
+#### Create PostgreSQL Dockerfile
 
-The Dockerfile is used by Docker as a blueprint to build Docker images. Docker
-containers are later on created based on these Docker images. More information
-is available on the official
-[Postgres Docker Images](https://hub.docker.com/_/postgres) but the standard
-Dockerfile for PostgreSQL is extremely simple. In the folder `db` (not in the
-folder `init`), create a new file named `Dockerfile` with the following content.
+The Dockerfile is used by Docker as a blueprint to build Docker images. Docker containers are later on created based on these Docker images. More information is available on the official [Postgres Docker Images](https://hub.docker.com/_/postgres) but the standard Dockerfile for PostgreSQL is extremely simple. In the folder `db` (not in the folder `init`), create a new file named `Dockerfile` with the following content.
 
 ```dockerfile
-FROM postgres:alpine
+FROM postgres:11.0-alpine
 COPY ./init/ /docker-entrypoint-initdb.d/
 ```
 
-The first line `FROM postgres:alpine` indicates to build the Docker image based
-on the official PostgreSQL Docker image running in an Alpine Linux container.
-The second line `COPY ./init/ /docker-entrypoint-initdb.d/` will copy the
-database initialization files (SQL) into the folder `docker-entrypoint-initdb.d`
-located in the Docker container. This folder is read by PostgreSQL upon database
-initialization and all its content is executed.
+The first line `FROM postgres:alpine` indicates to build the Docker image based on the official PostgreSQL Docker image running in an Alpine Linux container. The second line `COPY ./init/ /docker-entrypoint-initdb.d/` will copy the database initialization files (SQL) into the folder `docker-entrypoint-initdb.d` located in the Docker container. This folder is read by PostgreSQL upon database initialization and all its content is executed.
 
-## Create Docker Compose File
+#### Create Docker Compose File
 
-Docker command lines can be verbose with a lot of parameters so we will use
-Docker Compose to orchestrate the execution of our containers. Create a new file
-`docker-compose.yml` at the root of the repository with the following content.
+Docker command lines can be verbose with a lot of parameters so we will use Docker Compose to orchestrate the execution of our containers. Create a new file `docker-compose.yml` at the root of the repository with the following content.
 
 ```yml
 version: "3.3"
@@ -262,53 +191,21 @@ volumes:
   db:
 ```
 
-### Parameters description
+##### Parameters description
 
-<table>
-    <tr>
-        <th>Parameter</th><th>Description</th>
-    </tr>
-    <tr>
-        <td><b>db</b></td>
-        <td>Names of the services run by Docker Compose.</td>
-    </tr>
-    <tr>
-        <td><b>container_name</b></td>
-        <td>Guess what? It's the container name!</td>
-    </tr>
-    <tr>
-        <td><b>image</b></td>
-        <td>Name of the image to use to run the container.</td>
-    </tr>
-    <tr>
-        <td><b>build</b></td>
-        <td>When a build context is provided, Docker Compose will build a custom image using the Dockerfile located in the context folder.</td>
-    </tr>
-    <tr>
-        <td><b>context</b></td>
-        <td>Indicates the folder where to find the Dockerfile to build the image.</td>
-    </tr>
-    <tr>
-        <td><b>volumes</td>
-        <td>Mapping between the Docker volume and the PostgreSQL folder in your container, in format <b>docker_volume:container_folder</b>.<br><br>All the files generated in the <b>container_folder</b> will be copied in the <b>docker_volume</b> so that you can preserve and retrieve your data when stopping/restarting the container.<br><br>The Docker volume is automatically created when running the db container for the first time.</td>
-    </tr>
-    <tr>
-        <td><b>env_file</td>
-        <td>Path to the configuration file containing environment variables for the container. See <b>Create Configuration File</b> above.</td>
-    </tr>
-    <tr>
-        <td><b>networks</td>
-        <td>Networks are used to group and connect containers as part of a same network.</td>
-    </tr>
-    <tr>
-        <td><b>ports</td>
-        <td>Port, mapping between the port of your host machine and the port of your container, in format <b>host_port:container_port</b>.</td>
-    </tr>
-    <tr>
-        <td><b>command</td>
-        <td>Command to be executed after the container starts. Each argument must be provided in a separate list item.</td>
-    </tr>
-</table>
+| Parameter | Description |
+|-----------|-------------|
+| **db** | Names of the services run by Docker Compose. |
+| **container_name** | Guess what? It's the container name! |
+| **image** | Name of the image to use to run the container. |
+| **build** | When a build context is provided, Docker Compose will build a custom image using the Dockerfile located in the context folder. |
+| **context** | Indicates the folder where to find the Dockerfile to build the image. |
+| **volumes** | Mapping between the Docker volume and the PostgreSQL folder in your container, in format `docker_volume:container_folder`. All the files generated in the `container_folder` will be copied in the `docker_volume` so that you can preserve and retrieve your data when stopping/restarting the container. The Docker volume is automatically created when running the db container for the first time. |
+| **env_file** | Path to the configuration file containing environment variables for the container. See **Setup Environment Variables** above. |
+| **networks** | Networks are used to group and connect containers as part of a same network. |
+| **ports** | Port, mapping between the port of your host machine and the port of your container, in format `host_port:container_port` |
+| **command** | Command to be executed after the container starts. Each argument must be provided in a separate list item. |
+
 At this stage, the repository should look like this.
 
 ```
@@ -322,13 +219,11 @@ At this stage, the repository should look like this.
 └─ docker-compose.yml
 ```
 
-# Create PostGraphile Container
+### Create PostGraphile Container
 
-## Update Environment Variables
+#### Update Environment Variables
 
-Update the file `.env` to add the `DATABASE_URL` which will be used by
-PostGraphile to connect to the PostgreSQL database. Note the `DATABASE_URL`
-follows the syntax `postgres://<user>:<password>@db:5432/<db_name>`.
+Update the file `.env` to add the `DATABASE_URL` which will be used by PostGraphile to connect to the PostgreSQL database.
 
 ```
 [...]
@@ -337,12 +232,11 @@ follows the syntax `postgres://<user>:<password>@db:5432/<db_name>`.
 DATABASE_URL=postgres://postgres:change_me@db:5432/forum_example
 ```
 
-## Create PostGraphile Dockerfile
+> Note: The `DATABASE_URL` follows the syntax `postgres://<user>:<password>@db:5432/<db_name>`.
 
-Create a new folder `graphql` at the root of the repository. It will be used to
-store the files necessary to create the PostGraphile container. Create a new
-file `Dockerfile` in the `graphql` folder with the following content. You will
-notice we include the excellent plugin Connection Filter.
+#### Create PostGraphile Dockerfile
+
+Create a new folder `graphql` at the root of the repository. It will be used to store the files necessary to create the PostGraphile container. Create a new file `Dockerfile` in the `graphql` folder with the following content. You will notice we include the excellent plugin Connection Filter.
 
 ```dockerfile
 FROM node:alpine
@@ -356,10 +250,9 @@ EXPOSE 5000
 ENTRYPOINT ["postgraphile", "-n", "0.0.0.0"]
 ```
 
-## Update Docker Compose File
+#### Update Docker Compose File
 
-Update the file `docker-compose.yml` under the `services` section to include the
-GraphQL service.
+Update the file `docker-compose.yml` under the `services` section to include the GraphQL service.
 
 ```yml
 version: "3.3"
@@ -399,79 +292,57 @@ At this stage, the repository should look like this.
 └─ docker-compose.yml
 ```
 
-# Build Images And Run Containers
+### Build Images And Run Containers
 
-## Build Images
+#### Build Images
 
-You can build the Docker images by executing the following command from the root
-of the repository.
+You can build the Docker images by executing the following command from the root of the repository.
 
 ```
-# Build all images in docker compose
+# Build images for all services in docker-compose.yml
 $ docker-compose build
 
-# Build database image only
+# You can also build images one by one
+# For instance you can build the database image like this
 $ docker-compose build db
 
-# Build graphql image only
+# And build the graphql image like this
 $ docker-compose build graphql
 ```
 
-## Run Containers
+#### Run Containers
 
-You can run the Docker containers by executing the following command from the
-root of the repository. Note when running the database container for the first
-time, Docker will automatically create a Docker Volume to persist the data from
-the database. The Docker Volume is automatically named as
-`<your_repository_name>_db`.
+You can run the Docker containers by executing the following command from the root of the repository.
+
+> Note: when running the database container for the first time, Docker will automatically create a Docker Volume to persist the data from the database. The Docker Volume is automatically named as `<your_repository_name>_db`.
 
 ```
-# Run all containers
+# Run containers for all services in docker-compose.yml
 $ docker-compose up
 
-# Run all containers as daemon (in background)
+# Run containers as daemon (in background)
 $ docker-compose up -d
 
-# Run database container as daemon
+# Run only the database container as daemon
 $ docker-compose up -d db
 
-# Run graphql container as daemon
+# Run only the GraphQL container as daemon
 $ docker-compose up -d graphql
 ```
 
-Each container can be accessed at the following addresses. Note if you run
-Docker Toolbox on Windows Home, you can get your Docker machine IP address with
-the command `$ docker-machine ip default`.
+Each container can be accessed at the following addresses.
 
-<table>
-    <tr>
-        <th>Container</th>
-        <th>Docker on Linux / Windows Pro</th>
-        <th>Docker on Windows Home</th>
-    </tr>
-    <tr>
-        <td>GraphQL API Documentation</td>
-        <td>https://localhost:5433/graphiql</td>
-        <td>https://your_docker_machine_ip:5433/graphiql</td>
-    </tr>
-    <tr>
-        <td>GraphQL API</td>
-        <td>https://localhost:5433/graphql</td>
-        <td>https://your_docker_machine_ip:5433/graphql</td>
-    </tr>
-    <tr>
-        <td>PostgreSQL Database</td>
-        <td>host: localhost, port: 5432</td>
-        <td>host: your_docker_machine_ip, port: 5432</td>
-    </tr>
-</table>
+| Container | Docker on Linux / Windows Pro | Docker on Windows Home |
+|-----------|-------------------------------|------------------------|
+| GraphQL API Documentation | `https://localhost:5433/graphiql` | `https://your_docker_machine_ip:5433/graphiql` |
+| GraphQL API | `https://localhost:5433/graphql` | `https://your_docker_machine_ip:5433/graphql` |
+| PostgreSQL Database | host: `localhost`, port: `5432` | host: `your_docker_machine_ip`, port: `5432` |
 
-## Re-initialize The Database
+> Note: if you run Docker Toolbox on Windows Home, you can get your Docker machine IP address with the command `$ docker-machine ip default`.
 
-In case you do changes to the database schema by modifying the files in
-`/db/init`, you will need to re-initialize the database to see these changes.
-This means you need to delete the Docker Volume, the database Docker Image and
-rebuild it.
+#### Re-initialize The Database
+
+In case you do changes to the database schema by modifying the files in `/db/init`, you will need to re-initialize the database to see these changes. This means you need to delete the Docker Volume, the database Docker Image and rebuild it.
 
 ```shell
 # Stop running containers
@@ -490,14 +361,11 @@ $ docker rmi db
 $ docker-compose up
 ```
 
-# Add Custom Plugin
+### Add Custom Plugin
 
-## makeWrapResolversPlugin
+#### makeWrapResolversPlugin
 
-This section is optional but describes how to wrap a resolver generated by
-PostGraphile in order to customize it. In the folder `graphql`, create a new
-subfolder named `custom-plugin`. In this folder create a new file `package.json`
-with the following content (you can update it to your convenience).
+This section is optional but describes how to wrap a resolver generated by PostGraphile in order to customize it. In the folder `graphql`, create a new subfolder named `custom-plugin`. In this folder create a new file `package.json` with the following content (you can update it to your convenience).
 
 ```json
 {
@@ -517,8 +385,7 @@ with the following content (you can update it to your convenience).
 }
 ```
 
-In the same folder `custom-plugin`, create a new file `index.js` with the
-following content.
+In the same folder `custom-plugin`, create a new file `index.js` with the following content.
 
 ```js
 const { makeWrapResolversPlugin } = require("graphile-utils");
@@ -549,8 +416,7 @@ module.exports = makeWrapResolversPlugin({
 });
 ```
 
-In the `graphql` folder, update the `Dockerfile` so that it looks like the one
-below.
+In the `graphql` folder, update the `Dockerfile` so that it looks like the one below.
 
 ```dockerfile
 FROM node:alpine
@@ -570,8 +436,7 @@ EXPOSE 5000
 ENTRYPOINT ["postgraphile", "-n", "0.0.0.0"]
 ```
 
-In the file `docker-compose.yml`, add the custom plugin in the `graphql` service
-`command` parameter.
+In the file `docker-compose.yml`, add the custom plugin in the `graphql` service `command` parameter.
 
 ```yml
 version: "3.3"
@@ -619,19 +484,18 @@ Finally rebuild and rerun the GraphQL container.
 # Shut down containers
 $ docker-compose down
 
-# Rebuilder GraphQL container
+# Rebuild the GraphQL container
 $ docker-compose build graphql
 
 # Rerun containers
 $ docker-compose up
 ```
 
-If you execute a `createUser` mutation like in the example provided below, you
-will notice the log messages from the custom plugin printing in your terminal.
+If you execute a `createUser` mutation like in the example provided below, you will notice the log messages from the custom plugin printing in your terminal.
 
-# Queries And Mutations Examples
+### Queries And Mutations Examples
 
-## Queries
+#### Queries
 
 Example of query to get all posts and their author.
 
@@ -650,7 +514,7 @@ query {
 }
 ```
 
-## Mutations
+#### Mutations
 
 Example of mutation to create a new user.
 
