@@ -105,6 +105,25 @@ in a more familiar language you can use <code class="language-text">LANGUAGE plv
 extension), or one of the built in <code class="language-text">LANGUAGE</code> options such as Python, Perl or
 Tcl</li>
 </ul>
+<p>If you'd like PostGraphile to treat all function arguments as required
+(non-null) unless they have a default then you can use the
+<code class="language-text">graphileBuildOptions.pgStrictFunctions = true</code> setting. This is similar to
+marking the function as <code class="language-text">STRICT</code> but with the subtle difference that arguments
+with defaults may be specified as <code class="language-text">NULL</code> without necessitating that the function
+returns null. With this setting enabled, arguments without default value will be
+set mandatory while arguments with default value will be optional. For example:
+<code class="language-text">CREATE FUNCTION foo(a int, b int, c int = 0, d int = null)...</code> would give a
+mutation <code class="language-text">foo(a: Int!, b: Int!, c: Int, d: Int)</code>. To set this in the library
+version, pass it as part of <code class="language-text">graphileBuildOptions</code>:</p>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js">app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>
+  <span class="token function">postgraphile</span><span class="token punctuation">(</span>connectionString<span class="token punctuation">,</span> schemaName<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    graphileBuildOptions<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      pgStrictFunctions<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<p>To use it with the CLI you need to do similar using the <code class="language-text">.postgraphilerc.js</code>
+file.</p>
 <p>A note on <strong>named types</strong>: if you have a function that
 <code class="language-text">RETURNS SETOF table(a int, b text)</code> then PostGraphile will not <em>currently</em> pick
 it up due to the

@@ -356,6 +356,8 @@ within PostGraphile to be expanded with plugins. Generate with
 collections only (no Relay connections), "both" - both.</li>
 <li><code class="language-text">queryCacheMaxSize</code>: Max query cache size in bytes (extremely approximate,
 not accurate at all). Default <code class="language-text">50000000</code> (~50MB). Set to 0 to disable.</li>
+<li><code class="language-text">pgStrictFunctions</code>: When true, arguments which do not have a default value
+in PostgreSQL functions marked as <code class="language-text">STRICT</code> are set mandatory. See <a href="/postgraphile/custom-mutations/">Custom Mutations</a>.</li>
 </ul>
 </li>
 </ul>
