@@ -93,127 +93,127 @@ from
 <!-- prettier-ignore-start -->
 <!-- CLI_DOCBLOCK_BEGIN -->
 
-- `-V`, `--version`  
+* `-V`, `--version`  
   output the version number
-- `--plugins <string>`  
+* `--plugins <string>`  
   a list of PostGraphile server plugins (not Graphile Engine schema plugins) to load; if present, must be the _first_ option
-- `-c`, `--connection <string>`  
+* `-c`, `--connection <string>`  
   the PostgreSQL database name or connection string. If omitted, inferred from environmental variables (see https://www.postgresql.org/docs/current/static/libpq-envars.html). Examples: 'db', 'postgres:///db', 'postgres://user:password@domain:port/db?ssl=1'
-- `-C`, `--owner-connection <string>`  
+* `-C`, `--owner-connection <string>`  
   as `--connection`, but for a privileged user (e.g. for setting up watch fixtures, logical decoding, etc); defaults to the value from `--connection`
-- `-s`, `--schema <string>`  
+* `-s`, `--schema <string>`  
   a Postgres schema to be introspected. Use commas to define multiple schemas
-- `-S`, `--subscriptions`  
+* `-S`, `--subscriptions`  
   Enable GraphQL websocket transport support for subscriptions (you still need a subscriptions plugin currently)
-- `-L`, `--live`  
+* `-L`, `--live`  
   [EXPERIMENTAL] Enables live-query support via GraphQL subscriptions (sends updated payload any time nested collections/records change). Implies --subscriptions
-- `-w`, `--watch`  
+* `-w`, `--watch`  
   automatically updates your GraphQL schema when your database schema changes (NOTE: requires DB superuser to install `postgraphile_watch` schema)
-- `-n`, `--host <string>`  
+* `-n`, `--host <string>`  
   the hostname to be used. Defaults to `localhost`
-- `-p`, `--port <number>`  
+* `-p`, `--port <number>`  
   the port to be used. Defaults to 5000
-- `-m`, `--max-pool-size <number>`  
+* `-m`, `--max-pool-size <number>`  
   the maximum number of clients to keep in the Postgres pool. defaults to 10
-- `-r`, `--default-role <string>`  
+* `-r`, `--default-role <string>`  
   the default Postgres role to use when a request is made. supercedes the role used to connect to the database
-- `--retry-on-init-fail`  
+* `--retry-on-init-fail`  
   if an error occurs building the initial schema, this flag will cause PostGraphile to keep trying to build the schema with exponential backoff rather than exiting
-- `-j`, `--dynamic-json`  
+* `-j`, `--dynamic-json`  
   [RECOMMENDED] enable dynamic JSON in GraphQL inputs and outputs. PostGraphile uses stringified JSON by default
-- `-N`, `--no-setof-functions-contain-nulls`  
+* `-N`, `--no-setof-functions-contain-nulls`  
   [RECOMMENDED] if none of your `RETURNS SETOF compound_type` functions mix NULLs with the results then you may enable this to reduce the nullables in the GraphQL schema
-- `-a`, `--classic-ids`  
+* `-a`, `--classic-ids`  
   use classic global id field name. required to support Relay 1
-- `-M`, `--disable-default-mutations`  
+* `-M`, `--disable-default-mutations`  
   disable default mutations, mutation will only be possible through Postgres functions
-- `--simple-collections <omit|both|only>`  
+* `--simple-collections <omit|both|only>`  
   "omit" (default) - relay connections only, "only" - simple collections only (no Relay connections), "both" - both
-- `--no-ignore-rbac`  
+* `--no-ignore-rbac`  
   [RECOMMENDED] set this to exclude fields, queries and mutations that are not available to any possible user (determined from the user in connection string and any role they can become); this will be enabled by default in v5
-- `--no-ignore-indexes`  
+* `--no-ignore-indexes`  
   [RECOMMENDED] set this to exclude filters, orderBy, and relations that would be expensive to access due to missing indexes
-- `--include-extension-resources`  
+* `--include-extension-resources`  
   by default, tables and functions that come from extensions are excluded; use this flag to include them (not recommended)
-- `--show-error-stack [json|string]`  
+* `--show-error-stack [json|string]`  
   show JavaScript error stacks in the GraphQL result errors (recommended in development)
-- `--extended-errors <string>`  
+* `--extended-errors <string>`  
   a comma separated list of extended Postgres error fields to display in the GraphQL result. Recommended in development: 'hint,detail,errcode'. Default: none
-- `--append-plugins <string>`  
+* `--append-plugins <string>`  
   a comma-separated list of plugins to append to the list of Graphile Engine schema plugins
-- `--prepend-plugins <string>`  
+* `--prepend-plugins <string>`  
   a comma-separated list of plugins to prepend to the list of Graphile Engine schema plugins
-- `--skip-plugins <string>`  
+* `--skip-plugins <string>`  
   a comma-separated list of Graphile Engine schema plugins to skip
-- `--read-cache <path>`  
+* `--read-cache <path>`  
   [experimental] reads cached values from local cache file to improve startup time (you may want to do this in production)
-- `--write-cache <path>`  
+* `--write-cache <path>`  
   [experimental] writes computed values to local cache file so startup can be faster (do this during the build phase)
-- `--export-schema-json <path>`  
+* `--export-schema-json <path>`  
   enables exporting the detected schema, in JSON format, to the given location. The directories must exist already, if the file exists it will be overwritten.
-- `--export-schema-graphql <path>`  
+* `--export-schema-graphql <path>`  
   enables exporting the detected schema, in GraphQL schema format, to the given location. The directories must exist already, if the file exists it will be overwritten.
-- `--sort-export`  
+* `--sort-export`  
   lexicographically (alphabetically) sort exported schema for more stable diffing.
-- `-X`, `--no-server`  
-  [experimental] for when you just want to use --write-cache or --export-schema-\* and not actually run a server (e.g. CI)
-- `-q`, `--graphql <path>`  
+* `-X`, `--no-server`  
+  [experimental] for when you just want to use --write-cache or --export-schema-* and not actually run a server (e.g. CI)
+* `-q`, `--graphql <path>`  
   the route to mount the GraphQL server on. defaults to `/graphql`
-- `-i`, `--graphiql <path>`  
+* `-i`, `--graphiql <path>`  
   the route to mount the GraphiQL interface on. defaults to `/graphiql`
-- `--enhance-graphiql`  
+* `--enhance-graphiql`  
   [DEVELOPMENT] opt in to additional GraphiQL functionality (this may change over time - only intended for use in development; automatically enables with `subscriptions` and `live`)
-- `-b`, `--disable-graphiql`  
+* `-b`, `--disable-graphiql`  
   disables the GraphiQL interface. overrides the GraphiQL route option
-- `-o`, `--cors`  
+* `-o`, `--cors`  
   enable generous CORS settings; disabled by default, if possible use a proxy instead
-- `-l`, `--body-size-limit <string>`  
+* `-l`, `--body-size-limit <string>`  
   set the maximum size of the HTTP request body that can be parsed (default 100kB). The size can be given as a human-readable string, such as '200kB' or '5MB' (case insensitive).
-- `--timeout <number>`  
+* `--timeout <number>`  
   set the timeout value in milliseconds for sockets
-- `--cluster-workers <count>`  
+* `--cluster-workers <count>`  
   [experimental] spawn <count> workers to increase throughput
-- `--enable-query-batching`  
+* `--enable-query-batching`  
   [experimental] enable the server to process multiple GraphQL queries in one request
-- `--disable-query-log`  
+* `--disable-query-log`  
   disable logging queries to console (recommended in production)
-- `--allow-explain`  
+* `--allow-explain`  
   [EXPERIMENTAL] allows users to use the Explain button in GraphiQL to view the plan for the SQL that is executed (DO NOT USE IN PRODUCTION)
-- `-e`, `--jwt-secret <string>`  
+* `-e`, `--jwt-secret <string>`  
   the secret to be used when creating and verifying JWTs. if none is provided auth will be disabled
-- `--jwt-verify-algorithms <string>`  
+* `--jwt-verify-algorithms <string>`  
   a comma separated list of the names of the allowed jwt token algorithms
-- `-A`, `--jwt-verify-audience <string>`  
+* `-A`, `--jwt-verify-audience <string>`  
   a comma separated list of JWT audiences that will be accepted; defaults to 'postgraphile'. To disable audience verification, set to ''.
-- `--jwt-verify-clock-tolerance <number>`  
+* `--jwt-verify-clock-tolerance <number>`  
   number of seconds to tolerate when checking the nbf and exp claims, to deal with small clock differences among different servers
-- `--jwt-verify-id <string>`  
+* `--jwt-verify-id <string>`  
   the name of the allowed jwt token id
-- `--jwt-verify-ignore-expiration`  
+* `--jwt-verify-ignore-expiration`  
   if `true` do not validate the expiration of the token defaults to `false`
-- `--jwt-verify-ignore-not-before`  
+* `--jwt-verify-ignore-not-before`  
   if `true` do not validate the notBefore of the token defaults to `false`
-- `--jwt-verify-issuer <string>`  
+* `--jwt-verify-issuer <string>`  
   a comma separated list of the names of the allowed jwt token issuer
-- `--jwt-verify-subject <string>`  
+* `--jwt-verify-subject <string>`  
   the name of the allowed jwt token subject
-- `--jwt-role <string>`  
+* `--jwt-role <string>`  
   a comma seperated list of strings that create a path in the jwt from which to extract the postgres role. if none is provided it will use the key `role` on the root of the jwt.
-- `-t`, `--jwt-token-identifier <identifier>`  
+* `-t`, `--jwt-token-identifier <identifier>`  
   the Postgres identifier for a composite type that will be used to create JWT tokens
-- `--token <identifier>`  
+* `--token <identifier>`  
   [DEPRECATED] Use --jwt-token-identifier instead. This option will be removed in v5.
-- `--secret <string>`  
+* `--secret <string>`  
   [DEPRECATED] Use --jwt-secret instead. This option will be removed in v5.
-- `--jwt-audiences <string>`  
+* `--jwt-audiences <string>`  
   [DEPRECATED] Use --jwt-verify-audience instead. This option will be removed in v5.
-- `--legacy-functions-only`  
+* `--legacy-functions-only`  
   [DEPRECATED] PostGraphile 4.1.0 introduced support for PostgreSQL functions than declare parameters with IN/OUT/INOUT or declare RETURNS TABLE(...); enable this flag to ignore these types of functions. This option will be removed in v5.
-- `--legacy-relations <omit|deprecated|only>`  
+* `--legacy-relations <omit|deprecated|only>`  
   some one-to-one relations were previously detected as one-to-many - should we export 'only' the old relation shapes, both new and old but mark the old ones as 'deprecated', or 'omit' the old relation shapes entirely
-- `--legacy-json-uuid`  
+* `--legacy-json-uuid`  
   ONLY use this option if you require the v3 typenames 'Json' and 'Uuid' over 'JSON' and 'UUID'
-- `-h`, `--help`  
+* `-h`, `--help`  
   output usage information
 
 <!-- CLI_DOCBLOCK_END -->
