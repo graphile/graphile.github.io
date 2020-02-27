@@ -187,11 +187,11 @@ steps:
 https://www.graphile.org/postgraphile/introduction/
 
 Describes why you would want to go with this approach in the first place and
-reap the benefits and features that one solves using postgraphile. If you find
-this all daunting and too much `SQL`, do not worry. We do not usually use the
-database as a application, which it certainly should to reep all the benefits
-from being close to the data as well as the execution of the operations; more on
-the benefits is describe
+what the benefits and features of using PostGraphile are. Do not be deterred if
+you find this daunting and are not used to using this much `SQL`. Using the
+database as the application layer is a fairly modern and unfamiliar concept,
+but by adopting it there are many benefits you may reap by being close to the
+data, as well as leveraging the declarative nature of SQL.
 
 **Quick start**
 
