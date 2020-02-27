@@ -179,7 +179,7 @@ create policy friend_insert on my_other_table for insert with check ( are_friend
 
 #### Recommended path
 
-A good way to tackle and make a sense of postgraphile is to go through these
+A good way to tackle and make a sense of PostGraphile is to go through these
 steps:
 
 **Introduction**
@@ -217,4 +217,3 @@ https://www.graphile.org/postgraphile/running-postgraphile-in-docker/
 This will run through the making of GraphQL endpoints to build a forum; like
 hackernews. This goes through installation all the way to querying your
 query/mutations built from postgraphile.
-
