@@ -197,8 +197,8 @@ data, as well as leveraging the declarative nature of SQL.
 
 https://www.graphile.org/postgraphile/quick-start-guide/
 
-Walks you through installing the proper software like `node` and `postgres` and
-creating of a database that postgraphile will be hooking into.
+Walks you through installing the required software such as `node` and `postgres`
+and creating of a database that PostGraphile will be connecting to.
 
 **Schema Design**
 
