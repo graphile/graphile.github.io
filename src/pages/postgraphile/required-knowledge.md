@@ -204,11 +204,11 @@ and creating of a database that PostGraphile will be connecting to.
 
 https://www.graphile.org/postgraphile/postgresql-schema-design/
 
-If you have/have not built databases before this section clears out some
-questions about how to structure your process of crafting the database. Such as
-Naming conventions, schema initiation, roles, migrations; if these words are
-unfamiliar to you do not worry it will be clear once you have built one database
-with this schema design.
+Whether you have or have not built databases before, this section gives valuable
+advice about how to design a solid database. Topics include naming conventions, 
+namespacing with schemas, managing access with roles and policies, handling
+migrations and much more. If these words are unfamiliar to you, do not worry, it
+will be clear once you have built a database following this guide.
 
 **Postgraphile-in-docker**
 
