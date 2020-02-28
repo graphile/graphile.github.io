@@ -214,6 +214,9 @@ will be clear once you have built a database following this guide.
 
 https://www.graphile.org/postgraphile/running-postgraphile-in-docker/
 
-This will run through the making of GraphQL endpoints to build a forum; like
-hackernews. This goes through installation all the way to querying your
-query/mutations built from postgraphile.
+PostGraphile does not require Docker, and is very at home in a pure Node.js
+environment, so if you're not big on Docker you can skip this one!
+ 
+If you develop using Docker, this will run through the building of a GraphQL
+API for a forum-like website. It goes through installation through to
+example queries and mutations to issue to PostGraphile.
