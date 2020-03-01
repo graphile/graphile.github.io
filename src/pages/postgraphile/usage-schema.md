@@ -238,3 +238,287 @@ look at the `postgraphile-core` and `graphile-build-pg` modules.
 
 [graphql-js]: https://www.npmjs.com/package/graphql
 [`pg-pool`]: https://www.npmjs.com/package/pg-pool
+
+# Server side TypeScript support
+
+PostGraphile is taking care of the GraphQL API which different clients can use. 
+But it is not only possible to use the API from external clients. It is also
+possible to use the GraphQL API from within its own backend.
+
+High-level overview:
+
+- use the graphql-code-generator to create TypeScript types for our GraphQL 
+  schema
+- use the generated types to query/mutate your data
+- optional: use a Visual Studio Code extension to get IntelliSense
+
+## TypeScript Code generation
+
+We use the [{GraphQL} code generator](https://graphql-code-generator.com/)
+tools to create the TypeScript types in our backend code.
+
+The following `npm` packages will create typescript types:
+
+- `@graphql-codegen/cli` - the CLI tool to create the types
+- `@graphql-codegen/typescript` - create the typescript types. This is the main
+  package that we need
+- `@graphql-codegen/typescript-operations` - this input types for queries
+- optional: `@graphql-codegen/typescript-urql` - this produces typescript 
+  queries from any custom `*.graphql` query/mutation files that we define.
+
+Steps to get the backend typing support:
+
+1. Start the development like described in the above section. Follow all the
+   steps to create your first GraphQL API with all needed schemas, tables, 
+   roles, etc.
+2. Configure in the PostGraphile setup to export the GraphQL schema:  
+   `exportGqlSchemaPath: './src/generated/schema.graphql'`
+3. Start the project to let Postgraphile create the initial `schema.graphql` 
+   file. You can exclude this file from source control if you want to. But it 
+   might be nice to see differences in the schema during check-ins.
+4. Import the mentioned `npm` packages. You can find more plugins on their 
+   website in the [Plugins](https://graphql-code-generator.com/docs/plugins/) 
+   section.
+5. Create a file `codegen.yml` in the root of your workspace.
+   ```yaml
+   overwrite: true
+   schema: "./src/generated/schema.graphql"
+   generates:
+     # Creates the TypeScript types from the schema and any .graphql file
+     src/generated/types.ts:
+       documents: "src/**/*.graphql"
+       plugins:
+         - typescript
+         - typescript-operations
+         - typescript-urql
+       config:
+         withHOC: false
+         withComponent: false
+         withMutationFn: false
+   config:
+     scalars:
+       DateTime: "string"
+       JSON: "{ [key: string]: any }"
+   ```
+6. Run `graphql-codegen --config codegen.yml` to generate the types.
+7. The generated types can now be used in your custom business logic code.
+
+### Example
+
+We have a movie table that we want to query from our backend system.
+
+We can write a small GraphQL query file similar to this. It could be stored in
+`./src/graphql/getMovies.graphql`.
+
+```graphql
+query GetMovies($top: Int!) {
+  movies(first: $top) {
+    nodes {
+      id
+      title
+    }
+  }
+}
+```
+
+Save the file and run the code generation task.
+
+Alternatively we can create some inline query directly in code like this:
+
+```js
+import { makeExtendSchemaPlugin, gql } from 'graphile-utils';
+
+// inside some function:
+
+  const GetMoviesDocument = gql`
+    query Query {
+      __typename
+      movies(first: 3) {
+        nodes {
+          id
+          title
+        }
+      }
+    }
+  `;
+```
+
+The query can then be used in your code via the generated type or inline:
+
+```js
+
+  // This would be generated from the above .graphql file by the code generator
+  // alternatively define it inline via gql` like shown above
+  const doc = GetMoviesDocument;
+  const variables: GetMoviesQueryVariables = {
+    top: 3,
+  };
+
+  // Execute the query from your backend code
+  // The "Query" type is your the root Query type. It contains all the query
+  // endpoints from the GraphQL API with type support
+  const queryResult = await graphql.execute<Query>(
+    resolveInfo.schema,
+    doc,
+    undefined,
+    context,
+    variables,
+  );
+
+  if (queryResult.errors) {
+    // do something in error case
+  }
+
+  // the result can then be used to get the returned data
+  const allTitles = queryResult.data?.movies?.nodes.map(
+    (movie: any) => movie.title,
+  );
+```
+
+### Usage in different resolvers
+
+To use the GraphQL inside of our backend we need to get access to the "graphql"
+variable. This variable is available for example in the following places:
+
+```js
+export const BusinessLogicPlugin = makeExtendSchemaPlugin((build: Build) => {
+  const { graphql } = build;
+```
+
+```js
+export const WrapResolverPlugin = makeWrapResolversPlugin({
+  Mutation: {
+    async updateMovieById(
+      resolve: any,
+      source: any,
+      args: { [argName: string]: any },
+      context: any,
+      resolveInfo: GraphQLResolveInfo,
+    ) {
+    const query = context.pgClient.query;
+```
+
+### Build-time validation of inline documents
+
+If you want to write inline gql` queries it is possible to validate them during
+build-time. Adjust the created `codegen.yml` file with the following section at 
+the same level of the existing "src/generated/types.ts:" part.
+
+This will create types from any inline defined document. As we do not actually
+need the files but only use them for build-time validation of our inline queries
+we can have the types be put to some "trash" location.
+
+```yaml
+     # Creates types for inline gql`...` defined queries.
+     # This is only used for build-time validation of those queries
+     trash/inlineGqlValidation.ts:
+       documents: "src/**/*.ts"
+       plugins:
+         - typescript
+         - typescript-operations
+         - typescript-urql
+       config:
+         withHOC: false
+         withComponent: false
+         withMutationFn: false
+```
+
+## GraphQL IntelliSense
+
+The above mentioned steps provide strong typing support. If you are developing
+your code with VisualStudio Code you can get IntelliSense support both in 
+.graphql files and in inline defined gql` template strings.
+
+There are multiple extensions in the VSCode marketplace but this guide is 
+written for the Apollo GraphQL extension.
+
+Install the extension and if needed reload VSCode.
+
+Add a file "apollo.config.js" into the root of your workspace with the following
+content:
+
+```js
+module.exports = {
+  client: {
+    excludes: [
+      '**/node_modules',
+      '**/__tests__',
+      '**/generated/**/*.{ts,tsx,js,jsx,graphql,gql}',
+    ],
+    includes: ['src/**/*.{ts,tsx,js,jsx,graphql,gql}'],
+    service: {
+      name: 'client',
+      localSchemaFile: './src/generated/schema.graphql',
+    },
+  },
+};
+```
+
+- `localSchemaFile`: this must point to the schema created by PostGraphile
+- `excludes`: this must exclude the `node_modules` folder and any tests. It must
+  also exclude the generated `schema.graphql` and any code that was generated 
+  based on that schema.
+- `includes`: it should include any file for which you want to have 
+  IntelliSense. That is at least `.ts` and `.graphql` but potentially more.
+
+This will support syntax highlighting in your files. BUT - we have a problem. If
+we adjust our schema e.g. via `makeExtendSchemaPlugin` we define some custom
+extension to the automatically generated GraphQL schema. That means that the 
+Apollo extension will find this extension both in the generated schema.graphql
+file as well as in the file with your `makeExtendSchemaPlugin`. Then it 
+complains that this is not unique and will stop working. So we have to find a 
+solution for that.
+
+We should exclude our type extensions from IntelliSense. To do this we can 
+create a custom mapping to have the gql template string available as the normal
+"gql" but also as a second custom variable like "gql as gqlExtend". Then we can
+write our GraphQL schema extension by using the "gqlExtend" template string and
+any inline query by using the normal "gql" template string.
+
+An example could look like this:
+
+```js
+// get gql as two different variables
+import { makeExtendSchemaPlugin, gql, gql as gqlExtend } from 'graphile-utils';
+import { Build } from 'postgraphile';
+
+export const MyPlugin = makeExtendSchemaPlugin((build: Build) => {
+  const { graphql } = build;
+  return {
+    // use the "gqlExtend" template string here to extend your GraphQL API:
+    typeDefs: gqlExtend`
+      extend type Query {
+        myExtension: [String!]
+      }
+    `,
+    resolvers: {
+      Query: {
+        myExtension: async (query, args, context, resolveInfo) => {
+          // use the normal "gql" template string to define your query inline:
+          const inlineDocument = gql`
+            query Query {
+              __typename
+              movies(first: 3) {
+                nodes {
+                  id
+                  title
+                }
+              }
+            }
+          `;
+
+          // continue with your code
+        },
+      },
+    },
+  };
+});
+```
+
+> **Tips and tricks:**  
+> This VS code extension was not super stable as of the time of writing. It
+> would crash sometimes if it thought to find conflicting definitions. This
+> happens often when committing code and comparing it side by side or when 
+> having a "bad" graphql file/definition.  
+> If it stops working then reload the VSCode extension host by typing
+> `Developer: Restart Extension Host` in the actions "CTRL+SHIFT+P" field.
