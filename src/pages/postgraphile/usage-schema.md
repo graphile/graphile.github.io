@@ -239,43 +239,43 @@ look at the `postgraphile-core` and `graphile-build-pg` modules.
 [graphql-js]: https://www.npmjs.com/package/graphql
 [`pg-pool`]: https://www.npmjs.com/package/pg-pool
 
-# Server side TypeScript support
+# Server-side TypeScript support
 
-PostGraphile is taking care of the GraphQL API which different clients can use.
-But it is not only possible to use the API from external clients. It is also
+PostGraphile takes care of building and serving a GraphQL API for various clients to use.
+But it is not only possible to use the API from external clients, it is also
 possible to use the GraphQL API from within its own backend.
 
 High-level overview:
 
-- use the graphql-code-generator to create TypeScript types for our GraphQL
+- use graphql-code-generator to create TypeScript types for our GraphQL
   schema
 - use the generated types to query/mutate your data
 - optional: use a Visual Studio Code extension to get IntelliSense
 
-## TypeScript Code generation
+## TypeScript code generation
 
-We use the [{GraphQL} code generator](https://graphql-code-generator.com/) tools
+We use the [GraphQL code generator](https://graphql-code-generator.com/) tools
 to create the TypeScript types in our backend code.
 
-The following `npm` packages will create typescript types:
+The following `npm` packages will create TypeScript types:
 
 - `@graphql-codegen/cli` - the CLI tool to create the types
-- `@graphql-codegen/typescript` - create the typescript types. This is the main
+- `@graphql-codegen/typescript` - create the TypeScript types. This is the main
   package that we need
-- `@graphql-codegen/typescript-operations` - this input types for queries
-- optional: `@graphql-codegen/typescript-urql` - this produces typescript
-  queries from any custom `*.graphql` query/mutation files that we define.
+- `@graphql-codegen/typescript-operations` - generates types for queries/mutations/fragments
+- optionally add a client specific generator: e.g. `@graphql-codegen/typescript-urql` 
 
 Steps to get the backend typing support:
 
 1. Start the development like described in the above section. Follow all the
-   steps to create your first GraphQL API with all needed schemas, tables,
+   steps to create your GraphQL API with all needed schemas, tables,
    roles, etc.
-2. Configure in the PostGraphile setup to export the GraphQL schema:  
+2. Configure PostGraphile to export the GraphQL schema:  
    `exportGqlSchemaPath: './src/generated/schema.graphql'`
 3. Start the project to let PostGraphile create the initial `schema.graphql`
-   file. You can exclude this file from source control if you want to. But it
-   might be nice to see differences in the schema during check-ins.
+   file. Since it's generated you can exclude this file from source control if
+   you want to, but it is handy to see differences in the schema during check-ins
+   and is useful for other tooling such as `eslint-plugin-graphql`.
 4. Import the mentioned `npm` packages. You can find more plugins on their
    website in the [Plugins](https://graphql-code-generator.com/docs/plugins/)
    section.
@@ -308,7 +308,7 @@ Steps to get the backend typing support:
 We have a movie table that we want to query from our backend system.
 
 We can write a small GraphQL query file similar to this. It could be stored in
-`./src/graphql/getMovies.graphql`.
+`./src/graphql/getMovies.graphql`. (NOTE: this example uses the `@graphile-contrib/pg-simplify-inflector` plugin, your query might need to differ.)
 
 ```graphql
 query GetMovies($top: Int!) {
@@ -367,6 +367,7 @@ The query can then be used in your code via the generated type or inline:
 
   if (queryResult.errors) {
     // do something in error case
+    throw queryResult.errors[0];
   }
 
   // the result can then be used to get the returned data
@@ -428,7 +429,7 @@ trash/inlineGqlValidation.ts:
 
 The above mentioned steps provide strong typing support. If you are developing
 your code with VisualStudio Code you can get IntelliSense support both in
-.graphql files and in inline defined gql` template strings.
+.graphql files and in inline defined gql\` template strings.
 
 There are multiple extensions in the VSCode marketplace but this guide is
 written for the Apollo GraphQL extension.
