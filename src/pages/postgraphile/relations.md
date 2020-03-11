@@ -5,7 +5,8 @@ title: Relations
 ---
 
 We automatically discover relations between database tables by inspecting their
-foreign keys, and use this to build relations into the generated GraphQL schema.
+foreign keys (and indexes if `--no-ignore-indexes` or `ignoreIndexes: false` is set), and use these to build relations into the generated 
+GraphQL schema.
 
 An example of a foreign key constraint when defining a table would be the
 `REFERENCES` keyword below:
@@ -17,6 +18,7 @@ CREATE TABLE app_public.users (
     REFERENCES app_public.organizations ON DELETE CASCADE,
   -- ...
 );
+CREATE INDEX ON app_public.users (organization_id);
 ```
 
 Alternatively a foreign key constraint can be added after table creation:
@@ -27,6 +29,7 @@ ALTER TABLE users
   FOREIGN KEY (organization_id)
   REFERENCES organizations
   ON DELETE CASCADE;
+CREATE INDEX ON users (organization_id);
 ```
 
 You can read more about defining foreign key constraints, including constraints
@@ -68,6 +71,7 @@ create table a.post (
   -- `references` 👇  sets up the foreign key relation
   author_id int4 references c.person(id)
 );
+create index on a.post (author_id);
 ```
 
 #### Example query against the above schema
