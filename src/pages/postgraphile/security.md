@@ -181,6 +181,25 @@ const environment = new Environment({
 });
 ```
 
+#### Sending over a websocket
+
+If you are using Apollo:
+
+```js{3,8}
+// get the authentication token from wherever you store it
+const token = getJWTToken();
+
+const wsLink = new WebSocketLink({
+    uri: 'ws://localhost:3000/graphql',
+    options: {
+        reconnect: true,
+        connectionParams: token ? {
+            authorization: `Bearer ${token}`
+        } : {}
+    }
+});
+```
+
 ### How it works
 
 Your JWT token will include a number of claims, something like:
