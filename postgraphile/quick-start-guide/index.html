@@ -134,6 +134,13 @@ Type <span class="token string">"help"</span> <span class="token keyword">for</s
 <p>It is easy to install PostGraphile with
 <a href="https://docs.npmjs.com/getting-started/installing-node">npm</a>:</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">$ npm install -g postgraphile</code></pre></div>
+<blockquote>
+<p><strong>NOTE</strong>: <em>we do not recommend installing PostGraphile globally (with the <code class="language-text">-g</code>
+flag to <code class="language-text">npm</code> used here) - local installs are preferred. However, if you're
+just getting started with Node.js then using the global install method is much
+simpler. Once you start wanting to use plugins with PostGraphile we recommend
+you move to using a local install.</em></p>
+</blockquote>
 <p>To run PostGraphile, you’ll use the same URL that you used for <code class="language-text">psql</code> with the
 database name added:</p>
 <div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token comment"># Connect to the `mydb` database within the local PostgreSQL server</span>
