@@ -38,6 +38,10 @@ use something like
 to prevent malicious parties issuing complex requests) then I recommend you
 check it out!
 
+Be aware that the connection-filter plugin has no live-query specific handling. This means while [live queries](/postgraphile/live-queries/) will  work, the filters are not taken into account when checking if the query result changed. This means that you may get a subscription update every time something in the collection changes, even if the result with the applied filter is still the same. 
+
+With the included `condition` filters live queries work as expected until you start using `makeAddPgConditionPlugin` to add your own conditions.
+
 #### Other plugins
 
 Some more of the community plugins relate to filtering, you can read more about
