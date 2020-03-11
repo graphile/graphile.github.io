@@ -56,20 +56,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul>
 </li>
 </ul></div></div><div class="edit-this-page" style="display:"><a href="https://github.com/graphile/graphile.github.io/edit/develop/src/pages/postgraphile/relations.md">📝 Suggest improvement/edit this page</a></div><h2 class="mt3">Relations</h2><div><p>We automatically discover relations between database tables by inspecting their
-foreign keys, and use this to build relations into the generated GraphQL schema.</p>
+foreign keys (and indexes if <code class="language-text">--no-ignore-indexes</code> or <code class="language-text">ignoreIndexes: false</code> is
+set), and use these to build relations into the generated GraphQL schema.</p>
 <p>An example of a foreign key constraint when defining a table would be the
 <code class="language-text">REFERENCES</code> keyword below:</p>
 <div class="gatsby-highlight has-highlighted-lines" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> app_public<span class="token punctuation">.</span>users <span class="token punctuation">(</span>
   <span class="token comment">-- ...</span>
   organization_id <span class="token keyword">int</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span>
 <span class="gatsby-highlight-code-line">    <span class="token keyword">REFERENCES</span> app_public<span class="token punctuation">.</span>organizations <span class="token keyword">ON</span> <span class="token keyword">DELETE</span> <span class="token keyword">CASCADE</span><span class="token punctuation">,</span></span>  <span class="token comment">-- ...</span>
-<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">CREATE</span> <span class="token keyword">INDEX</span> <span class="token keyword">ON</span> app_public<span class="token punctuation">.</span>users <span class="token punctuation">(</span>organization_id<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>Alternatively a foreign key constraint can be added after table creation:</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">ALTER</span> <span class="token keyword">TABLE</span> users
   <span class="token keyword">ADD</span> <span class="token keyword">CONSTRAINT</span> users_organization_id_fkey
   <span class="token keyword">FOREIGN</span> <span class="token keyword">KEY</span> <span class="token punctuation">(</span>organization_id<span class="token punctuation">)</span>
   <span class="token keyword">REFERENCES</span> organizations
-  <span class="token keyword">ON</span> <span class="token keyword">DELETE</span> <span class="token keyword">CASCADE</span><span class="token punctuation">;</span></code></pre></div>
+  <span class="token keyword">ON</span> <span class="token keyword">DELETE</span> <span class="token keyword">CASCADE</span><span class="token punctuation">;</span>
+<span class="token keyword">CREATE</span> <span class="token keyword">INDEX</span> <span class="token keyword">ON</span> users <span class="token punctuation">(</span>organization_id<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>You can read more about defining foreign key constraints, including constraints
 that utilise multiple columns, in the
 <a href="https://www.postgresql.org/docs/current/static/ddl-constraints.html#DDL-CONSTRAINTS-FK">PostgreSQL documentation</a>.</p>
@@ -102,7 +105,8 @@ GraphQL connections that these relations expose support pagination,
   body <span class="token keyword">text</span><span class="token punctuation">,</span>
   <span class="token comment">-- `references` 👇  sets up the foreign key relation</span>
   author_id int4 <span class="token keyword">references</span> c<span class="token punctuation">.</span>person<span class="token punctuation">(</span>id<span class="token punctuation">)</span>
-<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">create</span> <span class="token keyword">index</span> <span class="token keyword">on</span> a<span class="token punctuation">.</span>post <span class="token punctuation">(</span>author_id<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <h4 id="example-query-against-the-above-schema"><a href="#example-query-against-the-above-schema" aria-label="example query against the above schema permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example query against the above schema</h4>
 <div class="gatsby-highlight" data-language="graphql"><pre class="language-graphql"><code class="language-graphql"><span class="token punctuation">{</span>
   allPosts <span class="token punctuation">{</span>
