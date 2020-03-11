@@ -190,13 +190,15 @@ If you are using Apollo:
 const token = getJWTToken();
 
 const wsLink = new WebSocketLink({
-    uri: 'ws://localhost:3000/graphql',
-    options: {
-        reconnect: true,
-        connectionParams: token ? {
-            authorization: `Bearer ${token}`
-        } : {}
-    }
+  uri: "ws://localhost:3000/graphql",
+  options: {
+    reconnect: true,
+    connectionParams: token
+      ? {
+          authorization: `Bearer ${token}`,
+        }
+      : {},
+  },
 });
 ```
 
