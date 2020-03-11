@@ -193,9 +193,9 @@ const wsLink = new WebSocketLink({
     uri: 'ws://localhost:3000/graphql',
     options: {
         reconnect: true,
-        connectionParams: {
-            authorization: token ? `Bearer ${token}` : ""
-        }
+        connectionParams: token ? {
+            authorization: `Bearer ${token}`
+        } : {}
     }
 });
 ```
