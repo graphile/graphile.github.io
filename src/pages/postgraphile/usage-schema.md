@@ -241,14 +241,13 @@ look at the `postgraphile-core` and `graphile-build-pg` modules.
 
 # Server-side TypeScript support
 
-PostGraphile takes care of building and serving a GraphQL API for various clients to use.
-But it is not only possible to use the API from external clients, it is also
-possible to use the GraphQL API from within its own backend.
+PostGraphile takes care of building and serving a GraphQL API for various
+clients to use. But it is not only possible to use the API from external
+clients, it is also possible to use the GraphQL API from within its own backend.
 
 High-level overview:
 
-- use graphql-code-generator to create TypeScript types for our GraphQL
-  schema
+- use graphql-code-generator to create TypeScript types for our GraphQL schema
 - use the generated types to query/mutate your data
 - optional: use a Visual Studio Code extension to get IntelliSense
 
@@ -262,20 +261,21 @@ The following `npm` packages will create TypeScript types:
 - `@graphql-codegen/cli` - the CLI tool to create the types
 - `@graphql-codegen/typescript` - create the TypeScript types. This is the main
   package that we need
-- `@graphql-codegen/typescript-operations` - generates types for queries/mutations/fragments
-- optionally add a client specific generator: e.g. `@graphql-codegen/typescript-urql` 
+- `@graphql-codegen/typescript-operations` - generates types for
+  queries/mutations/fragments
+- optionally add a client specific generator: e.g.
+  `@graphql-codegen/typescript-urql`
 
 Steps to get the backend typing support:
 
 1. Start the development like described in the above section. Follow all the
-   steps to create your GraphQL API with all needed schemas, tables,
-   roles, etc.
+   steps to create your GraphQL API with all needed schemas, tables, roles, etc.
 2. Configure PostGraphile to export the GraphQL schema:  
    `exportGqlSchemaPath: './src/generated/schema.graphql'`
 3. Start the project to let PostGraphile create the initial `schema.graphql`
    file. Since it's generated you can exclude this file from source control if
-   you want to, but it is handy to see differences in the schema during check-ins
-   and is useful for other tooling such as `eslint-plugin-graphql`.
+   you want to, but it is handy to see differences in the schema during
+   check-ins and is useful for other tooling such as `eslint-plugin-graphql`.
 4. Import the mentioned `npm` packages. You can find more plugins on their
    website in the [Plugins](https://graphql-code-generator.com/docs/plugins/)
    section.
@@ -308,7 +308,9 @@ Steps to get the backend typing support:
 We have a movie table that we want to query from our backend system.
 
 We can write a small GraphQL query file similar to this. It could be stored in
-`./src/graphql/getMovies.graphql`. (NOTE: this example uses the `@graphile-contrib/pg-simplify-inflector` plugin, your query might need to differ.)
+`./src/graphql/getMovies.graphql`. (NOTE: this example uses the
+`@graphile-contrib/pg-simplify-inflector` plugin, your query might need to
+differ.)
 
 ```graphql
 query GetMovies($top: Int!) {
@@ -343,86 +345,71 @@ const GetMoviesDocument = gql`
 `;
 ```
 
-The query can then be used in your code via the generated type or inline:
+The query can then be used in your code via the generated types or inline.
+Please see further down on why there is a need for `gql as gqlExtend`.
 
 ```js
+import { makeExtendSchemaPlugin, gql, gql as gqlExtend } from 'graphile-utils';
+import { Build } from 'postgraphile';
+import {
+  GetMoviesQuery,
+  GetMoviesDocument,
+  GetMoviesQueryVariables,
+} from '../../generated/types';
 
-  // This would be generated from the above .graphql file by the code generator
-  // alternatively define it inline via gql` like shown above
-  const doc = GetMoviesDocument;
-  const variables: GetMoviesQueryVariables = {
-    top: 3,
-  };
-
-  // Execute the query from your backend code
-  // The "Query" type is your the root Query type. It contains all the query
-  // endpoints from the GraphQL API with type support
-  const queryResult = await graphql.execute<Query>(
-    resolveInfo.schema,
-    doc,
-    undefined,
-    context,
-    variables,
-  );
-
-  if (queryResult.errors) {
-    // do something in error case
-    throw queryResult.errors[0];
-  }
-
-  // the result can then be used to get the returned data
-  const allTitles = queryResult.data?.movies?.nodes.map(
-    (movie: any) => movie.title,
-  );
-```
-
-### Usage in different resolvers
-
-To use the GraphQL inside of our backend we need to get access to the "graphql"
-variable. This variable is available for example in the following places:
-
-```js
+// doc: https://www.graphile.org/postgraphile/make-extend-schema-plugin/
 export const BusinessLogicPlugin = makeExtendSchemaPlugin((build: Build) => {
   const { graphql } = build;
-```
+  return {
+    typeDefs: gqlExtend`
+      extend type Query {
+        topMovieTitles: [String!]
+      }
+    `,
+    resolvers: {
+      Query: {
+        topMovieTitles: async (query, args, context, resolveInfo) => {
+          // Alternatively defined the query inline with intellisense support:
+          const inlineGetMoviesDocument = gql`
+            query Query {
+              __typename
+              movies(first: 3) {
+                nodes {
+                  id
+                  title
+                }
+              }
+            }
+          `;
+          const variables: GetMoviesQueryVariables = {
+            top: 3,
+          };
 
-```js
-export const WrapResolverPlugin = makeWrapResolversPlugin({
-  Mutation: {
-    async updateMovieById(
-      resolve: any,
-      source: any,
-      args: { [argName: string]: any },
-      context: any,
-      resolveInfo: GraphQLResolveInfo,
-    ) {
-    const query = context.pgClient.query;
-```
+          // execute the query
+          const queryResult = await graphql.execute<GetMoviesQuery>(
+            resolveInfo.schema,
+            GetMoviesDocument, // or: inlineGetMoviesDocument,
+            undefined,
+            context,
+            variables,
+          );
 
-### Build-time validation of inline documents
+          if (queryResult.errors) {
+            // do something in error case
+            throw queryResult.errors[0];
+          } else {
+            // the result can then be used to get the returned data
+            const allTitles = queryResult.data?.movies?.nodes.map(
+              movie => movie?.title,
+            );
 
-If you want to write inline
-gql`queries it is possible to validate them during build-time. Adjust the created`codegen.yml`
-file with the following section at the same level of the existing
-"src/generated/types.ts:" part.
-
-This will create types from any inline defined document. As we do not actually
-need the files but only use them for build-time validation of our inline queries
-we can have the types be put to some "trash" location.
-
-```yaml
-# Creates types for inline gql`...` defined queries.
-# This is only used for build-time validation of those queries
-trash/inlineGqlValidation.ts:
-  documents: "src/**/*.ts"
-  plugins:
-    - typescript
-    - typescript-operations
-    - typescript-urql
-  config:
-    withHOC: false
-    withComponent: false
-    withMutationFn: false
+            return allTitles;
+          }
+        },
+      },
+    },
+  };
+});
 ```
 
 ## GraphQL IntelliSense
