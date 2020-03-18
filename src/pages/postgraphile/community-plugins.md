@@ -24,7 +24,10 @@ Schema extension plugins for PostGraphile:
 - [postgraphile-plugin-connection-filter-polymorphic](https://github.com/hansololai/postgraphile-connection-filter-polymorphic) -
   adds association filter on top of connection filter for polymorphic
   associations.
-- [postgraphile-polymorphic-relation_plugin](https://www.npmjs.com/package/postgraphile-polymorphic-relation-plugin) - create associations (forward and backward) between models via polymorphic associations. (same concept as postgraphile-plugin-connection-filter-polymorphic). 
+- [postgraphile-polymorphic-relation_plugin](https://www.npmjs.com/package/postgraphile-polymorphic-relation-plugin) -
+  create associations (forward and backward) between models via polymorphic
+  associations. (same concept as
+  postgraphile-plugin-connection-filter-polymorphic).
 - [postgraphile-plugin-custom-filter](https://github.com/RoadRunnerEngineering/postgraphile-plugin-custom-filter) -
   adds a `customFilter:` arg to connections that offers user defined filters on
   any conditions, as long as they can be fit into a `where`

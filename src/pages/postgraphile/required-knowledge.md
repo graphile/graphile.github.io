@@ -187,9 +187,9 @@ steps:
 Describes why you would want to go with this approach in the first place and
 what the benefits and features of using PostGraphile are. Do not be deterred if
 you find this daunting and are not used to using this much `SQL`. Using the
-database as the application layer is a fairly modern and unfamiliar concept,
-but by adopting it there are many benefits you may reap by being close to the
-data, as well as leveraging the declarative nature of SQL.
+database as the application layer is a fairly modern and unfamiliar concept, but
+by adopting it there are many benefits you may reap by being close to the data,
+as well as leveraging the declarative nature of SQL.
 
 [**Quick start**](/postgraphile/quick-start-guide/)
 
@@ -199,7 +199,7 @@ and creating of a database that PostGraphile will be connecting to.
 [**Schema Design**](/postgraphile/postgresql-schema-design/)
 
 Whether you have or have not built databases before, this section gives valuable
-advice about how to design a solid database. Topics include naming conventions, 
+advice about how to design a solid database. Topics include naming conventions,
 namespacing with schemas, managing access with roles and policies, handling
 migrations and much more. If these words are unfamiliar to you, do not worry, it
 will be clear once you have built a database following this guide.
@@ -208,7 +208,7 @@ will be clear once you have built a database following this guide.
 
 PostGraphile does not require Docker, and is very at home in a pure Node.js
 environment, so if you're not big on Docker you can skip this one!
- 
-If you develop using Docker, this will run through the building of a GraphQL
-API for a forum-like website. It goes through installation through to
-example queries and mutations to issue to PostGraphile.
+
+If you develop using Docker, this will run through the building of a GraphQL API
+for a forum-like website. It goes through installation through to example
+queries and mutations to issue to PostGraphile.
