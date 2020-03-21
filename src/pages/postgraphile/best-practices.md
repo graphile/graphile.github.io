@@ -80,8 +80,8 @@ See [Production Considerations](/postgraphile/production/).
 
 Performance reasons. Specifically, under many circumstances, functions in `SQL`
 (but not `plpgsql`) can be inlined into the call-site and are thereby
-transparent to the query planner. The PostgreSQL docs [have a lot more details](
-https://wiki.postgresql.org/wiki/Inlining_of_SQL_functions).
+transparent to the query planner. The PostgreSQL docs
+[have a lot more details](https://wiki.postgresql.org/wiki/Inlining_of_SQL_functions).
 
 ### Name Triggers With A Numeric Prefix
 
