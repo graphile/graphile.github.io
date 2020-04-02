@@ -38,37 +38,34 @@ inflectors.
 
 You can pass either a new inflectors object to makeAddInflectorsPlugin, or if
 you need to call the previous inflector you're replacing then you can pass an
-"inflectors generator" function which will be passed the whole inflectors object.
-NOTE: your new inflectors will be merged into this object, so if you need to call
-the old inflectors from the new ones you must take a copy of them which you can
-do with "dereferencing," but be sure to use `.call(this, ...)` to keep the `this`
-binding correct; e.g.:
+"inflectors generator" function which will be passed the whole inflectors
+object. NOTE: your new inflectors will be merged into this object, so if you
+need to call the old inflectors from the new ones you must take a copy of them
+which you can do with "dereferencing," but be sure to use `.call(this, ...)` to
+keep the `this` binding correct; e.g.:
 
 ```ts
 const { makeAddInflectorsPlugin } = require("graphile-utils");
 
-module.exports = makeAddInflectorsPlugin(
-  inflectors => {
-    // Here 'enumName' is dereferenced to 'oldEnumName' from the existing
-    // inflectors.
-    const { enumName: oldEnumName } = inflectors;
-  
-    return {
-      enumName(value: string) {
-        // By the time we get here, `inflectors.enumName` refers to this very
-        // method, so we must call `oldEnumName` rather than 
-        // `inflectors.enumName` otherwise we will get a "Maximum call stack size
-        // exceeded" error.
-        
-        // Further, we must ensure that the value of `this` is passed through
-        // otherwise the old inflector cannot reference other inflectors.
-        
-        return oldEnumName.call(this, value.replace(/\./g, "_"));
-      },
-    }
-  },
-  true
-);
+module.exports = makeAddInflectorsPlugin(inflectors => {
+  // Here 'enumName' is dereferenced to 'oldEnumName' from the existing
+  // inflectors.
+  const { enumName: oldEnumName } = inflectors;
+
+  return {
+    enumName(value: string) {
+      // By the time we get here, `inflectors.enumName` refers to this very
+      // method, so we must call `oldEnumName` rather than
+      // `inflectors.enumName` otherwise we will get a "Maximum call stack size
+      // exceeded" error.
+
+      // Further, we must ensure that the value of `this` is passed through
+      // otherwise the old inflector cannot reference other inflectors.
+
+      return oldEnumName.call(this, value.replace(/\./g, "_"));
+    },
+  };
+}, true);
 ```
 
 ### Example
