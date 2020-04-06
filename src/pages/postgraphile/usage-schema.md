@@ -11,6 +11,8 @@ functions that PostGraphile provides.
 
 **To see an example, check out the [Graphile Cookbook Schema Only Example](https://github.com/graphile/cookbook/tree/master/examples/schema_only).**
 
+**If you're looking for Apollo Client SSR support for PostGraphile without a network roundtrip, check out [GraphileApolloLink in Graphile Starter](https://github.com/graphile/starter/blob/93a887cc87ea8b19eb048b72e9fb3308bc1d5a82/%40app/lib/src/GraphileApolloLink.ts).**
+
 The first function you will need is `createPostGraphileSchema` (or
 `watchPostGraphileSchema` if you want to get a new schema each time the database
 is updated) which creates your PostGraphile GraphQL schema by introspecting your
