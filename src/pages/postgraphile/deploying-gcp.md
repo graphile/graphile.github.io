@@ -197,7 +197,7 @@ app.listen(8080);
 
 Unlike running PostgreSQL on your machine or with the standard Docker container, the `postgres` user
 on Google Cloud SQL is not a superuser. If you are using PG roles for authorization 
-[as explained in this article](https://www.graphile.org/postgraphile/postgresql-schema-design/#grants),
+[as explained in this article](/postgraphile/postgresql-schema-design/#grants),
 you must also grant a role to the `postgres` user. For example, if you created the role `anonymous` in 
 my database, you also need to run:
 
