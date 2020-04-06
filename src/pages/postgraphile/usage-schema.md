@@ -9,6 +9,8 @@ your own GraphQL server. However, if you want to execute a PostGraphile query in
 Node.js without having to go through HTTP you can use some other exported
 functions that PostGraphile provides.
 
+**To see an example, check out the [Graphile Cookbook Schema Only Example](https://github.com/graphile/cookbook/tree/master/examples/schema_only).**
+
 The first function you will need is `createPostGraphileSchema` (or
 `watchPostGraphileSchema` if you want to get a new schema each time the database
 is updated) which creates your PostGraphile GraphQL schema by introspecting your
