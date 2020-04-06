@@ -76,20 +76,32 @@ as the second argument then it can be used for replacing (or wrapping) existing
 inflectors.</p>
 <p>You can pass either a new inflectors object to makeAddInflectorsPlugin, or if
 you need to call the previous inflector you're replacing then you can pass an
-"inflectors generator" function which will be passed the old inflectors you can
-then call into. When you do so, be very careful that you use
-<code class="language-text">oldInflectors.INFLECTOR_HERE.call(this, ...args)</code> to ensure that the <code class="language-text">this</code>
-binding is correct in the old function; e.g.:</p>
+"inflectors generator" function which will be passed the whole inflectors
+object. NOTE: your new inflectors will be merged into this object, so if you
+need to call the old inflectors from the new ones you must take a copy of them
+which you can do with "dereferencing," but be sure to use <code class="language-text">.call(this, ...)</code> to
+keep the <code class="language-text">this</code> binding correct; e.g.:</p>
 <div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">const</span> <span class="token punctuation">{</span> makeAddInflectorsPlugin <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token string">"graphile-utils"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="token keyword">module</span><span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token function">makeAddInflectorsPlugin</span><span class="token punctuation">(</span>
-  <span class="token parameter">oldInflection</span> <span class="token operator">=></span> <span class="token punctuation">(</span><span class="token punctuation">{</span>
+<span class="token keyword">module</span><span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token function">makeAddInflectorsPlugin</span><span class="token punctuation">(</span><span class="token parameter">inflectors</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token comment">// Here 'enumName' is dereferenced to 'oldEnumName' from the existing</span>
+  <span class="token comment">// inflectors.</span>
+  <span class="token keyword">const</span> <span class="token punctuation">{</span> enumName<span class="token punctuation">:</span> oldEnumName <span class="token punctuation">}</span> <span class="token operator">=</span> inflectors<span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> <span class="token punctuation">{</span>
     <span class="token function">enumName</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token punctuation">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token keyword">return</span> oldInflection<span class="token punctuation">.</span><span class="token function">enumName</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> value<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex">/\./g</span><span class="token punctuation">,</span> <span class="token string">"_"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment">// By the time we get here, `inflectors.enumName` refers to this very</span>
+      <span class="token comment">// method, so we must call `oldEnumName` rather than</span>
+      <span class="token comment">// `inflectors.enumName` otherwise we will get a "Maximum call stack size</span>
+      <span class="token comment">// exceeded" error.</span>
+
+      <span class="token comment">// Further, we must ensure that the value of `this` is passed through</span>
+      <span class="token comment">// otherwise the old inflector cannot reference other inflectors.</span>
+
+      <span class="token keyword">return</span> <span class="token function">oldEnumName</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> value<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex">/\./g</span><span class="token punctuation">,</span> <span class="token string">"_"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-  <span class="token boolean">true</span>
-<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <h3 id="example"><a href="#example" aria-label="example permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h3>
 <p>If you want <code class="language-text">*Patch</code> types to instead be called <code class="language-text">*ChangeSet</code> you could make a
 plugin such as this one:</p>
