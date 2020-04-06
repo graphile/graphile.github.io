@@ -195,7 +195,12 @@ app.listen(8080);
 
 ### PostgreSQL authorization with Google Cloud SQL
 
-The `postgres` user on Google Cloud SQL is not a `superuser`, unlike the Postgres user account you've likely been using in development. As such, if you need it to be able to switch into a different role then you must grant that role to the `postgres` user. For example, if you created the role `anonymous` in your database, and you want the `postgres` role to be able to perform `SET LOCAL role TO anonymous;` then you could run:
+The `postgres` user on Google Cloud SQL is not a `superuser`, unlike the
+Postgres user account you've likely been using in development. As such, if you
+need it to be able to switch into a different role then you must grant that role
+to the `postgres` user. For example, if you created the role `anonymous` in your
+database, and you want the `postgres` role to be able to perform
+`SET LOCAL role TO anonymous;` then you could run:
 
 ```sql
 GRANT anonymous TO postgres;
