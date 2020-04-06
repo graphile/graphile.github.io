@@ -612,3 +612,17 @@ class: {
 ```sql
 comment on materialized view my_materialized_view is E'@foreignKey (key_1, key_2) references other_table (key_1, key_2)';
 ```
+
+##### Smart Tags on virtual constraints
+
+You can also add smart tags on virtual constraints, for example adding the `fieldName` tag to a virtual foreign key constraint, by appending the pipe character `|`, as well as the smart tag:
+
+```json5
+class: {
+  my_materialized_view: {
+    tags: {
+      foreignKey: "@foreignKey (key_1, key_2) references other_table (key_1, key_2)|@fieldName field_1"
+    }
+  }
+}
+```
