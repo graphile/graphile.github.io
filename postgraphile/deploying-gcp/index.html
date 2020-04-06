@@ -54,6 +54,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul>
 </li>
 <li><a href="/postgraphile/deploying-gcp/#deploying-an-express-app">Deploying an express app</a></li>
+<li><a href="/postgraphile/deploying-gcp/#postgresql-authorization-with-google-cloud-sql">PG authorization with Google Cloud SQL</a></li>
 <li><a href="/postgraphile/deploying-gcp/#helpful-resources">Helpful resources</a></li>
 </ul></div></div><div class="edit-this-page" style="display:"><a href="https://github.com/graphile/graphile.github.io/edit/develop/src/pages/postgraphile/deploying-gcp.md">📝 Suggest improvement/edit this page</a></div><h2 class="mt3">Deploying to GCP</h2><div><p><em>aka Google Cloud Platform (App Engine)</em></p>
 <p><em>This post is a work in progress. Please see
@@ -209,6 +210,14 @@ something like</li>
 app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token function">postgraphile</span><span class="token punctuation">(</span>pgConfig<span class="token punctuation">,</span> <span class="token string">"public"</span><span class="token punctuation">,</span> postgraphileOptions<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 app<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">8080</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<h3 id="postgresql-authorization-with-google-cloud-sql"><a href="#postgresql-authorization-with-google-cloud-sql" aria-label="postgresql authorization with google cloud sql permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>PostgreSQL authorization with Google Cloud SQL</h3>
+<p>The <code class="language-text">postgres</code> user on Google Cloud SQL is not a <code class="language-text">superuser</code>, unlike the
+Postgres user account you've likely been using in development. As such, if you
+need it to be able to switch into a different role then you must grant that role
+to the <code class="language-text">postgres</code> user. For example, if you created the role <code class="language-text">anonymous</code> in your
+database, and you want the <code class="language-text">postgres</code> role to be able to perform
+<code class="language-text">SET LOCAL role TO anonymous;</code> then you could run:</p>
+<div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">GRANT</span> anonymous <span class="token keyword">TO</span> postgres<span class="token punctuation">;</span></code></pre></div>
 <h3 id="helpful-resources"><a href="#helpful-resources" aria-label="helpful resources permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Helpful resources</h3>
 <p>See
 <a href="https://github.com/GoogleCloudPlatform/nodejs-docs-samples/tree/master/appengine/hello-world/flexible">https://github.com/GoogleCloudPlatform/nodejs-docs-samples/tree/master/appengine/hello-world/flexible</a>
