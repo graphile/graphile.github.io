@@ -195,17 +195,11 @@ app.listen(8080);
 
 ### PostgreSQL authorization with Google Cloud SQL
 
-Unlike running PostgreSQL on your machine or with the standard Docker container, the `postgres` user
-on Google Cloud SQL is not a superuser. If you are using PG roles for authorization 
-[as explained in this article](/postgraphile/postgresql-schema-design/#grants),
-you must also grant a role to the `postgres` user. For example, if you created the role `anonymous` in 
-my database, you also need to run:
+The `postgres` user on Google Cloud SQL is not a `superuser`, unlike the Postgres user account you've likely been using in development. As such, if you need it to be able to switch into a different role then you must grant that role to the `postgres` user. For example, if you created the role `anonymous` in your database, and you want the `postgres` role to be able to perform `SET LOCAL role TO anonymous;` then you could run:
 
-```
+```sql
 GRANT anonymous TO postgres;
 ```
-
-Then the rest of your table grants or row-level security policies will be valid.
 
 ### Helpful resources
 
