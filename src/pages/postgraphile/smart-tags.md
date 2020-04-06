@@ -150,7 +150,7 @@ Applies to:
 
 - Tables
 - Views
-- Materialised views
+- Materialized views
 - Composite types (one direction only)
 - Columns
 - Types
@@ -283,7 +283,7 @@ Applies to:
 
 - Tables
 - Views
-- Materialised views
+- Materialized views
 - Composite types (one direction only)
 - Columns
 - Custom Queries
@@ -596,7 +596,7 @@ Applies to:
 
 - Tables
 - Views
-- Materialised views
+- Materialized views
 - Composite types (one direction only)
 
 ```json5
