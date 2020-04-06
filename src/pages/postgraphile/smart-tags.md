@@ -587,7 +587,7 @@ the following syntax which mirrors the PostgreSQL foreign key constraint:
 
 `@foreignKey (col1, ...) references [my_schema.]my_table [(col1, ...)]`
 
-In the tags file you have to omit the leading `@foreignKey` (see example below).
+In the tags file you must omit the leading `@foreignKey ` text since it is specified as the key (rather than the value) in the tags object ─ see example below.
 
 The schema is optional if the target table is in the same schema. If you're
 referencing a Primary Key on the remote table/view then you can skip the final
@@ -617,7 +617,7 @@ comment on materialized view my_materialized_view is E'@foreignKey (key_1, key_2
 
 ##### Smart Tags on virtual constraints
 
-You can also add smart tags on virtual constraints, for example adding the `fieldName` tag to a virtual foreign key constraint, by appending the pipe character `|` as well as the smart tag:
+You can also add smart tags on virtual constraints, for example adding the `fieldName` smart tag to a virtual foreign key constraint, by appending the pipe character `|` followed by the `@`-prefixed smart tag:
 
 ```json5
 class: {
