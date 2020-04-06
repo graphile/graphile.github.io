@@ -150,7 +150,7 @@ Applies to:
 
 - Tables
 - Views
-- Materialised views
+- Materialized views
 - Composite types (one direction only)
 - Columns
 - Types
@@ -283,7 +283,7 @@ Applies to:
 
 - Tables
 - Views
-- Materialised views
+- Materialized views
 - Composite types (one direction only)
 - Columns
 - Custom Queries
@@ -587,6 +587,8 @@ the following syntax which mirrors the PostgreSQL foreign key constraint:
 
 `@foreignKey (col1, ...) references [my_schema.]my_table [(col1, ...)]`
 
+In the tags file you must omit the leading `@foreignKey ` text since it is specified as the key (rather than the value) in the tags object ─ see example below.
+
 The schema is optional if the target table is in the same schema. If you're
 referencing a Primary Key on the remote table/view then you can skip the final
 column specification should you wish. Otherwise, you must reference columns
@@ -596,14 +598,14 @@ Applies to:
 
 - Tables
 - Views
-- Materialised views
+- Materialized views
 - Composite types (one direction only)
 
 ```json5
 class: {
   my_materialized_view: {
     tags: {
-      foreignKey: "@foreignKey (key_1, key_2) references other_table (key_1, key_2)"
+      foreignKey: "(key_1, key_2) references other_table (key_1, key_2)"
     }
   }
 }
@@ -611,4 +613,18 @@ class: {
 
 ```sql
 comment on materialized view my_materialized_view is E'@foreignKey (key_1, key_2) references other_table (key_1, key_2)';
+```
+
+##### Smart Tags on virtual constraints
+
+You can also add smart tags on virtual constraints, for example adding the `fieldName` smart tag to a virtual foreign key constraint, by appending the pipe character `|` followed by the `@`-prefixed smart tag:
+
+```json5
+class: {
+  my_materialized_view: {
+    tags: {
+      foreignKey: "(key_1, key_2) references other_table (key_1, key_2)|@fieldName field_1"
+    }
+  }
+}
 ```
