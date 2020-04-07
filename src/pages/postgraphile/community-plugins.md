@@ -28,6 +28,7 @@ Schema extension plugins for PostGraphile:
   create associations (forward and backward) between models via polymorphic
   associations. (same concept as
   postgraphile-plugin-connection-filter-polymorphic).
+- [postgraphile-index-to-unique-constraint-plugin](https://github.com/hansololai/postgraphile-index-to-unique-constraint-plugin) - extends PostGraphile's unique constraint detection to unique indexes also.
 - [postgraphile-plugin-custom-filter](https://github.com/RoadRunnerEngineering/postgraphile-plugin-custom-filter) -
   adds a `customFilter:` arg to connections that offers user defined filters on
   any conditions, as long as they can be fit into a `where`
