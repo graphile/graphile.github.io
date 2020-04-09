@@ -85,7 +85,7 @@ database. Normally, we assume whoever is querying the database has full
 visibility into the system as the only one with database access is our
 application. In this tutorial, we want to restrict access at the database level.
 Don’t worry though! Postgres is very secure about this, users will have no more
-permissions then that which you explicitly grant.
+permissions than that which you explicitly grant.
 
 > **Note:** When starting PostGraphile, you will want to use the name of the
 > schema you created with the `--schema` option, like so:
