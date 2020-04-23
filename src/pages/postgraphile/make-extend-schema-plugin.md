@@ -502,6 +502,65 @@ const MyRegisterUserMutationPlugin = makeExtendSchemaPlugin(build => {
 Note that the `@pgField` directive here is necessary for PostGraphile to "look
 ahead" and determine what to request from the database.
 
+If you want to make a logic delete via *nodeId* in a table(ie: item) that belongs to an authenticated user
+```
+import { makeExtendSchemaPlugin, gql } from 'graphile-utils'
+
+const PgCustomMutations = makeExtendSchemaPlugin(() => {
+  const typeDefs = gql`
+      extend type Mutation {
+          deleteItem(nodeId: ID!): Boolean
+      }
+  `
+
+  const resolvers = {
+    Mutation: {
+      deleteItem: async (_query, args, context) => {
+        // jwtClaims is decrypted jwt token data
+        const { pgClient, jwtClaims: { user_id } } = context
+
+        const binaryData = Buffer.from(args.nodeId, 'base64')
+         
+        // nodeId is a base64 array type ['tableName', id]
+        const item_id = JSON.parse(binaryData.toString('utf8'))[1]
+
+        await pgClient.query('SAVEPOINT graphql_mutation')
+
+        try {
+          const { rowCount } = await pgClient.query(
+            `UPDATE item SET is_archived = true
+              where
+            id = $1
+            and user_id = $2;
+          `,
+            [parseInt(item_id, 10), parseInt(user_id, 10)]
+          )
+
+          await pgClient.query('RELEASE SAVEPOINT graphql_mutation')
+
+          return rowCount === 1
+        } catch (e) {
+          await pgClient.query('ROLLBACK TO SAVEPOINT graphql_mutation')
+          throw e
+        }
+      }
+    }
+  }
+
+  /**
+  * typeDefs and resolvers are required when you want to make a custom plugin
+  */
+  return {
+    typeDefs,
+    resolvers
+  }
+})
+
+export default PgCustomMutations
+
+```
+
+
 ### Using the `@pgQuery` directive for non-root queries and better performance
 
 If your field is not defined on the `Query`/`Mutation` type directly (i.e. it's
