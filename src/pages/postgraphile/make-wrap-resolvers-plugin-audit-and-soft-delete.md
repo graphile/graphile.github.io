@@ -14,6 +14,8 @@ overrides the delete command with custom sql query (which, in this case, is `upd
 > NOTE to Benjie & the team: This example is provided with my limited knowledge as I have just started 
 > plugin development and with this disclaimer I can note that by using lodash and my solution for returning
 > the Delete mutation result to client is a hack that shows my limited knowledge ✌️😉
+>
+> ps. Please modify this page however you want to fit more generic usage of Postgraphile.    
 
 ```js
 const _ = require('lodash')
