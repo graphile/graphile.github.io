@@ -57,7 +57,7 @@ extension must be `.json5`) and is formatted like this:
         tags: {
           foreignKey: [
               "(default_user_id) references user (id)|@fieldName defaultUser",
-              "(organization_id) references organization (id)|@fieldName organization",
+              "(organization_id) references organization (id)|@fieldName organization"
           ]
         },
 
