@@ -163,7 +163,6 @@ const {
 } = require("postgraphile");
 const { graphql } = require("graphql");
 const MockReq = require("mock-req");
-const MockRes = require("mock-res");
 
 const { postgraphileOptions } = require("../../server/middleware/postgraphile");
 
