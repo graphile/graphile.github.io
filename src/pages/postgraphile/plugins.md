@@ -139,7 +139,7 @@ app.use(postGraphileMiddleware);
 ### Writing your own plugins
 
 The hook methods available can be viewed
-[in pluginHook.ts](https://github.com/graphile/postgraphile/blob/master/src/postgraphile/pluginHook.ts).
+[in pluginHook.ts](https://github.com/graphile/postgraphile/blob/v4/src/postgraphile/pluginHook.ts).
 Note that these may change in **semver minor** releases of PostGraphile as this
 is not an officially stable API yet.
 
