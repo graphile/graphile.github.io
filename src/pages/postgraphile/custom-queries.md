@@ -128,8 +128,7 @@ Stripe](https://medium.com/@sastraxi/authenticated-and-stitched-schemas-with-pos
 -->
 
 [procedures]: /postgraphile/procedures/
-[forum example]:
-  https://github.com/graphile/postgraphile/tree/v4/examples/forum
+[forum example]: https://github.com/graphile/postgraphile/tree/v4/examples/forum
 [`like`]: http://www.postgresql.org/docs/current/static/functions-matching.html
 
 ### Advice
