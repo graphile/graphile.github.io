@@ -29,7 +29,7 @@ for data intensive uses.
 For some function examples, you can refer to the [forum example SQL schema][].
 
 [forum example sql schema]:
-  https://github.com/graphile/postgraphile/blob/master/examples/forum/schema.sql
+  https://github.com/graphile/postgraphile/blob/v4/examples/forum/schema.sql
 
 ### Recommended Reading
 
@@ -309,7 +309,7 @@ More information on constructing advanced queries can be found
 [here](/postgraphile/custom-queries/).
 
 [forum example sql schema]:
-  https://github.com/graphile/postgraphile/blob/master/examples/forum/schema.sql
+  https://github.com/graphile/postgraphile/blob/v4/examples/forum/schema.sql
 
 ---
 

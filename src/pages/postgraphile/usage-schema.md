@@ -281,7 +281,7 @@ Steps to get the backend typing support:
    you want to, but it is handy to see differences in the schema during
    check-ins and is useful for other tooling such as `eslint-plugin-graphql`.
 4. Import the mentioned `npm` packages. You can find more plugins on their
-   website in the [Plugins](https://graphql-code-generator.com/docs/plugins/)
+   website in the [Plugins](https://graphql-code-generator.com/docs/plugins/index/)
    section.
 5. Create a file `codegen.yml` in the root of your workspace.
    ```yaml
