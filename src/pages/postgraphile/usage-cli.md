@@ -98,7 +98,7 @@ from
 * `--plugins <string>`  
   a list of PostGraphile server plugins (not Graphile Engine schema plugins) to load; if present, must be the _first_ option
 * `-c`, `--connection <string>`  
-  the PostgreSQL database name or connection string. If omitted, inferred from environmental variables (see https://www.postgresql.org/docs/current/static/libpq-envars.html). Examples: 'db', 'postgres:///db', 'postgres://user:password@domain:port/db?ssl=1'
+  the PostgreSQL database name or connection string. If omitted, inferred from environmental variables (see https://www.postgresql.org/docs/current/static/libpq-envars.html). Examples: 'db', 'postgres:///db', 'postgres://user:password@domain:port/db?ssl=true'
 * `-C`, `--owner-connection <string>`  
   as `--connection`, but for a privileged user (e.g. for setting up watch fixtures, logical decoding, etc); defaults to the value from `--connection`
 * `-s`, `--schema <string>`  

@@ -14,8 +14,9 @@ Postgres does not allow the issue of `CREATE ROLE` commands. (This can be worked
 around, see below.)
 
 You should enable the `force_ssl` setting in RDS, and to ensure PostGraphile
-connects to RDS using SSL you need to add `?ssl=1` to the connection string,
-e.g. `heroku config:set DATABASE_URL="postgres://...rdshost.../db_name?ssl=1"`
+connects to RDS using SSL you need to add `?ssl=true` to the connection string,
+e.g.
+`heroku config:set DATABASE_URL="postgres://...rdshost.../db_name?ssl=true"`
 
 ### Heroku Postgres
 
@@ -46,7 +47,7 @@ See: https://devcenter.heroku.com/articles/heroku-postgresql-credentials
 4. Commit everything: `git add . && git commit -m "Initial commit"`
 5. Add the heroku remote `heroku git:remote -a heroku_app_name`
 6. Configure Heroku to use the right url
-   `heroku config:set RDS_URL="postgres://user:pass@rdshost/dbname?ssl=1" -a heroku_app_name`
+   `heroku config:set RDS_URL="postgres://user:pass@rdshost/dbname?ssl=true" -a heroku_app_name`
 7. Create Procfile:
    `echo 'web: postgraphile -c $RDS_URL --host 0.0.0.0 --port $PORT' >> Procfile`
 8. Deploy: `git push heroku master`
@@ -91,7 +92,7 @@ instead be accomplished with the Heroku web interface):
   heroku config:set \
       NODE_ENV="production" \
       GRAPHILE_TURBO="1" \
-      DATABASE_URL="postgres://username:password@host:port/dbname?ssl=1" \
+      DATABASE_URL="postgres://username:password@host:port/dbname?ssl=true" \
       -a myappname
   ```
 - Add the Heroku app as a git remote to your local repository, e.g.

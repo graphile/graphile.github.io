@@ -141,7 +141,7 @@ database name added:
 $ postgraphile -c "postgres:///mydb"
 
 # Connect to a database that requires SSL/TLS
-$ postgraphile -c "postgres://securehost:5432/db?ssl=1"
+$ postgraphile -c "postgres://securehost:5432/db?ssl=true"
 
 # Connect to the `somedb` database within the PostgreSQL at somehost port 2345
 $ postgraphile -c "postgres://somehost:2345/somedb"
