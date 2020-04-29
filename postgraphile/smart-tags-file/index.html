@@ -92,7 +92,12 @@ extension must be <code class="language-text">.json5</code>) and is formatted li
          * Add tags specific to the </span><span class="token string">'post'</span> table here. You can omit this if you
          * don't want to add any tags.
          */
-        <span class="token property unquoted">tags</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token property unquoted">tags</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token property unquoted">foreignKey</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token string">"(default_user_id) references user (id)|@fieldName defaultUser"</span><span class="token punctuation">,</span>
+            <span class="token string">"(organization_id) references organization (id)|@fieldName organization"</span><span class="token punctuation">,</span>
+          <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
 
         <span class="token comment">/*
          * We've added a shortcut to class-types so you can tag/describe
