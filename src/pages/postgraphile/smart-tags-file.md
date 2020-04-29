@@ -54,7 +54,12 @@ extension must be `.json5`) and is formatted like this:
          * Add tags specific to the 'post' table here. You can omit this if you
          * don't want to add any tags.
          */
-        tags: {},
+        tags: {
+          foreignKey: [
+              "(default_user_id) references user (id)|@fieldName defaultUser",
+              "(organization_id) references organization (id)|@fieldName organization"
+          ]
+        },
 
         /*
          * We've added a shortcut to class-types so you can tag/describe
