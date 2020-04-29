@@ -470,11 +470,8 @@ const MyRegisterUserMutationPlugin = makeExtendSchemaPlugin(build => {
             await mockSendEmail(
               args.input.email,
               "Welcome to my site",
-              `You're user ${user.id} - ` + `thanks for being awesome`
+              `You're user ${user.id} - thanks for being awesome`
             );
-
-            // Success! Write the user to the database.
-            await pgClient.query("RELEASE SAVEPOINT graphql_mutation");
 
             // If the return type is a database record type, like User, then
             // you would return `row` directly. However if it's an indirect
@@ -491,6 +488,9 @@ const MyRegisterUserMutationPlugin = makeExtendSchemaPlugin(build => {
             // destroy all evidence you ever tried.
             await pgClient.query("ROLLBACK TO SAVEPOINT graphql_mutation");
             throw e;
+          } finally {
+            // Release our savepoint so it doesn't conflict with other mutations
+            await pgClient.query("RELEASE SAVEPOINT graphql_mutation");
           }
         },
       },
@@ -501,6 +501,81 @@ const MyRegisterUserMutationPlugin = makeExtendSchemaPlugin(build => {
 
 Note that the `@pgField` directive here is necessary for PostGraphile to "look
 ahead" and determine what to request from the database.
+
+#### Mutation Example with Node ID
+
+In this example we'll use a GraphQL Global Object Identifier (aka Node ID) to
+soft-delete an entry from our `app_public.items` table. We're also going to
+check that the user performing the soft-delete is the owner of the record.
+
+**Aside**: if you're interested in soft-deletes, check out
+[@graphile-contrib/pg-omit-archived](https://github.com/graphile-contrib/pg-omit-archived)
+
+```js
+const DeleteItemByNodeIdPlugin = makeExtendSchemaPlugin((build) => {
+  const typeDefs = gql`
+    input DeleteItemInput {
+      nodeId: ID!
+    }
+    type DeleteItemPayload {
+      success: Boolean
+    }
+    extend type Mutation {
+      deleteItem(input: DeleteItemInput!): DeleteItemPayload
+    }
+  `;
+
+  const resolvers = {
+    Mutation: {
+      deleteItem: async (_query, args, context) => {
+        // jwtClaims is decrypted jwt token data
+        const { pgClient, jwtClaims } = context;
+        
+        // Decode the node ID
+        const { Type, identifiers } = build.getTypeAndIdentifiersFromNodeId(
+          args.input.nodeId
+        );
+        
+        // Check it applies to our type
+        if (Type !== build.getTypeByName('Item')) {
+          throw new Error("Invalid nodeId for Item");
+        }
+        
+        // Assuming there's a single primary-key column, the PK will
+        // be the first and only entry in identifiers.
+        const itemId = identifiers[0];
+
+        // All mutations that issue SQL must be wrapped in savepoints
+        await pgClient.query('SAVEPOINT graphql_mutation')
+
+        try {
+          const { rowCount } = await pgClient.query(
+            `UPDATE app_public.items SET is_archived = true
+              WHERE id = $1
+              AND user_id = $2;`,
+            [itemId, jwtClaims.user_id]
+          );
+
+          return {
+            success: rowCount === 1,
+          };
+        } catch (e) {
+          await pgClient.query('ROLLBACK TO SAVEPOINT graphql_mutation');
+          throw e;
+        } finally {
+          await pgClient.query('RELEASE SAVEPOINT graphql_mutation');
+        }
+      }
+    }
+  };
+
+  return {
+    typeDefs,
+    resolvers
+  };
+});
+```
+
 
 ### Using the `@pgQuery` directive for non-root queries and better performance
 
