@@ -512,7 +512,7 @@ check that the user performing the soft-delete is the owner of the record.
 [@graphile-contrib/pg-omit-archived](https://github.com/graphile-contrib/pg-omit-archived)
 
 ```js
-const DeleteItemByNodeIdPlugin = makeExtendSchemaPlugin((build) => {
+const DeleteItemByNodeIdPlugin = makeExtendSchemaPlugin(build => {
   const typeDefs = gql`
     input DeleteItemInput {
       nodeId: ID!
@@ -530,23 +530,23 @@ const DeleteItemByNodeIdPlugin = makeExtendSchemaPlugin((build) => {
       deleteItem: async (_query, args, context) => {
         // jwtClaims is decrypted jwt token data
         const { pgClient, jwtClaims } = context;
-        
+
         // Decode the node ID
         const { Type, identifiers } = build.getTypeAndIdentifiersFromNodeId(
           args.input.nodeId
         );
-        
+
         // Check it applies to our type
-        if (Type !== build.getTypeByName('Item')) {
+        if (Type !== build.getTypeByName("Item")) {
           throw new Error("Invalid nodeId for Item");
         }
-        
+
         // Assuming there's a single primary-key column, the PK will
         // be the first and only entry in identifiers.
         const itemId = identifiers[0];
 
         // All mutations that issue SQL must be wrapped in savepoints
-        await pgClient.query('SAVEPOINT graphql_mutation')
+        await pgClient.query("SAVEPOINT graphql_mutation");
 
         try {
           const { rowCount } = await pgClient.query(
@@ -560,22 +560,21 @@ const DeleteItemByNodeIdPlugin = makeExtendSchemaPlugin((build) => {
             success: rowCount === 1,
           };
         } catch (e) {
-          await pgClient.query('ROLLBACK TO SAVEPOINT graphql_mutation');
+          await pgClient.query("ROLLBACK TO SAVEPOINT graphql_mutation");
           throw e;
         } finally {
-          await pgClient.query('RELEASE SAVEPOINT graphql_mutation');
+          await pgClient.query("RELEASE SAVEPOINT graphql_mutation");
         }
-      }
-    }
+      },
+    },
   };
 
   return {
     typeDefs,
-    resolvers
+    resolvers,
   };
 });
 ```
-
 
 ### Using the `@pgQuery` directive for non-root queries and better performance
 
