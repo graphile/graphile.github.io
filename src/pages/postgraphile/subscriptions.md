@@ -429,15 +429,19 @@ functions leave some optional spaces in, so when they are base64 encoded the
 strings do not match.)
 
 Assuming that you have a table of the form
-`foos(id serial primary key, title text, ...)` you can add the `__node__` field
+`app_public.foo(id serial primary key, title text, ...)` you can add the `__node__` field
 as follows and the record with id=32 will be made available as the `relatedNode`
 in the GraphQL subscription payload:
 
 ```sql
+insert into app_public.foo (title) values ('Howdy!') returning *;
 select pg_notify(
   'postgraphile:hello',
   json_build_object(
-    '__node__', json_build_array('foos', 32)
+    '__node__', json_build_array(
+      'foos',
+      (select max(id) from app_public.foo)
+    )
   )::text
 );
 ```
