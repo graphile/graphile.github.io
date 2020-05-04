@@ -12,7 +12,7 @@ need aggregates good starting points are:
   [built in `PgConnectionTotalCountPlugin`](https://github.com/graphile/graphile-engine/blob/2353cf94867a88d76062ab274a30ce930a30aab7/packages/graphile-build-pg/src/plugins/PgConnectionTotalCount.js)
   which adds a `totalCount` aggregate to connections, counting all rows that
   match the criteria (ignoring pagination info)
-- The [@graphile/pg-aggreates](https://github.com/graphile/pg-aggregates) module
+- The [@graphile/pg-aggregates](https://github.com/graphile/pg-aggregates) module
   which adds `sum` aggregates to the schema (more to come)
 - The [Discord chat](http://discord.gg/graphile) (feel free to @benjie in
   #help-and-support)
