@@ -135,7 +135,7 @@ data only to authenticated users:</p>
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">CREATE</span> <span class="token keyword">VIEW</span> personal_data_view
-  <span class="token keyword">WITH</span> <span class="token punctuation">(</span>security_barrier<span class="token punctuation">,</span> check_option <span class="token operator">=</span> <span class="token string">'cascaded'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">WITH</span> <span class="token punctuation">(</span>security_barrier<span class="token punctuation">,</span> check_option <span class="token operator">=</span> <span class="token string">'cascaded'</span><span class="token punctuation">)</span>
   <span class="token keyword">AS</span>
     <span class="token keyword">SELECT</span> personal_data<span class="token punctuation">.</span><span class="token operator">*</span>
     <span class="token keyword">FROM</span> app_public<span class="token punctuation">.</span>personal_data personal_data
