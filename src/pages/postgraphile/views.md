@@ -111,7 +111,7 @@ CREATE TABLE app_public.personal_data (
 );
 
 CREATE VIEW personal_data_view
-  WITH (security_barrier, check_option = 'cascaded');
+  WITH (security_barrier, check_option = 'cascaded')
   AS
     SELECT personal_data.*
     FROM app_public.personal_data personal_data
