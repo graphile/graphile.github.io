@@ -33,7 +33,8 @@ Schema extension plugins for PostGraphile:
 - [postgraphile-plugin-custom-filter](https://github.com/RoadRunnerEngineering/postgraphile-plugin-custom-filter) -
   adds a `customFilter:` arg to connections that offers user defined filters on
   any conditions, as long as they can be fit into a `where`
-- [postgraphile-plugin-atomic-mutations](https://github.com/EmperorRXF/postgraphile-plugin-atomic-mutations) - enables mutation atomicity with GraphQL requests containing multiple mutations
+- [postgraphile-plugin-atomic-mutations](https://github.com/EmperorRXF/postgraphile-plugin-atomic-mutations) -
+  enables mutation atomicity with GraphQL requests containing multiple mutations
 - [postgraphile-plugin-nested-mutations](https://github.com/mlipscombe/postgraphile-plugin-nested-mutations) -
   enables a single mutation to create/update many related records
 - [graphile-upsert-plugin](https://github.com/einarjegorov/graphile-upsert-plugin/blob/master/index.js) -
