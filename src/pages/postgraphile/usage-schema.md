@@ -97,7 +97,7 @@ The returned GraphQLSchema will **not** be updated when your database changes - 
   - `prependPlugins`: An array of [Graphile Engine](/graphile-build/plugins/) schema plugins to load before the default plugins (you probably don't want this).
   - `replaceAllPlugins`: The full array of [Graphile Engine](/graphile-build/plugins/) schema plugins to use for schema generation (you almost definitely don't want this!).
   - `skipPlugins`: An array of [Graphile Engine](/graphile-build/plugins/) schema plugins to skip.
-  - `readCache`: A file path string. Reads cached values from local cache file to improve startup time (you may want to do this in production).
+  - `readCache`: A file path string or an object. Reads cached values to improve startup time (you may want to do this in production).
   - `writeCache`: A file path string. Writes computed values to local cache file so startup can be faster (do this during the build phase).
   - `jwtSecret`: The secret for your JSON web tokens. This will be used to verify tokens in the `Authorization` header, and signing JWT tokens you return in procedures.
   - `jwtPgTypeIdentifier`: The Postgres type identifier for the compound type which will be signed as a JWT token if ever found as the return type of a procedure. Can be of the form: `my_schema.my_type`. You may use quotes as needed: `"my-special-schema".my_type`.
