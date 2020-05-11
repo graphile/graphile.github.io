@@ -1,4 +1,7 @@
 /* eslint-disable no-console */
+// Don't fail on self-signed SSL
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
 const fs = require("fs");
 const path = require("path");
 const glob = require("glob");
