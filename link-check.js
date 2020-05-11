@@ -31,10 +31,48 @@ const memoize = fn => {
   };
 };
 
+function defer() {
+  let _resolve, _reject;
+  const p = new Promise((resolve, reject) => {
+    _resolve = resolve;
+    _reject = reject;
+  });
+  p.resolve = _resolve;
+  p.reject = _reject;
+  return p;
+}
+
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 /**
  * This prevents us placing multiple fetches to the same URL
  */
-const checkLinkResolution = memoize(url => fetch(url));
+const queueByHost = {};
+const cachedCheckByUrl = {};
+const checkLinkResolution = memoize(url => {
+  if (!cachedCheckByUrl[url]) {
+    cachedCheckByUrl[url] = (async () => {
+      const { host } = new URL(url);
+      if (!queueByHost[host]) {
+        queueByHost[host] = Promise.resolve();
+      }
+      const deferred = defer();
+      const previous = queueByHost[host];
+      queueByHost[host] = previous
+        .finally(() => sleep(200))
+        .then(() =>
+          fetch(url, {
+            headers: {
+              "user-agent": "GraphileLinkChecker/0.1",
+            },
+          })
+        )
+        .then(deferred.resolve, deferred.reject);
+      return deferred;
+    })();
+  }
+  return cachedCheckByUrl[url];
+});
 
 function allMatches(str, regex) {
   const all = [];
@@ -127,10 +165,10 @@ pMap(
       return;
     } else if (isHTTP) {
       const matches = trimmed.match(
-        /^https?:\/\/(?:www\.)?postgresql.org\/docs\/([^\/]+)\/[^#]*(#.*)?$/
+        /^https?:\/\/(?:www\.)?postgresql.org\/docs\/([^/]+)\/[^#]*(#.*)?$/
       );
       if (matches) {
-        const [_, docVersion, hash] = matches;
+        const [, docVersion, hash] = matches;
         const CURRENT_VERSION = "11";
         /*
          * It's better to link to /docs/current/ in general, but when there's a
@@ -225,5 +263,8 @@ pMap(
       console.log();
       console.log(`${invalid} errors found 😔`);
       process.exit(1);
+    } else {
+      console.log();
+      console.log(`${fileLinks.length} links checked - all passed 💪`);
     }
   });
