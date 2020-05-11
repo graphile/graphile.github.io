@@ -437,7 +437,11 @@ in the GraphQL subscription payload:
 select pg_notify(
   'postgraphile:hello',
   json_build_object(
-    '__node__', json_build_array('foos', 32)
+    '__node__', json_build_array(
+      'foos', -- IMPORTANT: this is not always exactly the table name; base64
+              -- decode an existing nodeId to see what it should be.
+      32      -- The primary key (for multiple keys, list them all).
+    )
   )::text
 );
 ```
