@@ -75,8 +75,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 your own GraphQL server. However, if you want to execute a PostGraphile query in
 Node.js without having to go through HTTP you can use some other exported
 functions that PostGraphile provides.</p>
-<p><strong>To see an example, check out the <a href="https://github.com/graphile/cookbook/tree/master/examples/schema_only">Graphile Cookbook Schema Only Example</a>.</strong></p>
-<p><strong>If you're looking for Apollo Client SSR support for PostGraphile without a network roundtrip, check out <a href="https://github.com/graphile/starter/blob/93a887cc87ea8b19eb048b72e9fb3308bc1d5a82/%40app/lib/src/GraphileApolloLink.ts">GraphileApolloLink in Graphile Starter</a>.</strong></p>
+<p><strong>To see an example, check out the
+<a href="https://github.com/graphile/cookbook/tree/master/examples/schema_only">Graphile Cookbook Schema Only Example</a>.</strong></p>
+<p><strong>If you're looking for Apollo Client SSR support for PostGraphile without a
+network roundtrip, check out
+<a href="https://github.com/graphile/starter/blob/93a887cc87ea8b19eb048b72e9fb3308bc1d5a82/%40app/lib/src/GraphileApolloLink.ts">GraphileApolloLink in Graphile Starter</a>.</strong></p>
 <p>The first function you will need is <code class="language-text">createPostGraphileSchema</code> (or
 <code class="language-text">watchPostGraphileSchema</code> if you want to get a new schema each time the database
 is updated) which creates your PostGraphile GraphQL schema by introspecting your
@@ -207,8 +210,8 @@ this).</li>
 generation (you almost definitely don't want this!).</li>
 <li><code class="language-text">skipPlugins</code>: An array of <a href="/graphile-build/plugins/">Graphile Engine</a>
 schema plugins to skip.</li>
-<li><code class="language-text">readCache</code>: A file path string. Reads cached values from local cache file
-to improve startup time (you may want to do this in production).</li>
+<li><code class="language-text">readCache</code>: A file path string or an object. Reads cached values from local
+cache file to improve startup time (you may want to do this in production).</li>
 <li><code class="language-text">writeCache</code>: A file path string. Writes computed values to local cache file
 so startup can be faster (do this during the build phase).</li>
 <li><code class="language-text">jwtSecret</code>: The secret for your JSON web tokens. This will be used to
@@ -324,8 +327,8 @@ file. Since it's generated you can exclude this file from source control if
 you want to, but it is handy to see differences in the schema during
 check-ins and is useful for other tooling such as <code class="language-text">eslint-plugin-graphql</code>.</li>
 <li>Import the mentioned <code class="language-text">npm</code> packages. You can find more plugins on their
-website in the <a href="https://graphql-code-generator.com/docs/plugins/index/">Plugins</a>
-section.</li>
+website in the
+<a href="https://graphql-code-generator.com/docs/plugins/index/">Plugins</a> section.</li>
 <li>
 <p>Create a file <code class="language-text">codegen.yml</code> in the root of your workspace.</p>
 <div class="gatsby-highlight" data-language="yaml"><pre class="language-yaml"><code class="language-yaml"><span class="token key atrule">overwrite</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
