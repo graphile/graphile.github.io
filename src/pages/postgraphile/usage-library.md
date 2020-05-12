@@ -224,8 +224,8 @@ which are optional. The below options are valid for
     generation (you almost definitely don't want this!).
   - `skipPlugins`: An array of [Graphile Engine](/graphile-build/plugins/)
     schema plugins to skip.
-  - `readCache`: A file path string. Reads cached values from local cache file
-    to improve startup time (you may want to do this in production).
+  - `readCache`: A file path string or an object. Reads cached values from local
+    cache file to improve startup time (you may want to do this in production).
   - `writeCache`: A file path string. Writes computed values to local cache file
     so startup can be faster (do this during the build phase).
   - `exportJsonSchemaPath`: Enables saving the detected schema, in JSON format,

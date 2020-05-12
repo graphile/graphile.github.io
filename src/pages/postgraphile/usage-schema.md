@@ -9,9 +9,12 @@ your own GraphQL server. However, if you want to execute a PostGraphile query in
 Node.js without having to go through HTTP you can use some other exported
 functions that PostGraphile provides.
 
-**To see an example, check out the [Graphile Cookbook Schema Only Example](https://github.com/graphile/cookbook/tree/master/examples/schema_only).**
+**To see an example, check out the
+[Graphile Cookbook Schema Only Example](https://github.com/graphile/cookbook/tree/master/examples/schema_only).**
 
-**If you're looking for Apollo Client SSR support for PostGraphile without a network roundtrip, check out [GraphileApolloLink in Graphile Starter](https://github.com/graphile/starter/blob/93a887cc87ea8b19eb048b72e9fb3308bc1d5a82/%40app/lib/src/GraphileApolloLink.ts).**
+**If you're looking for Apollo Client SSR support for PostGraphile without a
+network roundtrip, check out
+[GraphileApolloLink in Graphile Starter](https://github.com/graphile/starter/blob/93a887cc87ea8b19eb048b72e9fb3308bc1d5a82/%40app/lib/src/GraphileApolloLink.ts).**
 
 The first function you will need is `createPostGraphileSchema` (or
 `watchPostGraphileSchema` if you want to get a new schema each time the database
@@ -153,8 +156,8 @@ instead (see below). The below options are valid for
     generation (you almost definitely don't want this!).
   - `skipPlugins`: An array of [Graphile Engine](/graphile-build/plugins/)
     schema plugins to skip.
-  - `readCache`: A file path string. Reads cached values from local cache file
-    to improve startup time (you may want to do this in production).
+  - `readCache`: A file path string or an object. Reads cached values from local
+    cache file to improve startup time (you may want to do this in production).
   - `writeCache`: A file path string. Writes computed values to local cache file
     so startup can be faster (do this during the build phase).
   - `jwtSecret`: The secret for your JSON web tokens. This will be used to
@@ -281,8 +284,8 @@ Steps to get the backend typing support:
    you want to, but it is handy to see differences in the schema during
    check-ins and is useful for other tooling such as `eslint-plugin-graphql`.
 4. Import the mentioned `npm` packages. You can find more plugins on their
-   website in the [Plugins](https://graphql-code-generator.com/docs/plugins/index/)
-   section.
+   website in the
+   [Plugins](https://graphql-code-generator.com/docs/plugins/index/) section.
 5. Create a file `codegen.yml` in the root of your workspace.
    ```yaml
    overwrite: true
