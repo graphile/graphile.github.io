@@ -65,7 +65,7 @@ extension must be `.json5`) and is formatted like this:
          * We've added a shortcut to class-types so you can tag/describe
          * columns at the same time of the class.
          */
-        columns: {
+        attribute: {
           /*
            * Assuming `body` is one of the columns in the 'post' table.
            */
