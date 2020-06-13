@@ -154,7 +154,11 @@ which are optional. The below options are valid for
     schema; PostGraphile will try to add this itself but requires DB superuser
     privileges to do so. If PostGraphile can't install it, you can do so
     manually. PostGraphile will not drop the schema when it exits, to remove it
-    you can execute: `DROP SCHEMA postgraphile_watch CASCADE;`
+    you can execute: `DROP SCHEMA postgraphile_watch CASCADE;`. Some database
+    services don't provide superuser privileges, so postgraphile_watch can't be
+    reacted. In this cases you can NOTIFY manually using command `NOTIFY postgraphile_watch, '{"type": "manual"}';`.
+    Also to stop trying to create schema you can use flag
+    `{graphileBuildOptions:{pgSkipInstallingWatchFixtures: true}}`.
   - `retryOnInitFail`: When false (default), PostGraphile will exit if it fails
     to build the initial schema (for example if it cannot connect to the
     database, or if there are fatal naming conflicts in the schema). When true,
