@@ -54,6 +54,12 @@ set GRAPHILE_LICENSE="license_key_from_graphile_store" & postgraphile -c postgre
 $env:GRAPHILE_LICENSE="license_key_from_graphile_store"; postgraphile -c postgres://...
 ```
 
+**IMPORTANT**: these plugins do not "phone home" so you'll need to update your 
+license at least once every 9 months. You can check the expiry date of your
+current license
+[in the Graphile Store validator](https://store.graphile.com/validate) and log
+in to generate a new license code.
+
 For more information, see the FAQ at the bottom of the
 [Go Pro!](/postgraphile/pricing/) page.
 
