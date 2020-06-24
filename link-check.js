@@ -10,6 +10,8 @@ const fetch = require("node-fetch");
 const pMap = require("p-map");
 const Entities = require("html-entities").AllHtmlEntities;
 
+const CACHED_VALID_URLS_FILE_PATH = `${__dirname}/.cachedValidUrls.json`;
+
 const entities = new Entities();
 
 const base = `${__dirname}/public`;
@@ -49,27 +51,48 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
  */
 const queueByHost = {};
 const cachedCheckByUrl = {};
+/**
+ * So we don't need to check again next time
+ */
+const validUrls = [];
+try {
+  const cached = require(CACHED_VALID_URLS_FILE_PATH);
+  validUrls.push(...cached);
+} catch (e) {
+  /* noop */
+}
+
 const checkLinkResolution = memoize(url => {
   if (!cachedCheckByUrl[url]) {
-    cachedCheckByUrl[url] = (async () => {
-      const { host } = new URL(url);
-      if (!queueByHost[host]) {
-        queueByHost[host] = Promise.resolve();
-      }
-      const deferred = defer();
-      const previous = queueByHost[host];
-      queueByHost[host] = previous
-        .finally(() => sleep(200))
-        .then(() =>
-          fetch(url, {
-            headers: {
-              "user-agent": "GraphileLinkChecker/0.1",
-            },
-          })
-        )
-        .then(deferred.resolve, deferred.reject);
-      return deferred;
-    })();
+    cachedCheckByUrl[url] = validUrls.includes(url)
+      ? Promise.resolve({ ok: true })
+      : (async () => {
+          const { host } = new URL(url);
+          if (!queueByHost[host]) {
+            queueByHost[host] = Promise.resolve();
+          }
+          const deferred = defer();
+          const previous = queueByHost[host];
+          queueByHost[host] = previous
+            .finally(() => sleep(300))
+            .then(async () => {
+              console.log(`Fetching (queue=${host}) '${url}'`);
+              const res = await fetch(url, {
+                headers: {
+                  "user-agent": "GraphileLinkChecker/0.1",
+                },
+              });
+              if (res.ok) {
+                // Add to list
+                validUrls.push(url);
+                return res;
+              } else {
+                return res;
+              }
+            })
+            .then(deferred.resolve, deferred.reject);
+          return deferred;
+        })();
   }
   return cachedCheckByUrl[url];
 });
@@ -120,6 +143,7 @@ pMap(
     const isMailto = /^mailto:/.test(trimmed);
     const isGraphile = /^https?:\/\/(www\.)?graphile\.(org|meh)/.test(trimmed);
     const isYoutube = /^https?:\/\/(www\.)?youtube.com(\/|$)/.test(trimmed);
+    const isTwitter = /^https?:\/\/(www\.)?twitter.com(\/|$)/.test(trimmed);
     const isLocalhost = /^https?:\/\/(localhost|127\.0\.0\.1|0\.0\.0\.0)/.test(
       trimmed
     );
@@ -162,6 +186,9 @@ pMap(
       return;
     } else if (isYoutube) {
       // YouTube sometimes gets upset and returns 429; we'll just allow it.
+      return;
+    } else if (isTwitter) {
+      // Twitter sometimes gets upset and returns 429; we'll just allow it.
       return;
     } else if (isHTTP) {
       const matches = trimmed.match(
@@ -250,7 +277,7 @@ pMap(
       `${filePretty} has disallowed link to '${link}' (none of the other validation rules matched)`
     );
   },
-  { concurrency: 6 }
+  { concurrency: 12 }
 )
   .catch(e => {
     console.error();
@@ -267,4 +294,10 @@ pMap(
       console.log();
       console.log(`${fileLinks.length} links checked - all passed 💪`);
     }
+  })
+  .then(() => {
+    fs.writeFileSync(
+      CACHED_VALID_URLS_FILE_PATH,
+      JSON.stringify(validUrls.sort(), null, 2)
+    );
   });
