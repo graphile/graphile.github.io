@@ -148,17 +148,22 @@ which are optional. The below options are valid for
 - **`options`**: An object containing other miscellaneous options. Options
   include: <!-- prettier-ignore-start --><!-- LIBRARY_DOCBLOCK_BEGIN -->
   - `watchPg`: When true, PostGraphile will update the GraphQL API whenever your
-    database schema changes. This feature requires some changes to your database
-    in the form of the
-    [`postgraphile_watch`](https://github.com/graphile/graphile-engine/blob/master/packages/graphile-build-pg/res/watch-fixtures.sql)
-    schema; PostGraphile will try to add this itself but requires DB superuser
-    privileges to do so. If PostGraphile can't install it, you can do so
-    manually. PostGraphile will not drop the schema when it exits, to remove it
-    you can execute: `DROP SCHEMA postgraphile_watch CASCADE;`. Some database
-    services don't provide superuser privileges, so postgraphile_watch can't be
-    reacted. In this cases you can NOTIFY manually using command `NOTIFY postgraphile_watch, '{"type": "manual"}';`.
-    Also to stop trying to create schema you can use flag
-    `{graphileBuildOptions:{pgSkipInstallingWatchFixtures: true}}`.
+    database schema changes. By default, this flag will attempt to install an "event
+    trigger" and related functions into your database in the form of a
+    self-contained [`postgraphile_watch` schema](https://github.com/graphile/graphile-engine/blob/master/packages/graphile-build-pg/res/watch-fixtures.sql).
+    Installing event triggers requires PostGraphile to have DB superuser privileges (e.g. via the `ownerConnectionString` configuration option).
+    If PostGraphile can't install this schema, you may choose to do so
+    manually by running the previously linked database schema script against
+    your database; to silence the warnings about PostGraphile not being able to
+    install the watch fixtures itself, you can merge the following object with your
+    `options`: `{ graphileBuildOptions: { pgSkipInstallingWatchFixtures: true } }`,
+    this will prevent PostGraphile from attempting to install this schema itself.
+    PostGraphile does not drop the `postgraphile_watch` schema when it exits (there may be multiple
+    PostGraphile instances depending on the schema), to remove it
+    yourself, execute: `DROP SCHEMA postgraphile_watch CASCADE;`. Some database
+    providers don't allow for superuser privileges, preventing this custom schema from
+    being installed; in this case, you can manually trigger a schema rebuild
+    using PostgreSQL's LISTEN/NOTIFY by issuing the command `NOTIFY postgraphile_watch, '{"type": "manual"}';`.
   - `retryOnInitFail`: When false (default), PostGraphile will exit if it fails
     to build the initial schema (for example if it cannot connect to the
     database, or if there are fatal naming conflicts in the schema). When true,
