@@ -101,7 +101,7 @@ create table users (
   offset itself you should do so in a separate column. You should always use
   this date type:
   https://wiki.postgresql.org/wiki/Don't_Do_This#Don.27t_use_timestamp_.28without_time_zone.29
-- `default` if the column is not specified, what should it's value default to
+- `default` if the column is not specified, what should its value default to
   (only applies to `INSERT`)
 
 #### Creating roles
