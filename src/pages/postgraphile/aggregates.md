@@ -15,7 +15,7 @@ need aggregates good starting points are:
 - The [@graphile/pg-aggregates](https://github.com/graphile/pg-aggregates)
   module which adds `sum` aggregates to the schema (more to come)
 - The [Discord chat](http://discord.gg/graphile) (feel free to @benjie in
-  #help-and-support)
+  \#help-and-support)
 
 ### Aggregates ignore pagination info
 
