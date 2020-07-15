@@ -18,6 +18,12 @@ fi
 git checkout master
 cp -af ../public/* ./
 echo 'www.graphile.org' > CNAME
-git add .
-git commit -m"Deploy $DATE"
-git push origin master
+
+git update-index -q --really-refresh
+if ! git diff-index --exit-code --name-status HEAD --; then
+  git add .
+  git commit -m"Deploy $DATE"
+  git push origin master
+else
+  echo "No changes to deploy"
+fi
