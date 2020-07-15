@@ -55,6 +55,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><a href="/postgraphile/usage-schema/#api-watchpostgraphileschemapgconfig-schemaname-options-onnewschema">API: <code>watchPostGraphileSchema(...)</code></a></li>
 <li><a href="/postgraphile/usage-schema/#api-withpostgraphilecontextoptions-callback">API: <code>withPostGraphileContext(...)</code></a></li>
 <li><a href="/postgraphile/usage-schema/#even-lower-level-access">Even lower level access</a></li>
+<li><a href="/postgraphile/usage-schema/#calling-a-resolver-from-a-resolver">Calling a resolver from a resolver</a></li>
 </ul>
 </li>
 </ul>
@@ -293,6 +294,66 @@ value of <code class="language-text">withPostGraphileContext</code>.</li>
 <h3 id="even-lower-level-access"><a href="#even-lower-level-access" aria-label="even lower level access permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Even lower level access</h3>
 <p>If you really want to get into the nitty-gritty of what's going on, then take a
 look at the <code class="language-text">postgraphile-core</code> and <code class="language-text">graphile-build-pg</code> modules.</p>
+<h3 id="calling-a-resolver-from-a-resolver"><a href="#calling-a-resolver-from-a-resolver" aria-label="calling a resolver from a resolver permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Calling a resolver from a resolver</h3>
+<p>You can issue GraphQL requests from various contexts, including within a resolver. To do so you need the following:</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">* Access to the `graphql` function from the `graphql` module
+
+  * In a PostGraphile plugin, if you have access to the build object (which you usually will), you should get this from `build.graphql.graphql`
+  * Failing that, you can `import { graphql } from &#39;graphql&#39;` or `const { graphql } = require(&#39;graphql&#39;)`, but this has caveats.
+
+* A reference to the GraphQL schema object. You can get this from many sources:
+
+  * in a resolver, you should extract it from `info.schema`
+  * if you have access to the PostGraphile middleware, you can issue `await postgraphileMiddleware.getGqlSchema()`
+  * if you don&#39;t need the PostGraphile middleware, you can use `await createPostGraphileSchema(...)` - see [schema only usage](https://www.graphile.org/postgraphile/usage-schema/) - do this once and cache it because it&#39;s expensive to compute
+
+* A GraphQL operation (aka query, but includes mutations, subscriptions) to execute; this can be a string or an AST
+
+* The variables to feed to the operation (if necessary)
+
+* A valid GraphQL context for PostGraphile
+
+  * inside a resolver, you can just pass the resolvers context straight through
+  * in other situations, have a look at `withPostGraphileContext` in the [schema only usage](/postgraphile/usage-schema/)</code></pre></div>
+<p>Issuing a GraphQL operation from inside a resolver example:</p>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token comment">/*
+ * Assuming you have access to a `build` object, e.g. inside a
+ * `makeExtendSchemaPlugin`, you can extract the `graphql` function
+ * from the `graphql` library here like so:
+ */</span>
+<span class="token keyword">const</span> <span class="token punctuation">{</span> graphql<span class="token punctuation">:</span> <span class="token punctuation">{</span> graphql <span class="token punctuation">}</span> <span class="token punctuation">}</span> <span class="token operator">=</span> build<span class="token punctuation">;</span>
+<span class="token comment">/*
+ * Failing the above: `import { graphql } from 'graphql';` but beware of
+ * duplicate `graphql` modules in your `node_modules` causing issues.
+ */</span>
+
+<span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">myResolver</span><span class="token punctuation">(</span><span class="token parameter">parent<span class="token punctuation">,</span> args<span class="token punctuation">,</span> context<span class="token punctuation">,</span> info</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// Whatever GraphQL query you wish to issue:</span>
+  <span class="token keyword">const</span> document <span class="token operator">=</span> <span class="token comment">/* GraphQL */</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+    query MyQuery($userId: Int!) {
+      userById(id: $userId) {
+        username
+      }
+    }
+  </span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+  <span class="token comment">// The name of the operation in your query document (optional)</span>
+  <span class="token keyword">const</span> operationName <span class="token operator">=</span> <span class="token string">'MyQuery'</span><span class="token punctuation">;</span>
+  <span class="token comment">// The variables for the query</span>
+  <span class="token keyword">const</span> variables <span class="token operator">=</span> <span class="token punctuation">{</span> userId<span class="token punctuation">:</span> args<span class="token punctuation">.</span>userId <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">const</span> <span class="token punctuation">{</span> data<span class="token punctuation">,</span> errors <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">graphql</span><span class="token punctuation">(</span>
+    info<span class="token punctuation">.</span>schema<span class="token punctuation">,</span>
+    document<span class="token punctuation">,</span>
+    <span class="token keyword">null</span><span class="token punctuation">,</span>
+    context<span class="token punctuation">,</span>
+    variables<span class="token punctuation">,</span>
+    operationName
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// TODO: error handling</span>
+
+  <span class="token keyword">return</span> data<span class="token punctuation">.</span>userById<span class="token punctuation">.</span>username<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
 <h1 id="server-side-typescript-support"><a href="#server-side-typescript-support" aria-label="server side typescript support permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Server-side TypeScript support</h1>
 <p>PostGraphile takes care of building and serving a GraphQL API for various
 clients to use. But it is not only possible to use the API from external
