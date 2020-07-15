@@ -18,9 +18,9 @@ git checkout -- src/pages/postgraphile/usage-*.md
 if [ "$GITHUB_TOKEN" != "" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "develop" ]; then
   echo "GITHUB_TOKEN is specified"
 
-  # git diff-index only looks at modified timestamps; this 'git status' call
+  # git diff-index only looks at modified timestamps; this update-index call
   # forces git to recognise that certain files are unmodified.
-  git status
+  git update-index -q --really-refresh
   if ! git diff-index --exit-code --name-status HEAD --; then
     echo "But first; there were changes so lets try and push those back to 'develop'"
     git add -u
