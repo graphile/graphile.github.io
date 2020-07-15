@@ -18,22 +18,12 @@ git checkout -- src/pages/postgraphile/usage-*.md
 if [ "$GITHUB_TOKEN" != "" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "develop" ]; then
   echo "GITHUB_TOKEN is specified"
 
-  if ! git diff-index --exit-code --name-only HEAD --; then
+  # git diff-index only looks at modified timestamps; this 'git status' call
+  # forces git to recognise that certain files are unmodified.
+  git status
+  if ! git diff-index --exit-code --name-status HEAD --; then
     echo "But first; there were changes so lets try and push those back to 'develop'"
-    set -x
-    # Checkout new branch so we're not in 'detatched head' mode
-    git checkout -b ci/$(date +"%Y%m%d_%H%M%S")
-    git status
-
     git add -u
-
-    git status
-
-    # Workaround issue on Travis CI
-    git add .cachedValidUrls.json
-
-    git status
-
     git commit -m"Fixes from CI"
 
     # I really hope this doesn't cause an infinite CI loop
