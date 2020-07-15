@@ -268,7 +268,7 @@ You can issue GraphQL requests from various contexts, including within a resolve
     * A valid GraphQL context for PostGraphile
 
       * inside a resolver, you can just pass the resolvers context straight through
-      * in other situations, have a look at `withPostGraphileContext` in the [schema only usage](https://www.graphile.org/postgraphile/usage-schema/)
+      * in other situations, have a look at `withPostGraphileContext` in the [schema only usage](/postgraphile/usage-schema/)
 
 Issuing a GraphQL operation from inside a resolver example:
 
@@ -284,7 +284,7 @@ const { graphql: { graphql } } = build;
  * duplicate `graphql` modules in your `node_modules` causing issues.
  */
 
-function myResolver(parent, args, context, info) {
+async function myResolver(parent, args, context, info) {
   // Whatever GraphQL query you wish to issue:
   const document = /* GraphQL */ `
     query MyQuery($userId: Int!) {
@@ -306,6 +306,8 @@ function myResolver(parent, args, context, info) {
     variables,
     operationName
   );
+  
+  // TODO: error handling
 
   return data.userById.username;
 }
