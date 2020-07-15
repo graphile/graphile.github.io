@@ -21,6 +21,8 @@ if [ "$GITHUB_TOKEN" != "" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRA
   if ! git diff-index --exit-code --name-only HEAD --; then
     echo "But first; there were changes so lets try and push those back to 'develop'"
     set -x
+    # Checkout new branch so we're not in 'detatched head' mode
+    git checkout -b ci/$(date +"%Y%m%d_%H%M%S")
     git status
 
     git add -u
