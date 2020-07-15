@@ -21,6 +21,8 @@ if [ "$GITHUB_TOKEN" != "" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRA
   if ! git diff-index --exit-code --name-only HEAD --; then
     echo "But first; there were changes so lets try and push those back to 'develop'"
     git add -u
+    # Workaround issue on Travis CI
+    git add .cachedValidUrls.json
     git commit -m"Fixes from CI"
 
     # I really hope this doesn't cause an infinite CI loop
