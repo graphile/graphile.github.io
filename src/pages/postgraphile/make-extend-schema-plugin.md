@@ -233,6 +233,17 @@ app.listen(3030);
 
 ### The `selectGraphQLResultFromTable` helper
 
+**IMPORTANT**: this helper is for populating data you return from your
+\*resolver; you _should not_ use `selectGraphQLResultFromTable` to retrieve data
+for your resolver to process. Instead use `context.pgClient` directly.
+
+**IMPORTANT**: `selectGraphQLResultFromTable` should only be called once per
+resolver; it doesn't make sense to call it multiple times, and attempting to
+combine the results is liable to cause issues. If you feel the need to call it
+multiple times, please read the IMPORTANT note above, and/or consider
+implementing your requirement via multiple fields/resolvers rather than trying
+to do it all in one.
+
 Resolvers are passed 4 arguments: `parent, args, context, resolveInfo`. In the
 `context.pgClient` is an instance of a database client from the `pg` module
 that's already in a transaction configured with the settings for this particular
@@ -250,11 +261,34 @@ your GraphQL field. It is responsible for hooking into the query look-ahead
 features of Graphile Engine to inspect the incoming GraphQL query and pull down
 the relevant data from the database (including nested relations). You are then
 expected to return the result of this fetch via your resolver. You can use the
-`queryBuilder` object to customise the generated query, changing the order,
+`queryBuilder` object to customize the generated query, changing the order,
 adding `where` clauses, `limit`s, etc (see below). Note that if you are not
 returning a record type directly (for example you're returning a mutation
 payload, or a connection interface), you should use the `@pgField` directive as
 shown below so that the Look Ahead feature continues to work.
+
+#### Usage for non-tables
+
+Despite the (unfortunate) name; `selectGraphQLResultFromTable` can be used with
+any table-like source, including a table-defining sub-query, however it should
+only be used where the type perfectly matches the expected return type of the
+GraphQL field.
+
+This non-table support is particularly useful when it comes to calling
+functions; for example if you had a function `match_user()` that returns a
+`users` record, you could define a `makeExtendSchemaPlugin` resolver that
+queries it like this:
+
+```js
+// type Query { matchingUser(searchText: String!): User }
+const matchingUserResolver = async (parent, args, context, resolveInfo) => {
+  const [row] = await resolveInfo.graphile.selectGraphQLResultFromTable(
+    sql.fragment`(select * from match_user(${sql.value(args.searchText)}))`,
+    () => {} // no-op
+  );
+  return row;
+};
+```
 
 #### QueryBuilder
 
@@ -502,7 +536,7 @@ const MyRegisterUserMutationPlugin = makeExtendSchemaPlugin(build => {
 Note that the `@pgField` directive here is necessary for PostGraphile to "look
 ahead" and determine what to request from the database.
 
-#### Mutation Example with Node ID
+### Mutation Example with Node ID
 
 In this example we'll use a GraphQL Global Object Identifier (aka Node ID) to
 soft-delete an entry from our `app_public.items` table. We're also going to
