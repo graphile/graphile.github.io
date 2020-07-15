@@ -246,6 +246,73 @@ look at the `postgraphile-core` and `graphile-build-pg` modules.
 [graphql-js]: https://www.npmjs.com/package/graphql
 [`pg-pool`]: https://www.npmjs.com/package/pg-pool
 
+### Calling a resolver from a resolver
+
+You can issue GraphQL requests from various contexts, including within a resolver. To do so you need the following:
+
+    * Access to the `graphql` function from the `graphql` module
+
+      * In a PostGraphile plugin, if you have access to the build object (which you usually will), you should get this from `build.graphql.graphql`
+      * Failing that, you can `import { graphql } from 'graphql'` or `const { graphql } = require('graphql')`, but this has caveats.
+
+    * A reference to the GraphQL schema object. You can get this from many sources:
+
+      * in a resolver, you should extract it from `info.schema`
+      * if you have access to the PostGraphile middleware, you can issue `await postgraphileMiddleware.getGqlSchema()`
+      * if you don't need the PostGraphile middleware, you can use `await createPostGraphileSchema(...)` - see [schema only usage](https://www.graphile.org/postgraphile/usage-schema/) - do this once and cache it because it's expensive to compute
+
+    * A GraphQL operation (aka query, but includes mutations, subscriptions) to execute; this can be a string or an AST
+
+    * The variables to feed to the operation (if necessary)
+
+    * A valid GraphQL context for PostGraphile
+
+      * inside a resolver, you can just pass the resolvers context straight through
+      * in other situations, have a look at `withPostGraphileContext` in the [schema only usage](/postgraphile/usage-schema/)
+
+Issuing a GraphQL operation from inside a resolver example:
+
+```js
+/*
+ * Assuming you have access to a `build` object, e.g. inside a
+ * `makeExtendSchemaPlugin`, you can extract the `graphql` function
+ * from the `graphql` library here like so:
+ */
+const { graphql: { graphql } } = build;
+/*
+ * Failing the above: `import { graphql } from 'graphql';` but beware of
+ * duplicate `graphql` modules in your `node_modules` causing issues.
+ */
+
+async function myResolver(parent, args, context, info) {
+  // Whatever GraphQL query you wish to issue:
+  const document = /* GraphQL */ `
+    query MyQuery($userId: Int!) {
+      userById(id: $userId) {
+        username
+      }
+    }
+  `;
+  // The name of the operation in your query document (optional)
+  const operationName = 'MyQuery';
+  // The variables for the query
+  const variables = { userId: args.userId };
+
+  const { data, errors } = await graphql(
+    info.schema,
+    document,
+    null,
+    context,
+    variables,
+    operationName
+  );
+  
+  // TODO: error handling
+
+  return data.userById.username;
+}
+```
+
 # Server-side TypeScript support
 
 PostGraphile takes care of building and serving a GraphQL API for various
