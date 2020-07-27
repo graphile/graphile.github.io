@@ -521,14 +521,12 @@ command. The triggers will run before a row is updated by the
 [`UPDATE`](https://www.postgresql.org/docs/current/static/sql-update.html)
 command and will execute the function on every row being updated.
 
-> **Note:** If you want to do some CPU intensive work in triggers, perhaps
-> consider using Postgres’s pub/sub functionality by running the
-> [`NOTIFY`](https://www.postgresql.org/docs/current/static/sql-notify.html)
-> command in triggers and then use the
-> [`LISTEN`](https://www.postgresql.org/docs/current/static/sql-listen.html)
-> command in a worker service. If Node.js is your platform of choice, you could
-> use the [`pg-pubsub`](https://www.npmjs.com/package/pg-pubsub) package to make
-> listening easier.
+> **Note:** If you want to do some CPU intensive work in triggers, and if Node.js
+> is your platform of choice, then consider using 
+> [`graphile-worker`](https://github.com/graphile/worker), 
+> which uses this pattern in a fail-safe way.
+> Graphile-worker allows you to run jobs "in the background" so that your 
+> HTTP response/application code is not held up.
 
 ---
 
