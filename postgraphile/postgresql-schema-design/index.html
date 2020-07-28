@@ -512,14 +512,17 @@ command. The triggers will run before a row is updated by the
 <a href="https://www.postgresql.org/docs/current/static/sql-update.html"><code class="language-text">UPDATE</code></a>
 command and will execute the function on every row being updated.</p>
 <blockquote>
-<p><strong>Note:</strong> If you want to do some CPU intensive work in triggers, perhaps
-consider using Postgres’s pub/sub functionality by running the
-<a href="https://www.postgresql.org/docs/current/static/sql-notify.html"><code class="language-text">NOTIFY</code></a>
-command in triggers and then use the
-<a href="https://www.postgresql.org/docs/current/static/sql-listen.html"><code class="language-text">LISTEN</code></a>
-command in a worker service. If Node.js is your platform of choice, you could
-use the <a href="https://www.npmjs.com/package/pg-pubsub"><code class="language-text">pg-pubsub</code></a> package to make
-listening easier.</p>
+<p><strong>Note:</strong> If you find yourself wanting to do CPU intensive work in triggers,
+instead consider using Postgres’ pub/sub functionality
+(<a href="https://www.postgresql.org/docs/current/static/sql-listen.html"><code class="language-text">LISTEN</code></a> /
+<a href="https://www.postgresql.org/docs/current/static/sql-notify.html"><code class="language-text">NOTIFY</code></a>) to
+send the work to a "worker service" to be executed asynchronously.
+<a href="https://github.com/graphile/worker">Graphile Worker</a> uses this pattern in a
+fail-safe way; allowing you to run jobs "in the background" so that your HTTP
+response/application code is not held up. We recommend using Graphile Worker
+with any Node.js based PostgreSQL database that needs to queue actions such as
+sending emails, push notifications, generating PDF reports and other such
+asynchronous tasks.</p>
 </blockquote>
 <hr>
 <p>That’s about it as far as Postgres functions go! They are a fun, interesting,
