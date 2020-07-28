@@ -39,7 +39,7 @@ const services = {
 
 for (const [service, connectionString] of Object.entries(services)) {
   app.use(
-    postgraphile(services.notification, "public", {
+    postgraphile(connectionString, "public", {
       graphiql: true,
       graphqlRoute: `/${service}/graphql`,
       graphiqlRoute: `/${service}/graphiql`,
