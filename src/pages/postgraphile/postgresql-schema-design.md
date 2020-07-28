@@ -523,15 +523,15 @@ command and will execute the function on every row being updated.
 
 > **Note:** If you find yourself wanting to do CPU intensive work in triggers,
 > instead consider using Postgres’ pub/sub functionality
-> ([`LISTEN`](https://www.postgresql.org/docs/current/static/sql-listen.html)
-> / [`NOTIFY`](https://www.postgresql.org/docs/current/static/sql-notify.html))
-> to send the work to a "worker service" to be executed asynchronously. 
-> [Graphile Worker](https://github.com/graphile/worker) uses this pattern 
-> in a fail-safe way; allowing you to run jobs "in the background" so that
-> your HTTP response/application code is not held up. We recommend using
-> Graphile Worker with any Node.js based PostgreSQL database that needs to
-> queue actions such as sending emails, push notifications, generating PDF
-> reports and other such asynchronous tasks.
+> ([`LISTEN`](https://www.postgresql.org/docs/current/static/sql-listen.html) /
+> [`NOTIFY`](https://www.postgresql.org/docs/current/static/sql-notify.html)) to
+> send the work to a "worker service" to be executed asynchronously.
+> [Graphile Worker](https://github.com/graphile/worker) uses this pattern in a
+> fail-safe way; allowing you to run jobs "in the background" so that your HTTP
+> response/application code is not held up. We recommend using Graphile Worker
+> with any Node.js based PostgreSQL database that needs to queue actions such as
+> sending emails, push notifications, generating PDF reports and other such
+> asynchronous tasks.
 
 ---
 
