@@ -320,6 +320,12 @@
         ]
       },
       {
+        "to": "/postgraphile/enums/",
+        "title": "Enums",
+        "sectionId": "basics",
+        "subpages": []
+      },
+      {
         "to": "/postgraphile/views/",
         "title": "Views",
         "sectionId": "basics",
