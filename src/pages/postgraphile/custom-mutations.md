@@ -100,6 +100,30 @@ app.use(
 To use it with the CLI you need to do similar using the `.postgraphilerc.js`
 file.
 
+### SETOF Mutation
+
+If you're wanting to create a bulk insert custom mutation that returns a setof, see the example implementation below.
+
+### Example
+```sql
+CREATE OR REPLACE FUNCTION create_documents(num integer, type text, location text)
+RETURNS SETOF document AS $$
+
+DECLARE
+temp_document document;
+
+BEGIN
+FOR i IN 1..num LOOP
+	INSERT INTO document (type, location) VALUES (create_documents.type, create_documents.location) RETURNING * INTO temp_document;
+	RETURN NEXT temp_document;
+END LOOP;
+
+RETURN;
+END;
+$$ LANGUAGE plpgsql VOLATILE STRICT SECURITY INVOKER;
+
+```
+
 A note on **named types**: if you have a function that
 `RETURNS SETOF table(a int, b text)` then PostGraphile will not _currently_ pick
 it up due to the
