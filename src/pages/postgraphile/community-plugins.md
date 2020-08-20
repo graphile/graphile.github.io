@@ -69,6 +69,8 @@ Schema extension plugins for PostGraphile:
 - [postgraphile-plugin-zombodb](https://github.com/mlipscombe/postgraphile-plugin-zombodb) -
   adds advanced search capabilities using
   [ZomboDB](https://github.com/zombodb/zombodb) and ElasticSearch
+- [postgraphile-plugin-many-create-update-delete](https://github.com/tjmoses/postgraphile-plugin-many-create-update-delete) -
+  generates batch create, update, & delete mutations
 
 Examples of using these plugins:
 
