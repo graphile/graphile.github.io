@@ -100,12 +100,26 @@ app.use(
 To use it with the CLI you need to do similar using the `.postgraphilerc.js`
 file.
 
-A note on **named types**: if you have a function that
-`RETURNS SETOF table(a int, b text)` then PostGraphile will not _currently_ pick
+### Bulk Insert Example
+
+Here's an example of a custom mutation that performs a "bulk insert" - inserting and returning a set of records:
+
+```sql
+CREATE FUNCTION app_public.create_documents(num integer, type text, location text)
+RETURNS SETOF app_public.document
+AS $$
+  INSERT INTO app_public.document (type, location)
+    SELECT create_documents.type, create_documents.location
+    FROM generate_series(1, num) i
+    RETURNING *;
+$$ LANGUAGE sql STRICT VOLATILE;
+```
+
+A note on **anonymous types**: if you have a function that
+`RETURNS SETOF TABLE(a int, b text)` (an anonymous record type) then PostGraphile will not _currently_ pick
 it up due to the
 [common PostGraphile function restrictions](/postgraphile/function-restrictions/).
-Work is underway to lift these restrictions, but it's easy to work around for
-now - just define a named type:
+It's easy to work around - define a named type:
 
 ```sql
 CREATE TYPE my_function_return_type AS (
