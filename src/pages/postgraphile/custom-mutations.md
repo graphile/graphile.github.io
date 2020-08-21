@@ -102,7 +102,8 @@ file.
 
 ### Bulk Insert Example
 
-Here's an example of a custom mutation that performs a "bulk insert" - inserting and returning a set of records:
+Here's an example of a custom mutation that performs a "bulk insert" - inserting
+and returning a set of records:
 
 ```sql
 CREATE FUNCTION app_public.create_documents(num integer, type text, location text)
@@ -116,8 +117,8 @@ $$ LANGUAGE sql STRICT VOLATILE;
 ```
 
 A note on **anonymous types**: if you have a function that
-`RETURNS SETOF TABLE(a int, b text)` (an anonymous record type) then PostGraphile will not _currently_ pick
-it up due to the
+`RETURNS SETOF TABLE(a int, b text)` (an anonymous record type) then
+PostGraphile will not _currently_ pick it up due to the
 [common PostGraphile function restrictions](/postgraphile/function-restrictions/).
 It's easy to work around - define a named type:
 
