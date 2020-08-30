@@ -527,6 +527,33 @@ app.use(postgraphile(connectionString, schema, options));
 This example uses Express, but a similar approach is possible with other Node.js
 webservers.
 
+### handleErrors
+
+Optionally you may specify a `handleErrors` function as part of the PostGraphile
+options. This function will be passed the list of errors that occurred during
+the GraphQL operation (if any occurred) and must return this same list, or a
+list that will be used to replace the errors.
+
+In [GraphQL.js](https://github.com/graphql/graphql-js), all errors are wrapped
+in
+[a `GraphQLError` object](https://github.com/graphql/graphql-js/blob/6bb002d74d32067540c0dc8401c977520fa1ed20/src/error/GraphQLError.js).
+You can get to the original error that was thrown from a resolver via the
+`originalError` property on the GraphQLError, however some errors might be
+GraphQL query validation or other error types that don't have an
+`originalError`. Further some errors might be provided by PostGraphile itself
+rather than GraphQL, so might not be GraphQLError objects.
+
+The original error could be thrown from any number of places (especially if
+you're using plugins) but if it is thrown from PostgreSQL, then it might be a
+[pg DatabaseError error](https://github.com/brianc/node-postgres/blob/95b5daadaade40ea343c0d3ad09ab230fa2ade4c/packages/pg-protocol/src/messages.ts#L97-L117).
+
+Errors are detailed in
+[the GraphQL Spec](https://spec.graphql.org/June2018/#sec-Errors), so be sure
+that the errors you return from `handleErrors` conform to these rules.
+
+You can find
+[an example of `handleErrors` in Graphile Starter](https://github.com/graphile/starter/blob/d90cdc7560b01a2bc2847a72307383a36786a780/%40app/server/src/utils/handleErrors.ts).
+
 [connect]: https://www.npmjs.com/connect
 [express]: https://www.npmjs.com/express
 [graphql/express-graphql#82]: https://github.com/graphql/express-graphql/pull/82
