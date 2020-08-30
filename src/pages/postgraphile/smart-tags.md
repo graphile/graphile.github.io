@@ -24,10 +24,13 @@ really these tags are just `omit` and `name` respectively; but in the
 tags in PostGraphile) the `@` is required to denote a smart tag, and this
 pattern has stuck when referring to smart tags.
 
-You will also often see the smart comment syntax used to refer to smart tags in
-general, it's because the syntax is a little easier to write quickly - you'll
-soon learn to translate `@omit update,delete` to `omit: "update,delete"` (and
-vice-versa) in your head.
+You will also often see the
+[smart comment syntax](http://graphile.meh/postgraphile/smart-comments/#smart-comment-spec)
+used to refer to smart tags in general, it's because the syntax is a little
+easier to write quickly. Read the
+[Smart Comments Spec](http://graphile.meh/postgraphile/smart-comments/#smart-comment-spec)
+and you'll soon learn to translate `@omit update,delete` to
+`omit: "update,delete"` (and vice-versa) in your head.
 
 ### Valid values
 

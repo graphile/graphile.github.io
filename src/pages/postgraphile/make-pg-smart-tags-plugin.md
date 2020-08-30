@@ -11,12 +11,57 @@ you know when and why you would use them.
 
 `makePgSmartTagsPlugin` and `makeJSONPgSmartTagsPlugin` are plugin generators
 that allows you to easily apply smart tags to various PostgreSQL entities.
-`makeJSONPgSmartTagsPlugin` is a wrapper around `makePgSmartTagsPlugin` that
-allows for you to pass a configuration object (possibly loaded from a JSON/JSON5
-file) - it's the recommended interface unless you're trying to do something a
-little more advanced than applying Smart Tags to named entities.
+
+- `makePgSmartTagsFromFilePlugin` is the highest level function, and loads smart
+  tags from a JSON5 file.
+- `makeJSONPgSmartTagsPlugin` is like `makePgSmartTagsFromFilePlugin`, except it
+  allows you to specify the configuration object in code rather than via a JSON5
+  file.
+- `makePgSmartTagsPlugin` is the lowest level plugin, it allows you to apply
+  smart tags to PostgreSQL entities that match your specified rules.
+
+We recommend the [postgraphile.tags.json5 file](/postgraphile/smart-tags-file/)
+to most users; but the below plugin generators can be helpful if you have more
+advanced needs.
+
+### makePgSmartTagsFromFilePlugin
+
+Unlike most other plugin generators, this plugin comes from
+`postgraphile/plugins`. The reason it's not in `graphile-utils` is because it
+needs to access the file-system.
+
+```ts
+const { makePgSmartTagsFromFilePlugin } = require("postgraphile/plugins");
+```
+
+Usage example:
+
+```ts
+const SmartTagsPlugin = makePgSmartTagsFromFilePlugin(
+  // JSON and JSONC are also JSON5 compatible, so you can use these extensions if you prefer:
+  "/path/to/my/tags.file.json5"
+);
+
+// ...
+
+app.use(
+  postgraphile(process.env.DATABASE_URL, "app_public", {
+    //...
+    appendPlugins: [SmartTagsPlugin],
+  })
+);
+```
+
+This plugin powers the automatic
+[postgraphile.tags.json5 file](/postgraphile/smart-tags-file/) support in
+PostGraphile CLI, and can be used as above for library users. You can even use
+it multiple times to merge smart tags from multiple files should you wish.
 
 ### makeJSONPgSmartTagsPlugin
+
+```ts
+const { makeJSONPgSmartTagsPlugin } = require("graphile-utils");
+```
 
 ```ts
 function makeJSONPgSmartTagsPlugin(
@@ -54,8 +99,11 @@ type SubscribeToJSONPgSmartTagsUpdatesCallback = (
 ```
 
 This plugin generator takes a `JSONPgSmartTags` object, and adds the relevant
-tags to the relevant entities referenced. An example of an empty
-`JSONPgSmartTags` object would be:
+tags to the relevant entities referenced. It is what powers
+makePgSmartTagsFromFilePlugin above, but you can also use it in your own
+PostGraphile schema plugins.
+
+An example of an empty `JSONPgSmartTags` object would be:
 
 ```json5
 {
@@ -68,6 +116,10 @@ tags to the relevant entities referenced. An example of an empty
   },
 }
 ```
+
+A more in-depth example of this configuration file, with comments, is available
+in
+[the postgraphile.tags.json5 file documentation](/postgraphile/smart-tags-file/).
 
 Within the config object, we can add entries for each supported "kind" of
 PostgreSQL entity. The supported entities include:
@@ -147,6 +199,10 @@ schema to refresh when this file changes. See:
 https://github.com/graphile/postgraphile/blob/9de271ecdddcd13fd42f8eac6777f0057ee8f7e7/src/plugins.ts#L23-L47
 
 ### makePgSmartTagsPlugin
+
+```ts
+const { makePgSmartTagsPlugin } = require("graphile-utils");
+```
 
 ```ts
 function makePgSmartTagsPlugin(
