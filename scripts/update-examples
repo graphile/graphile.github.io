@@ -93,8 +93,14 @@ async function tryPsql(flags, sql) {
 }
 
 async function main() {
-  const schemaSql = fs.readFileSync("../examples/data/schema.sql", "utf8");
-  const dataSql = fs.readFileSync("../examples/db/999_data.sql", "utf8");
+  const schemaSql = fs.readFileSync(
+    `${__dirname}/../examples/db/schema.sql`,
+    "utf8"
+  );
+  const dataSql = fs.readFileSync(
+    `${__dirname}/../examples/db/999_data.sql`,
+    "utf8"
+  );
 
   try {
     await spawn("dropdb", ["graphile_org_demo"]);
