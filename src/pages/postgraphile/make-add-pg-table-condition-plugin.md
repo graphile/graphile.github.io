@@ -95,6 +95,52 @@ NOTE: for more complex values, you may need to invoke
 convert the GraphQL value to the equivalent SQL value. If you should need this,
 reach out on [our Discord chat](https://discord.gg/graphile) for advice.
 
+## Example with ordering
+
+It's also possible for condition plugins to change the order of results by using
+[QueryBuilder](/postgraphile/make-extend-schema-plugin/#querybuilder)'s
+`orderBy` method. The following example both limits the list of quizzes returned
+to only those with a certain number of entries, _and_ orders the results such
+that the quizzes with the most entries are listed first.
+
+This example if quite contrived, but this functionality can be useful for a
+number of purposes: filtering and ordering by full text search results,
+filtering and ordering by proximity, etc.
+
+Note: prior to `graphile-utils` v4.9.1 (unreleased at time of writing), a plugin
+like this should be loaded via `--prepend-plugins` (or `prependPlugins` in the
+library mode) because otherwise the default ordering plugin dominates the order.
+
+```js
+const { makeAddPgTableConditionPlugin } = require("graphile-utils");
+
+module.exports = makeAddPgTableConditionPlugin(
+  "app_public",
+  "quiz",
+  "entryCountMin",
+  build => ({
+    type: build.graphql.GraphQLInt,
+  }),
+  (value, { queryBuilder, sql, sqlTableAlias }) => {
+    if (value == null) {
+      return;
+    }
+
+    // Order the result set by the number of entries the quiz has
+    queryBuilder.orderBy(
+      sql.fragment`(select count(*) from app_public.quiz_entry where quiz_entry.quiz_id = ${sqlTableAlias}.id)`,
+      false,
+      false
+    );
+
+    // Filter to only quizzes that have at least `value` entries.
+    return sql.fragment`(select count(*) from app_public.quiz_entry where quiz_entry.quiz_id = ${sqlTableAlias}.id) >= ${sql.value(
+      value
+    )}`;
+  }
+);
+```
+
 ## Function signature
 
 ### `makeAddPgTableConditionPlugin`
