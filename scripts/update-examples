@@ -93,7 +93,7 @@ async function tryPsql(flags, sql) {
 }
 
 async function main() {
-  const schemaSql = fs.readFileSync("../examples/db/schema.sql", "utf8");
+  const schemaSql = fs.readFileSync("../examples/data/schema.sql", "utf8");
   const dataSql = fs.readFileSync("../examples/db/999_data.sql", "utf8");
 
   try {
@@ -156,6 +156,14 @@ alter table quiz add column precision_200_scale_100 numeric(200,100);
  * This is just to aid testing
  */
 insert into quiz (name) values ('Cats'), ('Dogs'), ('Snakes');
+insert into quiz_entry (user_id, quiz_id) values
+  (1, 1),
+  (3, 1),
+  (1, 2),
+  (4, 2),
+  (3, 2),
+  (4, 2),
+  (5, 3);
 `
   );
   const pgPool = new pg.Pool({
