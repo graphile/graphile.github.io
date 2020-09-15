@@ -181,7 +181,7 @@ through GraphQL that are inexpensive for users to use).</p>
 <h3 id="api-postgraphilepgconfig-schemaname-options"><a href="#api-postgraphilepgconfig-schemaname-options" aria-label="api postgraphilepgconfig schemaname options permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>API: <code class="language-text">postgraphile(pgConfig, schemaName, options)</code></h3>
 <p>The <code class="language-text">postgraphile</code> middleware factory function takes three arguments, all of
 which are optional. The below options are valid for
-<tt>postgraphile@<!-- LIBRARY_VERSION_BEGIN -->4.5.0-rc.4<!-- LIBRARY_VERSION_END --></tt>.</p>
+<tt>postgraphile@<!-- LIBRARY_VERSION_BEGIN -->4.9.0<!-- LIBRARY_VERSION_END --></tt>.</p>
 <ul>
 <li><strong><code class="language-text">pgConfig</code></strong>: An object or string that will be passed to the <a href="https://www.npmjs.com/pg"><code class="language-text">pg</code></a>
 library and used to connect to a PostgreSQL backend, OR a pg.Pool to use.</li>
@@ -192,28 +192,21 @@ PostgreSQL schema(s) you to expose via PostGraphile; defaults to 'public'</li>
 include: <!-- prettier-ignore-start --><!-- LIBRARY_DOCBLOCK_BEGIN --></p>
 <ul>
 <li><code class="language-text">watchPg</code>: When true, PostGraphile will update the GraphQL API whenever your
-database schema changes. By default, this flag will attempt to install an "event
-trigger" and related functions into your database in the form of a
-self-contained <a href="https://github.com/graphile/graphile-engine/blob/master/packages/graphile-build-pg/res/watch-fixtures.sql"><code class="language-text">postgraphile_watch</code> schema</a>.
-Installing event triggers requires PostGraphile to have DB superuser privileges (e.g. via the <code class="language-text">ownerConnectionString</code> configuration option).
-If PostGraphile can't install this schema, you may choose to do so
-manually by running the previously linked database schema script against
-your database; to silence the warnings about PostGraphile not being able to
-install the watch fixtures itself, you can merge the following object with your
-<code class="language-text">options</code>: <code class="language-text">{ graphileBuildOptions: { pgSkipInstallingWatchFixtures: true } }</code>,
-this will prevent PostGraphile from attempting to install this schema itself.
-PostGraphile does not drop the <code class="language-text">postgraphile_watch</code> schema when it exits (there may be multiple
-PostGraphile instances depending on the schema), to remove it
-yourself, execute: <code class="language-text">DROP SCHEMA postgraphile_watch CASCADE;</code>. Some database
-providers don't allow for superuser privileges, preventing this custom schema from
-being installed; in this case, you can manually trigger a schema rebuild
-using PostgreSQL's LISTEN/NOTIFY by issuing the command <code class="language-text">NOTIFY postgraphile_watch, &#39;{&quot;type&quot;: &quot;manual&quot;}&#39;;</code>.</li>
+database schema changes. This feature requires some changes to your database
+in the form of the
+<a href="https://github.com/graphile/graphile-engine/blob/master/packages/graphile-build-pg/res/watch-fixtures.sql"><code class="language-text">postgraphile_watch</code></a>
+schema; PostGraphile will try to add this itself but requires DB superuser
+privileges to do so. If PostGraphile can't install it, you can do so
+manually. PostGraphile will not drop the schema when it exits, to remove it
+you can execute: <code class="language-text">DROP SCHEMA postgraphile_watch CASCADE;</code></li>
 <li><code class="language-text">retryOnInitFail</code>: When false (default), PostGraphile will exit if it fails
 to build the initial schema (for example if it cannot connect to the
 database, or if there are fatal naming conflicts in the schema). When true,
 PostGraphile will keep trying to rebuild the schema indefinitely, using an
 exponential backoff between attempts, starting at 100ms and increasing up to
-30s delay between retries.</li>
+30s delay between retries. When a function, the function will be called
+passing the error and the number of attempts, and it should return true to
+retry, false to permanently abort trying.</li>
 <li><code class="language-text">ownerConnectionString</code>: Connection string to use to connect to the database
 as a privileged user (e.g. for setting up watch fixtures, logical decoding,
 etc).</li>
@@ -277,8 +270,8 @@ this).</li>
 generation (you almost definitely don't want this!).</li>
 <li><code class="language-text">skipPlugins</code>: An array of <a href="/graphile-build/plugins/">Graphile Engine</a>
 schema plugins to skip.</li>
-<li><code class="language-text">readCache</code>: A file path string or an object. Reads cached values from local
-cache file to improve startup time (you may want to do this in production).</li>
+<li><code class="language-text">readCache</code>: A file path string or an object. Reads cached values to improve
+startup time (you may want to do this in production).</li>
 <li><code class="language-text">writeCache</code>: A file path string. Writes computed values to local cache file
 so startup can be faster (do this during the build phase).</li>
 <li><code class="language-text">exportJsonSchemaPath</code>: Enables saving the detected schema, in JSON format,
@@ -322,6 +315,8 @@ return in procedures.</li>
 <a href="https://github.com/auth0/node-jsonwebtoken#jwtverifytoken-secretorpublickey-options-callback">https://github.com/auth0/node-jsonwebtoken#jwtverifytoken-secretorpublickey-options-callback</a>
 If 'audience' property is unspecified, it will default to ['postgraphile'];
 to prevent audience verification set it explicitly to null.</li>
+<li><code class="language-text">jwtSignOptions</code>: Options with which to perform JWT signing - see
+<a href="https://github.com/auth0/node-jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback">https://github.com/auth0/node-jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback</a></li>
 <li><code class="language-text">jwtRole</code>: An array of (strings) path components that make up the path in
 the jwt from which to extract the postgres role. By default, the role is
 extracted from <code class="language-text">token.role</code>, so the default value is <code class="language-text">[&#39;role&#39;]</code>. e.g.
