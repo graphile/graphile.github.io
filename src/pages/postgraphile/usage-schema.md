@@ -87,7 +87,7 @@ a GraphQLSchema object.
 The returned GraphQLSchema will **not** be updated when your database changes -
 if you require "watch" functionality, please use `watchPostGraphileSchema`
 instead (see below). The below options are valid for
-<tt>postgraphile@<!-- SCHEMA_VERSION_BEGIN -->4.5.0-rc.4<!-- SCHEMA_VERSION_END --></tt>.
+<tt>postgraphile@<!-- SCHEMA_VERSION_BEGIN -->4.9.0<!-- SCHEMA_VERSION_END --></tt>.
 
 - **`pgConfig`**: An object or string that will be passed to the [`pg`][]
   library and used to connect to a PostgreSQL backend. If you already have a
@@ -138,14 +138,6 @@ instead (see below). The below options are valid for
     extensions are excluded from the generated GraphQL schema as general
     applications don't need them to be exposed to the end user. You can use this
     flag to include them in the generated schema (not recommended).
-  - `showErrorStack`: Enables adding a `stack` field to the error response. Can
-    be either the boolean `true` (which results in a single stack string) or the
-    string `json` (which causes the stack to become an array with elements for
-    each line of the stack). Recommended in development, not recommended in
-    production.
-  - `extendedErrors`: Extends the error response with additional details from
-    the Postgres error. Can be any combination of
-    `['hint', 'detail', 'errcode']`. Default is `[]`.
   - `appendPlugins`: An array of [Graphile Engine](/graphile-build/plugins/)
     schema plugins to load after the default plugins.
   - `prependPlugins`: An array of [Graphile Engine](/graphile-build/plugins/)
@@ -156,13 +148,15 @@ instead (see below). The below options are valid for
     generation (you almost definitely don't want this!).
   - `skipPlugins`: An array of [Graphile Engine](/graphile-build/plugins/)
     schema plugins to skip.
-  - `readCache`: A file path string or an object. Reads cached values from local
-    cache file to improve startup time (you may want to do this in production).
+  - `readCache`: A file path string or an object. Reads cached values to improve
+    startup time (you may want to do this in production).
   - `writeCache`: A file path string. Writes computed values to local cache file
     so startup can be faster (do this during the build phase).
   - `jwtSecret`: The secret for your JSON web tokens. This will be used to
     verify tokens in the `Authorization` header, and signing JWT tokens you
     return in procedures.
+  - `jwtSignOptions`: Options with which to perform JWT signing - see
+    https://github.com/auth0/node-jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback
   - `jwtPgTypeIdentifier`: The Postgres type identifier for the compound type
     which will be signed as a JWT token if ever found as the return type of a
     procedure. Can be of the form: `my_schema.my_type`. You may use quotes as
@@ -248,7 +242,8 @@ look at the `postgraphile-core` and `graphile-build-pg` modules.
 
 ### Calling a resolver from a resolver
 
-You can issue GraphQL requests from various contexts, including within a resolver. To do so you need the following:
+You can issue GraphQL requests from various contexts, including within a
+resolver. To do so you need the following:
 
     * Access to the `graphql` function from the `graphql` module
 
@@ -278,7 +273,9 @@ Issuing a GraphQL operation from inside a resolver example:
  * `makeExtendSchemaPlugin`, you can extract the `graphql` function
  * from the `graphql` library here like so:
  */
-const { graphql: { graphql } } = build;
+const {
+  graphql: { graphql },
+} = build;
 /*
  * Failing the above: `import { graphql } from 'graphql';` but beware of
  * duplicate `graphql` modules in your `node_modules` causing issues.
@@ -294,7 +291,7 @@ async function myResolver(parent, args, context, info) {
     }
   `;
   // The name of the operation in your query document (optional)
-  const operationName = 'MyQuery';
+  const operationName = "MyQuery";
   // The variables for the query
   const variables = { userId: args.userId };
 
@@ -306,7 +303,7 @@ async function myResolver(parent, args, context, info) {
     variables,
     operationName
   );
-  
+
   // TODO: error handling
 
   return data.userById.username;

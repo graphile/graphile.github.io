@@ -139,7 +139,7 @@ const postgraphileOptions = {
 
 The `postgraphile` middleware factory function takes three arguments, all of
 which are optional. The below options are valid for
-<tt>postgraphile@<!-- LIBRARY_VERSION_BEGIN -->4.5.0-rc.4<!-- LIBRARY_VERSION_END --></tt>.
+<tt>postgraphile@<!-- LIBRARY_VERSION_BEGIN -->4.9.0<!-- LIBRARY_VERSION_END --></tt>.
 
 - **`pgConfig`**: An object or string that will be passed to the [`pg`][]
   library and used to connect to a PostgreSQL backend, OR a pg.Pool to use.
@@ -148,28 +148,21 @@ which are optional. The below options are valid for
 - **`options`**: An object containing other miscellaneous options. Options
   include: <!-- prettier-ignore-start --><!-- LIBRARY_DOCBLOCK_BEGIN -->
   - `watchPg`: When true, PostGraphile will update the GraphQL API whenever your
-    database schema changes. By default, this flag will attempt to install an "event
-    trigger" and related functions into your database in the form of a
-    self-contained [`postgraphile_watch` schema](https://github.com/graphile/graphile-engine/blob/master/packages/graphile-build-pg/res/watch-fixtures.sql).
-    Installing event triggers requires PostGraphile to have DB superuser privileges (e.g. via the `ownerConnectionString` configuration option).
-    If PostGraphile can't install this schema, you may choose to do so
-    manually by running the previously linked database schema script against
-    your database; to silence the warnings about PostGraphile not being able to
-    install the watch fixtures itself, you can merge the following object with your
-    `options`: `{ graphileBuildOptions: { pgSkipInstallingWatchFixtures: true } }`,
-    this will prevent PostGraphile from attempting to install this schema itself.
-    PostGraphile does not drop the `postgraphile_watch` schema when it exits (there may be multiple
-    PostGraphile instances depending on the schema), to remove it
-    yourself, execute: `DROP SCHEMA postgraphile_watch CASCADE;`. Some database
-    providers don't allow for superuser privileges, preventing this custom schema from
-    being installed; in this case, you can manually trigger a schema rebuild
-    using PostgreSQL's LISTEN/NOTIFY by issuing the command `NOTIFY postgraphile_watch, '{"type": "manual"}';`.
+    database schema changes. This feature requires some changes to your database
+    in the form of the
+    [`postgraphile_watch`](https://github.com/graphile/graphile-engine/blob/master/packages/graphile-build-pg/res/watch-fixtures.sql)
+    schema; PostGraphile will try to add this itself but requires DB superuser
+    privileges to do so. If PostGraphile can't install it, you can do so
+    manually. PostGraphile will not drop the schema when it exits, to remove it
+    you can execute: `DROP SCHEMA postgraphile_watch CASCADE;`
   - `retryOnInitFail`: When false (default), PostGraphile will exit if it fails
     to build the initial schema (for example if it cannot connect to the
     database, or if there are fatal naming conflicts in the schema). When true,
     PostGraphile will keep trying to rebuild the schema indefinitely, using an
     exponential backoff between attempts, starting at 100ms and increasing up to
-    30s delay between retries.
+    30s delay between retries. When a function, the function will be called
+    passing the error and the number of attempts, and it should return true to
+    retry, false to permanently abort trying.
   - `ownerConnectionString`: Connection string to use to connect to the database
     as a privileged user (e.g. for setting up watch fixtures, logical decoding,
     etc).
@@ -233,8 +226,8 @@ which are optional. The below options are valid for
     generation (you almost definitely don't want this!).
   - `skipPlugins`: An array of [Graphile Engine](/graphile-build/plugins/)
     schema plugins to skip.
-  - `readCache`: A file path string or an object. Reads cached values from local
-    cache file to improve startup time (you may want to do this in production).
+  - `readCache`: A file path string or an object. Reads cached values to improve
+    startup time (you may want to do this in production).
   - `writeCache`: A file path string. Writes computed values to local cache file
     so startup can be faster (do this during the build phase).
   - `exportJsonSchemaPath`: Enables saving the detected schema, in JSON format,
@@ -278,6 +271,8 @@ which are optional. The below options are valid for
     https://github.com/auth0/node-jsonwebtoken#jwtverifytoken-secretorpublickey-options-callback
     If 'audience' property is unspecified, it will default to ['postgraphile'];
     to prevent audience verification set it explicitly to null.
+  - `jwtSignOptions`: Options with which to perform JWT signing - see
+    https://github.com/auth0/node-jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback
   - `jwtRole`: An array of (strings) path components that make up the path in
     the jwt from which to extract the postgres role. By default, the role is
     extracted from `token.role`, so the default value is `['role']`. e.g.
