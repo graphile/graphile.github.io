@@ -71,6 +71,8 @@ Schema extension plugins for PostGraphile:
   [ZomboDB](https://github.com/zombodb/zombodb) and ElasticSearch
 - [postgraphile-plugin-many-create-update-delete](https://github.com/tjmoses/postgraphile-plugin-many-create-update-delete) -
   generates batch create, update, & delete mutations
+- [graphile-column-privileges-mutations](https://github.com/pyramation/graphile-column-privileges-mutations) -
+  generates mutations safe to use with column-level select grants
 
 Examples of using these plugins:
 
