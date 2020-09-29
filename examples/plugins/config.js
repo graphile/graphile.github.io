@@ -1,8 +1,9 @@
 const fs = require("fs");
+const path = require("path");
 const vm = require("vm");
 const graphqlDiff = require("../_diff");
 
-exports.fileFilter = f => f.match(/^[^.].*\.js/);
+exports.fileFilter = f => f.match(/^[^.].*\.js$/);
 
 exports.processFile = async (
   exampleFilePath,
@@ -10,10 +11,11 @@ exports.processFile = async (
 ) => {
   const source = fs.readFileSync(exampleFilePath, "utf8");
   const fakeModule = { exports: {} };
-  vm.runInThisContext(`((module, exports, require) => {${source}})`)(
+  vm.runInThisContext(`((module, exports, require, __dirname) => {${source}})`)(
     fakeModule,
     fakeModule.exports,
-    require
+    require,
+    path.dirname(exampleFilePath)
   );
   const plugin = fakeModule.exports;
   const newSchema = await getPostGraphileSchemaWithOptions({
