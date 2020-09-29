@@ -1,6 +1,16 @@
+/**
+ * This plugin will create a file `smartTags.json` containing all of the smart
+ * tags gathered from all of the various sources (smart comments, smart tags,
+ * plugins, etc etc). This provides a relatively easy migration path from using
+ * smart comments to using smart tags instead. Neither Smart Comments nor Smart
+ * Tags are "better" - they each have trade offs - you can use which ever one
+ * matches your teams development flow better (or even mix and match!).
+ *
+ * Author phryneas (https://github.com/graphile/graphile.github.io/pull/243)
+ */
 const { writeFile } = require("fs");
 
-module.exports = (builder) => {
+module.exports = builder => {
   builder.hook("init", (_, build) => {
     function sortStuff(a, b) {
       const aSchema =
@@ -14,10 +24,10 @@ module.exports = (builder) => {
     const smart = {
       version: 1,
       config: {
-        class: build.pgIntrospectionResultsByKind.class
+        class: [...build.pgIntrospectionResultsByKind.class]
           .sort(sortStuff)
           .reduce((acc, pgClass) => {
-            let attribute = pgClass.attributes
+            let attribute = [...pgClass.attributes]
               .sort((a, b) => a.name.localeCompare(b.name))
               .reduce((acc, pgAttr) => {
                 const tags =
@@ -35,7 +45,7 @@ module.exports = (builder) => {
             if (Object.keys(attribute).length === 0) {
               attribute = undefined;
             }
-            let constraint = pgClass.constraints
+            let constraint = [...pgClass.constraints]
               .sort(sortStuff)
               .reduce((acc, pgConst) => {
                 if (pgConst.name.startsWith("FAKE_")) {
@@ -71,7 +81,7 @@ module.exports = (builder) => {
               };
             return acc;
           }, {}),
-        procedure: build.pgIntrospectionResultsByKind.procedure
+        procedure: [...build.pgIntrospectionResultsByKind.procedure]
           .sort(sortStuff)
           .reduce((acc, pgProc) => {
             if (pgProc.name.startsWith("FAKE_")) {
@@ -94,7 +104,7 @@ module.exports = (builder) => {
     writeFile(
       __dirname + "/smartTags.json",
       JSON.stringify(smart, undefined, 2),
-      (e) => {
+      e => {
         console.log(e);
       }
     );
