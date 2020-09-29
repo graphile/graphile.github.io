@@ -1,6 +1,6 @@
 const { writeFile } = require("fs");
 
-exports.extractSmartTags = (builder) => {
+module.exports = (builder) => {
   builder.hook("init", (_, build) => {
     function sortStuff(a, b) {
       const aSchema =
