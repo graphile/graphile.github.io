@@ -55,8 +55,8 @@ module.exports = builder => {
                   Object.keys(pgConst.tags).length > 0
                     ? pgConst.tags
                     : undefined;
-                if (pgConst.description || tags) {
-                  acc[pgConst.class?.namespaceName + "." + pgConst.name] = {
+                if (pgConst.class && (pgConst.description || tags)) {
+                  acc[pgConst.class.namespaceName + "." + pgConst.name] = {
                     ...(pgConst.description
                       ? { description: pgConst.description }
                       : {}),
