@@ -620,6 +620,41 @@ class: {
 comment on materialized view my_materialized_view is E'@foreignKey (key_1, key_2) references other_table (key_1, key_2)';
 ```
 
+##### @unique
+
+_From PostGraphile 4.9.1_
+
+Introduces a "fake" unique constraint, so `@unique col1,col2` is somewhat
+equivalent to the following, except it can also be applied to entities that
+cannot have unique constraints, e.g. views. It is up to you to ensure that your
+data is indeed unique on the given columns.
+
+```sql
+-- `@unique col1,col2` is roughly equivalent to:
+ALTER TABLE foo ADD CONSTRAINT fake_unique UNIQUE (col1, col2);
+```
+
+More than one `@unique` tag may be specified.
+
+```json5
+class: {
+  my_view: {
+    tags: {
+      unique: [
+        "id",
+        "org_id,slug"
+      ]
+      // or:
+      //   unique: "id"
+    }
+  }
+}
+```
+
+```sql
+comment on view my_view is E'@unique id\n@unique org,slug';
+```
+
 ##### Smart Tags on virtual constraints
 
 You can also add smart tags on virtual constraints, for example adding the
