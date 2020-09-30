@@ -75,6 +75,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><a href="/postgraphile/smart-tags/#notnull">@notNull</a></li>
 <li><a href="/postgraphile/smart-tags/#primarykey">@primaryKey</a></li>
 <li><a href="/postgraphile/smart-tags/#foreignkey">@foreignKey</a></li>
+<li><a href="/postgraphile/smart-tags/#unique">@unique</a></li>
 <li><a href="/postgraphile/smart-tags/#smart-tags-on-virtual-constraints">Smart Tags on virtual constraints</a></li>
 </ul>
 </li>
@@ -703,6 +704,28 @@ matching a unique constraint.</p>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre></div>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">comment</span> <span class="token keyword">on</span> materialized <span class="token keyword">view</span> my_materialized_view <span class="token operator">is</span> E<span class="token string">'@foreignKey (key_1, key_2) references other_table (key_1, key_2)'</span><span class="token punctuation">;</span></code></pre></div>
+<h5 id="unique"><a href="#unique" aria-label="unique permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>@unique</h5>
+<p><em>From PostGraphile 4.9.1</em></p>
+<p>Introduces a "fake" unique constraint, so <code class="language-text">@unique col1,col2</code> is somewhat
+equivalent to the following, except it can also be applied to entities that
+cannot have unique constraints, e.g. views. It is up to you to ensure that your
+data is indeed unique on the given columns.</p>
+<div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token comment">-- `@unique col1,col2` is roughly equivalent to:</span>
+<span class="token keyword">ALTER</span> <span class="token keyword">TABLE</span> foo <span class="token keyword">ADD</span> <span class="token keyword">CONSTRAINT</span> fake_unique <span class="token keyword">UNIQUE</span> <span class="token punctuation">(</span>col1<span class="token punctuation">,</span> col2<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<p>More than one <code class="language-text">@unique</code> tag may be specified.</p>
+<div class="gatsby-highlight" data-language="json5"><pre class="language-json5"><code class="language-json5"><span class="token property unquoted">class</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+  <span class="token property unquoted">my_view</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property unquoted">tags</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property unquoted">unique</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token string">"id"</span><span class="token punctuation">,</span>
+        <span class="token string">"org_id,slug"</span>
+      <span class="token punctuation">]</span>
+      <span class="token comment">// or:</span>
+      <span class="token comment">//   unique: "id"</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
+<div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">view</span> my_view <span class="token operator">is</span> E<span class="token string">'@unique id\n@unique org,slug'</span><span class="token punctuation">;</span></code></pre></div>
 <h5 id="smart-tags-on-virtual-constraints"><a href="#smart-tags-on-virtual-constraints" aria-label="smart tags on virtual constraints permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Smart Tags on virtual constraints</h5>
 <p>You can also add smart tags on virtual constraints, for example adding the
 <code class="language-text">fieldName</code> smart tag to a virtual foreign key constraint, by appending the pipe
