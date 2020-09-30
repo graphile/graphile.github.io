@@ -52,7 +52,7 @@ The easiest way to get started is with the
 try it out with:
 
 ```
-npx postgraphile -c postgres://user:pass@localhost/mydb --watch --enhance-graphiql --dynamic-json
+npx postgraphile -c 'postgres://user:pass@localhost/mydb' --watch --enhance-graphiql --dynamic-json
 ```
 
 (replacing user, pass and mydb with your PostgreSQL username, password and the
