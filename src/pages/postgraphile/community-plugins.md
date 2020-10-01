@@ -30,6 +30,8 @@ Schema extension plugins for PostGraphile:
   postgraphile-plugin-connection-filter-polymorphic).
 - [postgraphile-index-to-unique-constraint-plugin](https://github.com/hansololai/postgraphile-index-to-unique-constraint-plugin) -
   extends PostGraphile's unique constraint detection to unique indexes also.
+- [postgraphile-table-extension-plugin](https://github.com/hansololai/postgraphile-table-extension-plugin) - 
+  extend a table's fields (non-association) to another table via unique foreign key constraint. Useful for vertical partitioned tables.
 - [postgraphile-plugin-custom-filter](https://github.com/RoadRunnerEngineering/postgraphile-plugin-custom-filter) -
   adds a `customFilter:` arg to connections that offers user defined filters on
   any conditions, as long as they can be fit into a `where`
