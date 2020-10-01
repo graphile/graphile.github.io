@@ -163,6 +163,7 @@
   "https://github.com/graphql/graphql-js/blob/v14.5.6/src/type/schema.js",
   "https://github.com/hansololai/postgraphile-connection-filter-polymorphic",
   "https://github.com/hansololai/postgraphile-index-to-unique-constraint-plugin",
+  "https://github.com/hansololai/postgraphile-table-extension-plugin",
   "https://github.com/jashmenn/postgraphile-upsert-plugin",
   "https://github.com/knu/postgresql-plruby",
   "https://github.com/mattbretl",
