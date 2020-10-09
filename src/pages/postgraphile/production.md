@@ -251,8 +251,8 @@ request body.~~
 ~~I (Benjie) personally use my forks of Apollo's `persistgraphql` tools to help me
 manage the persisted queries themselves:~~
 
-~~- https://github.com/benjie/persistgraphql
-- https://github.com/benjie/persistgraphql-webpack-plugin~~
+- ~~https://github.com/benjie/persistgraphql~~
+- ~~https://github.com/benjie/persistgraphql-webpack-plugin~~
 
 ~~These forks generate hashes rather than numbers; which make the persisted
 queries consistent across multiple builds and applications (website, mobile,
