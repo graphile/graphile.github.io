@@ -189,8 +189,6 @@ app.use(postgraphile(pool, "public", { ... }));
 
 #### Simple: Query Allowlist ("persisted queries" / "persisted operations")
 
-
-
 If you do not intend to open your API up to third parties to run arbitrary
 queries against then using persisted queries as a query whitelist to protect
 your GraphQL endpoint is a great and highly recommended solution. This technique
@@ -212,12 +210,12 @@ This technique has a few caveats:
   `$myVar` to 2147483647 in order to cause your server to process as much data
   as possible.
 
-_**THIS SECTION IS OUT OF DATE**; please refer to the new 
+_**THIS SECTION IS OUT OF DATE**; please refer to the new
 [@graphile/persisted-operations project](https://github.com/graphile/persisted-operations)
 for up to date information and implementation details._
 
-~~PostGraphile currently doesn't have this functionality built in, but it's fairly
-easy to add it when using PostGraphile as an express middleware, a simple
+~~PostGraphile currently doesn't have this functionality built in, but it's
+fairly easy to add it when using PostGraphile as an express middleware, a simple
 implementation might look like this:~~
 
 ```js{9-18}
@@ -248,8 +246,8 @@ app.listen(5000);
 ~~i.e. a simple middleware mounted before postgraphile that manipulates the
 request body.~~
 
-~~I (Benjie) personally use my forks of Apollo's `persistgraphql` tools to help me
-manage the persisted queries themselves:~~
+~~I (Benjie) personally use my forks of Apollo's `persistgraphql` tools to help
+me manage the persisted queries themselves:~~
 
 - ~~https://github.com/benjie/persistgraphql~~
 - ~~https://github.com/benjie/persistgraphql-webpack-plugin~~
