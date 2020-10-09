@@ -53,7 +53,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p><a href="/postgraphile/production/#denial-of-service-considerations">Denial of Service Considerations</a></p>
 <ul>
 <li><a href="/postgraphile/production/#statement-timeout">Statement Timeout</a></li>
-<li><a href="/postgraphile/production/#simple-query-whitelist-persisted-queries">Simple: Query Whitelist ("persisted queries")</a></li>
+<li><a href="/postgraphile/production/#simple-query-allowlist-persisted-queries--persisted-operations">Simple: Query Allowlist ("persisted queries" / "persisted operations")</a></li>
 <li><a href="/postgraphile/production/#advanced">Advanced</a></li>
 <li><a href="/postgraphile/production/#sending-queries-to-read-replicas">Sending queries to read replicas</a></li>
 <li><a href="/postgraphile/production/#pagination-caps">Pagination caps</a></li>
@@ -215,7 +215,7 @@ pool<span class="token punctuation">.</span><span class="token function">on</spa
 <span class="token comment">// ...</span>
 app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token function">postgraphile</span><span class="token punctuation">(</span>pool<span class="token punctuation">,</span> <span class="token string">"public"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> <span class="token operator">...</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment">// ...</span></code></pre></div>
-<h4 id="simple-query-whitelist-persisted-queries"><a href="#simple-query-whitelist-persisted-queries" aria-label="simple query whitelist persisted queries permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Simple: Query Whitelist ("persisted queries")</h4>
+<h4 id="simple-query-allowlist-persisted-queries--persisted-operations"><a href="#simple-query-allowlist-persisted-queries--persisted-operations" aria-label="simple query allowlist persisted queries  persisted operations permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Simple: Query Allowlist ("persisted queries" / "persisted operations")</h4>
 <p>If you do not intend to open your API up to third parties to run arbitrary
 queries against then using persisted queries as a query whitelist to protect
 your GraphQL endpoint is a great and highly recommended solution. This technique
@@ -236,9 +236,12 @@ don't write <code class="language-text">allUsers(first: $myVar)</code> as a mali
 <code class="language-text">$myVar</code> to 2147483647 in order to cause your server to process as much data
 as possible.</li>
 </ul>
-<p>PostGraphile currently doesn't have this functionality built in, but it's fairly
-easy to add it when using PostGraphile as an express middleware, a simple
-implementation might look like this:</p>
+<p><em><strong>THIS SECTION IS OUT OF DATE</strong>; please refer to the new
+<a href="https://github.com/graphile/persisted-operations">@graphile/persisted-operations project</a>
+for up to date information and implementation details.</em></p>
+<p><del>PostGraphile currently doesn't have this functionality built in, but it's
+fairly easy to add it when using PostGraphile as an express middleware, a simple
+implementation might look like this:</del></p>
 <div class="gatsby-highlight has-highlighted-lines" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> postgraphile <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"postgraphile"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> express <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"express"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> bodyParser <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"body-parser"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -251,23 +254,23 @@ app<span class="token punctuation">.</span><span class="token function">use</spa
 app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token function">postgraphile</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 app<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">5000</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
-<p>i.e. a simple middleware mounted before postgraphile that manipulates the
-request body.</p>
-<p>I (Benjie) personally use my forks of Apollo's <code class="language-text">persistgraphql</code> tools to help me
-manage the persisted queries themselves:</p>
+<p><del>i.e. a simple middleware mounted before postgraphile that manipulates the
+request body.</del></p>
+<p><del>I (Benjie) personally use my forks of Apollo's <code class="language-text">persistgraphql</code> tools to help
+me manage the persisted queries themselves:</del></p>
 <ul>
-<li><a href="https://github.com/benjie/persistgraphql">https://github.com/benjie/persistgraphql</a></li>
-<li><a href="https://github.com/benjie/persistgraphql-webpack-plugin">https://github.com/benjie/persistgraphql-webpack-plugin</a></li>
+<li><del><a href="https://github.com/benjie/persistgraphql">https://github.com/benjie/persistgraphql</a></del></li>
+<li><del><a href="https://github.com/benjie/persistgraphql-webpack-plugin">https://github.com/benjie/persistgraphql-webpack-plugin</a></del></li>
 </ul>
-<p>These forks generate hashes rather than numbers; which make the persisted
+<p><del>These forks generate hashes rather than numbers; which make the persisted
 queries consistent across multiple builds and applications (website, mobile,
-browser plugin, ...).</p>
-<p><strong>NOTE</strong>: even if you're using persisted queries, it can still be wise to
+browser plugin, ...).</del></p>
+<p><strong>NOTE</strong>: even if you're using persisted operations, it can still be wise to
 implement advanced protections as it enables you to catch unnecessarily
 expensive queries during development, before you start facing performance
 bottlenecks down the line.</p>
 <h4 id="advanced"><a href="#advanced" aria-label="advanced permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Advanced</h4>
-<p>Using a query whitelist puts the decision in the hands of your engineers whether
+<p>Using a query allowlist puts the decision in the hands of your engineers whether
 a particular query should be accepted or not. Sometimes this isn't enough - it
 could be that your engineers need guidance to help them avoid common pit-falls
 (e.g. forgetting to put limits on collections they query), or it could be that
