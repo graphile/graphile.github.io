@@ -1176,7 +1176,7 @@ with `INSERT` commands because there are no rows to compare against before
 insertion, and you must use `using` with `DELETE` commands because a delete
 changes no rows only removes current ones.
 
-That’s it! We have successfully creating a Postgres schema embedded with our
+That’s it! We have successfully created a Postgres schema embedded with our
 business logic. When we use this schema with PostGraphile we will get a well
 designed GraphQL API that we can use in our frontend application.
 
