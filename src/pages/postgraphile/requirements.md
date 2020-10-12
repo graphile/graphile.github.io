@@ -27,20 +27,19 @@ experience.
   between the tables. There are plugins to get around this (using smart
   comments) but it's highly recommended that you use PostgreSQL's built in
   relations support.
-- <a name="dont-use-column-based-select-grants"></a>
-  **Don't use column-based SELECT grants**: column-based grants work well for
-  `INSERT` and `UPDATE` (especially when combined with `--no-ignore-rbac`!), but
-  they don't make sense for `DELETE` and they cause issues when used with
-  `SELECT`. Quite a few things in PostGraphile depend on full-table `SELECT`
-  grants; if you don't want to use full-table grants then you will need to
-  disable the default mutations and use custom mutations instead (because we use
-  `RETURNING *` on the mutations), you may also have to miss out on computed
-  columns (because we pass the entire row object to the function, though these
-  typically still work if you're using `LANGUAGE sql` rather than
-  `LANGUAGE plpgsql`/etc). It's recommended that you instead split your tables
-  on permission boundaries and use one-to-one relations to join them together
-  again - this also makes writing your RBAC/RLS policies simpler. If you want to
-  omit a column entirely then you can use the
+- <a name="dont-use-column-based-select-grants"></a> **Don't use column-based
+  SELECT grants**: column-based grants work well for `INSERT` and `UPDATE`
+  (especially when combined with `--no-ignore-rbac`!), but they don't make sense
+  for `DELETE` and they cause issues when used with `SELECT`. Quite a few things
+  in PostGraphile depend on full-table `SELECT` grants; if you don't want to use
+  full-table grants then you will need to disable the default mutations and use
+  custom mutations instead (because we use `RETURNING *` on the mutations), you
+  may also have to miss out on computed columns (because we pass the entire row
+  object to the function, though these typically still work if you're using
+  `LANGUAGE sql` rather than `LANGUAGE plpgsql`/etc). It's recommended that you
+  instead split your tables on permission boundaries and use one-to-one
+  relations to join them together again - this also makes writing your RBAC/RLS
+  policies simpler. If you want to omit a column entirely then you can use the
   [`@omit` smart comment](/postgraphile/smart-comments/#omitting).
 - **Function restrictions**: we have pretty good support for PostgreSQL
   functions, but there's some
