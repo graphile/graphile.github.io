@@ -47,7 +47,8 @@ GRANT INSERT ON users TO graphql_role;
 GRANT UPDATE ON users TO graphql_role;
 ```
 
-Column-level SELECT grants cause a lot of issues:
+Column-level SELECT grants
+[cause a lot of issues](/postgraphile/requirements/#dont-use-column-based-select-grants):
 
 - Reduces the number of optimisations we can do
 - Cannot `SELECT * FROM`
