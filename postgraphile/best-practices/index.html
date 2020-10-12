@@ -84,7 +84,8 @@ should at least enable it on every table in your exposed schemas.</p>
 <span class="token keyword">GRANT</span> <span class="token keyword">INSERT</span> <span class="token keyword">ON</span> users <span class="token keyword">TO</span> graphql_role<span class="token punctuation">;</span>
 <span class="token comment">-- 🛑 DO NOT USE</span>
 <span class="token keyword">GRANT</span> <span class="token keyword">UPDATE</span> <span class="token keyword">ON</span> users <span class="token keyword">TO</span> graphql_role<span class="token punctuation">;</span></code></pre></div>
-<p>Column-level SELECT grants cause a lot of issues:</p>
+<p>Column-level SELECT grants
+<a href="/postgraphile/requirements/#dont-use-column-based-select-grants">cause a lot of issues</a>:</p>
 <ul>
 <li>Reduces the number of optimisations we can do</li>
 <li>Cannot <code class="language-text">SELECT * FROM</code></li>

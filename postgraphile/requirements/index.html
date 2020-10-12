@@ -81,19 +81,19 @@ if you don't use these constraints then we won't know there's a relationship
 between the tables. There are plugins to get around this (using smart
 comments) but it's highly recommended that you use PostgreSQL's built in
 relations support.</li>
-<li><strong>Don't use column-based SELECT grants</strong>: column-based grants work well for
-<code class="language-text">INSERT</code> and <code class="language-text">UPDATE</code> (especially when combined with <code class="language-text">--no-ignore-rbac</code>!), but
-they don't make sense for <code class="language-text">DELETE</code> and they cause issues when used with
-<code class="language-text">SELECT</code>. Quite a few things in PostGraphile depend on full-table <code class="language-text">SELECT</code>
-grants; if you don't want to use full-table grants then you will need to
-disable the default mutations and use custom mutations instead (because we use
-<code class="language-text">RETURNING *</code> on the mutations), you may also have to miss out on computed
-columns (because we pass the entire row object to the function, though these
-typically still work if you're using <code class="language-text">LANGUAGE sql</code> rather than
-<code class="language-text">LANGUAGE plpgsql</code>/etc). It's recommended that you instead split your tables
-on permission boundaries and use one-to-one relations to join them together
-again - this also makes writing your RBAC/RLS policies simpler. If you want to
-omit a column entirely then you can use the
+<li><a name="dont-use-column-based-select-grants"></a> <strong>Don't use column-based
+SELECT grants</strong>: column-based grants work well for <code class="language-text">INSERT</code> and <code class="language-text">UPDATE</code>
+(especially when combined with <code class="language-text">--no-ignore-rbac</code>!), but they don't make sense
+for <code class="language-text">DELETE</code> and they cause issues when used with <code class="language-text">SELECT</code>. Quite a few things
+in PostGraphile depend on full-table <code class="language-text">SELECT</code> grants; if you don't want to use
+full-table grants then you will need to disable the default mutations and use
+custom mutations instead (because we use <code class="language-text">RETURNING *</code> on the mutations), you
+may also have to miss out on computed columns (because we pass the entire row
+object to the function, though these typically still work if you're using
+<code class="language-text">LANGUAGE sql</code> rather than <code class="language-text">LANGUAGE plpgsql</code>/etc). It's recommended that you
+instead split your tables on permission boundaries and use one-to-one
+relations to join them together again - this also makes writing your RBAC/RLS
+policies simpler. If you want to omit a column entirely then you can use the
 <a href="/postgraphile/smart-comments/#omitting"><code class="language-text">@omit</code> smart comment</a>.</li>
 <li><strong>Function restrictions</strong>: we have pretty good support for PostgreSQL
 functions, but there's some
