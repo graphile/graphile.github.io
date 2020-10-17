@@ -130,7 +130,7 @@ Authorization: Bearer JWT_TOKEN_HERE
 e.g.
 [with Apollo](https://www.apollographql.com/docs/react/networking/authentication/#header):
 
-```js{7,12}
+```js{7,13}
 const httpLink = createHttpLink({
   uri: "/graphql",
 });
@@ -139,12 +139,20 @@ const authLink = setContext((_, { headers }) => {
   // get the authentication token from wherever you store it
   const token = getJWTToken();
   // return the headers to the context so httpLink can read them
+  if (token) {
+    return {
+      headers: {
+        ...headers,
+        authorization: `Bearer ${token}`,
+      },
+    }
+  }
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : "",
+      // if no jwt, we don't want to pass the auth header at all
     },
-  };
+  }
 });
 
 const client = new ApolloClient({
