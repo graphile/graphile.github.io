@@ -145,7 +145,7 @@ const authLink = setContext((_, { headers }) => {
       // Only pass the authorization header if we have a JWT
       ...(token ? { authorization: `Bearer ${token}` } : null),
     },
-  }
+  };
 });
 
 const client = new ApolloClient({
