@@ -139,18 +139,11 @@ const authLink = setContext((_, { headers }) => {
   // get the authentication token from wherever you store it
   const token = getJWTToken();
   // return the headers to the context so httpLink can read them
-  if (token) {
-    return {
-      headers: {
-        ...headers,
-        authorization: `Bearer ${token}`,
-      },
-    }
-  }
   return {
     headers: {
       ...headers,
-      // if no jwt, we don't want to pass the auth header at all
+      // Only pass the authorization header if we have a JWT
+      ...(token ? { authorization: `Bearer ${token}` } : null),
     },
   }
 });
