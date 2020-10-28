@@ -5,26 +5,41 @@ title: PostGraphile as a Library
 fullTitle: Using PostGraphile as a Library
 ---
 
-Some people may want to use PostGraphile as a dependency of their current
-Node.js projects instead of as a CLI tool. If this is the approach you want to
-take then you may either use PostGraphile as an HTTP middleware, or create and
-execute queries against a PostGraphile schema using your own custom code. In
-this article we will go the former, for the latter see
+Library mode is the most popular way of running PostGraphile; it gives more
+power than using the CLI (see [CLI usage](/postgraphile/usage-cli/)), but is
+much easier to setup and more fully featured than
 [Schema-only Usage](/postgraphile/usage-schema/).
+
+Details of
+[the configuration options can be found below](#api-postgraphilepgconfig-schemaname-options).
+
+PostGraphile supports usage in library mode within various Node server
+frameworks. There are two ways of using the PostGraphile library mode inside a
+server framework: very concisely as middleware, or via the more verbose
+individual route handlers introduced in PostGraphile v4.10.0. The below table
+summarises the support of these modes by each of the frameworks we support, and
+the following documentation sections detail how to use them.
+
+| Framework                                        | &nbsp;&nbsp;&nbsp;&nbsp;[Middleware](#http-middleware)&nbsp;&nbsp; | &nbsp;&nbsp;[Route handlers](#route-handlers)&nbsp;&nbsp;&nbsp;&nbsp; | Example                                                                                                                                                                                                        |
+| :----------------------------------------------- | :----------------------------------------------------------------: | :-------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Node HTTP](https://nodejs.org/api/http.html)    |                                Yes                                 |                                   -                                   | [simple](https://github.com/graphile/postgraphile/blob/v4/examples/servers/node/index.ts)                                                                                                                      |
+| [Koa](http://koajs.com)                          |                           Since v4.10.0                            |                                  Yes                                  | [vanilla](https://github.com/graphile/postgraphile/blob/v4/examples/servers/koa/vanilla.ts) \| [flavourful](https://github.com/graphile/postgraphile/blob/v4/examples/servers/koa/rum-and-raisin.ts)           |
+| [Express](https://www.npmjs.com/package/express) |                                Yes                                 |                                  Yes                                  | [vanilla](https://github.com/graphile/postgraphile/blob/v4/examples/servers/express/vanilla.ts) \| [flavourful](https://github.com/graphile/postgraphile/blob/v4/examples/servers/express/rum-and-raisin.ts)   |
+| [Connect](http://npmjs.com/connect)              |                                Yes                                 |                                  Yes                                  | Similar to Express example                                                                                                                                                                                     |
+| [Fastify](https://www.fastify.io/) v2            |                           Since v4.10.0                            |                                  Yes                                  | Similar to Express example                                                                                                                                                                                     |
+| [Fastify](https://www.fastify.io/) v3            |                                 -                                  |                                  Yes                                  | [vanilla](https://github.com/graphile/postgraphile/blob/v4/examples/servers/fastify3/vanilla.ts) \| [flavourful](https://github.com/graphile/postgraphile/blob/v4/examples/servers/fastify3/rum-and-raisin.ts) |
+| [Restify](http://restify.com/)                   |                                 -                                  |                                  Yes                                  | [vanilla](https://github.com/graphile/postgraphile/blob/v4/examples/servers/restify/vanilla.ts) \| [flavourful](https://github.com/graphile/postgraphile/blob/v4/examples/servers/restify/rum-and-raisin.ts)   |
 
 ### HTTP Middleware
 
 To mount a PostGraphile instance on your own web server there is an export
 `postgraphile` from the `postgraphile` package that can be used as HTTP
-middleware for the following HTTP frameworks:
+middleware for Node's HTTP server, Express, Connect, Koa and Fastify v2 (but not
+Fastify v3). Usage is generally of the form `app.use(postgraphile(...))`.
 
-- [`connect`](http://npmjs.com/connect)
-- [`express`](https://www.npmjs.com/package/express)
-- [Vanilla `http`](https://nodejs.org/api/http.html)
-
-_We also have alpha-quality support for
-[`koa` 2.0](https://www.npmjs.com/package/koa), if you notice any problems
-[please raise a GitHub issue about it.](https://www.github.com/graphile/postgraphile)_
+Additional frameworks such as [Restify](http://restify.com/) and
+[Fastify](https://www.fastify.io/) are also supported since PostGraphile v4.10.0
+via the [route handlers](#route-handlers) method detailed below.
 
 To use PostGraphile with `express`, for instance, a small example would be:
 
@@ -69,6 +84,151 @@ http
   )
   .listen(process.env.PORT || 3000);
 ```
+
+### Route Handlers
+
+_Introduced in PostGraphile v4.10.0._
+
+If your server does not support the preferred middleware approach of mounting
+the PostGraphile library, then you can mount PostGraphile's route handlers
+individually. This looks slightly different depending on which server you're
+using (see the table above for links to examples for each server), but broadly
+it follows the following pattern (this example uses Fastify v3).
+
+First we create the PostGraphile middleware:
+
+```js
+import { postgraphile } from "postgraphile";
+
+const middleware = postgraphile(process.env.DATABASE_URL, "public", {
+  /* ... options here ... */
+});
+```
+
+And your server:
+
+```js
+import Fastify from "fastify";
+
+const app = Fastify({});
+```
+
+Next we need an adaptor to convert a generic PostGraphile route handler into a
+handler that's suitable for your given server framework. We provide the
+following out of the box:
+
+- `PostGraphileResponseNode` - for Node, Express, Connect, Restify, and Fastify
+  v2 (NOT v3)
+- `PostGraphileResponseKoa` - for Koa
+- `PostGraphileResponseFastify3` - for Fastify v3
+
+You can also make your own by sub-classing `PostGraphileResponse`, for help with
+this ping @Benjie [on Discord](https://discord.gg/YM5Q2SR).
+
+Note that some frameworks expect you to indicate failure by rejecting a promise,
+others expect you to pass an error object to the `next(err)` callback.
+PostGraphile's handler rejects on error, so if your framework (e.g. Express)
+requires `next(err)` you should add `.catch(next)` to the handler call.
+
+```js
+import { PostGraphileResponseFastify3 } from "postgraphile";
+
+// Converts a PostGraphile handler to a Fastify v3 handler
+const convertHandler = handler => (request, reply) =>
+  handler(new PostGraphileResponseFastify3(request, reply));
+
+/* Other frameworks:
+
+// Converts a PostGraphile handler to an Express handler
+const convertHandler = handler => (req, res, next) =>
+  handler(new PostGraphileResponseNode(req, res, next)).catch(next);
+
+// Converts a PostGraphile handler to a Koa handler
+const convertHandler = handler => (ctx, next) =>
+  handler(new PostGraphileResponseKoa(ctx, next));
+*/
+```
+
+Then we use the properties present on the PostGraphile middleware to mount our
+route handlers. The properties available include:
+
+- `options` - the PostGraphile options your server is using
+- route strings:
+  - `graphqlRoute` (e.g. `/graphql`) - the URL path the GraphQL endpoint should
+    be mounted at
+  - `graphiqlRoute` (e.g. `/graphiql`) - the URL path the GraphiQL (GraphQL IDE)
+    endpoint should be mounted at
+  - `eventStreamRoute` (e.g. `/graphql/stream`) - the URL path the EventStream
+    for PostGraphile watch mode should be mounted at (relates to the
+    X-GraphQL-Event-Stream header)
+- request handlers
+  - `graphqlRouteHandler` - handles GraphQL POST and OPTIONS requests
+  - `graphiqlRouteHandler` - handles GET requests to retrieve the GraphiQL
+    interface
+  - `faviconRouteHandler` - serves the PostGraphile favicon
+  - `eventStreamRouteHandler` - serves the PostGraphile watch-mode event stream
+
+For Fastify, this might look something like:
+
+```js
+// OPTIONS requests, for CORS/etc
+app.options(
+  middleware.graphqlRoute,
+  convertHandler(middleware.graphqlRouteHandler)
+);
+
+// This is the main middleware
+app.post(
+  middleware.graphqlRoute,
+  convertHandler(middleware.graphqlRouteHandler)
+);
+
+// GraphiQL, if you need it
+if (middleware.options.graphiql) {
+  if (middleware.graphiqlRouteHandler) {
+    app.head(
+      middleware.graphiqlRoute,
+      convertHandler(middleware.graphiqlRouteHandler)
+    );
+    app.get(
+      middleware.graphiqlRoute,
+      convertHandler(middleware.graphiqlRouteHandler)
+    );
+  }
+  // Remove this if you don't want the PostGraphile logo as your favicon!
+  if (middleware.faviconRouteHandler) {
+    app.get("/favicon.ico", convertHandler(middleware.faviconRouteHandler));
+  }
+}
+
+// If you need watch mode, this is the route served by the
+// X-GraphQL-Event-Stream header; see:
+// https://github.com/graphql/graphql-over-http/issues/48
+if (middleware.options.watchPg) {
+  if (middleware.eventStreamRouteHandler) {
+    app.options(
+      middleware.eventStreamRoute,
+      convertHandler(middleware.eventStreamRouteHandler)
+    );
+    app.get(
+      middleware.eventStreamRoute,
+      convertHandler(middleware.eventStreamRouteHandler)
+    );
+  }
+}
+```
+
+**IMPORTANT**: although it's tempting to add your handlers with explicitly
+written paths, e.g. `app.post('/graphql', ...)`, it's better to use the relevant
+middleware properties such as `middleware.graphqlRoute` to ensure that
+PostGraphile is expecting the GraphQL endpoint to be in the same place that
+you're expecting.
+
+**IMPORTANT**: it's advised that you also look through the full-flavoured
+"rum-and-raisin" example server for your framework; depending on what other
+middleware/plugins you're using (e.g. compression) you may need to add some tiny
+workarounds for common issues (most notably relating to the Event Stream from
+watch mode).
 
 ### Recommended options
 
