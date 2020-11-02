@@ -40,7 +40,7 @@ possible thing a CLI option - if you need that level of customisation then you
 should opt for the middleware.
 
 We recommend that you start with the PostGraphile CLI and then move to the
-PostGraphile library if you need deeper integration with Node.js.
+PostGraphile middleware if you need deeper integration with Node.js.
 
 Which layer would you like to read more about?
 
