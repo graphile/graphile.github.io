@@ -219,14 +219,18 @@ from
 <!-- CLI_DOCBLOCK_END -->
 <!-- prettier-ignore-end -->
 
-The following features and not part of PostGraphile core, but are available from
-the Supporter and/or Pro plugins - see [Go Pro!](/postgraphile/pricing/) for
-more information.
+The following options are not part of PostGraphile core, but are available from
+the `@graphile/pg-pubsub` [subscriptions plugin](/postgraphile/subscriptions/)
+(formerly the paid "supporter" plugin, but now fully free and open source -
+please consider [sponsoring us](/sponsor/)!):
 
-- `-S`, `--simple-subscriptions` [SUPPORTER] ⚡️[experimental] add simple
-  subscription support
-- `--subscription-authorization-function [fn]` [SUPPORTER] ⚡️[experimental] PG
-  function to call to check user is allowed to subscribe
+- `-S`, `--simple-subscriptions` add simple subscription support
+- `--subscription-authorization-function [fn]` PG function to call to check user
+  is allowed to subscribe
+
+The following features and not part of PostGraphile core, but are available from
+the Pro plugin - see [Go Pro!](/postgraphile/pricing/) for more information.
+
 - `--read-only-connection <string>` [PRO] ⚡️[experimental] a PostgreSQL
   connection string to use for read-only queries (i.e. not mutations)
 - `--default-pagination-cap [int]` [PRO] ⚡️[experimental] Ensures all

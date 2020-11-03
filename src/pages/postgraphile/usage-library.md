@@ -482,15 +482,19 @@ which are optional. The below options are valid for
 <!-- prettier-ignore-end -->
 
 The following options are not part of PostGraphile core, but are available from
-the Supporter and/or Pro plugins - see [Go Pro!](/postgraphile/pricing/) for
-more information.
+the `@graphile/pg-pubsub` [subscriptions plugin](/postgraphile/subscriptions/)
+(formerly the paid "supporter" plugin, but now fully free and open source -
+please consider [sponsoring us](/sponsor/)!):
+
+- `simpleSubscriptions`: set this to `true` to add simple subscription support
+- `subscriptionAuthorizationFunction [fn]` set this to the name (excluding
+  arguments/parentheses) of a PG function to call to check user is allowed to
+  subscribe
+
+The following options are not part of PostGraphile core, but are available from
+the Pro plugin - see [Go Pro!](/postgraphile/pricing/) for more information.
 
 - **`options`**:
-  - `simpleSubscriptions`: [SUPPORTER] ⚡️[experimental] set this to `true` to
-    add simple subscription support
-  - `subscriptionAuthorizationFunction [fn]` [SUPPORTER] ⚡️[experimental] set
-    this to the name (excluding arguments/parentheses) of a PG function to call
-    to check user is allowed to subscribe
   - `readOnlyConnection` [PRO] ⚡️[experimental] set this to a PostgreSQL
     connection string to use for read-only queries (i.e. not mutations)
   - `defaultPaginationCap` [PRO] ⚡️[experimental] integer, ensure all

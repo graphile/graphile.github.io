@@ -31,8 +31,8 @@ experience, or act as a template for writing your own plugins:
 There are also a couple of first-party plugins that may be purchased on the
 [Graphile Store](https://store.graphile.com):
 
-- `@graphile/supporter` [SUPPORTER] - all current features have been merged into
-  core
+- ~~`@graphile/supporter`~~ - all features now OSS via `@graphile/pg-pubsub`
+  plugin
 - `@graphile/pro` [PRO] - includes protections that can be mounted in front of
   PostGraphile to protect it from malicious actors
 
