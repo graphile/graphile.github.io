@@ -555,17 +555,21 @@ not accurate at all). Default <code class="language-text">50000000</code> (~50MB
 <!-- LIBRARY_DOCBLOCK_END -->
 <!-- prettier-ignore-end -->
 <p>The following options are not part of PostGraphile core, but are available from
-the Supporter and/or Pro plugins - see <a href="/postgraphile/pricing/">Go Pro!</a> for
-more information.</p>
+the <code class="language-text">@graphile/pg-pubsub</code> <a href="/postgraphile/subscriptions/">subscriptions plugin</a>
+(formerly the paid "supporter" plugin, but now fully free and open source -
+please consider <a href="/sponsor/">sponsoring us</a>!):</p>
+<ul>
+<li><code class="language-text">simpleSubscriptions</code>: set this to <code class="language-text">true</code> to add simple subscription support</li>
+<li><code class="language-text">subscriptionAuthorizationFunction [fn]</code> set this to the name (excluding
+arguments/parentheses) of a PG function to call to check user is allowed to
+subscribe</li>
+</ul>
+<p>The following options are not part of PostGraphile core, but are available from
+the Pro plugin - see <a href="/postgraphile/pricing/">Go Pro!</a> for more information.</p>
 <ul>
 <li>
 <p><strong><code class="language-text">options</code></strong>:</p>
 <ul>
-<li><code class="language-text">simpleSubscriptions</code>: <a href='/postgraphile/pricing/' class="plan-supporter"><span class='first-letter'>s</span><span class='rest'>upporter</span></a> ⚡️[experimental] set this to <code class="language-text">true</code> to
-add simple subscription support</li>
-<li><code class="language-text">subscriptionAuthorizationFunction [fn]</code> <a href='/postgraphile/pricing/' class="plan-supporter"><span class='first-letter'>s</span><span class='rest'>upporter</span></a> ⚡️[experimental] set
-this to the name (excluding arguments/parentheses) of a PG function to call
-to check user is allowed to subscribe</li>
 <li><code class="language-text">readOnlyConnection</code> <a href='/postgraphile/pricing/' class="plan-pro"><span class='first-letter'>p</span><span class='rest'>ro</span></a> ⚡️[experimental] set this to a PostgreSQL
 connection string to use for read-only queries (i.e. not mutations)</li>
 <li><code class="language-text">defaultPaginationCap</code> <a href='/postgraphile/pricing/' class="plan-pro"><span class='first-letter'>p</span><span class='rest'>ro</span></a> ⚡️[experimental] integer, ensure all

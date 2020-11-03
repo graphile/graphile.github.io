@@ -56,17 +56,19 @@ the PostGraphile middleware (see next). <strong>Most users should start with thi
 layer, many users use it successfully in production, and it's where we
 recommend you start.</strong></li>
 <li>The PostGraphile CLI wraps the
-<a href="/postgraphile/usage-library/"><strong>PostGraphile middleware</strong> ("library")</a>. This
-middleware is suitable for mounting in Node.js HTTP, Connect, Express or Koa
-applications. This layer is responsible for receiving, deciphering and
-validating the GraphQL HTTP request from the user according to the options
-supplied; configuring a PG client with the relevant settings; and then sending
-the query on to the GraphQL schema to be resolved. <strong>About 70% of PostGraphile
-users end up using this layer in their applications</strong>; reasons to use this
-over the CLI include the ability to add Express middlewares before
-PostGraphile (e.g. to perform rate limiting, sessions, authentication and
-other concerns) and the ability to take greater control over the PostGraphile
-system.</li>
+<a href="/postgraphile/usage-library/"><strong>PostGraphile library's</strong> middleware</a>. This
+middleware is suitable for mounting in Node.js HTTP, <strong>Connect</strong>, <strong>Express</strong>
+or <strong>Koa</strong> applications (the library also exports "route handlers" that are
+suitable for use in other frameworks such as <strong>Fastify</strong> and <strong>Restify</strong>).
+This layer is responsible for receiving, deciphering and validating the
+GraphQL HTTP request from the user according to the options supplied;
+configuring a PG client with the relevant settings; and then sending the query
+on to the GraphQL schema (see next) to be resolved. <strong>About 70% of
+PostGraphile users end up using this layer in their applications</strong>; reasons to
+use this over the CLI include the ability to add Express middlewares before
+PostGraphile (e.g. to perform rate limiting, sessions, custom logging, custom
+authentication and other concerns) and the ability to take greater control
+over the PostGraphile system.</li>
 <li>Deepest down is the
 <a href="/postgraphile/usage-schema/"><strong>PostGraphile GraphQL schema</strong> ("schema-only")</a>
 itself which contains all the types, fields and resolvers. (The schema is
@@ -79,7 +81,7 @@ power as is reasonable through the CLI, but it's not sensible to make every
 possible thing a CLI option - if you need that level of customisation then you
 should opt for the middleware.</p>
 <p>We recommend that you start with the PostGraphile CLI and then move to the
-PostGraphile library if you need deeper integration with Node.js.</p>
+PostGraphile middleware if you need deeper integration with Node.js.</p>
 <p>Which layer would you like to read more about?</p>
 <ul>
 <li><a href="/postgraphile/usage-cli/"><strong>CLI</strong></a></li>

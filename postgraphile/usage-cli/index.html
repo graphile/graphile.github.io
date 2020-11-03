@@ -245,14 +245,18 @@ output usage information</li>
 </ul>
 <!-- CLI_DOCBLOCK_END -->
 <!-- prettier-ignore-end -->
-<p>The following features and not part of PostGraphile core, but are available from
-the Supporter and/or Pro plugins - see <a href="/postgraphile/pricing/">Go Pro!</a> for
-more information.</p>
+<p>The following options are not part of PostGraphile core, but are available from
+the <code class="language-text">@graphile/pg-pubsub</code> <a href="/postgraphile/subscriptions/">subscriptions plugin</a>
+(formerly the paid "supporter" plugin, but now fully free and open source -
+please consider <a href="/sponsor/">sponsoring us</a>!):</p>
 <ul>
-<li><code class="language-text">-S</code>, <code class="language-text">--simple-subscriptions</code> <a href='/postgraphile/pricing/' class="plan-supporter"><span class='first-letter'>s</span><span class='rest'>upporter</span></a> ⚡️[experimental] add simple
-subscription support</li>
-<li><code class="language-text">--subscription-authorization-function [fn]</code> <a href='/postgraphile/pricing/' class="plan-supporter"><span class='first-letter'>s</span><span class='rest'>upporter</span></a> ⚡️[experimental] PG
-function to call to check user is allowed to subscribe</li>
+<li><code class="language-text">-S</code>, <code class="language-text">--simple-subscriptions</code> add simple subscription support</li>
+<li><code class="language-text">--subscription-authorization-function [fn]</code> PG function to call to check user
+is allowed to subscribe</li>
+</ul>
+<p>The following features and not part of PostGraphile core, but are available from
+the Pro plugin - see <a href="/postgraphile/pricing/">Go Pro!</a> for more information.</p>
+<ul>
 <li><code class="language-text">--read-only-connection &lt;string&gt;</code> <a href='/postgraphile/pricing/' class="plan-pro"><span class='first-letter'>p</span><span class='rest'>ro</span></a> ⚡️[experimental] a PostgreSQL
 connection string to use for read-only queries (i.e. not mutations)</li>
 <li><code class="language-text">--default-pagination-cap [int]</code> <a href='/postgraphile/pricing/' class="plan-pro"><span class='first-letter'>p</span><span class='rest'>ro</span></a> ⚡️[experimental] Ensures all
