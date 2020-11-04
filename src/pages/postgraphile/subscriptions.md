@@ -59,7 +59,7 @@ in the user ID).
 
 ```js
 // MySubscriptionPlugin.js
-const currentUserTopicFromContext = (_args, context, _resolveInfo) => {
+const currentUserTopicFromContext = async (_args, context, _resolveInfo) => {
   if (context.jwtClaims.user_id) {
     return `graphql:user:${context.jwtClaims.user_id}`;
   } else {
