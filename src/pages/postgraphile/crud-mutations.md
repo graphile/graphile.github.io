@@ -91,7 +91,8 @@ generated schema:
 - Views instead of tables
 - Missing primary keys (though 'create' mutations will still be added in this
   case)
-- If you only see mutations using primary key: You might be using the `PrimaryKeyMutationsOnlyPlugin`
+- If you only see mutations using primary key: You might be using the
+  `PrimaryKeyMutationsOnlyPlugin`
 
 Don't forget to check any associated `.postgraphilerc` for these settings too!
 
