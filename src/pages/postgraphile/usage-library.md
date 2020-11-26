@@ -427,6 +427,7 @@ which are optional. The below options are valid for
   - `jwtSecret`: The secret for your JSON web tokens. This will be used to
     verify tokens in the `Authorization` header, and signing JWT tokens you
     return in procedures.
+  - `jwtPublicKey`: [Optional] The public key to verify the jwt when signed with RS265 or ES256 algorithms.
   - `jwtVerifyOptions`: Options with which to perform JWT verification - see
     https://github.com/auth0/node-jsonwebtoken#jwtverifytoken-secretorpublickey-options-callback
     If 'audience' property is unspecified, it will default to ['postgraphile'];
