@@ -369,7 +369,7 @@ through GraphQL that are inexpensive for users to use).</p>
 <h3 id="api-postgraphilepgconfig-schemaname-options"><a href="#api-postgraphilepgconfig-schemaname-options" aria-label="api postgraphilepgconfig schemaname options permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>API: <code class="language-text">postgraphile(pgConfig, schemaName, options)</code></h3>
 <p>The <code class="language-text">postgraphile</code> middleware factory function takes three arguments, all of
 which are optional. The below options are valid for
-<tt>postgraphile@<!-- LIBRARY_VERSION_BEGIN -->4.9.0<!-- LIBRARY_VERSION_END --></tt>.</p>
+<tt>postgraphile@<!-- LIBRARY_VERSION_BEGIN -->4.10.0<!-- LIBRARY_VERSION_END --></tt>.</p>
 <ul>
 <li><strong><code class="language-text">pgConfig</code></strong>: An object or string that will be passed to the <a href="https://www.npmjs.com/pg"><code class="language-text">pg</code></a>
 library and used to connect to a PostgreSQL backend, OR a pg.Pool to use.</li>
@@ -406,7 +406,8 @@ subscriptions (you still need a subscriptions plugin currently)</li>
 (subscriptions || live) then you may want to authenticate your users using
 sessions or similar. You can pass some simple middlewares here that will be
 executed against the websocket connection in order to perform
-authentication. We current only support express (not Koa) middlewares here.</li>
+authentication. We current only support Express (not Koa, Fastify, Restify,
+etc) middlewares here.</li>
 <li><code class="language-text">pgDefaultRole</code>: The default Postgres role to use. If no role was provided
 in a provided JWT token, this role will be used.</li>
 <li><code class="language-text">dynamicJson</code>: By default, JSON and JSONB fields are presented as strings
@@ -472,19 +473,33 @@ file exists it will be overwritten.</li>
 schema for more stable diffing.</li>
 <li><code class="language-text">graphqlRoute</code>: The endpoint the GraphQL executer will listen on. Defaults
 to <code class="language-text">/graphql</code>.</li>
+<li><code class="language-text">eventStreamRoute</code>: The endpoint the watch-mode EventStream will be mounted
+on (only appropriate when watchPg is specified). Defaults to
+<code class="language-text">${graphqlRoute}/stream</code>.</li>
+<li><code class="language-text">externalGraphqlRoute</code>: The URL to the GraphQL endpoint for embedding into
+the GraphiQL client. We attempt to infer this (for many servers it is the
+same as <code class="language-text">graphqlRoute</code>), but you may need to specify it manually if you
+mount PostGraphile behind a URL-rewriting proxy, or mount PostGraphile on a
+subpath in certain Node.js servers.</li>
+<li><code class="language-text">externalEventStreamRoute</code>: As with <code class="language-text">externalGraphqlRoute</code>, but for
+<code class="language-text">eventStreamRoute</code> rather than <code class="language-text">graphqlRoute</code>. This is also used for the
+<code class="language-text">X-GraphQL-Event-Stream</code> header.</li>
 <li><code class="language-text">graphiqlRoute</code>: The endpoint the GraphiQL query interface will listen on
 (<strong>NOTE:</strong> GraphiQL will not be enabled unless the <code class="language-text">graphiql</code> option is set
 to <code class="language-text">true</code>). Defaults to <code class="language-text">/graphiql</code>.</li>
-<li><code class="language-text">externalUrlBase</code>: If you are using watch mode, or have enabled GraphiQL,
-and you either mount PostGraphile under a path, or use PostGraphile behind
-some kind of proxy that puts PostGraphile under a subpath (or both!) then
-you must specify this setting so that PostGraphile can figure out it's
-external URL. (e.g. if you do <code class="language-text">app.use(&#39;/path/to&#39;, postgraphile(...))</code>),
-which is not officially supported, then you should pass
-<code class="language-text">externalUrlBase: &#39;/path/to&#39;</code>.) This setting should never end in a slash
-(<code class="language-text">/</code>). To specify that the external URL is the expected one, either omit
-this setting or set it to the empty string <code class="language-text">&#39;&#39;</code>.</li>
+<li><code class="language-text">externalUrlBase</code>: DEPRECATED - use <code class="language-text">externalGraphqlRoute</code> and
+<code class="language-text">externalEventStreamRoute</code> instead. If you are using watch mode, or have
+enabled GraphiQL, and you either mount PostGraphile under a path, or use
+PostGraphile behind some kind of proxy that puts PostGraphile under a
+subpath (or both!) then you must specify this setting so that PostGraphile
+can figure out it's external URL. (e.g. if you do
+<code class="language-text">app.use(&#39;/path/to&#39;, postgraphile(...))</code>), which is not officially
+supported, then you should pass <code class="language-text">externalUrlBase: &#39;/path/to&#39;</code>.) This setting
+should never end in a slash (<code class="language-text">/</code>). To specify that the external URL is the
+expected one, either omit this setting or set it to the empty string <code class="language-text">&#39;&#39;</code>.</li>
 <li><code class="language-text">graphiql</code>: Set this to <code class="language-text">true</code> to enable the GraphiQL interface.</li>
+<li><code class="language-text">graphiqlCredentials</code>: Set this to change the way GraphiQL handles
+credentials. By default this is set to <code class="language-text">same-origin</code>.</li>
 <li><code class="language-text">enhanceGraphiql</code>: Set this to <code class="language-text">true</code> to add some enhancements to GraphiQL;
 intended for development usage only (automatically enables with
 <code class="language-text">subscriptions</code> and <code class="language-text">live</code>).</li>
@@ -499,6 +514,8 @@ multiple GraphQL queries in one request.</li>
 <li><code class="language-text">jwtSecret</code>: The secret for your JSON web tokens. This will be used to
 verify tokens in the <code class="language-text">Authorization</code> header, and signing JWT tokens you
 return in procedures.</li>
+<li><code class="language-text">jwtPublicKey</code>: The public key to verify the JWT when signed with RS265 or
+ES256 algorithms.</li>
 <li><code class="language-text">jwtVerifyOptions</code>: Options with which to perform JWT verification - see
 <a href="https://github.com/auth0/node-jsonwebtoken#jwtverifytoken-secretorpublickey-options-callback">https://github.com/auth0/node-jsonwebtoken#jwtverifytoken-secretorpublickey-options-callback</a>
 If 'audience' property is unspecified, it will default to ['postgraphile'];

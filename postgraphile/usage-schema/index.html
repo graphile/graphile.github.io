@@ -140,7 +140,7 @@ a GraphQLSchema object.</p>
 <p>The returned GraphQLSchema will <strong>not</strong> be updated when your database changes -
 if you require "watch" functionality, please use <code class="language-text">watchPostGraphileSchema</code>
 instead (see below). The below options are valid for
-<tt>postgraphile@<!-- SCHEMA_VERSION_BEGIN -->4.9.0<!-- SCHEMA_VERSION_END --></tt>.</p>
+<tt>postgraphile@<!-- SCHEMA_VERSION_BEGIN -->4.10.0<!-- SCHEMA_VERSION_END --></tt>.</p>
 <ul>
 <li><strong><code class="language-text">pgConfig</code></strong>: An object or string that will be passed to the [<code class="language-text">pg</code>][]
 library and used to connect to a PostgreSQL backend. If you already have a
@@ -210,6 +210,8 @@ so startup can be faster (do this during the build phase).</li>
 <li><code class="language-text">jwtSecret</code>: The secret for your JSON web tokens. This will be used to
 verify tokens in the <code class="language-text">Authorization</code> header, and signing JWT tokens you
 return in procedures.</li>
+<li><code class="language-text">jwtPublicKey</code>: The public key to verify the JWT when signed with RS265 or
+ES256 algorithms.</li>
 <li><code class="language-text">jwtSignOptions</code>: Options with which to perform JWT signing - see
 <a href="https://github.com/auth0/node-jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback">https://github.com/auth0/node-jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback</a></li>
 <li><code class="language-text">jwtPgTypeIdentifier</code>: The Postgres type identifier for the compound type
