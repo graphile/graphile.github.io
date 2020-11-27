@@ -87,7 +87,7 @@ a GraphQLSchema object.
 The returned GraphQLSchema will **not** be updated when your database changes -
 if you require "watch" functionality, please use `watchPostGraphileSchema`
 instead (see below). The below options are valid for
-<tt>postgraphile@<!-- SCHEMA_VERSION_BEGIN -->4.9.0<!-- SCHEMA_VERSION_END --></tt>.
+<tt>postgraphile@<!-- SCHEMA_VERSION_BEGIN -->4.10.0<!-- SCHEMA_VERSION_END --></tt>.
 
 - **`pgConfig`**: An object or string that will be passed to the [`pg`][]
   library and used to connect to a PostgreSQL backend. If you already have a
@@ -155,6 +155,8 @@ instead (see below). The below options are valid for
   - `jwtSecret`: The secret for your JSON web tokens. This will be used to
     verify tokens in the `Authorization` header, and signing JWT tokens you
     return in procedures.
+  - `jwtPublicKey`: The public key to verify the JWT when signed with RS265 or
+    ES256 algorithms.
   - `jwtSignOptions`: Options with which to perform JWT signing - see
     https://github.com/auth0/node-jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback
   - `jwtPgTypeIdentifier`: The Postgres type identifier for the compound type

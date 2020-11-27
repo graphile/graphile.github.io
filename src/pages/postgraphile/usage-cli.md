@@ -88,7 +88,7 @@ postgraphile \
 
 There are more CLI options available to customise the GraphQL server (these are
 from
-<tt>postgraphile@<!-- CLI_VERSION_BEGIN -->4.9.0<!-- CLI_VERSION_END --></tt>):
+<tt>postgraphile@<!-- CLI_VERSION_BEGIN -->4.10.0<!-- CLI_VERSION_END --></tt>):
 
 <!-- prettier-ignore-start -->
 <!-- CLI_DOCBLOCK_BEGIN -->

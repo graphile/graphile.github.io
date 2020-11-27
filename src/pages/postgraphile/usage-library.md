@@ -299,7 +299,7 @@ const postgraphileOptions = {
 
 The `postgraphile` middleware factory function takes three arguments, all of
 which are optional. The below options are valid for
-<tt>postgraphile@<!-- LIBRARY_VERSION_BEGIN -->4.9.0<!-- LIBRARY_VERSION_END --></tt>.
+<tt>postgraphile@<!-- LIBRARY_VERSION_BEGIN -->4.10.0<!-- LIBRARY_VERSION_END --></tt>.
 
 - **`pgConfig`**: An object or string that will be passed to the [`pg`][]
   library and used to connect to a PostgreSQL backend, OR a pg.Pool to use.
@@ -334,7 +334,8 @@ which are optional. The below options are valid for
     (subscriptions || live) then you may want to authenticate your users using
     sessions or similar. You can pass some simple middlewares here that will be
     executed against the websocket connection in order to perform
-    authentication. We current only support express (not Koa) middlewares here.
+    authentication. We current only support Express (not Koa, Fastify, Restify,
+    etc) middlewares here.
   - `pgDefaultRole`: The default Postgres role to use. If no role was provided
     in a provided JWT token, this role will be used.
   - `dynamicJson`: By default, JSON and JSONB fields are presented as strings
@@ -400,19 +401,33 @@ which are optional. The below options are valid for
     schema for more stable diffing.
   - `graphqlRoute`: The endpoint the GraphQL executer will listen on. Defaults
     to `/graphql`.
+  - `eventStreamRoute`: The endpoint the watch-mode EventStream will be mounted
+    on (only appropriate when watchPg is specified). Defaults to
+    `${graphqlRoute}/stream`.
+  - `externalGraphqlRoute`: The URL to the GraphQL endpoint for embedding into
+    the GraphiQL client. We attempt to infer this (for many servers it is the
+    same as `graphqlRoute`), but you may need to specify it manually if you
+    mount PostGraphile behind a URL-rewriting proxy, or mount PostGraphile on a
+    subpath in certain Node.js servers.
+  - `externalEventStreamRoute`: As with `externalGraphqlRoute`, but for
+    `eventStreamRoute` rather than `graphqlRoute`. This is also used for the
+    `X-GraphQL-Event-Stream` header.
   - `graphiqlRoute`: The endpoint the GraphiQL query interface will listen on
     (**NOTE:** GraphiQL will not be enabled unless the `graphiql` option is set
     to `true`). Defaults to `/graphiql`.
-  - `externalUrlBase`: If you are using watch mode, or have enabled GraphiQL,
-    and you either mount PostGraphile under a path, or use PostGraphile behind
-    some kind of proxy that puts PostGraphile under a subpath (or both!) then
-    you must specify this setting so that PostGraphile can figure out it's
-    external URL. (e.g. if you do `app.use('/path/to', postgraphile(...))`),
-    which is not officially supported, then you should pass
-    `externalUrlBase: '/path/to'`.) This setting should never end in a slash
-    (`/`). To specify that the external URL is the expected one, either omit
-    this setting or set it to the empty string `''`.
+  - `externalUrlBase`: DEPRECATED - use `externalGraphqlRoute` and
+    `externalEventStreamRoute` instead. If you are using watch mode, or have
+    enabled GraphiQL, and you either mount PostGraphile under a path, or use
+    PostGraphile behind some kind of proxy that puts PostGraphile under a
+    subpath (or both!) then you must specify this setting so that PostGraphile
+    can figure out it's external URL. (e.g. if you do
+    `app.use('/path/to', postgraphile(...))`), which is not officially
+    supported, then you should pass `externalUrlBase: '/path/to'`.) This setting
+    should never end in a slash (`/`). To specify that the external URL is the
+    expected one, either omit this setting or set it to the empty string `''`.
   - `graphiql`: Set this to `true` to enable the GraphiQL interface.
+  - `graphiqlCredentials`: Set this to change the way GraphiQL handles
+    credentials. By default this is set to `same-origin`.
   - `enhanceGraphiql`: Set this to `true` to add some enhancements to GraphiQL;
     intended for development usage only (automatically enables with
     `subscriptions` and `live`).
@@ -427,6 +442,8 @@ which are optional. The below options are valid for
   - `jwtSecret`: The secret for your JSON web tokens. This will be used to
     verify tokens in the `Authorization` header, and signing JWT tokens you
     return in procedures.
+  - `jwtPublicKey`: The public key to verify the JWT when signed with RS265 or
+    ES256 algorithms.
   - `jwtVerifyOptions`: Options with which to perform JWT verification - see
     https://github.com/auth0/node-jsonwebtoken#jwtverifytoken-secretorpublickey-options-callback
     If 'audience' property is unspecified, it will default to ['postgraphile'];
