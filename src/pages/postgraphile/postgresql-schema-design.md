@@ -125,7 +125,7 @@ you already understand, you can skip ahead.
     `primary key` of a table in many places to uniquely identify an object,
     including the globally unique id field.
 3.  `first_name text not null check (char_length(first_name) < 80)`: We want all
-    of our users to enter their first name and last name seperately, so this
+    of our users to enter their first name and last name separately, so this
     column definition will create a column named `first_name`, of type `text`,
     that is required (`not null`), and that must be less than 80 characters long
     (`check (char_length(first_name) < 80)`).
@@ -587,7 +587,7 @@ comment on column forum_example_private.person_account.password_hash is 'An opaq
 
 Why would we choose to create a new table in the `forum_example_private` schema
 instead of just adding columns to `forum_example.person`? There are a couple of
-answers to this question. The first and most fundamental is seperation of
+answers to this question. The first and most fundamental is separation of
 concerns. By moving `email` and `password_hash` to a second table we make it
 much harder to accidently select those values when reading
 `forum_example.person`. Also, users will not have the permission to directly
@@ -596,7 +596,7 @@ more secure. This approach is also good for PostGraphile as the
 `forum_example_private` schema is never exposed in PostGraphile, so you will
 never accidently expose password hashes in GraphQL.
 
-Besides those arguments, moving the person’s account to a seperate table is also
+Besides those arguments, moving the person’s account to a separate table is also
 good database design in general. Say you have multiple types of users. Perhaps
 normal person users, and then ’brand‘ or ‘organization’ users. This pattern
 could easily allow you to go in that direction.
