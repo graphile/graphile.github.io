@@ -257,8 +257,8 @@ resolver. To do so you need the following:
 * A GraphQL operation (aka query, but includes mutations, subscriptions) to execute; this can be a string or an AST
 * The variables to feed to the operation (if necessary)
 * A valid GraphQL context for PostGraphile
- * inside a resolver, you can just pass the resolvers context straight through
- * in other situations, have a look at `withPostGraphileContext` in the [schema only usage](/postgraphile/usage-schema/)
+  * inside a resolver, you can just pass the resolvers context straight through
+  * in other situations, have a look at `withPostGraphileContext` in the [schema only usage](/postgraphile/usage-schema/)
 
 Issuing a GraphQL operation from inside a resolver example:
 
