@@ -247,25 +247,18 @@ look at the `postgraphile-core` and `graphile-build-pg` modules.
 You can issue GraphQL requests from various contexts, including within a
 resolver. To do so you need the following:
 
-    * Access to the `graphql` function from the `graphql` module
-
-      * In a PostGraphile plugin, if you have access to the build object (which you usually will), you should get this from `build.graphql.graphql`
-      * Failing that, you can `import { graphql } from 'graphql'` or `const { graphql } = require('graphql')`, but this has caveats.
-
-    * A reference to the GraphQL schema object. You can get this from many sources:
-
-      * in a resolver, you should extract it from `info.schema`
-      * if you have access to the PostGraphile middleware, you can issue `await postgraphileMiddleware.getGqlSchema()`
-      * if you don't need the PostGraphile middleware, you can use `await createPostGraphileSchema(...)` - see [schema only usage](https://www.graphile.org/postgraphile/usage-schema/) - do this once and cache it because it's expensive to compute
-
-    * A GraphQL operation (aka query, but includes mutations, subscriptions) to execute; this can be a string or an AST
-
-    * The variables to feed to the operation (if necessary)
-
-    * A valid GraphQL context for PostGraphile
-
-      * inside a resolver, you can just pass the resolvers context straight through
-      * in other situations, have a look at `withPostGraphileContext` in the [schema only usage](/postgraphile/usage-schema/)
+* Access to the `graphql` function from the `graphql` module
+  * In a PostGraphile plugin, if you have access to the build object (which you usually will), you should get this from `build.graphql.graphql`
+  * Failing that, you can `import { graphql } from 'graphql'` or `const { graphql } = require('graphql')`, but this has caveats.
+* A reference to the GraphQL schema object. You can get this from many sources:
+  * in a resolver, you should extract it from `info.schema`
+  * if you have access to the PostGraphile middleware, you can issue `await postgraphileMiddleware.getGqlSchema()`
+  * if you don't need the PostGraphile middleware, you can use `await createPostGraphileSchema(...)` - see [schema only usage](https://www.graphile.org/postgraphile/usage-schema/) - do this once and cache it because it's expensive to compute
+* A GraphQL operation (aka query, but includes mutations, subscriptions) to execute; this can be a string or an AST
+* The variables to feed to the operation (if necessary)
+* A valid GraphQL context for PostGraphile
+ * inside a resolver, you can just pass the resolvers context straight through
+ * in other situations, have a look at `withPostGraphileContext` in the [schema only usage](/postgraphile/usage-schema/)
 
 Issuing a GraphQL operation from inside a resolver example:
 
