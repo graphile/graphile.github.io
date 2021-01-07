@@ -253,7 +253,7 @@ resolver. To do so you need the following:
 * A reference to the GraphQL schema object. You can get this from many sources:
   * in a resolver, you should extract it from `info.schema`
   * if you have access to the PostGraphile middleware, you can issue `await postgraphileMiddleware.getGqlSchema()`
-  * if you don't need the PostGraphile middleware, you can use `await createPostGraphileSchema(...)` - see [schema only usage](https://www.graphile.org/postgraphile/usage-schema/) - do this once and cache it because it's expensive to compute
+  * if you don't need the PostGraphile middleware, you can use `await createPostGraphileSchema(...)` - see [schema only usage](/postgraphile/usage-schema/) - do this once and cache it because it's expensive to compute
 * A GraphQL operation (aka query, but includes mutations, subscriptions) to execute; this can be a string or an AST
 * The variables to feed to the operation (if necessary)
 * A valid GraphQL context for PostGraphile
