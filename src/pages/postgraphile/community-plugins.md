@@ -77,7 +77,7 @@ Schema extension plugins for PostGraphile:
 - [graphile-column-privileges-mutations](https://github.com/pyramation/graphile-column-privileges-mutations) -
   generates mutations safe to use with column-level select grants
 - [postgraphile-remove-foreign-key-fields-plugin](https://github.com/jarvisuser90/postgraphile-remove-foreign-key-fields-plugin) -
-  Removes all foreign key fields from the GraphQL schema while still allowing 
+  Removes all foreign key fields from the GraphQL schema while still allowing
   foreign relationships to be created.
 
 Examples of using these plugins:

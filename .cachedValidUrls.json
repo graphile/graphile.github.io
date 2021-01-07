@@ -177,6 +177,7 @@
   "https://github.com/hansololai/postgraphile-connection-filter-polymorphic",
   "https://github.com/hansololai/postgraphile-index-to-unique-constraint-plugin",
   "https://github.com/hansololai/postgraphile-table-extension-plugin",
+  "https://github.com/jarvisuser90/postgraphile-remove-foreign-key-fields-plugin",
   "https://github.com/jashmenn/postgraphile-upsert-plugin",
   "https://github.com/knu/postgresql-plruby",
   "https://github.com/mattbretl",
