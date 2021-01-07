@@ -282,7 +282,7 @@ To create a function that returns a connection, you could use SQL such as this:
 
 ```sql
 -- Assuming we already have a table named `person`…
-CREATE FUNCTION my_function(a int, b int) RETURNS SETOF person AS $$ … $$ LANGUAGE sql;
+CREATE FUNCTION my_function(a int, b int) RETURNS SETOF person AS $$ … $$ LANGUAGE sql STABLE;
 ```
 
 This function would be recognised as a
