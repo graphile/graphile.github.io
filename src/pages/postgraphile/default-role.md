@@ -43,7 +43,7 @@ in:
 
 ```sql
 create role editor;
-create role editor nologin;
+create user editor nologin;
 ```
 
 “Logging in” just means we can use the role when authenticating in the
