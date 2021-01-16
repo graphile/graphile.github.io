@@ -74,7 +74,7 @@ role that can log in (or a user):</p>
 <p>…and the following are also equivalent as they create a role that <em>can’t</em> log
 in:</p>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> role editor<span class="token punctuation">;</span>
-<span class="token keyword">create</span> role editor nologin<span class="token punctuation">;</span></code></pre></div>
+<span class="token keyword">create</span> <span class="token keyword">user</span> editor nologin<span class="token punctuation">;</span></code></pre></div>
 <p>“Logging in” just means we can use the role when authenticating in the
 PostgreSQL authentication section of the connection string. So with the above
 roles you could start a PostgreSQL connection with
