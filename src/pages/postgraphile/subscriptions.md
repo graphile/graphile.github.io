@@ -59,6 +59,9 @@ in the user ID).
 
 ```js
 // MySubscriptionPlugin.js
+const { makeExtendSchemaPlugin, gql, embed } = require('graphile-utils');
+// or: import { makeExtendSchemaPlugin, gql, embed } from 'graphile-utils';
+
 const currentUserTopicFromContext = async (_args, context, _resolveInfo) => {
   if (context.jwtClaims.user_id) {
     return `graphql:user:${context.jwtClaims.user_id}`;
