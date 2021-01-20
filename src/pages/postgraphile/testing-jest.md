@@ -4,17 +4,53 @@ path: /postgraphile/testing-jest/
 title: Testing with Jest
 ---
 
-### Testing the database functions
+### Testing the database
 
-You can think of this as your "unit tests" - simply spin up a transaction, set
-any relevant Postgres settings (e.g. `jwt.claims.user_id`), run the SQL you want
-to test, check the results, and then rollback the transaction.
+Making sure your database functions, triggers, permissions, etc work correctly
+is critical; there are many tools out there that you can use to do this, but if
+you're already developing in a JavaScript environment it may feel natural to add
+them to your Jest suite.
+
+The pattern is effectively to spin up a transaction, set any relevant Postgres
+settings (e.g. `role`, `jwt.claims.user_id`, etc), run the SQL you want to test,
+check the results, and then rollback the transaction; i.e.:
+
+```sql
+-- start transaction
+begin;
+
+-- set relevant transaction settings; the `, true` means "local" - i.e. it'll
+-- be rolled back with the transaction - do not forget to add this!
+select
+  set_config('role', 'YOUR_GRAPHQL_ROLE_HERE', true),
+  set_config('jwt.claims.user_id', 27, true),
+  set_config...;
+
+-- run the SQL you want to test
+select * from my_function();
+
+-- rollback the transaction
+rollback;
+```
+
+Each of the statements above would normally have to be issued via
+`pgClient.query(...)` using a Postgres client that your retrieve from a
+`pg.Pool` (and release afterwards); however that's a lot of boilerplate for our
+tests, so it makes sense to extract the common patterns into helper functions.
 
 <details>
-<summary>(Click to expand.) Create some helpers in <tt>test_helpers.js</tt>. </summary>
+<summary>(Click to expand.) Create some helpers in <tt>test_helpers.ts</tt>. </summary>
 
-```js
-import { Pool } from "pg";
+The following code is in TypeScript; you can convert it to JavaScript via
+https://www.typescriptlang.org/play
+
+```ts
+import { Pool, PoolClient } from "pg";
+
+if (!process.env.TEST_DATABASE_URL) {
+  throw new Error("Cannot run tests without a TEST_DATABASE_URL");
+}
+export const TEST_DATABASE_URL: string = process.env.TEST_DATABASE_URL;
 
 const pools = {};
 
@@ -35,11 +71,8 @@ afterAll(() => {
   );
 });
 
-const withDbFromUrl = async (url, fn) => {
-  if (!pools[url]) {
-    pools[url] = new Pool({ connectionString: url });
-  }
-  const pool = pools[url];
+const withDbFromUrl = async <T>(url: string, fn: ClientCallback<T>) => {
+  const pool = poolFromUrl(url);
   const client = await pool.connect();
   await client.query("BEGIN ISOLATION LEVEL SERIALIZABLE;");
 
@@ -58,15 +91,42 @@ const withDbFromUrl = async (url, fn) => {
   }
 };
 
-export const withRootDb = fn =>
-  withDbFromUrl(process.env.TEST_DATABASE_URL, fn);
+export const withRootDb = <T>(fn: ClientCallback<T>) =>
+  withDbFromUrl(TEST_DATABASE_URL, fn);
 
-// You'll want to replace this with your own version
-exports.becomeUser = (client, userOrUserId = null) =>
-  client.query(
-    "select set_config('role', $1, true), set_config('jwt.claims.user_id', $2, true);",
-    ["app_visitor", userOrUserId ? userOrUserId.id || userOrUserId : null]
+export const becomeRoot = (client: PoolClient) => client.query("reset role");
+
+/******************************************************************************
+ **                                                                          **
+ **     BELOW HERE, YOU'LL WANT TO CUSTOMISE FOR YOUR OWN DATABASE SCHEMA    **
+ **                                                                          **
+ ******************************************************************************/
+
+export type User = {
+  id: string;
+  username: string;
+  _password?: string;
+  _email?: string;
+};
+export type Organization = { id: string; name: string };
+
+export const becomeUser = async (
+  client: PoolClient,
+  userOrUserId: User | string | null
+) => {
+  await becomeRoot(client);
+  const session = userOrUserId
+    ? await createSession(
+        client,
+        typeof userOrUserId === "object" ? userOrUserId.id : userOrUserId
+      )
+    : null;
+  await client.query(
+    `select set_config('role', $1::text, true),
+            set_config('jwt.claims.session_id', $2::text, true)`,
+    [process.env.DATABASE_VISITOR, session ? session.uuid : ""]
   );
+};
 
 // Enables multiple calls to `createUsers` within the same test to still have
 // deterministic results without conflicts.
@@ -75,31 +135,52 @@ beforeEach(() => {
   userCreationCounter = 0;
 });
 
-// You'll want to replace this with your own version!
-exports.createUsers = async function createUsers(client, count) {
+export const createUsers = async function createUsers(
+  client: PoolClient,
+  count: number = 1,
+  verified: boolean = true
+) {
   const users = [];
   if (userCreationCounter > 25) {
     throw new Error("Too many users created!");
   }
-  const userLetter = "abcdefghijklmnopqrstuvwxyz"[userCreationCounter];
   for (let i = 0; i < count; i++) {
-    let {
-      rows: [user],
-    } = await client.query(
-      "SELECT * FROM app_private.register_user_by_email($1)",
-      [`${userLetter}${i || ""}@b.c`]
-    );
+    const userLetter = "abcdefghijklmnopqrstuvwxyz"[userCreationCounter];
+    userCreationCounter++;
+    const password = userLetter.repeat(12);
+    const email = `${userLetter}${i || ""}@b.c`;
+    const user: User = (
+      await client.query(
+        `SELECT * FROM app_private.really_create_user(
+          username := $1,
+          email := $2,
+          email_is_verified := $3,
+          name := $4,
+          avatar_url := $5,
+          password := $6
+        )`,
+        [
+          `testuser_${userLetter}`,
+          email,
+          verified,
+          `User ${userLetter}`,
+          null,
+          password,
+        ]
+      )
+    ).rows[0];
     expect(user.id).not.toBeNull();
+    user._email = email;
+    user._password = password;
     users.push(user);
   }
-  userCreationCounter++;
   return users;
 };
 ```
 
 </details>
 
-Then a test file could be like:
+Then a test file might look like:
 
 ```js{3-13}
 import { becomeUser, createUsers, withRootDb } from "../test_helpers";
@@ -119,12 +200,24 @@ test("can delete self", () =>
   }));
 ```
 
+For more thorough test helpers (and to see this working in practice), check out
+[Graphile Starter](https://github.com/graphile/starter):
+
+<!-- prettier-ignore -->
+- [@app/db/\_\_tests\_\_/app\_public/functions/invite\_to\_organization.test.ts](https://github.com/graphile/starter/blob/main/@app/db/__tests__/app_public/functions/invite_to_organization.test.ts)
+- [@app/db/\_\_tests\_\_/helpers.ts](https://github.com/graphile/starter/blob/main/@app/db/__tests__/helpers.ts)
+- [@app/\_\_tests\_\_/helpers.ts](https://github.com/graphile/starter/blob/main/@app/__tests__/helpers.ts)
+
 ### Testing the GraphQL middleware
 
-These are more integration tests - they pretend to go through the middleware
-(exercising pgSettings / JWT / etc) and you can place assertions on the results.
+Whereas testing the database functionality can be thought of as unit tests,
+testing the GraphQL middleware is more akin to integration tests - they pretend
+to go through the middleware (exercising pgSettings / JWT / etc) and you can
+place assertions on the results.
 
-In your `server.js` (or wherever), export your PostGraphile options:
+First, make sure that you've extracted your PostGraphile (library mode) options
+into a function that you can import in your tests; for example your PostGraphile
+server file might look like this:
 
 ```js{6-11,17}
 const express = require("express");
@@ -151,73 +244,106 @@ app.listen(process.env.PORT || 3000);
 ```
 
 <details>
-<summary>(Click to expand.) Create a <tt>test_helper.js</tt> file for running your queries,
-responsible for importing options from `server.js`, and setting up/tearing down
+<summary>(Click to expand.) Create a <tt>test_helper.ts</tt> file for running your queries,
+responsible for importing this <tt>postgraphileOptions</tt> function and setting up/tearing down
 the transaction. Don't forget to set the environment variables used by this file. </summary>
 
-```js
-const pg = require("pg");
-const {
+The following code is in TypeScript; you can convert it to JavaScript via
+https://www.typescriptlang.org/play
+
+```ts
+import { Request, Response } from "express";
+import { ExecutionResult, graphql, GraphQLSchema } from "graphql";
+import { Pool, PoolClient } from "pg";
+import {
   createPostGraphileSchema,
+  PostGraphileOptions,
   withPostGraphileContext,
-} = require("postgraphile");
-const { graphql } = require("graphql");
+} from "postgraphile";
+
+import { getPostGraphileOptions } from "../src/middleware/installPostGraphile";
+
 const MockReq = require("mock-req");
 
-const { postgraphileOptions } = require("../../server/middleware/postgraphile");
-
-// This is the role that your normal PostGraphile connection string would use,
-// e.g. `postgres://POSTGRAPHILE_AUTHENTICATOR_ROLE:password@host/db`
-const POSTGRAPHILE_AUTHENTICATOR_ROLE = "app_authenticator";
-
+let known: Record<
+  string,
+  { counter: number; values: Map<unknown, string> }
+> = {};
+beforeEach(() => {
+  known = {};
+});
 /*
  * This function replaces values that are expected to change with static
  * placeholders so that our snapshot testing doesn't throw an error
  * every time we run the tests because time has ticked on in it's inevitable
  * march toward the future.
  */
-const sanitise = json => {
+export function sanitize(json: any): any {
+  /* This allows us to maintain stable references whilst dealing with variable values */
+  function mask(value: unknown, type: string) {
+    if (!known[type]) {
+      known[type] = { counter: 0, values: new Map() };
+    }
+    const o = known[type];
+    if (!o.values.has(value)) {
+      o.values.set(value, `[${type}-${++o.counter}]`);
+    }
+    return o.values.get(value);
+  }
+
   if (Array.isArray(json)) {
-    return json.map(el => sanitise(el));
+    return json.map(val => sanitize(val));
   } else if (json && typeof json === "object") {
-    const result = {};
-    for (const k in json) {
-      if (k === "nodeId") {
-        result[k] = "[nodeId]";
+    const result = { ...json };
+    for (const k in result) {
+      if (k === "nodeId" && typeof result[k] === "string") {
+        result[k] = mask(result[k], "nodeId");
       } else if (
         k === "id" ||
-        (k.endsWith("Id") && typeof json[k] === "number")
+        k === "uuid" ||
+        (k.endsWith("Id") &&
+          (typeof json[k] === "number" || typeof json[k] === "string")) ||
+        (k.endsWith("Uuid") && typeof k === "string")
       ) {
-        result[k] = "[id]";
+        result[k] = mask(result[k], "id");
       } else if (
         (k.endsWith("At") || k === "datetime") &&
         typeof json[k] === "string"
       ) {
-        result[k] = "[timestamp]";
+        result[k] = mask(result[k], "timestamp");
       } else if (
         k.match(/^deleted[A-Za-z0-9]+Id$/) &&
         typeof json[k] === "string"
       ) {
-        result[k] = "[nodeId]";
+        result[k] = mask(result[k], "nodeId");
+      } else if (k === "email" && typeof json[k] === "string") {
+        result[k] = mask(result[k], "email");
+      } else if (k === "username" && typeof json[k] === "string") {
+        result[k] = mask(result[k], "username");
       } else {
-        result[k] = sanitise(json[k]);
+        result[k] = sanitize(json[k]);
       }
     }
     return result;
   } else {
     return json;
   }
-};
+}
 
 // Contains the PostGraphile schema and rootPgPool
-let ctx;
+interface ICtx {
+  rootPgPool: Pool;
+  options: PostGraphileOptions<Request, Response>;
+  schema: GraphQLSchema;
+}
+let ctx: ICtx | null = null;
 
-exports.setup = async () => {
-  const rootPgPool = new pg.Pool({
-    connectionString: process.env.TEST_ROOT_DATABASE_URL,
+export const setup = async () => {
+  const rootPgPool = new Pool({
+    connectionString: process.env.TEST_DATABASE_URL,
   });
 
-  const options = postgraphileOptions();
+  const options = getPostGraphileOptions({ rootPgPool });
   const schema = await createPostGraphileSchema(
     rootPgPool,
     "app_public",
@@ -232,14 +358,14 @@ exports.setup = async () => {
   };
 };
 
-exports.teardown = async () => {
+export const teardown = async () => {
   try {
     if (!ctx) {
       return null;
     }
     const { rootPgPool } = ctx;
     ctx = null;
-    await rootPgPool.end();
+    rootPgPool.end();
     return null;
   } catch (e) {
     console.error(e);
@@ -247,12 +373,16 @@ exports.teardown = async () => {
   }
 };
 
-exports.runGraphQLQuery = async function runGraphQLQuery(
-  query, // The GraphQL query string
-  variables, // The GraphQL variables
-  reqOptions, // Any additional items to set on `req` (e.g. `{user: {id: 17}}`)
-  checker = () => {} // Place test assertions in this function
+export const runGraphQLQuery = async function runGraphQLQuery(
+  query: string, // The GraphQL query string
+  variables: { [key: string]: any } | null, // The GraphQL variables
+  reqOptions: { [key: string]: any } | null, // Any additional items to set on `req` (e.g. `{user: {id: 17}}`)
+  checker: (
+    result: ExecutionResult,
+    context: { pgClient: PoolClient }
+  ) => void | ExecutionResult | Promise<void | ExecutionResult> = () => {} // Place test assertions in this function
 ) {
+  if (!ctx) throw new Error("No ctx!");
   const { schema, rootPgPool, options } = ctx;
   const req = new MockReq({
     url: options.graphqlRoute || "/graphql",
@@ -263,121 +393,108 @@ exports.runGraphQLQuery = async function runGraphQLQuery(
     },
     ...reqOptions,
   });
+  const res: any = { req };
+  req.res = res;
 
-  const { pgSettings: pgSettingsGenerator } = options;
+  const {
+    pgSettings: pgSettingsGenerator,
+    additionalGraphQLContextFromRequest,
+  } = options;
   const pgSettings =
-    typeof pgSettingsGenerator === "function"
+    (typeof pgSettingsGenerator === "function"
       ? await pgSettingsGenerator(req)
-      : pgSettingsGenerator;
+      : pgSettingsGenerator) || {};
+
+  // Because we're connected as the database owner, we should manually switch to
+  // the authenticator role
+  if (!pgSettings.role) {
+    pgSettings.role = process.env.DATABASE_AUTHENTICATOR;
+  }
 
   await withPostGraphileContext(
     {
       ...options,
       pgPool: rootPgPool,
       pgSettings,
+      pgForceTransaction: true,
     },
     async context => {
-      /* BEGIN: pgClient REPLACEMENT */
-      // We're not going to use the `pgClient` that came with
-      // `withPostGraphileContext` because we want to ROLLBACK at the end. So
-      // we need to replace it, and re-implement the settings logic. Sorry.
-
-      const replacementPgClient = await rootPgPool.connect();
-      await replacementPgClient.query("begin");
-      await replacementPgClient.query(`select set_config('role', $1, true)`, [
-        POSTGRAPHILE_AUTHENTICATOR_ROLE,
-      ]);
-
-      const localSettings = new Map();
-
-      // Set the custom provided settings before jwt claims and role are set
-      // this prevents an accidentional overwriting
-      if (typeof pgSettings === "object") {
-        for (const key of Object.keys(pgSettings)) {
-          localSettings.set(key, String(pgSettings[key]));
-        }
-      }
-
-      // If there is at least one local setting.
-      if (localSettings.size !== 0) {
-        // Actually create our query.
-        const values = [];
-        const sqlQuery = `select ${Array.from(localSettings)
-          .map(([key, value]) => {
-            values.push(key);
-            values.push(value);
-            return `set_config($${values.length - 1}, $${values.length}, true)`;
-          })
-          .join(", ")}`;
-
-        // Execute the query.
-        await replacementPgClient.query(sqlQuery, values);
-      }
-      /* END: pgClient REPLACEMENT */
-
       let checkResult;
+      const { pgClient } = context;
       try {
         // This runs our GraphQL query, passing the replacement client
+        const additionalContext = additionalGraphQLContextFromRequest
+          ? await additionalGraphQLContextFromRequest(req, res)
+          : null;
         const result = await graphql(
           schema,
           query,
           null,
           {
             ...context,
-            pgClient: replacementPgClient,
+            ...additionalContext,
+            __TESTING: true,
           },
           variables
         );
         // Expand errors
         if (result.errors) {
-          // This does a similar transform that PostGraphile does to errors.
-          // It's not the same. Sorry.
-          // TODO: use `handleErrors` instead, if present
-          result.errors = result.errors.map(rawErr => {
-            const e = {
-              message: rawErr.message,
-              locations: rawErr.locations,
-              path: rawErr.path,
-            };
-            Object.defineProperty(e, "originalError", {
-              value: rawErr.originalError,
-              enumerable: false,
-            });
-
-            if (e.originalError) {
-              Object.keys(e.originalError).forEach(k => {
-                try {
-                  e[k] = e.originalError[k];
-                } catch (err) {
-                  // Meh.
-                }
+          if (options.handleErrors) {
+            result.errors = options.handleErrors(result.errors);
+          } else {
+            // This does a similar transform that PostGraphile does to errors.
+            // It's not the same. Sorry.
+            result.errors = result.errors.map(rawErr => {
+              const e = Object.create(rawErr);
+              Object.defineProperty(e, "originalError", {
+                value: rawErr.originalError,
+                enumerable: false,
               });
-            }
-            return e;
-          });
+
+              if (e.originalError) {
+                Object.keys(e.originalError).forEach(k => {
+                  try {
+                    e[k] = e.originalError[k];
+                  } catch (err) {
+                    // Meh.
+                  }
+                });
+              }
+              return e;
+            });
+          }
         }
 
         // This is were we call the `checker` so you can do your assertions.
         // Also note that we pass the `replacementPgClient` so that you can
         // query the data in the database from within the transaction before it
         // gets rolled back.
-        checkResult = await checker(result, { pgClient: replacementPgClient });
+        checkResult = await checker(result, {
+          pgClient,
+        });
 
         // You don't have to keep this, I just like knowing when things change!
-        expect(sanitise(result)).toMatchSnapshot();
+        expect(sanitize(result)).toMatchSnapshot();
+
+        return checkResult == null ? result : checkResult;
       } finally {
         // Rollback the transaction so no changes are written to the DB - this
         // makes our tests fairly deterministic.
-        await replacementPgClient.query("rollback");
-        replacementPgClient.release();
+        await pgClient.query("rollback");
       }
-      return checkResult;
     }
   );
 };
 ```
 
 </details>
+
+For more thorough test helpers (and to see this working in practice), check out
+Graphile Starter:
+
+- [@app/server/\_\_tests\_\_/queries/currentUser.test.ts](https://github.com/graphile/starter/blob/main/@app/server/__tests__/queries/currentUser.test.ts)
+- [@app/server/\_\_tests\_\_/helpers.ts](https://github.com/graphile/starter/blob/main/@app/server/__tests__/helpers.ts)
+- [@app/\_\_tests\_\_/helpers.ts](https://github.com/graphile/starter/blob/main/@app/__tests__/helpers.ts)
 
 Your test might look something like this:
 
@@ -390,7 +507,7 @@ afterAll(teardown);
 test("GraphQL query nodeId", async () => {
   await runGraphQLQuery(
     // GraphQL query goes here:
-    `{ nodeId }`,
+    `{ __typename }`,
 
     // GraphQL variables go here:
     {},
@@ -406,7 +523,7 @@ test("GraphQL query nodeId", async () => {
     // This function runs all your test assertions:
     async (json, { pgClient }) => {
       expect(json.errors).toBeFalsy();
-      expect(json.data.nodeId).toBeTruthy();
+      expect(json.data.__typename).toEqual("Query");
 
       // If you need to, you can query the DB within the context of this
       // function - e.g. to check that your mutation made the changes you'd
