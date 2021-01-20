@@ -169,6 +169,11 @@
   "https://github.com/graphile/starter",
   "https://github.com/graphile/starter/blob/93a887cc87ea8b19eb048b72e9fb3308bc1d5a82/%40app/lib/src/GraphileApolloLink.ts",
   "https://github.com/graphile/starter/blob/d90cdc7560b01a2bc2847a72307383a36786a780/%40app/server/src/utils/handleErrors.ts",
+  "https://github.com/graphile/starter/blob/main/@app/__tests__/helpers.ts",
+  "https://github.com/graphile/starter/blob/main/@app/db/__tests__/app_public/functions/invite_to_organization.test.ts",
+  "https://github.com/graphile/starter/blob/main/@app/db/__tests__/helpers.ts",
+  "https://github.com/graphile/starter/blob/main/@app/server/__tests__/helpers.ts",
+  "https://github.com/graphile/starter/blob/main/@app/server/__tests__/queries/currentUser.test.ts",
   "https://github.com/graphile/worker",
   "https://github.com/graphql/graphiql",
   "https://github.com/graphql/graphql-js",
@@ -311,5 +316,6 @@
   "https://www.postgresql.org/download/",
   "https://www.rabbitmq.com/",
   "https://www.supersaas.co.uk/schedule/Benjie/One_on_One",
+  "https://www.typescriptlang.org/play",
   "https://yarnpkg.com/lang/en/docs/selective-version-resolutions/"
 ]
