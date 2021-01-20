@@ -144,6 +144,17 @@ app.use(postGraphileMiddleware);
 
 ### Writing your own plugins
 
+**IMPORTANT**: here be dragons. This interface is experimental, and
+documentation on it is far from complete. To use this interface you are expected
+to have deep knowledge of the PostGraphile internals, since that is what you
+will be augmenting/overriding. Note that **many things you might think you need
+a server plugin for are better served with standard HTTP middleware**, e.g. by
+using Express/Koa/Fastify/etc middleware you can implement CORS, sessions,
+custom authentication flows, rate limiting, logging, routing,
+liveness/readiness/health endpoints, statistics collection and much more - you
+probably do not need to write PostGraphile server plugins for this kind of
+functionality.
+
 The hook methods available can be viewed
 [in pluginHook.ts](https://github.com/graphile/postgraphile/blob/v4/src/postgraphile/pluginHook.ts).
 Note that these may change in **semver minor** releases of PostGraphile as this
@@ -173,7 +184,7 @@ module.exports = MyPlugin;
 // export default MyPlugin;
 ```
 
-An example of a PostGraphile server plugin is
+An example of an open source PostGraphile server plugin is
 [@graphile/operation-hooks](https://github.com/graphile/operation-hooks/blob/master/src/index.ts):
 
 - uses `cli:flags:add:schema` to add `--operation-messages` and
@@ -182,6 +193,11 @@ An example of a PostGraphile server plugin is
 - uses `postgraphile:options` to a) convert the library options into
   graphileBuildOptions (Graphile Engine plugin options), and b) load the
   OperationHooksPlugin
+
+Other examples you may wish to check out include
+[@graphile/persisted-operations](https://github.com/graphile/persisted-operations)
+and
+[postgraphile-log-consola](https://github.com/graphile/postgraphile-log-consola).
 
 ### Inline tweaks via pluginHook
 
@@ -221,8 +237,8 @@ or by
 
 However, by being _generous_, you allow **any** origin to communicate with you
 PostGraphile instance. If you want to allow just one specific origin, and using
-a `cors` middleware before PostGraphile is not an option, then you can make a
-server plugin such as this one:
+a `cors` middleware before PostGraphile (which is by far the preferred route!)
+is not an option, then you can make a server plugin such as this one:
 
 ```js
 /**
@@ -278,4 +294,4 @@ const postGraphileMiddleware = postgraphile(databaseUrl, "app_public", {
 ```
 
 If you need help writing your own PostGraphile server plugins,
-[ask in our Discord chat](http://discord.gg/graphile).
+[ask in #help-and-support in our Discord chat](http://discord.gg/graphile).
