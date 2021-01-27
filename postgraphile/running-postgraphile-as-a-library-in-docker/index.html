@@ -136,11 +136,12 @@ with the following content.</p>
 <span class="token keyword">LABEL</span> description=<span class="token string">"Instant high-performance GraphQL API for your PostgreSQL database https://github.com/graphile/postgraphile"</span>
 
 <span class="token comment"># Set Node.js app folder</span>
-<span class="token keyword">RUN</span> mkdir <span class="token punctuation">-</span>p /home/node/app/node_modules &amp;&amp; chown <span class="token punctuation">-</span>R node<span class="token punctuation">:</span>node /home/node/app
+<span class="token keyword">RUN</span> mkdir <span class="token punctuation">-</span>p /home/node/app/node_modules
 <span class="token keyword">WORKDIR</span> /home/node/app
 
 <span class="token comment"># Copy dependencies</span>
 <span class="token keyword">COPY</span> ./src/package*.json .
+<span class="token keyword">RUN</span> chown <span class="token punctuation">-</span>R node<span class="token punctuation">:</span>node /home/node/app
 
 <span class="token comment"># Install dependencies</span>
 <span class="token keyword">USER</span> node
