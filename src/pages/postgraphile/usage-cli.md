@@ -30,7 +30,7 @@ current working directory.
 
 As PostGraphile evolves, we add more features; however we can't always enable
 these features by default as they may be breaking changes. There are also
-options that may have security repurcussions. For this reason, many features are
+options that may have security repercussions. For this reason, many features are
 behind flags. We understand this page is very long, so we've included some
 default option sets you might like to use:
 
