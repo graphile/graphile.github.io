@@ -56,8 +56,8 @@ The callback should return an object with two keys:
   field names with values that are resolver functions.
 
 For a larger example of how typeDefs and resolvers work, have a look at the
-[graphql-tools docs](https://www.graphql-tools.com/docs/generate-schema) -
-ours work in a similar way.
+[graphql-tools docs](https://www.graphql-tools.com/docs/generate-schema) - ours
+work in a similar way.
 
 Note that the resolve functions defined in `resolvers` will be sent the standard
 4 GraphQL resolve arguments (`parent`, `args`, `context`, `resolveInfo`); but
