@@ -95,9 +95,7 @@ instead (see below). The below options are valid for
   client or a `pg-pool` instance directly instead of a config.
 - **`schemaName`**: A string which specifies the PostgreSQL schema that
   PostGraphile will use to create a GraphQL schema. The default schema is the
-  `public` schema. May be an array for multiple schemas. For users who want to
-  run the Postgres introspection query ahead of time, you may also pass in a
-  `PgCatalog` instance directly.
+  `public` schema. May be an array for multiple schemas.
 - **`options`**: An object containing other miscellaneous options. Most options
   are shared with the `postgraphile` middleware function. Options could be:
   <!-- prettier-ignore-start --><!-- SCHEMA_DOCBLOCK_BEGIN -->
