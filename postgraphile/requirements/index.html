@@ -104,6 +104,11 @@ unique constraints to create mutations such as <code class="language-text">updat
 that "PostgreSQL automatically creates a unique index when a unique constraint
 or primary key is defined for a table." --
 <a href="https://www.postgresql.org/docs/current/static/indexes-unique.html">PG docs</a></li>
+<li><strong>Use the defaults</strong> for formatting output; for example we only support the
+default <code class="language-text">intervalstyle = &#39;postgres&#39;</code> rather than <code class="language-text">intervalstyle = &#39;iso_8601&#39;</code>.
+Many times this can be solved by returning the relevant default setting value
+from the
+<a href="/postgraphile/usage-library/#pgsettings-function">pgSettings function</a>.</li>
 </ul>
 <p>On top of this standard PostgreSQL best practices apply: use indexes carefully
 for performance, use constraints to ensure your data is valid and consistent,
