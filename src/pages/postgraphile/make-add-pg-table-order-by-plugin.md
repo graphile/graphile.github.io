@@ -111,9 +111,9 @@ The `OrderSpec` here is a 2- or 3-tuple, with the following entries:
    it's assumed to be a column from the table, otherwise it must be an SQL
    fragment from `pg-sql2`.
 2. whether the order should be ascending (`true`) or descending (`false`).
-3. (optional) whether the order is unique (`true`) or not (`false`) ─ if in
-   doubt, pass `false` and PostGraphile will make it unique by adding the
-   primary key as the last sort field invisibly.
+3. whether nulls appear before or after non-null values in the sort ordering. Pass true for nulls first, false for nulls last, and nothing/null for default behaviour.
+
+The unique key specifies whether the order is unique (true) or not (false) ─ if in doubt, pass false and PostGraphile will make it unique by adding the primary key as the last sort field invisibly.
 
 `MakeAddPgTableOrderByPluginOrders` is a hash (POJO ─ plain old JavaScript
 object) which maps from the name of the enum value to
