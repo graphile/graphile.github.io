@@ -50,6 +50,11 @@ experience.
   that "PostgreSQL automatically creates a unique index when a unique constraint
   or primary key is defined for a table." --
   [PG docs](https://www.postgresql.org/docs/current/static/indexes-unique.html)
+- **Use the defaults** for formatting output; for example we only support the
+  default `intervalstyle = 'postgres'` rather than `intervalstyle = 'iso_8601'`.
+  Many times this can be solved by returning the relevant default setting value
+  from the [pgSettings
+  function](/postgraphile/usage-library/#pgsettings-function).
 
 On top of this standard PostgreSQL best practices apply: use indexes carefully
 for performance, use constraints to ensure your data is valid and consistent,
