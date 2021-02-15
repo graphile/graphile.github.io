@@ -139,10 +139,13 @@ now order forums by these values from another table, e.g.:</p>
 it's assumed to be a column from the table, otherwise it must be an SQL
 fragment from <code class="language-text">pg-sql2</code>.</li>
 <li>whether the order should be ascending (<code class="language-text">true</code>) or descending (<code class="language-text">false</code>).</li>
-<li>(optional) whether the order is unique (<code class="language-text">true</code>) or not (<code class="language-text">false</code>) ─ if in
-doubt, pass <code class="language-text">false</code> and PostGraphile will make it unique by adding the
-primary key as the last sort field invisibly.</li>
+<li>whether nulls appear before or after non-null values in the sort ordering.
+Pass true for nulls first, false for nulls last, and nothing/null for default
+behaviour.</li>
 </ol>
+<p>The unique key specifies whether the order is unique (true) or not (false) ─ if
+in doubt, pass false and PostGraphile will make it unique by adding the primary
+key as the last sort field invisibly.</p>
 <p><code class="language-text">MakeAddPgTableOrderByPluginOrders</code> is a hash (POJO ─ plain old JavaScript
 object) which maps from the name of the enum value to
 <a href="https://graphql.org/graphql-js/type/#graphqlenumtype">a <code class="language-text">GraphQLEnumValueConfig</code> spec</a>.
