@@ -62,12 +62,12 @@ module.exports = makeAddPgTableConditionPlugin(
   },
   (value, helpers, build) => {
     const { sql, sqlTableAlias } = helpers;
-    
+
     // Note sqlTableAlias represents our table (app_public.forums),
     // but because it might be requested more than once in the
     // generated query we need to match this specific instance, so
     // we use an alias.
-    
+
     // This SQL fragment will be merged into the `WHERE` clause, so
     // it must be valid in that context.
     return sql.fragment`${sqlTableAlias}.id = ANY (${sql.value(value)}::int[])`;
@@ -81,7 +81,7 @@ To filter a list of forums (stored in the table `app_public.forums`) to just
 those where a particular user has posted in (posts are stored in
 `app_public.posts`) you might create a plugin like this:
 
-```js
+````js
 /* TODO: test this plugin works! */
 module.exports = makeAddPgTableConditionPlugin(
   "app_public",
@@ -96,7 +96,7 @@ module.exports = makeAddPgTableConditionPlugin(
   (value, helpers, build) => {
     const { sql, sqlTableAlias } = helpers;
     const sqlIdentifier = sql.identifier(Symbol("postsByUser"));
-    
+
     // This is merged into the `WHERE` clause, so we end up with
     // something like:
     //
@@ -117,7 +117,7 @@ module.exports = makeAddPgTableConditionPlugin(
     )`;
   }
 );
-```
+````
 
 The above plugin adds the `containsPostsByUserId` condition to collection fields
 for the `app_public.forums` table. You might use it like this:
