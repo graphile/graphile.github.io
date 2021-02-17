@@ -41,7 +41,41 @@ table, or by a computation, or something else.
 This plugin generator helps you build new `condition` values so that you can
 filter more flexibly. Let's make this clearer with an example:
 
-## Example
+## Example 1
+
+To return a list of forums which match a list of primary keys:
+
+```js
+/* TODO: test this plugin works! */
+module.exports = makeAddPgTableConditionPlugin(
+  "app_public",
+  "forums",
+  "idIn",
+  build => {
+    const { GraphQLList, GraphQLNonNull, GraphQLInt } = build.graphql;
+    return {
+      description: "Filters to records matching one of these ids",
+      // This is graphql-js for `[Int!]`; assumes you're using
+      // an integer primary key.
+      type: new GraphQLList(new GraphQLNonNull(GraphQLInt)),
+    };
+  },
+  (value, helpers, build) => {
+    const { sql, sqlTableAlias } = helpers;
+    
+    // Note sqlTableAlias represents our table (app_public.forums),
+    // but because it might be requested more than once in the
+    // generated query we need to match this specific instance, so
+    // we use an alias.
+    
+    // This SQL fragment will be merged into the `WHERE` clause, so
+    // it must be valid in that context.
+    return sql.fragment`${sqlTableAlias}.id = ANY (${sql.value(value)}::int[])`;
+  }
+);
+```
+
+## Example 2
 
 To filter a list of forums (stored in the table `app_public.forums`) to just
 those where a particular user has posted in (posts are stored in
@@ -62,6 +96,19 @@ module.exports = makeAddPgTableConditionPlugin(
   (value, helpers, build) => {
     const { sql, sqlTableAlias } = helpers;
     const sqlIdentifier = sql.identifier(Symbol("postsByUser"));
+    
+    // This is merged into the `WHERE` clause, so we end up with
+    // something like:
+    //
+    // ```sql
+    // SELECT ...
+    // FROM app_public.forums AS <sqlTableAlias>
+    // WHERE ...
+    // AND (
+    //   -- This is our returned fragment:
+    //   exists (select 1 from ...)
+    // )
+    // ```
     return sql.fragment`exists(
       select 1
       from app_public.posts as ${sqlIdentifier}
