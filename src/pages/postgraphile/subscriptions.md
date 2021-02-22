@@ -690,7 +690,7 @@ psql -1X -v ON_ERROR_STOP=1 subs << HERE
 HERE
 ```
 
-##### Advanced setup
+### Advanced setup
 
 If you need websockets to be listened for before your first HTTP request comes
 in (most people don't need this) then you must create a `rawHTTPServer`, mount
