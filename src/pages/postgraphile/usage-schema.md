@@ -176,7 +176,7 @@ instead (see below). The below options are valid for
 
 ### API: `watchPostGraphileSchema(pgConfig, schemaName, options, onNewSchema)`
 
-This function is takes the same options as `createPostGraphileSchema`; but with
+This function takes the same options as `createPostGraphileSchema`; but with
 one addition: a function `onNewSchema` that is called every time a new schema is
 generated, passing the new schema as the first argument. `onNewSchema` is
 guaranteed to be called before the `watchPostGraphileSchema` promise resolves.
@@ -255,7 +255,7 @@ resolver. To do so you need the following:
 * A GraphQL operation (aka query, but includes mutations, subscriptions) to execute; this can be a string or an AST
 * The variables to feed to the operation (if necessary)
 * A valid GraphQL context for PostGraphile
-  * inside a resolver, you can just pass the resolvers context straight through
+  * inside a resolver, you can just pass the resolver's context straight through
   * in other situations, have a look at `withPostGraphileContext` in the [schema only usage](/postgraphile/usage-schema/)
 
 Issuing a GraphQL operation from inside a resolver example:
