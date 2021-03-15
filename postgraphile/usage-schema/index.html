@@ -231,7 +231,7 @@ collections only (no Relay connections), "both" - both.</li>
 <!-- SCHEMA_DOCBLOCK_END -->
 <!-- prettier-ignore-end -->
 <h3 id="api-watchpostgraphileschemapgconfig-schemaname-options-onnewschema"><a href="#api-watchpostgraphileschemapgconfig-schemaname-options-onnewschema" aria-label="api watchpostgraphileschemapgconfig schemaname options onnewschema permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>API: <code class="language-text">watchPostGraphileSchema(pgConfig, schemaName, options, onNewSchema)</code></h3>
-<p>This function is takes the same options as <code class="language-text">createPostGraphileSchema</code>; but with
+<p>This function takes the same options as <code class="language-text">createPostGraphileSchema</code>; but with
 one addition: a function <code class="language-text">onNewSchema</code> that is called every time a new schema is
 generated, passing the new schema as the first argument. <code class="language-text">onNewSchema</code> is
 guaranteed to be called before the <code class="language-text">watchPostGraphileSchema</code> promise resolves.
@@ -312,7 +312,7 @@ resolver. To do so you need the following:</p>
 <li>
 <p>A valid GraphQL context for PostGraphile</p>
 <ul>
-<li>inside a resolver, you can just pass the resolvers context straight through</li>
+<li>inside a resolver, you can just pass the resolver's context straight through</li>
 <li>in other situations, have a look at <code class="language-text">withPostGraphileContext</code> in the <a href="/postgraphile/usage-schema/">schema only usage</a></li>
 </ul>
 </li>
