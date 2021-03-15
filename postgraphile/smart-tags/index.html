@@ -493,9 +493,9 @@ can see the reduced fields and types once the <code class="language-text">create
 <a href="https://github.com/graphile/postgraphile/releases/tag/v4.3.1">v4.3.1</a></p>
 <p>Applies to:</p>
 <ul>
-<li>Functions returning <code class="language-text">SETOF</code> a composite type (e.g. a table type, record type,
-or another type with "column"-like attributes): adds the <code class="language-text">orderBy</code> argument to
-this connection, allowing to <em>sort</em> the set by its columns/attributes.</li>
+<li>Functions returning <code class="language-text">SETOF</code> a table-like composite type (e.g. a table type,
+view, materialized view, etc): adds the <code class="language-text">orderBy</code> argument to this connection,
+allowing to <em>sort</em> the set by its columns/attributes.</li>
 <li>Computed column functions with no required parameters and returning a scalar
 or array: allows this function to be used as an order in the <code class="language-text">orderBy</code>
 argument for the parent table, allowing to <em>sort</em> the parent table <em>by</em> this
@@ -521,8 +521,9 @@ NOT a <em>sort by</em> for its parent table</p>
 <a href="https://github.com/graphile/postgraphile/releases/tag/v4.3.1">v4.3.1</a>.</p>
 <p>Applies to:</p>
 <ul>
-<li>Functions returning <code class="language-text">SETOF</code>: adds the <code class="language-text">condition</code> argument to this connection,
-allowing to <em>filter</em> the set by any of its scalar fields.</li>
+<li>Functions returning <code class="language-text">SETOF</code> a table-like composite type (e.g. a table type,
+view, materialized view, etc): adds the <code class="language-text">condition</code> argument to this
+connection, allowing to <em>filter</em> the set by any of its scalar fields.</li>
 <li>Computed column functions with no required parameters and returning a scalar
 or array: allows this function to be used as field in the <code class="language-text">condition</code> argument
 for the parent table, allowing to <em>filter by</em> this function's value the parent
