@@ -329,8 +329,8 @@ Since version
 Applies to:
 
 - Functions returning `SETOF` a table-like composite type (e.g. a table type,
-  view, materialized view, etc): adds the `orderBy` argument to this
-  connection, allowing to _sort_ the set by its columns/attributes.
+  view, materialized view, etc): adds the `orderBy` argument to this connection,
+  allowing to _sort_ the set by its columns/attributes.
 - Computed column functions with no required parameters and returning a scalar
   or array: allows this function to be used as an order in the `orderBy`
   argument for the parent table, allowing to _sort_ the parent table _by_ this
