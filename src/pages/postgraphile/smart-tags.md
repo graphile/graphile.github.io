@@ -328,9 +328,9 @@ Since version
 
 Applies to:
 
-- Functions returning `SETOF` a composite type (e.g. a table type, record type,
-  or another type with "column"-like attributes): adds the `orderBy` argument to
-  this connection, allowing to _sort_ the set by its columns/attributes.
+- Functions returning `SETOF` a table-like composite type (e.g. a table type,
+  view, materialized view, etc): adds the `orderBy` argument to this
+  connection, allowing to _sort_ the set by its columns/attributes.
 - Computed column functions with no required parameters and returning a scalar
   or array: allows this function to be used as an order in the `orderBy`
   argument for the parent table, allowing to _sort_ the parent table _by_ this
@@ -365,8 +365,9 @@ Since version
 
 Applies to:
 
-- Functions returning `SETOF`: adds the `condition` argument to this connection,
-  allowing to _filter_ the set by any of its scalar fields.
+- Functions returning `SETOF` a table-like composite type (e.g. a table type,
+  view, materialized view, etc): adds the `condition` argument to this
+  connection, allowing to _filter_ the set by any of its scalar fields.
 - Computed column functions with no required parameters and returning a scalar
   or array: allows this function to be used as field in the `condition` argument
   for the parent table, allowing to _filter by_ this function's value the parent
