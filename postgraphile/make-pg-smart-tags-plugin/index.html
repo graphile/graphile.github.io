@@ -228,7 +228,15 @@ schema to refresh when this file changes. See:
   description<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
-<span class="token keyword">type</span> <span class="token class-name">PgSmartTagFilterFunction<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">></span></span> <span class="token operator">=</span> <span class="token punctuation">(</span>input<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">,</span> build<span class="token operator">:</span> Build<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre></div>
+<span class="token keyword">type</span> <span class="token class-name">PgSmartTagFilterFunction<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">></span></span> <span class="token operator">=</span> <span class="token punctuation">(</span>input<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">,</span> build<span class="token operator">:</span> Build<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
+
+<span class="token keyword">type</span> <span class="token class-name">UpdatePgSmartTagRulesCallback</span> <span class="token operator">=</span> <span class="token punctuation">(</span>
+  ruleOrRules<span class="token operator">:</span> PgSmartTagRule <span class="token operator">|</span> PgSmartTagRule<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">|</span> <span class="token keyword">null</span>
+<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token keyword">void</span><span class="token punctuation">;</span>
+
+<span class="token keyword">type</span> <span class="token class-name">SubscribeToPgSmartTagUpdatesCallback</span> <span class="token operator">=</span> <span class="token punctuation">(</span>
+  cb<span class="token operator">:</span> UpdatePgSmartTagRulesCallback <span class="token operator">|</span> <span class="token keyword">null</span>
+<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token keyword">void</span> <span class="token operator">|</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span><span class="token keyword">void</span><span class="token operator">></span><span class="token punctuation">;</span></code></pre></div>
 <p>This is a more versatile, but higher effort plugin generator that powers
 <code class="language-text">makeJSONPgSmartTagsPlugin</code>. Rather than passing a configuration object, a list
 of rules (or a single rule) is passed.</p>
