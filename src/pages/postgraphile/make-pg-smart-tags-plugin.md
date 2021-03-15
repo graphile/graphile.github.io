@@ -218,6 +218,14 @@ interface PgSmartTagRule<T extends PgEntity = PgEntity> {
 }
 
 type PgSmartTagFilterFunction<T> = (input: T, build: Build) => boolean;
+
+type UpdatePgSmartTagRulesCallback = (
+  ruleOrRules: PgSmartTagRule | PgSmartTagRule[] | null
+) => void;
+
+type SubscribeToPgSmartTagUpdatesCallback = (
+  cb: UpdatePgSmartTagRulesCallback | null
+) => void | Promise<void>;
 ```
 
 This is a more versatile, but higher effort plugin generator that powers
