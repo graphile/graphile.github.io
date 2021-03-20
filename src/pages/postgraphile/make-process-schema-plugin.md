@@ -27,7 +27,7 @@ an alternative schema (e.g. a derivative).
 ### Example
 
 ```js
-require("graphile-utils");
+const { makeProcessSchemaPlugin } = require("graphile-utils");
 
 module.exports = makeProcessSchemaPlugin(schema => {
   return addThirdPartyEnhancementsToSchema(schema);
@@ -38,7 +38,7 @@ You can also use `makeProcessSchemaPlugin` to replace the current schema with a
 stitched schema and run it from within the PostGraphile server:
 
 ```js
-require("graphile-utils");
+const { makeProcessSchemaPlugin } = require("graphile-utils");
 
 module.exports = makeProcessSchemaPlugin(schema => {
   return stitchOtherSchemasInto(schema);
