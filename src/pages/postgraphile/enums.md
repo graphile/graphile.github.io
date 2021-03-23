@@ -21,6 +21,14 @@ create table pets (
 );
 ```
 
+The `@enum` smart comments can be used to set the name (`@enumName`)
+or the description (`@enumDescription`) of PostgreSQL enums.
+
+e.g.:
+```sql
+COMMENT ON TYPE animal_type IS E'@enum\n@enumName TypeOfAnimal';
+```
+
 Sometimes people prefer not to use PostgreSQL enums due to their technical
 limitations (e.g. you can never drop a value from a PostgreSQL enum, and you
 cannot add a value to it within a transaction). There are other ways to add
