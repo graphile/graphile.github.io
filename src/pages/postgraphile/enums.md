@@ -21,10 +21,11 @@ create table pets (
 );
 ```
 
-The `@enum` smart comments can be used to set the name (`@enumName`)
-or the description (`@enumDescription`) of PostgreSQL enums.
+The `@enum` smart comments can be used to set the name (`@enumName`) or the
+description (`@enumDescription`) of PostgreSQL enums.
 
 e.g.:
+
 ```sql
 COMMENT ON TYPE animal_type IS E'@enum\n@enumName TypeOfAnimal';
 ```
