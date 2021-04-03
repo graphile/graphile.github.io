@@ -150,7 +150,7 @@ but also the most fundamental part of your schema design.
 
 > **Note:** We prefer singular identifers like `forum_example.person` over
 > `forum_example.people` because when you create a table, it is like you are
-> creating a class in a statically typed language. Classes have singular names
+> creating a class in an object-oriented language. Classes have singular names
 > like “Person” while collections will often have plural names like “People.”
 > Table as a class is a better analogy than table as a collection because
 > Postgres itself will internally call tables “classes.”
