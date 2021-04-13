@@ -190,76 +190,17 @@ app.use(postgraphile(pool, "public", { ... }));
 #### Simple: Query Allowlist ("persisted queries" / "persisted operations")
 
 If you do not intend to open your API up to third parties to run arbitrary
-queries against then using persisted queries as a query whitelist to protect
-your GraphQL endpoint is a great and highly recommended solution. This technique
-ensures that only the queries you use in your own applications can be executed
-on the server (but you can of course change the variables).
+queries against, you can use
+[@graphile/persisted-operations](https://github.com/graphile/persisted-operations)
+to automatically whitelist queries used in your application at build time,
+and prevent any other query from executing.
 
-This technique has a few caveats:
+This technique prevents malicious (or merely curious) actors from executing
+queries which are more expensive than those you have written.
 
-- Your API will only accept queries that you've approved, so it's not suitable
-  if you want third parties to run arbitrary queries
-- You must be able to generate a unique ID from each query; e.g. a hash
-- You must use "static GraphQL queries" - that is the queries must be known at
-  build time of your application/webpage, and only the variables fed to those
-  queries can change at run-time
-- You must have a way of sharing these queries between the application and the
-  server
-- You must be careful not to use variables in dangerous places; for example
-  don't write `allUsers(first: $myVar)` as a malicious attacker could set
-  `$myVar` to 2147483647 in order to cause your server to process as much data
-  as possible.
-
-_**THIS SECTION IS OUT OF DATE**; please refer to the new
-[@graphile/persisted-operations project](https://github.com/graphile/persisted-operations)
-for up to date information and implementation details._
-
-~~PostGraphile currently doesn't have this functionality built in, but it's
-fairly easy to add it when using PostGraphile as an express middleware, a simple
-implementation might look like this:~~
-
-```js{9-18}
-const postgraphile = require("postgraphile");
-const express = require("express");
-const bodyParser = require("body-parser");
-
-const app = express();
-app.use(bodyParser.json());
-
-/**** BEGINNING OF CUSTOMIZATION ****/
-const persistedQueries = require("./persistedQueries.json");
-
-app.use("/graphql", async (req, res, next) => {
-  // TODO: validate req.body is of the right form
-  req.body.query = {}.hasOwnProperty.call(persistedQueries, req.body.id)
-    ? persistedQueries[req.body.id]
-    : null;
-  next();
-});
-/**** END OF CUSTOMIZATION *** */
-
-app.use(postgraphile());
-
-app.listen(5000);
-```
-
-~~i.e. a simple middleware mounted before postgraphile that manipulates the
-request body.~~
-
-~~I (Benjie) personally use my forks of Apollo's `persistgraphql` tools to help
-me manage the persisted queries themselves:~~
-
-- ~~https://github.com/benjie/persistgraphql~~
-- ~~https://github.com/benjie/persistgraphql-webpack-plugin~~
-
-~~These forks generate hashes rather than numbers; which make the persisted
-queries consistent across multiple builds and applications (website, mobile,
-browser plugin, ...).~~
-
-**NOTE**: even if you're using persisted operations, it can still be wise to
-implement advanced protections as it enables you to catch unnecessarily
-expensive queries during development, before you start facing performance
-bottlenecks down the line.
+It does not protect against expensive *variables* in those queries, such as 
+`allUsers(first: $myVar)` with `$myVar: 2147483647`, and of course it does
+not protect you from writing expensive queries yourself.
 
 #### Advanced
 
