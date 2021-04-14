@@ -293,8 +293,7 @@ const matchingUserResolver = async (parent, args, context, resolveInfo) => {
 #### QueryBuilder
 
 `queryBuilder` is an instance of `QueryBuilder`, a helper that uses an SQL AST
-constructed via
-[`pg-sql2` methods](https://www.npmjs.com/package/pg-sql2#api)
+constructed via [`pg-sql2` methods](https://www.npmjs.com/package/pg-sql2#api)
 to dynamically create powerful SQL queries without risking SQL injection
 attacks. The `queryBuilder` has a number of methods which affect the query which
 will be generated. The main ones you're likely to want are:
