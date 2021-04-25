@@ -61,10 +61,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 project. The language of the specification is meant to be generally applicable
 and adoptable by any who might want to use it.</p>
 </blockquote>
+<p><strong>NOTE</strong>: what follows is a specification of how you can use JWTs to
+authenticate a user with PostgreSQL such that PostgreSQL may perform your
+authorization checks. This is not the only way of achieving this goal with
+PostGraphile, for example you can do as the PostGraphile maintainer does and use
+standard session-based authentication (i.e. with cookies) via the relevant
+Express/Koa/Fastify middleware and PostGraphile's
+<a href="/postgraphile/usage-library/#pgsettings-function"><code class="language-text">pgSettings</code> function</a>
+allowing you to leverage powerful pre-built authentication stacks such as
+<a href="http://www.passportjs.org/">passport.js</a> which has OAuth integration with most
+major "social login" providers.</p>
 <h2 id="postgresql-json-web-token-serialization-specification"><a href="#postgresql-json-web-token-serialization-specification" aria-label="postgresql json web token serialization specification permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>PostgreSQL JSON Web Token Serialization Specification</h2>
 <p>This specification aims to define a standard way to serialize <a href="https://jwt.io/">JSON Web
 Tokens</a> (JWT, <a href="https://tools.ietf.org/html/rfc7519">RFC 7519</a>) to a PostgreSQL database for developers
-who want to move authentication logic into their PostgreSQL schema.</p>
+who want to move authorization logic into their PostgreSQL schema.</p>
 <p><a href="https://tools.ietf.org/html/rfc7519#section-2">Terminology</a> from the JSON Web Token specification will be used.</p>
 <p>After a JSON Web Token has been verified and decoded, the resulting claims will
 be serialized to the PostgreSQL database in two ways:</p>
