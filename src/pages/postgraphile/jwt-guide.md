@@ -9,11 +9,21 @@ title: PostGraphile JWT Guide
 > project. The language of the specification is meant to be generally applicable
 > and adoptable by any who might want to use it.
 
+**NOTE**: what follows is a specification of how you can use JWTs to authenticate a user
+with PostgreSQL such that PostgreSQL may perform your authorization checks. This
+is not the only way of achieving this goal with PostGraphile, for example you
+can do as the PostGraphile maintainer does and use standard session-based
+authentication (i.e. with cookies) via the relevant Express/Koa/Fastify middleware
+and PostGraphile's [`pgSettings` function](/postgraphile/usage-library/#pgsettings-function)
+allowing you to leverage powerful pre-built authentication stacks such as
+[passport.js](http://www.passportjs.org/) which has OAuth integration with most
+major "social login" providers.
+
 ## PostgreSQL JSON Web Token Serialization Specification
 
 This specification aims to define a standard way to serialize [JSON Web
 Tokens][jwt] (JWT, [RFC 7519][rfc7519]) to a PostgreSQL database for developers
-who want to move authentication logic into their PostgreSQL schema.
+who want to move authorization logic into their PostgreSQL schema.
 
 [Terminology][jwt-terms] from the JSON Web Token specification will be used.
 
