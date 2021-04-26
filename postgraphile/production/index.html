@@ -216,59 +216,40 @@ pool<span class="token punctuation">.</span><span class="token function">on</spa
 app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token function">postgraphile</span><span class="token punctuation">(</span>pool<span class="token punctuation">,</span> <span class="token string">"public"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> <span class="token operator">...</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment">// ...</span></code></pre></div>
 <h4 id="simple-query-allowlist-persisted-queries--persisted-operations"><a href="#simple-query-allowlist-persisted-queries--persisted-operations" aria-label="simple query allowlist persisted queries  persisted operations permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Simple: Query Allowlist ("persisted queries" / "persisted operations")</h4>
-<p>If you do not intend to open your API up to third parties to run arbitrary
-queries against then using persisted queries as a query whitelist to protect
-your GraphQL endpoint is a great and highly recommended solution. This technique
-ensures that only the queries you use in your own applications can be executed
-on the server (but you can of course change the variables).</p>
-<p>This technique has a few caveats:</p>
+<p>If you do not intend to allow third parties to run arbitrary operations against
+your API then using
+<a href="https://github.com/graphile/persisted-operations">persisted operations</a> as a
+query allowlist is a highly recommended solution to protect your GraphQL
+endpoint. This technique ensures that only the operations you use in your own
+applications can be executed on the server, preventing malicious (or merely
+curious) actors from executing operations which may be more expensive than those
+you have written.</p>
+<p>This technique is suitable for the vast majority of use cases and supports many
+GraphQL clients, but it does have a few caveats:</p>
 <ul>
-<li>Your API will only accept queries that you've approved, so it's not suitable
-if you want third parties to run arbitrary queries</li>
-<li>You must be able to generate a unique ID from each query; e.g. a hash</li>
-<li>You must use "static GraphQL queries" - that is the queries must be known at
-build time of your application/webpage, and only the variables fed to those
-queries can change at run-time</li>
-<li>You must have a way of sharing these queries between the application and the
-server</li>
-<li>You must be careful not to use variables in dangerous places; for example
-don't write <code class="language-text">allUsers(first: $myVar)</code> as a malicious attacker could set
-<code class="language-text">$myVar</code> to 2147483647 in order to cause your server to process as much data
-as possible.</li>
+<li>Your API will only accept operations that you've approved, so it's not
+suitable if you want third parties to run arbitrary custom operations.</li>
+<li>You must be able to generate a unique ID (e.g. a hash) from each operation at
+build time of your application/web page - your GraphQL operations must be
+"static". It's important to note this only applies to the operation document
+itself, the variables can of course change at runtime.</li>
+<li>You must have a way of sharing these static operations from the application
+build process to the server so that the server will know what operation the ID
+represents.</li>
+<li>You must be careful not to use variables in dangerous places within your
+operation; for example if you were to use <code class="language-text">allUsers(first: $myVar)</code> a
+malicious attacker could set <code class="language-text">$myVar</code> to 2147483647 to cause your server to
+process as much data as possible. Use fixed limits, conditions and orders
+where possible, even if it means having additional static operations.</li>
+<li>It does not protect you from writing expensive queries yourself; it may be
+wise to combine this technique with a cost estimation technique such as that
+provided by the <a href="/postgraphile/pricing/">Graphile Pro plugin</a> to help guide
+your developers and avoid accidentally writing expensive queries.</li>
 </ul>
-<p><em><strong>THIS SECTION IS OUT OF DATE</strong>; please refer to the new
-<a href="https://github.com/graphile/persisted-operations">@graphile/persisted-operations project</a>
-for up to date information and implementation details.</em></p>
-<p><del>PostGraphile currently doesn't have this functionality built in, but it's
-fairly easy to add it when using PostGraphile as an express middleware, a simple
-implementation might look like this:</del></p>
-<div class="gatsby-highlight has-highlighted-lines" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> postgraphile <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"postgraphile"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> express <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"express"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> bodyParser <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"body-parser"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">const</span> app <span class="token operator">=</span> <span class="token function">express</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>bodyParser<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token comment">/**** BEGINNING OF CUSTOMIZATION ****/</span>
-<span class="gatsby-highlight-code-line"><span class="token keyword">const</span> persistedQueries <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"./persistedQueries.json"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><span class="gatsby-highlight-code-line"></span><span class="gatsby-highlight-code-line">app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token string">"/graphql"</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res<span class="token punctuation">,</span> next</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span></span><span class="gatsby-highlight-code-line">  <span class="token comment">// TODO: validate req.body is of the right form</span></span><span class="gatsby-highlight-code-line">  req<span class="token punctuation">.</span>body<span class="token punctuation">.</span>query <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">.</span><span class="token function">hasOwnProperty</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>persistedQueries<span class="token punctuation">,</span> req<span class="token punctuation">.</span>body<span class="token punctuation">.</span>id<span class="token punctuation">)</span></span><span class="gatsby-highlight-code-line">    <span class="token operator">?</span> persistedQueries<span class="token punctuation">[</span>req<span class="token punctuation">.</span>body<span class="token punctuation">.</span>id<span class="token punctuation">]</span></span><span class="gatsby-highlight-code-line">    <span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">;</span></span><span class="gatsby-highlight-code-line">  <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><span class="gatsby-highlight-code-line"><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><span class="gatsby-highlight-code-line"><span class="token comment">/**** END OF CUSTOMIZATION *** */</span></span>
-app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token function">postgraphile</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-app<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">5000</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
-<p><del>i.e. a simple middleware mounted before postgraphile that manipulates the
-request body.</del></p>
-<p><del>I (Benjie) personally use my forks of Apollo's <code class="language-text">persistgraphql</code> tools to help
-me manage the persisted queries themselves:</del></p>
-<ul>
-<li><del><a href="https://github.com/benjie/persistgraphql">https://github.com/benjie/persistgraphql</a></del></li>
-<li><del><a href="https://github.com/benjie/persistgraphql-webpack-plugin">https://github.com/benjie/persistgraphql-webpack-plugin</a></del></li>
-</ul>
-<p><del>These forks generate hashes rather than numbers; which make the persisted
-queries consistent across multiple builds and applications (website, mobile,
-browser plugin, ...).</del></p>
-<p><strong>NOTE</strong>: even if you're using persisted operations, it can still be wise to
-implement advanced protections as it enables you to catch unnecessarily
-expensive queries during development, before you start facing performance
-bottlenecks down the line.</p>
+<p>PostGraphile has first-party support for persisted operations via the open
+source
+<a href="https://github.com/graphile/persisted-operations">@graphile/persisted-operations</a>
+plugin; we recommend its use to the vast majority of our users.</p>
 <h4 id="advanced"><a href="#advanced" aria-label="advanced permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Advanced</h4>
 <p>Using a query allowlist puts the decision in the hands of your engineers whether
 a particular query should be accepted or not. Sometimes this isn't enough - it
