@@ -189,18 +189,43 @@ app.use(postgraphile(pool, "public", { ... }));
 
 #### Simple: Query Allowlist ("persisted queries" / "persisted operations")
 
-If you do not intend to open your API up to third parties to run arbitrary
-queries against, you can use
+If you do not intend to allow third parties to run arbitrary operations against
+your API then using
+[persisted operations](https://github.com/graphile/persisted-operations) as a
+query allowlist is a highly recommended solution to protect your GraphQL
+endpoint. This technique ensures that only the operations you use in your own
+applications can be executed on the server, preventing malicious (or merely
+curious) actors from executing operations which may be more expensive than those
+you have written.
+
+This technique is suitable for the vast majority of use cases (basically
+anywhere that can use only static GraphQL operations) and supports many GraphQL
+clients, but it does have a few caveats:
+
+- Your API will only accept operations that you've approved, so it's not
+  suitable if you want third parties to run arbitrary custom operations.
+- You must be able to generate a unique ID (e.g. a hash) from each operation at
+  build time of your application/web page - your GraphQL operations must be
+  "static". It's important to note this only applies to the operation document
+  itself, the variables can of course change at runtime.
+- You must have a way of sharing these static operations from the application
+  build process to the server so that the server will know what operation the ID
+  represents.
+- You must be careful not to use variables in dangerous places within your
+  operation; for example if you were to use `allUsers(first: $myVar)` a
+  malicious attacker could set `$myVar` to 2147483647 to cause your server to
+  process as much data as possible. Use fixed limits, conditions and orders
+  where possible, even if it means having additional static operations.
+- It does not protect you from writing expensive queries yourself; it may be
+  wise to combine this technique with a cost estimation technique such as that
+  provided by the
+  [Graphile Pro plugin](https://www.graphile.org/postgraphile/pricing/) to help
+  guide your developers and avoid accidentally writing expensive queries.
+
+PostGraphile has first-party support for persisted operations via the open
+source
 [@graphile/persisted-operations](https://github.com/graphile/persisted-operations)
-to automatically whitelist queries used in your application at build time,
-and prevent any other query from executing.
-
-This technique prevents malicious (or merely curious) actors from executing
-queries which are more expensive than those you have written.
-
-It does not protect against expensive *variables* in those queries, such as 
-`allUsers(first: $myVar)` with `$myVar: 2147483647`, and of course it does
-not protect you from writing expensive queries yourself.
+plugin; we recommend its use to the vast majority of our users.
 
 #### Advanced
 
