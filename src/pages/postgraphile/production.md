@@ -217,9 +217,8 @@ GraphQL clients, but it does have a few caveats:
   where possible, even if it means having additional static operations.
 - It does not protect you from writing expensive queries yourself; it may be
   wise to combine this technique with a cost estimation technique such as that
-  provided by the
-  [Graphile Pro plugin](https://www.graphile.org/postgraphile/pricing/) to help
-  guide your developers and avoid accidentally writing expensive queries.
+  provided by the [Graphile Pro plugin](/postgraphile/pricing/) to help guide
+  your developers and avoid accidentally writing expensive queries.
 
 PostGraphile has first-party support for persisted operations via the open
 source
