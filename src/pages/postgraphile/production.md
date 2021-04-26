@@ -198,9 +198,8 @@ applications can be executed on the server, preventing malicious (or merely
 curious) actors from executing operations which may be more expensive than those
 you have written.
 
-This technique is suitable for the vast majority of use cases (basically
-anywhere that can use only static GraphQL operations) and supports many GraphQL
-clients, but it does have a few caveats:
+This technique is suitable for the vast majority of use cases and supports many
+GraphQL clients, but it does have a few caveats:
 
 - Your API will only accept operations that you've approved, so it's not
   suitable if you want third parties to run arbitrary custom operations.
