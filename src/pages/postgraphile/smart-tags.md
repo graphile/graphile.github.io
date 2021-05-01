@@ -586,7 +586,7 @@ comment on view my_view is E'@primaryKey type,identifier';
 
 ##### @foreignKey
 
-The foreign key adds a virtual constraint pretending to be a foreign key. It has
+The foreign key adds virtual constraints pretending to be foreign keys. It has
 the following syntax which mirrors the PostgreSQL foreign key constraint:
 
 `@foreignKey (col1, ...) references [my_schema.]my_table [(col1, ...)]`
@@ -615,10 +615,26 @@ class: {
     }
   }
 }
+
+// or if you want multiple foreignKeys
+class: {
+  my_materialized_view: {
+    tags: {
+      foreignKey: [
+        "(key_1, key_2) references other_table (key_1, key_2)",
+        "(key_3, key_4) references some_other_table (key_3, key_4)"
+      ]
+    }
+  }
+}
+
 ```
 
 ```sql
 comment on materialized view my_materialized_view is E'@foreignKey (key_1, key_2) references other_table (key_1, key_2)';
+
+-- or if you want multiple foreignKeys
+comment on materialized view my_materialized_view is E'@foreignKey (key_1, key_2) references other_table (key_1, key_2)\n@foreignKey (key_3, key_4) references some_other_table (key_3, key_4)';
 ```
 
 ##### @unique
