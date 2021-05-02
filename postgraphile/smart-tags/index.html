@@ -680,7 +680,7 @@ will happen...</p>
 <span class="token comment">-- or</span>
 <span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">view</span> my_view <span class="token operator">is</span> E<span class="token string">'@primaryKey type,identifier'</span><span class="token punctuation">;</span></code></pre></div>
 <h5 id="foreignkey"><a href="#foreignkey" aria-label="foreignkey permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>@foreignKey</h5>
-<p>The foreign key adds a virtual constraint pretending to be a foreign key. It has
+<p>The foreign key adds virtual constraints pretending to be foreign keys. It has
 the following syntax which mirrors the PostgreSQL foreign key constraint:</p>
 <p><code class="language-text">@foreignKey (col1, ...) references [my_schema.]my_table [(col1, ...)]</code></p>
 <p>In the tags file you must omit the leading <code class="language-text">@foreignKey</code> text since it is
@@ -703,8 +703,23 @@ matching a unique constraint.</p>
       <span class="token property unquoted">foreignKey</span><span class="token operator">:</span> <span class="token string">"(key_1, key_2) references other_table (key_1, key_2)"</span>
     <span class="token punctuation">}</span>
   <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// or if you want multiple foreignKeys</span>
+<span class="token property unquoted">class</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+  <span class="token property unquoted">my_materialized_view</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property unquoted">tags</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property unquoted">foreignKey</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token string">"(key_1, key_2) references other_table (key_1, key_2)"</span><span class="token punctuation">,</span>
+        <span class="token string">"(key_3, key_4) references some_other_table (key_3, key_4)"</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre></div>
-<div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">comment</span> <span class="token keyword">on</span> materialized <span class="token keyword">view</span> my_materialized_view <span class="token operator">is</span> E<span class="token string">'@foreignKey (key_1, key_2) references other_table (key_1, key_2)'</span><span class="token punctuation">;</span></code></pre></div>
+<div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">comment</span> <span class="token keyword">on</span> materialized <span class="token keyword">view</span> my_materialized_view <span class="token operator">is</span> E<span class="token string">'@foreignKey (key_1, key_2) references other_table (key_1, key_2)'</span><span class="token punctuation">;</span>
+
+<span class="token comment">-- or if you want multiple foreignKeys</span>
+<span class="token keyword">comment</span> <span class="token keyword">on</span> materialized <span class="token keyword">view</span> my_materialized_view <span class="token operator">is</span> E<span class="token string">'@foreignKey (key_1, key_2) references other_table (key_1, key_2)\n@foreignKey (key_3, key_4) references some_other_table (key_3, key_4)'</span><span class="token punctuation">;</span></code></pre></div>
 <h5 id="unique"><a href="#unique" aria-label="unique permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>@unique</h5>
 <p><em>From PostGraphile 4.9.1</em></p>
 <p>Introduces a "fake" unique constraint, so <code class="language-text">@unique col1,col2</code> is somewhat
