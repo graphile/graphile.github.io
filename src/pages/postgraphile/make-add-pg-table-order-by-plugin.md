@@ -136,7 +136,7 @@ reversed sort:
 export function orderByAscDesc(
   baseName: string,
   columnOrSqlFragment: string | SQL,
-  unique = false
+  uniqueOrOptions: boolean | OrderByAscDescOptions = false
 ): MakeAddPgTableOrderByPluginOrders;
 ```
 
@@ -146,4 +146,46 @@ this function creates.
 `columnOrSqlFragment` is where the order value is specified, it becomes the
 first entry in the `OrderSpec` tuple defined above.
 
-Only set `unique` to true if you can guarantee that the sort order is unique.
+`uniqueOrOptions` define 1) whether the sort order is unique, and 2) how to sort null values when sorting by ascending and descending order. Only set `uniqueOrOptions` (or `unique`) to true if you can guarantee that the sort order is unique.
+
+As of v4.12, you can also custmoize how nulls are sorted:
+
+```ts
+export type NullsSortMethod =
+  | "first"
+  | "last"
+  | "first-iff-ascending"
+  | "last-iff-ascending"
+  | undefined;
+
+export interface OrderByAscDescOptions {
+  unique?: boolean;
+  nulls?: NullsSortMethod;
+}
+```
+The `nulls` option appends the `ORDER BY` clause of the SQL query with either `NULLS FIRST` or `NULLS LAST` according to the following rules:
+- "first": specify `NULLS FIRST` for both ascending and descending;
+- "last": specify `NULLS LAST` for both ascending and descending;
+- "first-iff-ascending": specify `NULLS FIRST` when ordering by ascending, and `NULLS LAST` when ordering by descending;
+- "last-iff-ascending": specify `NULLS LAST` when ordering by ascending, and `NULLS FIRST` when ordering by descending;
+- (default) undefined: omit both `NULLS FIRST` and `NULLS LAST` in the order by clause for both ascending and descending, thus using the default ordering behavior.
+
+For example, you may wish to create a plugin to sort movies by either top-rated or lowest-rated first (meaning the average of the movie's reviews):
+```ts
+const customOrderBy = orderByAscDesc(
+  'RATING',
+  (helpers) => {
+    const { queryBuilder } = helpers;
+
+    const orderByFrag = sql.fragment`(
+      select avg(${sqlIdentifier}.rating)
+      from app_public.movie_reviews as ${sqlIdentifier}
+      where ${sqlIdentifier}.movie_id = ${queryBuilder.getTableAlias()}.id
+    )`;
+
+    return orderByFrag;
+  },
+  { nulls: 'last' },
+);
+```
+To get the top-rated movies, one would then use the `RATING_DESC` option in the GraphQL query. However, by default, `RATING_DESC` would put movies with no reviews (and thus an average of `null`) first, followed by the sorted movies. A movie with no ratings is not exactly what one thinks of when one hears "top-rated"! By specifying `{ nulls: 'last' }`, however, PostGraphile knows that this orderBy plugin should still show the movies without any reviews, but just put them at the end of the list.
