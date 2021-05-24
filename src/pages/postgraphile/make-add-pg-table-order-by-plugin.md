@@ -163,7 +163,7 @@ export interface OrderByAscDescOptions {
   nulls?: NullsSortMethod;
 }
 ```
-The `nulls` option appends the `ORDER BY` clause of the SQL query with either `NULLS FIRST` or `NULLS LAST` according to the following rules:
+The `nulls` option extends the `ORDER BY` clause of the SQL query with either `NULLS FIRST` or `NULLS LAST` according to the following rules:
 - "first": specify `NULLS FIRST` for both ascending and descending;
 - "last": specify `NULLS LAST` for both ascending and descending;
 - "first-iff-ascending": specify `NULLS FIRST` when ordering by ascending, and `NULLS LAST` when ordering by descending;
