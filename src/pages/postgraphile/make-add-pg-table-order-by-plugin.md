@@ -146,9 +146,9 @@ this function creates.
 `columnOrSqlFragment` is where the order value is specified, it becomes the
 first entry in the `OrderSpec` tuple defined above.
 
-`uniqueOrOptions` define 1) whether the sort order is unique, and 2) how to sort null values when sorting by ascending and descending order. Only set `uniqueOrOptions` (or `unique`) to true if you can guarantee that the sort order is unique.
+`uniqueOrOptions` define 1) whether the sort order is unique, and 2) how to sort null values when sorting by ascending and descending order. Only set `uniqueOrOptions` (or `unique`) to `true` if you can guarantee that the sort order is unique.
 
-As of v4.12, you can also custmoize how nulls are sorted:
+As of v4.12, you can also customize how nulls are sorted:
 
 ```ts
 export type NullsSortMethod =
