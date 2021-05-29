@@ -16,8 +16,7 @@ Use cases include:
 - Validating the schema against your custom logic
 - Replacing the schema with a mocked version or a derivative version (e.g.
   stitching it with another schema)
-- Integrating with third-party libraries such as `graphql-middleware` or
-  `graphql-shield` which mutate the GraphQLSchema after it has been constructed
+- Integrating with third-party libraries
 
 The plugin accepts one argument: a schema processing function which will be
 called with the generated schema and must either return the same schema (e.g. if
