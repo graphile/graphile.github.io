@@ -299,7 +299,7 @@ const postgraphileOptions = {
 
 The `postgraphile` middleware factory function takes three arguments, all of
 which are optional. The below options are valid for
-<tt>postgraphile@<!-- LIBRARY_VERSION_BEGIN -->4.10.0<!-- LIBRARY_VERSION_END --></tt>.
+<tt>postgraphile@<!-- LIBRARY_VERSION_BEGIN -->4.12.3<!-- LIBRARY_VERSION_END --></tt>.
 
 - **`pgConfig`**: An object or string that will be passed to the [`pg`][]
   library and used to connect to a PostgreSQL backend, OR a pg.Pool to use.
@@ -330,6 +330,11 @@ which are optional. The below options are valid for
     subscriptions (you still need a subscriptions plugin currently)
   - `live`: [EXPERIMENTAL] Enables live-query support via GraphQL subscriptions
     (sends updated payload any time nested collections/records change)
+  - `websockets`: Choose which websocket transport libraries to use. Use commas
+    to define multiple. Defaults to `['v0', 'v1']` if `subscriptions` or `live`
+    are true, `[]` otherwise
+  - `websocketOperations`: Toggle which GraphQL websocket transport operations
+    are supported: 'subscriptions' or 'all'. Defaults to `subscriptions`
   - `websocketMiddlewares`: [EXPERIMENTAL] If you're using websockets
     (subscriptions || live) then you may want to authenticate your users using
     sessions or similar. You can pass some simple middlewares here that will be

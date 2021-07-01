@@ -88,7 +88,7 @@ postgraphile \
 
 There are more CLI options available to customise the GraphQL server (these are
 from
-<tt>postgraphile@<!-- CLI_VERSION_BEGIN -->4.10.0<!-- CLI_VERSION_END --></tt>):
+<tt>postgraphile@<!-- CLI_VERSION_BEGIN -->4.12.3<!-- CLI_VERSION_END --></tt>):
 
 <!-- prettier-ignore-start -->
 <!-- CLI_DOCBLOCK_BEGIN -->
@@ -104,7 +104,11 @@ from
 * `-s`, `--schema <string>`  
   a Postgres schema to be introspected. Use commas to define multiple schemas
 * `-S`, `--subscriptions`  
-  Enable GraphQL websocket transport support for subscriptions (you still need a subscriptions plugin currently)
+  Enable GraphQL support for subscriptions (you still need a subscriptions plugin currently)
+* `--websockets <string>`  
+  Choose which websocket transport libraries to use. Use commas to define multiple. Defaults to 'v0,v1' if `--subscriptions` or `--live` were passed, '[]' otherwise
+* `--websocket-operations <operations>`  
+  Toggle which GraphQL websocket transport operations are supported: 'subscriptions' or 'all'. Defaults to 'subscriptions'
 * `-L`, `--live`  
   [EXPERIMENTAL] Enables live-query support via GraphQL subscriptions (sends updated payload any time nested collections/records change). Implies --subscriptions
 * `-w`, `--watch`  
