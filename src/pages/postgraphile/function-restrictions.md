@@ -5,7 +5,9 @@ title: Database Function Restrictions
 ---
 
 PostGraphile supports a wide range of PostgreSQL functions, the only major class
-of functions we don't support currently are VARIADIC functions.
+of functions we don't support currently are VARIADIC functions. We also do not
+support overloaded functions because it's not currently possible to expose them
+neatly over GraphQL.
 
 ### Thanks
 
