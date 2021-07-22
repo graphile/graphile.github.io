@@ -390,8 +390,8 @@ Each container can be accessed at the following addresses.
 
 | Container                 | Docker on Linux / Windows Pro     | Docker on Windows Home                         |
 | ------------------------- | --------------------------------- | ---------------------------------------------- |
-| GraphQL API Documentation | `https://localhost:5433/graphiql` | `https://your_docker_machine_ip:5433/graphiql` |
-| GraphQL API               | `https://localhost:5433/graphql`  | `https://your_docker_machine_ip:5433/graphql`  |
+| GraphQL API Documentation | `http://localhost:5433/graphiql`  | `http://your_docker_machine_ip:5433/graphiql`  |
+| GraphQL API               | `http://localhost:5433/graphql`   | `http://your_docker_machine_ip:5433/graphql`   |
 | PostgreSQL Database       | host: `localhost`, port: `5432`   | host: `your_docker_machine_ip`, port: `5432`   |
 
 > Note: if you run Docker Toolbox on Windows Home, you can get your Docker
