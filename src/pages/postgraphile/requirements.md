@@ -55,6 +55,8 @@ experience.
   Many times this can be solved by returning the relevant default setting value
   from the
   [pgSettings function](/postgraphile/usage-library/#pgsettings-function).
+- **Use UTF8 encoding**: GraphQL operates over the UTF8 character set, using
+  different encodings may impact your ability to store/retrieve certain values.
 
 On top of this standard PostgreSQL best practices apply: use indexes carefully
 for performance, use constraints to ensure your data is valid and consistent,
