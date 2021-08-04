@@ -116,21 +116,6 @@ AS $$
 $$ LANGUAGE sql STRICT VOLATILE;
 ```
 
-A note on **anonymous types**: if you have a function that
-`RETURNS SETOF TABLE(a int, b text)` (an anonymous record type) then
-PostGraphile will not _currently_ pick it up due to the
-[common PostGraphile function restrictions](/postgraphile/function-restrictions/).
-It's easy to work around - define a named type:
-
-```sql
-CREATE TYPE my_function_return_type AS (
-  a int,
-  b text
-);
-```
-
-and then change your function to `RETURNS SETOF my_function_return_type`.
-
 <!--
 ### Graphile Plugins
 
