@@ -301,11 +301,11 @@ The `postgraphile` middleware factory function takes three arguments, all of
 which are optional. The below options are valid for
 <tt>postgraphile@<!-- LIBRARY_VERSION_BEGIN -->4.12.3<!-- LIBRARY_VERSION_END --></tt>.
 
-- **`pgConfig`**: You may pass a PostgreSQL connection string, a configuration
-  object to pass to the [`pg.Pool`][] constructor, or a [`pg.Pool`][] instance.
-  Note: `pg.Pool` has a default pool size of 10, to increase this you use the
-  configuration object/pg.Pool instance approach and pass a different value as
-  `max`.
+- **`pgConfig`**: Specifies the PostgreSQL database you wish to connect to.
+  You may pass a PostgreSQL connection string, a configuration object to pass
+  to the [`pg.Pool`][] constructor, or a [`pg.Pool`][] instance. Note: `pg.Pool`
+  has a default pool size of 10, to increase this you use the configuration
+  object/pg.Pool instance approach and pass a different value as `max`.
 - **`schemaName`**: A string, or array of strings, which specifies the
   PostgreSQL schema(s) you to expose via PostGraphile; defaults to 'public'
 - **`options`**: An object containing other miscellaneous options. Options
