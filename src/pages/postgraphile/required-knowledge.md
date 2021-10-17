@@ -179,7 +179,7 @@ create policy friend_insert on my_other_table for insert with check ( are_friend
 
 #### Recommended path
 
-A good way to tackle and make a sense of PostGraphile is to go through these
+A good way to tackle and make sense of PostGraphile is to go through these
 steps:
 
 [**Introduction**](/postgraphile/introduction/)
