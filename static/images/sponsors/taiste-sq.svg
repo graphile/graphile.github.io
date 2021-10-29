@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512px" height="512px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>taiste-sq</title>
+    <desc>Created with Sketch.</desc>
+    <g id="taiste-sq" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect fill="#FFFFFF" x="0" y="0" width="512" height="512"></rect>
+        <path d="M291.689125,215.808161 L291.689125,359.839405 C291.689125,397.228738 318.715842,397.923877 370,395.154097 L370,476.170156 C244.562924,490.019055 202.290367,453.319473 202.290367,359.839405 L202.290367,215.808161 L142,215.808161 L142,129.942293 L202.290367,129.942293 L202.290367,60.005353 L291.689125,33 L291.689125,129.942293 L370,129.942293 L370,215.808161 L291.689125,215.808161 Z" id="Fill-1" fill="#1D1D1B"></path>
+    </g>
+</svg>
