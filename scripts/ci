@@ -26,6 +26,8 @@ if [ "$GITHUB_TOKEN" != "" ] && [ "$GITHUB_BASE_REF" == "" ] && [ "$GITHUB_REF" 
   git update-index -q --really-refresh
   if ! git diff-index --exit-code --name-status HEAD --; then
     echo "But first; there were changes so lets try and push those back to 'develop'"
+    git config user.email "co"''"de"@"benjie""gillam"'.'"com"
+    git config user.name "Benjie Gillam"
     git add -u
     git commit -m"Fixes from CI"
 
