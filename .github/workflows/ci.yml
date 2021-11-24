@@ -1,0 +1,43 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    env:
+      CI: true
+      TERM: xterm
+      FORCE_COLOR: 1
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGHOST: localhost
+      PGPORT: 5432
+
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports:
+          - "0.0.0.0:5432:5432"
+        # needed because the postgres container does not provide a healthcheck
+        options:
+          --health-cmd pg_isready --health-interval 10s --health-timeout 5s
+          --health-retries 5 --name postgres
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: 'Use Node.js 12'
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: yarn
+      - run: yarn clean
+      - run: yarn format
+      - run: yarn build
+      - run: yarn test
+
