@@ -29,20 +29,16 @@ if [ "$GITHUB_TOKEN" != "" ] && [ "$GITHUB_BASE_REF" == "" ] && [ "$GITHUB_REF" 
     git config user.email "co"''"de"@"benjie""gillam"'.'"com"
     git config user.name "Benjie Gillam"
     git add -u
-    git commit -m"Fixes from CI"
+    git commit -m"autofix: fixes from CI"
 
-    # I really hope this doesn't cause an infinite CI loop
     git push origin HEAD:develop
-    echo "Exiting with failed build due to local changes"
-    exit 1
-  else
-    echo
-    echo "#"
-    echo "# LGTM!"
-    echo "#"
-    echo "########################################"
   fi
-
+  echo
+  echo "#"
+  echo "# LGTM!"
+  echo "#"
+  echo "########################################"
+  echo
   echo "Okay; time to deploy..."
   scripts/deploy
 elif ! git diff-index --exit-code --name-only HEAD --; then
