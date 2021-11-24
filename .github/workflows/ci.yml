@@ -10,6 +10,10 @@ jobs:
       CI: true
       TERM: xterm
       FORCE_COLOR: 1
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGHOST: localhost
+      PGPORT: 5432
 
     services:
       postgres:

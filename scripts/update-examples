@@ -39,10 +39,14 @@ async function main() {
     "utf8"
   );
 
+  const password = String(Math.random());
+
   {
     const rootPool = new pg.Pool({
       host: process.env.PGHOST,
       port: process.env.PGPORT,
+      user: process.env.PGUSER,
+      password: process.env.PGPASSWORD,
       database: "postgres",
     });
 
@@ -51,8 +55,22 @@ async function main() {
     } catch (e) {
       /* non-existence is fine */
     }
+    try {
+      await rootPool.query("drop role graphiledemo");
+    } catch (e) {
+      /* non-existence is fine */
+    }
+    try {
+      await rootPool.query("drop role graphiledemo_authenticator");
+    } catch (e) {
+      /* non-existence is fine */
+    }
+    try {
+      await rootPool.query("drop role graphiledemo_visitor");
+    } catch (e) {
+      /* non-existence is fine */
+    }
 
-    const password = String(Math.random());
     await rootPool.query(
       `CREATE ROLE graphiledemo WITH LOGIN PASSWORD '${password}' SUPERUSER`
     );
@@ -69,16 +87,19 @@ async function main() {
     rootPool.end();
   }
 
-  const pgPool = new pg.Pool({
-    host: process.env.PGHOST,
-    port: process.env.PGPORT,
-    database: "graphile_org_demo",
-  });
+  {
+    const ownerPool = new pg.Pool({
+      host: process.env.PGHOST,
+      port: process.env.PGPORT,
+      user: process.env.PGUSER,
+      password: process.env.PGPASSWORD,
+      database: "graphile_org_demo",
+    });
 
-  await pgPool.query(schemaSql);
-  await pgPool.query(dataSql);
-  await pgPool.query(
-    `\
+    await ownerPool.query(schemaSql);
+    await ownerPool.query(dataSql);
+    await ownerPool.query(
+      `\
 set search_path to app_public, app_private, public;
 /**
  * These are the tables we're using in the insert-multiple-records example
@@ -121,7 +142,16 @@ insert into quiz_entry (user_id, quiz_id) values
   (4, 2),
   (5, 3);
 `
-  );
+    );
+  }
+
+  const pgPool = new pg.Pool({
+    host: process.env.PGHOST,
+    port: process.env.PGPORT,
+    user: process.env.PGUSER,
+    password: process.env.PGPASSWORD,
+    database: "graphile_org_demo",
+  });
   const getPostGraphileSchemaWithOptions = (options = {}, client = pgPool) =>
     createPostGraphileSchema(client, ["app_public"], {
       dynamicJson: true,
