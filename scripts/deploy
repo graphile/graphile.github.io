@@ -10,6 +10,11 @@ yarn test
 git clone "`git remote get-url origin`" __deploy
 cd __deploy
 
+if [ "$CI" != "" ]; then
+  git config credential.helper "store --file=.git/credentials"
+  echo "https://benjie:${GITHUB_TOKEN}@github.com" > .git/credentials
+fi;
+
 git checkout master
 cp -af ../public/* ./
 echo 'www.graphile.org' > CNAME
