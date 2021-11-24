@@ -45,3 +45,5 @@ jobs:
       - run: yarn format
       - run: yarn build
       - run: scripts/ci
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
