@@ -67,8 +67,8 @@ to PostgreSQL's `LISTEN/NOTIFY` pubsub features, Graphile Worker is notified
 when a task is queued and can fetch, execute, and complete a trivial task in
 2-3ms from when it was queued; this results in your system feeling very snappy.
 
-Graphile Worker stores tasks into its own schema within PostgreSQL, and offers
-a simple SQL API to create jobs. Queueing a job might look like:
+Graphile Worker stores tasks into its own schema within PostgreSQL, and offers a
+simple SQL API to create jobs. Queueing a job might look like:
 
 ```sql
 SELECT graphile_worker.add_job('hello', json_build_object('name', 'Bobby Tables'));
