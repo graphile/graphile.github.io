@@ -41,8 +41,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: git config credential.helper "store --file=.git/credentials"
-      - run: 'echo "https://benjie:${GITHUB_TOKEN}@github.com" > .git/credentials'
       - run: yarn
       - run: yarn clean
       - run: yarn format
