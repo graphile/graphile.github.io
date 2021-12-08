@@ -368,8 +368,8 @@ Applies to:
 
 - Functions returning `SETOF` a table-like composite type (e.g. a table type,
   view, materialized view, etc, but _not_ a custom type): adds the `condition`
-  argument to this connection, allowing to _filter_ the set by any of its
-  scalar fields.
+  argument to this connection, allowing to _filter_ the set by any of its scalar
+  fields.
 - Computed column functions with no required parameters and returning a scalar
   or array: allows this function to be used as field in the `condition` argument
   for the parent table, allowing to _filter by_ this function's value the parent
