@@ -242,11 +242,6 @@ We recommend you install the `@graphile-contrib/pg-simplify-inflector` plugin.
 
 #### For Development
 
-**NOTE**: if something you're expecting to see doesn't appear, try removing
-`ignoreRBAC: false` and/or `ignoreIndexes: false`, this should give you a hint
-as to what you need to fix in your database (you should only expose fields
-through GraphQL that are inexpensive for users to use).
-
 ```js
 const postgraphileOptions = {
   subscriptions: true,
@@ -254,7 +249,6 @@ const postgraphileOptions = {
   dynamicJson: true,
   setofFunctionsContainNulls: false,
   ignoreRBAC: false,
-  ignoreIndexes: false,
   showErrorStack: "json",
   extendedErrors: ["hint", "detail", "errcode"],
   appendPlugins: [require("@graphile-contrib/pg-simplify-inflector")],
@@ -282,7 +276,6 @@ const postgraphileOptions = {
   dynamicJson: true,
   setofFunctionsContainNulls: false,
   ignoreRBAC: false,
-  ignoreIndexes: false,
   extendedErrors: ["errcode"],
   appendPlugins: [require("@graphile-contrib/pg-simplify-inflector")],
   graphiql: false,
@@ -365,11 +358,10 @@ which are optional. The below options are valid for
     user in connection string and any role they can become); set this option
     true to skip these checks and create GraphQL fields and types for
     everything. The default is `true`, in v5 the default will change to `false`.
-  - `ignoreIndexes`: Set false (recommended) to exclude filters, orderBy, and
+  - `ignoreIndexes`: Set false to exclude filters, orderBy, and
     relations that would be expensive to access due to missing indexes. Changing
-    this from true to false is a breaking change, but false to true is not, so
-    we recommend you start with it set to `false`. The default is `true`, in v5
-    the default may change to `false`.
+    this from true to false is a breaking change, but false to true is not. The
+    default is `true`.
   - `includeExtensionResources`: By default, tables and functions that come from
     extensions are excluded from the generated GraphQL schema as general
     applications don't need them to be exposed to the end user. You can use this
