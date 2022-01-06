@@ -9,7 +9,7 @@ Out of the box, PostGraphile supports rudimentary filtering on
 allows you to filter for specific values (e.g. `username: "Alice"` or
 `category: ARTICLE`).
 
-[See an example using the `connection` argument.](https://www.graphile.org/postgraphile/examples/#Collections__Relation_condition)
+[See an example using the `connection` argument.](/postgraphile/examples/#Collections__Relation_condition)
 
 It's important when implementing filters to keep performance in mind, so
 PostGraphile gives you the ability to omit certain fields from the list of
