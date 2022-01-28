@@ -9,7 +9,7 @@ be automatically renamed in order to make sure they conform to the GraphQL
 naming requirements and conventions.
 
 ```sql
-create type animal_type as (
+create type animal_type as enum (
   'CAT',
   'DOG',
   'FISH'
