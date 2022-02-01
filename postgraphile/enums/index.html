@@ -53,7 +53,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul></div></div><div class="edit-this-page" style="display:"><a href="https://github.com/graphile/graphile.github.io/edit/develop/src/pages/postgraphile/enums.md">📝 Suggest improvement/edit this page</a></div><h2 class="mt3">Enums</h2><div><p>PostGraphile will automatically map PostgreSQL enums into GraphQL enums; they'll
 be automatically renamed in order to make sure they conform to the GraphQL
 naming requirements and conventions.</p>
-<div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">type</span> animal_type <span class="token keyword">as</span> <span class="token punctuation">(</span>
+<div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">type</span> animal_type <span class="token keyword">as</span> <span class="token keyword">enum</span> <span class="token punctuation">(</span>
   <span class="token string">'CAT'</span><span class="token punctuation">,</span>
   <span class="token string">'DOG'</span><span class="token punctuation">,</span>
   <span class="token string">'FISH'</span>
