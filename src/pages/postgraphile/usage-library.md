@@ -228,7 +228,7 @@ import { middleware } from './postgraphile.middleware'
 import { PostGraphileResponseNest } from './postgraphileResponseNest'
 
 @Controller('/')
-export class PostgraphileController {
+export class PostGraphileController {
   @Get(middleware.graphiqlRoute)
   graphiql (@Req() request: Request, @Res() response: Response, @Next() next) {
     middleware.graphiqlRouteHandler(new PostGraphileResponseNode(request, response, next))
