@@ -117,8 +117,8 @@ Next we need an adaptor to convert a generic PostGraphile route handler into a
 handler that's suitable for your given server framework. We provide the
 following out of the box:
 
-- `PostGraphileResponseNode` - for Node, Express, Connect, Restify, and Fastify
-  v2 (NOT v3)
+- `PostGraphileResponseNode` - for Node, Express, Connect, Nest, Restify, and 
+  Fastify v2 (NOT v3)
 - `PostGraphileResponseKoa` - for Koa
 - `PostGraphileResponseFastify3` - for Fastify v3
 
@@ -214,6 +214,28 @@ if (middleware.options.watchPg) {
       middleware.eventStreamRoute,
       convertHandler(middleware.eventStreamRouteHandler)
     );
+  }
+}
+```
+
+For Nest, this might look something like:
+
+```js
+import { Controller, Get, Post, Req, Next, Res } from '@nestjs/common';
+import { Request, Response } from 'express';
+import { PostGraphileResponseNode } from 'postgraphile';
+import { middleware } from './postgraphile.middleware';
+
+@Controller('/')
+export class PostGraphileController {
+  @Get(middleware.graphiqlRoute)
+  graphiql (@Req() request: Request, @Res() response: Response, @Next() next) {
+    middleware.graphiqlRouteHandler(new PostGraphileResponseNode(request, response, next));
+  }
+
+  @Post(middleware.graphqlRoute)
+  graphql (@Req() request: Request, @Res() response: Response, @Next() next) {
+    middleware.graphqlRouteHandler(new PostGraphileResponseNode(request, response, next));
   }
 }
 ```
