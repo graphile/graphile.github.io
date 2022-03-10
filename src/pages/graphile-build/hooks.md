@@ -24,8 +24,8 @@ Hooks are registered via a call to
 [`builder.hook(hookName, hookFunction)`](/graphile-build/schema-builder/#hookhookname-hookfunction).
 
 Every `hookFunction` must synchronously return a value - either the value that
-it was passed in as the first argument or a derivative of it (preferably immutable,
-but we're not strict on that).
+it was passed in as the first argument or a derivative of it (preferably
+immutable, but we're not strict on that).
 
 Hook functions for one hook by default run in the order they were registered,
 that is why the order of plugins is sometimes relevant.
