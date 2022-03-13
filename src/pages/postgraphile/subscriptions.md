@@ -228,7 +228,7 @@ Here's an example:
 const express = require("express");
 const { postgraphile, makePluginHook } = require("postgraphile");
 const MySubscriptionPlugin = require("./MySubscriptionPlugin"); // our plugin defined in previous step
-const { default: PgPubsub } = require("@graphile/pg-pubsub"); // rembember to install through yarn/npm
+const { default: PgPubsub } = require("@graphile/pg-pubsub"); // remember to install through yarn/npm
 
 const pluginHook = makePluginHook([PgPubsub]);
 
