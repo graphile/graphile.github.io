@@ -79,6 +79,8 @@ Schema extension plugins for PostGraphile:
 - [postgraphile-remove-foreign-key-fields-plugin](https://github.com/jarvisuser90/postgraphile-remove-foreign-key-fields-plugin) -
   Removes all foreign key fields from the GraphQL schema while still allowing
   foreign relationships to be created.
+- [postgraphile-plugin-timestamp-format](https://github.com/RedShift1/postgraphile-plugin-timestamp-format) - Format timestamps
+  with PostgreSQL's to_char function. Supports timezones too
 
 Examples of using these plugins:
 
