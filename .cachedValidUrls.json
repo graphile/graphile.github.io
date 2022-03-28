@@ -68,6 +68,7 @@
   "https://flow.org/",
   "https://github.com/EmperorRXF/postgraphile-plugin-atomic-mutations",
   "https://github.com/GoogleCloudPlatform/nodejs-docs-samples/tree/master/appengine/hello-world/flexible",
+  "https://github.com/RedShift1/postgraphile-plugin-timestamp-format",
   "https://github.com/RoadRunnerEngineering/postgraphile-plugin-custom-filter",
   "https://github.com/auth0/express-jwt",
   "https://github.com/auth0/node-jsonwebtoken",
