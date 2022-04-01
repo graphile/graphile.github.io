@@ -678,6 +678,8 @@ Notes:
 
 **NOTE: this section applies to PostGraphile v4.4.6+**
 
+**BUG: it seems `@pgQuery` only supports _scalars_ (not _enums_) right now: https://github.com/graphile/postgraphile/issues/1601**
+
 The @pgQuery directive can also be used with leaf fields (those returning a
 scalar or list thereof). To do so, we pass `@pgQuery` a `fragment:` argument.
 This argument can take two forms:
