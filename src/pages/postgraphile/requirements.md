@@ -111,6 +111,15 @@ Works well.
 
 Works well.
 
+#### PG 13 [officially supported]
+
+Works well.
+
+#### PG 14 [officially supported]
+
+Works well.
+
+
 ### Operating system
 
 PostGraphile is developed on Mac OS X and tested on GNU/Linux. It works on
