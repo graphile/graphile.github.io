@@ -119,7 +119,6 @@ Works well.
 
 Works well.
 
-
 ### Operating system
 
 PostGraphile is developed on Mac OS X and tested on GNU/Linux. It works on
