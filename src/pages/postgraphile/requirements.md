@@ -71,7 +71,7 @@ ES2018 features.
 ### PostgreSQL: use latest
 
 For best results we recommend you use the latest stable release of PostgreSQL
-that we officially support (v12 at time of writing), however it should run well
+that we officially support (v14 at time of writing), however it should run well
 on 9.6 or higher and anything that breaks v9.6 support will be deemed a breaking
 change. The absolute earliest version it will run well against is v9.4, however
 we do not support this version officially - we strongly recommend you upgrade.
