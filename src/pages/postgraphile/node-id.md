@@ -33,8 +33,8 @@ so, any `id` column will automatically be renamed to `rowId`.
 
 ### Disabling the Global Object Identifier
 
-You can disable the global object identifier throughout your API by skipping
-the `require('graphile-build').NodePlugin` plugin; e.g. from the CLI:
+You can disable the global object identifier throughout your API by skipping the
+`require('graphile-build').NodePlugin` plugin; e.g. from the CLI:
 
 ```
 postgraphile --skip-plugins graphile-build:NodePlugin ...
