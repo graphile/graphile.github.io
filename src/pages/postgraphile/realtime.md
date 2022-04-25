@@ -21,7 +21,7 @@ First, though, there are two main types of real-time provided by PostGraphile â€
 
 ### Subscriptions
 
-"Subscriptions" are a way of having a new proactively sent to the client
+"Subscriptions" are a way of having a new message proactively sent to the client
 automatically whenever a particular event occurs on the server side, such as:
 
 ```js
