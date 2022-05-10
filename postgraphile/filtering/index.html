@@ -70,8 +70,20 @@ adding fields using <a href="/postgraphile/custom-queries/">custom queries</a>,
 <a href="/postgraphile/computed-columns/">computed columns</a> or by using
 <a href="/postgraphile/make-extend-schema-plugin/">makeExtendSchemaPlugin</a>.</p>
 <p>You can also augment PostGraphile's existing connections using custom
-<a href="/postgraphile/extending-raw/">Graphile Engine plugins</a>, such as:</p>
+<a href="/postgraphile/extending-raw/">Graphile Engine plugins</a>, such as the following:</p>
 <h4 id="filter-plugin"><a href="#filter-plugin" aria-label="filter plugin permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Filter Plugin</h4>
+<blockquote>
+<p>🚨<strong>BEWARE</strong>🚨: adding powerful generic filtering capabilities to your GraphQL
+API is strongly discouraged, not just by Benjie (the maintainer of
+PostGraphile) but also
+<a href="https://twitter.com/leeb/status/1004655619431731200">by Lee Byron</a> (one of
+the inventors of GraphQL) and various other experts in the GraphQL ecosystem.
+It is <strong>strongly advised</strong> that you add only very specific filters using one
+of the techniques above (and that you make their inputs as simple as possible)
+rather than using a generic filtering plugin like this. Not heeding this
+advice may lead to very significant performance issues down the line that are
+very hard for you to dig your way out of.</p>
+</blockquote>
 <p>A very popular plugin is Matt Bretl's connection-filter plugin, located at
 <a href="https://github.com/graphile-contrib/postgraphile-plugin-connection-filter">https://github.com/graphile-contrib/postgraphile-plugin-connection-filter</a>.
 This adds a <code class="language-text">filter</code> argument to connections that enables you to use advanced
