@@ -25,20 +25,20 @@ adding fields using [custom queries](/postgraphile/custom-queries/),
 [makeExtendSchemaPlugin](/postgraphile/make-extend-schema-plugin/).
 
 You can also augment PostGraphile's existing connections using custom
-[Graphile Engine plugins](/postgraphile/extending-raw/), such as the following: 
+[Graphile Engine plugins](/postgraphile/extending-raw/), such as the following:
 
 #### Filter Plugin
 
-> 🚨**BEWARE**🚨: adding powerful generic filtering capabilities to your
-> GraphQL API is strongly discouraged, not just by Benjie (the maintainer of
+> 🚨**BEWARE**🚨: adding powerful generic filtering capabilities to your GraphQL
+> API is strongly discouraged, not just by Benjie (the maintainer of
 > PostGraphile) but also
 > [by Lee Byron](https://twitter.com/leeb/status/1004655619431731200) (one of
 > the inventors of GraphQL) and various other experts in the GraphQL ecosystem.
-> It is **strongly advised** that you add only very specific filters using one of
-> the techniques above (and that you make their inputs as simple as possible)
-> rather than using a generic filtering plugin like this. Not heeding this advice
-> may lead to very significant performance issues down the line that are very
-> hard for you to dig your way out of.
+> It is **strongly advised** that you add only very specific filters using one
+> of the techniques above (and that you make their inputs as simple as possible)
+> rather than using a generic filtering plugin like this. Not heeding this
+> advice may lead to very significant performance issues down the line that are
+> very hard for you to dig your way out of.
 
 A very popular plugin is Matt Bretl's connection-filter plugin, located at
 [https://github.com/graphile-contrib/postgraphile-plugin-connection-filter](https://github.com/graphile-contrib/postgraphile-plugin-connection-filter).
