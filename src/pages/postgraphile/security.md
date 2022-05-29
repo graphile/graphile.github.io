@@ -154,8 +154,7 @@ const client = new ApolloClient({
 });
 ```
 
-or
-[with Relay](https://relay.dev/docs/guides/network-layer/)
+or [with Relay](https://relay.dev/docs/guides/network-layer/)
 
 ```js{3,8}
 function fetchQuery( operation, variables, cacheConfig, uploadables) {
