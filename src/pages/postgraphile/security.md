@@ -155,7 +155,7 @@ const client = new ApolloClient({
 ```
 
 or
-[with Relay Modern](https://facebook.github.io/relay/docs/en/network-layer.html):
+[with Relay](https://facebook.github.io/relay/docs/en/network-layer.html):
 
 ```js{3,8}
 function fetchQuery( operation, variables, cacheConfig, uploadables) {
