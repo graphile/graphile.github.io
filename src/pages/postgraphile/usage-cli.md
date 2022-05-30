@@ -285,6 +285,7 @@ Here is the list of keys and their default values, or types, supported in the
   jwtAudiences: <string>
   jwtRole = ['role']
   jwtSecret: <string>
+  jwtSignOptions: {}
   jwtTokenIdentifier
   jwtVerifyAlgorithms: <string>
   jwtVerifyAudience: <string>
