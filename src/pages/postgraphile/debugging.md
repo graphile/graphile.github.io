@@ -51,7 +51,7 @@ private.
 Use the following CLI options with PostGraphile:
 
 - `--show-error-stack`
-- `--extended-errors hint,detail,errcode` (other options available
+- `--extended-errors hint,detail,code` (other options available
   [here](https://github.com/brianc/node-postgres/blob/7de137f9f88611b8fcae5539aa90b6037133f1f1/lib/connection.js#L565-L580))
 - or
 
@@ -62,7 +62,7 @@ Use the following CLI options with PostGraphile:
 or for the library:
 
 - `showErrorStack: true`
-- `extendedErrors: ['hint', 'detail', 'errcode']` (other options available
+- `extendedErrors: ['hint', 'detail', 'code']` (other options available
   [here](https://github.com/brianc/node-postgres/blob/7de137f9f88611b8fcae5539aa90b6037133f1f1/lib/connection.js#L565-L580))
 - or
 
