@@ -23,6 +23,10 @@ where `-c` is the connection string (defaults to `postgres:///`), `-s` is the
 schema name (defaults to "public"), `-a` enables Relay support and `-j` enables
 dynamic JSON.
 
+**macOS users**: you should also use the `--port` option to bind to a different
+port, the default port 5000 now conflicts with macOS Monterey's new AirPlay
+service.
+
 PostGraphile also reads options from a `.postgraphilerc.js` file from the
 current working directory.
 
