@@ -8,9 +8,8 @@ import MarketingLayout from '$components/MarketingLayout';
 import Hero from '$components/Hero';
 import MarketingSection from '$components/MarketingSection';
 import MarketingDivide from '$components/MarketingDivide';
-import MarketingCodebox from '$components/MarketingCodebox';
 import MarketingBullets from '$components/MarketingBullets';
-import Testimonial from '$components/MarketingTestimonial';
+import TeamBio from '$components/MarketingTeamBio';
 
 <MarketingLayout blue>
 
@@ -103,8 +102,30 @@ Price: from $1500/mo, paid monthly through GitHub sponsors, or quarterly / annua
 
 ## The Graphile Team
 
-<img alt="Benjie Gillam" src="/images/support/Benjie.jpg" width="300" height="300" />
-<img alt="Jem Gillam" src="/images/support/Jem.jpg" width="300" height="300" />
+<div class="mw9 ph3-ns flex flex-wrap justify-between">
+
+<TeamBio
+  name="Benjie"
+  role="Graphile Maintainer"
+  imageAlt="Benjie Gillam"
+  imageSrc="/images/support/Benjie.jpg"
+>
+  Thanks for making GraphQL something I can use on my project in a robust way
+  with <strong>minimal effort</strong>. 500-1500 requests per second on a
+  single server is pretty awesome.
+</TeamBio>
+
+<TeamBio
+  name="Jem"
+  role="Educator"
+  imageAlt="Jem Gillam"
+  imageSrc="/images/support/Jem.jpg"
+>
+  Thanks for making GraphQL something I can use on my project in a robust way
+  with <strong>minimal effort</strong>. 500-1500 requests per second on a
+  single server is pretty awesome.
+</TeamBio>
+</div>
 </div>
 </MarketingSection>
 
