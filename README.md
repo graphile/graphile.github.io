@@ -13,6 +13,12 @@ You can view the website in browser at http://localhost:8000/
 
 ## Troubleshooting
 
+Use node 12
+
+```bash
+nvm use 12
+```
+
 Gatsby sometimes goes wrong/gets confused. First port of call is to kill it,
 then clear the `.cache` and `public` folders:
 
