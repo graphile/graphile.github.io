@@ -20,7 +20,6 @@ must obey the following rules:
 
 - adhere to
   [common PostGraphile function restrictions](/postgraphile/function-restrictions/)
-- must be in the same schema as the table it applies to
 - name must begin with the name of the table it applies to, followed by an
   underscore (`_`)
 - first parameter must be the table type
