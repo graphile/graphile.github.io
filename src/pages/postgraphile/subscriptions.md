@@ -41,6 +41,198 @@ much more expressive about the realtime features of your GraphQL API.
 NOTE: the endpoint for subscriptions is the same as for GraphQL, except the
 protocol is changed from `http` or `https` to `ws` or `wss` respectively.
 
+
+
+### Simple Subscriptions
+
+In this implementation, we have `@graphile/pg-pubsub` automatically expose a
+generic `listen` handler that can be used with arbitrary topics in PostgreSQL —
+it requires very little ahead-of-time planning.
+
+#### Enabling with the CLI
+
+To enable Simple Subscriptions via the CLI, just load the `@graphile/pg-pubsub`
+plugin and pass the `--subscriptions` and `--simple-subscriptions` flags.
+
+```
+postgraphile \
+  --plugins @graphile/pg-pubsub \
+  --subscriptions \
+  --simple-subscriptions \
+  -c mydb
+```
+
+#### Enabling with an Express app
+
+When using PostGraphile as a library, you may enable Simple Subscriptions by
+passing the `pluginHook` with the `@graphile/pg-pubsub` plugin and using
+`simpleSubscriptions: true`.
+
+We emulate part of the Express stack, so if you require sessions you can pass
+additional Connect/Express middlewares (sorry, we don't support Koa middlewares
+here at this time) via the `websocketMiddlewares` option.
+
+Here's an example:
+
+```js
+const express = require("express");
+const { postgraphile, makePluginHook } = require("postgraphile");
+const { default: PgPubsub } = require("@graphile/pg-pubsub");
+
+const pluginHook = makePluginHook([PgPubsub]);
+
+const postgraphileOptions = {
+  pluginHook,
+  subscriptions: true,
+  simpleSubscriptions: true,
+  websocketMiddlewares: [
+    // Add whatever middlewares you need here, note that they should only
+    // manipulate properties on req/res, they must not sent response data. e.g.:
+    //
+    //   require('express-session')(),
+    //   require('passport').initialize(),
+    //   require('passport').session(),
+  ],
+};
+
+const app = express();
+app.use(postgraphile(databaseUrl, "app_public", postgraphileOptions));
+app.listen(parseInt(process.env.PORT, 10) || 3000);
+```
+
+#### Using
+
+Simple subscriptions exposes a `listen` field to the `Subscription` type that
+can be used for generic subscriptions to a named topic. This topic can be
+triggered using PostgreSQL's built in LISTEN/NOTIFY functionality (but remember
+to add the prefix - see below).
+
+```graphql
+type ListenPayload {
+  query: Query
+  relatedNode: Node
+  relatedNodeId: ID
+}
+
+type Subscription {
+  listen(topic: String!): ListenPayload!
+}
+```
+
+PostGraphile's built in GraphiQL now supports subscriptions, so you can use it
+directly to test your application.
+
+#### Topic prefix
+
+All topics requested from GraphQL are automatically prefixed with
+`postgraphile:`\* to avoid leaking other topics your application may be using
+
+- GraphQL consumers will not need to know about this, but you will need to
+  remember to add it to the topic when you perform `NOTIFY` otherwise
+  subscribers will not see the messages.
+
+\* _This is applied by default, but you can override it via
+`pgSubscriptionPrefix` setting in the `graphileBuildOptions` object; e.g.
+`postgraphile(DATABASE_URL, SCHEMAS, {pluginHook, subscriptions: true, graphileBuildOptions: { pgSubscriptionPrefix: "MyPrefix:"}})`.
+Note further that this setting only applies to simple subscriptions, custom
+subscriptions have no automatic prefix._
+
+For example a user may perform the following subscription:
+
+```graphql
+subscription {
+  listen(topic: "hello") {
+    relatedNodeId
+    relatedNode {
+      nodeId
+      ... on Foo {
+        id
+        title
+      }
+    }
+  }
+}
+```
+
+To cause the subscription to receive a message, you could run the following in
+PostgreSQL:
+
+```sql
+select pg_notify(
+  'postgraphile:hello',
+  '{}'
+);
+```
+
+Resulting in this GraphQL payload:
+
+```json
+{
+  "data": {
+    "listen": {
+      "relatedNodeId": null,
+      "relatedNode": null
+      }
+    }
+  }
+}
+```
+
+Which is sufficient to know that the event _occurred_. Chances are that you want
+to know more than this...
+
+It's also possible to send a `Node` along with your GraphQL payload using the
+`__node__` field on the `pg_notify` body (which is interpreted as JSON). The
+`__node__` field is similar to the `nodeId` (or `id` if you use `--classic-ids`)
+field in your GraphQL requests, except it's the raw JSON before it gets
+stringified and base64 encoded. (The reason for this is that Postgres' JSON
+functions leave some optional spaces in, so when they are base64 encoded the
+strings do not match.)
+
+Assuming that you have a table of the form
+`foos(id serial primary key, title text, ...)` you can add the `__node__` field
+as follows and the record with id=32 will be made available as the `relatedNode`
+in the GraphQL subscription payload:
+
+```sql
+select pg_notify(
+  'postgraphile:hello',
+  json_build_object(
+    '__node__', json_build_array(
+      'foos', -- IMPORTANT: this is not always exactly the table name; base64
+              -- decode an existing nodeId to see what it should be.
+      32      -- The primary key (for multiple keys, list them all).
+    )
+  )::text
+);
+```
+
+Resulting in this GraphQL payload:
+
+```json
+{
+  "data": {
+    "listen": {
+      "relatedNodeId": "WyJmb29zIiwzMl0=",
+      "relatedNode": {
+        "nodeId": "WyJmb29zIiwzMl0=",
+        "id": 32,
+        "title": "Howdy!"
+      }
+    }
+  }
+}
+```
+
+> **NOTE**: This solution is still taking shape, so it's not yet certain how
+> other fields on the NOTIFY message JSON will be exposed via GraphQL. You are
+> advised to treat the content of this message JSON as if it's visible to the
+> user, as at some point it may be.
+
+> **NOTE**: In PostgreSQL the channel is an "identifier" which by default is
+> limited to 63 characters. Subtracting the `postgraphile:` prefix leaves 50
+> characters for your topic name.
+
 ---
 
 ### Custom Subscriptions
@@ -284,196 +476,6 @@ tab, you will see the subscription payload. You are good to go! This should
 serve as the basis to implement your own custom subscriptions.
 
 ---
-
-### Simple Subscriptions
-
-In this implementation, we have `@graphile/pg-pubsub` automatically expose a
-generic `listen` handler that can be used with arbitrary topics in PostgreSQL —
-it requires very little ahead-of-time planning.
-
-#### Enabling with the CLI
-
-To enable Simple Subscriptions via the CLI, just load the `@graphile/pg-pubsub`
-plugin and pass the `--subscriptions` and `--simple-subscriptions` flags.
-
-```
-postgraphile \
-  --plugins @graphile/pg-pubsub \
-  --subscriptions \
-  --simple-subscriptions \
-  -c mydb
-```
-
-#### Enabling with an Express app
-
-When using PostGraphile as a library, you may enable Simple Subscriptions by
-passing the `pluginHook` with the `@graphile/pg-pubsub` plugin and using
-`simpleSubscriptions: true`.
-
-We emulate part of the Express stack, so if you require sessions you can pass
-additional Connect/Express middlewares (sorry, we don't support Koa middlewares
-here at this time) via the `websocketMiddlewares` option.
-
-Here's an example:
-
-```js
-const express = require("express");
-const { postgraphile, makePluginHook } = require("postgraphile");
-const { default: PgPubsub } = require("@graphile/pg-pubsub");
-
-const pluginHook = makePluginHook([PgPubsub]);
-
-const postgraphileOptions = {
-  pluginHook,
-  subscriptions: true,
-  simpleSubscriptions: true,
-  websocketMiddlewares: [
-    // Add whatever middlewares you need here, note that they should only
-    // manipulate properties on req/res, they must not sent response data. e.g.:
-    //
-    //   require('express-session')(),
-    //   require('passport').initialize(),
-    //   require('passport').session(),
-  ],
-};
-
-const app = express();
-app.use(postgraphile(databaseUrl, "app_public", postgraphileOptions));
-app.listen(parseInt(process.env.PORT, 10) || 3000);
-```
-
-#### Using
-
-Simple subscriptions exposes a `listen` field to the `Subscription` type that
-can be used for generic subscriptions to a named topic. This topic can be
-triggered using PostgreSQL's built in LISTEN/NOTIFY functionality (but remember
-to add the prefix - see below).
-
-```graphql
-type ListenPayload {
-  query: Query
-  relatedNode: Node
-  relatedNodeId: ID
-}
-
-type Subscription {
-  listen(topic: String!): ListenPayload!
-}
-```
-
-PostGraphile's built in GraphiQL now supports subscriptions, so you can use it
-directly to test your application.
-
-#### Topic prefix
-
-All topics requested from GraphQL are automatically prefixed with
-`postgraphile:`\* to avoid leaking other topics your application may be using
-
-- GraphQL consumers will not need to know about this, but you will need to
-  remember to add it to the topic when you perform `NOTIFY` otherwise
-  subscribers will not see the messages.
-
-\* _This is applied by default, but you can override it via
-`pgSubscriptionPrefix` setting in the `graphileBuildOptions` object; e.g.
-`postgraphile(DATABASE_URL, SCHEMAS, {pluginHook, subscriptions: true, graphileBuildOptions: { pgSubscriptionPrefix: "MyPrefix:"}})`.
-Note further that this setting only applies to simple subscriptions, custom
-subscriptions have no automatic prefix._
-
-For example a user may perform the following subscription:
-
-```graphql
-subscription {
-  listen(topic: "hello") {
-    relatedNodeId
-    relatedNode {
-      nodeId
-      ... on Foo {
-        id
-        title
-      }
-    }
-  }
-}
-```
-
-To cause the subscription to receive a message, you could run the following in
-PostgreSQL:
-
-```sql
-select pg_notify(
-  'postgraphile:hello',
-  '{}'
-);
-```
-
-Resulting in this GraphQL payload:
-
-```json
-{
-  "data": {
-    "listen": {
-      "relatedNodeId": null,
-      "relatedNode": null
-      }
-    }
-  }
-}
-```
-
-Which is sufficient to know that the event _occurred_. Chances are that you want
-to know more than this...
-
-It's also possible to send a `Node` along with your GraphQL payload using the
-`__node__` field on the `pg_notify` body (which is interpreted as JSON). The
-`__node__` field is similar to the `nodeId` (or `id` if you use `--classic-ids`)
-field in your GraphQL requests, except it's the raw JSON before it gets
-stringified and base64 encoded. (The reason for this is that Postgres' JSON
-functions leave some optional spaces in, so when they are base64 encoded the
-strings do not match.)
-
-Assuming that you have a table of the form
-`foos(id serial primary key, title text, ...)` you can add the `__node__` field
-as follows and the record with id=32 will be made available as the `relatedNode`
-in the GraphQL subscription payload:
-
-```sql
-select pg_notify(
-  'postgraphile:hello',
-  json_build_object(
-    '__node__', json_build_array(
-      'foos', -- IMPORTANT: this is not always exactly the table name; base64
-              -- decode an existing nodeId to see what it should be.
-      32      -- The primary key (for multiple keys, list them all).
-    )
-  )::text
-);
-```
-
-Resulting in this GraphQL payload:
-
-```json
-{
-  "data": {
-    "listen": {
-      "relatedNodeId": "WyJmb29zIiwzMl0=",
-      "relatedNode": {
-        "nodeId": "WyJmb29zIiwzMl0=",
-        "id": 32,
-        "title": "Howdy!"
-      }
-    }
-  }
-}
-```
-
-> **NOTE**: This solution is still taking shape, so it's not yet certain how
-> other fields on the NOTIFY message JSON will be exposed via GraphQL. You are
-> advised to treat the content of this message JSON as if it's visible to the
-> user, as at some point it may be.
-
-> **NOTE**: In PostgreSQL the channel is an "identifier" which by default is
-> limited to 63 characters. Subtracting the `postgraphile:` prefix leaves 50
-> characters for your topic name.
 
 #### Subscription security
 
