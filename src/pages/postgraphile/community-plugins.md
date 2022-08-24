@@ -47,6 +47,7 @@ Schema extension plugins for PostGraphile:
 - [@graphile-contrib/pg-simplify-inflector](https://github.com/graphile-contrib/pg-simplify-inflector) -
   simplifies field names by automatically removing `ByFooIdAndBarId`-style
   suffixes.
+- [@graphile-contrib/pg-omit-archived](https://github.com/graphile-contrib/pg-omit-archived) - allows soft-deletes and automatic hiding of records with a particular flag
 - [@graphile-contrib/pg-many-to-many](https://github.com/graphile-contrib/pg-many-to-many) -
   adds connection fields for many-to-many relations.
 - [@graphile-contrib/pg-order-by-related](https://github.com/graphile-contrib/pg-order-by-related) -
