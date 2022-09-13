@@ -1,6 +1,15 @@
 const outputEl = document.getElementById("output");
 outputEl.innerHTML = "hi";
 
+const XML_REPLACEMENTS = {
+  "<": "&lt;",
+  ">": "&gt;",
+  "&": "&amp;",
+  '"': "&quot;",
+  "'": "&apos;",
+};
+const escapeXML = str => str.replace(/[<>&"']/g, (_, l) => XML_REPLACEMENTS[l]);
+
 /**
  * The Graphile heart has 9 points. Starting at the top middle, we number the
  * points clockwise around the outside A-H, and then M for the middle (which is
@@ -36,7 +45,7 @@ const H = [260, 25];
 const M = [715, 615];
 // const points = [A, B, C, D, E, F, G, H, M];
 
-function makeSvg(pallette, colors, border = false) {
+function makeSvg(title, pallette, colors, border = false) {
   const svg = `\
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
@@ -73,7 +82,7 @@ ${
 }
 </style>
 
-  <desc>Graphile logo</desc>
+  <desc>${escapeXML(title)}</desc>
   <polygon points="${F} ${G} ${H} ${M}" class="seg6" />
   <polygon points="${G} ${H} ${A} ${M}" class="seg7" />
   <polygon points="${H} ${A} ${B} ${M}" class="seg8" />
@@ -97,6 +106,7 @@ ${
 }
 
 const GRAPHILE_HEART_SVG = makeSvg(
+  "Graphile Heart",
   ["#cd4948", "#fd504e", "#c0201c", "#7e120e", "#610f0d"],
   [1, 2, 3, 4, 3, 2, 1, 0]
 );
