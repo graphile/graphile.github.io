@@ -11,14 +11,15 @@ const XML_REPLACEMENTS = {
 const escapeXML = str => str.replace(/[<>&"']/g, (_, l) => XML_REPLACEMENTS[l]);
 
 /**
- * The Graphile heart has 9 points. Starting at the top middle, we number the
- * points clockwise around the outside A-H, and then M for the middle (which is
- * slightly offset from center):
+ * The Graphile heart has 8 points. Starting at the top middle, we number the
+ * points clockwise around the outside A-H. We also have two "center" points,
+ * one is in the middle between D and F, and the other is offset to the right
+ * of here.
  *
  *        H    B
  *  G     /'-.-'\     C
  *   \__/    A    \__/
- *    __|     M   |__
+ *    __|         |__
  *   /   \       /   \
  *  F      \   /      D
  *           V
@@ -42,14 +43,21 @@ const E = [600, 1055];
 const F = [100, 615];
 const G = [25, 360];
 const H = [260, 25];
-const M = [715, 615];
+const MIDDLE = [600, 615];
+const MIDDLE_OFFSET = [715, 615];
 // const points = [A, B, C, D, E, F, G, H, M];
 
 function makeSvg(
   title,
   pallette,
   colors,
-  { border = false, svg = "", css = "" } = {}
+  {
+    border = false,
+    svgPre = "",
+    svgPost = "",
+    css = "",
+    M = MIDDLE_OFFSET,
+  } = {}
 ) {
   const string = `\
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
@@ -89,6 +97,9 @@ ${css}
 </style>
 
   <desc>${escapeXML(title)}</desc>
+
+${svgPre}
+
   <g class='base'>
     <polygon points="${F} ${G} ${H} ${M}" class="seg${colors[5]}" />
     <polygon points="${G} ${H} ${A} ${M}" class="seg${colors[6]}" />
@@ -106,7 +117,7 @@ ${css}
     }
   </g>
 
-${svg}
+${svgPost}
 
 </svg>
 `;
@@ -149,7 +160,7 @@ const POSTGRAPHILE_ELEPHANT_SVG = makeSvg(
   fill: transparent;
   fill-opacity: 0;
 }`,
-    svg: `
+    svgPost: `
   <g class='face'>
 
     <polygon points="375,740 460,795 325,900" class="tusk left-tusk" />
@@ -179,4 +190,114 @@ const POSTGRAPHILE_ELEPHANT_SVG = makeSvg(
   }
 );
 
-outputEl.innerHTML = POSTGRAPHILE_ELEPHANT_SVG;
+function deriv(start, stop, percent) {
+  const x = start[0] + (stop[0] - start[0]) * percent;
+  const y = start[1] + (stop[1] - start[1]) * percent;
+  return [x, y];
+}
+
+function flipX(points) {
+  return points.map(p => [1200 - p[0], p[1]]);
+}
+
+function makePoly(points, className) {
+  return `<polygon points="${points.map(p => `${p[0]},${p[1]}`).join(" ")} ${
+    points[0][0]
+  },${points[0][1]}" class="${className}" />`;
+}
+
+{
+  const M = MIDDLE;
+  const antEyeCoords = [
+    deriv(B, C, 1 / 3),
+    deriv(C, C, 1),
+    deriv(C, E, 1 / 3),
+    deriv(C, E, 1 / 4),
+    deriv(C, M, 1 / 2),
+    deriv(deriv(B, C, 1 / 3), F, 1 / 6),
+  ];
+  const antEyeR = makePoly(antEyeCoords, "seg4");
+  const antEyeL = makePoly(flipX(antEyeCoords), "seg4");
+
+  const at1 = deriv(D, E, 1 / 2);
+  const at2 = deriv(D, E, 2 / 3);
+  const atY = at2[1] + 75;
+  const atY2 = atY + 125;
+  const antTuskCoords = [
+    M,
+    at1,
+    [at1[0], atY],
+    [at2[0] - 50, atY2],
+    [at2[0], atY],
+    at2,
+  ];
+  const antTuskR = makePoly(antTuskCoords, "seg4");
+  const antTuskL = makePoly(flipX(antTuskCoords), "seg4");
+
+  const antAntennaCoords = [
+    deriv(antEyeCoords[antEyeCoords.length - 1], A, 1 / 3),
+    [antEyeCoords[0][0], 0],
+    [C[0], B[1]],
+    [1200, C[1]],
+  ];
+  const s = 24;
+  antAntennaCoords.push([
+    antAntennaCoords[2][0] - s,
+    antAntennaCoords[2][1] + s,
+  ]);
+  antAntennaCoords.push([
+    antAntennaCoords[1][0] + s / 3,
+    antAntennaCoords[1][1] + s,
+  ]);
+  antAntennaCoords.push(deriv(antEyeCoords[antEyeCoords.length - 1], A, 1 / 6));
+
+  const antAntennaR = makePoly(antAntennaCoords, "seg4");
+  const antAntennaL = makePoly(flipX(antAntennaCoords), "seg4");
+
+  const WORKER_ANT_SVG = makeSvg(
+    "Worker Ant",
+    ["#f0a420", "#b7561b", "#944822", "#331918", "#333333"],
+    [1, 1, 2, 3, 2, 1, 0, 0],
+    {
+      M,
+      css: `
+.face .eye {
+  fill: #ffffff;
+  stroke: #ffffff;
+}
+.face .tusk {
+  stroke: #000000;
+  fill: #ffffff;
+}
+.face .no-stroke {
+  stroke: transparent;
+  stroke-opacity: 0;
+}
+.face .tusk,
+.face .stroke-only,
+.heart-outline {
+  stroke: #082744;
+  stroke-width: 8;
+  stroke-linejoin: round;
+}
+.face .stroke-only,
+.heart-outline {
+  fill: transparent;
+  fill-opacity: 0;
+}`,
+      svgPre: `
+    <polygon points="${B} ${M} ${H}" class="seg2" />
+    ${antTuskL}
+    ${antTuskR}
+`,
+      svgPost: `
+    ${antEyeR}
+    ${antEyeL}
+    ${antAntennaR}
+    ${antAntennaL}
+`,
+    }
+  );
+
+  outputEl.innerHTML = WORKER_ANT_SVG;
+}
