@@ -39,14 +39,14 @@ const points = [A, B, C, D, E, F, G, H, M];
 const HEART_PALETTE = ["#cd4948", "#fd504e", "#c0201c", "#7e120e", "#610f0d"];
 const HEART_COLORS = [1, 2, 3, 4, 3, 2, 1, 0];
 
-function makeSvg(pallette, colors) {
+function makeSvg(pallette, colors, border = false) {
   const svg = `\
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg width="1200" height="1200" version="1.1" xmlns="http://www.w3.org/2000/svg">
 <!--
 
-This file is Copyright © 2018 Benjie Gillam. All rights reserved.
+This file is Copyright © ${new Date().getUTCFullYear()} Benjie Gillam. All rights reserved.
 
 -->
 <style type="text/css">
@@ -82,7 +82,11 @@ ${colors
   <polygon points="${E} ${F} ${G} ${M}" class="seg5" />
   <polygon points="${F} ${G} ${M}" class="seg6" />
 
-  <!-- polygon points="${G} ${H} ${H} ${A} ${A} ${B} ${B} ${C} ${C} ${D} ${D} ${E} ${E} ${F} ${F} ${G}" class="heart-outline" / -->
+  ${
+    border
+      ? `<polygon points="${A} ${B} ${C} ${D} ${E} ${F} ${G} ${H} ${A}" class="heart-outline" />`
+      : ""
+  }
 
 
 </svg>
