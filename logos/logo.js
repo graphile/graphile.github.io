@@ -65,12 +65,12 @@ polygon {
   stroke-width: 0;
   shape-rendering: geometricPrecision;
 }\
-${colors
+${pallette
   .map(
     (c, i) => `
-.seg${i + 1} {
-  fill: ${pallette[c]};
-  stroke: ${pallette[c]};
+.seg${i} {
+  fill: ${c};
+  stroke: ${c};
 }`
   )
   .join("")}\
@@ -90,15 +90,15 @@ ${css}
 
   <desc>${escapeXML(title)}</desc>
   <g class='base'>
-    <polygon points="${F} ${G} ${H} ${M}" class="seg6" />
-    <polygon points="${G} ${H} ${A} ${M}" class="seg7" />
-    <polygon points="${H} ${A} ${B} ${M}" class="seg8" />
-    <polygon points="${A} ${B} ${C} ${M}" class="seg1" />
-    <polygon points="${B} ${C} ${D} ${M}" class="seg2" />
-    <polygon points="${C} ${D} ${E} ${M}" class="seg3" />
-    <polygon points="${D} ${E} ${F} ${M}" class="seg4" />
-    <polygon points="${E} ${F} ${G} ${M}" class="seg5" />
-    <polygon points="${F} ${G} ${M}" class="seg6" />
+    <polygon points="${F} ${G} ${H} ${M}" class="seg${colors[5]}" />
+    <polygon points="${G} ${H} ${A} ${M}" class="seg${colors[6]}" />
+    <polygon points="${H} ${A} ${B} ${M}" class="seg${colors[7]}" />
+    <polygon points="${A} ${B} ${C} ${M}" class="seg${colors[0]}" />
+    <polygon points="${B} ${C} ${D} ${M}" class="seg${colors[1]}" />
+    <polygon points="${C} ${D} ${E} ${M}" class="seg${colors[2]}" />
+    <polygon points="${D} ${E} ${F} ${M}" class="seg${colors[3]}" />
+    <polygon points="${E} ${F} ${G} ${M}" class="seg${colors[4]}" />
+    <polygon points="${F} ${G} ${M}" class="seg${colors[5]}" />
     ${
       border
         ? `<polygon points="${A} ${B} ${C} ${D} ${E} ${F} ${G} ${H} ${A}" class="heart-outline" />`
@@ -121,17 +121,7 @@ const GRAPHILE_HEART_SVG = makeSvg(
 
 const POSTGRAPHILE_ELEPHANT_SVG = makeSvg(
   "PostGraphile Elephant",
-  [
-    "#468bcc",
-    "#4ba8ff",
-    "#166ebf",
-    "#0b457f",
-    "#0c3861",
-    "#ffffff",
-    "#000000",
-    "transparent",
-    "#082744",
-  ],
+  ["#468bcc", "#4ba8ff", "#166ebf", "#0b457f", "#0c3861", "#ffffff"],
   [0, 1, 0, 0, 0, 0, 1, 0],
   {
     css: `
@@ -165,18 +155,18 @@ const POSTGRAPHILE_ELEPHANT_SVG = makeSvg(
     <polygon points="375,740 460,795 325,900" class="tusk left-tusk" />
     <polygon points="825,740 740,795 875,900" class="tusk right-tusk" />
 
-    <polygon points="325,300 490,96 710,96 600,450" class="seg2 forehead-left" />
-    <polygon points="490,96 710,96 875,300 600,450" class="seg1 forehead-top" />
-    <polygon points="710,96 875,300 875,725 600,450" class="seg3 forehead-right no-stroke" />
+    <polygon points="325,300 490,96 710,96 600,450" class="seg1 forehead-left" />
+    <polygon points="490,96 710,96 875,300 600,450" class="seg0 forehead-top" />
+    <polygon points="710,96 875,300 875,725 600,450" class="seg2 forehead-right no-stroke" />
 
-    <polygon points="875,300 875,725 710,835 600,450" class="seg4 right-eye-area no-stroke" />
+    <polygon points="875,300 875,725 710,835 600,450" class="seg3 right-eye-area no-stroke" />
 
-    <polygon points="875,725 710,835 600,1130 600,450" class="seg5 face-bottom-right no-stroke" />
-    <polygon points="710,835 710,1075 600,1130 490,835 600,450" class="seg3 no-stroke trunk-highlight-right" />
-    <polygon points="600,1130 490,1075 490,835 325,725 600,450" class="seg2 no-stroke trunk-highlight-left" />
-    <polygon points="490,835 325,725 325,300 600,450" class="seg3 face-bottom-left no-stroke" />
+    <polygon points="875,725 710,835 600,1130 600,450" class="seg4 face-bottom-right no-stroke" />
+    <polygon points="710,835 710,1075 600,1130 490,835 600,450" class="seg2 no-stroke trunk-highlight-right" />
+    <polygon points="600,1130 490,1075 490,835 325,725 600,450" class="seg1 no-stroke trunk-highlight-left" />
+    <polygon points="490,835 325,725 325,300 600,450" class="seg2 face-bottom-left no-stroke" />
 
-    <polygon points="325,725 325,300 600,450" class="seg1 left-eye-area no-stroke" />
+    <polygon points="325,725 325,300 600,450" class="seg0 left-eye-area no-stroke" />
 
 
     <polygon points="490,96 710,96 875,300 875,725 710,835 710,1075 600,1130 490,1075 490,835 325,725 325,300" class="entire-face stroke-only" />
@@ -190,4 +180,3 @@ const POSTGRAPHILE_ELEPHANT_SVG = makeSvg(
 );
 
 outputEl.innerHTML = POSTGRAPHILE_ELEPHANT_SVG;
-outputEl.innerHTML = GRAPHILE_HEART_SVG;
