@@ -45,8 +45,13 @@ const H = [260, 25];
 const M = [715, 615];
 // const points = [A, B, C, D, E, F, G, H, M];
 
-function makeSvg(title, pallette, colors, border = false) {
-  const svg = `\
+function makeSvg(
+  title,
+  pallette,
+  colors,
+  { border = false, svg = "", css = "" } = {}
+) {
+  const string = `\
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg width="1200" height="1200" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -80,29 +85,32 @@ ${
 }`
     : ""
 }
+${css}
 </style>
 
   <desc>${escapeXML(title)}</desc>
-  <polygon points="${F} ${G} ${H} ${M}" class="seg6" />
-  <polygon points="${G} ${H} ${A} ${M}" class="seg7" />
-  <polygon points="${H} ${A} ${B} ${M}" class="seg8" />
-  <polygon points="${A} ${B} ${C} ${M}" class="seg1" />
-  <polygon points="${B} ${C} ${D} ${M}" class="seg2" />
-  <polygon points="${C} ${D} ${E} ${M}" class="seg3" />
-  <polygon points="${D} ${E} ${F} ${M}" class="seg4" />
-  <polygon points="${E} ${F} ${G} ${M}" class="seg5" />
-  <polygon points="${F} ${G} ${M}" class="seg6" />
+  <g class='base'>
+    <polygon points="${F} ${G} ${H} ${M}" class="seg6" />
+    <polygon points="${G} ${H} ${A} ${M}" class="seg7" />
+    <polygon points="${H} ${A} ${B} ${M}" class="seg8" />
+    <polygon points="${A} ${B} ${C} ${M}" class="seg1" />
+    <polygon points="${B} ${C} ${D} ${M}" class="seg2" />
+    <polygon points="${C} ${D} ${E} ${M}" class="seg3" />
+    <polygon points="${D} ${E} ${F} ${M}" class="seg4" />
+    <polygon points="${E} ${F} ${G} ${M}" class="seg5" />
+    <polygon points="${F} ${G} ${M}" class="seg6" />
+    ${
+      border
+        ? `<polygon points="${A} ${B} ${C} ${D} ${E} ${F} ${G} ${H} ${A}" class="heart-outline" />`
+        : ""
+    }
+  </g>
 
-  ${
-    border
-      ? `<polygon points="${A} ${B} ${C} ${D} ${E} ${F} ${G} ${H} ${A}" class="heart-outline" />`
-      : ""
-  }
-
+${svg}
 
 </svg>
 `;
-  return svg;
+  return string;
 }
 
 const GRAPHILE_HEART_SVG = makeSvg(
@@ -111,4 +119,75 @@ const GRAPHILE_HEART_SVG = makeSvg(
   [1, 2, 3, 4, 3, 2, 1, 0]
 );
 
+const POSTGRAPHILE_ELEPHANT_SVG = makeSvg(
+  "PostGraphile Elephant",
+  [
+    "#468bcc",
+    "#4ba8ff",
+    "#166ebf",
+    "#0b457f",
+    "#0c3861",
+    "#ffffff",
+    "#000000",
+    "transparent",
+    "#082744",
+  ],
+  [0, 1, 0, 0, 0, 0, 1, 0],
+  {
+    css: `
+.face .eye {
+  fill: #ffffff;
+  stroke: #ffffff;
+}
+.face .tusk {
+  stroke: #000000;
+  fill: #ffffff;
+}
+.face .no-stroke {
+  stroke: transparent;
+  stroke-opacity: 0;
+}
+.face .tusk,
+.face .stroke-only,
+.heart-outline {
+  stroke: #082744;
+  stroke-width: 8;
+  stroke-linejoin: round;
+}
+.face .stroke-only,
+.heart-outline {
+  fill: transparent;
+  fill-opacity: 0;
+}`,
+    svg: `
+  <g class='face'>
+
+    <polygon points="375,740 460,795 325,900" class="tusk left-tusk" />
+    <polygon points="825,740 740,795 875,900" class="tusk right-tusk" />
+
+    <polygon points="325,300 490,96 710,96 600,450" class="seg2 forehead-left" />
+    <polygon points="490,96 710,96 875,300 600,450" class="seg1 forehead-top" />
+    <polygon points="710,96 875,300 875,725 600,450" class="seg3 forehead-right no-stroke" />
+
+    <polygon points="875,300 875,725 710,835 600,450" class="seg4 right-eye-area no-stroke" />
+
+    <polygon points="875,725 710,835 600,1130 600,450" class="seg5 face-bottom-right no-stroke" />
+    <polygon points="710,835 710,1075 600,1130 490,835 600,450" class="seg3 no-stroke trunk-highlight-right" />
+    <polygon points="600,1130 490,1075 490,835 325,725 600,450" class="seg2 no-stroke trunk-highlight-left" />
+    <polygon points="490,835 325,725 325,300 600,450" class="seg3 face-bottom-left no-stroke" />
+
+    <polygon points="325,725 325,300 600,450" class="seg1 left-eye-area no-stroke" />
+
+
+    <polygon points="490,96 710,96 875,300 875,725 710,835 710,1075 600,1130 490,1075 490,835 325,725 325,300" class="entire-face stroke-only" />
+
+    <polygon points="385,415 515,455 385,505" class="eye left-eye" />
+    <polygon points="815,415 685,455 815,505" class="eye right-eye" />
+
+
+  </g>`,
+  }
+);
+
+outputEl.innerHTML = POSTGRAPHILE_ELEPHANT_SVG;
 outputEl.innerHTML = GRAPHILE_HEART_SVG;
