@@ -34,10 +34,7 @@ const F = [100, 615];
 const G = [25, 360];
 const H = [260, 25];
 const M = [715, 615];
-const points = [A, B, C, D, E, F, G, H, M];
-
-const HEART_PALETTE = ["#cd4948", "#fd504e", "#c0201c", "#7e120e", "#610f0d"];
-const HEART_COLORS = [1, 2, 3, 4, 3, 2, 1, 0];
+// const points = [A, B, C, D, E, F, G, H, M];
 
 function makeSvg(pallette, colors, border = false) {
   const svg = `\
@@ -53,21 +50,26 @@ This file is Copyright © ${new Date().getUTCFullYear()} Benjie Gillam. All righ
 polygon {
   stroke-width: 0;
   shape-rendering: geometricPrecision;
-}
+}\
 ${colors
   .map(
-    (c, i) => `\
+    (c, i) => `
 .seg${i + 1} {
   fill: ${pallette[c]};
   stroke: ${pallette[c]};
 }`
   )
-  .join("\n")}
+  .join("")}\
+${
+  border
+    ? `
 .heart-outline {
   fill: transparent;
   stroke: black;
   stroke-width: 8;
   stroke-linejoin: round;
+}`
+    : ""
 }
 </style>
 
@@ -93,4 +95,10 @@ ${colors
 `;
   return svg;
 }
-outputEl.innerHTML = makeSvg(HEART_PALETTE, HEART_COLORS);
+
+const GRAPHILE_HEART_SVG = makeSvg(
+  ["#cd4948", "#fd504e", "#c0201c", "#7e120e", "#610f0d"],
+  [1, 2, 3, 4, 3, 2, 1, 0]
+);
+
+outputEl.innerHTML = GRAPHILE_HEART_SVG;
