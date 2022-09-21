@@ -15,11 +15,11 @@ import TeamBio from '$components/MarketingTeamBio';
 
 <!-- **************************************** -->
 
-<Hero bg="nodes">
+<Hero bg="white">
 
 ## Professional Support
 
-### From the team behind PostGraphile and Graphile Engine
+### From the team behind PostGraphile and the Graphile suite
 
 <div class='flex'>
 <a class='mr3 button--solid-light' href='mailto:team@graphile.com?subject=Support%20enquiry'>Get in touch <span class='fas fa-fw fa-arrow-right' /></a>
@@ -27,9 +27,11 @@ import TeamBio from '$components/MarketingTeamBio';
 </div>
 
 </Hero>
-<MarketingSection bg="nodes">
+
+<MarketingSection bg="white">
 
 <div className="f4 b tl" style={{maxWidth: '54rem', margin: '0 auto'}}>
+
 
 ## On Demand Consultancy
 
@@ -45,14 +47,13 @@ import TeamBio from '$components/MarketingTeamBio';
 <div class='flex'>
 <a class='mr3 button--solid' target="_blank" href='https://benjie.dev/'>Consult with Benjie ASAP <span class='fas fa-fw fa-external-link-alt' /></a>
 </div>
-
-
 </div>
 
 </MarketingSection>
 
-<MarketingDivide from="nodes" to="dark" down />
-<MarketingDivide from="dark" to="nodes" down />
+<MarketingDivide from="white" to="medium" via="light" down />
+
+<MarketingDivide from="medium" to="nodes" via="medium" />
 
 <MarketingSection bg="nodes">
 
@@ -75,7 +76,6 @@ import TeamBio from '$components/MarketingTeamBio';
 <div class='flex'>
 <a class='button--solid' href='mailto:team@graphile.com?subject=Support%20plan%20enquiry'>Get in touch <span class='fas fa-fw fa-arrow-right' /></a>
 </div>
-
 </div>
 
 </MarketingSection>
@@ -83,50 +83,35 @@ import TeamBio from '$components/MarketingTeamBio';
 <MarketingDivide from="nodes" to="medium" />
 
 <MarketingSection bg="medium">
-<div className="f4 tl" style={{maxWidth: '50rem', margin: '0 auto'}}>
 
+<div className="f4 tl" style={{maxWidth: '50rem', margin: '0 auto'}}>
 Our Development Support Plans give your team access to the knowledge and
 experience of the Graphile team for any issues you have with
 PostGraphile, the Graphile suite and other tools in the ecosystem 
-such as TypeScript, SQL, Node.js, GraphQL and more.
+such as TypeScript, SQL, Node.js, GraphQL and more. If you're running any of the Graphile tools, you won't find anyone more qualified to help. 
 
 Price: from $1500/mo, paid monthly through GitHub sponsors, or quarterly / annually through invoicing (+ VAT where applicable)
-
 </div>
+
 </MarketingSection>
 
 <MarketingDivide from="medium" to="dark" via="light" down/>
 
 <MarketingSection bg="dark">
+
 <div className="f4 b tl" style={{maxWidth: '54rem', margin: '0 auto'}}>
-
-## The Graphile Team
-
 <div class="mw9 ph3-ns flex flex-wrap justify-between">
-
 <TeamBio
-  name="Benjie"
-  role="Graphile Maintainer"
-  imageAlt="Benjie Gillam"
-  imageSrc="/images/support/Benjie.jpg"
+name="Benjie"
+role="Maintainer of Graphile and GraphQL TSC member"
+imageAlt="Benjie at Reactive Conf 2019"
+imageSrc="/images/support/makeitfast3.jpg"
 >
-  Thanks for making GraphQL something I can use on my project in a robust way
-  with <strong>minimal effort</strong>. 500-1500 requests per second on a
-  single server is pretty awesome.
-</TeamBio>
-
-<TeamBio
-  name="Jem"
-  role="Educator"
-  imageAlt="Jem Gillam"
-  imageSrc="/images/support/Jem.jpg"
->
-  Thanks for making GraphQL something I can use on my project in a robust way
-  with <strong>minimal effort</strong>. 500-1500 requests per second on a
-  single server is pretty awesome.
+Maintainer of Graphile, GraphQL TSC member and keynote speaker, Benjie is at the forefront of GraphQL development. Together with the Graphile team, he will lend his expertise to your in-house development and push for faster, better and more robust software development and practises.  
 </TeamBio>
 </div>
 </div>
+
 </MarketingSection>
 
 <MarketingDivide from="dark" to="medium" via="light"/>
@@ -134,24 +119,41 @@ Price: from $1500/mo, paid monthly through GitHub sponsors, or quarterly / annua
 <MarketingSection bg="medium">
 <div className="f4 tl pb5" style={{maxWidth: '50rem', margin: '0 auto'}}>
 
+## Two plans to choose from
+
+Plan 1. Private Advisor
+
+$1500/mo, cancel any time, no minimum term
+Add the Graphile team to your company chat and code repositories for priority text support straight from the maintainer
+Ask questions related to anything in the Graphile, Node.js, GraphQL and PostgreSQL ecosystems (or anything else), limited to Benjie's knowledge
+Free access to pgRITA
+All the benefits of sponsorship at the $500 tier
+
+
+Plan 2. Enhanced Private Advisor 
+
+$6000/mo, cancel any time, no minimum term
+Everything in the above offering, plus:
+Targeted code review
+Schedule calls with Benjie directly on his calendar
+Longer and deeper discussions:
+help planning product features; work together via screen sharing and Google Docs or similar
+help designing your database or GraphQL schema
+help solving (or avoiding) performance issues
+help debugging
+Optional NDA
+
+
+</div>
+</MarketingSection>
+
+<MarketingDivide from="medium" to="dark" via="light"/>
+
+<MarketingSection bg="dark">
+
+<div className="f4 tl pb5" style={{maxWidth: '50rem', margin: '0 auto'}}>
+
 ## FAQ
-
-### What are the response times? 
-
-Response times are guaranteed based on the severity of the
-incoming support request:
-
-- **critical**: 2 business days
-- all other classes of severity: 5 business days
-
-### How is severity classified?
-
-We classify the severity of incoming support requests according to these classes:
-
-- **critical**: the Software is inoperable or a core function of the Software is unavailable or a critical security vulnerability in the Software is discovered;
-- **serious**: a core function of the Software is significantly impaired;
-- **moderate**: a core function of the Software is impaired, where the impairment does not constitute a serious issue; or a non-core function of the Software is significantly impaired; and
-- **minor**: any impairment of the Software not falling into the above categories; and any cosmetic issue affecting the Software or its documentation.
 
 ### Does the support plan cover large/complex deployments, and multi-stage QA pipelines?
 
@@ -179,29 +181,24 @@ or 'EXPERIMENTAL' in the documentation) are not officially covered under the
 support agreement, but if we're able we will try and help you with these
 also.
 
-Support requests **cannot** be used:
+### Does the plan cover general consultancy?
+
+Support **cannot** be used:
 
 - for general consulting,
 - for brainstorming,
 - for development of new features or plugins.
 
+However, we can offer a consultancy bundle alongside the support contract. Get in touch for more information. 
+
 </div>
 
 </MarketingSection>
-
-<MarketingDivide from="medium" to="dark" via="light"/>
-
-<MarketingSection bg="dark">
-
-<div className="f4 tl pb5" style={{maxWidth: '50rem', margin: '0 auto'}}>
-Testimonial
-</div>
-</MarketingSection>
-
 
 <MarketingDivide from="dark" to="medium" via="light"/>
 
 <MarketingSection bg="medium">
+
 <div className="f4 tl pb5" style={{maxWidth: '50rem', margin: '0 auto'}}>
 
 ### What other benefits does a support plan give me?
@@ -214,9 +211,8 @@ members with coloured name badges.
 <div class='flex'>
 <a class='button--solid' href='mailto:team@graphile.com?subject=Support%20plan%20enquiry'>Get in touch <span class='fas fa-fw fa-arrow-right' /></a>
 </div>
-
 </div>
-</MarketingSection>
 
+</MarketingSection>
 
 </MarketingLayout>

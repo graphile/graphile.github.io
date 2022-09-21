@@ -20,7 +20,7 @@ export default function MarketingTeamBio({
       <p className="lh-copy measure center f6 black-70">
         &nbsp;{children}&nbsp;
       </p>
-      <img alt={imageAlt} src={imageSrc} width="300" height="300" />
+      <img alt={imageAlt} src={imageSrc} width="800" />
     </article>
   );
 }
