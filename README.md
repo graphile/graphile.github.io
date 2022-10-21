@@ -20,6 +20,12 @@ then clear the `.cache` and `public` folders:
 rm -Rf .cache public
 ```
 
+Requires Node version 14
+
+```bash
+nvm use 14
+```
+
 If you are running Windows and encounter an error installing `fsevents`, then
 try:
 
