@@ -51,9 +51,9 @@ import TeamBio from '$components/MarketingTeamBio';
 
 </MarketingSection>
 
-<MarketingDivide from="white" to="medium" via="light" down />
+<MarketingDivide from="white" to="light" down />
+<MarketingDivide from="light" to="nodes" via="medium" down />
 
-<MarketingDivide from="medium" to="nodes" via="medium" />
 
 <MarketingSection bg="nodes">
 
@@ -66,10 +66,9 @@ import TeamBio from '$components/MarketingTeamBio';
 <MarketingBullets single big bullets={[
 'Priority text support straight from the maintainer',
 'Add the Graphile team to your chat server for timely responses',
-'Reference your codebase verbatim, or add the team to your GitHub organisation',
-'Calls arranged as required',
-'Free access to valuable analysis tool pgRITA',
-'The benefits of Sponsorship included',
+'Reference your code verbatim',
+'Add the team to your GitHub/GitLab organisation','Calls arranged as required',
+<>The benefits of sponsorship included & free access to <a href="https://pgrita.com" target="_blank">pgRITA</a></>,
 'NDA available',
 ]}/>
 
@@ -88,9 +87,12 @@ import TeamBio from '$components/MarketingTeamBio';
 Our Development Support Plans give your team access to the knowledge and
 experience of the Graphile team for any issues you have with
 PostGraphile, the Graphile suite and other tools in the ecosystem 
-such as TypeScript, SQL, Node.js, GraphQL and more. If you're running any of the Graphile tools, you won't find anyone more qualified to help. 
+such as TypeScript, SQL, Node.js, GraphQL and more. If you're
+running any of the Graphile tools, you won't find anyone more qualified
+to help.
 
-Price: from $1500/mo, paid monthly through GitHub sponsors, or quarterly / annually through invoicing (+ VAT where applicable)
+Price: from $1,500/month, paid monthly through GitHub sponsors, or
+quarterly/annually through invoicing (+ VAT where applicable).
 </div>
 
 </MarketingSection>
@@ -107,115 +109,66 @@ role="Maintainer of Graphile and GraphQL TSC member"
 imageAlt="Benjie at Reactive Conf 2019"
 imageSrc="/images/support/makeitfast.jpg"
 >
-Maintainer of Graphile, GraphQL TSC member and keynote speaker, Benjie is at the forefront of GraphQL development. Together with the Graphile team, he will lend his expertise to your in-house development and push for faster, better and more robust software development and practises.  
+Maintainer of Graphile, GraphQL TSC member and keynote speaker, Benjie 
+is at the forefront of GraphQL development. Together with the Graphile 
+team, he will lend his expertise to your in-house development and push 
+for faster, safer and more robust software development and practices.  
 </TeamBio>
 </div>
 </div>
 
 </MarketingSection>
 
-<MarketingDivide from="dark" to="medium" via="light"/>
+<MarketingDivide from="dark" to="nodes" via="light"/>
 
-<MarketingSection bg="medium">
+<MarketingSection bg="nodes">
+
 <div className="f4 tl pb5" style={{maxWidth: '50rem', margin: '0 auto'}}>
 
-## Two plans to choose from
+## Want more?
 
-### Plan 1. Private Advisor
+### Our Consultancy Retainer includes the benefits above, plus:
 
-- $1500/mo, cancel any time, no minimum term
-- Add the Graphile team to your company chat and code repositories for priority text support straight from the maintainer
-- Reference your code verbatim rather than wasting time making examples suitable for public consumption
-- Ask questions related to anything in the Graphile, Node.js, GraphQL and PostgreSQL ecosystems (or anything else we agree)
-- Free access to pgRITA
-- Optional NDA
-- All the benefits of sponsorship at the Featured Tier  
+<MarketingBullets single big bullets={[
+'Schedule calls directly on our calendar*, no additional fee',
+<>Longer and deeper discussions:<ul className="ul-check">
+<li>planning product features</li>
+    <li>designing your database or GraphQL schema</li>
+    <li>solving (or avoiding) performance issues</li>
+    <li>debugging</li></ul></>,
+'Targeted code review'
+]}/>
 
-### Plan 2. Consultancy Retainer 
+<div className="f4 tl" style={{maxWidth: '50rem', margin: '0 auto'}}>
+Price: from $6,000/month, cancel any time, no minimum term.
 
-- $6000/mo, cancel any time, no minimum term
-- Everything in the above offering, plus:
-- Targeted code review
-- Schedule calls with Benjie directly on his calendar
-- Longer and deeper discussions:
-    - help planning product features; work together via screen sharing and Google Docs or similar
-    - help designing your database or GraphQL schema
-    - help solving (or avoiding) performance issues
-    - help debugging  
-
-*T&Cs apply - prices quoted for teams containing up to 10 engineers - pay monthly through GitHub Sponsors (available on Private Advisor Tier or Consultancy Retainer Tier only), or through quarterly/annual invoicing.*
+*\* T&Cs apply - prices quoted for teams containing up to 10 engineers - 
+calls may be up to 3 hours, at most one per day, booked on a first-come 
+first-served basis - pay monthly through GitHub Sponsors, or through 
+quarterly/annual invoicing (+ VAT where applicable).*
+</div>
 
 <div class='flex'>
-<a class='mr3 button--solid' target="_blank" href='https://github.com/sponsors/benjie'>Sponsor now <span class='fas fa-fw fa-external-link-alt' /></a>
 <a class='button--solid' href='mailto:team@graphile.com?subject=Support%20plan%20enquiry'>Get in touch <span class='fas fa-fw fa-arrow-right' /></a>
 </div>
 
 </div>
 </MarketingSection>
 
-<MarketingDivide from="medium" to="dark" via="light"/>
+<MarketingDivide from="nodes" to="dark" via="light"/>
 
 <MarketingSection bg="dark">
 
 <div className="f4 tl pb5" style={{maxWidth: '50rem', margin: '0 auto'}}>
 
-## FAQ
-
-### Does the support plan cover large/complex deployments, and multi-stage QA pipelines?
-
-The advertised fee is not affected by how you deploy, or how many development
-environments you have. However, you should note that the support plan
-covers issues with the Graphile suite only, it does not cover external concerns such as
-your servers, routing, proxying and deployment — we cannot help you debug your
-Kubernetes cluster, or help spot an issue in your nginx config.
-
-### What kind of things can the support be used for?
-
-The main use case for Graphile support is that if you hit a bug in
-PostGraphile or the Graphile suite of tools, we can help you to understand it, and advise you on how to work
-around the issue until a fix is available. Given PostGraphile's MIT license
-(which disclaims all liabilities), having the guarantee of a rapid response
-to production or development issues is the main value proposition of the
-support plan.
-
-A secondary use case is if the documentation is unclear or
-lacking in a particular area, we can prioritise fixing it, and can provide
-you with a solution/explanation in the interim.
-
-Experimental features of PostGraphile (these are marked with 'experimental'
-or 'EXPERIMENTAL' in the documentation) are not officially covered under the
-support agreement, but if we're able we will try and help you with these
-also.
-
-### Does the plan cover general consultancy?
-
-Support **cannot** be used:
-
-- for general consulting,
-- for brainstorming,
-- for development of new features or plugins.
-
-However, we can offer a consultancy bundle alongside the support contract. Get in touch for more information. 
-
-</div>
-
-</MarketingSection>
-
-<MarketingDivide from="dark" to="medium" via="light"/>
-
-<MarketingSection bg="medium">
-
-<div className="f4 tl pb5" style={{maxWidth: '50rem', margin: '0 auto'}}>
-
 ### What other benefits does a support plan give me?
 
-On [our Discord chat](http://discord.gg/graphile), members are given coloured
+On [our Discord chat](http://discord.gg/graphile), members are given colourful
 name badges if they support our open source endeavours in some way (sponsorship, support
 plan, etc). Unofficially, we can allocate more time to helping these
-members with coloured name badges.
+members with colourful name badges.
 
 <div class='flex'>
-<a class='mr3 button--solid' target="_blank" href='https://github.com/sponsors/benjie'>Sponsor now <span class='fas fa-fw fa-external-link-alt' /></a>
 <a class='button--solid' href='mailto:team@graphile.com?subject=Support%20plan%20enquiry'>Get in touch <span class='fas fa-fw fa-arrow-right' /></a>
 </div>
 </div>

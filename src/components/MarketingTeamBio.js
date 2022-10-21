@@ -17,9 +17,7 @@ export default function MarketingTeamBio({
         <span className="i f5 b">{role}</span>{" "}
         <hr className="mw3 bb bw1 b--black-10 db" />
       </div>
-      <p className="lh-copy measure center f6 black-70">
-        &nbsp;{children}&nbsp;
-      </p>
+      <p className="lh-copy measure center f6 black-70">{children}</p>
       <img alt={imageAlt} src={imageSrc} width="800" />
     </article>
   );
