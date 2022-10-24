@@ -2,9 +2,13 @@ import React from "react";
 import fallbackIcon from "../images/avatar.svg";
 import { black } from "ansi-colors";
 
-function Icon({ src }) {
+function Icon({ src, alt }) {
   return (
-    <img style={{ width: "5rem", height: "5rem" }} src={src || fallbackIcon} />
+    <img
+      style={{ width: "5rem", height: "5rem" }}
+      src={src || fallbackIcon}
+      alt={alt}
+    />
   );
 }
 
@@ -38,7 +42,7 @@ export default function Contribution({ title, children, text, icon }) {
           marginTop: "1rem",
         }}
       >
-        <Icon src={icon} />
+        <Icon src={icon} alt={title} />
         <span>{title}</span>
       </div>
       <div style={{}}>{text || children}</div>
