@@ -10,7 +10,7 @@ title: PostGraphile Pro!
 <div class='col-xs-12'>
 <div class='hero-block'>
 
-# Get PostGraphile Pro!
+# Get PostGraphile Pro
 
 #### PostGraphile core is open source software under the MIT license. Pro is a commercial plugin which enhances PostGraphile with additional features and helps fund development and maintenance on PostGraphile Core.
 
@@ -176,7 +176,7 @@ title: PostGraphile Pro!
 
 <tr>
   <th>Pricing</th>
-  <td><strong><a href='/sponsor'>Crowd-funded</a></strong><span class='note'>Please give back</span></td>
+  <td><strong><a href='/sponsor/'>Crowd-funded</a></strong><span class='note'>Please give back</span></td>
   <td><strong><small><s>$100/mo</s> USD</small> $25<small>/mo exc. VAT</small></strong><span class='note'><small>EUR €25/mo, GBP £20/mo</small></span></td>
 </tr>
 
@@ -191,7 +191,7 @@ title: PostGraphile Pro!
 
 <tr>
   <th></th>
-  <td><a class='button--solid' href='https://patreon.com/benjie'>Sponsor development <span class='fas fa-external-link-square-alt'></span></a></td>
+  <td><a class='button--solid' href='/sponsor/'>Sponsor development</span></a></td>
   <td><a class='button--solid' href='https://store.graphile.com'>Buy <span class='fas fa-external-link-square-alt'></span></a></td>
 </tr>
 
@@ -225,8 +225,7 @@ removed or obscured, and it continues to be advanced and enhanced.
 
 Development and maintenance of PostGraphile core is ongoing, supported by
 contributions from the community, [professional services](/support/) contracts,
-[Patreon supporters](https://patreon.com/benjie) and sales of commercial plugin
-licenses.
+[GitHub Sponsors](/sponsor/) and sales of commercial plugin licenses.
 
 ### PostGraphile Pro is a commercial plugin
 
@@ -241,7 +240,7 @@ first-party only then you would use a GraphQL query whitelist (e.g. persisted
 queries) for this purpose; although the Pro features can still be helpful to
 dissuade your developers from building expensive queries!)
 
-### Does the licenses cover my production cluster?
+### Does the license cover my production cluster?
 
 The [Pro plugin EULA](https://store.graphile.com/eulas/postgraphile-pro/) states
 you may:
@@ -293,17 +292,27 @@ automated keys expire after one year rather than one month. You will be able to
 issue new keys via the store when your key is near to expiry. Please do not
 abuse our trust.
 
+### Does the Pro License come with direct support?
+
+No. We run community support through our
+[Discord Server](https://discord.gg/graphile) where anyone can ask and answer
+questions about PostGraphile and the Graphile suite of tools. We offer a
+Development Support contract which includes async text support within your own
+Slack/GitHub organisation. Prices start at \$1,500 a month, with no minimum
+term. More information can be found at the
+[Development Support page](/support/).
+
+### I'm an enterprise user and need X, Y and Z
+
+Please [get in touch](mailto:team@graphile.org?subject=Enterprise%20enquiry) and
+we'll be happy to help!
+
 ### Commercial plugins help fund development on PostGraphile
 
 Maintaining an OSS project is very (very!) time-intensive. Giving this
 maintenance work a solid commercial backing benefits hobbyist and commercial
 users alike by making the project more sustainable and helping new features and
 fixes to be developed and released faster.
-
-### I'm an enterprise user and need X, Y and Z
-
-Please [get in touch](mailto:team@graphile.org?subject=Enterprise%20enquiry) and
-I'll be happy to help!
 
 </div>
 </div>
