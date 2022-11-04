@@ -215,8 +215,8 @@ class Page extends React.Component {
                     padding: "0.25rem",
                   }}
                 >
-                  Need help or advice? Our Standard Support plan now includes
-                  consultancy calls{" "}
+                  Need help or advice? We now offer Development Support, direct
+                  from the maintainer{" "}
                   <Link
                     className="button--outline"
                     to="/support/"
