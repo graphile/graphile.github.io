@@ -144,9 +144,9 @@ comment on column my_schema.my_table.my_column is
 
 ### @hasDefault
 
-You can indicate that a column has a default - be that implemented via a trigger,
-or maybe as an instead of insert rule - so the field will be nullable in create*
-mutations.
+You can indicate that a column has a default - be that implemented via a
+trigger, or maybe as an instead of insert rule - so the field will be nullable
+in create\* mutations.
 
 ```sql
 comment on column my_schema.my_table.my_column is E'@hasDefault';
