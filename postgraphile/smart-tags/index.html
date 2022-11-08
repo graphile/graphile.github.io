@@ -55,6 +55,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p><a href="/postgraphile/smart-tags/#built-in-smart-tags">Built-in smart tags</a></p>
 <ul>
 <li><a href="/postgraphile/smart-tags/#deprecated">@deprecated</a></li>
+</ul>
+</li>
+<li>
+<p><a href="/postgraphile/smart-tags/#hasdefault">@hasDefault</a></p>
+<ul>
 <li><a href="/postgraphile/smart-tags/#name">@name</a></li>
 <li><a href="/postgraphile/smart-tags/#fieldname">@fieldName</a></li>
 <li><a href="/postgraphile/smart-tags/#foreignfieldname">@foreignFieldName</a></li>
@@ -260,6 +265,11 @@ text.</p>
 <span class="token punctuation">}</span></code></pre></div>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">column</span> my_schema<span class="token punctuation">.</span>my_table<span class="token punctuation">.</span>my_column <span class="token operator">is</span>
   E<span class="token string">'@deprecated Use myOtherColumn instead.'</span><span class="token punctuation">;</span></code></pre></div>
+<h3 id="hasdefault"><a href="#hasdefault" aria-label="hasdefault permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>@hasDefault</h3>
+<p>You can indicate that a column has a default - be that implemented via a
+trigger, or maybe as an instead of insert rule - so the field will be nullable
+in create* mutations.</p>
+<div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql"><span class="token keyword">comment</span> <span class="token keyword">on</span> <span class="token keyword">column</span> my_schema<span class="token punctuation">.</span>my_table<span class="token punctuation">.</span>my_column <span class="token operator">is</span> E<span class="token string">'@hasDefault'</span><span class="token punctuation">;</span></code></pre></div>
 <h4 id="name"><a href="#name" aria-label="name permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>@name</h4>
 <p>You can add a smart tag to an entity to rename that entity. For tables, columns,
 custom types and many functions you can use the <code class="language-text">name</code> tag. For more complex
