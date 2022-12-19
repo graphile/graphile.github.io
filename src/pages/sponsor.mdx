@@ -12,6 +12,7 @@ import MarketingSection from "$components/MarketingSection";
 import MarketingDivide from "$components/MarketingDivide";
 import MarketingCodebox from "$components/MarketingCodebox";
 import MarketingBullets from "$components/MarketingBullets";
+import MarketingProduct from "$components/MarketingProduct";
 import postgresPostgraphileGraphql from "$images/postgres_postgraphile_graphql.png";
 import Testimonial from "$components/MarketingTestimonial";
 import Sponsors, { Sponsor } from "$components/MarketingSponsor";
@@ -40,9 +41,55 @@ import Sponsors, { Sponsor } from "$components/MarketingSponsor";
 </div>
 
 </MarketingSection>
-<MarketingDivide from="white" to="medium" />
+
+<MarketingDivide from="white" to="medium" via="light" />
 
 <MarketingSection bg="medium">
+
+</MarketingSection>
+
+<MarketingSection bg="medium">
+
+
+<Flex>
+<Col span="6">
+
+<img
+src="/images/grafast-hero.png"
+alt="A Grafast superhero reveals the Grafast heart logo on their chest"
+class='br2'
+/>
+
+</Col>
+<Col span="6">
+<MarketingProduct
+big
+name={<span>Sponsor Gra<em>fast</em></span>}
+headline="The next-generation planning and execution engine for GraphQL"
+>
+
+
+
+Grafast is currently only available to Graphile sponsors as it is still undergoing heavy iteration; sign up as a sponsor to get access to the binaries and documentation (sponsor at the Featured Tier for access to the repository, issues and support!)
+
+<div class='df flex-row justify-center' style={{height: '3rem'}}>
+<div class='ph2 df flex-column justify-center'>
+<a class='button--solid' href='https://github.com/users/benjie/sponsorship'><span class='fas fa-heart' /> Sponsor on GitHub <span class='fas fa-external-link-square-alt' /></a>{ ' '}
+</div>
+<div class='ph2 df flex-column justify-center'>
+<a class='button--solid' href='https://grafast.org' target="_new">grafast.org <span class='fas fa-external-link-square-alt' /></a>{ ' '}
+</div>
+</div>
+
+</MarketingProduct>
+</Col>
+</Flex>
+
+</MarketingSection>
+
+<MarketingDivide from="medium" to="dark" via="light"/>
+
+<MarketingSection bg="dark">
 
 ### Who sponsors Graphile?
 
@@ -195,9 +242,9 @@ YOU!**
 <!-- SPONSORS_END -->
 
 </MarketingSection>
-<MarketingDivide from="medium" to="dark" via="light" down />
+<MarketingDivide from="dark" to="medium" via="light" down />
 
-<MarketingSection bg="dark" left maxWidth>
+<MarketingSection bg="medium" left maxWidth>
 
 ### Why "crowd-funded open-source project"?
 
@@ -218,8 +265,8 @@ improving the software, which you and other users then benefit from.
 </div>
 
 </MarketingSection>
-<MarketingDivide from="dark" to="light" />
-<MarketingSection bg="light" left maxWidth>
+<MarketingDivide from="medium" to="dark" />
+<MarketingSection bg="dark" left maxWidth>
 
 ### How is sponsorship money spent?
 
@@ -228,7 +275,7 @@ and releases of the PostGraphile and Graphile suite. A small amount is also used
 to send rewards such as stickers and learning materials to our backers.
 
 </MarketingSection>
-<MarketingDivide from="light" to="medium" down />
+<MarketingDivide from="dark" to="medium" down />
 <MarketingSection bg="medium" left maxWidth>
 
 ### Is sponsorship required to use Graphile's OSS?

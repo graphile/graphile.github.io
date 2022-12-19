@@ -27,6 +27,75 @@ import COLOURS from "$components/colours";
 
 
 <Flex>
+<Col span="6">
+
+<MarketingProduct
+big
+name={<span>Introducing Gra<em>fast</em>!</span>}
+headline="The next-generation planning and execution engine for GraphQL"
+>
+
+Enables greater performance and efficiency via deeper integration into your existing Node.js or remote business logic, no matter the shape of your GraphQL schema.
+
+Gra<em>fast</em> is currently only available to sponsors whilst it is still undergoing heavy iteration; sign up as a sponsor to get access.
+
+Add yourself to our mailing list to be notified when Gra<em>fast</em> is made generally available under the MIT license.
+  
+<div class='df flex-row justify-center' style={{height: '3rem'}}>
+<div class='ph2 df flex-column justify-center'>
+<a class='button--outline' href='/sponsor/'><span class='fas fa-heart' /> Sponsor</a>{ ' '}
+</div>
+<div class='ph2 df flex-column justify-center'>
+<a class='button--solid' href='https://grafast.org' target="_new">grafast.org <span class='fas fa-external-link-square-alt' /></a>{ ' '}
+</div>
+</div>
+</MarketingProduct>
+
+</Col>
+<Col span="6">
+<p>&nbsp;</p>
+<iframe 
+width="560"
+height="315"
+src="https://www.youtube-nocookie.com/embed/x0FMjL5-kNI"
+title="YouTube video player"
+frameborder="1" 
+style="border: 4px solid #1b1b3d; border-radius: 4px"
+allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+allowfullscreen>
+</iframe>
+
+</Col>
+</Flex>
+
+</MarketingSection>
+
+<MarketingDivide from="white" to="medium" via="dark" />
+
+<MarketingSection bg="medium">
+
+## Crowd-funded open-source software
+
+
+<div style={{maxWidth: '48rem', margin: '0 auto'}}>
+
+We're extremely grateful to our sponsors, for helping to fund ongoing
+development on PostGraphile, Graphile Engine, Graphile Worker and Graphile
+Migrate.  
+**THANK YOU!**
+
+</div>
+
+<a class='button--solid' href='/sponsor/'><span class='fas fa-arrow-right' /> Learn more about sponsors and sponsorship</a>
+
+
+</MarketingSection>
+
+<MarketingDivide from="medium" to="white" via="light" />
+
+<MarketingSection bg="white">
+
+<Flex>
   <Col className="center" span="8">
     <img src={postgresPostgraphileGraphql} style={{ maxWidth: "80%" }} alt="PostGraphile" />
   </Col>
@@ -121,29 +190,8 @@ Experimental, being developed in the open. Focusses on fast iteration speed.
 
 </MarketingSection>
 
-<MarketingDivide from="dark" to="light" down />
+<MarketingDivide from="dark" to="nodes" via="light" />
 
-<MarketingSection bg="light">
-
-## Crowd-funded open-source software
-
-
-<div style={{maxWidth: '48rem', margin: '0 auto'}}>
-
-We're extremely grateful to our sponsors, for helping to fund ongoing
-development on PostGraphile, Graphile Engine, Graphile Worker and Graphile
-Migrate.  
-**THANK YOU!**
-
-</div>
-
-<a class='button--solid-light' href='/sponsor/'><span class='fas fa-arrow-right' /> Learn more about sponsors and sponsorship</a>
-
-
-</MarketingSection>
-
-
-<MarketingDivide from="light" to="nodes" />
 <MarketingSection bg="nodes">
 <MarketingProduct big name="Development Support" headline="Priority text support straight from the maintainer" more="/support/">
 Give your company access to the knowledge and experience of the Graphile team through your chat server and GitHub/GitLab organisation. Reference your code verbatim and arrange calls for any trickier topics.
