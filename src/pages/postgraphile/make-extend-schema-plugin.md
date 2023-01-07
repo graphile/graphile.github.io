@@ -535,6 +535,55 @@ const MyRegisterUserMutationPlugin = makeExtendSchemaPlugin(build => {
 Note that the `@pgField` directive here is necessary for PostGraphile to "look
 ahead" and determine what to request from the database.
 
+#### Working with arrays via `json_array_elements`
+
+Here's an example of working with a join table. Resetting it, essentially, with each call.
+
+```js
+...
+
+resolvers: {
+  Mutation: {
+    updatePersonsThings: async (_query, { input: { personId, thingIds } }, { pgClient }, resolveInfo) => {
+      await pgClient.query("SAVEPOINT graphql_mutation");
+      try {
+        // Delete all existing relations
+        await pgClient.query(`
+          DELETE FROM public.persons_things
+            WHERE person_id = $1
+        `, [personId]);
+        
+        // Bulk insert the new relations
+        const elements = JSON.stringify(thingIds.map(thingId => ({ thingId, personId })));
+        await pgClient.query(`
+          INSERT INTO public.persons_things (person_id, thing_id)
+          SELECT
+            (el->>'personId')::uuid,
+            (el->>'thingId')::uuid
+          FROM json_array_elements($1) el
+        `, [elements]);
+
+        // Build response
+        const { data } = await resolveInfo.graphile.selectGraphQLResultFromTable(
+          sql.fragment`public.persons_things`,
+          (tableAlias, queryBuilder) => {
+            queryBuilder.where(
+              sql.fragment`${tableAlias}.person_id = ${sql.value(personId)}`
+            );
+          }
+        );
+
+        return { data };
+      } catch (e) {
+        await pgClient.query("ROLLBACK TO SAVEPOINT graphql_mutation");
+        console.error(e);
+        throw e;
+      } finally {
+        await pgClient.query("RELEASE SAVEPOINT graphql_mutation");
+      }
+    },
+```
+
 ### Mutation Example with Node ID
 
 In this example we'll use a GraphQL Global Object Identifier (aka Node ID) to
