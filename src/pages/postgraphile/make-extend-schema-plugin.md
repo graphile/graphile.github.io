@@ -585,6 +585,8 @@ resolvers: {
         await pgClient.query("RELEASE SAVEPOINT graphql_mutation");
       }
     },
+  }
+}
 ```
 
 ### Mutation Example with Node ID
