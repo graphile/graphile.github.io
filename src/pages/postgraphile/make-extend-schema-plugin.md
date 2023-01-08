@@ -556,8 +556,10 @@ resolvers: {
     updatePersonsThings: async (_query, { input: { personId, thingIds } }, { pgClient }, resolveInfo) => {
       await pgClient.query("SAVEPOINT graphql_mutation");
       try {
-        // Bulk insert
+        // Ensure proper formatting. This may not be necessary if not modifying the input
         const elements = JSON.stringify(thingIds.map(thingId => ({ thingId, personId })));
+        
+        // Bulk insert
         await pgClient.query(`
           INSERT INTO public.persons_things (person_id, thing_id)
           SELECT
