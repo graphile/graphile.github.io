@@ -537,7 +537,7 @@ ahead" and determine what to request from the database.
 
 #### Working with arrays via `json_array_elements`
 
-Here's an example of working with a join table. Resetting it, essentially, with each call.
+Here's an example of working with a join table, and bulk inserting multiple records from a graphQL List.
 
 ```js
 ...
