@@ -542,6 +542,15 @@ Here's an example of working with a join table. Resetting it, essentially, with 
 ```js
 ...
 
+typeDefs: gql`
+  input updatePersonsThingsInput {
+    personId: UUID!,
+    thingIds: [UUID!]!
+  }
+  extend type Mutation {
+    updatePersonsThings(input: updatePersonsThingsInput!): PersonsThingsConnection
+  }
+`,
 resolvers: {
   Mutation: {
     updatePersonsThings: async (_query, { input: { personId, thingIds } }, { pgClient }, resolveInfo) => {
