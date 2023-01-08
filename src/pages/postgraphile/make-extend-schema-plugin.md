@@ -547,13 +547,7 @@ resolvers: {
     updatePersonsThings: async (_query, { input: { personId, thingIds } }, { pgClient }, resolveInfo) => {
       await pgClient.query("SAVEPOINT graphql_mutation");
       try {
-        // Delete all existing relations
-        await pgClient.query(`
-          DELETE FROM public.persons_things
-            WHERE person_id = $1
-        `, [personId]);
-        
-        // Bulk insert the new relations
+        // Bulk insert
         const elements = JSON.stringify(thingIds.map(thingId => ({ thingId, personId })));
         await pgClient.query(`
           INSERT INTO public.persons_things (person_id, thing_id)
