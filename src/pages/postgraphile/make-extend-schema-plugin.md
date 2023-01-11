@@ -537,18 +537,21 @@ ahead" and determine what to request from the database.
 
 #### Working with arrays via `json_array_elements`
 
-Here's an example of working with a join table, and bulk inserting multiple records from a graphQL List.
+Here's an example of working with a join table, and bulk inserting multiple records from a GraphQL list.
 
 ```js
 ...
 
 typeDefs: gql`
-  input updatePersonsThingsInput {
+  input UpdatePersonsThingsInput {
     personId: UUID!,
     thingIds: [UUID!]!
   }
+  type UpdatePersonThingsPayload {
+    personThings: [PersonThings!]
+  }
   extend type Mutation {
-    updatePersonsThings(input: updatePersonsThingsInput!): PersonsThingsConnection
+    updatePersonsThings(input: UpdatePersonsThingsInput!): UpdatePersonsThingsPayload
   }
 `,
 resolvers: {
@@ -566,19 +569,11 @@ resolvers: {
             (el->>'personId')::uuid,
             (el->>'thingId')::uuid
           FROM json_array_elements($1) el
+          RETURNING id
         `, [elements]);
 
-        // Build response
-        const { data } = await resolveInfo.graphile.selectGraphQLResultFromTable(
-          sql.fragment`public.persons_things`,
-          (tableAlias, queryBuilder) => {
-            queryBuilder.where(
-              sql.fragment`${tableAlias}.person_id = ${sql.value(personId)}`
-            );
-          }
-        );
-
-        return { data };
+        // Return data for next layer to use
+        return { personThingIds: rows.map((row) => row.id) };
       } catch (e) {
         await pgClient.query("ROLLBACK TO SAVEPOINT graphql_mutation");
         console.error(e);
@@ -587,6 +582,18 @@ resolvers: {
         await pgClient.query("RELEASE SAVEPOINT graphql_mutation");
       }
     },
+  },
+  UpdatePersonThingsPayload: {
+    personThings({ personThingIds }, args, context, resolveInfo) {
+      return resolveInfo.graphile.selectGraphQLResultFromTable(
+        sql.fragment`public.persons_things`,
+        (tableAlias, queryBuilder) => {
+          queryBuilder.where(
+            sql.fragment`${tableAlias}.id = ANY (${sql.value(personThingIds)}::int[])`
+          );
+        }
+      );
+    }
   }
 }
 ```
