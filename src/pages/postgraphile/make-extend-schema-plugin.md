@@ -584,7 +584,7 @@ resolvers: {
     },
   },
   UpdatePersonThingsPayload: {
-    personThings({ personThingIds }, _args, _context, { graphile: { selectGraphQLResultFromTable } }) {
+    personThings: ({ personThingIds }, _args, _context, { graphile: { selectGraphQLResultFromTable } }) => {
       return selectGraphQLResultFromTable(
         sql.fragment`public.persons_things`,
         (tableAlias, queryBuilder) => {
