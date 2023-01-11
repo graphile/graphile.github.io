@@ -548,7 +548,7 @@ typeDefs: gql`
     thingIds: [UUID!]!
   }
   type UpdatePersonThingsPayload {
-    personThings: [PersonThings!]
+    personThings: [PersonThing!]
   }
   extend type Mutation {
     updatePersonsThings(input: UpdatePersonsThingsInput!): UpdatePersonsThingsPayload
@@ -556,14 +556,14 @@ typeDefs: gql`
 `,
 resolvers: {
   Mutation: {
-    updatePersonsThings: async (_query, { input: { personId, thingIds } }, { pgClient }, resolveInfo) => {
+    updatePersonsThings: async (_query, { input: { personId, thingIds } }, { pgClient }, _resolveInfo) => {
       await pgClient.query("SAVEPOINT graphql_mutation");
       try {
         // Ensure proper formatting. This may not be necessary if not modifying the input
         const elements = JSON.stringify(thingIds.map(thingId => ({ thingId, personId })));
         
         // Bulk insert
-        await pgClient.query(`
+        const { rows } = await pgClient.query(`
           INSERT INTO public.persons_things (person_id, thing_id)
           SELECT
             (el->>'personId')::uuid,
@@ -573,7 +573,7 @@ resolvers: {
         `, [elements]);
 
         // Return data for next layer to use
-        return { personThingIds: rows.map((row) => row.id) };
+        return { personThingIds: rows.map(({ id }) => id) };
       } catch (e) {
         await pgClient.query("ROLLBACK TO SAVEPOINT graphql_mutation");
         console.error(e);
@@ -584,8 +584,8 @@ resolvers: {
     },
   },
   UpdatePersonThingsPayload: {
-    personThings({ personThingIds }, args, context, resolveInfo) {
-      return resolveInfo.graphile.selectGraphQLResultFromTable(
+    personThings({ personThingIds }, _args, _context, { graphile: { selectGraphQLResultFromTable } }) {
+      return selectGraphQLResultFromTable(
         sql.fragment`public.persons_things`,
         (tableAlias, queryBuilder) => {
           queryBuilder.where(
