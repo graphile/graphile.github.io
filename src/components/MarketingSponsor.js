@@ -62,7 +62,8 @@ export class Sponsor extends React.Component {
           backgroundColor: plain ? null : "white",
           color: plain ? "white" : "#1b3955",
           margin: "0.5em",
-          borderRadius: "4px",
+          borderRadius: plain ? null : "12px",
+          border: plain ? null : "4px solid #1b1b3d",
           minHeight: showAvatar ? "8em" : "3em",
           fontWeight: "normal",
         }}
