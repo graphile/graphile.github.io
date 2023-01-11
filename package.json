@@ -33,7 +33,7 @@
     "gatsby-remark-prismjs": "^3.3.12",
     "gatsby-source-filesystem": "^2.1.19",
     "gatsby-transformer-json": "^2.2.7",
-    "gatsby-transformer-remark": "^2.6.21",
+    "gatsby-transformer-remark": "^5.25.1",
     "graphile-build": "^4.12.0",
     "graphql": "^14.5.4",
     "juice": "5.2.0",
