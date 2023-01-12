@@ -568,7 +568,7 @@ resolvers: {
           SELECT
             (el->>'personId')::uuid,
             (el->>'thingId')::uuid
-          FROM json_array_elements($1) el
+          FROM json_array_elements($1::json) el
           RETURNING id
         `, [elements]);
 
