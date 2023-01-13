@@ -537,7 +537,8 @@ ahead" and determine what to request from the database.
 
 #### Working with arrays via `json_array_elements`
 
-Here's an example of working with a join table, and bulk inserting multiple records from a GraphQL list.
+Here's an example of working with a join table, and bulk inserting multiple
+records from a GraphQL list.
 
 ```js
 ...
@@ -561,7 +562,7 @@ resolvers: {
       try {
         // Ensure proper formatting. This may not be necessary if not modifying the input
         const elements = JSON.stringify(thingIds.map(thingId => ({ thingId, personId })));
-        
+
         // Bulk insert
         const { rows } = await pgClient.query(`
           INSERT INTO public.persons_things (person_id, thing_id)
