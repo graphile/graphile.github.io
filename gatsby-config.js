@@ -1,6 +1,9 @@
 module.exports = {
   siteMetadata: {
     title: `Graphile.org`,
+    description:
+      "Community funded open source utilities to build powerful, performant and extensible applications rapidly",
+    siteUrl: "https://graphile.org",
   },
   plugins: [
     `gatsby-plugin-mdx`,
@@ -45,7 +48,6 @@ module.exports = {
       },
     },
     `gatsby-transformer-json`,
-    /*
     {
       resolve: `gatsby-plugin-feed`,
       options: {
@@ -63,43 +65,51 @@ module.exports = {
         `,
         feeds: [
           {
-            serialize: ({ query: { site, allMarkdownRemark } }) => {
-              return allMarkdownRemark.nodes
-                .filter((node) => {
-                  // TODO
-                  return true;
-                })
-                .map((node) => {
-                  return Object.assign({}, node.frontmatter, {
-                    description: node.excerpt,
-                    date: node.frontmatter.date,
-                    url: site.siteMetadata.siteUrl + node.fields.slug,
-                    guid: site.siteMetadata.siteUrl + node.fields.slug,
-                    custom_elements: [{ "content:encoded": node.html }],
-                  });
+            serialize: ({ query: { site, allFile } }) => {
+              return allFile.nodes.map(({ post: node }) => {
+                return Object.assign({}, node.frontmatter, {
+                  description: node.excerpt,
+                  date: node.frontmatter.date,
+                  url: site.siteMetadata.siteUrl + node.fields.slug,
+                  guid: site.siteMetadata.siteUrl + node.fields.slug,
+                  custom_elements: [{ "content:encoded": node.html }],
                 });
+              });
             },
-            query: `{
-              allMarkdownRemark(sort: {frontmatter: {date: DESC}}) {
-                nodes {
-                  excerpt
-                  html
-                  fields {
-                    slug
+            query: /* GraphQL */ `
+              {
+                allFile(
+                  filter: { sourceInstanceName: { eq: "news" } }
+                  sort: {
+                    fields: childMarkdownRemark___frontmatter___date
+                    order: DESC
                   }
-                  frontmatter {
-                    title
-                    date
+                ) {
+                  nodes {
+                    post: childMarkdownRemark {
+                      excerpt
+                      html
+                      fields {
+                        slug
+                      }
+                      frontmatter {
+                        title
+                        date
+                      }
+                    }
                   }
                 }
               }
-            }`,
-            output: "/rss.xml",
+            `,
+            output: "/news/rss.xml",
             title: "Graphile News",
+            // Which URLs to advertise on?
+            // match: "^/news($|/)",
+            // optional configuration to specify external rss feed, such as feedburner
+            // link: "https://feeds.feedburner.com/gatsby/blog",
           },
         ],
       },
     },
-    */
   ],
 };
