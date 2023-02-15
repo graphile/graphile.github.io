@@ -51,21 +51,19 @@ class News extends Component {
             <section>
               <div class="container">
                 <div class="row">
-                  {files
-                    .filter((file) => file.post.frontmatter.title.length > 0)
-                    .map(({ post: post }) => {
-                      return (
-                        <div className="blog-file-preview" key={post.id}>
-                          <h1>
-                            <Link to={post.frontmatter.path}>
-                              {post.frontmatter.title}
-                            </Link>
-                          </h1>
-                          <h2>{post.frontmatter.date}</h2>
-                          <p>{post.excerpt}</p>
-                        </div>
-                      );
-                    })}
+                  {files.map(({ post: post }) => {
+                    return (
+                      <div className="blog-file-preview" key={post.id}>
+                        <h2>
+                          <Link to={post.frontmatter.path}>
+                            {post.frontmatter.title}
+                          </Link>
+                        </h2>
+                        <h3>{post.frontmatter.date}</h3>
+                        <p>{post.excerpt}</p>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </section>
