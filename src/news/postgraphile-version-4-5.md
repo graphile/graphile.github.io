@@ -2,6 +2,8 @@
 layout: page
 path: /news/postgraphile-version-4-5/
 title: PostGraphile Releases Version 4.5
+date: 2019-11-24T00:00:01.000Z
+
 noToc: true
 ---
 
