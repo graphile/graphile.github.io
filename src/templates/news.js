@@ -17,7 +17,17 @@ class News extends Component {
       },
       location,
       history,
+      pageContext: { numPages, currentPage },
     } = this.props;
+
+    const prevUrl =
+      currentPage > 2
+        ? `/news/${currentPage - 1}`
+        : currentPage === 2
+        ? `/news`
+        : null;
+    const nextUrl = currentPage < numPages ? `/news/${currentPage + 1}` : null;
+
     return (
       <Layout {...this.props}>
         <div className={`template-page postgraphile`}>
@@ -59,6 +69,11 @@ class News extends Component {
                 </div>
               </div>
             </section>
+            <footer>
+              {prevUrl ? <Link to={prevUrl}>&laquo; Previous</Link> : null}
+              {prevUrl && nextUrl ? " | " : null}
+              {nextUrl ? <Link to={nextUrl}>Next &raquo;</Link> : null}
+            </footer>
           </div>
           <SiteFooter />
         </div>
@@ -72,15 +87,12 @@ News.propTypes = {
 };
 
 export const pageQuery = graphql`
-  query NewsTemplateQuery($slug: String!) {
-    remark: markdownRemark(frontmatter: { path: { eq: $slug } }) {
-      html
-      frontmatter {
-        path
-        title
-      }
-    }
-    allFile(filter: { sourceInstanceName: { eq: "news" } }) {
+  query NewsTemplateQuery($limit: Int!, $skip: Int!) {
+    allFile(
+      filter: { sourceInstanceName: { eq: "news" } }
+      limit: $limit
+      skip: $skip
+    ) {
       nodes {
         post: childMarkdownRemark {
           excerpt(pruneLength: 250)

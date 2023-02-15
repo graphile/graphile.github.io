@@ -27,6 +27,9 @@ exports.createPages = async ({ actions, graphql }) => {
           }
         }
       }
+      news: allFile(filter: { sourceInstanceName: { eq: "news" } }) {
+        totalCount
+      }
     }
   `);
   if (result.errors) {
@@ -49,6 +52,23 @@ exports.createPages = async ({ actions, graphql }) => {
       context: {
         slug: node.frontmatter.path,
         layout: node.frontmatter.layout || "page",
+      },
+    });
+  });
+
+  // Create blog-list pages
+  const postCount = result.data.news.totalCount;
+  const postsPerPage = 2;
+  const numPages = Math.ceil(postCount / postsPerPage);
+  Array.from({ length: numPages }).forEach((_, i) => {
+    createPage({
+      path: i === 0 ? `/news` : `/news/${i + 1}`,
+      component: path.resolve("./src/templates/news.js"),
+      context: {
+        limit: postsPerPage,
+        skip: i * postsPerPage,
+        numPages,
+        currentPage: i + 1,
       },
     });
   });
