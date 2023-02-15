@@ -30,7 +30,7 @@ class News extends Component {
 
     return (
       <Layout {...this.props}>
-        <div className={`template-page postgraphile`}>
+        <div className={`template-marketing postgraphile`}>
           <Helmet
             title="Graphile | Powerful, Extensible and Performant GraphQL APIs Rapidly"
             meta={[
@@ -48,11 +48,36 @@ class News extends Component {
           />
           <SiteHeader location={location} history={history} />
           <div className="page-content">
-            <section>
+            <header class="hero simple">
               <div class="container">
                 <div class="row">
-                  {files.map(({ post: post }) => {
-                    return (
+                  <div class="col-xs-12">
+                    <div class="hero-block">
+                      <h1> Graphile Announcements</h1>
+                      <h3>
+                        The latest news on PostGraphile and the Graphile suite
+                      </h3>
+                      <br />
+                      <div class="flex">
+                        <a
+                          class="button--solid-light"
+                          href="/news/graphile-starter/"
+                        >
+                          Latest Announcement{" "}
+                          <span class="fas fa-fw fa-arrow-right" />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </header>
+
+            {files.map(({ post: post }) => {
+              return (
+                <section>
+                  <div class="container">
+                    <div class="row">
                       <div className="blog-file-preview" key={post.id}>
                         <h2>
                           <Link to={post.frontmatter.path}>
@@ -61,12 +86,13 @@ class News extends Component {
                         </h2>
                         <h3>{post.frontmatter.date}</h3>
                         <p>{post.excerpt}</p>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            </section>
+                      </div>{" "}
+                    </div>
+                  </div>
+                </section>
+              );
+            })}
+
             <footer>
               {prevUrl ? <Link to={prevUrl}>&laquo; Previous</Link> : null}
               {prevUrl && nextUrl ? " | " : null}
@@ -88,6 +114,7 @@ export const pageQuery = graphql`
   query NewsTemplateQuery($limit: Int!, $skip: Int!) {
     allFile(
       filter: { sourceInstanceName: { eq: "news" } }
+      sort: { fields: childMarkdownRemark___frontmatter___date, order: DESC }
       limit: $limit
       skip: $skip
     ) {
