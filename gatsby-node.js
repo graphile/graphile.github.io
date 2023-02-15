@@ -1,6 +1,8 @@
 const path = require("path");
 //const { createFilePath } = require(`gatsby-source-filesystem`);
 
+const postsPerPage = 8;
+
 exports.createPages = async ({ actions, graphql }) => {
   const { createPage } = actions;
 
@@ -58,7 +60,6 @@ exports.createPages = async ({ actions, graphql }) => {
 
   // Create blog-list pages
   const postCount = result.data.news.totalCount;
-  const postsPerPage = 2;
   const numPages = Math.ceil(postCount / postsPerPage);
   Array.from({ length: numPages }).forEach((_, i) => {
     createPage({
