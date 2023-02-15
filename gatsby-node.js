@@ -7,6 +7,7 @@ exports.createPages = async ({ actions, graphql }) => {
   const layouts = {
     page: path.resolve(`src/templates/page.js`),
     marketing: path.resolve(`src/templates/marketing.js`),
+    news: path.resolve(`src/templates/news.js`),
     home: path.resolve(`src/templates/home.js`),
   };
 
