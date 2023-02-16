@@ -3,6 +3,8 @@ layout: post
 title: Graphile Migrate 0.1 Released
 date: 2020-03-17T01:00:00Z
 path: /news/20200317-migrate-01/
+thumbnail: /images/news/graphile-migrate.svg
+thumbnailAlt: "Cartoon people release red arrows up into the sky"
 tags: announcements, releases, migrate
 ---
 
