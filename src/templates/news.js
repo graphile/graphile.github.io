@@ -77,16 +77,25 @@ class News extends Component {
               return (
                 <section>
                   <div class="container">
-                    <div class="row">
-                      <div className="blog-file-preview" key={post.id}>
-                        <h2>
-                          <Link to={post.frontmatter.path}>
-                            {post.frontmatter.title}
-                          </Link>
-                        </h2>
-                        <h3>{post.frontmatter.date}</h3>
-                        <p>{post.excerpt}</p>
-                      </div>{" "}
+                    <div class="row flex-wrap-reverse">
+                      <div class="text-center col-xs-12 col-md-9 col-lg-7">
+                        <div className="blog-file-preview" key={post.id}>
+                          <h2>
+                            <Link to={post.frontmatter.path}>
+                              {post.frontmatter.title}
+                            </Link>
+                          </h2>
+                          <h3>{post.frontmatter.date}</h3>
+                          <p>{post.excerpt}</p>
+                        </div>{" "}
+                      </div>
+                      <div class="text-center col-xs-12 col-md-3 col-lg-5">
+                        <img
+                          src={post.frontmatter.thumbnail}
+                          alt={post.frontmatter.thumbnailAlt}
+                          style={{ maxHeight: 200 }}
+                        />
+                      </div>
                     </div>
                   </div>
                 </section>
@@ -126,6 +135,8 @@ export const pageQuery = graphql`
             title
             date(formatString: "MMMM DD, YYYY")
             path
+            thumbnail
+            thumbnailAlt
           }
         }
       }
