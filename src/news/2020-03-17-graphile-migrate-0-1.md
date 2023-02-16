@@ -2,7 +2,7 @@
 layout: post
 title: Graphile Migrate 0.1 Released
 date: 2020-03-17T01:00:00Z
-path: /news/2020-03-17-migrate-01/
+path: /news/20200317-migrate-01/
 tags: announcements, releases, migrate
 ---
 
