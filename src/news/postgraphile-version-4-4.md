@@ -3,7 +3,13 @@ layout: page
 path: /news/postgraphile-version-4-4/
 title: PostGraphile Releases Version 4.4 - Real-time!
 date: 2019-05-03T00:00:01.000Z
+thumbnail: /images/postgraphile.optimized.svg
+thumbnailAlt: "PostGraphile logo, a blue elephant face"
 noToc: true
+
+summary:
+  "Version 4.4 has been released, and among other things it adds real-time
+  features including GraphQL subscriptions and live queries!"
 ---
 
 _Announced 2019-05-03_

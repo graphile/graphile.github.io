@@ -3,7 +3,18 @@ layout: page
 path: /news/postgraphile-version-4-1/
 title: PostGraphile Releases Version 4.1 - Better Webpackability!
 date: 2018-12-06T00:00:01.000Z
+thumbnail: /images/undraw_developer_activity.png
+thumbnailAlt:
+  "A developer working at a laptop, the GitHub contribution graph is projected
+  behind him"
 noToc: true
+
+summary:
+  "Building upon the huge performance gains found in Version 4, the release of
+  Version 4.1 has a huge improvement to startup performance in serverless
+  environments. This update also brings a large number of enhancements including
+  much broader PostgreSQL function support, an enhanced GraphiQL interface, and
+  a lot more helpers for writing plugins."
 ---
 
 ### The original GraphQL API for PostgreSQL: now with improved Lambda support
