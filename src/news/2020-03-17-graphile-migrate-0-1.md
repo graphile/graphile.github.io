@@ -9,11 +9,10 @@ tags: announcements, releases, migrate
 noToc: true
 
 summary:
-  "Graphile Migrate 0.1 is out in pre-release This is a big milestone for the
-  project, with it finally leaving 0.0.x territory - That's right, it's no
-  longer 'Highly' experimental! This release is a significant jump from the
-  previous versions and includes many new commands, more configuration options,
-  and a suite of new features."
+  "Graphile Migrate 0.1 is a big milestone for the project, with it finally
+  leaving 0.0.x territory - That's right, it's no longer 'Highly' experimental!
+  This release is a significant jump from the previous versions and includes
+  many new commands, more configuration options, and a suite of new features."
 ---
 
 _Announced 2020-03-17_

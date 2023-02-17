@@ -6,7 +6,7 @@
    viewBox="0 0 423.87628 532.80415"
    version="1.1"
    id="svg6581"
-   sodipodi:docname="graphile-thankyou.svg"
+   sodipodi:docname="postgraphile-thankyou.svg"
    inkscape:version="1.2.1 (9c6d41e4, 2022-07-14)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -87,7 +87,7 @@
      transform="translate(-388.06186 -183.59792)"
      fill="#e44336"
      id="path6523"
-     style="fill:#c0201c;fill-opacity:1" />
+     style="fill:#1b3956;fill-opacity:1" />
   <path
      d="M523.23806,385.87587q-.12178-.26813-.24289-.5381c.03112.001.06192.00547.093.00628Z"
      transform="translate(-388.06186 -183.59792)"
@@ -104,7 +104,7 @@
      transform="translate(-388.06186 -183.59792)"
      fill="#e44336"
      id="path6529"
-     style="fill:#c0201c;fill-opacity:1" />
+     style="fill:#1b3956;fill-opacity:1" />
   <path
      d="m 157.95226,20.921107 v 0 c -0.10649,0.103503 -0.20469,0.212385 -0.31002,0.316758 C 141.19868,4.9205227 114.71643,4.7769697 98.09689,20.914934 v 0 C 81.418216,37.116544 80.854593,63.713348 96.831972,80.607013 l -0.01035,0.0101 0.397833,0.40967 v 0 l 58.836535,60.579577 60.98936,-59.234477 -0.16964,-0.17456 c 0.10243,-0.0976 0.20911,-0.18814 0.31078,-0.28711 v 0 c 16.84177,-16.357096 17.23459,-43.269985 0.8775,-60.111759 v 0 C 201.70689,4.9567627 174.7939,4.5639387 157.95233,20.921047 Z"
      fill="#e44336"
@@ -120,18 +120,18 @@
      transform="translate(-388.06186 -183.59792)"
      fill="#e44336"
      id="path6533"
-     style="fill:#c0201c;fill-opacity:1" />
+     style="fill:#1b3956;fill-opacity:1" />
   <polygon
      points="288.635 284.344 287.262 297.074 288.07 313.768 251.094 309.375 247.619 284.344 252.046 284.387 288.635 284.344"
      fill="#ffb6b6"
      id="polygon6535"
-     style="fill:#c0201c;fill-opacity:1" />
+     style="fill:#1b3956;fill-opacity:1" />
   <path
      d="M644.50115,426.10222l8.78628-5.27177,4.21257-6.501,13,2,15.89164,10.65282-.15567,24.16089-9.85315,25.05907-41.29551-5.27177-1.569-8.839s-11.42217-15.34139.87863-24.12767Z"
      transform="translate(-388.06186 -183.59792)"
      fill="#e44336"
      id="path6537"
-     style="fill:#c0201c;fill-opacity:1" />
+     style="fill:#1b3956;fill-opacity:1" />
   <path
      d="M591.76649,354.35931a6.7071,6.7071,0,0,0,4.33508,9.32622l28.60677,53.97634L636.25506,408.75l-31.75033-50.25468a6.74344,6.74344,0,0,0-12.73824-4.136Z"
      transform="translate(-388.06186 -183.59792)"
@@ -142,7 +142,7 @@
      transform="translate(-388.06186 -183.59792)"
      fill="#e44336"
      id="path6541"
-     style="fill:#c0201c;fill-opacity:1" />
+     style="fill:#1b3956;fill-opacity:1" />
   <polygon
      points="307.814 515.476 299.73 515.476 295.882 484.294 307.814 484.294 307.814 515.476"
      fill="#ffb6b6"
@@ -176,7 +176,7 @@
      transform="translate(-388.06186 -183.59792)"
      fill="#e44336"
      id="path6555"
-     style="fill:#c0201c;fill-opacity:1" />
+     style="fill:#1b3956;fill-opacity:1" />
   <path
      d="M803.28255,714.84886a1.54861,1.54861,0,0,1-1.5533,1.55322H389.67908a1.55322,1.55322,0,0,1,0-3.10644H801.72925A1.54866,1.54866,0,0,1,803.28255,714.84886Z"
      transform="translate(-388.06186 -183.59792)"
