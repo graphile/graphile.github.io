@@ -6,6 +6,11 @@ path: /news/20200317-migrate-01/
 thumbnail: /images/news/graphile-migrate.svg
 thumbnailAlt: "Cartoon people release red arrows up into the sky"
 tags: announcements, releases, migrate
+
+summary: "Graphile Migrate 0.1 is out in pre-release! That's right - we're no longer in
+0.0.x territory! This release has a lot of work in it, so it's quite a
+significant bump from the previous release. Make sure you familiarise yourself
+with the release notes"
 ---
 
 <p class='intro'>

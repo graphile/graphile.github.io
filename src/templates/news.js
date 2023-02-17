@@ -86,7 +86,11 @@ class News extends Component {
                             </Link>
                           </h2>
                           <h3>{post.frontmatter.date}</h3>
-                          <p>{post.excerpt}</p>
+                          {post.frontmatter.summary ? (
+                            <p>{post.frontmatter.summary}</p>
+                          ) : (
+                            <p>{post.excerpt}</p>
+                          )}
                         </div>{" "}
                       </div>
                       <div class="text-center col-xs-12 col-md-3 col-lg-5">
@@ -137,6 +141,7 @@ export const pageQuery = graphql`
             path
             thumbnail
             thumbnailAlt
+            summary
           }
         }
       }
