@@ -11,14 +11,14 @@ noToc: true
 summary:
   "Graphile Migrate 1.0  has been released; after many months of use and
   testing, Migrate is ready to move from 'experimental' into stable v 1.0.0.
-  There are no breaking changes in this release, there is now support for a
-  `.gmrc.js` file and a few minor fixes."
+  There are no breaking changes in this release, there is now support for a gmrc
+  file and a few minor fixes."
 ---
 
 _Announced 2020-11-27_
 
 <p class='intro'>
-The Graphile team are pleased to announce that Graphile Migrate 1.0  has been released; after many months of use and testing, Migrate is ready to move from 'experimental' into stable v 1.0.0. There are no breaking changes in this release, there is now support for a `.gmrc.js` file and a few minor fixes.
+The Graphile team are pleased to announce that Graphile Migrate 1.0  has been released; after many months of use and testing, Migrate is ready to move from 'experimental' into stable v 1.0.0. There are no breaking changes in this release, there is now support for a .gmrc.js file and a few minor fixes.
 </p>
 
 Graphile Migrate is an opinionated, SQL-powered, productive roll-forward

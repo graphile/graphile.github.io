@@ -3,85 +3,85 @@ layout: post
 title: PostGraphile Releases Version 4.10 - Framework Friends
 date: 2020-11-27T01:00:00Z
 path: /news/20201127-postgraphile-410/
+thumbnail: /images/news/frameworks-thumbnail.svg
+thumbnailAlt: "A gallery wall of frames containing blank blue images"
 tags: announcements, releases, postgraphile
+noToc: true
+
+summary:
+  "Graphile is pleased to announce the release of PostGraphile version 4.10, an
+  upgrade introducing better support for various Node.js webserver frameworks,
+  an upgraded GraphiQL and GraphiQL Explorer, and improvements added by our
+  community members."
 ---
 
-Pretty big release, so let's get straight to it: Improved Framework Support
+_Announced 2020-11-27_
 
-The major feature in this release is much more solid support for various Node.js
-webserver frameworks: Node itself, Connect, Express, Koa, Fastify (v2 and v3
-🆕), and Restify 🆕. This also fixes some long-standing compatibility issues
-with certain Koa plugins 😉
+<p class='intro'>
+Graphile is pleased to announce the release of PostGraphile version 4.10, an upgrade introducing better support for various Node.js webserver frameworks, an upgraded GraphiQL and GraphiQL Explorer, and improvements added by our community members.
+</p>
 
-To accomplish this we've split the middleware into separate route handlers for
+### Improved Framework Support
+
+The major feature in this release is vastly improved support for various Node.js
+webserver frameworks, including: Node itself, Connect, Express, Koa, Fastify (v2
+and v3), and Restify. This also fixes some long-standing compatibility issues
+with certain Koa plugins.
+
+To accomplish this, we've split the middleware into separate route handlers for
 each of our routes, and you can either use the middleware to delegate to these
 (where the framework allows), or you can add the route handlers directly. You
 can find documentation in our library usage page and can see examples in our new
 server examples folder:
 https://github.com/graphile/postgraphile/tree/v4/examples/servers
 
-Along with this we get some new server hooks that you can use in place of (or in
-addition to) postgraphile:http:handler that are only called on the relevant
-routes: postgraphile:http:eventStreamRouteHandler,
-postgraphile:http:faviconRouteHandler, postgraphile:http:graphiqlRouteHandler
-and postgraphile:http:graphqlRouteHandler. Upgraded PostGraphiQL
+<div class="flex flex-wrap justify-around">
+<img alt="A gallery wall of frames containing logos for Connect, Restify, Fastify,
+  Express and Koa" src="/images/news/frameworks.svg" style="max-height: 600px" />
+</div>
 
-We've upgraded GraphiQL and GraphiQL Explorer.
+### Upgraded PostGraphiQL
 
-With the GraphiQL upgrade we now get a dedicated headers editor panel next to
-the variables editor, so no more hacky sidebar 🎉 It also adds new "Merge Query"
-and "Copy Query" buttons to the enhanced GraphiQL which may ease you development
-or debugging flows.
+The GraphiQL upgrade provides a dedicated headers editor panel next to the
+variables editor, which replaces the old proof-of-concept sidebar. It also adds
+new "Merge Query" and "Copy Query" buttons to the enhanced GraphiQL which may
+ease development or debugging flows. The Explorer pane is now much smoother and
+better looking too!
 
-GraphiQL Explorer is now smoother and better looking.
+Community member _@eddiewang_ also added the ability to configure credentials
+for GraphiQL. We appreciate additions from our community; if you wish to see a
+particular feature in one of the Graphile projects, we encourage you to open an
+issue or pull request with details. See our [Contribution Guide](/contribute/)
+for some important information before going ahead and writing a new feature.
 
-@eddiewang also added the ability to configure credentials for GraphiQL.
+<div class="flex flex-wrap justify-around">
+<img alt="A screenshot of the new improved PostGraphiQL" src="/images/news/postgraphiql.4.10.png" style="max-height: 600px" />
+</div>
 
-Thank you
+### GraphQL v15
 
-PostGraphile wouldn't be where it is today without the support of the community;
-as always I want to say a huge THANK YOU to all our sponsors and contributors
-that make this possible. GraphQL v15
+GraphQL v15 compatibility has finally been added - you should review the changes
+for yourself and pin GraphQL v14 if there are any breaking changes in your
+projects.
 
-I've had many (many) requests for GraphQL v15 compatibility; this has finally
-been added. You should review the GraphQL v15 changes for yourself, and if you
-deem them to be breaking for your workflows then you should pin GraphQL v14 in
-your projects which PostGraphile continues to support. Domain constrained
-composite types
+### Thank you
 
-@jcgsville has added a tweak so that domain constrained composite types (CREATE
-DOMAIN my_domain AS my_composite_type ..., where my_composite_type is a type
-with multiple attributes) are now supported. MaxListenersExceededWarning fix
+As always we want to say a huge THANK YOU to all our sponsors and contributors;
+This release includes many additions from new and old-hat contributors, and
+wouldn't have been possible without paid time from our sponsors. If your company
+benefits from PostGraphile or the wider Graphile suite, you should consider
+asking them to fund our work. By significantly reducing the amount of work
+needed to achieve business goals and reducing running costs, Graphile's software
+results in huge time and money savings for users. We encourage companies to
+contribute a portion of these savings back, enabling the projects to advance
+more rapidly, and result in even greater savings for your company.
+[Find out more about sponsorship here on our website](/sponsor/).
 
-If you've ever been greeted with:
+<div class="flex flex-wrap justify-around">
+<img alt="PostGraphile thanks the community" src="/images/thanks.png" />
+</div>
 
-MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11
-graphql:... listeners added to [EventEmitter]. Use emitter.setMaxListeners() to
-increase limit
-
-because you use @graphile/pg-pubsub, you can now opt-out of this by passing a
-sufficiently large subscriptionEventEmitterMaxListeners option to PostGraphile.
-Thanks @xvaara! Features
-
-    HTTP server overhaul, improved framework support (#1361) (317aa40)
-    allow access to Fastify request from Node request (#1385) (a3cd8b8)
-    hooks for route handlers (#1389) (aeb41de)
-    upgrade GraphiQL/GraphiQL Explorer (#1377) (0152244)
-    graphiql: add configurable credentials behavior (#1388) (61da7e3) (thanks @eddiewang)
-    deps: support for GraphQL v15 (graphile/graphile-engine#689) (3e7f98f) and (#1393) (eb1d1a6)
-    pg: support domain constrained composite types (graphile/graphile-engine#615) (215f5cf) (thanks @jcgsville)
-    pubsub: add maxListeners to subscription eventEmitter (graphile/graphile-engine#688) (576177f) (thanks @xvaara)
-    cli: add Node version info and clarify enhance-graphiql (#1401) (aa7f4f9)
-
-PostgreSQL schema review
-
-If you'd like to give your schema a checkup right now, take pgRITA for a spin!
-We also offer one-on-one consultancy over Zoom screen sharing; if that's of
-interest you can book a call at https://benjie.dev or email jem @ our website
-domain (there's no www 😉) to enquire as to other options. Thanks for your
-support!
-
-Full release notes
+### Full release notes
 
 Full detailed technical release notes can be found on GitHub:
 
