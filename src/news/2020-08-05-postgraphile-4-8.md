@@ -36,9 +36,9 @@ functionality - don't worry, it only queries the table if it sees the `@enum`
 smart comment.
 
 An enum table must have a text (or varchar / char) primary key, and may have
-other columns. It must have the `@enum` smart comment, and this must be done via
-a smart comment (and not a smart tag file or plugin) due to the way in which
-PostGraphile v4's introspection engine works. See
+other columns. It must be done through using an `@enum` smart comment (and not a
+smart tag file or plugin) due to the way in which PostGraphile v4's
+introspection engine works. See
 [our documentation](https://www.graphile.org/postgraphile/enums/#with-enum-tables)
 for more information, or the detailed
 [technical release notes](https://github.com/graphile/postgraphile/releases/tag/v4.8.0).
@@ -63,19 +63,22 @@ Further details and full list of fixes in the
 
 ### The Graphile suite of tools
 
-PostGraphile is just one in a suite of Graphile developer tools. Graphile Worker
-is a job queue for Postgres running on Node, and Graphile Migrate is an
-opinionated, SQL-powered, productive roll-forward migration tool for Postgres.
-In true Graphile style, these tools are simple, familiar, fully functional and
-fast. Worker in particular pairs beautifully with PostGraphile projects, and is
-currently downloaded over 15k times per week! Together these projects can give
+PostGraphile is just one in a suite of Graphile developer tools.
+[Graphile Worker](https://github.com/graphile/worker) is a job queue for
+Postgres running on Node, and
+[Graphile Migrate](https://github.com/graphile/migrate) is an opinionated,
+SQL-powered, productive roll-forward migration tool for Postgres. In true
+Graphile style, these tools are simple, familiar, fully functional and fast.
+Worker, in particular, pairs beautifully with PostGraphile projects, and is
+currently downloaded over 15k times per week! Together, these projects can give
 you the building blocks you need to make powerful and performant software
 quickly and efficiently.
 
 Graphile Starter is a "batteries included" off-the-shelf starter project
 marrying these tools together with a design system, user and session management
 and so much more; ready for you to take as a jumping-off point for your own
-project. You can check them all out [at our homepage](https://graphile.org).
+project. You can see our entire suite of projects
+[at our homepage](https://graphile.org).
 
 ### Thank you Sponsors!
 
