@@ -15,9 +15,10 @@ summary:
   tables', native GraphQL schema validation, and fixes in watch mode."
 ---
 
+_Announced 2021-01-29_
+
 <p class='intro'>
-Graphile is pleased to announce the release of PostGraphile version 4.11, an
-  upgrade introducing support for GraphQL websockets, extended support for 'enum tables', native GraphQL schema validation, and fixes in watch mode.
+Graphile is pleased to announce the release of PostGraphile version 4.11, an upgrade introducing support for GraphQL websockets, extended support for 'enum tables', native GraphQL schema validation, and fixes in watch mode.
 </p>
 
 ### Websocket Support
