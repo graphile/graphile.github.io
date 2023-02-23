@@ -3,7 +3,7 @@ layout: page
 path: /news/postgraphile-version-4-4/
 title: PostGraphile Releases Version 4.4 - Real-time!
 date: 2019-05-03T00:00:01.000Z
-thumbnail: /images/undraw_realtime.png
+thumbnail: /images/news/real-time-sync.svg
 thumbnailAlt: "Real-time subscriptions across mobile devices"
 noToc: true
 
@@ -53,7 +53,7 @@ performed whenever the specified event occurs on the GraphQL server, for example
 `emailReceived`, `userStatusChanged`, `notificationAdded`, or `messageArchived`.
 
 <div class="tc">
-<img alt="Real-time subscriptions" src="/images/undraw_realtime.png" />
+<img alt="Real-time subscriptions" src="/images/news/real-time-sync.svg" style="max-height: 300px" />
 </div>
 
 To enable this real-time feature, a long running connection is required with the
