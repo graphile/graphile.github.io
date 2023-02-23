@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Graphile Migrate Reaches 1.0.0
+title: Graphile Migrate Reaches 1.0
 date: 2020-11-27T01:00:00Z
 path: /news/20201127-migrate-1/
 thumbnail: /images/news/graphile-migrate1.0.svg

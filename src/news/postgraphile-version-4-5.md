@@ -1,7 +1,7 @@
 ---
 layout: page
 path: /news/postgraphile-version-4-5/
-title: PostGraphile Releases Version 4.5
+title: PostGraphile Releases Version 4.5 - Explain Feature
 date: 2019-11-24T00:00:01.000Z
 thumbnail: /images/v4-5-explain.png
 thumbnailAlt: "A cartoon woman holds a giant question mark"
@@ -10,7 +10,9 @@ noToc: true
 summary:
   "PostGraphile Version 4.5 is here, and with it comes an enhanced GraphiQL with
   a query explain feature."
----_Announced 2019-11-24_
+---
+
+_Announced 2019-11-24_
 
 <p class='intro'>
 Graphile is pleased to announce the release of PostGraphile version 4.5.0, an upgrade recommended for all PostGraphile users.
