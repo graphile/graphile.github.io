@@ -3,7 +3,15 @@ layout: post
 title: PostGraphile Releases Version 4.12 - Awesome Aggregates
 date: 2021-05-27T01:00:00Z
 path: /news/20210527-postgraphile-412/
+thumbnail: /images/news/postgraphile-developers.svg
+thumbnailAlt: "A pair of developers sit in front of a computer monitor."
 tags: announcements, releases, postgraphile
+noToc: true
+
+summary:
+  "Graphile is pleased to announce the release of PostGraphile version 4.11, an
+  upgrade introducing support for GraphQL websockets, extended support for 'enum
+  tables', native GraphQL schema validation, and fixes in watch mode."
 ---
 
 <p class='intro'>
@@ -17,6 +25,10 @@ relational aggregates, filtering by the results of aggregates on related
 connections, etc.
 
 For more details check out the plugin: https://github.com/graphile/pg-aggregates
+
+<div class="flex flex-wrap justify-around">
+<img alt="A pair of developers sit in front of a computer monitor." src="/images/news/postgraphile-developers.svg" style="max-height: 300px" />
+</div>
 
 This release also includes a few small fixes and some other minor features that
 enable greater community expansion of PostGraphile. We love seeing your

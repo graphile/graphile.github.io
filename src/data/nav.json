@@ -7,19 +7,19 @@
         "title": "Releases"
       },
       {
-        "id": "misc",
-        "title": "Misc"
+        "id": "about",
+        "title": "About Graphile"
       },
       {
-        "id": "about",
-        "title": "About"
+        "id": "misc",
+        "title": "Talks, Events & Podcasts"
       }
     ],
     "pages": [
       {
         "to": "/news/20221020-development-support/",
         "title": "Development Support Now Available",
-        "sectionId": "misc"
+        "sectionId": "about"
       },
       {
         "to": "/news/20221011-worker-014/",
@@ -34,7 +34,7 @@
       {
         "to": "/news/20220704-github-readme/",
         "title": "Jem's Discussion Panel at GitHub ReadME",
-        "sectionId": "misc"
+        "sectionId": "about"
       },
       {
         "to": "/news/20220607-spec-news/",
@@ -62,11 +62,6 @@
         "sectionId": "main"
       },
       {
-        "to": "/news/20210316-persisted-operations/",
-        "title": "Persisted Operations",
-        "sectionId": "main"
-      },
-      {
         "to": "/news/20210129-postgraphile-411/",
         "title": "PostGraphile 4.11 - Wonderful Websockets",
         "sectionId": "main"
@@ -79,7 +74,7 @@
       {
         "to": "/news/20201208-github-sponsors/",
         "title": "GitHub Sponsors Now Available to Organisations",
-        "sectionId": "misc"
+        "sectionId": "about"
       },
       {
         "to": "/news/20201127-postgraphile-410/",
@@ -89,7 +84,7 @@
       {
         "to": "/news/20200922-github-readme/",
         "title": "Benjie's Story at GitHub ReadME",
-        "sectionId": "misc"
+        "sectionId": "about"
       },
       {
         "to": "/news/20201127-migrate-1/",
@@ -163,7 +158,7 @@
       },
       {
         "to": "/news/press-kit/",
-        "title": "Press Kit",
+        "title": "Graphile Press Kit",
         "sectionId": "about"
       }
     ]
