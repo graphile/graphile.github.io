@@ -1,12 +1,20 @@
 ---
-layout: post
-title: GraphQL Radio Interviews Benjie
+
+layout: post 
+title: GraphQL Radio Interviews Benjie 
 date: 2022-07-14T01:00:00Z
-path: /news/20220714-graphql-radio/
-tags: podcast, graphql
+path: /news/20220714-graphql-radio/ 
+thumbnail: /images/news/graphqlradio.jpg
+thumbnailAlt: "GraphQL Radio logo, its a radio telegraph pole." 
+tags: podcast, graphql 
+noToc: true
+
+summary: "This week, Benjie appears on the revamped GraphQL Radio podcast,
+discussing the early days of GraphQL and Benjie's early forays into Computer
+Science as a teenager."
 ---
 
-![GraphQL Radio logo, its a radio telegraph pole]({{site.url}}/assets/images/graphqlradio.jpg)
+_2022-07-14_
 
 This week, Benjie appears on the revamped
 [GraphQL Radio podcast](https://graphqlradio.com/) hosted by Max Stoiber (CEO,
@@ -18,3 +26,7 @@ university!), how he goes about running an open source business with Jem, and
 the widespread benefits of supporting open source work.
 
 [Hear the episode here](https://graphqlradio.com/episodes/postgraphile-and-beyond-w-benjie-gillam-graphql-technical-steering-committee-member)
+
+<div class="flex flex-wrap justify-around">
+<img alt="GraphQL Radio logo, its a radio telegraph pole." src="/images/news/graphqlradio.jpg" style="max-height: 300px" />
+</div>

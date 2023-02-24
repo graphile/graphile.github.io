@@ -53,7 +53,7 @@ class News extends Component {
                 <div class="row">
                   <div class="col-xs-12">
                     <div class="hero-block">
-                      <h1> Graphile Announcements</h1>
+                      <h1> Graphile News</h1>
                       <h3>
                         The latest news on PostGraphile and the Graphile suite
                       </h3>
@@ -61,9 +61,9 @@ class News extends Component {
                       <div class="flex">
                         <a
                           class="button--solid-light"
-                          href="/news/20221020-development-support/"
+                          href="/news/20221011-worker-014/"
                         >
-                          Latest Announcement{" "}
+                          Latest Release News{" "}
                           <span class="fas fa-fw fa-arrow-right" />
                         </a>
                       </div>
