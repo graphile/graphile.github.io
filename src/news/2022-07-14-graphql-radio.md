@@ -4,8 +4,6 @@ layout: post
 title: GraphQL Radio Interviews Benjie 
 date: 2022-07-14T01:00:00Z
 path: /news/20220714-graphql-radio/ 
-thumbnail: /images/news/graphqlradio.jpg
-thumbnailAlt: "GraphQL Radio logo, its a radio telegraph pole." 
 tags: podcast, graphql 
 noToc: true
 
@@ -25,8 +23,4 @@ a teenager (and quickly discovering he much preferred to study something else at
 university!), how he goes about running an open source business with Jem, and
 the widespread benefits of supporting open source work.
 
-[Hear the episode here](https://graphqlradio.com/episodes/postgraphile-and-beyond-w-benjie-gillam-graphql-technical-steering-committee-member)
-
-<div class="flex flex-wrap justify-around">
-<img alt="GraphQL Radio logo, its a radio telegraph pole." src="/images/news/graphqlradio.jpg" style="max-height: 300px" />
-</div>
+[Hear the episode here.](https://graphqlradio.com/episodes/postgraphile-and-beyond-w-benjie-gillam-graphql-technical-steering-committee-member)
