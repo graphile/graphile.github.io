@@ -325,197 +325,197 @@ which are optional. The below options are valid for
   PostgreSQL schema(s) you to expose via PostGraphile; defaults to 'public'
 - **`options`**: An object containing other miscellaneous options. Options
   include: <!-- prettier-ignore-start --><!-- LIBRARY_DOCBLOCK_BEGIN -->
-  - `watchPg`: When true, PostGraphile will update the GraphQL API whenever your
-    database schema changes. This feature requires some changes to your database
-    in the form of the
-    [`postgraphile_watch`](https://github.com/graphile/graphile-engine/blob/master/packages/graphile-build-pg/res/watch-fixtures.sql)
-    schema; PostGraphile will try to add this itself but requires DB superuser
-    privileges to do so. If PostGraphile can't install it, you can do so
-    manually. PostGraphile will not drop the schema when it exits, to remove it
-    you can execute: `DROP SCHEMA postgraphile_watch CASCADE;`
-  - `retryOnInitFail`: When false (default), PostGraphile will exit if it fails
-    to build the initial schema (for example if it cannot connect to the
-    database, or if there are fatal naming conflicts in the schema). When true,
-    PostGraphile will keep trying to rebuild the schema indefinitely, using an
-    exponential backoff between attempts, starting at 100ms and increasing up to
-    30s delay between retries. When a function, the function will be called
-    passing the error and the number of attempts, and it should return true to
-    retry, false to permanently abort trying.
-  - `ownerConnectionString`: Connection string to use to connect to the database
-    as a privileged user (e.g. for setting up watch fixtures, logical decoding,
-    etc).
-  - `subscriptions`: Enable GraphQL websocket transport support for
-    subscriptions (you still need a subscriptions plugin currently)
-  - `live`: [EXPERIMENTAL] Enables live-query support via GraphQL subscriptions
-    (sends updated payload any time nested collections/records change)
-  - `websockets`: Choose which websocket transport libraries to use. Use commas
-    to define multiple. Defaults to `['v0', 'v1']` if `subscriptions` or `live`
-    are true, `[]` otherwise
-  - `websocketOperations`: Toggle which GraphQL websocket transport operations
-    are supported: 'subscriptions' or 'all'. Defaults to `subscriptions`
-  - `websocketMiddlewares`: [EXPERIMENTAL] If you're using websockets
-    (subscriptions || live) then you may want to authenticate your users using
-    sessions or similar. You can pass some simple middlewares here that will be
-    executed against the websocket connection in order to perform
-    authentication. We current only support Express (not Koa, Fastify, Restify,
-    etc) middlewares here.
-  - `pgDefaultRole`: The default Postgres role to use. If no role was provided
-    in a provided JWT token, this role will be used.
-  - `dynamicJson`: By default, JSON and JSONB fields are presented as strings
-    (JSON encoded) from the GraphQL schema. Setting this to `true` (recommended)
-    enables raw JSON input and output, saving the need to parse / stringify JSON
-    manually.
-  - `setofFunctionsContainNulls`: If none of your `RETURNS SETOF compound_type`
-    functions mix NULLs with the results then you may set this false to reduce
-    the nullables in the GraphQL schema.
-  - `classicIds`: Enables classic ids for Relay support. Instead of using the
-    field name `nodeId` for globally unique ids, PostGraphile will instead use
-    the field name `id` for its globally unique ids. This means that table `id`
-    columns will also get renamed to `rowId`.
-  - `disableDefaultMutations`: Setting this to `true` will prevent the creation
-    of the default mutation types & fields. Database mutation will only be
-    possible through Postgres functions.
-  - `ignoreRBAC`: Set false (recommended) to exclude fields, queries and
-    mutations that are not available to any possible user (determined from the
-    user in connection string and any role they can become); set this option
-    true to skip these checks and create GraphQL fields and types for
-    everything. The default is `true`, in v5 the default will change to `false`.
-  - `ignoreIndexes`: Set false to exclude filters, orderBy, and
-    relations that would be expensive to access due to missing indexes. Changing
-    this from true to false is a breaking change, but false to true is not. The
-    default is `true`.
-  - `includeExtensionResources`: By default, tables and functions that come from
-    extensions are excluded from the generated GraphQL schema as general
-    applications don't need them to be exposed to the end user. You can use this
-    flag to include them in the generated schema (not recommended).
-  - `showErrorStack`: Enables adding a `stack` field to the error response. Can
-    be either the boolean `true` (which results in a single stack string) or the
-    string `json` (which causes the stack to become an array with elements for
-    each line of the stack). Recommended in development, not recommended in
-    production.
-  - `extendedErrors`: Extends the error response with additional details from
-    the Postgres error. Can be any combination of
-    `['hint', 'detail', 'errcode']`. Default is `[]`.
-  - `handleErrors`: Enables ability to modify errors before sending them down to
-    the client. Optionally can send down custom responses. If you use this then
-    `showErrorStack` and `extendedError` may have no effect.
-  - `appendPlugins`: An array of [Graphile Engine](/graphile-build/plugins/)
-    schema plugins to load after the default plugins.
-  - `prependPlugins`: An array of [Graphile Engine](/graphile-build/plugins/)
-    schema plugins to load before the default plugins (you probably don't want
-    this).
-  - `replaceAllPlugins`: The full array of
-    [Graphile Engine](/graphile-build/plugins/) schema plugins to use for schema
-    generation (you almost definitely don't want this!).
-  - `skipPlugins`: An array of [Graphile Engine](/graphile-build/plugins/)
-    schema plugins to skip.
-  - `readCache`: A file path string or an object. Reads cached values to improve
-    startup time (you may want to do this in production).
-  - `writeCache`: A file path string. Writes computed values to local cache file
-    so startup can be faster (do this during the build phase).
-  - `exportJsonSchemaPath`: Enables saving the detected schema, in JSON format,
-    to the given location. The directories must exist already, if the file
-    exists it will be overwritten.
-  - `exportGqlSchemaPath`: Enables saving the detected schema, in GraphQL schema
-    format, to the given location. The directories must exist already, if the
-    file exists it will be overwritten.
-  - `sortExport`: If true, lexicographically (alphabetically) sort exported
-    schema for more stable diffing.
-  - `graphqlRoute`: The endpoint the GraphQL executer will listen on. Defaults
-    to `/graphql`.
-  - `eventStreamRoute`: The endpoint the watch-mode EventStream will be mounted
-    on (only appropriate when watchPg is specified). Defaults to
-    `${graphqlRoute}/stream`.
-  - `externalGraphqlRoute`: The URL to the GraphQL endpoint for embedding into
-    the GraphiQL client. We attempt to infer this (for many servers it is the
-    same as `graphqlRoute`), but you may need to specify it manually if you
-    mount PostGraphile behind a URL-rewriting proxy, or mount PostGraphile on a
-    subpath in certain Node.js servers.
-  - `externalEventStreamRoute`: As with `externalGraphqlRoute`, but for
-    `eventStreamRoute` rather than `graphqlRoute`. This is also used for the
-    `X-GraphQL-Event-Stream` header.
-  - `graphiqlRoute`: The endpoint the GraphiQL query interface will listen on
-    (**NOTE:** GraphiQL will not be enabled unless the `graphiql` option is set
-    to `true`). Defaults to `/graphiql`.
-  - `externalUrlBase`: DEPRECATED - use `externalGraphqlRoute` and
-    `externalEventStreamRoute` instead. If you are using watch mode, or have
-    enabled GraphiQL, and you either mount PostGraphile under a path, or use
-    PostGraphile behind some kind of proxy that puts PostGraphile under a
-    subpath (or both!) then you must specify this setting so that PostGraphile
-    can figure out it's external URL. (e.g. if you do
-    `app.use('/path/to', postgraphile(...))`), which is not officially
-    supported, then you should pass `externalUrlBase: '/path/to'`.) This setting
-    should never end in a slash (`/`). To specify that the external URL is the
-    expected one, either omit this setting or set it to the empty string `''`.
-  - `graphiql`: Set this to `true` to enable the GraphiQL interface.
-  - `graphiqlCredentials`: Set this to change the way GraphiQL handles
-    credentials. By default this is set to `same-origin`.
-  - `enhanceGraphiql`: Set this to `true` to add some enhancements to GraphiQL;
-    intended for development usage only (automatically enables with
-    `subscriptions` and `live`).
-  - `enableCors`: Enables some generous CORS settings for the GraphQL endpoint.
-    There are some costs associated when enabling this, if at all possible try
-    to put your API behind a reverse proxy.
-  - `bodySizeLimit`: Set the maximum size of HTTP request bodies that can be
-    parsed (default 100kB). The size can be given as a human-readable string,
-    such as '200kB' or '5MB' (case insensitive).
-  - `enableQueryBatching`: [Experimental] Enable the middleware to process
-    multiple GraphQL queries in one request.
-  - `jwtSecret`: The secret for your JSON web tokens. This will be used to
-    verify tokens in the `Authorization` header, and signing JWT tokens you
-    return in procedures.
-  - `jwtPublicKey`: The public key to verify the JWT when signed with RS265 or
-    ES256 algorithms.
-  - `jwtVerifyOptions`: Options with which to perform JWT verification - see
-    https://github.com/auth0/node-jsonwebtoken#jwtverifytoken-secretorpublickey-options-callback
-    If 'audience' property is unspecified, it will default to ['postgraphile'];
-    to prevent audience verification set it explicitly to null.
-  - `jwtSignOptions`: Options with which to perform JWT signing - see
-    https://github.com/auth0/node-jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback
-  - `jwtRole`: An array of (strings) path components that make up the path in
-    the jwt from which to extract the postgres role. By default, the role is
-    extracted from `token.role`, so the default value is `['role']`. e.g.
-    `{ iat: 123456789, creds: { local: { role: "my_role" } } }` the path would
-    be `token.creds.local.role` i.e. `['creds', 'local', 'role']`
-  - `jwtPgTypeIdentifier`: The Postgres type identifier for the compound type
-    which will be signed as a JWT token if ever found as the return type of a
-    procedure. Can be of the form: `my_schema.my_type`. You may use quotes as
-    needed: `"my-special-schema".my_type`.
-  - `jwtAudiences`: [DEPRECATED] The audience to use when verifing the JWT
-    token. Deprecated, use `jwtVerifyOptions.audience` instead.
-  - `legacyRelations`: Some one-to-one relations were previously detected as
-    one-to-many - should we export 'only' the old relation shapes, both new and
-    old but mark the old ones as 'deprecated' (default), or 'omit' (recommended)
-    the old relation shapes entirely.
-  - `legacyJsonUuid`: ONLY use this option if you require the v3 typenames
-    'Json' and 'Uuid' over 'JSON' and 'UUID'.
-  - `disableQueryLog`: Turns off GraphQL query logging. By default PostGraphile
-    will log every GraphQL query it processes along with some other information.
-    Set this to `true` (recommended in production) to disable that feature.
-  - `pgSettings`: A plain object specifying custom config values to set in the
-    PostgreSQL transaction (accessed via `current_setting('my.custom.setting')`)
-    **or** an (optionally asynchronous) function which will return the same (or
-    a Promise to the same) based on the incoming web request (e.g. to extract
-    session data).
-  - `allowExplain`: [Experimental] Determines if the 'Explain' feature in
-    GraphiQL can be used to show the user the SQL statements that were executed.
-    Set to a boolean to enable all users to use this, or to a function that
-    filters each request to determine if the request may use Explain. DO NOT USE
-    IN PRODUCTION unless you're comfortable with the security repurcussions of
-    doing so.
   - `additionalGraphQLContextFromRequest`: Some Graphile Engine schema plugins
-    may need additional information available on the `context` argument to the
-    resolver - you can use this function to provide such information based on
-    the incoming request - you can even use this to change the response
-    [experimental], e.g. setting cookies.
+      may need additional information available on the `context` argument to the
+      resolver - you can use this function to provide such information based on
+      the incoming request - you can even use this to change the response
+      [experimental], e.g. setting cookies.
+  - `allowExplain`: [Experimental] Determines if the 'Explain' feature in
+      GraphiQL can be used to show the user the SQL statements that were executed.
+      Set to a boolean to enable all users to use this, or to a function that
+      filters each request to determine if the request may use Explain. DO NOT USE
+      IN PRODUCTION unless you're comfortable with the security repurcussions of
+      doing so.
+  - `appendPlugins`: An array of [Graphile Engine](/graphile-build/plugins/)
+      schema plugins to load after the default plugins.
+  - `bodySizeLimit`: Set the maximum size of HTTP request bodies that can be
+      parsed (default 100kB). The size can be given as a human-readable string,
+      such as '200kB' or '5MB' (case insensitive).
+  - `classicIds`: Enables classic ids for Relay support. Instead of using the
+      field name `nodeId` for globally unique ids, PostGraphile will instead use
+      the field name `id` for its globally unique ids. This means that table `id`
+      columns will also get renamed to `rowId`.
+  - `disableDefaultMutations`: Setting this to `true` will prevent the creation
+      of the default mutation types & fields. Database mutation will only be
+      possible through Postgres functions.
+  - `disableQueryLog`: Turns off GraphQL query logging. By default PostGraphile
+      will log every GraphQL query it processes along with some other information.
+      Set this to `true` (recommended in production) to disable that feature.
+  - `dynamicJson`: By default, JSON and JSONB fields are presented as strings
+      (JSON encoded) from the GraphQL schema. Setting this to `true` (recommended)
+      enables raw JSON input and output, saving the need to parse / stringify JSON
+      manually.
+  - `enableCors`: Enables some generous CORS settings for the GraphQL endpoint.
+      There are some costs associated when enabling this, if at all possible try
+      to put your API behind a reverse proxy.
+  - `enableQueryBatching`: [Experimental] Enable the middleware to process
+      multiple GraphQL queries in one request.
+  - `enhanceGraphiql`: Set this to `true` to add some enhancements to GraphiQL;
+      intended for development usage only (automatically enables with
+      `subscriptions` and `live`).
+  - `eventStreamRoute`: The endpoint the watch-mode EventStream will be mounted
+      on (only appropriate when watchPg is specified). Defaults to
+      `${graphqlRoute}/stream`.
+  - `exportGqlSchemaPath`: Enables saving the detected schema, in GraphQL schema
+      format, to the given location. The directories must exist already, if the
+      file exists it will be overwritten.
+  - `exportJsonSchemaPath`: Enables saving the detected schema, in JSON format,
+      to the given location. The directories must exist already, if the file
+      exists it will be overwritten.
+  - `extendedErrors`: Extends the error response with additional details from
+      the Postgres error. Can be any combination of
+      `['hint', 'detail', 'errcode']`. Default is `[]`.
+  - `externalEventStreamRoute`: As with `externalGraphqlRoute`, but for
+      `eventStreamRoute` rather than `graphqlRoute`. This is also used for the
+      `X-GraphQL-Event-Stream` header.
+  - `externalGraphqlRoute`: The URL to the GraphQL endpoint for embedding into
+      the GraphiQL client. We attempt to infer this (for many servers it is the
+      same as `graphqlRoute`), but you may need to specify it manually if you
+      mount PostGraphile behind a URL-rewriting proxy, or mount PostGraphile on a
+      subpath in certain Node.js servers.
+  - `externalUrlBase`: DEPRECATED - use `externalGraphqlRoute` and
+      `externalEventStreamRoute` instead. If you are using watch mode, or have
+      enabled GraphiQL, and you either mount PostGraphile under a path, or use
+      PostGraphile behind some kind of proxy that puts PostGraphile under a
+      subpath (or both!) then you must specify this setting so that PostGraphile
+      can figure out it's external URL. (e.g. if you do
+      `app.use('/path/to', postgraphile(...))`), which is not officially
+      supported, then you should pass `externalUrlBase: '/path/to'`.) This setting
+      should never end in a slash (`/`). To specify that the external URL is the
+      expected one, either omit this setting or set it to the empty string `''`.
+  - `graphiqlCredentials`: Set this to change the way GraphiQL handles
+      credentials. By default this is set to `same-origin`.
+  - `graphiqlRoute`: The endpoint the GraphiQL query interface will listen on
+      (**NOTE:** GraphiQL will not be enabled unless the `graphiql` option is set
+      to `true`). Defaults to `/graphiql`.
+  - `graphiql`: Set this to `true` to enable the GraphiQL interface.
+  - `graphqlRoute`: The endpoint the GraphQL executer will listen on. Defaults
+      to `/graphql`.
+  - `handleErrors`: Enables ability to modify errors before sending them down to
+      the client. Optionally can send down custom responses. If you use this then
+      `showErrorStack` and `extendedError` may have no effect.
+  - `ignoreIndexes`: Set false to exclude filters, orderBy, and
+      relations that would be expensive to access due to missing indexes. Changing
+      this from true to false is a breaking change, but false to true is not. The
+      default is `true`.
+  - `ignoreRBAC`: Set false (recommended) to exclude fields, queries and
+      mutations that are not available to any possible user (determined from the
+      user in connection string and any role they can become); set this option
+      true to skip these checks and create GraphQL fields and types for
+      everything. The default is `true`, in v5 the default will change to `false`.
+  - `includeExtensionResources`: By default, tables and functions that come from
+      extensions are excluded from the generated GraphQL schema as general
+      applications don't need them to be exposed to the end user. You can use this
+      flag to include them in the generated schema (not recommended).
+  - `jwtAudiences`: [DEPRECATED] The audience to use when verifing the JWT
+      token. Deprecated, use `jwtVerifyOptions.audience` instead.
+  - `jwtPgTypeIdentifier`: The Postgres type identifier for the compound type
+      which will be signed as a JWT token if ever found as the return type of a
+      procedure. Can be of the form: `my_schema.my_type`. You may use quotes as
+      needed: `"my-special-schema".my_type`.
+  - `jwtPublicKey`: The public key to verify the JWT when signed with RS265 or
+      ES256 algorithms.
+  - `jwtRole`: An array of (strings) path components that make up the path in
+      the jwt from which to extract the postgres role. By default, the role is
+      extracted from `token.role`, so the default value is `['role']`. e.g.
+      `{ iat: 123456789, creds: { local: { role: "my_role" } } }` the path would
+      be `token.creds.local.role` i.e. `['creds', 'local', 'role']`
+  - `jwtSecret`: The secret for your JSON web tokens. This will be used to
+      verify tokens in the `Authorization` header, and signing JWT tokens you
+      return in procedures.
+  - `jwtSignOptions`: Options with which to perform JWT signing - see
+      https://github.com/auth0/node-jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback
+  - `jwtVerifyOptions`: Options with which to perform JWT verification - see
+      https://github.com/auth0/node-jsonwebtoken#jwtverifytoken-secretorpublickey-options-callback
+      If 'audience' property is unspecified, it will default to ['postgraphile'];
+      to prevent audience verification set it explicitly to null.
+  - `legacyJsonUuid`: ONLY use this option if you require the v3 typenames
+      'Json' and 'Uuid' over 'JSON' and 'UUID'.
+  - `legacyRelations`: Some one-to-one relations were previously detected as
+      one-to-many - should we export 'only' the old relation shapes, both new and
+      old but mark the old ones as 'deprecated' (default), or 'omit' (recommended)
+      the old relation shapes entirely.
+  - `live`: [EXPERIMENTAL] Enables live-query support via GraphQL subscriptions
+      (sends updated payload any time nested collections/records change)
+  - `ownerConnectionString`: Connection string to use to connect to the database
+      as a privileged user (e.g. for setting up watch fixtures, logical decoding,
+      etc).
+  - `pgDefaultRole`: The default Postgres role to use. If no role was provided
+      in a provided JWT token, this role will be used.
+  - `pgSettings`: A plain object specifying custom config values to set in the
+      PostgreSQL transaction (accessed via `current_setting('my.custom.setting')`)
+      **or** an (optionally asynchronous) function which will return the same (or
+      a Promise to the same) based on the incoming web request (e.g. to extract
+      session data).
   - `pluginHook`: [experimental] Plugin hook function, enables functionality
-    within PostGraphile to be expanded with plugins. Generate with
-    `makePluginHook(plugins)` passing a list of plugin objects.
-  - `simpleCollections`: Should we use relay pagination, or simple collections?
-    "omit" (default) - relay connections only, "only" (not recommended) - simple
-    collections only (no Relay connections), "both" - both.
+      within PostGraphile to be expanded with plugins. Generate with
+      `makePluginHook(plugins)` passing a list of plugin objects.
+  - `prependPlugins`: An array of [Graphile Engine](/graphile-build/plugins/)
+      schema plugins to load before the default plugins (you probably don't want
+      this).
   - `queryCacheMaxSize`: Max query cache size in bytes (extremely approximate,
-    not accurate at all). Default `50000000` (~50MB). Set to 0 to disable.
+      not accurate at all). Default `50000000` (~50MB). Set to 0 to disable.- `readCache`: A file path string or an object. Reads cached values to improve
+      startup time (you may want to do this in production).
+  - `replaceAllPlugins`: The full array of
+      [Graphile Engine](/graphile-build/plugins/) schema plugins to use for schema
+      generation (you almost definitely don't want this!).
+  - `retryOnInitFail`: When false (default), PostGraphile will exit if it fails
+      to build the initial schema (for example if it cannot connect to the
+      database, or if there are fatal naming conflicts in the schema). When true,
+      PostGraphile will keep trying to rebuild the schema indefinitely, using an
+      exponential backoff between attempts, starting at 100ms and increasing up to
+      30s delay between retries. When a function, the function will be called
+      passing the error and the number of attempts, and it should return true to
+      retry, false to permanently abort trying.
+  - `setofFunctionsContainNulls`: If none of your `RETURNS SETOF compound_type`
+      functions mix NULLs with the results then you may set this false to reduce
+      the nullables in the GraphQL schema.
+  - `showErrorStack`: Enables adding a `stack` field to the error response. Can
+      be either the boolean `true` (which results in a single stack string) or the
+      string `json` (which causes the stack to become an array with elements for
+      each line of the stack). Recommended in development, not recommended in
+      production.
+  - `simpleCollections`: Should we use relay pagination, or simple collections?
+      "omit" (default) - relay connections only, "only" (not recommended) - simple
+      collections only (no Relay connections), "both" - both.
+  - `skipPlugins`: An array of [Graphile Engine](/graphile-build/plugins/)
+      schema plugins to skip.
+  - `sortExport`: If true, lexicographically (alphabetically) sort exported
+      schema for more stable diffing.
+  - `subscriptions`: Enable GraphQL websocket transport support for
+      subscriptions (you still need a subscriptions plugin currently)
+  - `watchPg`: When true, PostGraphile will update the GraphQL API whenever your
+      database schema changes. This feature requires some changes to your database
+      in the form of the
+      [`postgraphile_watch`](https://github.com/graphile/graphile-engine/blob/master/packages/graphile-build-pg/res/watch-fixtures.sql)
+      schema; PostGraphile will try to add this itself but requires DB superuser
+      privileges to do so. If PostGraphile can't install it, you can do so
+      manually. PostGraphile will not drop the schema when it exits, to remove it
+      you can execute: `DROP SCHEMA postgraphile_watch CASCADE;`
+  - `websocketMiddlewares`: [EXPERIMENTAL] If you're using websockets
+      (subscriptions || live) then you may want to authenticate your users using
+      sessions or similar. You can pass some simple middlewares here that will be
+      executed against the websocket connection in order to perform
+      authentication. We current only support Express (not Koa, Fastify, Restify,
+      etc) middlewares here.
+  - `websocketOperations`: Toggle which GraphQL websocket transport operations
+      are supported: 'subscriptions' or 'all'. Defaults to `subscriptions`
+  - `websockets`: Choose which websocket transport libraries to use. Use commas
+      to define multiple. Defaults to `['v0', 'v1']` if `subscriptions` or `live`
+      are true, `[]` otherwise
+  - `writeCache`: A file path string. Writes computed values to local cache file
+      so startup can be faster (do this during the build phase).
+
 
 <!-- LIBRARY_DOCBLOCK_END -->
 <!-- prettier-ignore-end -->
