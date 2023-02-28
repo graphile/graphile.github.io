@@ -1,12 +1,15 @@
 const path = require("path");
 //const { createFilePath } = require(`gatsby-source-filesystem`);
 
+const postsPerPage = 8;
+
 exports.createPages = async ({ actions, graphql }) => {
   const { createPage } = actions;
 
   const layouts = {
     page: path.resolve(`src/templates/page.js`),
     marketing: path.resolve(`src/templates/marketing.js`),
+    news: path.resolve(`src/templates/news.js`),
     home: path.resolve(`src/templates/home.js`),
   };
 
@@ -25,6 +28,9 @@ exports.createPages = async ({ actions, graphql }) => {
             }
           }
         }
+      }
+      news: allFile(filter: { sourceInstanceName: { eq: "news" } }) {
+        totalCount
       }
     }
   `);
@@ -48,6 +54,22 @@ exports.createPages = async ({ actions, graphql }) => {
       context: {
         slug: node.frontmatter.path,
         layout: node.frontmatter.layout || "page",
+      },
+    });
+  });
+
+  // Create blog-list pages
+  const postCount = result.data.news.totalCount;
+  const numPages = Math.ceil(postCount / postsPerPage);
+  Array.from({ length: numPages }).forEach((_, i) => {
+    createPage({
+      path: i === 0 ? `/news` : `/news/${i + 1}`,
+      component: path.resolve("./src/templates/news.js"),
+      context: {
+        limit: postsPerPage,
+        skip: i * postsPerPage,
+        numPages,
+        currentPage: i + 1,
       },
     });
   });

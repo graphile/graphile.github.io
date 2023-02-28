@@ -4,42 +4,161 @@
     "sections": [
       {
         "id": "main",
-        "title": "Archive"
+        "title": "Releases"
       },
       {
         "id": "about",
-        "title": "About"
+        "title": "About Graphile"
+      },
+      {
+        "id": "misc",
+        "title": "Talks, Events & Podcasts"
       }
     ],
     "pages": [
       {
+        "to": "/news/20221020-development-support/",
+        "title": "Development Support Now Available",
+        "sectionId": "about"
+      },
+      {
+        "to": "/news/20221011-worker-014/",
+        "title": "Graphile Worker 0.14 - Batch Jobs",
+        "sectionId": "main"
+      },
+      {
+        "to": "/news/20220714-graphql-radio/",
+        "title": "GraphQL Radio Appearance",
+        "sectionId": "misc"
+      },
+      {
+        "to": "/news/20220704-github-readme/",
+        "title": "Jem's Discussion Panel at GitHub ReadME",
+        "sectionId": "about"
+      },
+      {
+        "to": "/news/20220607-spec-news/",
+        "title": "Spec News Pod Launch",
+        "sectionId": "misc"
+      },
+      {
+        "to": "/news/20220415-graphql-over-sse/",
+        "title": "GraphQL over SSE",
+        "sectionId": "main"
+      },
+      {
+        "to": "/news/20211207-graphql-galaxy/",
+        "title": "Working Group Discussion Panel",
+        "sectionId": "misc"
+      },
+      {
+        "to": "/news/20211109-graphql-summit/",
+        "title": "What's Next for the GraphQL Spec in 2022?",
+        "sectionId": "misc"
+      },
+      {
+        "to": "/news/20210527-postgraphile-412/",
+        "title": "PostGraphile 4.12 - Awesome Aggregates",
+        "sectionId": "main"
+      },
+      {
+        "to": "/news/20210129-postgraphile-411/",
+        "title": "PostGraphile 4.11 - Wonderful Websockets",
+        "sectionId": "main"
+      },
+      {
+        "to": "/news/20210120-worker-09/",
+        "title": "Graphile Worker 0.9",
+        "sectionId": "main"
+      },
+      {
+        "to": "/news/20201208-github-sponsors/",
+        "title": "GitHub Sponsors Now Available to Organizations",
+        "sectionId": "about"
+      },
+      {
+        "to": "/news/20201127-postgraphile-410/",
+        "title": "PostGraphile 4.10 - Framework Friends",
+        "sectionId": "main"
+      },
+      {
+        "to": "/news/20200922-github-readme/",
+        "title": "Benjie's Story at GitHub ReadME",
+        "sectionId": "about"
+      },
+      {
+        "to": "/news/20201127-migrate-1/",
+        "title": "Graphile Migrate Reaches 1.0 Milestone",
+        "sectionId": "main"
+      },
+      {
+        "to": "/news/20200805-postgraphile-48/",
+        "title": "PostGraphile 4.8 - Excellent Enums",
+        "sectionId": "main"
+      },
+      {
+        "to": "/news/20200721-rita/",
+        "title": "pgRITA - A Tool for Postgres",
+        "sectionId": "main"
+      },
+      {
+        "to": "/news/20200427-starter-30/",
+        "title": "Graphile Starter 3.0",
+        "sectionId": "main"
+      },
+      {
+        "to": "/news/20200317-migrate-01/",
+        "title": "Graphile Migrate 0.1",
+        "sectionId": "main"
+      },
+      {
+        "to": "/news/20200205-worker-04/",
+        "title": "Graphile Worker 0.4",
+        "sectionId": "main"
+      },
+      {
+        "to": "/news/20200131-fosdem/",
+        "title": "Graphile Goes to FOSDEM 2020",
+        "sectionId": "misc"
+      },
+      {
         "to": "/news/graphile-starter/",
-        "title": "Graphile Starter is here",
+        "title": "Graphile Starter Released",
         "sectionId": "main"
       },
       {
         "to": "/news/postgraphile-version-4-5/",
-        "title": "Version 4.5 - Explain feature",
+        "title": "PostGraphile 4.5 - Explain Feature",
         "sectionId": "main"
       },
       {
+        "to": "/news/20191104-reactive-conf/",
+        "title": "Increasing velocity with GraphQL and Postgres",
+        "sectionId": "misc"
+      },
+      {
         "to": "/news/postgraphile-version-4-4/",
-        "title": "Version 4.4 - Real-time",
+        "title": "PostGraphile 4.4 - Real-time",
         "sectionId": "main"
       },
       {
         "to": "/news/postgraphile-version-4-1/",
-        "title": "Version 4.1 - Better Webpackability",
+        "title": "PostGraphile 4.1 - Better Webpackability",
         "sectionId": "main"
       },
       {
+        "to": "/news/20181023-graphql-finland/",
+        "title": "Database-Driven GraphQL Development",
+        "sectionId": "misc"
+      },
+      {
         "to": "/news/postgraphile-version-4/",
-        "title": "Version 4 - Fantastic Performance",
+        "title": "PostGraphile 4.0 - Fantastic Performance",
         "sectionId": "main"
       },
       {
         "to": "/news/press-kit/",
-        "title": "Press Kit",
+        "title": "Graphile Press Kit",
         "sectionId": "about"
       }
     ]
