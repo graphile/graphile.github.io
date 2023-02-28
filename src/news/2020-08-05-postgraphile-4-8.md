@@ -14,7 +14,7 @@ summary:
   enum tables and geometric types."
 ---
 
-_Announced 2020-08-05_
+_Announced 2020-08-05 by the Graphile Team_
 
 <p class='intro'>
 Graphile is pleased to announce the release of PostGraphile version 4.8.0, an upgrade recommended for all PostGraphile users, which introduces support for enum tables and geometric types.
@@ -31,9 +31,8 @@ Instead, we recommend creating a table where the enum value is the primary key,
 and use foreign key constraints to reference this value.
 
 This functionality is now written inside of PostGraphile. This means you may
-need to revisit your database permissions if you wish to use this
-functionality - don't worry, it only queries the table if it sees the `@enum`
-smart comment.
+need to revisit your database permissions if you wish to use this functionality
+⁠— don't worry, it only queries the table if it sees the `@enum` smart comment.
 
 An enum table must have a text (or varchar / char) primary key, and may have
 other columns. It must be done through using an `@enum` smart comment (and not a
@@ -83,8 +82,8 @@ project. You can see our entire suite of projects
 ### Thank you Sponsors!
 
 Dear Sponsors: we love you! Thank you so much for continuing to support us
-during these difficult pandemic times, the progress of the Graphile projects --
-and of course the development of Version 5 -- would not be possible without your
+during these difficult pandemic times, the progress of the Graphile projects ⁠—
+and of course the development of Version 5 ⁠— would not be possible without your
 support ❤️
 
 **PostGraphile Development:** work on Version 5 is underway, for more details

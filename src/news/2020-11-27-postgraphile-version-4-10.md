@@ -15,7 +15,7 @@ summary:
   community members."
 ---
 
-_Announced 2020-11-27_
+_Announced 2020-11-27 by Team Graphile_
 
 <p class='intro'>
 Graphile is pleased to announce the release of PostGraphile version 4.10, an upgrade introducing better support for various Node.js webserver frameworks, an upgraded GraphiQL and GraphiQL Explorer, and improvements added by our community members.

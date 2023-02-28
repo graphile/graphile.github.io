@@ -13,7 +13,7 @@ summary:
   significant update bringing full support for aggregates."
 ---
 
-_Announced 2021-05-27_
+_Announced 2021-05-27 by the Graphile Team_
 
 <p class='intro'>
 Graphile is pleased to announce the release of PostGraphile version 4.12 - a significant update bringing full support for aggregates. 

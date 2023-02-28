@@ -33,7 +33,7 @@ will show executed query in a readable format.
 ### Smart Tags
 
 No longer do you need to put `COMMENT` commands in the database ("smart
-comments") to customise your schema, you can now use a tags file to gather these
+comments") to customize your schema, you can now use a tags file to gather these
 "smart tags" into one, version controlled, easy-to-diff place. Smart comments
 and smart tags can be used in unison, and both will be supported going forward
 so you can pick whichever works best for your team.

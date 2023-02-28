@@ -15,7 +15,7 @@ summary:
   tables', native GraphQL schema validation, and fixes in watch mode."
 ---
 
-_Announced 2021-01-29_
+_Announced 2021-01-29 by the Graphile Team_
 
 <p class='intro'>
 Graphile is pleased to announce the release of PostGraphile version 4.11, an upgrade introducing support for GraphQL websockets, extended support for 'enum tables', native GraphQL schema validation, and fixes in watch mode.
@@ -23,8 +23,8 @@ Graphile is pleased to announce the release of PostGraphile version 4.11, an upg
 
 ### Websocket Support
 
-Thanks to help from the author _@enisdenjo_, PostGraphile 4.11 adds support for
-the new `graphql-ws` websocket transport module to replace Apollo's unmaintained
+Thanks to help from author _@enisdenjo_, PostGraphile 4.11 adds support for the
+new `graphql-ws` websocket transport module to replace Apollo's unmaintained
 `subscriptions-transport-ws`. It's advised that anyone using websockets with
 GraphQL move to this new module and protocol.
 
@@ -39,7 +39,7 @@ behave in a different way.
 
 ### GraphQL Schema Validation
 
-We were surprised to realise that we hadn't yet had PostGraphile validate its
+We were surprised to realize that we hadn't yet had PostGraphile validate its
 GraphQL schema! Fortunately, the schema PostGraphile builds has always been
 valid, and now we have made sure it checks for this. This means that any bugs in
 third-party plugins will now be caught before the server goes live.
@@ -67,9 +67,9 @@ PostGraphile results in huge savings for users. If your organization contributes
 some of these savings back then everyone can benefit from more frequent releases
 with better performance, better compatibility, better documentation, easier
 customization, and more features — leading to even greater savings or profits
-for your organisation.
+for your organization.
 
-[More details about and why to Sponsor Graphile here](/sponsor/)
+[More details about how and why to sponsor Graphile are on our Sponsor page.](/sponsor/)
 
 <div class="flex flex-wrap justify-around">
 <img alt="A cartoon woman sends hearts up into the sky ." src="/images/undraw/undraw_super_thank_you_small.png" style="max-height: 300px" />

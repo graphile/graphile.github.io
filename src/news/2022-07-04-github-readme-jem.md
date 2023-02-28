@@ -8,17 +8,17 @@ tags: community, interview
 summary:
   "This week, Jem discusses how they helped to build the community around
   Graphile, beginning with the early days of PostGraphile and the growing
-  realisation that users wanted an online space to gather and craft bespoke
+  realization that users wanted an online space to gather and craft bespoke
   technologies together."
 ---
 
 _2022-07-04_
 
-This week, Jem took part in the
-[GitHub ReadME project](https://github.com/readme), an endeavour to collect
+<p class="intro">This week, Jem took part in the
+GitHub ReadME project, an endeavour to collect
 stories from open source maintainers and amplify their voices to the wider
 developer community. The project contains many articles, educational material
-and podcasts all focused on the developer community.
+and podcasts all focused on the developer community.</p>
 
 [Click through to the ReadME Project](https://github.blog/2022-06-30-what-to-do-when-your-open-source-project-becomes-a-community/)
 to read a panel interview with Jem alongside
@@ -29,9 +29,9 @@ to read a panel interview with Jem alongside
 
 In this article, Jem discusses how they helped to build the community around
 Graphile, beginning with the early days of PostGraphile and the growing
-realisation that users wanted an online space to come together to craft plugins
+realization that users wanted an online space to come together to craft plugins
 and discuss different approaches of Postgres and GraphQL. When the first
-donations to the project began coming in, they realised it was time to become
+donations to the project began coming in, they realized it was time to become
 more intentional in their approach to community building and began drawing
 inspiration from other open source projects.
 

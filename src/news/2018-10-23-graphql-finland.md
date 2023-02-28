@@ -10,8 +10,9 @@ thumbnailAlt:
   logo"
 
 summary:
-  "Benjie and Jem are pleased to announce the release of new podcast Spec News!
-  A monthly round up of GraphQL Spec news in under ten minutes."
+  "Benjie gave a talk on Database-Driven GraphQL Development at GraphQL Finland.
+  Learn how a database-centric approach to GraphQL API development can give your
+  engineers more time to focus on the important parts of your project."
 ---
 
 _2018-10-23_

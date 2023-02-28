@@ -14,16 +14,16 @@ Science as a teenager."
 
 _2022-07-14_
 
-This week, Benjie appears on the revamped
-[GraphQL Radio podcast](https://graphqlradio.com/) hosted by Max Stoiber (CEO,
-Stellate) and Abhi Aiyer (Tech Lead, Gatsby).
+<p class="intro">This week, Benjie appears on the revamped
+GraphQL Radio podcast hosted by Max Stoiber (CEO,
+Stellate) and Abhi Aiyer (Tech Lead, Gatsby).</p>
 
 They discuss the early days of GraphQL, Benjie's forays into Computer Science as
 a teenager (and quickly discovering he much preferred to study something else at
 university!), how he goes about running an open source business with Jem, and
 the widespread benefits of supporting open source work.
 
-[Hear the episode here.](https://graphqlradio.com/episodes/postgraphile-and-beyond-w-benjie-gillam-graphql-technical-steering-committee-member)
+[Hear the episode on the GraphQL Radio website.](https://graphqlradio.com/episodes/postgraphile-and-beyond-w-benjie-gillam-graphql-technical-steering-committee-member)
 
 <div class="flex flex-wrap justify-around">
 <a href="https://graphqlradio.com/episodes/postgraphile-and-beyond-w-benjie-gillam-graphql-technical-steering-committee-member" target="_blank"><img alt="A greyscale photo of Benjie" src="/images/news/graphqlradio.jpg" style="max-height: 300px" /></a>

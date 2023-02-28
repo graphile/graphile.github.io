@@ -19,10 +19,10 @@ summary:
 
 ### The original GraphQL API for PostgreSQL: now with improved Lambda support
 
-_Announced 2018-12-06_
+_Announced 2018-12-06 by Team Graphile_
 
-Building upon the huge performance gains found in Version 4, Benjie Gillam is
-pleased to announce the release of Version 4.1 of PostGraphile, now with a huge
+Building upon the huge performance gains found in Version 4, Graphile is pleased
+to announce the release of Version 4.1 of PostGraphile, now with a huge
 improvement to startup performance in serverless environments. This update also
 brings a large number of enhancements including much broader PostgreSQL function
 support, an enhanced GraphiQL interface, and a lot more helpers for writing

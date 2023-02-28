@@ -12,7 +12,7 @@ summary:
   features including GraphQL subscriptions and live queries!"
 ---
 
-_Announced 2019-05-03_
+_Announced 2019-05-03 by the Graphile Team_
 
 <p class='intro'>
 Graphile is pleased to announce the release of PostGraphile version 4.4.0, a backwards-compatible* upgrade recommended for all PostGraphile users.

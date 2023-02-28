@@ -16,12 +16,12 @@ summary:
 
 _2021-11-09_
 
-This week, Benjie teamed up with Ivan to give a virtual talk looking at the
-future of the GraphQL Specification at Apollo GraphQL Summit. As long-standing
-community contributors to the GraphQL Specification Working Group, Ivan and
-Benjie presented highlights of the 2021 GraphQL Specification release and
-introduced some of the exciting new features currently working their way towards
-becoming part of the GraphQL Spec.
+This week, Benjie teamed up with Ivan from Apollo to give a virtual talk looking
+at the future of the GraphQL Specification at Apollo GraphQL Summit. As
+long-standing community contributors to the GraphQL Specification Working Group,
+Ivan and Benjie presented highlights of the 2021 GraphQL Specification release
+and introduced some of the exciting new features currently working their way
+towards becoming part of the GraphQL Spec.
 
 <div class="tc">
 <iframe 

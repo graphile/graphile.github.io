@@ -15,7 +15,7 @@ summary:
   many new commands, more configuration options, and a suite of new features."
 ---
 
-_Announced 2020-03-17_
+_Announced 2020-03-17 by Team Graphile_
 
 <p class='intro'>
 The Graphile team are pleased to announce that Graphile Migrate 0.1 is out in pre-release. This is a big milestone for the project, with it finally leaving 0.0.x territory and leaving behind the word "highly" in the phrase "highly experimental"! This release is a significant jump from the previous versions and includes many new commands, more configuration options, as well as a suite of new features.
@@ -24,9 +24,9 @@ The Graphile team are pleased to announce that Graphile Migrate 0.1 is out in pr
 Graphile Migrate is an opinionated, SQL-powered, productive roll-forward
 migration tool for Postgres. In true Graphile style, it is simple, familiar,
 fully functional and fast: Save a file and the database is updated in
-milliseconds. There's no custom DSL to learn, just use Postgres syntax. Graphile
-Migrate pairs well with [PostGraphile](/postgraphile/) and the wider Graphile
-suite of tools. You can find it
+milliseconds. There's no custom DSL to learn, instead use standard Postgres
+syntax. Graphile Migrate pairs well with [PostGraphile](/postgraphile/) and the
+wider Graphile suite of tools. You can find it
 [on GitHub](https://github.com/graphile/migrate/).
 
 <div class="flex flex-wrap justify-around">
@@ -60,10 +60,9 @@ The full, technical details can be found in the
 ### Thank you Graphile Sponsors and contributors!
 
 We extend our gratitude to everyone who has filed issues and pull requests
-against Graphile Migrate, contributors and user feedback are invaluable to open
-source projects and help to push the software to be the best possible version of
-itself it can be. Can you believe that there are currently no open issues or
-pull requests in this project? We don't expect that to last long!
+against Graphile Migrate ⁠— contributors and user feedback are invaluable to
+open source projects and help to push the software to be the best possible
+version of itself it can be.
 
 This freedom to innovate and make our tooling available for free would not be
 possible without our sponsors. The GitHub Sponsor program has been key in
