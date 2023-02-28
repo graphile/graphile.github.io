@@ -1,0 +1,1056 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Graphile News]]></title><description><![CDATA[Community funded open source utilities to build powerful, performant and extensible applications rapidly]]></description><link>https://graphile.org</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 28 Feb 2023 17:50:31 GMT</lastBuildDate><item><title><![CDATA[Development Support Now Available]]></title><description><![CDATA[2022-10-20 Graphile maintainer, GraphQL TSC member and keynote speaker Benjie is well
+placed to offer Development Support for PostGraphile…]]></description><link>https://graphile.org/news/20221020-development-support/</link><guid isPermaLink="false">https://graphile.org/news/20221020-development-support/</guid><pubDate>Thu, 20 Oct 2022 01:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;2022-10-20&lt;/em&gt;&lt;/p&gt;
+&lt;p class=&quot;intro&quot;&gt;The Graphile team are pleased to introduce a new Development Support offering,
+drawing on their experience as educators and leaders in the GraphQL ecosystem.
+Development Support gives your organization access to the knowledge and
+experience of the Graphile team for any issues you have with PostGraphile, the
+Graphile suite and other tools in the ecosystem such as TypeScript, SQL,
+Node.js, GraphQL and more.&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;Benjie stands on a stage, behind him is a presentation slide about the history of Postgres with the caption &apos;Make it work, make it right, make it fast&apos;&quot; src=&quot;/images/news/makeitfast.jpg&quot; style=&quot;max-height: 500px&quot; /&gt;
+&lt;/div&gt;
+&lt;p&gt;Graphile maintainer, GraphQL TSC member and keynote speaker Benjie is well
+placed to offer Development Support for PostGraphile and related technologies in
+the GraphQL ecosystem. Together with the Graphile team, he will lend his
+expertise to your in-house development and push for faster, safer and more
+robust software development and practices.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/support/&quot;&gt;Find out more about the Graphile support offering here.&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Graphile Worker 0.14 - Batch Jobs]]></title><description><![CDATA[Announced 2022-10-11 by the Graphile Team Batch Jobs Normally a job's  is an object; however jobs are also allowed to have a
+ which is an…]]></description><link>https://graphile.org/news/20221011-worker-014/</link><guid isPermaLink="false">https://graphile.org/news/20221011-worker-014/</guid><pubDate>Tue, 11 Oct 2022 01:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;Announced 2022-10-11 by the Graphile Team&lt;/em&gt;&lt;/p&gt;
+&lt;p class=&apos;intro&apos;&gt;
+Graphile are pleased to announce the release of Graphile Worker 0.14, which
+includes many new significant changes in preparation for moving towards version
+1.0.
+&lt;/p&gt;
+&lt;h3 id=&quot;batch-jobs&quot;&gt;&lt;a href=&quot;#batch-jobs&quot; aria-label=&quot;batch jobs permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Batch Jobs&lt;/h3&gt;
+&lt;p&gt;Normally a job&apos;s &lt;code class=&quot;language-text&quot;&gt;payload&lt;/code&gt; is an object; however jobs are also allowed to have a
+&lt;code class=&quot;language-text&quot;&gt;payload&lt;/code&gt; which is an array of objects. Jobs of this type are called &quot;batch
+jobs&quot; and they have a few special behaviours:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;when you use &lt;code class=&quot;language-text&quot;&gt;job_key&lt;/code&gt; in &lt;code class=&quot;language-text&quot;&gt;replace&lt;/code&gt; or &lt;code class=&quot;language-text&quot;&gt;preserve_run_at&lt;/code&gt; mode, when a job is
+replaced/updated, instead of overwriting the payload, the existing and new
+payloads will be merged into a larger array (this only occurs when the
+existing and new payloads are both arrays, otherwise the payload is simply
+replaced).&lt;/li&gt;
+&lt;li&gt;when a task executes a batch job, it may return a list of promises that is the
+same length as the payload array. If any of these promises reject, then the
+job is said to have &apos;partial success&apos;, the result of which is it being sent
+back to the queue for a retry, but with the successful objects removed from
+the payload so only the failed objects will be retried.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Batch jobs can be useful where you need to aggregate multiple tasks together
+over time for efficiency; for example if you have a notification system you
+might schedule a notification to be sent to a user in 2 minutes time that they
+received a DM. Over the next 2 minutes if any other DMs are received, these can
+be appended to the job payload such that when the job executes it can inform the
+user of all of these DMs, not just the latest one.&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;A man pushes a trolley full of packages.&quot; src=&quot;/images/news/worker-batching.svg&quot; style=&quot;max-height: 300px&quot;&gt;
+&lt;/div&gt;
+&lt;h3 id=&quot;other-features&quot;&gt;&lt;a href=&quot;#other-features&quot; aria-label=&quot;other features permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Other Features&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Significantly improved &apos;large jobs table&apos; performance (e.g. when a large queue
+is locked, or there&apos;s a lot of jobs queued for task identifiers your worker
+instance doesn&apos;t support, or a lot of failed jobs). There&apos;s around 20x
+improvement in this &apos;worst case&apos; performance for real user workloads.&lt;/li&gt;
+&lt;li&gt;Added new (experimental) much faster &lt;code class=&quot;language-text&quot;&gt;add_jobs&lt;/code&gt; batch API.&lt;/li&gt;
+&lt;li&gt;Fix error handling of cron issues in &apos;run&apos; method.&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;CronItem.match&lt;/code&gt; can now accept either a pattern string or a matcher function.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;See the full update in the project&apos;s
+&lt;a href=&quot;https://github.com/graphile/worker/blob/main/RELEASE_NOTES.md#v0140&quot;&gt;release notes&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;sponsor-the-project&quot;&gt;&lt;a href=&quot;#sponsor-the-project&quot; aria-label=&quot;sponsor the project permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Sponsor the project&lt;/h3&gt;
+&lt;p&gt;Please support development of this project via sponsorship. With your support we
+can improve performance, usability and documentation at a greater rate, leading
+to reduced running and engineering costs for your organisation, leading to a net
+ROI. &lt;a href=&quot;/sponsor/&quot;&gt;Find out how to sponsor Graphile Worker here&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;Cartoon Benjie and Jem send cartoon hearts up into the sky&quot; src=&quot;/images/news/graphile-thankyou.svg&quot; style=&quot;max-height: 300px&quot;&gt;
+&lt;/div&gt;</content:encoded></item><item><title><![CDATA[GraphQL Radio Interviews Benjie]]></title><description><![CDATA[2022-07-14 They discuss the early days of GraphQL, Benjie's forays into Computer Science as
+a teenager (and quickly discovering he much…]]></description><link>https://graphile.org/news/20220714-graphql-radio/</link><guid isPermaLink="false">https://graphile.org/news/20220714-graphql-radio/</guid><pubDate>Thu, 14 Jul 2022 01:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;2022-07-14&lt;/em&gt;&lt;/p&gt;
+&lt;p class=&quot;intro&quot;&gt;This week, Benjie appears on the revamped
+GraphQL Radio podcast hosted by Max Stoiber (CEO,
+Stellate) and Abhi Aiyer (Tech Lead, Gatsby).&lt;/p&gt;
+&lt;p&gt;They discuss the early days of GraphQL, Benjie&apos;s forays into Computer Science as
+a teenager (and quickly discovering he much preferred to study something else at
+university!), how he goes about running an open source business with Jem, and
+the widespread benefits of supporting open source work.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://graphqlradio.com/episodes/postgraphile-and-beyond-w-benjie-gillam-graphql-technical-steering-committee-member&quot;&gt;Hear the episode on the GraphQL Radio website.&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;a href=&quot;https://graphqlradio.com/episodes/postgraphile-and-beyond-w-benjie-gillam-graphql-technical-steering-committee-member&quot; target=&quot;_blank&quot;&gt;&lt;img alt=&quot;A greyscale photo of Benjie&quot; src=&quot;/images/news/graphqlradio.jpg&quot; style=&quot;max-height: 300px&quot; /&gt;&lt;/a&gt;
+&lt;/div&gt;</content:encoded></item><item><title><![CDATA[Jem Discusses OSS Communities at the GitHub ReadME Project]]></title><description><![CDATA[2022-07-04 Click through to the ReadME Project
+to read a panel interview with Jem alongside
+Chrissy LeMaire, the creator and maintainer of…]]></description><link>https://graphile.org/news/20220704-github-readme/</link><guid isPermaLink="false">https://graphile.org/news/20220704-github-readme/</guid><pubDate>Mon, 04 Jul 2022 01:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;2022-07-04&lt;/em&gt;&lt;/p&gt;
+&lt;p class=&quot;intro&quot;&gt;This week, Jem took part in the
+GitHub ReadME project, an endeavour to collect
+stories from open source maintainers and amplify their voices to the wider
+developer community. The project contains many articles, educational material
+and podcasts all focused on the developer community.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.blog/2022-06-30-what-to-do-when-your-open-source-project-becomes-a-community/&quot;&gt;Click through to the ReadME Project&lt;/a&gt;
+to read a panel interview with Jem alongside
+&lt;a href=&quot;https://tech.lgbt/@cl&quot;&gt;Chrissy LeMaire&lt;/a&gt;, the creator and maintainer of
+&lt;a href=&quot;https://dbatools.io/&quot;&gt;dbatools&lt;/a&gt;, and
+&lt;a href=&quot;http://fredkschott.com/about/&quot;&gt;Fred Schott&lt;/a&gt;, the co-creator of
+&lt;a href=&quot;https://astro.build/&quot;&gt;Astro&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In this article, Jem discusses how they helped to build the community around
+Graphile, beginning with the early days of PostGraphile and the growing
+realization that users wanted an online space to come together to craft plugins
+and discuss different approaches of Postgres and GraphQL. When the first
+donations to the project began coming in, they realized it was time to become
+more intentional in their approach to community building and began drawing
+inspiration from other open source projects.&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;Benjie and Jem pose in front of a banner showcasing PostGraphile&quot; src=&quot;/images/news/benjie-and-jem-fosdem.jpg&quot; style=&quot;max-height: 500px&quot; /&gt;
+&lt;/div&gt;
+&lt;p&gt;Benjie and Jem enjoy working together in open source, and this wouldn&apos;t be
+possible without the sponsorship from the community. By significantly reducing
+the amount of work needed to achieve business goals, using the Graphile tools
+results in huge savings for users. If your organization contributes some of
+these savings back then everyone can benefit from more frequent releases with
+better performance, better compatibility, better documentation, easier
+customization, and more features — leading to even greater savings or profits
+for your organization.
+&lt;a href=&quot;/sponsor/&quot;&gt;Find out how to sponsor Jem and the Graphile suite here.&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;PostGraphile thanks the community&quot; src=&quot;/images/thanks.png&quot; /&gt;
+&lt;/div&gt;</content:encoded></item><item><title><![CDATA[SpecNews - A New GraphQL Podcast from the Graphile team]]></title><description><![CDATA[2022-06-07 by Team Graphile Benjie is a GraphQL TSC member and attends the monthly working groups, he then
+gives Jem a digest of the two or…]]></description><link>https://graphile.org/news/20220607-spec-news/</link><guid isPermaLink="false">https://graphile.org/news/20220607-spec-news/</guid><pubDate>Tue, 07 Jun 2022 01:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;2022-06-07 by Team Graphile&lt;/em&gt;&lt;/p&gt;
+&lt;p class=&quot;intro&quot;&gt;Benjie and Jem are pleased to announce the release of new podcast
+SpecNews! A monthly round up of GraphQL Specification news in under ten minutes.&lt;/p&gt;
+&lt;p&gt;Benjie is a GraphQL TSC member and attends the monthly working groups, he then
+gives Jem a digest of the two or three hour meeting. He figured, why not make
+that digest available for everyone?&lt;/p&gt;
+&lt;p&gt;The podcast is available on
+&lt;a href=&quot;https://podcasts.apple.com/us/podcast/specnews-graphql-digests/id1628494077&quot;&gt;Apple podcasts&lt;/a&gt;,
+&lt;a href=&quot;https://open.spotify.com/show/69vo1Wrlda6EP3EzIZnzjf&quot;&gt;Spotify&lt;/a&gt;, and your
+favourite
+&lt;a href=&quot;https://anchor.fm/specnews/episodes/0--Hello-World-e1jghe1&quot;&gt;podcatcher of choice&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;a href=&quot;https://specnewspod.com&quot; target=&quot;_blank&quot;&gt;&lt;img alt=&quot;SpecNews logo - The word Spec in pink and the word News in black&quot; src=&quot;/images/news/SpecNews.png&quot; style=&quot;max-height: 500px&quot; /&gt;&lt;/a&gt;
+&lt;/div&gt;</content:encoded></item><item><title><![CDATA[PostGraphile Now Supports GraphQL Over Server-Sent Events]]></title><description><![CDATA[Announced 2022-04-15 by the Graphile Team This functionality is powered by  - a zero-dependency, HTTP/1 safe,
+simple, GraphQL over Server…]]></description><link>https://graphile.org/news/20220415-graphql-over-sse/</link><guid isPermaLink="false">https://graphile.org/news/20220415-graphql-over-sse/</guid><pubDate>Fri, 15 Apr 2022 01:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;Announced 2022-04-15 by the Graphile Team&lt;/em&gt;&lt;/p&gt;
+&lt;p class=&apos;intro&apos;&gt;
+PostGraphile now supports GraphQL over Server-Sent Events; a protocol which
+enables the user to push data to web pages in real-time.
+&lt;/p&gt;
+&lt;p&gt;This functionality is powered by &lt;code class=&quot;language-text&quot;&gt;graphql-sse&lt;/code&gt; - a zero-dependency, HTTP/1 safe,
+simple, GraphQL over Server-Sent Events Protocol server and client, written by
+Denis Badurina.&lt;/p&gt;
+&lt;p&gt;Find his implementation for PostGraphile in the
+&lt;a href=&quot;https://github.com/graphile-contrib/graphql-sse&quot;&gt;graphile-contrib repo&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;People sending paper airplanes to each other.&quot; src=&quot;/images/news/sse.svg&quot; style=&quot;max-height: 300px&quot;&gt;
+&lt;/div&gt;
+&lt;h3 id=&quot;contribute-to-graphile-projects&quot;&gt;&lt;a href=&quot;#contribute-to-graphile-projects&quot; aria-label=&quot;contribute to graphile projects permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Contribute to Graphile projects&lt;/h3&gt;
+&lt;p&gt;This is just one example of a Graphile community member adding to the Graphile
+suite of open source tools. We welcome contributions in many forms across many
+of our projects, from simple fixes in our documentation through to community
+plug-ins and contributions to the main PostGraphile git branch. If you wish to
+get involved, a good first step is our &lt;a href=&quot;/contribute/&quot;&gt;Contribution Guide&lt;/a&gt;; if
+you wish to get stuck into developing on the main branches of our projects then
+please pop into our &lt;a href=&quot;https://discord.gg/graphile&quot;&gt;Community Discord&lt;/a&gt; where we
+have several &lt;code class=&quot;language-text&quot;&gt;#dev&lt;/code&gt; channels - this will let you see where we&apos;re currently
+working in the code base, and ideas others have also had. Pull requests should
+be focused on changing only one thing at a time - and large changes should seek
+maintainer approval first. We look forward to welcoming you to our team of
+contributors!&lt;/p&gt;
+&lt;div class=&quot;tc&quot;&gt;
+&lt;img alt=&quot;Thank you&quot; src=&quot;/images/thanks.png&quot; /&gt;
+&lt;/div&gt;</content:encoded></item><item><title><![CDATA[GraphQL Working Group Discussion]]></title><description><![CDATA[2021-12-07 This week, Benjie appeared on a virtual panel at
+GraphQL Galaxy - one of the biggest virtual
+GraphQL conferences. Benjie was one…]]></description><link>https://graphile.org/news/20211207-graphql-galaxy/</link><guid isPermaLink="false">https://graphile.org/news/20211207-graphql-galaxy/</guid><pubDate>Tue, 07 Dec 2021 01:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;2021-12-07&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;This week, Benjie appeared on a virtual panel at
+&lt;a href=&quot;https://graphqlgalaxy.com/&quot;&gt;GraphQL Galaxy&lt;/a&gt; - one of the biggest virtual
+GraphQL conferences.&lt;/p&gt;
+&lt;p&gt;Benjie was one of five panelists representing the GraphQL Working Group. They
+discussed their work on the spec, what the working group is and more.&lt;/p&gt;
+&lt;div class=&quot;tc&quot;&gt;
+&lt;iframe 
+width=&quot;560&quot;
+height=&quot;315&quot;
+src=&quot;https://www.youtube-nocookie.com/embed/V24dbQS9n5A&quot;
+title=&quot;YouTube video player&quot;
+frameborder=&quot;1&quot; 
+style=&quot;border: 6px solid #1b1b3d; border-radius: 10px&quot;
+allow=&quot;accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot;
+allowfullscreen&gt;
+&lt;/iframe&gt;
+&lt;/div&gt;
+&lt;p&gt;You can also see the discussion
+&lt;a href=&quot;https://www.youtube.com/watch?v=V24dbQS9n5A&quot;&gt;on YouTube&lt;/a&gt;.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[What's Next for the GraphQL Spec in 2022?]]></title><description><![CDATA[2021-11-09 This week, Benjie teamed up with Ivan from Apollo to give a virtual talk looking
+at the future of the GraphQL Specification at…]]></description><link>https://graphile.org/news/20211109-graphql-summit/</link><guid isPermaLink="false">https://graphile.org/news/20211109-graphql-summit/</guid><pubDate>Tue, 09 Nov 2021 01:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;2021-11-09&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;This week, Benjie teamed up with Ivan from Apollo to give a virtual talk looking
+at the future of the GraphQL Specification at Apollo GraphQL Summit. As
+long-standing community contributors to the GraphQL Specification Working Group,
+Ivan and Benjie presented highlights of the 2021 GraphQL Specification release
+and introduced some of the exciting new features currently working their way
+towards becoming part of the GraphQL Spec.&lt;/p&gt;
+&lt;div class=&quot;tc&quot;&gt;
+&lt;iframe 
+width=&quot;560&quot;
+height=&quot;315&quot;
+src=&quot;https://www.youtube-nocookie.com/embed/yA2qHxSiPqM&quot;
+title=&quot;YouTube video player&quot;
+frameborder=&quot;1&quot; 
+style=&quot;border: 6px solid #1b1b3d; border-radius: 10px&quot;
+allow=&quot;accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot;
+allowfullscreen&gt;
+&lt;/iframe&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=yA2qHxSiPqM&quot;&gt;The talk is also available on YouTube.&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[PostGraphile Releases Version 4.12 - Awesome Aggregates]]></title><description><![CDATA[Announced 2021-05-27 by the Graphile Team Awesome Aggregates We've finally taken our proof of concept aggregation plugin and fleshed it out…]]></description><link>https://graphile.org/news/20210527-postgraphile-412/</link><guid isPermaLink="false">https://graphile.org/news/20210527-postgraphile-412/</guid><pubDate>Thu, 27 May 2021 01:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;Announced 2021-05-27 by the Graphile Team&lt;/em&gt;&lt;/p&gt;
+&lt;p class=&apos;intro&apos;&gt;
+Graphile is pleased to announce the release of PostGraphile version 4.12 - a significant update bringing full support for aggregates. 
+&lt;/p&gt;
+&lt;h3 id=&quot;awesome-aggregates&quot;&gt;&lt;a href=&quot;#awesome-aggregates&quot; aria-label=&quot;awesome aggregates permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Awesome Aggregates&lt;/h3&gt;
+&lt;p&gt;We&apos;ve finally taken our proof of concept aggregation plugin and fleshed it out
+with some very significant features: calculating aggregates across connections,
+grouped aggregates, applying conditions to grouped aggregates, ordering by
+relational aggregates, filtering by the results of aggregates on related
+connections, and more besides.&lt;/p&gt;
+&lt;p&gt;For more details
+&lt;a href=&quot;https://github.com/graphile/pg-aggregates&quot;&gt;see the plugin hosted on GitHub&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;A pair of developers sit in front of a computer monitor.&quot; src=&quot;/images/news/postgraphile-developers.svg&quot; style=&quot;max-height: 300px&quot;&gt;
+&lt;/div&gt;
+&lt;h3 id=&quot;release-notes&quot;&gt;&lt;a href=&quot;#release-notes&quot; aria-label=&quot;release notes permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Release Notes&lt;/h3&gt;
+&lt;p&gt;This release also includes a few small fixes and some other minor features that
+enable greater community expansion of PostGraphile. We love seeing your
+plugins - do share them in our &lt;code class=&quot;language-text&quot;&gt;#i-made-this channel&lt;/code&gt; on
+&lt;a href=&quot;https://discord.gg/graphile&quot;&gt;Discord&lt;/a&gt; or add them to
+&lt;a href=&quot;/postgraphile/community-plugins/&quot;&gt;the list on the website&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;Full release notes available on GitHub:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/graphile/postgraphile/releases/tag/v4.12.1&quot;&gt;v4.12.1&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/graphile/postgraphile/releases/tag/v4.11.0&quot;&gt;v4.11.0&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/graphile/postgraphile/releases/tag/v4.10.0&quot;&gt;v4.10.0&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;thank-you-sponsors&quot;&gt;&lt;a href=&quot;#thank-you-sponsors&quot; aria-label=&quot;thank you sponsors permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Thank you Sponsors&lt;/h3&gt;
+&lt;p&gt;PostGraphile is crowd-funded open-source software, it relies on crowd-sourced
+funding from individuals and companies to keep advancing.&lt;/p&gt;
+&lt;p&gt;If your company benefits from PostGraphile or the wider Graphile suite, you
+should consider asking them to fund our work. By significantly reducing the
+amount of work needed to achieve business goals and reducing running costs,
+Graphile&apos;s software results in huge time and money savings for users. We
+encourage companies to contribute a portion of these savings back, enabling the
+projects to advance more rapidly, and result in even greater savings for your
+company. &lt;a href=&quot;/sponsor/&quot;&gt;Find out more about sponsorship here on our website&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;Cartoon Benjie and Jem send cartoon hearts up into the sky&quot; src=&quot;/images/news/postgraphile-thankyou.svg&quot; style=&quot;max-height: 300px&quot;&gt;
+&lt;/div&gt;</content:encoded></item><item><title><![CDATA[PostGraphile Releases Version 4.11 - Wonderful Websockets]]></title><description><![CDATA[Announced 2021-01-29 by the Graphile Team Websocket Support Thanks to help from author @enisdenjo, PostGraphile 4.11 adds support for the…]]></description><link>https://graphile.org/news/20210129-postgraphile-411/</link><guid isPermaLink="false">https://graphile.org/news/20210129-postgraphile-411/</guid><pubDate>Fri, 29 Jan 2021 01:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;Announced 2021-01-29 by the Graphile Team&lt;/em&gt;&lt;/p&gt;
+&lt;p class=&apos;intro&apos;&gt;
+Graphile is pleased to announce the release of PostGraphile version 4.11, an upgrade introducing support for GraphQL websockets, extended support for &apos;enum tables&apos;, native GraphQL schema validation, and fixes in watch mode.
+&lt;/p&gt;
+&lt;h3 id=&quot;websocket-support&quot;&gt;&lt;a href=&quot;#websocket-support&quot; aria-label=&quot;websocket support permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Websocket Support&lt;/h3&gt;
+&lt;p&gt;Thanks to help from author &lt;em&gt;@enisdenjo&lt;/em&gt;, PostGraphile 4.11 adds support for the
+new &lt;code class=&quot;language-text&quot;&gt;graphql-ws&lt;/code&gt; websocket transport module to replace Apollo&apos;s unmaintained
+&lt;code class=&quot;language-text&quot;&gt;subscriptions-transport-ws&lt;/code&gt;. It&apos;s advised that anyone using websockets with
+GraphQL move to this new module and protocol.&lt;/p&gt;
+&lt;p&gt;Opting into this new method also allows the user to perform queries and
+mutations this way - but the security implications need to be scrutinised first,
+particularly with respect to cross-site request forgery issues as websockets
+behave in a different way.&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;A developer sits at a laptop, an abstract code graphic is behind her.&quot; src=&quot;/images/news/postgraphile-developer2.svg&quot; style=&quot;max-height: 300px&quot;&gt;
+&lt;/div&gt;
+&lt;h3 id=&quot;graphql-schema-validation&quot;&gt;&lt;a href=&quot;#graphql-schema-validation&quot; aria-label=&quot;graphql schema validation permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;GraphQL Schema Validation&lt;/h3&gt;
+&lt;p&gt;We were surprised to realize that we hadn&apos;t yet had PostGraphile validate its
+GraphQL schema! Fortunately, the schema PostGraphile builds has always been
+valid, and now we have made sure it checks for this. This means that any bugs in
+third-party plugins will now be caught before the server goes live.&lt;/p&gt;
+&lt;h3 id=&quot;other-additions&quot;&gt;&lt;a href=&quot;#other-additions&quot; aria-label=&quot;other additions permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Other Additions&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Support for &lt;a href=&quot;/postgraphile/enums/#with-enum-tables&quot;&gt;&quot;enum tables&quot;&lt;/a&gt; has been
+extended to views.&lt;/li&gt;
+&lt;li&gt;A bug in watch mode (which is not intended for production usage) which could
+result in pool exhaustion has been resolved.&lt;/li&gt;
+&lt;li&gt;A minor performance enhancement to &lt;code class=&quot;language-text&quot;&gt;pg-sql2&lt;/code&gt; that allows re-use of &lt;code class=&quot;language-text&quot;&gt;sql.value&lt;/code&gt;
+nodes for improved PostgreSQL query planning and marginally more efficient
+queries.&lt;/li&gt;
+&lt;li&gt;GraphiQL now contains enhancements to the &quot;Merge&quot; functionality&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;There are also a number of bug fixes, see the
+&lt;a href=&quot;https://github.com/graphile/postgraphile/releases/tag/v4.11.0&quot;&gt;release notes&lt;/a&gt;
+for the full details&lt;/p&gt;
+&lt;h3 id=&quot;thank-you&quot;&gt;&lt;a href=&quot;#thank-you&quot; aria-label=&quot;thank you permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Thank you&lt;/h3&gt;
+&lt;p&gt;By significantly reducing the amount of work needed to achieve business goals,
+PostGraphile results in huge savings for users. If your organization contributes
+some of these savings back then everyone can benefit from more frequent releases
+with better performance, better compatibility, better documentation, easier
+customization, and more features — leading to even greater savings or profits
+for your organization.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/sponsor/&quot;&gt;More details about how and why to sponsor Graphile are on our Sponsor page.&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;A cartoon woman sends hearts up into the sky .&quot; src=&quot;/images/undraw/undraw_super_thank_you_small.png&quot; style=&quot;max-height: 300px&quot; /&gt;
+&lt;/div&gt;
+Full release notes available on GitHub:
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/graphile/postgraphile/releases/tag/v4.11.0&quot;&gt;v4.11.0&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/graphile/postgraphile/releases/tag/v4.10.0&quot;&gt;v4.10.0&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[Graphile Worker 0.9 Released]]></title><description><![CDATA[Announced 2021-01-20 by the Graphile Team Graphile Worker is a job queue for PostgreSQL running on Node.js. It allows you
+to run jobs (e.g…]]></description><link>https://graphile.org/news/20210120-worker-09/</link><guid isPermaLink="false">https://graphile.org/news/20210120-worker-09/</guid><pubDate>Wed, 20 Jan 2021 01:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;Announced 2021-01-20 by the Graphile Team&lt;/em&gt;&lt;/p&gt;
+&lt;p class=&apos;intro&apos;&gt;
+Today, Graphile Worker 0.9 has been released. This version includes
+a new events system, a new cron functionality for regularly scheduled jobs and a new job_key_mode setting.
+&lt;/p&gt;
+&lt;p&gt;Graphile Worker is a job queue for PostgreSQL running on Node.js. It allows you
+to run jobs (e.g. sending emails, performing calculations, generating PDFs, etc)
+&quot;in the background&quot; so that your HTTP response/application code is not held up.
+Worker can be used with any PostgreSQL-backed application and pairs beautifully
+with &lt;a href=&quot;/postgraphile/&quot;&gt;PostGraphile&lt;/a&gt;. You can find Worker
+&lt;a href=&quot;https://github.com/graphile/worker/&quot;&gt;on GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;A cartoon man runs towards the red Graphile heart logo&quot; src=&quot;/images/news/graphile-worker.svg&quot; style=&quot;max-height: 300px&quot;&gt;
+&lt;/div&gt;
+&lt;h3 id=&quot;new-job_key_mode-setting&quot;&gt;&lt;a href=&quot;#new-job_key_mode-setting&quot; aria-label=&quot;new job_key_mode setting permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;New &lt;code class=&quot;language-text&quot;&gt;job_key_mode&lt;/code&gt; setting&lt;/h3&gt;
+&lt;p&gt;When &lt;code class=&quot;language-text&quot;&gt;job_key&lt;/code&gt; is specified, the &lt;code class=&quot;language-text&quot;&gt;job_key_mode&lt;/code&gt; setting indicates what should
+happen when an existing job is found with the same job key. By default the
+existing job is replaced, but you can also choose to update to the new
+attributes, or stop and return the existing job. There&apos;s more information in
+&lt;a href=&quot;https://github.com/graphile/worker/tree/v0.9.0#replacing-updating-and-removing-jobs&quot;&gt;the project readme&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;thank-you-graphile-sponsors&quot;&gt;&lt;a href=&quot;#thank-you-graphile-sponsors&quot; aria-label=&quot;thank you graphile sponsors permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Thank you Graphile Sponsors&lt;/h3&gt;
+&lt;p&gt;Graphile Worker is a part of a suite of open source developer tools which we
+make to address both our needs as developers, and the needs of the wider
+developer community. This freedom to innovate and make our tooling available for
+free would not be possible without our sponsors. We have recently joined the
+GitHub sponsors program and that, alongside Patreon, has been invaluable in
+giving us paid time to work on open source projects. &lt;strong&gt;Take our projects, go
+make some money, and then give back&lt;/strong&gt; to help support further development on
+both Worker and the whole Graphile suite of tools.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/sponsor/&quot;&gt;Click here to find out more about why and how you should sponsor Graphile.&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;Cartoon Benjie and Jem send cartoon hearts up into the sky&quot; src=&quot;/images/news/graphile-thankyou.svg&quot; style=&quot;max-height: 300px&quot;&gt;
+&lt;/div&gt;</content:encoded></item><item><title><![CDATA[GitHub Sponsors Now Available to Organizations]]></title><description><![CDATA[Announced 2020-12-08 Graphile has a number of crowd-funded open-source projects, licensed under the
+permissive MIT license, including…]]></description><link>https://graphile.org/news/20201208-github-sponsors/</link><guid isPermaLink="false">https://graphile.org/news/20201208-github-sponsors/</guid><pubDate>Tue, 08 Dec 2020 01:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;Announced 2020-12-08&lt;/em&gt;&lt;/p&gt;
+&lt;p class=&quot;intro&quot;&gt;Many companies depend on open source every day, so it&apos;s crucial to invest back into that infrastructure which they have built their businesses upon. So starting today, companies can sponsor projects and developers through their existing billing with GitHub.&lt;/p&gt;
+&lt;p&gt;Graphile has a number of crowd-funded open-source projects, licensed under the
+permissive MIT license, including PostGraphile, Graphile Worker, Graphile
+Migrate and Graphile Starter. Sponsorship increases the rate of fixes,
+documentation improvements, and feature development on these and other projects.&lt;/p&gt;
+&lt;p&gt;By significantly reducing the amount of work needed to achieve business goals,
+using the Graphile tools results in huge savings for users. If your organization
+contributes some of these savings back then everyone can benefit from more
+frequent releases with better performance, better compatibility, better
+documentation, easier customization, and more features — leading to even greater
+savings or profits for your organization.
+&lt;a href=&quot;/sponsor/&quot;&gt;Join these companies and individuals already sponsoring the Graphile suite.&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;Cartoon woman holds up a heart by a laptop showing some sponsor logos including Postlight, Qwick and Dovetail&quot; src=&quot;/images/news/2020-sponsors.png&quot; style=&quot;max-height: 400px&quot; /&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/sponsors&quot;&gt;Read the GitHub Sponsors announcement.&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Graphile Migrate Reaches 1.0]]></title><description><![CDATA[Announced 2020-11-27 by the Graphile Team Graphile Migrate is an opinionated, SQL-powered, productive roll-forward
+migration tool for…]]></description><link>https://graphile.org/news/20201127-migrate-1/</link><guid isPermaLink="false">https://graphile.org/news/20201127-migrate-1/</guid><pubDate>Fri, 27 Nov 2020 01:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;Announced 2020-11-27 by the Graphile Team&lt;/em&gt;&lt;/p&gt;
+&lt;p class=&apos;intro&apos;&gt;
+The Graphile team are pleased to announce that Graphile Migrate 1.0  has been released; after many months of use and testing, Migrate is ready to move from &apos;experimental&apos; into stable v1.0.0. There are no breaking changes in this release, there is now support for a .gmrc.js file and a few minor fixes.
+&lt;/p&gt;
+&lt;p&gt;Graphile Migrate is an opinionated, SQL-powered, productive roll-forward
+migration tool for Postgres. In true Graphile style, it is simple, familiar,
+fully functional, configurable and fast: Save a file and the database is updated
+in milliseconds. There&apos;s no custom DSL to learn, use already familiar Postgres
+syntax. Graphile Migrate pairs well with &lt;a href=&quot;/postgraphile/&quot;&gt;PostGraphile&lt;/a&gt; and the
+wider Graphile suite of tools. You can find it
+&lt;a href=&quot;https://github.com/graphile/migrate/&quot;&gt;on GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;Cartoon people release red arrows up into the sky&quot; src=&quot;/images/news/graphile-migrate1.0.svg&quot; style=&quot;max-height: 300px&quot;&gt;
+&lt;/div&gt;
+&lt;h3 id=&quot;thank-you-graphile-sponsors-and-contributors&quot;&gt;&lt;a href=&quot;#thank-you-graphile-sponsors-and-contributors&quot; aria-label=&quot;thank you graphile sponsors and contributors permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Thank you Graphile Sponsors and contributors!&lt;/h3&gt;
+&lt;p&gt;We extend our gratitude to everyone who has filed issues and pull requests
+against Graphile Migrate ⁠— contributors and user feedback are invaluable to
+open source projects and help to push the software to be the best possible
+version of itself it can be. Can you believe that there are currently no open
+issues or pull requests in this project? We don&apos;t expect that to last long!&lt;/p&gt;
+&lt;p&gt;This freedom to innovate and make our tooling available for free would not be
+possible without our sponsors. The GitHub Sponsor program has been key in
+enabling us to spend paid time on our open source work. If you appreciate what
+we do, encourage your company to sponsor us to help us keep dedicating time and
+resources to our open source developer tooling. There&apos;s more information on
+&lt;a href=&quot;/sponsor/&quot;&gt;our sponsor page&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;Graphile thanks the community&quot; src=&quot;/images/thanks.png&quot; /&gt;
+&lt;/div&gt;</content:encoded></item><item><title><![CDATA[PostGraphile Releases Version 4.10 - Framework Friends]]></title><description><![CDATA[Announced 2020-11-27 by Team Graphile Improved Framework Support The major feature in this release is vastly improved support for various…]]></description><link>https://graphile.org/news/20201127-postgraphile-410/</link><guid isPermaLink="false">https://graphile.org/news/20201127-postgraphile-410/</guid><pubDate>Fri, 27 Nov 2020 01:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;Announced 2020-11-27 by Team Graphile&lt;/em&gt;&lt;/p&gt;
+&lt;p class=&apos;intro&apos;&gt;
+Graphile is pleased to announce the release of PostGraphile version 4.10, an upgrade introducing better support for various Node.js webserver frameworks, an upgraded GraphiQL and GraphiQL Explorer, and improvements added by our community members.
+&lt;/p&gt;
+&lt;h3 id=&quot;improved-framework-support&quot;&gt;&lt;a href=&quot;#improved-framework-support&quot; aria-label=&quot;improved framework support permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Improved Framework Support&lt;/h3&gt;
+&lt;p&gt;The major feature in this release is vastly improved support for various Node.js
+webserver frameworks, including: Node itself, Connect, Express, Koa, Fastify (v2
+and v3), and Restify. This also fixes some long-standing compatibility issues
+with certain Koa plugins.&lt;/p&gt;
+&lt;p&gt;To accomplish this, we&apos;ve split the middleware into separate route handlers for
+each of our routes, and you can either use the middleware to delegate to these
+(where the framework allows), or you can add the route handlers directly. You
+can find documentation in our library usage page and can see examples in our new
+server examples folder:
+&lt;a href=&quot;https://github.com/graphile/postgraphile/tree/v4/examples/servers&quot;&gt;https://github.com/graphile/postgraphile/tree/v4/examples/servers&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;A gallery wall of frames containing logos for Connect, Restify, Fastify,
+  Express and Koa&quot; src=&quot;/images/news/frameworks.svg&quot; style=&quot;max-height: 600px&quot;&gt;
+&lt;/div&gt;
+&lt;h3 id=&quot;upgraded-postgraphiql&quot;&gt;&lt;a href=&quot;#upgraded-postgraphiql&quot; aria-label=&quot;upgraded postgraphiql permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Upgraded PostGraphiQL&lt;/h3&gt;
+&lt;p&gt;The GraphiQL upgrade provides a dedicated headers editor panel next to the
+variables editor, which replaces the old proof-of-concept sidebar. It also adds
+new &quot;Merge Query&quot; and &quot;Copy Query&quot; buttons to the enhanced GraphiQL which may
+ease development or debugging flows. The Explorer pane is now much smoother and
+better looking too!&lt;/p&gt;
+&lt;p&gt;Community member &lt;em&gt;@eddiewang&lt;/em&gt; also added the ability to configure credentials
+for GraphiQL. We appreciate additions from our community; if you wish to see a
+particular feature in one of the Graphile projects, we encourage you to open an
+issue or pull request with details. See our &lt;a href=&quot;/contribute/&quot;&gt;Contribution Guide&lt;/a&gt;
+for some important information before going ahead and writing a new feature.&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;A screenshot of the new improved PostGraphiQL&quot; src=&quot;/images/news/postgraphiql.4.10.png&quot; style=&quot;max-height: 600px&quot; /&gt;
+&lt;/div&gt;
+&lt;h3 id=&quot;graphql-v15&quot;&gt;&lt;a href=&quot;#graphql-v15&quot; aria-label=&quot;graphql v15 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;GraphQL v15&lt;/h3&gt;
+&lt;p&gt;GraphQL v15 compatibility has finally been added - you should review the changes
+for yourself and pin GraphQL v14 if there are any breaking changes in your
+projects.&lt;/p&gt;
+&lt;h3 id=&quot;thank-you&quot;&gt;&lt;a href=&quot;#thank-you&quot; aria-label=&quot;thank you permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Thank you&lt;/h3&gt;
+&lt;p&gt;As always we want to say a huge THANK YOU to all our sponsors and contributors;
+This release includes many additions from new and old-hat contributors, and
+wouldn&apos;t have been possible without paid time from our sponsors. If your company
+benefits from PostGraphile or the wider Graphile suite, you should consider
+asking them to fund our work. By significantly reducing the amount of work
+needed to achieve business goals and reducing running costs, Graphile&apos;s software
+results in huge time and money savings for users. We encourage companies to
+contribute a portion of these savings back, enabling the projects to advance
+more rapidly, and result in even greater savings for your company.
+&lt;a href=&quot;/sponsor/&quot;&gt;Find out more about sponsorship here on our website&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;PostGraphile thanks the community&quot; src=&quot;/images/thanks.png&quot; /&gt;
+&lt;/div&gt;
+&lt;h3 id=&quot;full-release-notes&quot;&gt;&lt;a href=&quot;#full-release-notes&quot; aria-label=&quot;full release notes permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Full release notes&lt;/h3&gt;
+&lt;p&gt;Full detailed technical release notes can be found on GitHub:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/graphile/postgraphile/releases/tag/v4.10.0&quot;&gt;4.10.0&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/graphile/postgraphile/releases/tag/v4.9.2&quot;&gt;4.9.2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/graphile/postgraphile/releases/tag/v4.9.1&quot;&gt;4.9.1&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/graphile/postgraphile/releases/tag/v4.9.0&quot;&gt;4.9.0&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[Benjie's story at the GitHub ReadME project]]></title><description><![CDATA[2020-09-22 This week, Benjie was profiled by the
+GitHub ReadME project, a new endeavour to collect
+stories from open source maintainers and…]]></description><link>https://graphile.org/news/20200922-github-readme/</link><guid isPermaLink="false">https://graphile.org/news/20200922-github-readme/</guid><pubDate>Tue, 22 Sep 2020 01:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;2020-09-22&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;This week, Benjie was profiled by the
+&lt;a href=&quot;https://github.com/readme&quot;&gt;GitHub ReadME project&lt;/a&gt;, a new endeavour to collect
+stories from open source maintainers and amplify their voices to the wider
+developer community.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/readme/stories/benjie-gillam&quot;&gt;Click through to the ReadME Project&lt;/a&gt;
+to read Benjie&apos;s history of software development, starting as a teenager at the
+turn of the millennium with his own Linux mail server in his bedroom. As he
+entered the world of employment, he realized he much preferred the freedom of
+running his own business gave him, and eventually incorporated Graphile with his
+wife Jem in 2019. Together, they work on Graphile&apos;s open source projects and are
+seeking funding through GitHub Sponsors and Patreon.&lt;/p&gt;
+&lt;p&gt;In this article, Benjie discusses the ins-and-outs of running an open source
+company with his wife, while building a supportive community, and sheds light on
+how other maintainers may start to take their passion project full time.&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;Benjie and Jem clink glasses full of lemonade&quot; src=&quot;/images/news/jem-and-benjie.jpg&quot; style=&quot;max-height: 500px&quot; /&gt;
+&lt;/div&gt;
+&lt;p&gt;Benjie and Jem enjoy working together in open source, and this wouldn&apos;t be
+possible without the sponsorship from the community. By significantly reducing
+the amount of work needed to achieve business goals, using the Graphile tools
+results in huge savings for users. If your organization contributes some of
+these savings back then everyone can benefit from more frequent releases with
+better performance, better compatibility, better documentation, easier
+customization, and more features — leading to even greater savings or profits
+for your organization.
+&lt;a href=&quot;/sponsor/&quot;&gt;Find out how to sponsor Benjie and the Graphile suite here.&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;PostGraphile thanks the community&quot; src=&quot;/images/thanks.png&quot; /&gt;
+&lt;/div&gt;</content:encoded></item><item><title><![CDATA[PostGraphile Releases Version 4.8 - Excellent Enums]]></title><description><![CDATA[Announced 2020-08-05 by the Graphile Team Enum Tables PostGraphile now supports "enum tables"; we have previously recommended against
+using…]]></description><link>https://graphile.org/news/20200805-postgraphile-48/</link><guid isPermaLink="false">https://graphile.org/news/20200805-postgraphile-48/</guid><pubDate>Wed, 05 Aug 2020 01:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;Announced 2020-08-05 by the Graphile Team&lt;/em&gt;&lt;/p&gt;
+&lt;p class=&apos;intro&apos;&gt;
+Graphile is pleased to announce the release of PostGraphile version 4.8.0, an upgrade recommended for all PostGraphile users, which introduces support for enum tables and geometric types.
+&lt;/p&gt;
+&lt;h3 id=&quot;enum-tables&quot;&gt;&lt;a href=&quot;#enum-tables&quot; aria-label=&quot;enum tables permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Enum Tables&lt;/h3&gt;
+&lt;p&gt;PostGraphile now supports &quot;enum tables&quot;; we have previously recommended against
+using PostgreSQL enums if the enums are ever likely to change after creation.
+This is because PostgreSQL enums cannot be added to within a transaction, and
+cannot ever have a value removed.&lt;/p&gt;
+&lt;p&gt;Instead, we recommend creating a table where the enum value is the primary key,
+and use foreign key constraints to reference this value.&lt;/p&gt;
+&lt;p&gt;This functionality is now written inside of PostGraphile. This means you may
+need to revisit your database permissions if you wish to use this functionality
+⁠— don&apos;t worry, it only queries the table if it sees the &lt;code class=&quot;language-text&quot;&gt;@enum&lt;/code&gt; smart comment.&lt;/p&gt;
+&lt;p&gt;An enum table must have a text (or varchar / char) primary key, and may have
+other columns. It must be done through using an &lt;code class=&quot;language-text&quot;&gt;@enum&lt;/code&gt; smart comment (and not a
+smart tag file or plugin) due to the way in which PostGraphile v4&apos;s
+introspection engine works. See
+&lt;a href=&quot;/postgraphile/enums/#with-enum-tables&quot;&gt;our documentation&lt;/a&gt; for more information,
+or the detailed
+&lt;a href=&quot;https://github.com/graphile/postgraphile/releases/tag/v4.8.0&quot;&gt;technical release notes&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;A developer sat at a desk with a computer monitor and laptop&quot; src=&quot;/images/news/postgraphile-developer.svg&quot; style=&quot;max-height: 300px&quot;&gt;
+&lt;/div&gt;
+&lt;h3 id=&quot;all-new-features&quot;&gt;&lt;a href=&quot;#all-new-features&quot; aria-label=&quot;all new features permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;All new features&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Add support for &quot;enum tables&quot; (&lt;a href=&quot;https://github.com/graphile/graphile-engine/issues/635&quot;&gt;GitHub link&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Add support for geometric types (&lt;a href=&quot;https://github.com/graphile/graphile-engine/issues/637&quot;&gt;GitHub link&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Warn early if placeholders will be exhausted (&lt;a href=&quot;https://github.com/graphile/graphile-engine/issues/632&quot;&gt;GitHub link&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;@pgSubscription&lt;/code&gt; directive now supports initial events (&lt;a href=&quot;https://github.com/graphile/graphile-engine/issues/612&quot;&gt;GitHub link&lt;/a&gt;), thank you to &lt;em&gt;@enisdenjo&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Further details and full list of fixes in the
+&lt;a href=&quot;https://github.com/graphile/postgraphile/releases/tag/v4.8.0&quot;&gt;technical release notes&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&quot;tc&quot;&gt;
+&lt;img alt=&quot;Thank you&quot; src=&quot;/images/thanks.png&quot; /&gt;
+&lt;/div&gt;
+&lt;h3 id=&quot;the-graphile-suite-of-tools&quot;&gt;&lt;a href=&quot;#the-graphile-suite-of-tools&quot; aria-label=&quot;the graphile suite of tools permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;The Graphile suite of tools&lt;/h3&gt;
+&lt;p&gt;PostGraphile is just one in a suite of Graphile developer tools.
+&lt;a href=&quot;https://github.com/graphile/worker&quot;&gt;Graphile Worker&lt;/a&gt; is a job queue for
+Postgres running on Node, and
+&lt;a href=&quot;https://github.com/graphile/migrate&quot;&gt;Graphile Migrate&lt;/a&gt; is an opinionated,
+SQL-powered, productive roll-forward migration tool for Postgres. In true
+Graphile style, these tools are simple, familiar, fully functional and fast.
+Worker, in particular, pairs beautifully with PostGraphile projects, and is
+currently downloaded over 15k times per week! Together, these projects can give
+you the building blocks you need to make powerful and performant software
+quickly and efficiently.&lt;/p&gt;
+&lt;p&gt;Graphile Starter is a &quot;batteries included&quot; off-the-shelf starter project
+marrying these tools together with a design system, user and session management
+and so much more; ready for you to take as a jumping-off point for your own
+project. You can see our entire suite of projects &lt;a href=&quot;/&quot;&gt;at our homepage&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;thank-you-sponsors&quot;&gt;&lt;a href=&quot;#thank-you-sponsors&quot; aria-label=&quot;thank you sponsors permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Thank you Sponsors!&lt;/h3&gt;
+&lt;p&gt;Dear Sponsors: we love you! Thank you so much for continuing to support us
+during these difficult pandemic times, the progress of the Graphile projects ⁠—
+and of course the development of Version 5 ⁠— would not be possible without your
+support ❤️&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;PostGraphile Development:&lt;/strong&gt; work on Version 5 is underway, for more details
+see the &lt;code class=&quot;language-text&quot;&gt;#dev-postgraphile&lt;/code&gt; channel on our Discord: &lt;a href=&quot;https://discord.gg/graphile&quot;&gt;https://discord.gg/graphile&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;Cartoon Benjie and Jem send cartoon hearts up into the sky&quot; src=&quot;/images/news/postgraphile-thankyou.svg&quot; style=&quot;max-height: 300px&quot;&gt;
+&lt;/div&gt;
+&lt;h3 id=&quot;full-release-notes&quot;&gt;&lt;a href=&quot;#full-release-notes&quot; aria-label=&quot;full release notes permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Full release notes&lt;/h3&gt;
+&lt;p&gt;Full detailed technical release notes can be found on GitHub:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/graphile/postgraphile/releases/tag/v4.8.0&quot;&gt;v4.4.8 release notes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/graphile/postgraphile/releases/tag/v4.7.0&quot;&gt;v4.4.7 release notes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/graphile/postgraphile/releases/tag/v4.6.0&quot;&gt;v4.4.6 release notes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/graphile/postgraphile/releases/tag/v4.5.0&quot;&gt;v4.4.5 release notes&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[Graphile Team Releases pgRITA - a Tool for Postgres]]></title><description><![CDATA[Announced 2020-07-21 by Team Graphile We've built a service (using Graphile Starter) that will analyze your database
+design against a list…]]></description><link>https://graphile.org/news/20200721-rita/</link><guid isPermaLink="false">https://graphile.org/news/20200721-rita/</guid><pubDate>Tue, 21 Jul 2020 01:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;Announced 2020-07-21 by Team Graphile&lt;/em&gt;&lt;/p&gt;
+&lt;p class=&quot;intro&quot;&gt;
+If you&apos;ve ever thought &quot;I&apos;d love to have the Graphile maintainer
+checking over my database schema design,&quot; then we&apos;re extremely excited to share
+our news with you!&lt;/p&gt;
+&lt;p&gt;We&apos;ve built a service (using Graphile Starter) that will analyze your database
+design against a list of rules we&apos;ve compiled over the last few years of
+consultancy and support, explains any detected issues, and in many cases
+provides tailored SQL fixes to inspire your next migration. Income from this
+service will help fund Graphile&apos;s Open Source endeavours, and what&apos;s more, it
+has a free plan with some essential rules that pair beautifully with
+PostGraphile.&lt;/p&gt;
+&lt;h3 id=&quot;recommendations-insights-tailored-actionable&quot;&gt;&lt;a href=&quot;#recommendations-insights-tailored-actionable&quot; aria-label=&quot;recommendations insights tailored actionable permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Recommendations. Insights. Tailored. Actionable.&lt;/h3&gt;
+&lt;p&gt;pgRITA analyzes your database schema against our rules, compiling an interactive
+report that helps your engineers to build secure, robust and performant
+databases. Many of our rules produce fixes tailored to your database enabling
+you to fix missing indexes, constraints, permissions and more in record time.&lt;/p&gt;
+&lt;h3 id=&quot;really-insightful-technical-appliance&quot;&gt;&lt;a href=&quot;#really-insightful-technical-appliance&quot; aria-label=&quot;really insightful technical appliance permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Really Insightful Technical Appliance&lt;/h3&gt;
+&lt;p&gt;pgRITA compiles an interactive report showing the results of the database
+analysis, with detailed documentation that explains the potential issues found
+in the database, and helps engineers determine how to resolve them.&lt;/p&gt;
+&lt;p&gt;If you&apos;re thinking of engaging a database consultant, running pgRITA first could
+be a great way to reduce costs ─ enabling the consultant to focus in the more
+bespoke areas where they provide the most value.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://pgrita.com/demo/&quot;&gt;View an example report and try the pgRITA demo now.&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;A purple andriod named RITA uses a touchscreen to give a report to a woman&quot; src=&quot;/images/news/rita.svg&quot; style=&quot;max-height: 300px&quot;&gt;
+&lt;/div&gt;</content:encoded></item><item><title><![CDATA[Graphile Starter 3.0 - Organize your Organizations!]]></title><description><![CDATA[Announced 2020-04-27 by the Graphile Team Version three of Graphile Starter is focused on organization support. A Starter
+organization is a…]]></description><link>https://graphile.org/news/20200427-starter-30/</link><guid isPermaLink="false">https://graphile.org/news/20200427-starter-30/</guid><pubDate>Mon, 27 Apr 2020 01:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;Announced 2020-04-27 by the Graphile Team&lt;/em&gt;&lt;/p&gt;
+&lt;p class=&apos;intro&apos;&gt;
+The team behind Graphile are excited to release Graphile Starter 3.0 - an updated version of the opinionated quick-start project for full-stack application development in React, Node.js, GraphQL and PostgreSQL. Starter includes the foundations of a modern web application, with a full user registration system, session management, optimized job queue, a significant amount of pre-configured tooling, tests and much more.
+&lt;/p&gt;
+&lt;p&gt;Version three of Graphile Starter is focused on organization support. A Starter
+organization is a group of users (such as a charity, workspace or team) where
+one user is &quot;in charge&quot; and one person is a billing contact; with support for
+further permissions configuration. Starter 3.0 includes all the behaviours you&apos;d
+expect from such a quick start project: creating, deleting and inviting users;
+inviting non-users; sending and accepting invite emails, re-assigning the
+ownership or billing contact; managing members; and controlling access to
+settings based on user role.&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;Woman holding a lightbulb which contains the number 3.0&quot; src=&quot;/images/news/lightbulb30.png&quot; style=&quot;max-height: 300px&quot; /&gt;
+&lt;/div&gt;
+&lt;p&gt;Some of the things included with Starter, ready for you to take and extend:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Batteries included:&lt;/strong&gt; full user system and OAuth with support for
+organizations or teams, AntD design framework, jest and Cypress end-to-end
+testing, security, email templating and transport, pre-configured linting and
+code formatting, deployment instructions, and more&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Speedy development:&lt;/strong&gt; easy debugging, Graphile&apos;s idempotent migration system,
+job queue and server middleware ready to use, hot reloading; not to mention deep
+integration with VSCode&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Type safety:&lt;/strong&gt; pre-configured type checking, strongly typed throughout with
+TypeScript&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Best practices:&lt;/strong&gt; React, GraphQL, PostGraphile, Node, jest and Cypress best
+practices&lt;/p&gt;
+&lt;p&gt;Full instructions and technical detail can be found on GitHub:
+&lt;a href=&quot;https://github.com/graphile/starter&quot;&gt;Graphile Starter - github.com/graphile/starter&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;using-version-30&quot;&gt;&lt;a href=&quot;#using-version-30&quot; aria-label=&quot;using version 30 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Using Version 3.0&lt;/h3&gt;
+&lt;p&gt;It is intended that you use a &quot;point in time&quot; version of Starter - it&apos;s a
+starting point for your own projects. As such, you can&apos;t simply update your
+existing Starter project to this new version as there&apos;s no attempt at backwards
+compatibility.&lt;/p&gt;
+&lt;h3 id=&quot;thank-you-graphile-sponsors&quot;&gt;&lt;a href=&quot;#thank-you-graphile-sponsors&quot; aria-label=&quot;thank you graphile sponsors permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Thank you Graphile Sponsors&lt;/h3&gt;
+&lt;p&gt;Graphile Starter has been a labour of love, and would not be possible without
+our sponsors. We have recently joined the GitHub sponsors program and that,
+alongside Patreon, has been invaluable in giving us paid time to work on open
+source projects. &lt;strong&gt;Take Graphile Starter, go make some money, and then give
+back&lt;/strong&gt; to help support further development on both the Starter and the Graphile
+suite of tools.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/sponsor/&quot;&gt;Click here to find out more about why and how you should sponsor PostGraphile development.&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;Woman sending a cartoon heart up into the sky&quot; src=&quot;/images/news/undraw_super_thank_you_small.png&quot; /&gt;
+&lt;/div&gt;</content:encoded></item><item><title><![CDATA[Graphile Migrate 0.1 Released]]></title><description><![CDATA[Announced 2020-03-17 by Team Graphile Graphile Migrate is an opinionated, SQL-powered, productive roll-forward
+migration tool for Postgres…]]></description><link>https://graphile.org/news/20200317-migrate-01/</link><guid isPermaLink="false">https://graphile.org/news/20200317-migrate-01/</guid><pubDate>Tue, 17 Mar 2020 01:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;Announced 2020-03-17 by Team Graphile&lt;/em&gt;&lt;/p&gt;
+&lt;p class=&apos;intro&apos;&gt;
+The Graphile team are pleased to announce that Graphile Migrate 0.1 is out in pre-release. This is a big milestone for the project, with it finally leaving 0.0.x territory and leaving behind the word &quot;highly&quot; in the phrase &quot;highly experimental&quot;! This release is a significant jump from the previous versions and includes many new commands, more configuration options, as well as a suite of new features.
+&lt;/p&gt;
+&lt;p&gt;Graphile Migrate is an opinionated, SQL-powered, productive roll-forward
+migration tool for Postgres. In true Graphile style, it is simple, familiar,
+fully functional and fast: Save a file and the database is updated in
+milliseconds. There&apos;s no custom DSL to learn, instead use standard Postgres
+syntax. Graphile Migrate pairs well with &lt;a href=&quot;/postgraphile/&quot;&gt;PostGraphile&lt;/a&gt; and the
+wider Graphile suite of tools. You can find it
+&lt;a href=&quot;https://github.com/graphile/migrate/&quot;&gt;on GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;Cartoon people release red arrows up into the sky&quot; src=&quot;/images/news/graphile-migrate.svg&quot; style=&quot;max-height: 300px&quot;&gt;
+&lt;/div&gt;
+&lt;h3 id=&quot;migrate-01-features&quot;&gt;&lt;a href=&quot;#migrate-01-features&quot; aria-label=&quot;migrate 01 features permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Migrate 0.1 features&lt;/h3&gt;
+&lt;p&gt;There are many new features and a 🚨 breaking change in Migrate 0.1. Make sure
+you read the full release notes and the new and improved Readme of the project
+&lt;a href=&quot;https://github.com/graphile/migrate/&quot;&gt;on GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;New commands:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;init to set up a new environment&lt;/li&gt;
+&lt;li&gt;compile to compile an SQL file (filling out placeholders) and output the
+result&lt;/li&gt;
+&lt;li&gt;run to compile and run an SQL file&lt;/li&gt;
+&lt;li&gt;completion to install CLI autocompletion&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;More configuration options are exposed&lt;/li&gt;
+&lt;li&gt;Support for the current migration to be a directory&lt;/li&gt;
+&lt;li&gt;Support for naming commits&lt;/li&gt;
+&lt;li&gt;Ability to run &lt;code class=&quot;language-text&quot;&gt;afterRest&lt;/code&gt; SQL actions as a superuser&lt;/li&gt;
+&lt;li&gt;Add ability to run &lt;code class=&quot;language-text&quot;&gt;graphile-migrate status&lt;/code&gt; without requiring a database
+connection&lt;/li&gt;
+&lt;li&gt;Stronger linting, stronger types and lots of other housekeeping&lt;/li&gt;
+&lt;li&gt;🚨 potential checksum breaking change&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The full, technical details can be found in the
+&lt;a href=&quot;https://github.com/graphile/migrate/releases/tag/v0.1.0&quot;&gt;release notes in the project repo.&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;thank-you-graphile-sponsors-and-contributors&quot;&gt;&lt;a href=&quot;#thank-you-graphile-sponsors-and-contributors&quot; aria-label=&quot;thank you graphile sponsors and contributors permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Thank you Graphile Sponsors and contributors!&lt;/h3&gt;
+&lt;p&gt;We extend our gratitude to everyone who has filed issues and pull requests
+against Graphile Migrate ⁠— contributors and user feedback are invaluable to
+open source projects and help to push the software to be the best possible
+version of itself it can be.&lt;/p&gt;
+&lt;p&gt;This freedom to innovate and make our tooling available for free would not be
+possible without our sponsors. The GitHub Sponsor program has been key in
+enabling us to spend paid time on our open source work. If you appreciate what
+we do, encourage your company to sponsor us to help us keep dedicating time and
+resources to our open source developer tooling. There&apos;s more information on
+&lt;a href=&quot;/sponsor/&quot;&gt;our sponsor page&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;Graphile thanks the community&quot; src=&quot;/images/thanks.png&quot; /&gt;
+&lt;/div&gt;</content:encoded></item><item><title><![CDATA[Graphile Worker 0.4 released]]></title><description><![CDATA[Announced 2020-02-05 by Team Graphile Graphile Worker is a job queue for PostgreSQL running on Node.js. It allows you
+to run jobs (e.g…]]></description><link>https://graphile.org/news/20200205-worker-04/</link><guid isPermaLink="false">https://graphile.org/news/20200205-worker-04/</guid><pubDate>Wed, 05 Feb 2020 01:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;Announced 2020-02-05 by Team Graphile&lt;/em&gt;&lt;/p&gt;
+&lt;p class=&apos;intro&apos;&gt;
+Today, Graphile Worker 0.4 has been released. This version includes
+significantly enhanced performance gains, a dedicated API for queuing jobs from
+TypeScript, and the ability to run jobs in parallel.
+&lt;/p&gt;
+&lt;p&gt;Graphile Worker is a job queue for PostgreSQL running on Node.js. It allows you
+to run jobs (e.g. sending emails, performing calculations, generating PDFs, etc)
+&quot;in the background&quot; so that your HTTP response/application code is not held up.
+Worker can be used with any PostgreSQL-backed application and pairs beautifully
+with &lt;a href=&quot;/postgraphile/&quot;&gt;PostGraphile&lt;/a&gt;. You can find Worker
+&lt;a href=&quot;https://github.com/graphile/worker/&quot;&gt;on GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;A cartoon man runs towards the red Graphile heart logo&quot; src=&quot;/images/news/graphile-worker.svg&quot; style=&quot;max-height: 300px&quot;&gt;
+&lt;/div&gt;
+&lt;h3 id=&quot;full-release-notes&quot;&gt;&lt;a href=&quot;#full-release-notes&quot; aria-label=&quot;full release notes permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Full release notes&lt;/h3&gt;
+&lt;p&gt;The full, technical details can be found in the
+&lt;a href=&quot;https://github.com/graphile/worker/blob/main/RELEASE_NOTES.md&quot;&gt;release notes in the project repo&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;thank-you-graphile-sponsors&quot;&gt;&lt;a href=&quot;#thank-you-graphile-sponsors&quot; aria-label=&quot;thank you graphile sponsors permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Thank you Graphile Sponsors&lt;/h3&gt;
+&lt;p&gt;Graphile Worker is a part of a suite of open source developer tools which we
+make to address both our needs as developers, and the needs of the wider
+developer community. This freedom to innovate and make our tooling available for
+free would not be possible without our sponsors. We have recently joined the
+GitHub sponsors program and that, alongside Patreon, has been invaluable in
+giving us paid time to work on open source projects. &lt;strong&gt;Take our projects, go
+make some money, and then give back&lt;/strong&gt; to help support further development on
+both Worker and the whole Graphile suite of tools.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/sponsor/&quot;&gt;Click here to find out more about why and how you should sponsor Graphile.&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;Cartoon Benjie and Jem send cartoon hearts up into the sky&quot; src=&quot;/images/news/graphile-thankyou.svg&quot; style=&quot;max-height: 300px&quot;&gt;
+&lt;/div&gt;</content:encoded></item><item><title><![CDATA[Graphile goes to FOSDEM]]></title><description><![CDATA[2020-01-31 Benjie and Jem are excited to be representing the Graphile suite of tools at
+this years FOSDEM in Brussels. FOSDEM is Europe's…]]></description><link>https://graphile.org/news/20200131-fosdem/</link><guid isPermaLink="false">https://graphile.org/news/20200131-fosdem/</guid><pubDate>Fri, 31 Jan 2020 01:00:00 GMT</pubDate><content:encoded>&lt;p&gt; &lt;em&gt;2020-01-31&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Benjie and Jem are excited to be representing the Graphile suite of tools at
+this years FOSDEM in Brussels. FOSDEM is Europe&apos;s largest community conference
+focussed on Open Source software, providing software developers and communities
+a place to meet, get in touch with other developers, find out about the latest
+developments in the free software world and attend talks and presentations on
+various topics from project leaders.&lt;/p&gt;
+&lt;p&gt;The team had an amazing experience at FOSDEM in 2019 and are looking forward to
+meeting thousands of members of the open source community again.
+&lt;a href=&quot;https://discord.org/graphile&quot;&gt;Send a message&lt;/a&gt; if you are going so we can
+arrange to meet!&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://fosdem.org/&quot;&gt;More details about FOSDEM available on their website.&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;Benjie and Jem pose in front of a banner showcasing PostGraphile&quot; src=&quot;/images/news/benjie-and-jem-fosdem.jpg&quot; style=&quot;max-height: 500px&quot; /&gt;
+&lt;/div&gt;</content:encoded></item><item><title><![CDATA[Graphile Starter is here!]]></title><description><![CDATA[Announced 2019-12-03 by Team Graphile Graphile Starter is designed for client projects, hack days, side hustles, SaaS
+projects, and many…]]></description><link>https://graphile.org/news/graphile-starter/</link><guid isPermaLink="false">https://graphile.org/news/graphile-starter/</guid><pubDate>Tue, 03 Dec 2019 01:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;Announced 2019-12-03 by Team Graphile&lt;/em&gt;&lt;/p&gt;
+&lt;p class=&apos;intro&apos;&gt;
+The team behind Graphile are excited to release Graphile Starter - an opinionated quick-start project for full-stack application development in React, Node.js, GraphQL and PostgreSQL. It includes the foundations of a modern web application, with a full user registration system, session management, optimized job queue, a significant amount of pre-configured tooling, tests and much more.
+&lt;/p&gt;
+&lt;p&gt;Graphile Starter is designed for client projects, hack days, side hustles, SaaS
+projects, and many other uses we haven&apos;t even thought of yet. The boilerplate
+for a React, GraphQL and Postgres stack is already there, just add your idea and
+you&apos;re ready to go.&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;Woman holding a lightbulb&quot; src=&quot;/images/news/lightbulb.png&quot; style=&quot;max-height: 300px&quot; /&gt;
+&lt;/div&gt;
+&lt;p&gt;Some of the things included with the starter, ready for you to take and extend:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Batteries included:&lt;/strong&gt; full user system and OAuth, AntD design framework, jest
+and Cypress end-to-end testing, security, email templating and transport,
+pre-configured linting and code formatting, deployment instructions, and more&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Speedy development:&lt;/strong&gt; easy debugging, Graphile&apos;s idempotent migration system,
+job queue and server middleware ready to use, hot reloading; not to mention deep
+integration with VSCode: plugin recommendations, preconfigured settings, ESLint
+and Prettier integration and debugging profiles&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Type safety:&lt;/strong&gt; pre-configured type checking, strongly typed throughout with
+TypeScript&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Best practices:&lt;/strong&gt; React, GraphQL, PostGraphile, Node, jest and Cypress best
+practices&lt;/p&gt;
+&lt;p&gt;Full instructions and technical detail can be found on GitHub:
+&lt;a href=&quot;https://github.com/graphile/starter&quot;&gt;github.com/graphile/starter&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;thank-you-graphile-sponsors&quot;&gt;&lt;a href=&quot;#thank-you-graphile-sponsors&quot; aria-label=&quot;thank you graphile sponsors permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Thank you Graphile Sponsors&lt;/h3&gt;
+&lt;p&gt;Graphile Starter has been a labour of love, and would not be possible without
+our sponsors. We have recently joined the GitHub sponsors program and that,
+alongside Patreon, has been invaluable in giving us paid time to work on open
+source projects. &lt;strong&gt;Take Graphile Starter, go make some money, and then give
+back&lt;/strong&gt; to help support further development on both the Starter and the Graphile
+suite of tools.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/sponsor/&quot;&gt;Click here to find out more about why and how you should sponsor PostGraphile development.&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;Woman sending a cartoon heart up into the sky&quot; src=&quot;/images/news/undraw_super_thank_you_small.png&quot; /&gt;
+&lt;/div&gt;</content:encoded></item><item><title><![CDATA[PostGraphile Releases Version 4.5 - Explain Feature]]></title><description><![CDATA[Announced 2019-11-24 New Feature: Explain in GraphiQL The headline feature in 4.5 is the addition of the new Explain feature in
+GraphiQL…]]></description><link>https://graphile.org/news/postgraphile-version-4-5/</link><guid isPermaLink="false">https://graphile.org/news/postgraphile-version-4-5/</guid><pubDate>Sun, 24 Nov 2019 00:00:01 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;Announced 2019-11-24&lt;/em&gt;&lt;/p&gt;
+&lt;p class=&apos;intro&apos;&gt;
+Graphile is pleased to announce the release of PostGraphile version 4.5.0, an upgrade recommended for all PostGraphile users.
+&lt;/p&gt;
+&lt;strong&gt;🚨Beware:&lt;/strong&gt; previously the CLI would ignore arguments it didn&apos;t understand, now it exits stating the arguments it wasn&apos;t expecting. If you were relying on this old behaviour, you will need to update your code to pass valid arguments.
+&lt;h3 id=&quot;new-feature-explain-in-graphiql&quot;&gt;&lt;a href=&quot;#new-feature-explain-in-graphiql&quot; aria-label=&quot;new feature explain in graphiql permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;New Feature: Explain in Graph&lt;em&gt;i&lt;/em&gt;QL&lt;/h3&gt;
+&lt;p&gt;The headline feature in 4.5 is the addition of the new Explain feature in
+Graph&lt;em&gt;i&lt;/em&gt;QL, visible by using the &lt;code class=&quot;language-text&quot;&gt;--allow-explain&lt;/code&gt; flag. In Graph&lt;em&gt;i&lt;/em&gt;QL you&apos;ll
+see a new section in your return statement, plus new panel on the right which
+will show executed query in a readable format.&lt;/p&gt;
+&lt;div class=&quot;tc&quot;&gt;
+&lt;img alt=&quot;Demo of the new GraphiQL Explain feature in PostGraphile&quot; src=&quot;/images/graphiqlexplainbutton.png&quot; /&gt;
+&lt;/div&gt;
+&lt;h3 id=&quot;smart-tags&quot;&gt;&lt;a href=&quot;#smart-tags&quot; aria-label=&quot;smart tags permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Smart Tags&lt;/h3&gt;
+&lt;p&gt;No longer do you need to put &lt;code class=&quot;language-text&quot;&gt;COMMENT&lt;/code&gt; commands in the database (&quot;smart
+comments&quot;) to customize your schema, you can now use a tags file to gather these
+&quot;smart tags&quot; into one, version controlled, easy-to-diff place. Smart comments
+and smart tags can be used in unison, and both will be supported going forward
+so you can pick whichever works best for your team.&lt;/p&gt;
+&lt;h3 id=&quot;big-contributions-from-the-graphile-community&quot;&gt;&lt;a href=&quot;#big-contributions-from-the-graphile-community&quot; aria-label=&quot;big contributions from the graphile community permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Big contributions from the Graphile community&lt;/h3&gt;
+&lt;p&gt;Thanks to everyone in the Graphile community who has contributed to this
+release; it&apos;s been a good release for community involvement as you can see in
+the
+&lt;a href=&quot;https://github.com/graphile/postgraphile/releases/tag/v4.5.0&quot;&gt;release notes&lt;/a&gt;.
+Contributions from the community include improvements to QueryBuilder, better
+JWT support and bug fixes for types.&lt;/p&gt;
+&lt;div class=&quot;tc&quot;&gt;
+&lt;img alt=&quot;Thank you&quot; src=&quot;/images/thanks.png&quot; /&gt;
+&lt;/div&gt;
+&lt;h3 id=&quot;thank-you-for-your-sponsorship&quot;&gt;&lt;a href=&quot;#thank-you-for-your-sponsorship&quot; aria-label=&quot;thank you for your sponsorship permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Thank you for your sponsorship&lt;/h3&gt;
+&lt;p&gt;By significantly reducing the amount of work needed to achieve business goals,
+PostGraphile results in huge savings for users. If your organization contributes
+some of these savings back then everyone can benefit from more frequent releases
+with better performance, better compatibility, better documentation, easier
+customization, and more features — leading to even greater savings or profits
+for your organization.&lt;/p&gt;
+&lt;p&gt;We now have 84 sponsors across GitHub and Patreon and that means we&apos;re funded to
+spend an average of nearly 2 days per week on Open Source; this is brilliant!&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/sponsor/&quot;&gt;Click here to find out more about why and how you should sponsor PostGraphile development.&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;full-release-notes&quot;&gt;&lt;a href=&quot;#full-release-notes&quot; aria-label=&quot;full release notes permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Full release notes&lt;/h3&gt;
+&lt;p&gt;Full detailed technical release notes can be found on GitHub:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/graphile/postgraphile/releases/tag/v4.5.0&quot;&gt;v4.5.0 release notes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/graphile/postgraphile/releases/tag/v4.4.4&quot;&gt;v4.4.4 release notes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/graphile/postgraphile/releases/tag/v4.4.3&quot;&gt;v4.4.3 release notes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/graphile/postgraphile/releases/tag/v4.4.2&quot;&gt;v4.4.2 release notes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/graphile/postgraphile/releases/tag/v4.4.1&quot;&gt;v4.4.1 release notes&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[Increasing velocity with GraphQL and Postgres]]></title><description><![CDATA[2019-11-04 Benjie and Jem travelled to Prague for ReactiveConf where Benjie gave the
+keynote on increasing velocity with GraphQL and…]]></description><link>https://graphile.org/news/20191104-reactive-conf/</link><guid isPermaLink="false">https://graphile.org/news/20191104-reactive-conf/</guid><pubDate>Mon, 04 Nov 2019 01:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;2019-11-04&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Benjie and Jem travelled to Prague for ReactiveConf where Benjie gave the
+keynote on increasing velocity with GraphQL and Postgres. The talk focused on
+how the two tools can pair beautifully, leading to massively increased software
+development and delivery speed, faster APIs, fewer bugs and ultimately enabling
+a greater focus on delivering value on the frontend rather than maintaining
+three different layers of data models and associated logic on the backend.&lt;/p&gt;
+&lt;div class=&quot;tc&quot;&gt;
+&lt;iframe 
+width=&quot;560&quot;
+height=&quot;315&quot;
+src=&quot;https://www.youtube-nocookie.com/embed/BNLcHlMn5X4&quot;
+title=&quot;YouTube video player&quot;
+frameborder=&quot;1&quot; 
+style=&quot;border: 6px solid #1b1b3d; border-radius: 10px&quot;
+allow=&quot;accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot;
+allowfullscreen&gt;
+&lt;/iframe&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=BNLcHlMn5X4&quot;&gt;You can also view the talk on YouTube here.&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[PostGraphile Releases Version 4.4 - Real-time!]]></title><description><![CDATA[Announced 2019-05-03 by the Graphile Team The headline feature in 4.4 is real-time support. Previously, GraphQL
+subscriptions were only…]]></description><link>https://graphile.org/news/postgraphile-version-4-4/</link><guid isPermaLink="false">https://graphile.org/news/postgraphile-version-4-4/</guid><pubDate>Fri, 03 May 2019 00:00:01 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;Announced 2019-05-03 by the Graphile Team&lt;/em&gt;&lt;/p&gt;
+&lt;p class=&apos;intro&apos;&gt;
+Graphile is pleased to announce the release of PostGraphile version 4.4.0, a backwards-compatible* upgrade recommended for all PostGraphile users.
+&lt;/p&gt;
+&lt;p&gt;The headline feature in 4.4 is real-time support. Previously, GraphQL
+subscriptions were only available in PostGraphile via the “supporter” plugin
+(for Patreon sponsors). We’ve overhauled this functionality and released it as
+open source, added built-in support for subscriptions to our PostGraphiQL
+editor, and also added experimental support for live queries.&lt;/p&gt;
+&lt;p&gt;Besides these exciting features, a lot of improvements and minor features have
+been added, including: performance improvements; revised handling of PostgreSQL
+restarts and server availability on startup; having &lt;code class=&quot;language-text&quot;&gt;makeExtendSchemaPlugin&lt;/code&gt; do
+more for you automatically; giving you a way to choose between lists and Relay
+connections on a per-table, per-function or per-constraint basis; and adding a
+plugin dependency/ordering system.&lt;/p&gt;
+&lt;p&gt;PostGraphile is crowd-funded open-source software, it relies on financial
+contributions from the individuals and companies that are using it in order to
+keep advancing. Please &lt;a href=&quot;/sponsor/&quot;&gt;sponsor the project&lt;/a&gt;, you will surely reap
+the rewards!&lt;/p&gt;
+&lt;p&gt;Technical details of this release can be found in the
+&lt;a href=&quot;https://github.com/graphile/postgraphile/releases/tag/v4.4.0&quot;&gt;release notes&lt;/a&gt;,
+or read on for more information on Subscriptions and Live Queries.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;* there’s a small number of fixes which may cause issues for existing
+applications that were relying on broken behaviour, these are outlined in the
+“Breaking Fixes” section of the release notes, along with how to opt-out of
+these fixes.&lt;/em&gt;&lt;/p&gt;
+&lt;h3 id=&quot;graphql-subscriptions&quot;&gt;&lt;a href=&quot;#graphql-subscriptions&quot; aria-label=&quot;graphql subscriptions permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;GraphQL Subscriptions&lt;/h3&gt;
+&lt;p&gt;GraphQL Subscriptions are an official feature, detailed in the GraphQL
+specification. They enable your application to request a certain query be
+performed whenever the specified event occurs on the GraphQL server, for example
+&lt;code class=&quot;language-text&quot;&gt;emailReceived&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;userStatusChanged&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;notificationAdded&lt;/code&gt;, or &lt;code class=&quot;language-text&quot;&gt;messageArchived&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&quot;tc&quot;&gt;
+&lt;img alt=&quot;Real-time subscriptions&quot; src=&quot;/images/news/real-time-sync.svg&quot; style=&quot;max-height: 300px&quot;&gt;
+&lt;/div&gt;
+&lt;p&gt;To enable this real-time feature, a long running connection is required with the
+server. In PostGraphile we achieve this via websockets, the de-facto standard
+for real-time GraphQL targeting web browsers and mobile apps.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Note: with a standard GraphQL subscription, the query is only executed when the
+specified event occurs, making it an efficient way of subscribing to particular
+events without being notified of every data change on the backend.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Subscriptions are the recommended way of adding real-time features to your
+GraphQL API.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/postgraphile/subscriptions/&quot;&gt;Read more about PostGraphile subscriptions in the documentation.&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;postgraphile-live-queries&quot;&gt;&lt;a href=&quot;#postgraphile-live-queries&quot; aria-label=&quot;postgraphile live queries permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;PostGraphile Live Queries&lt;/h3&gt;
+&lt;p&gt;A “live query” monitors the query a user provides and gives the client an
+updated version whenever the query would return a different result. You can
+think of it as akin to extremely frequent polling of a regular query, but
+without the bandwidth costs. Live queries are not yet an official feature of
+GraphQL, and so there are a number of different implementations. PostGraphile’s
+live queries do not require specific client software since we use the standard
+GraphQL subscriptions interface — simply change your &lt;code class=&quot;language-text&quot;&gt;query&lt;/code&gt; to a &lt;code class=&quot;language-text&quot;&gt;subscription&lt;/code&gt;
+and it becomes live, as in the following example
+(&lt;a href=&quot;https://github.com/graphile/livesotope&quot;&gt;available on GitHub&lt;/a&gt;) showing
+real-time points rankings of fictional players:&lt;/p&gt;
+&lt;div class=&quot;tc&quot;&gt;
+&lt;img alt=&quot;Changing a query to a live query&quot; src=&quot;/images/query2subscription.png&quot; style=&quot;max-height: 230px&quot; /&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;div class=&quot;tc&quot;&gt;
+&lt;img alt=&quot;Demo of live query&quot; src=&quot;/images/live_demo_rankings.gif&quot;&gt;
+&lt;/div&gt;
+&lt;p&gt;Live queries are an incredibly powerful tool for frontend developers, as it
+means they don’t need to worry about monitoring for changes in the data — they
+know the data they’ve requested will always be up to date. However, live queries
+are not a panacea: they can come with significant backend cost and/or
+complexity.&lt;/p&gt;
+&lt;p&gt;PostGraphile has worked hard to decrease the costs associated with live queries,
+but there’s still more to be done. Currently we feel PostGraphile live queries
+may be suitable in apps with relatively small user bases (such as for internal
+tooling used across a large enterprise), but if you’re targeting an internet
+scale deployment hoping for millions of users you will likely be better off
+using traditional subscriptions (or keeping live queries to a very small area of
+your application). There are lots of factors that may go into deciding if live
+queries are a good fit for your problem; if you need help deciding then you may
+wish to engage our consultancy services.&lt;/p&gt;
+&lt;p&gt;There will be more enhancements in live queries in future. If you&apos;re interested
+in helping in this development please get in touch
+&lt;a href=&quot;http://discord.gg/graphile&quot;&gt;via our Discord chat&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/postgraphile/live-queries/&quot;&gt;Read more about PostGraphile live queries in the documentation.&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;help-us-to-help-you&quot;&gt;&lt;a href=&quot;#help-us-to-help-you&quot; aria-label=&quot;help us to help you permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Help us to help you!&lt;/h3&gt;
+&lt;p&gt;By significantly reducing the amount of work needed to achieve business goals,
+PostGraphile results in huge savings for users. If your organization contributes
+some of these savings back then everyone can benefit from more frequent releases
+with better performance, better compatibility, better documentation, easier
+customization, and more features — leading to even greater savings or profits
+for your organization.&lt;/p&gt;
+&lt;p&gt;Huge thanks to the 70 individuals and companies already sponsoring PostGraphile!&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/sponsor/&quot;&gt;Click here to find out more about why and how you should sponsor PostGraphile development.&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;tc&quot;&gt;
+&lt;img alt=&quot;Thank you&quot; src=&quot;/images/thanks.png&quot; /&gt;
+&lt;/div&gt;
+&lt;h3 id=&quot;full-release-notes&quot;&gt;&lt;a href=&quot;#full-release-notes&quot; aria-label=&quot;full release notes permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Full release notes&lt;/h3&gt;
+&lt;p&gt;As always, we’ve published detailed technical release notes to GitHub:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/graphile/postgraphile/releases/tag/v4.4.0&quot;&gt;v4.4.0 release notes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/graphile/postgraphile/releases/tag/v4.3.3&quot;&gt;v4.3.3 release notes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/graphile/postgraphile/releases/tag/v4.3.2&quot;&gt;v4.3.2 release notes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/graphile/postgraphile/releases/tag/v4.3.1&quot;&gt;v4.3.1 release notes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/graphile/postgraphile/releases/tag/v4.2.0&quot;&gt;v4.2.0 release notes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/graphile/postgraphile/releases/tag/v4.1.0&quot;&gt;v4.1.0 release notes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/graphile/postgraphile/releases/tag/v4.0.0&quot;&gt;v4.0.0 release notes&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[PostGraphile Releases Version 4.1 - Better Webpackability!]]></title><description><![CDATA[The original GraphQL API for PostgreSQL: now with improved Lambda support Announced 2018-12-06 by Team Graphile Building upon the huge…]]></description><link>https://graphile.org/news/postgraphile-version-4-1/</link><guid isPermaLink="false">https://graphile.org/news/postgraphile-version-4-1/</guid><pubDate>Thu, 06 Dec 2018 00:00:01 GMT</pubDate><content:encoded>&lt;h3 id=&quot;the-original-graphql-api-for-postgresql-now-with-improved-lambda-support&quot;&gt;&lt;a href=&quot;#the-original-graphql-api-for-postgresql-now-with-improved-lambda-support&quot; aria-label=&quot;the original graphql api for postgresql now with improved lambda support permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;The original GraphQL API for PostgreSQL: now with improved Lambda support&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;Announced 2018-12-06 by Team Graphile&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Building upon the huge performance gains found in Version 4, Graphile is pleased
+to announce the release of Version 4.1 of PostGraphile, now with a huge
+improvement to startup performance in serverless environments. This update also
+brings a large number of enhancements including much broader PostgreSQL function
+support, an enhanced GraphiQL interface, and a lot more helpers for writing
+plugins.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/graphile/postgraphile/releases/tag/v4.1.0&quot;&gt;See the entire release notes on GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;better-webpackability&quot;&gt;&lt;a href=&quot;#better-webpackability&quot; aria-label=&quot;better webpackability permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Better webpackability&lt;/h3&gt;
+&lt;p&gt;Thanks to funding from &lt;a href=&quot;https://cogo.co/&quot;&gt;Connecting Good&lt;/a&gt;, PostGraphile Version
+4.1 enhances startup performance for webpack and serverless/Amazon Lambda users:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Bundle size is around 10 times smaller&lt;/li&gt;
+&lt;li&gt;Unzip time is up to 140 times faster&lt;/li&gt;
+&lt;li&gt;Cold start time is now under half a second&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This has been achieved through targeted work optimising PostGraphile’s
+&quot;webpackability&quot; - how well it could be processed by the popular webpack tool.
+Previously, many features of PostGraphile could not be included in webpack&apos;s
+output, resulting in &gt;4000 files to be zipped up and sent to Lambda. Now a
+PostGraphile application can be reduced to just 2 files, leading to a smaller
+zip file and a faster startup time.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Do you use PostGraphile in serverless environments?&lt;/strong&gt; If so, make sure to
+update to Version 4.1 and &lt;a href=&quot;https://discord.gg/graphile&quot;&gt;let us know&lt;/a&gt; about your
+performance gains.&lt;/p&gt;
+&lt;h3 id=&quot;big-contributions-from-the-graphile-community&quot;&gt;&lt;a href=&quot;#big-contributions-from-the-graphile-community&quot; aria-label=&quot;big contributions from the graphile community permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Big contributions from the Graphile community&lt;/h3&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;PostGraphile thanks our contributors&quot; src=&quot;/images/undraw_developer_activity.png&quot; /&gt;
+&lt;/div&gt;
+&lt;p&gt;Version 4.1 also includes a big update from frequent contributor
+&lt;a href=&quot;https://github.com/mattbretl&quot;&gt;@mattbretl&lt;/a&gt;, who has introduced support for a
+wider range of PostgreSQL functions. This reduces the constraints developers
+have to work within, freeing them to use the right PostgreSQL function type for
+the task, leading to even faster development times.&lt;/p&gt;
+&lt;h3 id=&quot;help-us-to-help-you&quot;&gt;&lt;a href=&quot;#help-us-to-help-you&quot; aria-label=&quot;help us to help you permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Help us to help you!&lt;/h3&gt;
+&lt;p&gt;PostGraphile is crowd-funded open-source software, it relies on crowd-sourced
+funding from individuals and companies to keep advancing.&lt;/p&gt;
+&lt;p&gt;By significantly reducing the amount of work needed to achieve business goals,
+PostGraphile results in huge savings for users. Your organization should
+contribute some of these savings back so everyone can benefit from more frequent
+releases with better performance, better compatibility, better documentation,
+easier customization, and more features - leading to even greater savings or
+profits for your organization.&lt;/p&gt;
+&lt;p&gt;Huge thanks to the 60 individuals and companies already sponsoring PostGraphile!&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;/sponsor/&quot;&gt;Click here to sponsor PostGraphile development now.&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;PostGraphile thanks the community&quot; src=&quot;/images/thanks.png&quot; /&gt;
+&lt;/div&gt;</content:encoded></item><item><title><![CDATA[GraphQL Finland]]></title><description><![CDATA[2018-10-23 Benjie travelled to GraphQL Finland to give
+a talk on Database-Driven GraphQL Development. Learn how a database-centric
+approach…]]></description><link>https://graphile.org/news/20181023-graphql-finland/</link><guid isPermaLink="false">https://graphile.org/news/20181023-graphql-finland/</guid><pubDate>Tue, 23 Oct 2018 01:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;2018-10-23&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Benjie travelled to &lt;a href=&quot;https://graphql-finland.fi/2018/&quot;&gt;GraphQL Finland&lt;/a&gt; to give
+a talk on Database-Driven GraphQL Development. Learn how a database-centric
+approach to GraphQL API development can give your engineers more time to focus
+on the important parts of your application. Topics covered included
+authorization, adhering to GraphQL best practices, embracing the power of
+PostgreSQL, and avoiding common pitfalls.&lt;/p&gt;
+&lt;div class=&quot;tc&quot;&gt;
+&lt;iframe 
+width=&quot;560&quot;
+height=&quot;315&quot;
+src=&quot;https://www.youtube-nocookie.com/embed/XDOrhTXd4pE&quot;
+title=&quot;YouTube video player&quot;
+frameborder=&quot;1&quot; 
+style=&quot;border: 6px solid #1b1b3d; border-radius: 10px&quot;
+allow=&quot;accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot;
+allowfullscreen&gt;
+&lt;/iframe&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=XDOrhTXd4pE&quot;&gt;You can also find the talk on YouTube here.&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[PostGraphile Launches Version 4]]></title><description><![CDATA[Announced 2018-10-02 by Team Graphile The original GraphQL API for PostgreSQL: now vastly more performant, customizable and extensible than…]]></description><link>https://graphile.org/news/postgraphile-version-4/</link><guid isPermaLink="false">https://graphile.org/news/postgraphile-version-4/</guid><pubDate>Tue, 02 Oct 2018 00:00:01 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;Announced 2018-10-02 by Team Graphile&lt;/em&gt;&lt;/p&gt;
+&lt;h3 id=&quot;the-original-graphql-api-for-postgresql-now-vastly-more-performant-customizable-and-extensible-than-ever-before&quot;&gt;&lt;a href=&quot;#the-original-graphql-api-for-postgresql-now-vastly-more-performant-customizable-and-extensible-than-ever-before&quot; aria-label=&quot;the original graphql api for postgresql now vastly more performant customizable and extensible than ever before permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;The original GraphQL API for PostgreSQL: now vastly more performant, customizable and extensible than ever before&lt;/h3&gt;
+&lt;p&gt;After a year of development and testing, Benjie is pleased to announce the
+release of PostGraphile Version 4 ⁠— the most customizable and extensible
+automatic GraphQL API for PostgreSQL yet. PostGraphile⁠—previously known as
+PostGraphQL⁠—has been re-written from the ground up with a strong focus on
+performance, best practices and flexibility. This has been enabled through the
+creation of Graphile Engine - a powerful datasource-agnostic GraphQL Engine that
+has extensibility and performance at its core ⁠— upon which PostGraphile Version
+4 is built.&lt;/p&gt;
+&lt;p&gt;Instead of requiring developers to learn a new set of tools and lock business
+logic into a new software stack, PostGraphile encourages them to build the
+important things⁠—their data and business logic—using the database they&apos;re
+already using. Then with minimal configuration, they can use PostGraphile to
+make this available as a secure and lightning-fast GraphQL API.&lt;/p&gt;
+&lt;h3 id=&quot;postgraphile-version-4-is-highly-performant&quot;&gt;&lt;a href=&quot;#postgraphile-version-4-is-highly-performant&quot; aria-label=&quot;postgraphile version 4 is highly performant permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;PostGraphile Version 4 is highly performant&lt;/h3&gt;
+&lt;p&gt;Benjie has rebuilt the core of PostGraphile entirely, with a strong focus on
+performance. Unlike other solutions, PostGraphile is able to look at the GraphQL
+query holistically and find the most efficient way of executing it. This has
+lead to a large increase in the request throughput, and a 94% decrease in
+latency. Peak memory usage has also reduced by 92% as compared to Version 3. The
+result is a much faster application, and happier end users ⁠— especially those
+on mobile. PostGraphile Version 3 developers will be able to reap these massive
+performance improvements simply by updating ⁠— no need to change their
+application code.&lt;/p&gt;
+&lt;div class=&quot;flex flex-row flex-wrap&quot;&gt;
+&lt;div class=&apos;text-center col-xs-12 col-md-3 col-lg-5 postgraphile-graphs-requests-per-second&apos;&gt;&lt;/div&gt;
+&lt;div class=&apos;text-center col-xs-12 col-md-3 col-lg-5 postgraphile-graphs-average-latency-label&apos;&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a href=&quot;/postgraphile/performance/&quot;&gt;Read more about the stunning new performance of PostGraphile version 4&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;version-4-is-highly-customizable&quot;&gt;&lt;a href=&quot;#version-4-is-highly-customizable&quot; aria-label=&quot;version 4 is highly customizable permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Version 4 is highly customizable&lt;/h3&gt;
+&lt;p&gt;Version 4 has added three handy features to help developers streamline their
+GraphQL schema. First, unnecessary functionality from PostgreSQL extensions is
+automatically filtered out by default, so only the tables and functions the
+developer has added are exposed. Secondly, PostGraphile can now inspect database
+permissions, and automatically remove types and fields from the generated schema
+the end user has no way of accessing. Finally, Version 4 introduces the concept
+of &quot;smart comments&quot;.&lt;/p&gt;
+&lt;p&gt;The new smart comments functionality enables the developer to customize their
+GraphQL schema as they see fit. By adding smart comments, the developer can
+easily perform operations such as renaming fields without modifying the
+underlying table structure. Besides renaming fields, current operations include
+renaming types, detailing when a field should be included or not (e.g. making a
+field read-only), and handling deprecation gracefully. Plugin authors are
+already using the smart comments functionality to add new features to their
+PostGraphile schemas, such as adding relations on views.&lt;/p&gt;
+&lt;p&gt;These features lead to smaller GraphQL schemas that are easier for developers to
+understand and manage without sacrificing desired functionality.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/postgraphile/smart-comments/&quot;&gt;Read more about the new smart comments system&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;version-4-is-highly-extensible&quot;&gt;&lt;a href=&quot;#version-4-is-highly-extensible&quot; aria-label=&quot;version 4 is highly extensible permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Version 4 is highly extensible&lt;/h3&gt;
+&lt;p&gt;Before commencing work on PostGraphile Version 4, Benjie reviewed every issue in
+the PostGraphile bug tracker, and concluded that a rigid one-size-fits all
+GraphQL API was too restrictive for many users. The rigid nature of Version 3
+resulted in a number of users having to compromise with workarounds such as
+schema stitching, or resort to maintaining a separate fork of the project to add
+their desired functionality. With this in mind Benjie, set out to find a
+solution to all these issues.&lt;/p&gt;
+&lt;p&gt;PostGraphile became a modular project, with its GraphQL generation powered by a
+new plugin-based project named Graphile Engine. Users can now use plugins to add
+functionality to their GraphQL schema without requiring modifications to the
+core ⁠— and they can even share these features with the world. During the
+development stages of Graphile Engine, a community of plugin authors formed;
+with their help, the plugin system solidified into the capable production-ready
+system that Benjie is proud to be releasing today. This work has negated the
+need to maintain forks of PostGraphile, and has lead to a growing ecosystem of
+functionality putting PostGraphile at the forefront of PostgreSQL GraphQL APIs.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/postgraphile/extending/&quot;&gt;Read more about the new plug in system&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;postgraphile-is-open-source-supported-by-the-community&quot;&gt;&lt;a href=&quot;#postgraphile-is-open-source-supported-by-the-community&quot; aria-label=&quot;postgraphile is open source supported by the community permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;PostGraphile is open source, supported by the community&lt;/h3&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;PostGraphile thanks the community&quot; src=&quot;/images/thanks.png&quot; /&gt;
+&lt;/div&gt;
+&lt;p&gt;This release of PostGraphile wouldn’t have been possible without the community.
+Benjie says, “The community&apos;s response to PostGraphile has been amazing! People
+have found so many ways to help support the project: from testing and reporting
+issues, to documentation fixes, and even large feature development. Their
+sponsorship now funds one day a week dedicated to PostGraphile development, and
+this support is growing every month which is already leading to more features
+and faster releases. This voluntary financial support from the community is very
+motivational, a great antidote to the burn-out that&apos;s common in open source
+maintainers, and it&apos;s exciting to be turning PostGraphile into a sustainable
+open source project that people can rely on for years to come. It&apos;s also
+wonderful to see the community being so supportive of each other ⁠— sharing
+knowledge, debugging issues, testing and sharing plugins. There&apos;s so much more
+to come from PostGraphile ⁠— bring on the future!”&lt;/p&gt;</content:encoded></item></channel></rss>
