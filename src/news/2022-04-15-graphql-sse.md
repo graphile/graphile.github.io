@@ -37,14 +37,14 @@ This is just one example of a Graphile community member adding to the Graphile
 suite of open source tools. We welcome contributions in many forms across many
 of our projects, from simple fixes in our documentation through to community
 plug-ins and contributions to the main PostGraphile git branch. If you wish to
-get involved, a good first step is our
-[Contribution Guide](https://www.graphile.org/contribute/); if you wish to get
-stuck into developing on the main branches of our projects then please pop into
-our [Community Discord](https://discord.gg/graphile) where we have several
-`#dev` channels - this will let you see where we're currently working in the
-code base, and ideas others have also had. Pull requests should be focused on
-changing only one thing at a time - and large changes should seek maintainer
-approval first. We look forward to welcoming you to our team of contributors!
+get involved, a good first step is our [Contribution Guide](/contribute/); if
+you wish to get stuck into developing on the main branches of our projects then
+please pop into our [Community Discord](https://discord.gg/graphile) where we
+have several `#dev` channels - this will let you see where we're currently
+working in the code base, and ideas others have also had. Pull requests should
+be focused on changing only one thing at a time - and large changes should seek
+maintainer approval first. We look forward to welcoming you to our team of
+contributors!
 
 <div class="tc">
 <img alt="Thank you" src="/images/thanks.png" />

@@ -38,8 +38,8 @@ An enum table must have a text (or varchar / char) primary key, and may have
 other columns. It must be done through using an `@enum` smart comment (and not a
 smart tag file or plugin) due to the way in which PostGraphile v4's
 introspection engine works. See
-[our documentation](https://www.graphile.org/postgraphile/enums/#with-enum-tables)
-for more information, or the detailed
+[our documentation](/postgraphile/enums/#with-enum-tables) for more information,
+or the detailed
 [technical release notes](https://github.com/graphile/postgraphile/releases/tag/v4.8.0).
 
 <div class="flex flex-wrap justify-around">
@@ -76,8 +76,7 @@ quickly and efficiently.
 Graphile Starter is a "batteries included" off-the-shelf starter project
 marrying these tools together with a design system, user and session management
 and so much more; ready for you to take as a jumping-off point for your own
-project. You can see our entire suite of projects
-[at our homepage](https://graphile.org).
+project. You can see our entire suite of projects [at our homepage](/).
 
 ### Thank you Sponsors!
 

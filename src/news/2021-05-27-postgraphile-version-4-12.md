@@ -40,7 +40,7 @@ This release also includes a few small fixes and some other minor features that
 enable greater community expansion of PostGraphile. We love seeing your
 plugins - do share them in our `#i-made-this channel` on
 [Discord](https://discord.gg/graphile) or add them to
-[the list on the website](https://www.graphile.org/postgraphile/community-plugins/)!
+[the list on the website](/postgraphile/community-plugins/)!
 
 Full release notes available on GitHub:
 

@@ -46,7 +46,7 @@ possible without our sponsors. The GitHub Sponsor program has been key in
 enabling us to spend paid time on our open source work. If you appreciate what
 we do, encourage your company to sponsor us to help us keep dedicating time and
 resources to our open source developer tooling. There's more information on
-[our sponsor page](https://graphile.org/sponsor).
+[our sponsor page](/sponsor/).
 
 <div class="flex flex-wrap justify-around">
 <img alt="Graphile thanks the community" src="/images/thanks.png" />

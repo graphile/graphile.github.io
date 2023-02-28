@@ -22,11 +22,11 @@ class News extends Component {
 
     const prevUrl =
       currentPage > 2
-        ? `/news/${currentPage - 1}`
+        ? `/news/${currentPage - 1}/`
         : currentPage === 2
-        ? `/news`
+        ? `/news/`
         : null;
-    const nextUrl = currentPage < numPages ? `/news/${currentPage + 1}` : null;
+    const nextUrl = currentPage < numPages ? `/news/${currentPage + 1}/` : null;
 
     return (
       <Layout {...this.props}>

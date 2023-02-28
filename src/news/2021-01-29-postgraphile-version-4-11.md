@@ -46,9 +46,8 @@ third-party plugins will now be caught before the server goes live.
 
 ### Other Additions
 
-- Support for
-  ["enum tables"](https://www.graphile.org/postgraphile/enums/#with-enum-tables)
-  has been extended to views.
+- Support for ["enum tables"](/postgraphile/enums/#with-enum-tables) has been
+  extended to views.
 - A bug in watch mode (which is not intended for production usage) which could
   result in pool exhaustion has been resolved.
 - A minor performance enhancement to `pg-sql2` that allows re-use of `sql.value`
