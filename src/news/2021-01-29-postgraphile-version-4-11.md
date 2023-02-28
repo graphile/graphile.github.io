@@ -1,6 +1,6 @@
 ---
 layout: post
-title: PostGraphile Releases Version 4.11 - Wonderful Websockets
+title: "PostGraphile Releases Version 4.11 - Wonderful Websockets"
 date: 2021-01-29T01:00:00Z
 path: /news/20210129-postgraphile-411/
 thumbnail: /images/news/postgraphile-developer2.svg

@@ -1,7 +1,7 @@
 ---
 layout: page
 path: /news/postgraphile-version-4-1/
-title: PostGraphile Releases Version 4.1 - Better Webpackability!
+title: "PostGraphile Releases Version 4.1 - Better Webpackability!"
 date: 2018-12-06T00:00:01.000Z
 thumbnail: /images/undraw_developer_activity.png
 thumbnailAlt:

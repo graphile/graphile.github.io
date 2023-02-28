@@ -1,7 +1,7 @@
 ---
 layout: page
 path: /news/postgraphile-version-4/
-title: PostGraphile Launches Version 4
+title: "PostGraphile Launches Version 4"
 date: 2018-10-02T00:00:01.000Z
 thumbnail: /images/v4-average-latency-with-label.png
 thumbnailAlt: "Graph showing Version 4 has 94% reduced latency"

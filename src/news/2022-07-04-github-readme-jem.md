@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Jem discusses OSS communities at the GitHub ReadME project
+title: "Jem Discusses OSS Communities at the GitHub ReadME Project"
 date: 2022-07-04T01:00:00Z
 path: /news/20220704-github-readme/
 tags: community, interview

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Benjie's story at the GitHub ReadME project
+title: "Benjie's story at the GitHub ReadME project"
 date: 2020-09-22T01:00:00Z
 path: /news/20200922-github-readme/
 tags: community, interview

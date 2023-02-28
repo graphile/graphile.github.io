@@ -1,6 +1,6 @@
 ---
 layout: post
-title: PostGraphile Releases Version 4.10 - Framework Friends
+title: "PostGraphile Releases Version 4.10 - Framework Friends"
 date: 2020-11-27T01:00:00Z
 path: /news/20201127-postgraphile-410/
 thumbnail: /images/news/frameworks-thumbnail.svg

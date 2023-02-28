@@ -1,14 +1,15 @@
 ---
-layout: post
-title: Graphile goes to FOSDEM
-date: 2020-01-31T01:00:00Z
-path: /news/20200131-fosdem/
+
+layout: post  
+title: "Graphile goes to FOSDEM"  
+date: 2020-01-31T01:00:00Z  
+path: /news/20200131-fosdem/  
 tags: community, conference
 
-summary: "Benjie and Jem are attending FOSDEM - Europe's largest community conference
-focussed on Open Source software, providing developers and communities
-a place to meet, get in touch with other developers and find out about the latest
-news in the free software world."
+summary: "Benjie and Jem are attending FOSDEM - Europe's largest community
+conference focussed on Open Source software, providing developers and
+communities a place to meet, get in touch with other developers and find out
+about the latest news in the free software world."
 
 --- _2020-01-31_
 

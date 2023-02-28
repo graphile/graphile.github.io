@@ -1,6 +1,6 @@
 ---
 layout: post
-title: GraphQL Working Group Discussion
+title: "GraphQL Working Group Discussion"
 date: 2021-12-07T01:00:00Z
 path: /news/20211207-graphql-galaxy/
 tags: conference, graphql

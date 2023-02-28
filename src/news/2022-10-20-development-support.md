@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Development Support Now Available
+title: "Development Support Now Available"
 date: 2022-10-20T01:00:00Z
 path: /news/20221020-development-support/
 tags: announcements, support

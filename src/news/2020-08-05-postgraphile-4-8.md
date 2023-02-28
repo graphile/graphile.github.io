@@ -1,6 +1,6 @@
 ---
 layout: post
-title: PostGraphile Releases Version 4.8 - Excellent Enums
+title: "PostGraphile Releases Version 4.8 - Excellent Enums"
 date: 2020-08-05T01:00:00Z
 path: /news/20200805-postgraphile-48/
 thumbnail: /images/news/postgraphile-developer.svg

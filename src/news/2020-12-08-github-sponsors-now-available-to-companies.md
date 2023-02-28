@@ -1,6 +1,6 @@
 ---
 layout: post
-title: GitHub Sponsors Now Available to Organizations
+title: "GitHub Sponsors Now Available to Organizations"
 date: 2020-12-08T01:00:00Z
 path: /news/20201208-github-sponsors/
 tags: sponsorship

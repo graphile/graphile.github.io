@@ -1,6 +1,6 @@
 ---
 layout: post
-title: PostGraphile Now Supports GraphQL Over Server-Sent Events
+title: "PostGraphile Now Supports GraphQL Over Server-Sent Events"
 date: 2022-04-15T01:00:00Z
 path: /news/20220415-graphql-over-sse/
 thumbnail: /images/news/sse.svg

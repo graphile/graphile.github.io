@@ -1,6 +1,6 @@
 ---
 layout: post
-title: What's Next for the GraphQL Spec in 2022?
+title: "What's Next for the GraphQL Spec in 2022?"
 date: 2021-11-09T01:00:00Z
 path: /news/20211109-graphql-summit/
 tags: conference, graphql

@@ -1,7 +1,7 @@
 ---
 layout: page
 path: /news/postgraphile-version-4-4/
-title: PostGraphile Releases Version 4.4 - Real-time!
+title: "PostGraphile Releases Version 4.4 - Real-time!"
 date: 2019-05-03T00:00:01.000Z
 thumbnail: /images/news/real-time-sync.svg
 thumbnailAlt: "Real-time subscriptions across mobile devices"

@@ -1,7 +1,7 @@
 ---
 
 layout: post 
-title: GraphQL Radio Interviews Benjie 
+title: "GraphQL Radio Interviews Benjie" 
 date: 2022-07-14T01:00:00Z
 path: /news/20220714-graphql-radio/ 
 tags: podcast, graphql 

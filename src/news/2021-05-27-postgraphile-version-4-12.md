@@ -1,6 +1,6 @@
 ---
 layout: post
-title: PostGraphile Releases Version 4.12 - Awesome Aggregates
+title: "PostGraphile Releases Version 4.12 - Awesome Aggregates"
 date: 2021-05-27T01:00:00Z
 path: /news/20210527-postgraphile-412/
 thumbnail: /images/news/postgraphile-developers.svg

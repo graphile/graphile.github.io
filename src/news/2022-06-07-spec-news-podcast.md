@@ -1,6 +1,6 @@
 ---
 layout: post
-title: SpecNews - A New GraphQL Podcast from the Graphile team
+title: "SpecNews - A New GraphQL Podcast from the Graphile team"
 date: 2022-06-07T01:00:00Z
 path: /news/20220607-spec-news/
 tags: announcements, podcast, graphql
@@ -10,7 +10,7 @@ summary:
   monthly round up of GraphQL Spec news in under ten minutes."
 ---
 
-_2022-06-07_
+_2022-06-07 by Team Graphile_
 
 <p class="intro">Benjie and Jem are pleased to announce the release of new podcast
 SpecNews! A monthly round up of GraphQL Specification news in under ten minutes.</p>
