@@ -48,11 +48,11 @@ class News extends Component {
           />
           <SiteHeader location={location} history={history} />
           <div className="page-content">
-            <header class="hero simple">
-              <div class="container">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <div class="hero-block">
+            <header className="hero simple">
+              <div className="container">
+                <div className="row">
+                  <div className="col-xs-12">
+                    <div className="hero-block">
                       <h1> Graphile News</h1>
                       <h3>
                         The latest news on PostGraphile and the Graphile suite
@@ -76,9 +76,9 @@ class News extends Component {
             {files.map(({ post: post }) => {
               return (
                 <section>
-                  <div class="container">
-                    <div class="row flex-wrap-reverse">
-                      <div class="text-center col-xs-12 col-md-9 col-lg-7">
+                  <div className="container">
+                    <div className="row flex-wrap-reverse">
+                      <div className="text-center col-xs-12 col-md-9 col-lg-7">
                         <div className="blog-file-preview" key={post.id}>
                           <h2>
                             <Link to={post.frontmatter.path}>
@@ -93,7 +93,7 @@ class News extends Component {
                           )}
                         </div>{" "}
                       </div>
-                      <div class="text-center col-xs-12 col-md-3 col-lg-5">
+                      <div className="text-center2 col-xs-12 col-md-3 col-lg-5">
                         <img
                           src={post.frontmatter.thumbnail}
                           alt={post.frontmatter.thumbnailAlt}
@@ -106,11 +106,19 @@ class News extends Component {
               );
             })}
 
-            <footer>
-              {prevUrl ? <Link to={prevUrl}>&laquo; Previous</Link> : null}
-              {prevUrl && nextUrl ? " | " : null}
-              {nextUrl ? <Link to={nextUrl}>Next &raquo;</Link> : null}
-            </footer>
+            <section className="bg-white">
+              <div className="container">
+                <div className="row">
+                  <div className="text-center2 col-xs-12 f4">
+                    {prevUrl ? (
+                      <Link to={prevUrl}>&laquo; Previous</Link>
+                    ) : null}
+                    {prevUrl && nextUrl ? " | " : null}
+                    {nextUrl ? <Link to={nextUrl}>Next &raquo;</Link> : null}
+                  </div>
+                </div>
+              </div>
+            </section>
           </div>
           <SiteFooter />
         </div>
