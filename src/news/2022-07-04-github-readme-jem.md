@@ -36,13 +36,13 @@ more intentional in their approach to community building and began drawing
 inspiration from other open source projects.
 
 <div class="flex flex-wrap justify-around">
-<img alt="Benjie and Jem pose in front of a banner showcasing PostGraphile" src="/images/news/benjie-and-jem-at-fosdem.jpg" style="max-height: 500px" />
+<img alt="Benjie and Jem pose in front of a banner showcasing PostGraphile" src="/images/news/benjie-and-jem-fosdem.jpg" style="max-height: 500px" />
 </div>
 
 Benjie and Jem enjoy working together in open source, and this wouldn't be
 possible without the sponsorship from the community. By significantly reducing
 the amount of work needed to achieve business goals, using the Graphile tools
-results in huge savings for users. If your organisation contributes some of
+results in huge savings for users. If your organization contributes some of
 these savings back then everyone can benefit from more frequent releases with
 better performance, better compatibility, better documentation, easier
 customization, and more features — leading to even greater savings or profits

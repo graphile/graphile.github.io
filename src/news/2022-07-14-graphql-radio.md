@@ -24,3 +24,7 @@ university!), how he goes about running an open source business with Jem, and
 the widespread benefits of supporting open source work.
 
 [Hear the episode here.](https://graphqlradio.com/episodes/postgraphile-and-beyond-w-benjie-gillam-graphql-technical-steering-committee-member)
+
+<div class="flex flex-wrap justify-around">
+<a href="https://graphqlradio.com/episodes/postgraphile-and-beyond-w-benjie-gillam-graphql-technical-steering-committee-member" target="_blank"><img alt="A greyscale photo of Benjie" src="/images/news/graphqlradio.jpg" style="max-height: 300px" /></a>
+</div>

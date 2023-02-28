@@ -48,12 +48,12 @@
       },
       {
         "to": "/news/20211207-graphql-galaxy/",
-        "title": "GraphQL Galaxy 2021",
+        "title": "Working Group Discussion Panel",
         "sectionId": "misc"
       },
       {
         "to": "/news/20211109-graphql-summit/",
-        "title": "Apollo GraphQL Summit 2021",
+        "title": "What's Next for the GraphQL Spec in 2022?",
         "sectionId": "misc"
       },
       {
@@ -133,7 +133,7 @@
       },
       {
         "to": "/news/20191104-reactive-conf/",
-        "title": "ReactiveConf 2019",
+        "title": "Increasing velocity with GraphQL and Postgres",
         "sectionId": "misc"
       },
       {
@@ -148,7 +148,7 @@
       },
       {
         "to": "/news/20181023-graphql-finland/",
-        "title": "GraphQL Finland 2018",
+        "title": "Database-Driven GraphQL Development",
         "sectionId": "misc"
       },
       {
