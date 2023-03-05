@@ -142,7 +142,7 @@ comment on column my_schema.my_table.my_column is
   E'@deprecated Use myOtherColumn instead.';
 ```
 
-### @hasDefault
+#### @hasDefault
 
 You can indicate that a column has a default - be that implemented via a
 trigger, or maybe as an instead of insert rule - so the field will be nullable
