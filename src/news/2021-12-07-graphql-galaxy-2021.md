@@ -10,8 +10,8 @@ thumbnailAlt:
   logo"
 
 summary:
-  "Benjie and Jem are pleased to announce the release of new podcast Spec News!
-  A monthly round up of GraphQL Spec news in under ten minutes."
+  "Benjie appeared on a virtual panel at GraphQL Galaxy 2021, discussing the
+  roles and aims of the GraphQL Working Group."
 ---
 
 _2021-12-07_
