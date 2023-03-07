@@ -42,6 +42,11 @@
         "sectionId": "about"
       },
       {
+        "to": "/news/20220607-schema-metadata/",
+        "title": "Schema Metadata: A Growing Need",
+        "sectionId": "misc"
+      },
+      {
         "to": "/news/20220607-spec-news/",
         "title": "Spec News Pod Launch",
         "sectionId": "misc"
