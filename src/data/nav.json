@@ -17,6 +17,11 @@
     ],
     "pages": [
       {
+        "to": "/news/20221208-graphql-galaxy/",
+        "title": "Step Aside Resolvers!",
+        "sectionId": "misc"
+      },
+      {
         "to": "/news/20221020-development-support/",
         "title": "Development Support Now Available",
         "sectionId": "about"
