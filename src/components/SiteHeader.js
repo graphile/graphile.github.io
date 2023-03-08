@@ -319,6 +319,13 @@ export default class SiteHeader extends React.Component {
                   path="/news"
                   render={() => (
                     <li className="navbar-item">
+                      <Link className={`nav-link`} to="/news/rss.xml">
+                        <span aria-hidden="true" className="fa fa-rss-square" />{" "}
+                        <span className="rss">RSS</span>
+                      </Link>
+                      <Link className={`nav-link`} to="/sponsor/">
+                        Sponsor
+                      </Link>
                       <Link
                         className={`nav-link ${
                           location.pathname.match(/^\/news\/?$/) ? "active" : ""
@@ -326,19 +333,6 @@ export default class SiteHeader extends React.Component {
                         to="/news/"
                       >
                         Latest Announcements
-                      </Link>
-                    </li>
-                  )}
-                />
-                <Route
-                  path="/news/"
-                  render={() => (
-                    <li className="navbar-item">
-                      <Link
-                        className={"nav-link"}
-                        to="/news/postgraphile-version-4/"
-                      >
-                        Archive
                       </Link>
                     </li>
                   )}
