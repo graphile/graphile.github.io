@@ -323,9 +323,23 @@ export default class SiteHeader extends React.Component {
                         <span aria-hidden="true" className="fa fa-rss-square" />{" "}
                         <span className="rss">RSS</span>
                       </Link>
+                    </li>
+                  )}
+                />
+                <Route
+                  path="/news"
+                  render={() => (
+                    <li className="navbar-item">
                       <Link className={`nav-link`} to="/sponsor/">
                         Sponsor
                       </Link>
+                    </li>
+                  )}
+                />
+                <Route
+                  path="/news"
+                  render={() => (
+                    <li className="navbar-item">
                       <Link
                         className={`nav-link ${
                           location.pathname.match(/^\/news\/?$/) ? "active" : ""
