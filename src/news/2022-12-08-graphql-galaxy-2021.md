@@ -43,5 +43,5 @@ heavy iteration. All sponsors can request access to the binaries and
 documentation; Featured Tier sponsors can gain access to the repository, issues
 and support. [Find out more about sponsorship on our website](/sponsor/).
 
-_You can also see the talk
-[on YouTube](https://www.youtube.com/watch?v=H26uBe_lLag)._
+You can also see the talk
+[on YouTube](https://www.youtube.com/watch?v=H26uBe_lLag).
