@@ -62,7 +62,7 @@ const SiteFooter = () => {
                 </a>
               </li>
               <li>
-                <a href="https://fosstodon.org/@graphile">
+                <a href="https://fosstodon.org/@graphile" rel="me">
                   <i className="fab fa-mastodon" /> Mastodon
                 </a>
               </li>
