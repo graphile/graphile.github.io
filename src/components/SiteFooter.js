@@ -61,10 +61,19 @@ const SiteFooter = () => {
                   <i className="fab fa-discord" /> Chat (discord)
                 </a>
               </li>
-
+              <li>
+                <a href="https://fosstodon.org/@graphile" rel="me">
+                  <i className="fab fa-mastodon" /> Mastodon
+                </a>
+              </li>
               <li>
                 <a href="https://twitter.com/graphilehq">
                   <i className="fab fa-twitter" /> Twitter
+                </a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/channel/UCPPQNCaD8ukbb5gp1KrYMqA">
+                  <i className="fa fa-play" /> Youtube
                 </a>
               </li>
               <li>

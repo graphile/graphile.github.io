@@ -156,7 +156,7 @@ pMap(
     if (trimmed === "") {
       // Anchor link (#section-name), continue
       return;
-    } else if (trimmed.match(/\.(css|png|svg|webmanifest)$/)) {
+    } else if (trimmed.match(/\.(css|png|svg|webmanifest|xml)$/)) {
       // Resources
       return;
     } else if (isLocalhost5000) {
