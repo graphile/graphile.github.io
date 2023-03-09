@@ -1,4 +1,29 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Graphile News]]></title><description><![CDATA[Community funded open source utilities to build powerful, performant and extensible applications rapidly]]></description><link>https://graphile.org</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 06 Mar 2023 08:18:29 GMT</lastBuildDate><item><title><![CDATA[Development Support Now Available]]></title><description><![CDATA[2022-10-20 Graphile maintainer, GraphQL TSC member and keynote speaker Benjie is well
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Graphile News]]></title><description><![CDATA[Community funded open source utilities to build powerful, performant and extensible applications rapidly]]></description><link>https://graphile.org</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 09 Mar 2023 11:12:22 GMT</lastBuildDate><item><title><![CDATA[Step Aside Resolvers: a New Approach to GraphQL Execution]]></title><description><![CDATA[2022-12-07 This week at GraphQL Galaxy, Benjie introduced his
+vision for a new general-purpose GraphQL execution strategy whose holistic…]]></description><link>https://graphile.org/news/20221208-graphql-galaxy/</link><guid isPermaLink="false">https://graphile.org/news/20221208-graphql-galaxy/</guid><pubDate>Thu, 08 Dec 2022 01:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;2022-12-07&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;This week at &lt;a href=&quot;https://graphqlgalaxy.com/&quot;&gt;GraphQL Galaxy&lt;/a&gt;, Benjie introduced his
+vision for a new general-purpose GraphQL execution strategy whose holistic
+approach could lead to significant efficiency and scalability gains for all
+GraphQL APIs. This talk is the first public look at the ludicrously speedy,
+general purpose and holistic advanced planning and execution engine codenamed
+Grafast.&lt;/p&gt;
+&lt;div class=&quot;tc&quot;&gt;
+&lt;iframe 
+width=&quot;560&quot;
+height=&quot;315&quot;
+src=&quot;https://www.youtube-nocookie.com/embed/H26uBe_lLag&quot;
+title=&quot;YouTube video player&quot;
+frameborder=&quot;1&quot; 
+style=&quot;border: 6px solid #1b1b3d; border-radius: 10px&quot;
+allow=&quot;accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot;
+allowfullscreen&gt;
+&lt;/iframe&gt;
+&lt;/div&gt;
+&lt;p&gt;Grafast is already available to Graphile sponsors whilst it is still undergoing
+heavy iteration. All sponsors can request access to the binaries and
+documentation; Featured Tier sponsors can gain access to the repository, issues
+and support. &lt;a href=&quot;/sponsor/&quot;&gt;Find out more about sponsorship on our website&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You can also see the talk
+&lt;a href=&quot;https://www.youtube.com/watch?v=H26uBe_lLag&quot;&gt;on YouTube&lt;/a&gt;.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Development Support Now Available]]></title><description><![CDATA[2022-10-20 Graphile maintainer, GraphQL TSC member and keynote speaker Benjie is well
 placed to offer Development Support for PostGraphile…]]></description><link>https://graphile.org/news/20221020-development-support/</link><guid isPermaLink="false">https://graphile.org/news/20221020-development-support/</guid><pubDate>Thu, 20 Oct 2022 01:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;2022-10-20&lt;/em&gt;&lt;/p&gt;
 &lt;p class=&quot;intro&quot;&gt;The Graphile team are pleased to introduce a new Development Support offering,
 drawing on their experience as educators and leaders in the GraphQL ecosystem.
@@ -112,7 +137,33 @@ for your organization.
 &lt;a href=&quot;/sponsor/&quot;&gt;Find out how to sponsor Jem and the Graphile suite here.&lt;/a&gt;&lt;/p&gt;
 &lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
 &lt;img alt=&quot;PostGraphile thanks the community&quot; src=&quot;/images/thanks.png&quot; /&gt;
-&lt;/div&gt;</content:encoded></item><item><title><![CDATA[SpecNews - A New GraphQL Podcast from the Graphile team]]></title><description><![CDATA[2022-06-07 by Team Graphile Benjie is a GraphQL TSC member and attends the monthly working groups, he then
+&lt;/div&gt;</content:encoded></item><item><title><![CDATA[Schema Metadata: A Growing Need]]></title><description><![CDATA[2022-06-07 This week, Benjie gave a virtual talk at
+GraphQL Conf - the first
+official GraphQL Conference hosted by the GraphQL Foundation…]]></description><link>https://graphile.org/news/20220607-schema-metadata/</link><guid isPermaLink="false">https://graphile.org/news/20220607-schema-metadata/</guid><pubDate>Tue, 07 Jun 2022 02:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;2022-06-07&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;This week, Benjie gave a virtual talk at
+&lt;a href=&quot;https://graphql.org/foundation/graphql-conf/&quot;&gt;GraphQL Conf&lt;/a&gt; - the first
+official GraphQL Conference hosted by the GraphQL Foundation.&lt;/p&gt;
+&lt;p&gt;Benjie was one of eight GraphQL experts giving a talk on the cutting edge of
+GraphQL advancements; his talk focused on the need for a defined approach to
+GraphQL schema metadata. From complex challenges such as federating schemas to
+simply indicating pagination limits, the needs for this metadata are growing.
+This talk surfaced some of the use cases for schema metadata, looked over some
+of the workarounds that are in use, and briefly explored some proposed
+solutions.&lt;/p&gt;
+&lt;div class=&quot;tc&quot;&gt;
+&lt;iframe 
+width=&quot;560&quot;
+height=&quot;315&quot;
+src=&quot;https://www.youtube-nocookie.com/embed/FC4AFSjh_4k&quot;
+title=&quot;YouTube video player&quot;
+frameborder=&quot;1&quot; 
+style=&quot;border: 6px solid #1b1b3d; border-radius: 10px&quot;
+allow=&quot;accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot;
+allowfullscreen&gt;
+&lt;/iframe&gt;
+&lt;/div&gt;
+&lt;p&gt;You can also see the talk
+&lt;a href=&quot;https://www.youtube.com/watch?v=FC4AFSjh_4k&amp;#x26;list=PLP1igyLx8foGJrtkgYL9nunvC5qMXTVaa&amp;#x26;index=2&quot;&gt;on YouTube&lt;/a&gt;.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[SpecNews - A New GraphQL Podcast from the Graphile team]]></title><description><![CDATA[2022-06-07 by Team Graphile Benjie is a GraphQL TSC member and attends the monthly working groups, he then
 gives Jem a digest of the two or…]]></description><link>https://graphile.org/news/20220607-spec-news/</link><guid isPermaLink="false">https://graphile.org/news/20220607-spec-news/</guid><pubDate>Tue, 07 Jun 2022 01:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;2022-06-07 by Team Graphile&lt;/em&gt;&lt;/p&gt;
 &lt;p class=&quot;intro&quot;&gt;Benjie and Jem are pleased to announce the release of new podcast
 SpecNews! A monthly round up of GraphQL Specification news in under ten minutes.&lt;/p&gt;
