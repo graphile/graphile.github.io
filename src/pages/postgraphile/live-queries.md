@@ -293,7 +293,11 @@ to detect all changes. For example `@graphile/subscriptions-lds` can detect
 changes to results queried from tables, but cannot currently detect changes to
 results queried from views and functions. In particular, computed columns are
 not kept up to date (although they are re-calculated whenever a table update
-triggers the subscription). Monitored tables must also use primary keys.
+triggers the subscription). 
+
+Monitored tables must also use primary keys. Problems may arise if such key is
+a bigint or bigserial due to how javascript/graphql currently handle bigint. We 
+recommend the key to be either regular int or uuid.
 
 ### Amazon RDS
 
