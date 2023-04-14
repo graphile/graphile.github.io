@@ -287,7 +287,12 @@ to detect all changes. For example <code class="language-text">@graphile/subscri
 changes to results queried from tables, but cannot currently detect changes to
 results queried from views and functions. In particular, computed columns are
 not kept up to date (although they are re-calculated whenever a table update
-triggers the subscription). Monitored tables must also use primary keys.</p>
+triggers the subscription).</p>
+<p>Monitored tables must also use primary keys. Problems may arise if such key is a
+<code class="language-text">bigint</code> or <code class="language-text">bigserial</code> due to how PostgreSQL serializes these to JSON as a
+number (which is allowed by the JSON spec), but JavaScript's JSON.parse will not
+maintain precision when parsing them, leading to potential divergence. We
+recommend the key to be either a regular <code class="language-text">int</code> or a <code class="language-text">uuid</code>.</p>
 <h3 id="amazon-rds"><a href="#amazon-rds" aria-label="amazon rds permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Amazon RDS</h3>
 <p>Configuring Live Queries on Amazon RDS is slightly different, as it's a managed
 service. (Also note that RDS runs a slightly out-of-date <code class="language-text">wal2json</code>.)</p>
