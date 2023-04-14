@@ -293,10 +293,10 @@ to detect all changes. For example `@graphile/subscriptions-lds` can detect
 changes to results queried from tables, but cannot currently detect changes to
 results queried from views and functions. In particular, computed columns are
 not kept up to date (although they are re-calculated whenever a table update
-triggers the subscription). 
+triggers the subscription).
 
-Monitored tables must also use primary keys. Problems may arise if such key is
-a `bigint` or `bigserial` due to how PostgreSQL serializes these to JSON as a
+Monitored tables must also use primary keys. Problems may arise if such key is a
+`bigint` or `bigserial` due to how PostgreSQL serializes these to JSON as a
 number (which is allowed by the JSON spec), but JavaScript's JSON.parse will not
 maintain precision when parsing them, leading to potential divergence. We
 recommend the key to be either a regular `int` or a `uuid`.
