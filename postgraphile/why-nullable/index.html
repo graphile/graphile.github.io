@@ -199,7 +199,12 @@ can fix that with a plugin.</p>
 GraphQLNonNull-wrapped version of their original type:</p>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js">module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token function">NonNullRelationsPlugin</span><span class="token punctuation">(</span><span class="token parameter">builder</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   builder<span class="token punctuation">.</span><span class="token function">hook</span><span class="token punctuation">(</span><span class="token string">"GraphQLObjectType:fields:field"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">field<span class="token punctuation">,</span> build<span class="token punctuation">,</span> context</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>context<span class="token punctuation">.</span>scope<span class="token punctuation">.</span>isPgForwardRelationField<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>
+      <span class="token operator">!</span>context<span class="token punctuation">.</span>scope<span class="token punctuation">.</span>isPgForwardRelationField <span class="token operator">||</span>
+      <span class="token operator">!</span>context<span class="token punctuation">.</span>scope<span class="token punctuation">.</span>pgFieldIntrospection<span class="token operator">?.</span>keyAttributes<span class="token operator">?.</span><span class="token function">every</span><span class="token punctuation">(</span>
+        <span class="token parameter">attr</span> <span class="token operator">=></span> attr<span class="token punctuation">.</span>isNotNull
+      <span class="token punctuation">)</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token keyword">return</span> field<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
     <span class="token keyword">return</span> <span class="token punctuation">{</span>
