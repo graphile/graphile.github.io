@@ -194,7 +194,9 @@ module.exports = function NonNullRelationsPlugin(builder) {
   builder.hook("GraphQLObjectType:fields:field", (field, build, context) => {
     if (
       !context.scope.isPgForwardRelationField ||
-      !context.scope.pgFieldIntrospection?.keyAttributes?.every(attr => attr.isNotNull)
+      !context.scope.pgFieldIntrospection?.keyAttributes?.every(
+        attr => attr.isNotNull
+      )
     ) {
       return field;
     }
