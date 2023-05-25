@@ -84,6 +84,39 @@ comment on table animal_type is E'@enum\n@enumName TypeOfAnimal';
 
 The name must conform to the GraphQL identifier restrictions.
 
+#### Functions returning table enums
+
+You may want your functions to return enums and have them be correctly typed in GraphQL. 
+
+You can achieve this by creating a domain for your enum that:
+  - either has a name that ends with `_enum_domain`.
+  - or is tagged with `@enum the_enum_table_it_references`
+
+Example:
+```sql
+create table stage_options (
+  type text primary key
+);
+comment on table stage_options is E'@enum';
+insert into stage_options (type) values ('pending'), ('round 1'), ('round 2'), ('rejected'), ('hired');
+
+-- either follow the convention of [enum_name]_enum_domain
+create domain stage_options_enum_domain as text;
+-- or use any name  for the domain and add a smart comment:
+-- create domain stage as text;
+-- comment on domain stage is E'@enum stage_options';
+
+--- this function will add a `nextStage` field to applicant with type `StageOptions`
+create or replace function applicants_next_stage(
+  a applicants
+) returns stage_options_enum_domain
+as $$
+  select (case when a.stage = 'round 2' then 'hired' 
+    else 'rejected' end)::stage_options_enum_domain;
+$$ language sql stable;
+
+```
+
 ### With makeExtendSchemaPlugin
 
 Use the standard `enum` GraphQL interface definition language (IDL/SDL) to
