@@ -117,6 +117,30 @@ $$ language sql stable;
 
 ```
 
+For enums using unique constraints, you can achieve the same result by creating a domain:
+  - whose name follows this pattern: `[enum_table_name]_[constraint_name]_enum_domain`
+  - that is that tagged with `@enum [enum_table_name]_[constraint_name]`
+
+For example:
+```sql
+create table my_enums (
+  transportation text not null constraint transportation_mean unique
+);
+
+comment on constraint transportation_mean on my_enums is E'@enum';
+insert into my_enums (transportation) values ('CAR'), ('BIKE'), ('SUBWAY');
+
+-- either follow the convention of [enum_table_name]_[constraint_name]_enum_domain
+create domain my_enums_transportation_mean_enum_domain as text;
+-- or use any name  for the domain and add a smart comment 
+-- referencing the enum this way [enum_table_name]_[constraint_name]
+create domain transportation as text;
+comment on domain transportation is E'@enum my_enums_transportation_mean';
+
+-- Then you can create functions that take this domain as 
+-- the type of their arguments or return value like in the previous example
+```
+
 ### With makeExtendSchemaPlugin
 
 Use the standard `enum` GraphQL interface definition language (IDL/SDL) to
