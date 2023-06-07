@@ -86,6 +86,8 @@ The name must conform to the GraphQL identifier restrictions.
 
 #### Functions and table enums
 
+_Since 4.14.0_
+
 Functions exposed via GraphQL (as custom queries, computed columns and custom
 mutations) need a little assistance in order to indicate that an argument type
 or return type references a enum table and should be typed as a GraphQL enum.
