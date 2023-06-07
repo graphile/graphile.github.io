@@ -84,9 +84,10 @@ comment on table animal_type is E'@enum\n@enumName TypeOfAnimal';
 
 The name must conform to the GraphQL identifier restrictions.
 
-#### Functions returning table enums
+#### Functions and table enums
 
-You may want your functions to return enums and have them be correctly typed in GraphQL. 
+You may want to use your table enums as arguments or return values of functions
+ and have them be correctly typed as GraphQL enums. 
 
 You can achieve this by creating a domain for your enum that:
   - either has a name that ends with `_enum_domain`.
@@ -106,15 +107,24 @@ create domain stage_options_enum_domain as text;
 -- create domain stage as text;
 -- comment on domain stage is E'@enum stage_options';
 
---- this function will add a `nextStage` field to applicant with type `StageOptions`
-create or replace function applicants_next_stage(
+--- this function will add a `nextStage` field to applicant with GraphQL type `StageOptions`
+create function applicants_next_stage(
   a applicants
-) returns stage_options_enum_domain
-as $$
-  select (case when a.stage = 'round 2' then 'hired' 
-    else 'rejected' end)::stage_options_enum_domain;
+) returns stage_options_enum_domain as $$
+  select (
+      case 
+        when a.stage = 'round 2' then 'hired' 
+        else 'rejected' 
+      end
+    )::stage_options_enum_domain;
 $$ language sql stable;
 
+-- this function allows to filter applicants by `StageOptions` value
+create function applicants_by_stage(
+  wanted_stage stage_options_enum_domain
+) returns setof applicants as $$
+  select * from applicants a where a.stage = wanted_stage
+$$ language sql stable;
 ```
 
 For enums using unique constraints, you can achieve the same result by creating a domain:
