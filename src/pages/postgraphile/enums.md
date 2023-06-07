@@ -86,69 +86,86 @@ The name must conform to the GraphQL identifier restrictions.
 
 #### Functions and table enums
 
-You may want to use your table enums as arguments or return values of functions
- and have them be correctly typed as GraphQL enums. 
+Functions exposed via GraphQL (as custom queries, computed columns and custom
+mutations) need a little assistance in order to indicate that an argument type
+or return type references a enum table and should be typed as a GraphQL enum.
 
-You can achieve this by creating a domain for your enum that:
-  - either has a name that ends with `_enum_domain`.
-  - or is tagged with `@enum the_enum_table_it_references`
+You can achieve this by creating a domain for your enum that either:
+
+- has a name that ends with `_enum_domain`, or
+- is tagged with `@enum the_enum_table_it_references`.
 
 Example:
+
 ```sql
 create table stage_options (
   type text primary key
 );
 comment on table stage_options is E'@enum';
-insert into stage_options (type) values ('pending'), ('round 1'), ('round 2'), ('rejected'), ('hired');
+insert into stage_options
+  (type) values
+  ('pending'),
+  ('round 1'),
+  ('round 2'),
+  ('rejected'),
+  ('hired');
 
--- either follow the convention of [enum_name]_enum_domain
+-- Either follow the convention of [enum_name]_enum_domain:
 create domain stage_options_enum_domain as text;
--- or use any name  for the domain and add a smart comment:
+-- or use any name for the domain and add a smart comment:
 -- create domain stage as text;
 -- comment on domain stage is E'@enum stage_options';
 
---- this function will add a `nextStage` field to applicant with GraphQL type `StageOptions`
-create function applicants_next_stage(
-  a applicants
-) returns stage_options_enum_domain as $$
-  select (
-      case 
-        when a.stage = 'round 2' then 'hired' 
-        else 'rejected' 
-      end
-    )::stage_options_enum_domain;
+-- This function will add a `nextStage` field to applicant with GraphQL type
+-- `StageOptions` (our table enum):
+create function applicants_next_stage(a applicants)
+returns stage_options_enum_domain
+as $$
+  select (case
+    when a.stage = 'round 2' then 'hired'
+    else 'rejected'
+  end)::stage_options_enum_domain;
 $$ language sql stable;
 
--- this function allows to filter applicants by `StageOptions` value
-create function applicants_by_stage(
-  wanted_stage stage_options_enum_domain
-) returns setof applicants as $$
+-- This function allows to filter applicants by `StageOptions` value:
+create function applicants_by_stage(wanted_stage stage_options_enum_domain)
+returns setof applicants
+as $$
   select * from applicants a where a.stage = wanted_stage
 $$ language sql stable;
 ```
 
-For enums using unique constraints, you can achieve the same result by creating a domain:
-  - whose name follows this pattern: `[enum_table_name]_[constraint_name]_enum_domain`
-  - that is that tagged with `@enum [enum_table_name]_[constraint_name]`
+For enums using unique constraints, you can achieve the same result by creating
+a domain that either:
+
+- has a name that follows this pattern:
+  `[enum_table_name]_[constraint_name]_enum_domain`, or
+- is that tagged with `@enum [enum_table_name]_[constraint_name]`.
 
 For example:
+
 ```sql
 create table my_enums (
   transportation text not null constraint transportation_mean unique
 );
 
 comment on constraint transportation_mean on my_enums is E'@enum';
-insert into my_enums (transportation) values ('CAR'), ('BIKE'), ('SUBWAY');
+insert into my_enums
+  (transportation) values
+  ('CAR'),
+  ('BIKE'),
+  ('SUBWAY');
 
--- either follow the convention of [enum_table_name]_[constraint_name]_enum_domain
+-- Either follow the convention of [enum_table_name]_[constraint_name]_enum_domain:
 create domain my_enums_transportation_mean_enum_domain as text;
--- or use any name  for the domain and add a smart comment 
--- referencing the enum this way [enum_table_name]_[constraint_name]
+
+-- Or use any name for the domain and add a smart comment referencing the enum
+-- via `[enum_table_name]_[constraint_name]`:
 create domain transportation as text;
 comment on domain transportation is E'@enum my_enums_transportation_mean';
 
--- Then you can create functions that take this domain as 
--- the type of their arguments or return value like in the previous example
+-- Then you can create functions that take this domain as the type of their
+-- arguments or return value like in the previous example.
 ```
 
 ### With makeExtendSchemaPlugin
