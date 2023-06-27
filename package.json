@@ -21,7 +21,7 @@
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.14.3",
     "flow-bin": "^0.111.3",
-    "gatsby": "^2.18.17",
+    "gatsby": "^4.25.7",
     "gatsby-link": "^2.2.11",
     "gatsby-plugin-catch-links": "^2.1.7",
     "gatsby-plugin-feed": "2.x",
