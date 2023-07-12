@@ -144,8 +144,8 @@ instead (see below). The below options are valid for
 <ul>
 <li><strong><code class="language-text">pgConfig</code></strong>: An object or string that will be passed to the [<code class="language-text">pg</code>][]
 library and used to connect to a PostgreSQL backend. If you already have a
-client or pool instance, when using this function you may also pass a <code class="language-text">pg</code>
-client or a <code class="language-text">pg-pool</code> instance directly instead of a config.</li>
+pool client or a pool instance, when using this function you may instead
+pass that pool client or <code class="language-text">pg-pool</code> instance directly instead of a config.</li>
 <li><strong><code class="language-text">schemaName</code></strong>: A string which specifies the PostgreSQL schema that
 PostGraphile will use to create a GraphQL schema. The default schema is the
 <code class="language-text">public</code> schema. May be an array for multiple schemas.</li>
