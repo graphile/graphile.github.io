@@ -52,13 +52,13 @@ improved**. All sponsors are invited to join the early access program, if you
 already sponsor us please get in contact and we'll arrange an access code for
 you and your team.
 
+<div class="flex flex-wrap justify-around">
+<img alt="sending cartoon hearts up into the sky" src="/images/news/undraw_super_thank_you_small.png" style="max-height: 300px" />
+</div>
+
 ### Thank you for sponsoring the project!
 
 Our ability to innovate and make our tooling freely available would not be
 possible without our sponsors, thank you to each and every sponsor - past and
 present - for the financial support to keep building tools which serve you.
 [For everyone else, find out how to sponsor here](/sponsor/).
-
-<div class="flex flex-wrap justify-around">
-<img alt="Cartoon Benjie and Jem send cartoon hearts up into the sky" src="/images/news/postgraphile-thankyou.svg" style="max-height: 300px" />
-</div>
