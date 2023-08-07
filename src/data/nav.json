@@ -17,6 +17,16 @@
     ],
     "pages": [
       {
+        "to": "/news/20230803-postgraphile-v5-beta/",
+        "title": "PostGraphile V5 public beta!",
+        "sectionId": "main"
+      },
+      {
+        "to": "/news/20230622-intro-to-postgraphile-v5//",
+        "title": "Intro to PostGraphile V5",
+        "sectionId": "misc"
+      },
+      {
         "to": "/news/20221208-graphql-galaxy/",
         "title": "Step Aside Resolvers!",
         "sectionId": "misc"
