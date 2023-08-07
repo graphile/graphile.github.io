@@ -4,7 +4,7 @@ title: "PostGraphile V5 public beta — get involved!"
 date: 2023-08-03T01:00:00Z
 path: /news/20230803-postgraphile-v5-beta/
 thumbnail: /images/news/coder.svg
-thumbnailAlt: "A man pushes a trolley full of packages."
+thumbnailAlt: "A developer looks at her monitor while holding a cup of tea."
 tags: announcements, releases, postgraphile
 noToc: true
 
