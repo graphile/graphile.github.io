@@ -1,4 +1,82 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Graphile News]]></title><description><![CDATA[Community funded open source utilities to build powerful, performant and extensible applications rapidly]]></description><link>https://graphile.org</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 31 Jul 2023 11:43:47 GMT</lastBuildDate><item><title><![CDATA[Step Aside Resolvers: a New Approach to GraphQL Execution]]></title><description><![CDATA[2022-12-07 This week at GraphQL Galaxy, Benjie introduced his
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Graphile News]]></title><description><![CDATA[Community funded open source utilities to build powerful, performant and extensible applications rapidly]]></description><link>https://graphile.org</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 07 Aug 2023 15:30:42 GMT</lastBuildDate><item><title><![CDATA[PostGraphile V5 public beta — get involved!]]></title><description><![CDATA[Announced 2023-08-03 by the Graphile Team We need help writing automated tests, validating it works in your real-world
+applications…]]></description><link>https://graphile.org/news/20230803-postgraphile-v5-beta/</link><guid isPermaLink="false">https://graphile.org/news/20230803-postgraphile-v5-beta/</guid><pubDate>Thu, 03 Aug 2023 01:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;Announced 2023-08-03 by the Graphile Team&lt;/em&gt;&lt;/p&gt;
+&lt;p class=&apos;intro&apos;&gt;
+It’s finally here! The day has come that you can get your hands on an early
+  release of PostGraphile Version 5; but we do have an ask: please help us to
+  get it ready for release.
+&lt;/p&gt;
+&lt;p&gt;We need help writing automated tests, validating it works in your real-world
+applications, improving the documentation, keeping up with issues and community
+support, porting plugins, smoothing edges, and as always we need financial
+support so we can keep investing our time into V5 and our other projects. Find
+out what this means for you at the new
+&lt;a href=&quot;https://postgraphile.org/news/2023-08-03-version-5-beta&quot;&gt;PostGraphile website&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;A developer looks at her monitor while holding a cup of tea.&quot; src=&quot;/images/news/coder.svg&quot; style=&quot;max-height: 300px&quot;&gt;
+&lt;/div&gt;
+&lt;h3 id=&quot;intro-to-v5&quot;&gt;&lt;a href=&quot;#intro-to-v5&quot; aria-label=&quot;intro to v5 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Intro to V5&lt;/h3&gt;
+&lt;p&gt;We have continued to detail the new exciting features in PostGraphile Version 5.
+Particularly exciting are those in Parts 5 &amp;#x26; 6 - a pair of brand new features
+which can unlock new possibilities for your projects. Find
+&lt;a href=&quot;https://dev.to/benjie/series/23459&quot;&gt;the full “Intro to V5”&lt;/a&gt; series on dev.to,
+covering the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Replacing the Foundations&lt;/li&gt;
+&lt;li&gt;Plug-ins and Presets&lt;/li&gt;
+&lt;li&gt;Introspection and Abstraction&lt;/li&gt;
+&lt;li&gt;Making the Schema Yours&lt;/li&gt;
+&lt;li&gt;Polymorphism!&lt;/li&gt;
+&lt;li&gt;Excellent Executable Exports&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;sponsor-the-project&quot;&gt;&lt;a href=&quot;#sponsor-the-project&quot; aria-label=&quot;sponsor the project permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Sponsor the project&lt;/h3&gt;
+&lt;p&gt;If you appreciate the work we do, and you want to help us to continue doing it,
+then please support development of this project via sponsorship. With your
+support we can improve performance, usability and documentation at a greater
+rate, leading to reduced running and engineering costs for your organisation,
+leading to a net ROI. &lt;a href=&quot;/sponsor/&quot;&gt;Find out how to sponsor here&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;Cartoon Benjie and Jem send cartoon hearts up into the sky&quot; src=&quot;/images/news/postgraphile-thankyou.svg&quot; style=&quot;max-height: 300px&quot;&gt;
+&lt;/div&gt;</content:encoded></item><item><title><![CDATA[Intro to PostGraphile V5 — a new blog series!]]></title><description><![CDATA[Announced 2023-06-22 by the Graphile Team This week we are starting with an exploration of replacing the look-ahead
+system. In the post, you…]]></description><link>https://graphile.org/news/20230622-intro-to-postgraphile-v5/</link><guid isPermaLink="false">https://graphile.org/news/20230622-intro-to-postgraphile-v5/</guid><pubDate>Thu, 22 Jun 2023 01:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;Announced 2023-06-22 by the Graphile Team&lt;/em&gt;&lt;/p&gt;
+&lt;p class=&apos;intro&apos;&gt;
+In our new blog post series, we are beginning to lift the curtain of secrecy which has surrounded Version 5 for the past few years. Each week, Benjie will dive in to a key feature of this massive new release.
+&lt;/p&gt;
+&lt;p&gt;This week we are starting with an exploration of replacing the look-ahead
+system. In the post, you&apos;ll find out why we invented
+&lt;a href=&quot;/news/20221208-graphql-galaxy/&quot;&gt;Gra&lt;em&gt;fast&lt;/em&gt;&lt;/a&gt; (our new planning and
+execution engine for GraphQL); see examples of the straightforward “plan
+resolvers” that PostGraphile V5 uses; and revel in the significantly
+simplified and more efficient SQL queries that V5 generates.&lt;/p&gt;
+&lt;div class=&apos;df flex-row justify-center&apos;&gt;
+&lt;div class=&apos;ph2 df flex-column justify-center&apos;&gt;
+&lt;a class=&apos;button--solid&apos; href=&apos;https://dev.to/benjie/series/23459&apos; target=&quot;_new&quot;&gt;See the blog series on dev.to &lt;span class=&apos;fas fa-external-link-square-alt&apos; /&gt;&lt;/a&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h3 id=&quot;postgraphile-v5-sponsors-early-access&quot;&gt;&lt;a href=&quot;#postgraphile-v5-sponsors-early-access&quot; aria-label=&quot;postgraphile v5 sponsors early access permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;PostGraphile V5 Sponsors Early Access&lt;/h3&gt;
+&lt;p&gt;April marked a big milestone for PostGraphile Version 5, when
+&lt;a href=&quot;https://postgraphile.org/news/2023-04-26-version-5-alpha&quot;&gt;it entered the alpha stage&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;With thanks to everyone in the V5 testing community - and a special shout out
+for the excellent and continued feedback from our sponsors dfg, hov, James,
+Josiah and the Netflix team, mattste, Simon, and Timo - &lt;strong&gt;we&apos;re now confident V5
+is suitable to run in production&lt;/strong&gt;. Work preparing for final release is still
+ongoing, but we now have a
+&lt;a href=&quot;https://postgraphile.org/postgraphile/next/migrating-from-v4/&quot;&gt;detailed migration guide&lt;/a&gt;,
+&lt;a href=&quot;https://postgraphile.org&quot;&gt;updated docs&lt;/a&gt;, an enhanced developer experience and
+much improved backwards compatibility!&lt;/p&gt;
+&lt;p&gt;With the beta just around the corner, now is the perfect time to join our
+sponsors and test Version 5. &lt;strong&gt;If you don’t try V5 until after its public
+release then it may be too late to comment on things that could have been
+improved&lt;/strong&gt;. All sponsors are invited to join the early access program, if you
+already sponsor us please get in contact and we&apos;ll arrange an access code for
+you and your team.&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;sending cartoon hearts up into the sky&quot; src=&quot;/images/news/undraw_super_thank_you_small.png&quot; style=&quot;max-height: 300px&quot; /&gt;
+&lt;/div&gt;
+&lt;h3 id=&quot;thank-you-for-sponsoring-the-project&quot;&gt;&lt;a href=&quot;#thank-you-for-sponsoring-the-project&quot; aria-label=&quot;thank you for sponsoring the project permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Thank you for sponsoring the project!&lt;/h3&gt;
+&lt;p&gt;Our ability to innovate and make our tooling freely available would not be
+possible without our sponsors, thank you to each and every sponsor - past and
+present - for the financial support to keep building tools which serve you.
+&lt;a href=&quot;/sponsor/&quot;&gt;For everyone else, find out how to sponsor here&lt;/a&gt;.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Step Aside Resolvers: a New Approach to GraphQL Execution]]></title><description><![CDATA[2022-12-07 This week at GraphQL Galaxy, Benjie introduced his
 vision for a new general-purpose GraphQL execution strategy whose holistic…]]></description><link>https://graphile.org/news/20221208-graphql-galaxy/</link><guid isPermaLink="false">https://graphile.org/news/20221208-graphql-galaxy/</guid><pubDate>Thu, 08 Dec 2022 01:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;2022-12-07&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;This week at &lt;a href=&quot;https://graphqlgalaxy.com/&quot;&gt;GraphQL Galaxy&lt;/a&gt;, Benjie introduced his
 vision for a new general-purpose GraphQL execution strategy whose holistic
