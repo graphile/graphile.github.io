@@ -52,7 +52,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul></div></div><div class="edit-this-page" style="display:"><a href="https://github.com/graphile/graphile.github.io/edit/develop/src/pages/postgraphile/custom-queries.md">📝 Suggest improvement/edit this page</a></div><h2 class="mt3">Custom Queries</h2><div><p>You can add root-level <code class="language-text">Query</code> fields to your GraphQL schema using "Custom
 Queries". These are PostgreSQL functions, similar to
 <a href="/postgraphile/computed-columns/">computed columns</a>, that can return scalars,
-records, lists or sets. Sets (denoted by <code class="language-text">RETURNS SETOF ...</code>) are exposed as
+records, <a href="/postgraphile/enums/#functions-returning-table-enums">enums</a>, lists or
+sets. Sets (denoted by <code class="language-text">RETURNS SETOF ...</code>) are exposed as
 <a href="/postgraphile/connections/">connections</a>. The arguments to these functions will
 be exposed via GraphQL - named arguments are preferred, if your arguments are
 not named we will assign them an auto-generated name such as <code class="language-text">arg1</code>.</p>
