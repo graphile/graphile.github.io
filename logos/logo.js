@@ -47,8 +47,6 @@ const MIDDLE = [600, 615];
 const MIDDLE_OFFSET = [715, 615];
 // const points = [A, B, C, D, E, F, G, H, M];
 
-const OFFSET = 50;
-
 function makeSvg(
   title,
   pallette,
@@ -59,6 +57,7 @@ function makeSvg(
     svgPost = "",
     css = "",
     M = MIDDLE_OFFSET,
+    OFFSET = 0,
   } = {}
 ) {
   const string = `\
@@ -210,6 +209,7 @@ function makePoly(points, className) {
 
 {
   const M = [600, 800];
+  const OFFSET = 50;
   const antEyeCoords = [
     deriv(B, C, 1 / 3),
     deriv(C, C, 1),
@@ -262,6 +262,7 @@ function makePoly(points, className) {
     [1, 1, 2, 3, 2, 1, 0, 0],
     {
       M,
+      OFFSET,
       css: `
 .face .eye {
   fill: #ffffff;
