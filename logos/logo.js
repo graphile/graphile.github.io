@@ -47,6 +47,8 @@ const MIDDLE = [600, 615];
 const MIDDLE_OFFSET = [715, 615];
 // const points = [A, B, C, D, E, F, G, H, M];
 
+const OFFSET = 50;
+
 function makeSvg(
   title,
   pallette,
@@ -62,7 +64,7 @@ function makeSvg(
   const string = `\
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="1200" height="1200" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg width="1200" height="1200" version="1.1" viewBox="0 -${OFFSET} 1200 1200" xmlns="http://www.w3.org/2000/svg">
 <!--
 
 This file is Copyright © ${new Date().getUTCFullYear()} Benjie Gillam. All rights reserved.
@@ -207,7 +209,7 @@ function makePoly(points, className) {
 }
 
 {
-  const M = MIDDLE;
+  const M = [600, 800];
   const antEyeCoords = [
     deriv(B, C, 1 / 3),
     deriv(C, C, 1),
@@ -220,7 +222,7 @@ function makePoly(points, className) {
   const antEyeL = makePoly(flipX(antEyeCoords), "seg4");
 
   const at1 = deriv(D, E, 1 / 2);
-  const at2 = deriv(D, E, 2 / 3);
+  const at2 = deriv(D, E, 3 / 4);
   const atY = at2[1] + 75;
   const atY2 = atY + 125;
   const antTuskCoords = [
@@ -235,19 +237,19 @@ function makePoly(points, className) {
   const antTuskL = makePoly(flipX(antTuskCoords), "seg4");
 
   const antAntennaCoords = [
-    deriv(antEyeCoords[antEyeCoords.length - 1], A, 1 / 3),
-    [antEyeCoords[0][0], 0],
+    deriv(antEyeCoords[antEyeCoords.length - 1], A, 7 / 12),
+    [antEyeCoords[0][0], -OFFSET],
     [C[0], B[1]],
-    [1200, C[1]],
+    [1200, (2 / 3) * C[1]],
   ];
-  const s = 24;
+  const s = 36;
   antAntennaCoords.push([
     antAntennaCoords[2][0] - s,
     antAntennaCoords[2][1] + s,
   ]);
   antAntennaCoords.push([
     antAntennaCoords[1][0] + s / 3,
-    antAntennaCoords[1][1] + s,
+    antAntennaCoords[1][1] + 2 * s,
   ]);
   antAntennaCoords.push(deriv(antEyeCoords[antEyeCoords.length - 1], A, 1 / 6));
 
@@ -256,7 +258,7 @@ function makePoly(points, className) {
 
   const WORKER_ANT_SVG = makeSvg(
     "Worker Ant",
-    ["#f0a420", "#b7561b", "#944822", "#331918", "#333333"],
+    ["#f0a420", "#b7561b", "#944822", "#331918", "#770000"],
     [1, 1, 2, 3, 2, 1, 0, 0],
     {
       M,
