@@ -125,10 +125,20 @@ ${svgPost}
   return string;
 }
 
+const GRAPHILE_HEART_PALETTE = [
+  "#cd4948",
+  "#fd504e",
+  "#c0201c",
+  "#7e120e",
+  "#610f0d",
+];
+
+const GRAPHILE_HEART_COLORS = [1, 2, 3, 4, 3, 2, 1, 0];
+
 const GRAPHILE_HEART_SVG = makeSvg(
   "Graphile Heart",
-  ["#cd4948", "#fd504e", "#c0201c", "#7e120e", "#610f0d"],
-  [1, 2, 3, 4, 3, 2, 1, 0]
+  GRAPHILE_HEART_PALETTE,
+  GRAPHILE_HEART_COLORS
 );
 
 const POSTGRAPHILE_ELEPHANT_SVG = makeSvg(
@@ -301,6 +311,37 @@ function makePoly(points, className) {
 `,
     }
   );
-
+  // WARNING: overwritten below
   outputEl.innerHTML = WORKER_ANT_SVG;
+}
+
+{
+  const WORKER_SPANNER_SVG = makeSvg(
+    "Worker Ant",
+    GRAPHILE_HEART_PALETTE,
+    [1, 2, 3, 4, 3, 2, 1, 2],
+    {
+      css: `
+.spanner {
+  fill: #cccccc;
+  stroke: #555555;
+  stroke-width: 8;
+  stroke-linejoin: round;
+}
+`,
+      svgPre: `
+`,
+      svgPost: `
+  <g class='spanner'>
+
+    <!-- polygon points="200,0 400,0 550,150 550,350 1200,1000 1200,1100 1100,1200 1000,1200 350,550 150,550 0,400 0,200 200,400 350,350 400,200" class="tusk left-tusk" -->
+    <polygon points="250,50 450,50 600,200 600,400 1050,850 1050,950 950,1050 850,1050 400,600 200,600 50,450 50,250 250,450 400,400 450,250" class="spanner" />
+
+
+
+  </g>`,
+    }
+  );
+
+  outputEl.innerHTML = WORKER_SPANNER_SVG;
 }
