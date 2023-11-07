@@ -397,7 +397,7 @@ if (false) {
 
   const antenna2 = deriv(A, H, 3 / 2);
   const gradient = [H[0] - G[0], H[1] - G[1]];
-  const antenna3ratio = 1 / 4;
+  const antenna3ratio = 7 / 24;
   const antenna3 = [
     antenna2[0] - gradient[0] * antenna3ratio,
     antenna2[1] - gradient[1] * antenna3ratio,
