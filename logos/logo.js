@@ -80,7 +80,13 @@ ${pallette
 .seg${i} {
   fill: ${c};
   stroke: ${c};
-}`
+}
+.path${i} {
+  fill: none;
+  stroke: ${c};
+  stroke-width: 50px;
+}
+`
   )
   .join("")}\
 ${
@@ -107,9 +113,19 @@ ${svgPre}
     <polygon points="${H} ${A} ${B} ${M}" class="seg${colors[7]}" />
     <polygon points="${A} ${B} ${C} ${M}" class="seg${colors[0]}" />
     <polygon points="${B} ${C} ${D} ${M}" class="seg${colors[1]}" />
-    <polygon points="${C} ${D} ${E} ${M}" class="seg${colors[2]}" />
-    <polygon points="${D} ${E} ${F} ${M}" class="seg${colors[3]}" />
-    <polygon points="${E} ${F} ${G} ${M}" class="seg${colors[4]}" />
+    <polygon points="${C} ${D} ${colors[3] == null ? "" : E} ${M}" class="seg${
+    colors[2]
+  }" />
+    ${
+      colors[3] == null
+        ? ""
+        : `<polygon points="${D} ${E} ${F} ${M}" class="seg${colors[3]}" />`
+    }
+    ${
+      colors[4] == null
+        ? ""
+        : `<polygon points="${E} ${F} ${G} ${M}" class="seg${colors[4]}" />`
+    }
     <polygon points="${F} ${G} ${M}" class="seg${colors[5]}" />
     ${
       border
@@ -217,7 +233,14 @@ function makePoly(points, className) {
   },${points[0][1]}" class="${className}" />`;
 }
 
+function makePath(points, className) {
+  return `<path d="${points
+    .map((p, i) => `${i == 0 ? "M" : "L"}${p[0]},${p[1]}`)
+    .join(" ")}" class="${className}" />`;
+}
+
 {
+  // Old worker ant
   const M = [600, 800];
   const OFFSET = 50;
   const antEyeCoords = [
@@ -311,11 +334,12 @@ function makePoly(points, className) {
 `,
     }
   );
-  // WARNING: overwritten below
+  // WARNING: may be overwritten below
   outputEl.innerHTML = WORKER_ANT_SVG;
 }
 
-{
+if (false) {
+  // Worker spanner
   const WORKER_SPANNER_SVG = makeSvg(
     "Worker Ant",
     GRAPHILE_HEART_PALETTE,
@@ -343,5 +367,90 @@ function makePoly(points, className) {
     }
   );
 
+  // WARNING: may be overwritten below
   outputEl.innerHTML = WORKER_SPANNER_SVG;
+}
+
+{
+  // Nice worker ant
+  const M = [600, 800];
+  const OFFSET = 100;
+  const antEyeCoords = [
+    deriv(G, M, 1 / 6),
+    deriv(G, M, 2 / 3),
+    deriv(F, M, 1 / 6),
+  ];
+  const antEyeR = makePoly(antEyeCoords, "seg4");
+  const antEyeL = makePoly(flipX(antEyeCoords), "seg4");
+
+  const antTuskCoords = [
+    M,
+    deriv(C, M, 13 / 12),
+    deriv(E, deriv(G, H, 1 / 2), 1 / 12),
+    deriv(E, F, 1 / 32),
+    F,
+    // Just to ensure no white gaps:
+    deriv(H, M, 1 / 2),
+  ];
+  const antTuskR = makePoly(antTuskCoords, "seg3");
+  const antTuskL = makePoly(flipX(antTuskCoords), "seg3");
+
+  const antenna2 = deriv(A, H, 3 / 2);
+  const gradient = [H[0] - G[0], H[1] - G[1]];
+  const antenna3ratio = 1 / 4;
+  const antenna3 = [
+    antenna2[0] - gradient[0] * antenna3ratio,
+    antenna2[1] - gradient[1] * antenna3ratio,
+  ];
+  const antAntennaCoords = [deriv(M, H, 1 / 3), H, antenna2, antenna3];
+
+  const antAntennaR = makePath(antAntennaCoords, "path4");
+  const antAntennaL = makePath(flipX(antAntennaCoords), "path4");
+
+  const WORKER_ANT_SVG = makeSvg(
+    "Worker Ant",
+    ["#d45c00", "#fd6e01", "#fa8e3b", "#a74413", "#7e120e"],
+    [0, 1, 2, null, null, 2, 0, 1],
+    {
+      M,
+      OFFSET,
+      css: `
+.face .eye {
+  fill: #ffffff;
+  stroke: #ffffff;
+}
+.face .tusk {
+  stroke: #000000;
+  fill: #ffffff;
+}
+.face .no-stroke {
+  stroke: transparent;
+  stroke-opacity: 0;
+}
+.face .tusk,
+.face .stroke-only,
+.heart-outline {
+  stroke: #082744;
+  stroke-width: 8;
+  stroke-linejoin: round;
+}
+.face .stroke-only,
+.heart-outline {
+  fill: transparent;
+  fill-opacity: 0;
+}`,
+      svgPre: `
+    ${antTuskL}
+    ${antTuskR}
+`,
+      svgPost: `
+    ${antEyeR}
+    ${antEyeL}
+    ${antAntennaR}
+    ${antAntennaL}
+`,
+    }
+  );
+  // WARNING: may be overwritten below
+  outputEl.innerHTML = WORKER_ANT_SVG;
 }
