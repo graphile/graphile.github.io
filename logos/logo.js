@@ -517,9 +517,29 @@ if (false) {
     "path5 toothDivide"
   );
 
-  const schnoz = makePoly(
-    [deriv(A, M, 3 / 4), deriv(C, M, 3 / 4), M, deriv(G, M, 3 / 4)],
-    "seg5"
+  const schnozPoints = [
+    deriv(A, M, 3 / 4),
+    deriv(C, M, 3 / 4),
+    M,
+    deriv(G, M, 3 / 4),
+  ];
+  const schnoz = makePoly(schnozPoints, "seg5");
+  const schnozShine = makePoly(
+    [
+      deriv(A, M, 25 / 32),
+      deriv(
+        deriv(schnozPoints[0], schnozPoints[1], 1 / 3),
+        schnozPoints[2],
+        1 / 8
+      ),
+      deriv(schnozPoints[0], schnozPoints[2], 5 / 12),
+      deriv(
+        deriv(schnozPoints[0], schnozPoints[3], 1 / 3),
+        schnozPoints[2],
+        1 / 8
+      ),
+    ],
+    "seg4"
   );
 
   const BUILD_BEAVER_SVG = makeSvg(
@@ -573,6 +593,7 @@ stroke-width: 3;
     ${beaverToothDivide}
     ${beaverToothDivide2}
     ${schnoz}
+    ${schnozShine}
 `,
     }
   );
