@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="1200" height="1200" version="1.1" viewBox="0 -50 1200 1200" xmlns="http://www.w3.org/2000/svg">
+<!--
+
+This file is Copyright Â© 2023 Benjie Gillam. All rights reserved.
+
+-->
+<style type="text/css">
+polygon {
+  stroke-width: 0;
+  shape-rendering: geometricPrecision;
+}
+.seg0 {
+  fill: #a74413;
+  stroke: #a74413;
+}
+.path0 {
+  fill: none;
+  stroke: #a74413;
+  stroke-width: 50px;
+}
+
+.seg1 {
+  fill: #fd6e01;
+  stroke: #fd6e01;
+}
+.path1 {
+  fill: none;
+  stroke: #fd6e01;
+  stroke-width: 50px;
+}
+
+.seg2 {
+  fill: #fa8e3b;
+  stroke: #fa8e3b;
+}
+.path2 {
+  fill: none;
+  stroke: #fa8e3b;
+  stroke-width: 50px;
+}
+
+.seg3 {
+  fill: #d45c00;
+  stroke: #d45c00;
+}
+.path3 {
+  fill: none;
+  stroke: #d45c00;
+  stroke-width: 50px;
+}
+
+.seg4 {
+  fill: #ffffff;
+  stroke: #ffffff;
+}
+.path4 {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 50px;
+}
+
+.seg5 {
+  fill: #000000;
+  stroke: #000000;
+}
+.path5 {
+  fill: none;
+  stroke: #000000;
+  stroke-width: 50px;
+}
+
+
+.face .eye {
+  fill: #ffffff;
+  stroke: #ffffff;
+}
+.face .tusk {
+  stroke: #000000;
+  fill: #ffffff;
+}
+.face .no-stroke {
+  stroke: transparent;
+  stroke-opacity: 0;
+}
+.face .tusk,
+.face .stroke-only,
+.heart-outline {
+  stroke: #082744;
+  stroke-width: 8;
+  stroke-linejoin: round;
+}
+.face .stroke-only,
+.heart-outline {
+  fill: transparent;
+  fill-opacity: 0;
+}
+.tooth {
+stroke-width: 8;
+}
+.toothDivide {
+stroke-width: 3;
+}
+
+</style>
+
+  <desc>Worker Ant</desc>
+
+
+
+
+  <g class="base">
+    <polygon points="100,615 25,360 260,25 600,700" class="seg2"></polygon>
+    <polygon points="25,360 260,25 600,130 600,700" class="seg1"></polygon>
+    <polygon points="260,25 600,130 940,25 600,700" class="seg0"></polygon>
+    <polygon points="600,130 940,25 1175,360 600,700" class="seg0"></polygon>
+    <polygon points="940,25 1175,360 1100,615 600,700" class="seg1"></polygon>
+    <polygon points="1175,360 1100,615 600,1055 600,700" class="seg2"></polygon>
+    <polygon points="1100,615 600,1055 100,615 600,700" class="seg3"></polygon>
+    <polygon points="600,1055 100,615 25,360 600,700" class="seg3"></polygon>
+    <polygon points="100,615 25,360 600,700" class="seg2"></polygon>
+    
+  </g>
+
+
+    <polygon points="165.41666666666669,304.79166666666663 168.75,445 364.6875,383.125 165.41666666666669,304.79166666666663" class="seg4"></polygon>
+    <polygon points="1034.5833333333333,304.79166666666663 1031.25,445 835.3125,383.125 1034.5833333333333,304.79166666666663" class="seg4"></polygon>
+    <polygon points="475,777.0833333333333 495,1067.0833333333333 600,1084.5833333333333 600,759.1666666666666 475,777.0833333333333" class="seg4"></polygon>
+    <polygon points="725,777.0833333333333 705,1067.0833333333333 600,1084.5833333333333 600,759.1666666666666 725,777.0833333333333" class="seg4"></polygon>
+    <path d="M475,777.0833333333333 L495,1067.0833333333333 L600,1084.5833333333333 L705,1067.0833333333333 L725,777.0833333333333" class="path5 tooth"></path>
+    <path d="M600,788.75 L600,1055" class="path5 toothDivide"></path>
+    <path d="M600,652.5 L600,759.1666666666666 L443.75,781.5624999999999 L600,759.1666666666666 L756.25,781.5624999999999 L600,759.1666666666666" class="path5 toothDivide"></path>
+    <polygon points="600,557.5 743.75,615 600,700 456.25,615 600,557.5" class="seg5"></polygon>
+
+
+</svg>
