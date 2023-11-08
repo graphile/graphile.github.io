@@ -223,6 +223,10 @@ function deriv(start, stop, percent) {
   return [x, y];
 }
 
+function add(coord, offset) {
+  return [coord[0] + offset[0], coord[1] + offset[1]];
+}
+
 function flipX(points) {
   return points.map(p => [1200 - p[0], p[1]]);
 }
@@ -243,7 +247,7 @@ function makePath(points, className) {
   // Old worker ant
   const M = [600, 800];
   const OFFSET = 50;
-  const antEyeCoords = [
+  const eyeCoords = [
     deriv(B, C, 1 / 3),
     deriv(C, C, 1),
     deriv(C, E, 1 / 3),
@@ -251,8 +255,8 @@ function makePath(points, className) {
     deriv(C, M, 1 / 2),
     deriv(deriv(B, C, 1 / 3), F, 1 / 6),
   ];
-  const antEyeR = makePoly(antEyeCoords, "seg4");
-  const antEyeL = makePoly(flipX(antEyeCoords), "seg4");
+  const eyeR = makePoly(eyeCoords, "seg4");
+  const eyeL = makePoly(flipX(eyeCoords), "seg4");
 
   const at1 = deriv(D, E, 1 / 2);
   const at2 = deriv(D, E, 3 / 4);
@@ -270,8 +274,8 @@ function makePath(points, className) {
   const antTuskL = makePoly(flipX(antTuskCoords), "seg4");
 
   const antAntennaCoords = [
-    deriv(antEyeCoords[antEyeCoords.length - 1], A, 7 / 12),
-    [antEyeCoords[0][0], -OFFSET],
+    deriv(eyeCoords[eyeCoords.length - 1], A, 7 / 12),
+    [eyeCoords[0][0], -OFFSET],
     [C[0], B[1]],
     [1200, (2 / 3) * C[1]],
   ];
@@ -284,7 +288,7 @@ function makePath(points, className) {
     antAntennaCoords[1][0] + s / 3,
     antAntennaCoords[1][1] + 2 * s,
   ]);
-  antAntennaCoords.push(deriv(antEyeCoords[antEyeCoords.length - 1], A, 1 / 6));
+  antAntennaCoords.push(deriv(eyeCoords[eyeCoords.length - 1], A, 1 / 6));
 
   const antAntennaR = makePoly(antAntennaCoords, "seg4");
   const antAntennaL = makePoly(flipX(antAntennaCoords), "seg4");
@@ -327,8 +331,8 @@ function makePath(points, className) {
     ${antTuskR}
 `,
       svgPost: `
-    ${antEyeR}
-    ${antEyeL}
+    ${eyeR}
+    ${eyeL}
     ${antAntennaR}
     ${antAntennaL}
 `,
@@ -375,13 +379,13 @@ if (false) {
   // Nice worker ant
   const M = [600, 800];
   const OFFSET = 100;
-  const antEyeCoords = [
+  const eyeCoords = [
     deriv(G, M, 1 / 6),
     deriv(G, M, 2 / 3),
     deriv(F, M, 1 / 6),
   ];
-  const antEyeR = makePoly(antEyeCoords, "seg4");
-  const antEyeL = makePoly(flipX(antEyeCoords), "seg4");
+  const eyeR = makePoly(eyeCoords, "seg4");
+  const eyeL = makePoly(flipX(eyeCoords), "seg4");
 
   const antTuskCoords = [
     M,
@@ -397,6 +401,7 @@ if (false) {
 
   const antenna2 = deriv(A, H, 3 / 2);
   const gradient = [H[0] - G[0], H[1] - G[1]];
+  // const antenna3ratio = 1 / 4;
   const antenna3ratio = 7 / 24;
   const antenna3 = [
     antenna2[0] - gradient[0] * antenna3ratio,
@@ -444,8 +449,8 @@ if (false) {
     ${antTuskR}
 `,
       svgPost: `
-    ${antEyeR}
-    ${antEyeL}
+    ${eyeR}
+    ${eyeL}
     ${antAntennaR}
     ${antAntennaL}
 `,
@@ -453,4 +458,124 @@ if (false) {
   );
   // WARNING: may be overwritten below
   outputEl.innerHTML = WORKER_ANT_SVG;
+}
+
+{
+  // Build beaver
+  const M = [600, 700];
+  const OFFSET = 50;
+  const bl = deriv(G, M, 1 / 4);
+  const eyeCoords = [
+    deriv(deriv(H, G, 2 / 3), M, 1 / 8),
+    bl,
+    deriv(bl, deriv(H, M, 6 / 12), 3 / 4),
+  ];
+  const eyeR = makePoly(eyeCoords, "seg4");
+  const eyeL = makePoly(flipX(eyeCoords), "seg4");
+
+  const toothMidTop = deriv(M, E, 1 / 6); //add(M, [0, TOOTH_DROP]);
+  const toothTopLeft = add(deriv(deriv(F, E, 1 / 2), toothMidTop, 1 / 2), [
+    0,
+    -20,
+  ]);
+  const beaverToothCoords = [
+    toothTopLeft,
+    add(toothTopLeft, [20, 290]),
+    deriv(M, E, 13 / 12),
+    toothMidTop,
+  ];
+  /* [
+    add(deriv(M, F, 1 / 4), [0, TOOTH_DROP]),
+    add(deriv(B, M, 4 / 3), [0, TOOTH_DROP]),
+    deriv(M, E, 13 / 12),
+    toothMidTop,
+  ]; */
+  const beaverToothL = makePoly(beaverToothCoords, "seg4");
+  const beaverToothR = makePoly(flipX(beaverToothCoords), "seg4");
+  const beaverToothOutline = makePath(
+    [
+      ...beaverToothCoords.slice(0, 3),
+      ...flipX(beaverToothCoords)
+        .reverse()
+        .slice(2),
+    ],
+    "path5 tooth"
+  );
+  const beaverToothDivide = makePath(
+    [add(toothMidTop, [0, (E[1] - M[1]) / 12]), E],
+    "path5 toothDivide"
+  );
+  const beaverToothDivide2 = makePath(
+    [
+      deriv(A, M, 11 / 12),
+      toothMidTop,
+      deriv(toothMidTop, toothTopLeft, 5 / 4),
+      toothMidTop,
+      deriv(toothMidTop, flipX([toothTopLeft])[0], 5 / 4),
+      toothMidTop,
+    ],
+    "path5 toothDivide"
+  );
+
+  const schnoz = makePoly(
+    [deriv(A, M, 3 / 4), deriv(C, M, 3 / 4), M, deriv(G, M, 3 / 4)],
+    "seg5"
+  );
+
+  const BUILD_BEAVER_SVG = makeSvg(
+    "Worker Ant",
+    //["#d45c00", "#fd6e01", "#fa8e3b", "#a74413", "#ffffff", "#000000"],
+    ["#a74413", "#fd6e01", "#fa8e3b", "#d45c00", "#ffffff", "#000000"],
+    [0, 1, 2, 3, 3, 2, 1, 0],
+    {
+      M,
+      OFFSET,
+      css: `
+.face .eye {
+  fill: #ffffff;
+  stroke: #ffffff;
+}
+.face .tusk {
+  stroke: #000000;
+  fill: #ffffff;
+}
+.face .no-stroke {
+  stroke: transparent;
+  stroke-opacity: 0;
+}
+.face .tusk,
+.face .stroke-only,
+.heart-outline {
+  stroke: #082744;
+  stroke-width: 8;
+  stroke-linejoin: round;
+}
+.face .stroke-only,
+.heart-outline {
+  fill: transparent;
+  fill-opacity: 0;
+}
+.tooth {
+stroke-width: 8;
+}
+.toothDivide {
+stroke-width: 3;
+}
+`,
+      svgPre: `
+`,
+      svgPost: `
+    ${eyeR}
+    ${eyeL}
+    ${beaverToothL}
+    ${beaverToothR}
+    ${beaverToothOutline}
+    ${beaverToothDivide}
+    ${beaverToothDivide2}
+    ${schnoz}
+`,
+    }
+  );
+  // WARNING: may be overwritten below
+  outputEl.innerHTML = BUILD_BEAVER_SVG;
 }
