@@ -59,7 +59,7 @@ collection changes, even if the result with the applied filter is still the
 same.
 
 With the included `condition` filters live queries work as expected until you
-start using `makeAddPgConditionPlugin` to add your own conditions.
+start using [makeAddPgTableConditionPlugin](/postgraphile/make-add-pg-table-condition-plugin/) to add your own conditions.
 
 #### Other plugins
 
