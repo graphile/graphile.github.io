@@ -12,7 +12,7 @@ title: PostGraphile Pro!
 
 # Get PostGraphile Pro
 
-#### PostGraphile core is open source software under the MIT license. Pro is a commercial plugin which enhances PostGraphile with additional features and helps fund development and maintenance on PostGraphile Core.
+#### PostGraphile V4 Core is open source software under the MIT license. Pro is a commercial plugin which enhances PostGraphile V4 with additional features to help your team to save development costs before deploying to production.
 
 ##### See below the pricing table for more information.
 
@@ -29,6 +29,20 @@ title: PostGraphile Pro!
 
 <div class='row'>
 <div class='text-center col-xs-12'>
+
+### How to get Pro
+
+PostGraphile Pro is available as a perk for
+[Graphile sponsors](https://graphile.org/sponsor/). Businesses which use
+PostGraphile should explore sponsorship as the first option to obtain Pro, as
+sponsorship also helps to fund development and maintenance of the Graphile
+suite, as well as enabling us to advance the software they rely on.
+
+For businesses which are not capable of engaging in the sponsorship model, there
+is an option to purchase the license by itself. However, this does not come with
+any other benefit such as priority support or discounted consultancy rates.
+
+### Feature comparison
 
 <table class='pricing-table'>
   <thead>
@@ -216,18 +230,19 @@ Questions, comments or feedback? Email
 <div class='row'>
 <div class='text-center col-xs-12'>
 
-### PostGraphile core is OSS under the MIT license
+### PostGraphile V4 Core and PostGraphile V5 are OSS under the MIT license
 
-PostGraphile core is sufficient for many peoples needs; it's the only version
+PostGraphile V4 Core is sufficient for many peoples needs; it's the only version
 that existed for the first 2 years of the project and many people are running it
-with great success in production. No features in PostGraphile core have been
-removed or obscured, and it continues to be advanced and enhanced.
+with great success in production. No features in PostGraphile V4 Core have been
+removed or obscured, and it continues to be maintained. PostGraphile V5 is also
+open source under the MIT License and continues to be advanced and enhanced.
 
-Development and maintenance of PostGraphile core is ongoing, supported by
-contributions from the community, [professional services](/support/) contracts,
-[GitHub Sponsors](/sponsor/) and sales of commercial plugin licenses.
+Development and maintenance of PostGraphile V5 is ongoing, supported by
+contributions from the community, [professional services](/support/) contracts
+and [GitHub Sponsors](/sponsor/).
 
-### PostGraphile Pro is a commercial plugin
+### PostGraphile Pro is a commercial plugin for those who wish to scale with PostGraphile V4
 
 The Pro plugin enhances PostGraphile with additional features and is loaded
 through the standard [server plugin interface](/postgraphile/plugins/).
@@ -236,7 +251,7 @@ The Pro plugin contains features that are particularly useful to businesses
 wishing to scale their solution out using database read-replicas or protect the
 generated GraphQL API from expensive queries which may be issued by untrusted
 third parties. (Typically if the intended clients to your GraphQL API are
-first-party only then you would use a GraphQL query whitelist (e.g. persisted
+first-party only then you would use a GraphQL query allowlist (e.g. persisted
 queries) for this purpose; although the Pro features can still be helpful to
 dissuade your developers from building expensive queries!)
 
@@ -279,7 +294,8 @@ There's also a lot more information in the
 ### Is the fulfillment of the license key automated?
 
 Yes, license keys are issued automatically by our store software upon completion
-of the payment process.
+of the payment process. Sponsors can use their GitHub Sponsors account to log in
+to the store.
 
 ### Do license keys "phone home"?
 
@@ -296,23 +312,19 @@ abuse our trust.
 
 No. We run community support through our
 [Discord Server](https://discord.gg/graphile) where anyone can ask and answer
-questions about PostGraphile and the Graphile suite of tools. We offer a
-Development Support contract which includes async text support within your own
-Slack/GitHub organisation. Prices start at \$1,500 a month, with no minimum
-term. More information can be found at the
-[Development Support page](/support/).
+questions about PostGraphile and the Graphile suite of tools. Sponsors receive
+priority support from our maintainers within our Discord Server. Sponsors on the
+"Private Advisor" tier or above can enter a complimentary Development Support
+contract and receive support through their company Slack/GitHub organization.
+Prices start at \$1,500 a month, with no minimum term. More information can be
+found at the [Development Support page](https://graphile.org/support/) or you
+can
+[get in contract](mailto:info@graphile.org?subject=Private%20Advisor%20tier%20question).
 
 ### I'm an enterprise user and need X, Y and Z
 
 Please [get in touch](mailto:team@graphile.org?subject=Enterprise%20enquiry) and
 we'll be happy to help!
-
-### Commercial plugins help fund development on PostGraphile
-
-Maintaining an OSS project is very (very!) time-intensive. Giving this
-maintenance work a solid commercial backing benefits hobbyist and commercial
-users alike by making the project more sustainable and helping new features and
-fixes to be developed and released faster.
 
 </div>
 </div>
