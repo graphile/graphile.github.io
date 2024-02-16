@@ -232,17 +232,18 @@ please consider [sponsoring us](/sponsor/)!):
 The following features and not part of PostGraphile core, but are available from
 the Pro plugin - see [Go Pro!](/postgraphile/pricing/) for more information.
 
-- `--read-only-connection <string>` [PRO] ⚡️[experimental] a PostgreSQL
-  connection string to use for read-only queries (i.e. not mutations)
-- `--default-pagination-cap [int]` [PRO] ⚡️[experimental] Ensures all
-  connections have first/last specified and are no large than this value
+- `--read-only-connection <string>` [PRO]&nbsp;[SPON] ⚡️[experimental] a
+  PostgreSQL connection string to use for read-only queries (i.e. not mutations)
+- `--default-pagination-cap [int]` [PRO]&nbsp;[SPON] ⚡️[experimental] Ensures
+  all connections have first/last specified and are no large than this value
   (default: 50), set to -1 to disable; override via smart comment
   `@paginationCap 50`
-- `--graphql-depth-limit [int]` [PRO] ⚡️[experimental] Validates GraphQL
-  queries cannot be deeper than the specified int (default: 16), set to -1 to
-  disable
-- `--graphql-cost-limit [int]` [PRO] ⚡️[experimental] Only allows queries with
-  a computed cost below the specified int (default: 1000), set to -1 to disable
+- `--graphql-depth-limit [int]` [PRO]&nbsp;[SPON] ⚡️[experimental] Validates
+  GraphQL queries cannot be deeper than the specified int (default: 16), set to
+  -1 to disable
+- `--graphql-cost-limit [int]` [PRO]&nbsp;[SPON] ⚡️[experimental] Only allows
+  queries with a computed cost below the specified int (default: 1000), set to
+  -1 to disable
 
 ### RC file options
 

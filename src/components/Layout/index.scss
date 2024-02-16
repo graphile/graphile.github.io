@@ -573,6 +573,7 @@ h6 code {
 .pricing-table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 2rem;
 }
 .pricing-table td,
 .pricing-table th {
@@ -773,6 +774,11 @@ h6 code {
 }
 
 .plan-sponsor {
+  @extend .plan-tag;
+  background-color: rgb(45, 128, 211);
+}
+
+.plan-supporter {
   @extend .plan-tag;
   background-color: rgb(45, 128, 211);
 }

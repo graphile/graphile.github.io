@@ -249,7 +249,7 @@ lot more that can be done to optimise our logical decoding support, so if you
 get to a point where logical decoding performance is an issue, please get in
 touch!
 
-Optimisation steps you can take currently:
+Optimization steps you can take currently:
 
 - Whitelist (or otherwise limit) the live queries that your system may perform
 - Only write small non-overlapping live queries - since the entire query must
@@ -261,12 +261,12 @@ Optimisation steps you can take currently:
 - Move the logical decoding system to a dedicated server
 - Add more `liveConditions` to queries to filter rows the user may not see so
   that they do not trigger live updates for that user (TODO: document this!)
-- Use read replicas [PRO]
+- Use read replicas [PRO]&nbsp;[SPON]
 
 We do not currently recommend live queries for very large deployments - if
 you're expecting tens of thousands of concurrent users it's going to be
 significantly more efficient to use regular
-[subscriptions](/postgraphile/subscriptions/)
+[subscriptions](/postgraphile/subscriptions/).
 
 ### Scaling
 
