@@ -576,20 +576,35 @@ h6 code {
 }
 .pricing-table td,
 .pricing-table th {
-  width: 25%;
+  width: 20%;
 }
 .pricing-table thead th {
   @extend .f3;
   @extend .pb3;
-  border-bottom: 2px solid #a51b1b;
+  font-size: 1.2rem;
 }
+
+.pricing-table thead tr:first-child,
+.pricing-table thead tr:first-child th {
+  padding-bottom: 0.5rem;
+}
+
+.pricing-table thead tr:last-child,
+.pricing-table thead tr:last-child th {
+  font-style: italic;
+  color: #555;
+  font-size: 0.8rem;
+  padding-top: 0;
+  border-bottom: 2px solid #2d437d;
+}
+
 .pricing-table tbody th,
 .pricing-table tbody td {
   @extend .pv3;
   @extend .ph1;
 }
 .pricing-table tbody tr {
-  border-bottom: 1px solid #a51b1b;
+  border-bottom: 1px solid #2d437d;
 }
 .pricing-table tbody tr:last-child th,
 .pricing-table tbody tr:last-child td {
@@ -609,10 +624,10 @@ h6 code {
   @extend .f3;
 }
 .pricing-table .fa-check-circle {
-  color: green;
+  color: #4a68b4;
 }
 .pricing-table .fa-times-circle {
-  color: red;
+  color: rgb(255, 71, 81);
 }
 .pricing-table .fa-minus-circle {
   color: #ccc;
@@ -712,22 +727,30 @@ h6 code {
         position: relative;
         padding-left: 40%;
       }
+    }
+    tbody,
+    tfoot {
       td::before {
-        content: "Placeholder";
+        content: "";
         position: absolute;
         left: 0.5rem;
         top: 0;
         font-variant: small-caps;
         font-size: 1.2em;
       }
-      td:nth-of-type(1)::before {
-        content: "Core";
-      }
       td:nth-of-type(2)::before {
-        content: "Supporter";
+        content: "Pro";
       }
       td:nth-of-type(3)::before {
-        content: "Pro";
+        content: "Sponsor+";
+      }
+      td:nth-of-type(4)::before {
+        content: "Enterprise";
+      }
+    }
+    tbody {
+      td:nth-of-type(1)::before {
+        content: "Core";
       }
     }
   }
@@ -749,14 +772,14 @@ h6 code {
   font-weight: normal;
 }
 
-.plan-supporter {
+.plan-sponsor {
   @extend .plan-tag;
-  background-color: #4d4dff;
+  background-color: rgb(45, 128, 211);
 }
 
 .plan-pro {
   @extend .plan-tag;
-  background-color: #c511c5;
+  background-color: rgb(255, 71, 81);
 }
 .plan-enterprise {
   @extend .plan-tag;
@@ -768,6 +791,55 @@ h6 code {
   }
 }
 
+/* Tooltip container */
+.tooltipped {
+  position: relative;
+  display: inline-block;
+  text-decoration: underline dotted 2px #4a68b4;
+}
+
+/* Tooltip text */
+.tooltipped > .tooltip-text {
+  display: block;
+  visibility: hidden;
+  width: 220px;
+  background-color: #f4faff;
+  border: 2px solid #cbe3ff;
+  color: black;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.tooltipped:hover > .tooltip-text {
+  visibility: visible;
+  top: -5px;
+  right: 105%;
+}
+
+.tooltipped > .tooltip-text::after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  left: 100%; /* To the right of the tooltip */
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent #cbe3ff;
+}
+
+.show-full {
+  display: contents;
+}
+
+.show-mobile {
+  display: none;
+}
+
 // ----------------------------------------
 // Misc media queries
 
@@ -777,6 +849,12 @@ h6 code {
     &:before {
       left: 50%;
     }
+  }
+  .show-full {
+    display: none;
+  }
+  .show-mobile {
+    display: contents;
   }
 }
 

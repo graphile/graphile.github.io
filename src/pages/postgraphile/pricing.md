@@ -56,7 +56,14 @@ any other benefit such as priority support or discounted consultancy rates.
 </tr>
 
 <tr>
-  <th>OSS projects, not-for-profits</th>
+  <th>
+  <span class='tooltipped'>
+    OSS projects, not-for-profits
+    <span class='tooltip-text'>Also, hobbyists, pre-revenue start-ups, and any other use
+    where the Pro features are either not needed or can be re-implemented by your team
+    </span>
+    </span>
+    </th>
   <th>Small businesses</th>
   <th>Small and medium businesses</th>
   <th>Enterprise</th>
@@ -66,15 +73,13 @@ any other benefit such as priority support or discounted consultancy rates.
 <tbody>
 
 <tr>
-  <th>Instant GraphQL API<br />(queries and mutations)</th>
-  <td><span class='fas fa-check-circle'></span></td>
-  <td><span class='fas fa-check-circle'></span></td>
-  <td><span class='fas fa-check-circle'></span></td>
-  <td><span class='fas fa-check-circle'></span></td>
-</tr>
-
-<tr>
-  <th>Automatic CRUD mutations</th>
+  <th>
+    <span class='tooltipped'>
+      Instant GraphQL API
+      <span class='tooltip-text'>Queries and mutations</span>
+    </span>
+    &nbsp;and automatic CRUD mutations
+  </th>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
@@ -90,7 +95,14 @@ any other benefit such as priority support or discounted consultancy rates.
 </tr>
 
 <tr>
-  <th>Authentication via JWT or custom <code>pgSettings</code></th>
+  <th>
+    <span class='tooltipped'>
+      Authentication
+      <span class='tooltip-text'>
+        via JWT or custom <code>pgSettings</code>
+      </span>
+    </span>
+  </th>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
@@ -98,7 +110,11 @@ any other benefit such as priority support or discounted consultancy rates.
 </tr>
 
 <tr>
-  <th>RLS and RBAC authorization</th>
+    <th>
+    <span class='tooltipped'>
+      Authorization<span class='tooltip-text'>RLS and RBAC</span>
+    </span>
+  </th>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
@@ -122,15 +138,7 @@ any other benefit such as priority support or discounted consultancy rates.
 </tr>
 
 <tr>
-  <th>Filtering</th>
-  <td><span class='fas fa-check-circle'></span></td>
-  <td><span class='fas fa-check-circle'></span></td>
-  <td><span class='fas fa-check-circle'></span></td>
-  <td><span class='fas fa-check-circle'></span></td>
-</tr>
-
-<tr>
-  <th>Ordering</th>
+  <th>Filtering &amp; Ordering</th>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
@@ -178,7 +186,14 @@ any other benefit such as priority support or discounted consultancy rates.
 </tr>
 
 <tr>
-  <th>Real-time GraphQL</a></th>
+  <th>
+    <span class='tooltipped'>
+      Real-time GraphQL
+      <span class='tooltip-text'>
+        GraphQL Subscriptions and Live Queries
+      </span>
+    </span>
+  </th>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
@@ -218,7 +233,7 @@ any other benefit such as priority support or discounted consultancy rates.
 </tr>
 
 <tr>
-  <th>Free access to pgRITA</th>
+  <th>Free access to <a href="https://pgrita.com">pgRITA</a></th>
   <td><span class='fas fa-times-circle'></span></td>
   <td><span class='fas fa-times-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
@@ -226,7 +241,7 @@ any other benefit such as priority support or discounted consultancy rates.
 </tr>
 
 <tr>
-  <th>Logo featured on website</th>
+  <th>Logo featured on <a href="https://graphile.org/sponsor">website</a></th>
   <td><span class='fas fa-times-circle'></span></td>
   <td><span class='fas fa-times-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
@@ -245,16 +260,42 @@ any other benefit such as priority support or discounted consultancy rates.
   <th>Sponsor's discount</th>
   <td><span class='fas fa-times-circle'></span></td>
   <td><span class='fas fa-times-circle'></span></td>
-  <td>Discounted video calls</td>
-  <td>Discounted consultancy packages</td>
+  <td>    
+    <span class='show-full'>
+      Discounted <a href="https://benjie.dev/book">video calls</a>
+    </span>
+    <span class='show-mobile'>
+      <span class="f3 fa fa-phone-square"></span>
+    </span></td>
+  <td>
+    <span class='show-full'>
+      Discounted consultancy packages
+    </span>
+    <span class='show-mobile'>
+      <span class='fas fa-check-circle'></span>
+    </span>
+  </td>
 </tr>
 
 <tr>
   <th>Support</th>
-  <td>via community Discord</td>
-  <td>via community Discord</td>
-  <td>Priority support via community Discord</td>
-  <td>Within your own company</td>
+  <td>
+    <span class='show-full'>via community Discord</span>
+    <span class='show-mobile'>Community support</span>
+  </td>
+  <td>
+    <span class='show-full'>via community Discord</span>
+    <span class='show-mobile'>Community support</span>
+  </td>
+  <td>
+    <span class='show-full'>Priority support via community Discord</span>
+    <span class='show-mobile'>Priority community support</span>
+  </td>
+  <td>Within your own company <br />
+    <span class="f3 fab fa-github"></span>
+    <span class="f3 fab fa-slack"></span>
+    <span class="f3 fa fa-phone-square"></span>
+  </td>
 </tr>
 
 <tr>
@@ -267,10 +308,29 @@ any other benefit such as priority support or discounted consultancy rates.
 
 <tr>
   <th>Pricing</th>
-  <td><strong><a href='/sponsor/'>Crowd-funded</a></strong><span class='note'>Please give back</span></td>
-  <td><strong><small><s>$100/mo</s> USD</small> $25<small>/mo</small></strong><span class='note'><small>EUR €25/mo, GBP £20/mo excluding VAT</small></span></td>
-  <td><small>From</small> <strong>$100<small>/mo USD</small></strong><span class='note'><small>GitHub Sponsors or annual invoicing</small></span></td>
-    <td><small>From</small> <strong>$1,500<small>/mo USD</small></strong><span class='note'><small>GitHub Sponsors or bespoke invoicing</small></span></td>
+  <td>
+    <strong><a href='/sponsor/'>Crowd-funded</a></strong><br />
+    <span class='show-full'>
+    <span class='note'><small>Please give back</small>
+    </span>
+    </span>
+  </td>
+  <td>
+    <strong><span class='show-full'><small><s>$100/mo</s></small></span> $25<small> /mo USD</small></strong>
+    <span class='show-full'>
+    <span class='note'><small>EUR €25/mo, GBP £20/mo <br />excluding VAT</small>
+    </span>
+    </span>
+  </td>
+  <td><small>From</small> <strong>$100<small>/mo USD</small></strong>
+  <span class='show-full'>
+  <span class='note'><small>GitHub Sponsors <br />or annual invoicing</small></span>
+  </span>
+  </td>
+  <td><small>From</small> <strong>$1,500<small>/mo USD</small></strong>
+  <span class='show-full'>
+  <span class='note'><small>GitHub Sponsors <br />or bespoke invoicing</small></span>
+  </span></td>
 </tr>
 
 </tbody>
