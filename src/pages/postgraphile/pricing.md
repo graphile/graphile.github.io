@@ -48,22 +48,27 @@ any other benefit such as priority support or discounted consultancy rates.
   <thead>
 
 <tr>
-  <th></th>
+  <th rowspan="2"></th>
   <th><span class="f3 fab fa-github"></span> Core</th>
-  <th><span class='plan-pro'><span class='first-letter'>p</span></span> Pro</th>
+  <th><span class='plan-pro'><span class='first-letter'>p</span></span> License Only</th>
+  <th><span class='plan-sponsor'><span class='first-letter'>s</span></span> Production Sponsor</th>
+  <th><span class='plan-sponsor'><span class='first-letter'>s</span></span> Private Advisor Tier</th>
+</tr>
+
+<tr>
+  <th>OSS projects, not-for-profits</th>
+  <th>Small businesses</th>
+  <th>Small and medium businesses</th>
+  <th>Enterprise</th>
 </tr>
 
 </thead>
 <tbody>
 
 <tr>
-  <th>Audience</th>
-  <td>Hobbyists, OSS projects and<br />pre-revenue startups</td>
-  <td>Businesses and enterprise</td>
-</tr>
-
-<tr>
   <th>Instant GraphQL API<br />(queries and mutations)</th>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
 </tr>
@@ -72,10 +77,14 @@ any other benefit such as priority support or discounted consultancy rates.
   <th>Automatic CRUD mutations</th>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Excellent performance</th>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
 </tr>
@@ -84,10 +93,14 @@ any other benefit such as priority support or discounted consultancy rates.
   <th>Authentication via JWT or custom <code>pgSettings</code></th>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>RLS and RBAC authorization</th>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
 </tr>
@@ -96,10 +109,14 @@ any other benefit such as priority support or discounted consultancy rates.
   <th>Relay-compatible connections</th>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Simple list-based relations</th>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
 </tr>
@@ -108,10 +125,14 @@ any other benefit such as priority support or discounted consultancy rates.
   <th>Filtering</th>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Ordering</th>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
 </tr>
@@ -120,10 +141,14 @@ any other benefit such as priority support or discounted consultancy rates.
   <th>Computed columns</th>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Custom queries</th>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
 </tr>
@@ -132,28 +157,30 @@ any other benefit such as priority support or discounted consultancy rates.
   <th>Custom mutations</th>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
-</tr>
-
-<tr>
-  <th>Customisable with<br />Smart Comments</th>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
-  <th>Extensible via plugins</th>
+  <th>Smart Comments</th>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
-  <th>GraphQL <a href="/postgraphile/subscriptions/">Subscriptions</a></th>
+  <th>Plugins</th>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
-  <th>GraphQL <a href="/postgraphile/live-queries/">Live Queries</a></th>
+  <th>Real-time GraphQL</a></th>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
 </tr>
@@ -162,11 +189,15 @@ any other benefit such as priority support or discounted consultancy rates.
   <th>Integrated<sup>‡</sup> GraphQL query cost limit</th>
   <td><span class='fas fa-times-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Integrated<sup>‡</sup> limits on pagination</th>
   <td><span class='fas fa-times-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
@@ -174,49 +205,90 @@ any other benefit such as priority support or discounted consultancy rates.
   <th>Integrated<sup>‡</sup> GraphQL query depth limits</th>
   <td><span class='fas fa-times-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Facility to scale via read replicas</th>
   <td><span class='fas fa-times-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+</tr>
+
+<tr>
+  <th>Free access to pgRITA</th>
+  <td><span class='fas fa-times-circle'></span></td>
+  <td><span class='fas fa-times-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+</tr>
+
+<tr>
+  <th>Logo featured on website</th>
+  <td><span class='fas fa-times-circle'></span></td>
+  <td><span class='fas fa-times-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+</tr>
+
+<tr>
+  <th>Logo featured in project</th>
+  <td><span class='fas fa-times-circle'></span></td>
+  <td><span class='fas fa-times-circle'></span></td>
+  <td><span class='fas fa-times-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+</tr>
+
+<tr>
+  <th>Sponsor's discount</th>
+  <td><span class='fas fa-times-circle'></span></td>
+  <td><span class='fas fa-times-circle'></span></td>
+  <td>Discounted video calls</td>
+  <td>Discounted consultancy packages</td>
+</tr>
+
+<tr>
+  <th>Support</th>
+  <td>via community Discord</td>
+  <td>via community Discord</td>
+  <td>Priority support via community Discord</td>
+  <td>Within your own company</td>
 </tr>
 
 <tr>
   <th>License</th>
   <td>MIT</td>
   <td>Commercial</td>
+  <td>Commercial</td>
+  <td>Commercial</td>
 </tr>
 
 <tr>
   <th>Pricing</th>
   <td><strong><a href='/sponsor/'>Crowd-funded</a></strong><span class='note'>Please give back</span></td>
-  <td><strong><small><s>$100/mo</s> USD</small> $25<small>/mo exc. VAT</small></strong><span class='note'><small>EUR €25/mo, GBP £20/mo</small></span></td>
+  <td><strong><small><s>$100/mo</s> USD</small> $25<small>/mo</small></strong><span class='note'><small>EUR €25/mo, GBP £20/mo excluding VAT</small></span></td>
+  <td><small>From</small> <strong>$100<small>/mo USD</small></strong><span class='note'><small>GitHub Sponsors or annual invoicing</small></span></td>
+    <td><small>From</small> <strong>$1,500<small>/mo USD</small></strong><span class='note'><small>GitHub Sponsors or bespoke invoicing</small></span></td>
 </tr>
 
-<tr>
-  <th>Purchase</th>
-  <td>&mdash;</td>
-  <td>Credit/Debit Card</td>
-</tr>
-
-  </tbody>
-  <tfoot>
+</tbody>
+<tfoot>
 
 <tr>
   <th></th>
-  <td><a class='button--solid' href='/sponsor/'>Sponsor development</span></a></td>
-  <td><a class='button--solid' href='https://store.graphile.com'>Buy <span class='fas fa-external-link-square-alt'></span></a></td>
+  <td></td>
+  <td><a class='button--outline' href='https://store.graphile.com'>Buy <span class='fas fa-external-link-square-alt'></span></a></td>
+  <td><a class='button--solid' href='https://github.com/sponsors/benjie'>Sponsor <span class='fas fa-external-link-square-alt'></span></a></td>
+  <td><a class='button--outline' href='mailto:info@graphile.org?subject=Private%20Advisor%20tier%20question'>Get in contact</a></td>
 </tr>
 
   </tfoot>
 
 </table>
 
-##### <sup>‡</sup> These features integrate deeply with PostGraphile and have been optimised for its nuances by the maintainer. If you wish to build and maintain protections yourself rather than using the Pro plugin, refer to [Running in Production](/postgraphile/production/) for information on how you might go about doing this. Purchasing the Pro plugin helps fund ongoing development and maintenance on the open source PostGraphile project.
-
-Questions, comments or feedback? Email
-<a href="mailto:info@graphile.org?subject=Pricing%20question/comment/feedback:)">info@graphile.org</a>
+##### <sup>‡</sup> These features integrate deeply with PostGraphile and have been optimized for its nuances by the maintainer. If you wish to build and maintain protections yourself rather than using the Pro plugin, refer to [Running in Production](/postgraphile/production/) for information on how you might go about doing this. Purchasing the Pro plugin helps fund ongoing development and maintenance on the open source PostGraphile project.
 
 </div>
 </div>
