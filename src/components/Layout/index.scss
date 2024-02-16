@@ -795,7 +795,7 @@ h6 code {
 .tooltipped {
   position: relative;
   display: inline-block;
-  text-decoration: underline dotted 2px #4a68b4;
+  text-decoration: underline dotted 2px #a1a1a1;
 }
 
 /* Tooltip text */
@@ -803,8 +803,8 @@ h6 code {
   display: block;
   visibility: hidden;
   width: 220px;
-  background-color: #f4faff;
-  border: 2px solid #cbe3ff;
+  background-color: white;
+  border: 2px solid #a1a1a1;
   color: black;
   text-align: center;
   padding: 5px 0;
@@ -818,18 +818,18 @@ h6 code {
 .tooltipped:hover > .tooltip-text {
   visibility: visible;
   top: -5px;
-  right: 105%;
+  left: 105%;
 }
 
 .tooltipped > .tooltip-text::after {
   content: " ";
   position: absolute;
   top: 50%;
-  left: 100%; /* To the right of the tooltip */
+  right: 100%; /* To the left of the tooltip */
   margin-top: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: transparent transparent transparent #cbe3ff;
+  border-color: transparent #555 transparent transparent;
 }
 
 .show-full {

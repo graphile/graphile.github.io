@@ -348,7 +348,7 @@ any other benefit such as priority support or discounted consultancy rates.
 
 </table>
 
-##### <sup>‡</sup> These features integrate deeply with PostGraphile and have been optimized for its nuances by the maintainer. If you wish to build and maintain protections yourself rather than using the Pro plugin, refer to [Running in Production](/postgraphile/production/) for information on how you might go about doing this. Purchasing the Pro plugin helps fund ongoing development and maintenance on the open source PostGraphile project.
+##### <sup>‡</sup> These features integrate deeply with PostGraphile and have been optimized for its nuances by the maintainer. If you wish to build and maintain protections yourself rather than using the Pro plugin, refer to [Production Considerations](/postgraphile/production/) for information on how you might go about doing this. Purchasing the Pro plugin helps fund ongoing development and maintenance on the open source PostGraphile project.
 
 </div>
 </div>
