@@ -46,7 +46,7 @@ any other benefit such as priority support or discounted consultancy rates.
 <p class='show-mobile'>
   There are several tiers of sponsorship available; The "Production
   Sponsor" tier (<strong>Sponsor+</strong>) is suitable for many small and
-  medium businesses while the "Private Advisor Tier" (<strong>Enterprise</strong>) gives access to a complimentary <a href="https://www.graphile.org/support/">Development Support </a> contract and discounted consultancy packages, perfect for enterprises and those who need bespoke advice and support on their project.
+  medium businesses while the "Private Advisor Tier" (<strong>Enterprise</strong>) gives access to a complimentary <a href="/support/">Development Support </a> contract and discounted consultancy packages, perfect for enterprises and those who need bespoke advice and support on their project.
 </p>
 
 <p class='show-full'>
@@ -57,7 +57,7 @@ any other benefit such as priority support or discounted consultancy rates.
   the database tool <a href="https://pgrita.com">pgRITA </a> and discounted
   consultancy calls. The "Private Advisor Tier" gives access to a
   complimentary
-  <a href="https://www.graphile.org/support/">Development Support </a> contract
+  <a href="/support/">Development Support </a> contract
   and discounted consultancy packages, perfect for enterprises and those who
   need bespoke advice and support on their project.
 </p>
