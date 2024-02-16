@@ -32,11 +32,10 @@ title: PostGraphile Pro!
 
 ### How to get Pro
 
-PostGraphile Pro is available as a perk for
-[Graphile sponsors](https://graphile.org/sponsor/). Businesses which use
-PostGraphile should explore sponsorship as the first option to obtain Pro, as
-sponsorship also helps to fund development and maintenance of the Graphile
-suite, as well as enabling us to advance the software they rely on.
+PostGraphile Pro is available as a perk for [Graphile sponsors](/sponsor/).
+Businesses which use PostGraphile should explore sponsorship as the first option
+to obtain Pro, as sponsorship also helps to fund development and maintenance of
+the Graphile suite, as well as enabling us to advance the software they rely on.
 
 For businesses which are not capable of engaging in the sponsorship model, there
 is an option to purchase the license by itself. However, this does not come with
@@ -241,7 +240,7 @@ any other benefit such as priority support or discounted consultancy rates.
 </tr>
 
 <tr>
-  <th>Logo featured on <a href="https://graphile.org/sponsor">website</a></th>
+  <th>Logo featured on <a href="/sponsor">website</a></th>
   <td><span class='fas fa-times-circle'></span></td>
   <td><span class='fas fa-times-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
@@ -449,8 +448,7 @@ priority support from our maintainers within our Discord Server. Sponsors on the
 "Private Advisor" tier or above can enter a complimentary Development Support
 contract and receive support through their company Slack/GitHub organization.
 Prices start at \$1,500 a month, with no minimum term. More information can be
-found at the [Development Support page](https://graphile.org/support/) or you
-can
+found at the [Development Support page](/support/) or you can
 [get in contract](mailto:info@graphile.org?subject=Private%20Advisor%20tier%20question).
 
 ### I'm an enterprise user and need X, Y and Z
