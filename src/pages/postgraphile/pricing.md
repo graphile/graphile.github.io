@@ -41,7 +41,26 @@ For businesses which are not capable of engaging in the sponsorship model, there
 is an option to purchase the license by itself. However, this does not come with
 any other benefit such as priority support or discounted consultancy rates.
 
-### Feature comparison
+#### Feature comparison
+
+<p class='show-mobile'>
+  There are several tiers of sponsorship available; The "Production
+  Sponsor" tier (<strong>Sponsor+</strong>) is suitable for many small and
+  medium businesses while the "Private Advisor Tier" (<strong>Enterprise</strong>) gives access to a complimentary <a href="https://www.graphile.org/support/">Development Support </a> contract and discounted consultancy packages, perfect for enterprises and those who need bespoke advice and support on their project.
+</p>
+
+<p class='show-full'>
+  Below, we have listed the differences between PostGraphile V4 Core, purchasing
+  the license by itself, and sponsoring Graphile. There are several tiers of
+  sponsorship available; The "Production Sponsor" tier is suitable
+  for many small and medium businesses with some perks such as free access to
+  the database tool <a href="https://pgrita.com">pgRITA </a> and discounted
+  consultancy calls. The "Private Advisor Tier" gives access to a
+  complimentary
+  <a href="https://www.graphile.org/support/">Development Support </a> contract
+  and discounted consultancy packages, perfect for enterprises and those who
+  need bespoke advice and support on their project.
+</p>
 
 <table class='pricing-table'>
   <thead>
