@@ -240,7 +240,7 @@ any other benefit such as priority support or discounted consultancy rates.
 </tr>
 
 <tr>
-  <th>Logo featured on <a href="/sponsor">website</a></th>
+  <th>Logo featured on <a href="/sponsor/">website</a></th>
   <td><span class='fas fa-times-circle'></span></td>
   <td><span class='fas fa-times-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
