@@ -12,7 +12,7 @@ title: PostGraphile Pro!
 
 # Get PostGraphile Pro
 
-#### PostGraphile core is open source software under the MIT license. Pro is a commercial plugin which enhances PostGraphile with additional features and helps fund development and maintenance on PostGraphile Core.
+#### PostGraphile V4 Core is open source software under the MIT license. Pro is a commercial plugin which enhances PostGraphile V4 with additional features to help your team to save development costs before deploying to production.
 
 ##### See below the pricing table for more information.
 
@@ -30,32 +30,76 @@ title: PostGraphile Pro!
 <div class='row'>
 <div class='text-center col-xs-12'>
 
+### How to get Pro
+
+PostGraphile Pro is available as a perk for [Graphile sponsors](/sponsor/).
+Businesses which use PostGraphile should explore sponsorship as the first option
+to obtain Pro, as sponsorship also helps to fund development and maintenance of
+the Graphile suite, as well as enabling us to advance the software they rely on.
+
+For businesses which are not capable of engaging in the sponsorship model, there
+is an option to purchase the license by itself. However, this does not come with
+any other benefit such as priority support or discounted consultancy rates.
+
+#### Feature comparison
+
+<p class='show-mobile'>
+  There are several tiers of sponsorship available; The "Production
+  Sponsor" tier (<strong>Sponsor+</strong>) is suitable for many small and
+  medium businesses while the "Private Advisor Tier" (<strong>Enterprise</strong>) gives access to a complimentary <a href="/support/">Development Support </a> contract and discounted consultancy packages, perfect for enterprises and those who need bespoke advice and support on their project.
+</p>
+
+<p class='show-full'>
+  Below, we have listed the differences between PostGraphile V4 Core, purchasing
+  the license by itself, and sponsoring Graphile. There are several tiers of
+  sponsorship available; The "Production Sponsor" tier is suitable
+  for many small and medium businesses with some perks such as free access to
+  the database tool <a href="https://pgrita.com">pgRITA </a> and discounted
+  consultancy calls. The "Private Advisor Tier" gives access to a
+  complimentary
+  <a href="/support/">Development Support </a> contract
+  and discounted consultancy packages, perfect for enterprises and those who
+  need bespoke advice and support on their project.
+</p>
+
 <table class='pricing-table'>
   <thead>
 
 <tr>
-  <th></th>
+  <th rowspan="2"></th>
   <th><span class="f3 fab fa-github"></span> Core</th>
-  <th><span class='plan-pro'><span class='first-letter'>p</span></span> Pro</th>
+  <th><span class='plan-pro'><span class='first-letter'>p</span></span> License Only</th>
+  <th><span class='plan-sponsor'><span class='first-letter'>s</span></span> Production Sponsor</th>
+  <th><span class='plan-sponsor'><span class='first-letter'>s</span></span> Private Advisor Tier</th>
+</tr>
+
+<tr>
+  <th>
+  <span class='tooltipped'>
+    OSS projects, not-for-profits
+    <span class='tooltip-text'>Also, hobbyists, pre-revenue start-ups, and any other use
+    where the Pro features are either not needed or can be re-implemented by your team
+    </span>
+    </span>
+    </th>
+  <th>Small businesses</th>
+  <th>Small and medium businesses</th>
+  <th>Enterprise</th>
 </tr>
 
 </thead>
 <tbody>
 
 <tr>
-  <th>Audience</th>
-  <td>Hobbyists, OSS projects and<br />pre-revenue startups</td>
-  <td>Businesses and enterprise</td>
-</tr>
-
-<tr>
-  <th>Instant GraphQL API<br />(queries and mutations)</th>
+  <th>
+    <span class='tooltipped'>
+      Instant GraphQL API
+      <span class='tooltip-text'>Queries and mutations</span>
+    </span>
+    &nbsp;and automatic CRUD mutations
+  </th>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
-</tr>
-
-<tr>
-  <th>Automatic CRUD mutations</th>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
 </tr>
@@ -64,16 +108,33 @@ title: PostGraphile Pro!
   <th>Excellent performance</th>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
-</tr>
-
-<tr>
-  <th>Authentication via JWT or custom <code>pgSettings</code></th>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
-  <th>RLS and RBAC authorization</th>
+  <th>
+    <span class='tooltipped'>
+      Authentication
+      <span class='tooltip-text'>
+        via JWT or custom <code>pgSettings</code>
+      </span>
+    </span>
+  </th>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+</tr>
+
+<tr>
+    <th>
+    <span class='tooltipped'>
+      Authorization<span class='tooltip-text'>RLS and RBAC</span>
+    </span>
+  </th>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
 </tr>
@@ -82,22 +143,22 @@ title: PostGraphile Pro!
   <th>Relay-compatible connections</th>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Simple list-based relations</th>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
-</tr>
-
-<tr>
-  <th>Filtering</th>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
-  <th>Ordering</th>
+  <th>Filtering &amp; Ordering</th>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
 </tr>
@@ -106,10 +167,14 @@ title: PostGraphile Pro!
   <th>Computed columns</th>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Custom queries</th>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
 </tr>
@@ -118,28 +183,37 @@ title: PostGraphile Pro!
   <th>Custom mutations</th>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
-</tr>
-
-<tr>
-  <th>Customisable with<br />Smart Comments</th>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
-  <th>Extensible via plugins</th>
+  <th>Smart Comments</th>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
-  <th>GraphQL <a href="/postgraphile/subscriptions/">Subscriptions</a></th>
+  <th>Plugins</th>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
-  <th>GraphQL <a href="/postgraphile/live-queries/">Live Queries</a></th>
+  <th>
+    <span class='tooltipped'>
+      Real-time GraphQL
+      <span class='tooltip-text'>
+        GraphQL Subscriptions and Live Queries
+      </span>
+    </span>
+  </th>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
 </tr>
@@ -148,11 +222,15 @@ title: PostGraphile Pro!
   <th>Integrated<sup>‡</sup> GraphQL query cost limit</th>
   <td><span class='fas fa-times-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Integrated<sup>‡</sup> limits on pagination</th>
   <td><span class='fas fa-times-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
@@ -160,49 +238,135 @@ title: PostGraphile Pro!
   <th>Integrated<sup>‡</sup> GraphQL query depth limits</th>
   <td><span class='fas fa-times-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
 </tr>
 
 <tr>
   <th>Facility to scale via read replicas</th>
   <td><span class='fas fa-times-circle'></span></td>
   <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+</tr>
+
+<tr>
+  <th>Free access to <a href="https://pgrita.com">pgRITA</a></th>
+  <td><span class='fas fa-times-circle'></span></td>
+  <td><span class='fas fa-times-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+</tr>
+
+<tr>
+  <th>Logo featured on <a href="/sponsor/">website</a></th>
+  <td><span class='fas fa-times-circle'></span></td>
+  <td><span class='fas fa-times-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+</tr>
+
+<tr>
+  <th>Logo featured in project</th>
+  <td><span class='fas fa-times-circle'></span></td>
+  <td><span class='fas fa-times-circle'></span></td>
+  <td><span class='fas fa-times-circle'></span></td>
+  <td><span class='fas fa-check-circle'></span></td>
+</tr>
+
+<tr>
+  <th>Sponsor's discount</th>
+  <td><span class='fas fa-times-circle'></span></td>
+  <td><span class='fas fa-times-circle'></span></td>
+  <td>    
+    <span class='show-full'>
+      Discounted <a href="https://benjie.dev/book">video calls</a>
+    </span>
+    <span class='show-mobile'>
+      <span class="f3 fa fa-phone-square"></span>
+    </span></td>
+  <td>
+    <span class='show-full'>
+      Discounted consultancy packages
+    </span>
+    <span class='show-mobile'>
+      <span class='fas fa-check-circle'></span>
+    </span>
+  </td>
+</tr>
+
+<tr>
+  <th>Support</th>
+  <td>
+    <span class='show-full'>via community Discord</span>
+    <span class='show-mobile'>Community support</span>
+  </td>
+  <td>
+    <span class='show-full'>via community Discord</span>
+    <span class='show-mobile'>Community support</span>
+  </td>
+  <td>
+    <span class='show-full'>Priority support via community Discord</span>
+    <span class='show-mobile'>Priority community support</span>
+  </td>
+  <td>Within your own company <br />
+    <span class="f3 fab fa-github"></span>
+    <span class="f3 fab fa-slack"></span>
+    <span class="f3 fa fa-phone-square"></span>
+  </td>
 </tr>
 
 <tr>
   <th>License</th>
   <td>MIT</td>
   <td>Commercial</td>
+  <td>Commercial</td>
+  <td>Commercial</td>
 </tr>
 
 <tr>
   <th>Pricing</th>
-  <td><strong><a href='/sponsor/'>Crowd-funded</a></strong><span class='note'>Please give back</span></td>
-  <td><strong><small><s>$100/mo</s> USD</small> $25<small>/mo exc. VAT</small></strong><span class='note'><small>EUR €25/mo, GBP £20/mo</small></span></td>
+  <td>
+    <strong><a href='/sponsor/'>Crowd-funded</a></strong><br />
+    <span class='show-full'>
+    <span class='note'><small>Please give back</small>
+    </span>
+    </span>
+  </td>
+  <td>
+    <strong><span class='show-full'><small><s>$100/mo</s></small></span> $25<small> /mo USD</small></strong>
+    <span class='show-full'>
+    <span class='note'><small>EUR €25/mo, GBP £20/mo <br />excluding VAT</small>
+    </span>
+    </span>
+  </td>
+  <td><small>From</small> <strong>$100<small>/mo USD</small></strong>
+  <span class='show-full'>
+  <span class='note'><small>GitHub Sponsors <br />or annual invoicing</small></span>
+  </span>
+  </td>
+  <td><small>From</small> <strong>$1,500<small>/mo USD</small></strong>
+  <span class='show-full'>
+  <span class='note'><small>GitHub Sponsors <br />or bespoke invoicing</small></span>
+  </span></td>
 </tr>
 
-<tr>
-  <th>Purchase</th>
-  <td>&mdash;</td>
-  <td>Credit/Debit Card</td>
-</tr>
-
-  </tbody>
-  <tfoot>
+</tbody>
+<tfoot>
 
 <tr>
   <th></th>
-  <td><a class='button--solid' href='/sponsor/'>Sponsor development</span></a></td>
-  <td><a class='button--solid' href='https://store.graphile.com'>Buy <span class='fas fa-external-link-square-alt'></span></a></td>
+  <td></td>
+  <td><a class='button--outline' href='https://store.graphile.com'>Buy <span class='fas fa-external-link-square-alt'></span></a></td>
+  <td><a class='button--solid' href='https://github.com/sponsors/benjie'>Sponsor <span class='fas fa-external-link-square-alt'></span></a></td>
+  <td><a class='button--outline' href='mailto:info@graphile.org?subject=Private%20Advisor%20tier%20question'>Get in contact</a></td>
 </tr>
 
   </tfoot>
 
 </table>
 
-##### <sup>‡</sup> These features integrate deeply with PostGraphile and have been optimised for its nuances by the maintainer. If you wish to build and maintain protections yourself rather than using the Pro plugin, refer to [Running in Production](/postgraphile/production/) for information on how you might go about doing this. Purchasing the Pro plugin helps fund ongoing development and maintenance on the open source PostGraphile project.
-
-Questions, comments or feedback? Email
-<a href="mailto:info@graphile.org?subject=Pricing%20question/comment/feedback:)">info@graphile.org</a>
+##### <sup>‡</sup> These features integrate deeply with PostGraphile and have been optimized for its nuances by the maintainer. If you wish to build and maintain protections yourself rather than using the Pro plugin, refer to [Production Considerations](/postgraphile/production/) for information on how you might go about doing this. Purchasing the Pro plugin helps fund ongoing development and maintenance on the open source PostGraphile project.
 
 </div>
 </div>
@@ -216,18 +380,19 @@ Questions, comments or feedback? Email
 <div class='row'>
 <div class='text-center col-xs-12'>
 
-### PostGraphile core is OSS under the MIT license
+### PostGraphile V4 Core and PostGraphile V5 are OSS under the MIT license
 
-PostGraphile core is sufficient for many peoples needs; it's the only version
+PostGraphile V4 Core is sufficient for many peoples needs; it's the only version
 that existed for the first 2 years of the project and many people are running it
-with great success in production. No features in PostGraphile core have been
-removed or obscured, and it continues to be advanced and enhanced.
+with great success in production. No features in PostGraphile V4 Core have been
+removed or obscured, and it continues to be maintained. PostGraphile V5 is also
+open source under the MIT License and continues to be advanced and enhanced.
 
-Development and maintenance of PostGraphile core is ongoing, supported by
-contributions from the community, [professional services](/support/) contracts,
-[GitHub Sponsors](/sponsor/) and sales of commercial plugin licenses.
+Development and maintenance of PostGraphile V5 is ongoing, supported by
+contributions from the community, [professional services](/support/) contracts
+and [GitHub Sponsors](/sponsor/).
 
-### PostGraphile Pro is a commercial plugin
+### PostGraphile Pro is a commercial plugin for those who wish to scale with PostGraphile V4
 
 The Pro plugin enhances PostGraphile with additional features and is loaded
 through the standard [server plugin interface](/postgraphile/plugins/).
@@ -236,7 +401,7 @@ The Pro plugin contains features that are particularly useful to businesses
 wishing to scale their solution out using database read-replicas or protect the
 generated GraphQL API from expensive queries which may be issued by untrusted
 third parties. (Typically if the intended clients to your GraphQL API are
-first-party only then you would use a GraphQL query whitelist (e.g. persisted
+first-party only then you would use a GraphQL query allowlist (e.g. persisted
 queries) for this purpose; although the Pro features can still be helpful to
 dissuade your developers from building expensive queries!)
 
@@ -279,7 +444,8 @@ There's also a lot more information in the
 ### Is the fulfillment of the license key automated?
 
 Yes, license keys are issued automatically by our store software upon completion
-of the payment process.
+of the payment process. Sponsors can use their GitHub Sponsors account to log in
+to the store.
 
 ### Do license keys "phone home"?
 
@@ -296,23 +462,18 @@ abuse our trust.
 
 No. We run community support through our
 [Discord Server](https://discord.gg/graphile) where anyone can ask and answer
-questions about PostGraphile and the Graphile suite of tools. We offer a
-Development Support contract which includes async text support within your own
-Slack/GitHub organisation. Prices start at \$1,500 a month, with no minimum
-term. More information can be found at the
-[Development Support page](/support/).
+questions about PostGraphile and the Graphile suite of tools. Sponsors receive
+priority support from our maintainers within our Discord Server. Sponsors on the
+"Private Advisor" tier or above can enter a complimentary Development Support
+contract and receive support through their company Slack/GitHub organization.
+Prices start at \$1,500 a month, with no minimum term. More information can be
+found at the [Development Support page](/support/) or you can
+[get in contract](mailto:info@graphile.org?subject=Private%20Advisor%20tier%20question).
 
 ### I'm an enterprise user and need X, Y and Z
 
 Please [get in touch](mailto:team@graphile.org?subject=Enterprise%20enquiry) and
 we'll be happy to help!
-
-### Commercial plugins help fund development on PostGraphile
-
-Maintaining an OSS project is very (very!) time-intensive. Giving this
-maintenance work a solid commercial backing benefits hobbyist and commercial
-users alike by making the project more sustainable and helping new features and
-fixes to be developed and released faster.
 
 </div>
 </div>

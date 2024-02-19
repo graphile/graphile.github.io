@@ -237,9 +237,10 @@ their knees.
 
 **You are highly encouraged to purchase the
 [Pro Plugin [PRO]](/postgraphile/pricing/), which implements these protections
-in a deeply integrated and PostGraphile optimised way, and has the added benefit
-of helping sustain development and maintenance on the project.** You can read
-the [@graphile/pro README on npm](https://www.npmjs.com/package/@graphile/pro).
+in a deeply-integrated and PostGraphile-optimized way. Sponsors [SPON] also have
+access to the Pro Plugin and have the added benefit of helping sustain
+development and maintenance on the project.** You can read the
+[@graphile/pro README on npm](https://www.npmjs.com/package/@graphile/pro).
 
 The following details how the Pro Plugin addresses these issues, including hints
 on how you might go about solving the issues for yourself. Many of these
@@ -259,9 +260,10 @@ operations to read replicas (clones of your primary database)
   will perform any writes or not: if it's a `query` then it's read-only, if it's
   a `mutation` then it may perform writes.
 
-Using `--read-only-connection <string>` [PRO] you may give PostGraphile a
-separate connection string to use for queries, to compliment the connection
-string passed via `--connection` which will now be used only for mutations.
+Using `--read-only-connection <string>` [PRO]&nbsp;[SPON] you may give
+PostGraphile a separate connection string to use for queries, to compliment the
+connection string passed via `--connection` which will now be used only for
+mutations.
 
 (If you're using middleware, then you should use the `readOnlyConnection` option
 instead.)
@@ -275,13 +277,13 @@ instead.)
 It's unlikely that you want users to request `allUsers` and receive back
 literally all of the users in the database. More likely you want users to use
 cursor-based pagination over this connection with `first` / `after`. The Pro
-Plugin introduces the `--default-pagination-cap [int]` [PRO] option (library
-option: `defaultPaginationCap`) which enables you to enforce a pagination cap on
-all connections. Whatever number you pass will be used as the pagination cap
-(allowing requests smaller or equal to this cap to go through, and blocking
-those above it), but you can override it on a table-by-table basis using
-[smart comments](/postgraphile/smart-comments/) - in this case the
-`@paginationCap`[PRO] smart comment.
+Plugin introduces the `--default-pagination-cap [int]` [PRO]&nbsp;[SPON] option
+(library option: `defaultPaginationCap`) which enables you to enforce a
+pagination cap on all connections. Whatever number you pass will be used as the
+pagination cap (allowing requests smaller or equal to this cap to go through,
+and blocking those above it), but you can override it on a table-by-table basis
+using [smart comments](/postgraphile/smart-comments/) - in this case the
+`@paginationCap`[PRO]&nbsp;[SPON] smart comment.
 
 ```sql
 comment on table users is
@@ -292,18 +294,18 @@ comment on table users is
 
 Most GraphQL queries tend to be only a few levels deep, queries like the deep
 one at the top of this article are generally not required. You may use
-`--graphql-depth-limit [int]` [PRO] to limit the depth of any GraphQL queries
-that hit PostGraphile - any deeper than this will be discarded during query
-validation.
+`--graphql-depth-limit [int]` [PRO]&nbsp;[SPON] to limit the depth of any
+GraphQL queries that hit PostGraphile - any deeper than this will be discarded
+during query validation.
 
 #### [EXPERIMENTAL] GraphQL cost limit
 
 The most powerful way of preventing DOS is to limit the cost of GraphQL queries
 that may be executed against your GraphQL server. The Pro Plugin contains a
 early implementation of this technique with heuristically estimated costs. You
-may enable a cost limit with `--graphql-cost-limit [int]` [PRO] and the
-calculated cost of any GraphQL queries will be made available on `meta` field in
-the GraphQL payload.
+may enable a cost limit with `--graphql-cost-limit [int]` [PRO]&nbsp;[SPON] and
+the calculated cost of any GraphQL queries will be made available on `meta`
+field in the GraphQL payload.
 
 If your GraphQL query is seen to be too expensive, here's some techniques to
 bring the calculated cost down:

@@ -54,9 +54,14 @@ const Nav = ({ sections, pages, location }) => (
   </aside>
 );
 
-const tag = (name, label = name, noLink = false) =>
+const tag = (
+  name,
+  label = name,
+  noLink = false,
+  linkTarget = "/postgraphile/pricing/"
+) =>
   `<${
-    noLink ? "span" : "a href='/postgraphile/pricing/'"
+    noLink ? "span" : "a href='" + linkTarget + "'"
   } class="plan-${name}"><span class='first-letter'>${
     label[0]
   }</span><span class='rest'>${label.substr(1)}</span></${
@@ -65,6 +70,7 @@ const tag = (name, label = name, noLink = false) =>
 
 function processHTML(html, noLink) {
   return html
+    .replace(/\[SPON\]/g, tag("sponsor", "spon", noLink, "/sponsor/"))
     .replace(/\[SUPPORTER\]/g, tag("supporter", "supporter", noLink))
     .replace(/\[PRO\]/g, tag("pro", "pro", noLink))
     .replace(/\[ENTERPRISE\]/g, tag("enterprise", "enterprise", noLink))
