@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="225"
+   height="225"
+   viewBox="0 0 225 225"
+   fill="none"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="sylvera.svg"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="3.316396"
+     inkscape:cx="95.434925"
+     inkscape:cy="74.47844"
+     inkscape:window-width="1904"
+     inkscape:window-height="1297"
+     inkscape:window-x="38"
+     inkscape:window-y="45"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg1" />
+  <defs
+     id="defs1">
+    <clipPath
+       id="clip0_31_706">
+      <rect
+         width="217"
+         height="55.6903"
+         fill="#ffffff"
+         id="rect1"
+         x="0"
+         y="0" />
+    </clipPath>
+    <clipPath
+       id="clip0_31_706-3">
+      <rect
+         width="217"
+         height="55.6903"
+         fill="#ffffff"
+         id="rect1-6"
+         x="0"
+         y="0" />
+    </clipPath>
+  </defs>
+  <g
+     id="dark-logo-8"
+     clip-path="url(#clip0_31_706-3)"
+     transform="matrix(3.9891296,0,0,3.9891296,17.182423,1.3441753)">
+    <g
+       id="g2">
+      <path
+         id="Vector_8-1"
+         d="m 7.9656,23.8697 c -0.00483,1.3402 0.15804,2.6758 0.48482,3.9758 0.88396,3.4185 2.88068,6.4464 5.67608,8.6074 2.7953,2.1609 6.2306,3.3323 9.7654,3.3296 V 47.739 H 23.2762 C 17.7407,47.5992 12.4259,45.5424 8.24104,41.9206 4.05615,38.2988 1.26127,33.337 0.334554,27.8842 0.109882,26.5709 -0.00203449,25.2408 2.79919e-5,23.9084 -6.08764e-4,20.7741 0.616906,17.6703 1.8173,14.7744 3.01769,11.8784 4.77745,9.24706 6.99608,7.03052 9.2147,4.81399 11.8487,3.05571 14.7477,1.85611 17.6468,0.6565 20.754,0.0390624 23.8919,0.0390625 V 7.99551 H 23.2762 C 19.1666,8.15672 15.2785,9.89873 12.425,12.8572 9.57155,15.8157 7.9737,19.7616 7.9656,23.8697 Z"
+         fill="#01311d" />
+      <path
+         id="Vector_9-4"
+         d="m 47.7883,31.8211 c 0,3.1346 -0.6181,6.2385 -1.819,9.1344 -1.2009,2.896 -2.9612,5.5273 -5.1802,7.7438 -2.219,2.2165 -4.8533,3.9747 -7.7526,5.1742 -2.8993,1.1996 -6.0067,1.817 -9.1449,1.817 V 47.734 h 0.6157 c 4.1155,-0.1602 8.0091,-1.9057 10.8644,-4.8705 2.8552,-2.9649 4.4504,-6.9188 4.4511,-11.0327 0.0048,-1.3402 -0.1581,-2.6758 -0.4849,-3.9758 -0.8852,-3.4156 -2.8811,-6.4408 -5.6742,-8.6005 -2.7931,-2.1597 -6.2253,-3.3316 -9.7576,-3.3317 V 7.95667 h 0.6158 c 5.5395,0.14066 10.8577,2.20063 15.0439,5.82723 4.1862,3.6266 6.9798,8.5941 7.9025,14.0518 0.2204,1.3169 0.3274,2.6503 0.32,3.9854 z"
+         fill="#3acb5a" />
+    </g>
+  </g>
+</svg>
