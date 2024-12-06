@@ -23,7 +23,7 @@
       "description": "The next-generation planning and execution engine for GraphQL. Grafast understands GraphQL and (with your help) your business logic; this allows it to orchestrate a GraphQL request's data requirements in an extremely efficient manner, leading to excellent performance, reduced server load, and happier customers.",
       "webpageUrl": {
         "url": "https://grafast.org/",
-        "wellKnown": ""
+        "wellKnown": "https://grafast.org/.well-known/funding-manifest-urls"
       },
       "repositoryUrl": {
         "url": "https://github.com/graphile/crystal/tree/main/grafast/grafast",
@@ -44,7 +44,7 @@
       "description": "A highly performant GraphQL server for Node.js, powered by Grafast.",
       "webpageUrl": {
         "url": "https://grafast.org/grafserv/",
-        "wellKnown": ""
+        "wellKnown": "https://grafast.org/.well-known/funding-manifest-urls"
       },
       "repositoryUrl": {
         "url": "https://github.com/graphile/crystal/tree/main/grafast/grafserv",
@@ -65,7 +65,7 @@
       "description": "graphile-build provides a framework to build extensible GraphQL APIs by combining plugins. Each plugin typically has its own small purpose and by combining these plugins together you get a large, powerful, and manageable GraphQL schema. Plugins enable you to make broad changes to your GraphQL schema with minimal code, and because you're changing your schema in broad ways it helps to guarantee consistency.",
       "webpageUrl": {
         "url": "https://build.graphile.org/",
-        "wellKnown": ""
+        "wellKnown": "https://build.graphile.org/.well-known/funding-manifest-urls"
       },
       "repositoryUrl": {
         "url": "https://github.com/graphile/crystal/tree/main/graphile-build/graphile-build",
@@ -128,7 +128,7 @@
       "description": "A group of useful Graphile utilities, including graphile-config which provides a standard plugin interace and helpers which can be used across the entire Graphile suite; graphile-export which exports a GraphQL Schema (or other code) as executable JavaScript; tamedevil a module to help tame eval; and pg-sql2 and pg-introspection.",
       "webpageUrl": {
         "url": "https://star.graphile.org/",
-        "wellKnown": ""
+        "wellKnown": "https://star.graphile.org/.well-known/funding-manifest-urls"
       },
       "repositoryUrl": {
         "url": "https://github.com/graphile/crystal/tree/main/utils",
@@ -170,7 +170,7 @@
       "description": "A Grafast-enhanced distribution of GraphiQL.",
       "webpageUrl": {
         "url": "https://grafast.org/ruru",
-        "wellKnown": ""
+        "wellKnown": "https://grafast.org/.well-known/funding-manifest-urls"
       },
       "repositoryUrl": {
         "url": "https://github.com/graphile/crystal/tree/main/grafast/ruru",
