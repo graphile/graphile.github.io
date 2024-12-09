@@ -191,7 +191,7 @@
           "guid": "production",
           "status": "active",
           "name": "Production Sponsor",
-          "description": "Access to private security announcements. Free access to @graphile/pro. Your avatar featured on our website, plus benefits of lower tiers", // Optional. Any additional description or instructions for the funding plan.
+          "description": "Access to private security announcements. Free access to @graphile/pro. Your avatar featured on our website, plus benefits of lower tiers",
           "amount": 100,
           "currency": "USD",
           "frequency": "monthly",
