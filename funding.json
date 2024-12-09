@@ -27,7 +27,7 @@
       },
       "repositoryUrl": {
         "url": "https://github.com/graphile/crystal/tree/main/grafast/grafast",
-        "wellKnown": ""
+        "wellKnown": "https://github.com/graphile/crystal/tree/main/grafast/grafast/.well-known/funding-manifest-urls"
       },
       "licenses": ["spdx:MIT"],
       "tags": [
@@ -48,7 +48,7 @@
       },
       "repositoryUrl": {
         "url": "https://github.com/graphile/crystal/tree/main/grafast/grafserv",
-        "wellKnown": ""
+        "wellKnown": "https://github.com/graphile/crystal/tree/main/grafast/grafserv/.well-known/funding-manifest-urls"
       },
       "licenses": ["spdx:MIT"],
       "tags": [
@@ -69,7 +69,7 @@
       },
       "repositoryUrl": {
         "url": "https://github.com/graphile/crystal/tree/main/graphile-build/graphile-build",
-        "wellKnown": ""
+        "wellKnown": "https://github.com/graphile/crystal/tree/main/graphile-build/graphile-build/.well-known/funding-manifest-urls"
       },
       "licenses": ["spdx:MIT"],
       "tags": [
@@ -132,7 +132,7 @@
       },
       "repositoryUrl": {
         "url": "https://github.com/graphile/crystal/tree/main/utils",
-        "wellKnown": ""
+        "wellKnown": "https://github.com/graphile/crystal/tree/main/utils/.well-known/funding-manifest-urls"
       },
       "licenses": ["spdx:MIT"],
       "tags": [
@@ -174,7 +174,7 @@
       },
       "repositoryUrl": {
         "url": "https://github.com/graphile/crystal/tree/main/grafast/ruru",
-        "wellKnown": ""
+        "wellKnown": "https://github.com/graphile/crystal/tree/main/grafast/ruru/.well-known/funding-manifest-urls"
       },
       "licenses": ["spdx:MIT"],
       "tags": [
