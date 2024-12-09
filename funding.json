@@ -123,9 +123,9 @@
       ] // Required. Up to 10 general tags describing the project. Lowercase-alphanumeric-dashes (max 32 chars). eg: ["programming", "developer-tools"]. For reference, see tags.txt
     },
     {
-      "guid": "graphile-utils",
-      "name": "Graphile Utils",
-      "description": "A group of useful Graphile utilities, including graphile-config which provides a standard plugin interace and helpers which can be used across the entire Graphile suite; graphile-export which exports a GraphQL Schema (or other code) as executable JavaScript; tamedevil a module to help tame eval; and pg-sql2 and pg-introspection.",
+      "guid": "graphile-star",
+      "name": "Graphile Star",
+      "description": "A group of useful Graphile utilities, including graphile-config which provides a standard plugin interface and helpers which can be used across the entire Graphile suite; graphile-export which exports a GraphQL Schema (or other code) as executable JavaScript; tamedevil a module to help tame eval; and pg-sql2 and pg-introspection.",
       "webpageUrl": {
         "url": "https://star.graphile.org/",
         "wellKnown": "https://star.graphile.org/.well-known/funding-manifest-urls"
@@ -135,13 +135,7 @@
         "wellKnown": "https://github.com/graphile/crystal/tree/main/utils/.well-known/funding-manifest-urls"
       },
       "licenses": ["spdx:MIT"],
-      "tags": [
-        "developer-tools",
-        "development",
-        "programming",
-        "software-engineering",
-        "web-development"
-      ]
+      "tags": ["developer-tools", "development"]
     },
     {
       "guid": "postgraphile",
