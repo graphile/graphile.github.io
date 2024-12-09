@@ -143,11 +143,11 @@
       "description": "An incredibly low-effort way to build a well structured and high-performance GraphQL API backed primarily by a PostgreSQL database. Our main focusses are performance, automatic best-practices and customisability/extensibility. Use this if you have a PostgreSQL database and you want to use it as the source of truth for an auto-generated GraphQL API (which you can still make significant changes to).",
       "webpageUrl": {
         "url": "https://postgraphile.org/",
-        "wellKnown": ""
+        "wellKnown": "https://postgraphile.org/.well-known/funding-manifest-urls"
       },
       "repositoryUrl": {
         "url": "https://github.com/graphile/crystal/tree/main/postgraphile/postgraphile",
-        "wellKnown": ""
+        "wellKnown": "https://github.com/graphile/crystal/tree/main/postgraphile/postgraphile/.well-known/funding-manifest-urls"
       },
       "licenses": ["spdx:MIT"],
       "tags": [
