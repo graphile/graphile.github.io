@@ -1,0 +1,243 @@
+{
+  "version": "v1.0.0",
+  "entity": {
+    "type": "organisation",
+    "role": "owner",
+    "name": "Graphile",
+    "email": "fundingjson@graphile.com",
+    "description": "Devtools for Node.js, PostgreSQL and GraphQL focussed on development and execution efficiency.",
+    "webpageUrl": {
+      "url": "https://graphile.org"
+    },
+    "projects": [
+      {
+        "guid": "grafast",
+        "name": "Grafast",
+        "description": "The next-generation planning and execution engine for GraphQL. Grafast understands GraphQL and (with your help) your business logic; this allows it to orchestrate a GraphQL request's data requirements in an extremely efficient manner, leading to excellent performance, reduced server load, and happier customers.",
+        "webpageUrl": {
+          "url": "https://grafast.org/",
+          "wellKnown": "https://grafast.org/.well-known/funding-manifest-urls"
+        },
+        "repositoryUrl": {
+          "url": "https://github.com/graphile/crystal/tree/main/grafast/grafast",
+          "wellKnown": "https://github.com/graphile/crystal/tree/main/grafast/grafast/.well-known/funding-manifest-urls"
+        },
+        "licenses": ["spdx:MIT"],
+        "tags": [
+          "developer-tools",
+          "development",
+          "programming",
+          "software-engineering",
+          "web-development"
+        ]
+      },
+      {
+        "guid": "grafserv",
+        "name": "grafserv",
+        "description": "A highly performant GraphQL server for Node.js, powered by Grafast.",
+        "webpageUrl": {
+          "url": "https://grafast.org/grafserv/",
+          "wellKnown": "https://grafast.org/.well-known/funding-manifest-urls"
+        },
+        "repositoryUrl": {
+          "url": "https://github.com/graphile/crystal/tree/main/grafast/grafserv",
+          "wellKnown": "https://github.com/graphile/crystal/tree/main/grafast/grafserv/.well-known/funding-manifest-urls"
+        },
+        "licenses": ["spdx:MIT"],
+        "tags": [
+          "developer-tools",
+          "development",
+          "programming",
+          "software-engineering",
+          "web-development"
+        ]
+      },
+      {
+        "guid": "graphile-build",
+        "name": "Graphile Build",
+        "description": "graphile-build provides a framework to build extensible GraphQL APIs by combining plugins. Each plugin typically has its own small purpose and by combining these plugins together you get a large, powerful, and manageable GraphQL schema. Plugins enable you to make broad changes to your GraphQL schema with minimal code, and because you're changing your schema in broad ways it helps to guarantee consistency.",
+        "webpageUrl": {
+          "url": "https://build.graphile.org/",
+          "wellKnown": "https://build.graphile.org/.well-known/funding-manifest-urls"
+        },
+        "repositoryUrl": {
+          "url": "https://github.com/graphile/crystal/tree/main/graphile-build/graphile-build",
+          "wellKnown": "https://github.com/graphile/crystal/tree/main/graphile-build/graphile-build/.well-known/funding-manifest-urls"
+        },
+        "licenses": ["spdx:MIT"],
+        "tags": [
+          "developer-tools",
+          "development",
+          "programming",
+          "software-engineering",
+          "web-development"
+        ]
+      },
+      {
+        "guid": "graphile-migrate",
+        "name": "Graphile Migrate",
+        "description": "Opinionated SQL-powered productive roll-forward migration tool for PostgreSQL.",
+        "webpageUrl": {
+          "url": "https://github.com/graphile/migrate",
+          "wellKnown": "https://github.com/graphile/migrate/.well-known/funding-manifest-urls"
+        },
+        "repositoryUrl": {
+          "url": "https://github.com/graphile/migrate",
+          "wellKnown": "https://github.com/graphile/migrate/.well-known/funding-manifest-urls"
+        },
+        "licenses": ["spdx:MIT"],
+        "tags": [
+          "developer-tools",
+          "development",
+          "programming",
+          "software-engineering",
+          "web-development"
+        ]
+      },
+      {
+        "guid": "graphile-star",
+        "name": "Graphile Star",
+        "description": "A collection of utility modules including: graphile-config (standardized plugins and presets infrastructure); graphile-export (export a dynamic GraphQL Schema as executable JavaScript); tamedevil (makes dealing with `eval` safer); pg-sql2 (SQLi-resistant and speedy SQL templating in Node.js) and pg-introspection.",
+        "webpageUrl": {
+          "url": "https://star.graphile.org/",
+          "wellKnown": "https://star.graphile.org/.well-known/funding-manifest-urls"
+        },
+        "repositoryUrl": {
+          "url": "https://github.com/graphile/crystal/tree/main/utils",
+          "wellKnown": "https://github.com/graphile/crystal/tree/main/utils/.well-known/funding-manifest-urls"
+        },
+        "licenses": ["spdx:MIT"],
+        "tags": ["developer-tools", "development"]
+      },
+      {
+        "guid": "graphile-worker",
+        "name": "Graphile Worker",
+        "description": "Node.js job queue powered by PostgreSQL - schedule jobs (sending emails, converting images, generating PDFs, etc) in the background so your website and API requests don't have to wait.",
+        "webpageUrl": {
+          "url": "https://worker.graphile.org/",
+          "wellKnown": "https://worker.graphile.org/.well-known/funding-manifest-urls"
+        },
+        "repositoryUrl": {
+          "url": "https://github.com/graphile/worker",
+          "wellKnown": "https://github.com/graphile/worker/.well-known/funding-manifest-urls"
+        },
+        "licenses": ["spdx:MIT"],
+        "tags": [
+          "developer-tools",
+          "development",
+          "programming",
+          "software-engineering",
+          "web-development"
+        ]
+      },
+      {
+        "guid": "postgraphile",
+        "name": "PostGraphile",
+        "description": "An incredibly low-effort way to build a well structured and high-performance GraphQL API backed primarily by a PostgreSQL database. Our main focusses are performance, automatic best-practices and customisability/extensibility. Use this if you have a PostgreSQL database and you want to use it as the source of truth for an auto-generated GraphQL API (which you can still make significant changes to).",
+        "webpageUrl": {
+          "url": "https://postgraphile.org/",
+          "wellKnown": "https://postgraphile.org/.well-known/funding-manifest-urls"
+        },
+        "repositoryUrl": {
+          "url": "https://github.com/graphile/crystal/tree/main/postgraphile/postgraphile",
+          "wellKnown": "https://github.com/graphile/crystal/tree/main/postgraphile/postgraphile/.well-known/funding-manifest-urls"
+        },
+        "licenses": ["spdx:MIT"],
+        "tags": [
+          "developer-tools",
+          "development",
+          "programming",
+          "software-engineering",
+          "web-development"
+        ]
+      },
+      {
+        "guid": "ruru",
+        "name": "ruru",
+        "description": "A Grafast-enhanced distribution of GraphiQL.",
+        "webpageUrl": {
+          "url": "https://grafast.org/ruru",
+          "wellKnown": "https://grafast.org/.well-known/funding-manifest-urls"
+        },
+        "repositoryUrl": {
+          "url": "https://github.com/graphile/crystal/tree/main/grafast/ruru",
+          "wellKnown": "https://github.com/graphile/crystal/tree/main/grafast/ruru/.well-known/funding-manifest-urls"
+        },
+        "licenses": ["spdx:MIT"],
+        "tags": [
+          "developer-tools",
+          "development",
+          "programming",
+          "software-engineering",
+          "web-development"
+        ]
+      }
+    ],
+    "funding": {
+      "channels": [
+        {
+          "guid": "github-sponsors",
+          "type": "payment-provider",
+          "description": "We prefer GitHub sponsors due to their low fees. Pay by credit card as an individual or organisation."
+        },
+        {
+          "guid": "bespoke",
+          "type": "bank",
+          "description": "Bespoke invoicing arrangements for larger sponsor amounts (USD 1500 or above). Please get in touch."
+        }
+      ],
+      "plans": [
+        {
+          "guid": "production",
+          "status": "active",
+          "name": "Production Sponsor",
+          "description": "Access to private security announcements. Free access to @graphile/pro. Your avatar featured on our website, plus benefits of lower tiers",
+          "amount": 100,
+          "currency": "USD",
+          "frequency": "monthly",
+          "channels": ["github-sponsors"]
+        },
+        {
+          "guid": "featured",
+          "status": "active",
+          "name": "Featured Sponsor",
+          "description": "Your name and avatar featured in the READMEs of Graphile projects, plus benefits of lower tiers",
+          "amount": 500,
+          "currency": "USD",
+          "frequency": "monthly",
+          "channels": ["github-sponsors"]
+        },
+        {
+          "guid": "advisor",
+          "status": "active",
+          "name": "Private Advisor",
+          "description": "A complementary support contract is offered (more detail on request), plus benefits of lower tiers",
+          "amount": 1500,
+          "currency": "USD",
+          "frequency": "monthly",
+          "channels": ["github-sponsors"]
+        },
+        {
+          "guid": "bespoke-advisor",
+          "status": "active",
+          "name": "Private Advisor",
+          "description": "A complementary support contract is offered (more detail on request), plus benefits of lower tiers",
+          "amount": 4500,
+          "currency": "USD",
+          "frequency": "quarterly",
+          "channels": ["bespoke"]
+        },
+        {
+          "guid": "bespoke",
+          "status": "active",
+          "name": "Bespoke Agreement",
+          "description": "A complementary support or consultancy contract can be offered (more detail on request), plus benefits of lower tiers",
+          "amount": 0,
+          "currency": "USD",
+          "frequency": "other",
+          "channels": ["bespoke"]
+        }
+      ]
+    }
+  }
+}
