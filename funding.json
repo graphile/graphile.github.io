@@ -5,7 +5,7 @@
     "role": "owner",
     "name": "Graphile",
     "email": "fundingjson@graphile.com",
-    "description": "At Graphile we love GraphQL so much we named ourselves for our love of it!",
+    "description": "Devtools for Node.js, PostgreSQL and GraphQL focussed on development and execution efficiency.",
     "webpageUrl": {
       "url": "https://graphile.org"
     },
@@ -97,7 +97,7 @@
       {
         "guid": "graphile-star",
         "name": "Graphile Star",
-        "description": "A group of useful Graphile utilities, including graphile-config which provides a standard plugin interface and helpers which can be used across the entire Graphile suite; graphile-export which exports a GraphQL Schema (or other code) as executable JavaScript; tamedevil a module to help tame eval; and pg-sql2 and pg-introspection.",
+        "description": "A collection of utility modules including: graphile-config (standardized plugins and presets infrastructure); graphile-export (export a dynamic GraphQL Schema as executable JavaScript); tamedevil (makes dealing with `eval` safer); pg-sql2 (SQLi-resistant and speedy SQL templating in Node.js) and pg-introspection.",
         "webpageUrl": {
           "url": "https://star.graphile.org/",
           "wellKnown": "https://star.graphile.org/.well-known/funding-manifest-urls"
@@ -112,7 +112,7 @@
       {
         "guid": "graphile-worker",
         "name": "Graphile Worker",
-        "description": "Job queue for PostgreSQL running on Node.js - allows you to run jobs (e.g. sending emails, performing calculations, generating PDFs, etc) in the background so that your HTTP response/application code is not held up. Can be used with any PostgreSQL-backed application.",
+        "description": "Node.js job queue powered by PostgreSQL - schedule jobs (sending emails, converting images, generating PDFs, etc) in the background so your website and API requests don't have to wait.",
         "webpageUrl": {
           "url": "https://worker.graphile.org/",
           "wellKnown": "https://worker.graphile.org/.well-known/funding-manifest-urls"
