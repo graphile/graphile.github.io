@@ -225,7 +225,7 @@
         "description": "A complementary support contract is offered (more detail on request), plus benefits of lower tiers",
         "amount": 4500,
         "currency": "USD",
-        "frequency": "quarterly",
+        "frequency": "other",
         "channels": ["bespoke"]
       },
       {
