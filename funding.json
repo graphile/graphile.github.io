@@ -16,8 +16,8 @@
       "name": "Grafast",
       "description": "The next-generation planning and execution engine for GraphQL. Grafast understands GraphQL and (with your help) your business logic; this allows it to orchestrate a GraphQL request's data requirements in an extremely efficient manner, leading to excellent performance, reduced server load, and happier customers.",
       "webpageUrl": {
-        "url": "https://grafast.org/",
-        "wellKnown": "https://grafast.org/.well-known/funding-manifest-urls"
+        "url": "https://www.grafast.org/",
+        "wellKnown": "https://www.grafast.org/.well-known/funding-manifest-urls"
       },
       "repositoryUrl": {
         "url": "https://github.com/graphile/crystal/tree/main/grafast/grafast",
@@ -37,8 +37,8 @@
       "name": "grafserv",
       "description": "A highly performant GraphQL server for Node.js, powered by Grafast.",
       "webpageUrl": {
-        "url": "https://grafast.org/grafserv/",
-        "wellKnown": "https://grafast.org/.well-known/funding-manifest-urls"
+        "url": "https://www.grafast.org/grafserv/",
+        "wellKnown": "https://www.grafast.org/.well-known/funding-manifest-urls"
       },
       "repositoryUrl": {
         "url": "https://github.com/graphile/crystal/tree/main/grafast/grafserv",
@@ -136,8 +136,8 @@
       "name": "PostGraphile",
       "description": "An incredibly low-effort way to build a well structured and high-performance GraphQL API backed primarily by a PostgreSQL database. Our main focusses are performance, automatic best-practices and customisability/extensibility. Use this if you have a PostgreSQL database and you want to use it as the source of truth for an auto-generated GraphQL API (which you can still make significant changes to).",
       "webpageUrl": {
-        "url": "https://postgraphile.org/",
-        "wellKnown": "https://postgraphile.org/.well-known/funding-manifest-urls"
+        "url": "https://www.postgraphile.org/",
+        "wellKnown": "https://www.postgraphile.org/.well-known/funding-manifest-urls"
       },
       "repositoryUrl": {
         "url": "https://github.com/graphile/crystal/tree/main/postgraphile/postgraphile",
@@ -157,8 +157,8 @@
       "name": "ruru",
       "description": "A Grafast-enhanced distribution of GraphiQL.",
       "webpageUrl": {
-        "url": "https://grafast.org/ruru",
-        "wellKnown": "https://grafast.org/.well-known/funding-manifest-urls"
+        "url": "https://www.grafast.org/ruru",
+        "wellKnown": "https://www.grafast.org/.well-known/funding-manifest-urls"
       },
       "repositoryUrl": {
         "url": "https://github.com/graphile/crystal/tree/main/grafast/ruru",
