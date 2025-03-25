@@ -3,7 +3,7 @@ layout: post
 title: "Major Grafast beta: three down, one to go"
 date: 2025-03-24T17:00:00Z
 path: /news/20250324-major-grafast-beta/
-thumbnail: /images/news/coder.svg
+thumbnail: /images/news/grafast-wordmark-2023.svg
 thumbnailAlt: "A developer looks at her monitor while holding a cup of tea."
 tags: announcements, releases, grafast, postgraphile
 noToc: false
@@ -32,9 +32,6 @@ these, eradicating eval, is now addressed with the launch of
 `postgraphile@5.0.0-beta.39`). Let's look into what that has meant.
 
 ## Input evaluation moved to runtime
-
-_Ref:
-[https://github.com/graphile/crystal/issues/2060](https://github.com/graphile/crystal/issues/2060)_
 
 Since the beginning, Gra*fast* has had the ability to add plan resolvers not
 just to fields, not just to arguments, but also to input object fields
@@ -218,10 +215,11 @@ When writing your own step classes:
   did not assert that you were actually dealing with a unary execution value.
 - If you were using `@stream` (incremental delivery) and had written your own
   `Step` class with stream support, first of all: amazing! Please let me know
-  you did that! Secondly, you'll need to either rename your `stream` function to
-  `execute` or merge its code into your existing `execute` method if you have
-  one. It turns out there wasn't much point in separating them, and you can
-  confer a lot of benefit from merging them.
+  you did that (_via email or [Discord](https://discord.gg/graphile)_)!
+  Secondly, you'll need to either rename your `stream` function to `execute` or
+  merge its code into your existing `execute` method if you have one. It turns
+  out there wasn't much point in separating them, and you can confer a lot of
+  benefit from merging them.
 
 ### Other Gra*fast* improvements
 
@@ -237,3 +235,21 @@ When writing your own step classes:
   allowing returning connection-capable steps in list positions
 - Optimization to Gra*fast*'s internal execution values, which are used heavily
   in hot paths.
+
+### Thank you Sponsors
+
+Gra*fast* and PostGraphile are crowd-funded open-source software, they rely on
+crowd-sourced funding from individuals and companies to keep advancing.
+
+If your company benefits from Gra*fast*, PostGraphile or the wider Graphile
+suite, you should consider asking them to fund our work. By significantly
+reducing the amount of work needed to achieve business goals and reducing
+running costs, Graphile's software results in huge time and money savings for
+users. We encourage companies to contribute a portion of these savings back,
+enabling the projects to advance more rapidly, and result in even greater
+savings for your company.
+[Find out more about sponsorship here on our website](/sponsor/).
+
+<div class="flex flex-wrap justify-around">
+<img alt="Cartoon Benjie and Jem send cartoon hearts up into the sky" src="/images/news/postgraphile-thankyou.svg" style="max-height: 300px" />
+</div>
