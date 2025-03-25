@@ -7,7 +7,7 @@
    version="1.1"
    id="svg6581"
    sodipodi:docname="postgraphile-thankyou.svg"
-   inkscape:version="1.2.1 (9c6d41e4, 2022-07-14)"
+   inkscape:version="1.4 (e7c3feb1, 2024-10-09)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -24,13 +24,13 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
-     inkscape:zoom="1.2528221"
-     inkscape:cx="153.254"
-     inkscape:cy="284.55756"
-     inkscape:window-width="1362"
+     inkscape:zoom="0.92287575"
+     inkscape:cx="152.7833"
+     inkscape:cy="283.8952"
+     inkscape:window-width="1376"
      inkscape:window-height="935"
      inkscape:window-x="1684"
-     inkscape:window-y="444"
+     inkscape:window-y="416"
      inkscape:window-maximized="0"
      inkscape:current-layer="svg6581" />
   <path
@@ -187,7 +187,7 @@
      transform="translate(-388.06186 -183.59792)"
      fill="#2f2e41"
      id="path6559"
-     style="fill:#cb6425;fill-opacity:1" />
+     style="fill:#7c2dd3;fill-opacity:1" />
   <path
      d="M677.66066,402.884a17.031,17.031,0,0,1-27.09993-20.63521l.1478-.19411a17.031,17.031,0,0,1,26.94792,20.82613Z"
      transform="translate(-388.06186 -183.59792)"
@@ -198,11 +198,11 @@
      transform="translate(-388.06186 -183.59792)"
      fill="#2f2e41"
      id="path6563"
-     style="fill:#cb6425;fill-opacity:1" />
+     style="fill:#7c2dd3;fill-opacity:1" />
   <path
      d="M667.64689,373.13142l12.05584,6.83116a14.12778,14.12778,0,0,1,5.32688,19.2565l0,0a21.929,21.929,0,0,1-28.0394,9.20182l11.01643-9.72506-14.94451,7.61439-3.19079-1.808C665.899,401.588,668.99079,389.0156,667.64689,373.13142Z"
      transform="translate(-388.06186 -183.59792)"
      fill="#2f2e41"
      id="path6567"
-     style="fill:#cb6425;fill-opacity:1" />
+     style="fill:#7c2dd3;fill-opacity:1" />
 </svg>
