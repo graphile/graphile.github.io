@@ -1,4 +1,200 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Graphile News]]></title><description><![CDATA[Community funded open source utilities to build powerful, performant and extensible applications rapidly]]></description><link>https://graphile.org</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 23 Dec 2024 10:17:26 GMT</lastBuildDate><item><title><![CDATA[PostGraphile V5 public beta — get involved!]]></title><description><![CDATA[Announced 2023-08-03 by the Graphile Team We need help writing automated tests, validating it works in your real-world
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Graphile News]]></title><description><![CDATA[Community funded open source utilities to build powerful, performant and extensible applications rapidly]]></description><link>https://graphile.org</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 25 Mar 2025 10:35:17 GMT</lastBuildDate><item><title><![CDATA[Major Grafast beta: three down, one to go]]></title><description><![CDATA[Announced 2025-03-24 by Benjie ✅⤵️ Global dependencies - solved via "unary" steps ✅⤵️ Early exit - solved via "flags" ✅🎉 Eradicating eval…]]></description><link>https://graphile.org/news/20250324-major-grafast-beta/</link><guid isPermaLink="false">https://graphile.org/news/20250324-major-grafast-beta/</guid><pubDate>Mon, 24 Mar 2025 17:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;Announced 2025-03-24 by Benjie&lt;/em&gt;&lt;/p&gt;
+&lt;p class=&apos;intro&apos;&gt;
+In the first Gra&lt;em&gt;fast&lt;/em&gt; Working Group, we outlined 4 &lt;em&gt;major&lt;/em&gt; issues in Gra&lt;em&gt;fast&lt;/em&gt;
+  that needed to be addressed before we could think about general release. With
+  this release, 3 of these are now complete!
+&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;✅⤵️ Global dependencies - solved via &quot;unary&quot; steps&lt;/li&gt;
+&lt;li&gt;✅⤵️ Early exit - solved via &quot;flags&quot;&lt;/li&gt;
+&lt;li&gt;✅🎉 &lt;strong&gt;Eradicating eval - this release!&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;🤔🔜 Polymorphism&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;After 3 months of gruelling work, we&apos;re proud to announce that the third of
+these, eradicating eval, is now addressed with the launch of
+&lt;code class=&quot;language-text&quot;&gt;grafast@0.1.1-beta.21&lt;/code&gt; (used as the core execution engine in
+&lt;code class=&quot;language-text&quot;&gt;postgraphile@5.0.0-beta.39&lt;/code&gt;). Let&apos;s look into what that has meant.&lt;/p&gt;
+&lt;h2 id=&quot;input-evaluation-moved-to-runtime&quot;&gt;&lt;a href=&quot;#input-evaluation-moved-to-runtime&quot; aria-label=&quot;input evaluation moved to runtime permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Input evaluation moved to runtime&lt;/h2&gt;
+&lt;p&gt;Since the beginning, Gra&lt;em&gt;fast&lt;/em&gt; has had the ability to add plan resolvers not
+just to fields, not just to arguments, but also to input object fields
+(including those within lists). This made Gra&lt;em&gt;fast&lt;/em&gt;&apos;s planning really ergonomic
+for things like nested filters, which was great for PostGraphile! But it turns
+out it&apos;s really problematic for certain shapes of input — planning would put
+constraints on the variables compatible with the plan, requiring potentially
+unlimited numbers of operation plans needing to be built for the same GraphQL
+document. Worse: for large input trees involving lists, the number of steps
+generated could be overwhelming, resulting in the deduplication phase taking
+excessive time.&lt;/p&gt;
+&lt;p&gt;One particular user example that could cause 4 minutes of planning time from
+just a 100kB input made it clear that we had overreached with using plan
+resolvers too deep into inputs; so we&apos;ve scaled it back so that you can only add
+plan resolvers to fields and arguments, you can no longer attach &lt;code class=&quot;language-text&quot;&gt;applyPlan&lt;/code&gt; or
+&lt;code class=&quot;language-text&quot;&gt;inputPlan&lt;/code&gt; to input object fields. This was something that we used a lot
+internally (hence the huge time investment migrating away!), but very few people
+(no-one?) used externally so it was ripe for removal.&lt;/p&gt;
+&lt;p&gt;That problematic query that took 4 minutes to plan before? It now takes 1.1ms to
+plan, yielding a 200,000x speedup!&lt;/p&gt;
+&lt;h3 id=&quot;what-does-this-mean-for-my-codebase&quot;&gt;&lt;a href=&quot;#what-does-this-mean-for-my-codebase&quot; aria-label=&quot;what does this mean for my codebase permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;What does this mean for my codebase?&lt;/h3&gt;
+&lt;p&gt;Hopefully good things! Please update to the latest &lt;code class=&quot;language-text&quot;&gt;@beta&lt;/code&gt; of all the
+PostGraphile and/or Gra&lt;em&gt;fast&lt;/em&gt; related modules you&apos;re using (including plugins)
+and for most users everything should work as before, only better.&lt;/p&gt;
+&lt;p&gt;I&apos;ve outlined some of the most common changes you may need to make below, but if
+you are impacted by any other changes, please ask for help in the chat — AFAIK
+most of the other things that have had significant changes are used by almost
+no-one except me, so it doesn&apos;t make sense for me to invest time documenting it
+here. If you&apos;re curious, many items are documented in both the changelogs and
+the pull requests where the changes occurred.&lt;/p&gt;
+&lt;h4 id=&quot;change-fieldargsget-to-fieldargsgetraw&quot;&gt;&lt;a href=&quot;#change-fieldargsget-to-fieldargsgetraw&quot; aria-label=&quot;change fieldargsget to fieldargsgetraw permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Change &lt;code class=&quot;language-text&quot;&gt;fieldArgs.get&lt;/code&gt; to &lt;code class=&quot;language-text&quot;&gt;fieldArgs.getRaw&lt;/code&gt;&lt;/h4&gt;
+&lt;p&gt;Because we&apos;ve removed &lt;code class=&quot;language-text&quot;&gt;inputPlan&lt;/code&gt;, the &lt;code class=&quot;language-text&quot;&gt;fieldArgs.get(key)&lt;/code&gt; method is no more;
+instead use &lt;code class=&quot;language-text&quot;&gt;fieldArgs.getRaw(key)&lt;/code&gt; which is equivalent unless the inputs had
+plans (which they cannot any more).&lt;/p&gt;
+&lt;h4 id=&quot;converting-applyplan-and-inputplan&quot;&gt;&lt;a href=&quot;#converting-applyplan-and-inputplan&quot; aria-label=&quot;converting applyplan and inputplan permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Converting &lt;code class=&quot;language-text&quot;&gt;applyPlan&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;inputPlan&lt;/code&gt;&lt;/h4&gt;
+&lt;p&gt;If your input object fields did have plan resolvers then instead of having
+Grafast automatically call them on each and every input field recursively at
+plan-time, we now have the &lt;code class=&quot;language-text&quot;&gt;applyInput&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;bakedInput&lt;/code&gt; steps that represent
+runtime application or transform of these inputs recursively via a single step
+in our plan diagram.&lt;/p&gt;
+&lt;p&gt;We&apos;ve managed to make this new runtime system very similar in shape to the old
+plan-time system, so PostGraphile plugins don&apos;t need to change much — this was
+largely enabled by how closely we managed to get the Grafast plan syntax to the
+syntax of code you would normally write at runtime. The first change is to
+rename &lt;code class=&quot;language-text&quot;&gt;applyPlan&lt;/code&gt; to &lt;code class=&quot;language-text&quot;&gt;apply&lt;/code&gt;, and &lt;code class=&quot;language-text&quot;&gt;inputPlan&lt;/code&gt; to &lt;code class=&quot;language-text&quot;&gt;baked&lt;/code&gt;. From there, your code
+might just work straight away, or it might need some more small tweaks (e.g.
+&lt;code class=&quot;language-text&quot;&gt;fieldArgs&lt;/code&gt; is no longer present, it&apos;s been replaced with simply the runtime
+value of the current field).&lt;/p&gt;
+&lt;h4 id=&quot;no-more-stepeval&quot;&gt;&lt;a href=&quot;#no-more-stepeval&quot; aria-label=&quot;no more stepeval permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;No more &lt;code class=&quot;language-text&quot;&gt;$step.eval*()&lt;/code&gt;&lt;/h4&gt;
+&lt;p&gt;The eval methods are now marked as internal so you will get TypeScript errors if
+you try and use them. They will likely be removed at some point after release,
+so you should be sure to migrate away from using them at your earliest
+opportunity. But you weren&apos;t using them anyway… right?&lt;/p&gt;
+&lt;h4 id=&quot;executablestep-renamed-to-step&quot;&gt;&lt;a href=&quot;#executablestep-renamed-to-step&quot; aria-label=&quot;executablestep renamed to step permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;ExecutableStep renamed to Step&lt;/h4&gt;
+&lt;p&gt;This one is more cosmetic…&lt;/p&gt;
+&lt;p&gt;Since we no longer have plan resolvers deep in inputs, we no longer have the
+&lt;code class=&quot;language-text&quot;&gt;ModifierStep&lt;/code&gt; system that was used for managing them (it&apos;s been replaced with
+&lt;code class=&quot;language-text&quot;&gt;Modifier&lt;/code&gt; which happens at runtime). Since we no longer have ModifierStep, we
+no longer need &lt;code class=&quot;language-text&quot;&gt;BaseStep&lt;/code&gt; to be separate from and inherited by &lt;code class=&quot;language-text&quot;&gt;ExecutableStep&lt;/code&gt;,
+so we&apos;ve merged them. Since this is the base class for &lt;em&gt;all&lt;/em&gt; steps now, we&apos;ve
+renamed it to simply &lt;code class=&quot;language-text&quot;&gt;Step&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;We have kept an &lt;code&gt;ExecutableStep&lt;/code&gt; export for backwards
+compatibility.&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id=&quot;postgraphile-changes&quot;&gt;&lt;a href=&quot;#postgraphile-changes&quot; aria-label=&quot;postgraphile changes permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;PostGraphile changes&lt;/h2&gt;
+&lt;p&gt;In addition to the changes above that impact everything that uses Gra&lt;em&gt;fast&lt;/em&gt;,
+here are some of the changes that specifically impact PostGraphile users.&lt;/p&gt;
+&lt;h3 id=&quot;sql-generation-moved-to-runtime&quot;&gt;&lt;a href=&quot;#sql-generation-moved-to-runtime&quot; aria-label=&quot;sql generation moved to runtime permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;SQL generation moved to runtime&lt;/h3&gt;
+&lt;p&gt;PostGraphile&apos;s various SQL-running steps like PgSelectStep now build their
+queries at runtime rather than plantime. They use the &quot;builder&quot; pattern, where
+much of the SQL query can be established at plan-time, but final tweaks can be
+applied at run-time (register tweaks via the &lt;code class=&quot;language-text&quot;&gt;$pgSelect.apply($callback)&lt;/code&gt;
+method) before the query is built.&lt;/p&gt;
+&lt;h3 id=&quot;sql-efficiency-increased&quot;&gt;&lt;a href=&quot;#sql-efficiency-increased&quot; aria-label=&quot;sql efficiency increased permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;SQL efficiency increased&lt;/h3&gt;
+&lt;p&gt;Since we have more information at run-time, our SQL queries were able to become
+even simpler, 10% smaller on average across our test suite! This nets us a
+modest performance improvement inside PostgreSQL, but the shift to runtime does
+cost us a little performance in the JS layer since queries now need to be built
+for every request, rather than once per plan. We&apos;re happy with this tradeoff;
+one of the core goals of PostGraphile V5 (and the motivation for Grafast in the
+first place) was to shift load from the PostgreSQL layer (which is non-trivial
+to scale) to the Node.js layer (which is easy to scale horizontally).&lt;/p&gt;
+&lt;h3 id=&quot;postgres-arrays-now-parse-5x-faster&quot;&gt;&lt;a href=&quot;#postgres-arrays-now-parse-5x-faster&quot; aria-label=&quot;postgres arrays now parse 5x faster permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Postgres Arrays now parse 5x faster&lt;/h3&gt;
+&lt;p&gt;I&apos;ve also &lt;a href=&quot;https://github.com/bendrucker/postgres-array/pull/19&quot;&gt;backported&lt;/a&gt;
+these &lt;a href=&quot;https://github.com/bendrucker/postgres-array/pull/20&quot;&gt;fixes&lt;/a&gt; into the
+&lt;code class=&quot;language-text&quot;&gt;postgres-array&lt;/code&gt; npm module for everyone that uses &lt;code class=&quot;language-text&quot;&gt;pg&lt;/code&gt; to benefit from.&lt;/p&gt;
+&lt;h3 id=&quot;easier-to-write-sql-fragments&quot;&gt;&lt;a href=&quot;#easier-to-write-sql-fragments&quot; aria-label=&quot;easier to write sql fragments permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Easier to write SQL fragments&lt;/h3&gt;
+&lt;p&gt;Added a new feature to &lt;code class=&quot;language-text&quot;&gt;pg-sql2&lt;/code&gt; that allows us to handle non-SQL parameter
+embeds with custom code, making it easier to write custom SQL, e.g. if a value
+is already coming from SQL you can embed it directly without having to invoke
+placeholder:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;diff&quot;&gt;&lt;pre class=&quot;language-diff&quot;&gt;&lt;code class=&quot;language-diff&quot;&gt;&lt;span class=&quot;token unchanged&quot;&gt;&lt;span class=&quot;token prefix unchanged&quot;&gt; &lt;/span&gt;&lt;span class=&quot;token line&quot;&gt;const $fooId = $foo.get(&apos;id&apos;);
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token deleted-sign deleted&quot;&gt;&lt;span class=&quot;token prefix deleted&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token line&quot;&gt;$pgSelect.where(sql`foo_id = ${$pgSelect.placeholder($fooId)}`);
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token inserted-sign inserted&quot;&gt;&lt;span class=&quot;token prefix inserted&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;token line&quot;&gt;$pgSelect.where(sql`foo_id = ${$fooId}`);&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We&apos;ve also added the ability to embed dynamic SQL fragments that can be
+dependent on runtime values (these values must be unary, i.e. they must come
+from GraphQL field arguments or derivatives thereof):&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;ts&quot;&gt;&lt;pre class=&quot;language-ts&quot;&gt;&lt;code class=&quot;language-ts&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; $includeArchived &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; fieldArgs&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;getRaw&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;includeArchived&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; $condition &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;lambda&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;$includeArchived&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; includeArchived &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt;
+  includeArchived &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt; sql&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; sql&lt;span class=&quot;token template-string&quot;&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;is_archived is false&lt;/span&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+$pgSelect&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;$condition&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;additional-changes&quot;&gt;&lt;a href=&quot;#additional-changes&quot; aria-label=&quot;additional changes permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Additional changes&lt;/h2&gt;
+&lt;h3 id=&quot;makegrafastschema&quot;&gt;&lt;a href=&quot;#makegrafastschema&quot; aria-label=&quot;makegrafastschema permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;makeGrafastSchema&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;🚨The structure of &lt;code class=&quot;language-text&quot;&gt;makeGrafastSchema&lt;/code&gt; as it relates to arguments and input
+object fields has changed a little; use TypeScript to guide you. I&apos;m hoping
+this is the last change of its kind before release.&lt;/li&gt;
+&lt;li&gt;New shortcuts added for argument &lt;code class=&quot;language-text&quot;&gt;applyPlan()&lt;/code&gt; and input field &lt;code class=&quot;language-text&quot;&gt;apply()&lt;/code&gt;
+methods.&lt;/li&gt;
+&lt;li&gt;Trimmed a load of unnecessary exported code, such as empty objects and field
+resolvers that do the same as the default field resolver.&lt;/li&gt;
+&lt;li&gt;Fix bug in &lt;code class=&quot;language-text&quot;&gt;makeGrafastSchema&lt;/code&gt; that fails to build schema sometimes if a field
+uses a function shortcut rather than object definition.&lt;/li&gt;
+&lt;li&gt;Fix bug in &lt;code class=&quot;language-text&quot;&gt;makeGrafastSchema&lt;/code&gt; that sometimes doesn&apos;t allow defining input
+objects&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;🚨 If you use &lt;code class=&quot;language-text&quot;&gt;graphile-export&lt;/code&gt; to export your schema as executable code, be
+sure to regenerate your schemas as the old generated code could be
+misinterpreted by the new &lt;code class=&quot;language-text&quot;&gt;makeGrafastSchema&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;graphile-export&quot;&gt;&lt;a href=&quot;#graphile-export&quot; aria-label=&quot;graphile export permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;graphile-export&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Massively improved the executable code output from &lt;code class=&quot;language-text&quot;&gt;graphile-export&lt;/code&gt; in
+combination with the changes to &lt;code class=&quot;language-text&quot;&gt;makeGrafastSchema&lt;/code&gt; above.&lt;/li&gt;
+&lt;li&gt;PostGraphile&apos;s &quot;kitchen sink&quot; schema export code now outputs 37KLOC rather
+than 47KLOC - a significant reduction in complexity!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;improved-plan-diagrams&quot;&gt;&lt;a href=&quot;#improved-plan-diagrams&quot; aria-label=&quot;improved plan diagrams permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Improved plan diagrams&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Plan diagrams now reveal (via &lt;code class=&quot;language-text&quot;&gt;@s&lt;/code&gt; text) if a step is meant to be streamed.&lt;/li&gt;
+&lt;li&gt;Constant steps improved.&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;Object: null prototype&lt;/code&gt; simplified to &lt;code class=&quot;language-text&quot;&gt;§&lt;/code&gt; in output.&lt;/li&gt;
+&lt;li&gt;Hoist steps during &lt;code class=&quot;language-text&quot;&gt;optimize&lt;/code&gt; phase.&lt;/li&gt;
+&lt;li&gt;We no longer render dependencies on the &lt;code class=&quot;language-text&quot;&gt;undefined&lt;/code&gt; constant, because it&apos;s
+messy and doesn&apos;t add value&lt;/li&gt;
+&lt;li&gt;We group when there are multiple dependencies to the same step from the same
+step, and label the line with the count instead.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;step-classes&quot;&gt;&lt;a href=&quot;#step-classes&quot; aria-label=&quot;step classes permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Step classes&lt;/h3&gt;
+&lt;p&gt;When writing your own step classes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;ExecutionValue&lt;/code&gt; has gained a new &lt;code class=&quot;language-text&quot;&gt;.unaryValue()&lt;/code&gt; method that returns the
+unary value for unary execution values, and throws an error for non-unary
+execution values. This is much safer than the previous &lt;code class=&quot;language-text&quot;&gt;.at(0)&lt;/code&gt; trick which
+did not assert that you were actually dealing with a unary execution value.&lt;/li&gt;
+&lt;li&gt;If you were using &lt;code class=&quot;language-text&quot;&gt;@stream&lt;/code&gt; (incremental delivery) and had written your own
+&lt;code class=&quot;language-text&quot;&gt;Step&lt;/code&gt; class with stream support, first of all: amazing! Please let me know
+you did that (&lt;em&gt;via email or &lt;a href=&quot;https://discord.gg/graphile&quot;&gt;Discord&lt;/a&gt;&lt;/em&gt;)!
+Secondly, you&apos;ll need to either rename your &lt;code class=&quot;language-text&quot;&gt;stream&lt;/code&gt; function to &lt;code class=&quot;language-text&quot;&gt;execute&lt;/code&gt; or
+merge its code into your existing &lt;code class=&quot;language-text&quot;&gt;execute&lt;/code&gt; method if you have one. It turns
+out there wasn&apos;t much point in separating them, and you can confer a lot of
+benefit from merging them.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;other-grafast-improvements&quot;&gt;&lt;a href=&quot;#other-grafast-improvements&quot; aria-label=&quot;other grafast improvements permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Other Gra&lt;em&gt;fast&lt;/em&gt; improvements&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Compatible mutation operations can now complete synchronously via
+&lt;code class=&quot;language-text&quot;&gt;grafastSync()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Fixes bug in input objects where keys that weren&apos;t set would still be present
+with value &lt;code class=&quot;language-text&quot;&gt;undefined&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Fix bug in step caching relating to polymorphism&lt;/li&gt;
+&lt;li&gt;New &lt;code class=&quot;language-text&quot;&gt;items()&lt;/code&gt; conventional method for extracting the items from a collection
+(makes for easier compatibility with connections)&lt;/li&gt;
+&lt;li&gt;Error handling improved&lt;/li&gt;
+&lt;li&gt;Lists improved - especially error handling and deduplication logic; as well as
+allowing returning connection-capable steps in list positions&lt;/li&gt;
+&lt;li&gt;Optimization to Gra&lt;em&gt;fast&lt;/em&gt;&apos;s internal execution values, which are used heavily
+in hot paths.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;thank-you-sponsors&quot;&gt;&lt;a href=&quot;#thank-you-sponsors&quot; aria-label=&quot;thank you sponsors permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Thank you Sponsors&lt;/h3&gt;
+&lt;p&gt;Gra&lt;em&gt;fast&lt;/em&gt; and PostGraphile are crowd-funded open-source software, they rely on
+crowd-sourced funding from individuals and companies to keep advancing.&lt;/p&gt;
+&lt;p&gt;If your company benefits from Gra&lt;em&gt;fast&lt;/em&gt;, PostGraphile or the wider Graphile
+suite, you should consider asking them to fund our work. By significantly
+reducing the amount of work needed to achieve business goals and reducing
+running costs, Graphile&apos;s software results in huge time and money savings for
+users. We encourage companies to contribute a portion of these savings back,
+enabling the projects to advance more rapidly, and result in even greater
+savings for your company.
+&lt;a href=&quot;/sponsor/&quot;&gt;Find out more about sponsorship here on our website&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;Cartoon Benjie and Jem send cartoon hearts up into the sky&quot; src=&quot;/images/news/postgraphile-thankyou.svg&quot; style=&quot;max-height: 300px&quot;&gt;
+&lt;/div&gt;</content:encoded></item><item><title><![CDATA[PostGraphile V5 public beta — get involved!]]></title><description><![CDATA[Announced 2023-08-03 by the Graphile Team We need help writing automated tests, validating it works in your real-world
 applications…]]></description><link>https://graphile.org/news/20230803-postgraphile-v5-beta/</link><guid isPermaLink="false">https://graphile.org/news/20230803-postgraphile-v5-beta/</guid><pubDate>Thu, 03 Aug 2023 01:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;Announced 2023-08-03 by the Graphile Team&lt;/em&gt;&lt;/p&gt;
 &lt;p class=&apos;intro&apos;&gt;
 It’s finally here! The day has come that you can get your hands on an early
