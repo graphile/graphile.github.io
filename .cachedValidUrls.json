@@ -84,6 +84,8 @@
   "https://github.com/auth0/express-jwt",
   "https://github.com/auth0/node-jsonwebtoken",
   "https://github.com/auth0/node-jwks-rsa",
+  "https://github.com/bendrucker/postgres-array/pull/19",
+  "https://github.com/bendrucker/postgres-array/pull/20",
   "https://github.com/benjie/persistgraphql",
   "https://github.com/benjie/persistgraphql-webpack-plugin",
   "https://github.com/brianc/node-postgres/blob/7de137f9f88611b8fcae5539aa90b6037133f1f1/lib/connection.js",
