@@ -17,6 +17,11 @@
     ],
     "pages": [
       {
+        "to": "/news/20250324-major-grafast-beta/",
+        "title": "Major Grafast release: beta.21",
+        "sectionId": "main"
+      },
+      {
         "to": "/news/20230803-postgraphile-v5-beta/",
         "title": "PostGraphile V5 public beta!",
         "sectionId": "main"
