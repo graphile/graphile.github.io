@@ -140,19 +140,16 @@ class Page extends React.Component {
   }
   render() {
     const {
-      data: {
-        remark: {
-          html: rawHTML,
-          tableOfContents: rawTableOfContents,
-          timeToRead,
-          frontmatter: { title, fullTitle, showExamples, noToc },
-        },
-        nav,
-        examples,
-      },
+      data: { remark, nav = { edges: [] }, examples } = {},
       location,
       history,
     } = this.props;
+    const {
+      html: rawHTML = "",
+      tableOfContents: rawTableOfContents = "",
+      timeToRead = "",
+      frontmatter: { title = "", fullTitle = "", showExamples, noToc } = {},
+    } = remark ?? {};
     const tableOfContents =
       !noToc && timeToRead > 1
         ? processTableOfContents(rawTableOfContents)
