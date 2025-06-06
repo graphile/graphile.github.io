@@ -149,6 +149,11 @@ Example:
  },
 ```
 
+_(Aside: I pasted the
+[markdown version](https://github.com/graphile/graphile.github.io/blob/6693b91d5dd9980b676876524d0a14d370800dcf/src/news/2025-06-06-last-epic-solved.md#L78-L150)
+of these instructions into ChatGPT and it managed to convert a number of plugins
+perfectly! YMMV.)_
+
 Other changes:
 
 - `ObjectPlans`/`GrafastPlans`/`FieldPlans`/`InputObjectPlans`/`ScalarPlans` all
