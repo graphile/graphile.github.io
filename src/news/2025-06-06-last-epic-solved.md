@@ -31,7 +31,7 @@ solved before v1.0. This release of `grafast@0.1.1-beta.22` (used as the core
 execution engine in `postgraphile@5.0.0-beta.41`) fixes this final epic through
 a complete overhaul of the polymorphism system. Let’s take a look!
 
-### Polymorphism Epic Achieved
+### Polymorphism epic achieved
 
 By moving the responsibility of polymorphic resolution from field plan resolvers
 into the abstract types themselves, we’ve centralized this logic, simplified
@@ -174,14 +174,14 @@ Other changes:
 - `GrafastFieldConfig` last two generics swapped order.
 - `GrafastArgumentConfig` generics completely changed
 
-### Gra*fast* Features
+### Gra*fast* features
 
-#### New Steps
+#### New steps
 
 - `coalesce()`: Accepts a number of steps and represents the first value from
   them that isn’t `null` or `undefined`
 
-#### Step Classes
+#### Step classes
 
 - Experimental support for adding “references” to other steps at plan-time only
   (via `refId = this.addRef($step)` and reciprocal `$step = this.getRef(refId)`
