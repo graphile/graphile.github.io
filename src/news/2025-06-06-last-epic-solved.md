@@ -1,23 +1,22 @@
 ---
 layout: post
-title: "Grafast beta: last Epic reached!"
+title: "Grafast beta: last epic solved!"
 date: 2025-06-06T17:00:00Z
-path: /news/20250606-last-epic-reached/
+path: /news/20250606-last-epic-solved/
 thumbnail: /images/news/grafast-wordmark-2023.svg
 thumbnailAlt: "The Grafast logo"
 tags: announcements, releases, grafast, postgraphile
 noToc: false
 
 summary:
-  "Polymorphism re-overhauled for greater efficiency and ergonomics. This is the
-  last breaking change to plan resolvers we are expecting before becoming
-  stable."
+  "Polymorphism overhauled for greater efficiency and ergonomics. This is the
+  last breaking change to plan resolvers we are expecting for v1."
 ---
 
 _Announced 2025-06-06 by the Graphile Team_
 
 <p class='intro'>
-In the first Gra<em>fast</em> Working Group, we outlined 4 <em>major</em> issues in Gra<em>fast</em> that needed to be addressed before we could think about general release. The fourth, and final, Epic has now been reached! 
+In the first Gra<em>fast</em> Working Group, we outlined 4 <em>major</em> issues in Gra<em>fast</em> that needed to be addressed before we could think about general release. The fourth, and final, epic has now been solved! 
 </p>
 
 - ✅ Global dependencies — solved via “unary” steps
@@ -27,9 +26,9 @@ In the first Gra<em>fast</em> Working Group, we outlined 4 <em>major</em> issues
 
 In previous versions of Gra*fast* there was the possibility of exponential plan
 branching due to the naive method of resolution of abstract types — a known
-issue raised in the first Gra*fast* working group as one of four “Epics” to be
+issue raised in the first Gra*fast* working group as one of four “epics” to be
 solved before v1.0. This release of `grafast@0.1.1-beta.22` (used as the core
-execution engine in `postgraphile@5.0.0-beta.41`) fixes this final Epic through
+execution engine in `postgraphile@5.0.0-beta.41`) fixes this final epic through
 a complete overhaul of the polymorphism system. Let’s take a look!
 
 ### Polymorphism Epic Achieved
@@ -38,49 +37,55 @@ By moving the responsibility of polymorphic resolution from field plan resolvers
 into the abstract types themselves, we’ve centralized this logic, simplified
 field plan resolvers, and unlocked more optimization opportunities and greater
 execution efficiency. We no longer have the concept of “polymorphic capable”
-steps: any step may now be used for polymorphism. The abstract types now gain a
+steps: any step may now be used for polymorphism. Abstract types now gain a
 `planType` method responsible for taking a “specifier” from the field plan
-resolver and determining how to resolve its concrete object type and the
-associated step.
+resolver and returning a step representing the name of its concrete object type
+along with subplans for each possible object types.
 
-To solve the problem of exponential branching, we merge the previous polymorphic
-branch into a single “specifier” step before planning the next level of
-polymorphism.
+To solve the problem of exponential branching, we merge the new “specifier”
+steps from all of the previous polymorphic branches into a single combined step
+before planning the next level of polymorphism.
 
-Users of PostGraphile’s polymorphism should not need to take any action to
-benefit from these changes and may notice that their SQL queries are now
-slightly smaller and in general fewer requests to the database are required.
+Users of PostGraphile’s Postgres-based polymorphism should not need to take any
+action to benefit from these changes, and may notice that their SQL queries are
+now slightly smaller.
 
 For the few of you who have been brave enough to hand write polymorphic plan
-resolvers: first of all, thank you for trying our new system! Hand written
-polymorphic plan resolvers will need to be updated to match the new paradigm,
-this will involve moving the polymorphic resolution from field plan resolvers
-into the new `planType` method on the relevant abstract type and adjusting the
-logic to fit the new pattern. Steps such as `polymorphicBranch`,
+resolvers: first of all, thank you for trying it out! Hand written polymorphic
+plan resolvers will need to be updated to match the new paradigm, this will
+involve moving the polymorphic resolution from field plan resolvers into the new
+`planType` method on the relevant abstract type (interface or union) and
+adjusting the logic to fit the new pattern. Steps such as `polymorphicBranch`,
 `pgPolymorphism`, and other polymorphism related steps no longer exist as they
-are no longer supported in this new paradigm. For guidance on how to write the
-`planType` method, see
+are no longer supported or needed in this new paradigm. For guidance on how to
+write the `planType` method, see
 [the Gra*fast* docs](https://grafast.org/grafast/polymorphism) and please reach
-out to us on Discord — we’d love to help you get migrated.
+out to us on Discord or GitHub issues — we’d love to help you get migrated.
 
-Fortunately, this is the last change to hand written plan resolvers that we
-expect to make before the v1.0 release (other than some improvements around
-TypeScript types).
+Excitingly this is the last change to hand written plan resolvers that we expect
+to make for v1.0 (other than some improvements around TypeScript types), so
+we're getting a lot closer to release candidate stage!
 
 ### TypeDefs / plans overhaul
 
 In order to make the libraries more type safe, `makeGrafastSchema` (from
 `grafast`) and `makeExtendSchemaPlugin` (from `postgraphile/utils`) have
 deprecated the `typeDefs`/`plans` pattern since `plans` (like `resolvers` in the
-traditional format) ended up being a mish-mash of lots of different types and
-`__`-prefixed fields for special cases.
+traditional format) ended up being a mish-mash of lots of different types
+(objects, scalars, enums, etc) and `__`-prefixed fields (`__resolveType`,
+`__isTypeOf`, etc) for methods on the type itself.
 
 Going forwards, the configuration should be split into `typeDefs` with
-`objects`, `interfaces`, `unions`, `inputObjects`, `scalars` and `enums`.
-Type-level properties such as `resolveType`/`isTypeOf`/`planType`/`scope`/etc
-should now be presented without their `__` prefix; to avoid conflicts with
-type-level properties, object and input object fields should be specified inside
-a new `plans` property and enum values within the new `values` property.
+`objects`, `interfaces`, `unions`, `inputObjects`, `scalars` and `enums` as
+appropriate. Type-level properties such as
+`resolveType`/`isTypeOf`/`planType`/`scope`/etc are no longer prefixed with `__`
+and, to avoid conflicts with these type-level properties, object and input
+object fields should be specified inside a new `plans` property and enum values
+within the new `values` property.
+
+**The old pattern will still work** (this is not a breaking change), but we
+recommend moving to the new shape and will use it for all of our examples in the
+documentation from now on.
 
 Migration is quite straightforward:
 
@@ -90,20 +95,20 @@ Migration is quite straightforward:
    where you’re not defining types of that kind.
 
 1. **Split definitions based on type kind**. For each type defined in `plans`
-   move it into the appropriate new property based on the keyword used to define
-   the type in the `typeDefs` (`type` &rarr; `objects`, `interface` &rarr;
-   `interfaces`, `union` &rarr; `unions`, `input object` &rarr; `inputObjects`,
-   `scalar` &rarr; `scalars`, `enum` &rarr; `enums`).
+   move it into the appropriate new object (based on keyword defining the type;
+   i.e. `type` &rarr; `objects`, `interface` &rarr; `interfaces`, `union` &rarr;
+   `unions`, `input object` &rarr; `inputObjects`, `scalar` &rarr; `scalars`,
+   `enum` &rarr; `enums`).
 
 1. **Move field plans into nested `plans: {...}` object**. For each type defined
-   in the new `objects` and `inputObjects` maps: create a `plans: { ... }` entry
-   inside the type and move all fields (anything not prefixed with `__`) inside
-   this new (nested) property.
+   in the new `objects` and `inputObjects` objects: create a `plans: { ... }`
+   entry inside the type and move all fields (anything not prefixed with `__`)
+   inside this new (nested) property.
 
 1. **Move enum values into nested `values: {...}` object**. For each type
-   defined in the new `enums` map: create a `values: { ... }` entry inside the
-   type and move all values (anything not prefixed with `__`) inside this new
-   (nested) property.
+   defined in the new `enums` object: create a `values: { ... }` entry inside
+   the type and move all values (anything not prefixed with `__`) inside this
+   new (nested) property.
 
 1. **Remove `__` prefixes**. For each type across
    `objects`/`interfaces`/`unions`/`interfaceObjects`/`scalars` and `enums`:
