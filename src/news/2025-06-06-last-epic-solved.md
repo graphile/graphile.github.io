@@ -178,8 +178,8 @@ Other changes:
 
 #### New Steps
 
-- Coalesce: Accepts a number of steps and represents the first one of them that
-  isn’t nullish
+- `coalesce()`: Accepts a number of steps and represents the first value from
+  them that isn’t `null` or `undefined`
 
 #### Step Classes
 
@@ -208,10 +208,14 @@ sensible defaults if you only specify the first two generics.
 
 ### Other breaking changes
 
-- Minimum version of Node.js bumped to Node 22 (the latest LTS).
+- Minimum version of Node.js bumped to Node 22 (the latest LTS) in preparation
+  for release candidate
 - Grafserv: Naked GraphQL errors (such as those you’d see from coercion) are now
   treated as safe to output.
 - graphile-export now supports and possibly requires ESLint v9.
+- Gra*fast*: plan JSON now has layer plans as a list rather than a tree, to
+  account for combination layer plans that have many parents. May not be
+  compatible with previous versions of Ruru.
 
 ### Bug fixes
 
@@ -219,23 +223,21 @@ sensible defaults if you only specify the first two generics.
   dependency.
 - Gra*fast*: Fix a number of edge-case issues relating to incremental delivery
 - PostGraphile: Fix bug in nullable nodeID handling for computed column
-  arguments with the Relay preset that was causing the entire select to be
+  arguments with the Relay preset that was causing the entire PgSelectStep to be
   inhibited on null/undefined.
 - PostGraphile: Fix bug with `@ref ... plural` smart tag where multiple
   `@refVia` are present but the target type is not abstract.
 
 ### And here’s the rest...
 
-- Gra*fast*: plan JSON now has layer plans as a list rather than a tree, to
-  account for combination layer plans that have many parents.
-- Gra*fast*: Implement deduplication of loadOne() / loadMany() and jsonParse()
-  steps
+- Gra*fast*: Implement deduplication of `loadOne()` / `loadMany()` and
+  `jsonParse()` steps
 - Gra*fast*: Planning field inputs now uses a cache so planning time should
   reduce marginally and step ids will be less inflated.
 - Gra*fast:* Don’t call `applyPlan` on arguments if the value is not specified
   (not even a variable) and there’s no default value.
-- Gra*fast*: Fixes bug where undefined values might not be flagged with
-  FLAG_NULL
+- Gra*fast*: Fixes bug where `undefined` values might not be flagged with
+  `FLAG_NULL`
 - PostGraphile: General plan efficiency improvements
 - Ruru: Upgrade to Mermaid 11, and reduce verbosity of polymorphism in plan
   diagrams.
