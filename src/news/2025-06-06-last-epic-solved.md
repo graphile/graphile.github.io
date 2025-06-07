@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Grafast beta: last epic solved!"
-date: 2025-06-06T17:00:00Z
-path: /news/20250606-last-epic-solved/
+date: 2025-06-07T12:00:00Z
+path: /news/20250607-last-epic-solved/
 thumbnail: /images/news/grafast-wordmark-2023.svg
 thumbnailAlt: "The Grafast logo"
 tags: announcements, releases, grafast, postgraphile
@@ -13,7 +13,7 @@ summary:
   last breaking change to plan resolvers we are expecting for v1."
 ---
 
-_Announced 2025-06-06 by the Graphile Team_
+_Announced 2025-06-07 by the Graphile Team_
 
 <p class='intro'>
 In the first Gra<em>fast</em> Working Group, we outlined 4 <em>major</em> issues in Gra<em>fast</em> that needed to be addressed before we could think about general release. The fourth, and final, epic has now been solved! 
