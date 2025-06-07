@@ -17,6 +17,11 @@
     ],
     "pages": [
       {
+        "to": "/news/20250607-last-epic-solved/",
+        "title": "Grafast beta: last Epic reached!",
+        "sectionId": "main"
+      },
+      {
         "to": "/news/20250324-major-grafast-beta/",
         "title": "Major Grafast release: beta.21",
         "sectionId": "main"
