@@ -20,7 +20,7 @@
         "wellKnown": "https://www.grafast.org/.well-known/funding-manifest-urls"
       },
       "repositoryUrl": {
-        "url": "https://github.com/graphile/crystal/tree/main/grafast/grafast",
+        "url": "https://github.com/graphile/crystal",
         "wellKnown": "https://github.com/graphile/crystal/raw/main/grafast/grafast/.well-known/funding-manifest-urls"
       },
       "licenses": ["spdx:MIT"],
@@ -41,7 +41,7 @@
         "wellKnown": "https://www.grafast.org/.well-known/funding-manifest-urls"
       },
       "repositoryUrl": {
-        "url": "https://github.com/graphile/crystal/tree/main/grafast/grafserv",
+        "url": "https://github.com/graphile/crystal",
         "wellKnown": "https://github.com/graphile/crystal/raw/main/grafast/grafserv/.well-known/funding-manifest-urls"
       },
       "licenses": ["spdx:MIT"],
@@ -62,7 +62,7 @@
         "wellKnown": "https://build.graphile.org/.well-known/funding-manifest-urls"
       },
       "repositoryUrl": {
-        "url": "https://github.com/graphile/crystal/tree/main/graphile-build/graphile-build",
+        "url": "https://github.com/graphile/crystal",
         "wellKnown": "https://github.com/graphile/crystal/raw/main/graphile-build/graphile-build/.well-known/funding-manifest-urls"
       },
       "licenses": ["spdx:MIT"],
@@ -104,7 +104,7 @@
         "wellKnown": "https://star.graphile.org/.well-known/funding-manifest-urls"
       },
       "repositoryUrl": {
-        "url": "https://github.com/graphile/crystal/tree/main/utils",
+        "url": "https://github.com/graphile/crystal",
         "wellKnown": "https://github.com/graphile/crystal/raw/main/utils/.well-known/funding-manifest-urls"
       },
       "licenses": ["spdx:MIT"],
@@ -140,7 +140,7 @@
         "wellKnown": "https://www.postgraphile.org/.well-known/funding-manifest-urls"
       },
       "repositoryUrl": {
-        "url": "https://github.com/graphile/crystal/tree/main/postgraphile/postgraphile",
+        "url": "https://github.com/graphile/crystal",
         "wellKnown": "https://github.com/graphile/crystal/raw/main/postgraphile/postgraphile/.well-known/funding-manifest-urls"
       },
       "licenses": ["spdx:MIT"],
@@ -161,7 +161,7 @@
         "wellKnown": "https://www.grafast.org/.well-known/funding-manifest-urls"
       },
       "repositoryUrl": {
-        "url": "https://github.com/graphile/crystal/tree/main/grafast/ruru",
+        "url": "https://github.com/graphile/crystal",
         "wellKnown": "https://github.com/graphile/crystal/raw/main/grafast/ruru/.well-known/funding-manifest-urls"
       },
       "licenses": ["spdx:MIT"],
