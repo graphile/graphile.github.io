@@ -80,11 +80,11 @@
       "description": "Opinionated SQL-powered productive roll-forward migration tool for PostgreSQL.",
       "webpageUrl": {
         "url": "https://github.com/graphile/migrate",
-        "wellKnown": "https://github.com/graphile/migrate/.well-known/funding-manifest-urls"
+        "wellKnown": "https://github.com/graphile/migrate/raw/main/.well-known/funding-manifest-urls"
       },
       "repositoryUrl": {
         "url": "https://github.com/graphile/migrate",
-        "wellKnown": "https://github.com/graphile/migrate/.well-known/funding-manifest-urls"
+        "wellKnown": "https://github.com/graphile/migrate/raw/main/.well-known/funding-manifest-urls"
       },
       "licenses": ["spdx:MIT"],
       "tags": [
@@ -120,7 +120,7 @@
       },
       "repositoryUrl": {
         "url": "https://github.com/graphile/worker",
-        "wellKnown": "https://github.com/graphile/worker/.well-known/funding-manifest-urls"
+        "wellKnown": "https://github.com/graphile/worker/raw/main/.well-known/funding-manifest-urls"
       },
       "licenses": ["spdx:MIT"],
       "tags": [
