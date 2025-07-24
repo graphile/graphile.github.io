@@ -16,6 +16,7 @@ import MarketingProduct from "$components/MarketingProduct";
 import postgresPostgraphileGraphql from "$images/postgres_postgraphile_graphql.png";
 import Testimonial from "$components/MarketingTestimonial";
 import Sponsors, { Sponsor } from "$components/MarketingSponsor";
+import Tiers, { Tier } from "$components/MarketingTier";
 
 <MarketingLayout blue>
 <Hero bg="medium">
@@ -216,20 +217,98 @@ directed and financially sustainable.
 to come is through monthly sponsorship.** Crowd-sourced funding enables us to spend the 
 most time directly working on improving the software, which you and other users then benefit from.
 
-<div class="flex">
-  <a class="button--solid" href="https://github.com/users/benjie/sponsorship">
-    Become a Sponsor <span class="fas fa-fw fa-external-link-square-alt" />
-  </a>
-</div>
-
 </MarketingSection>
 <MarketingDivide from="dark" to="medium" via="light" down/>
 <MarketingSection bg="medium" left maxWidth>
 
-
 ### Sponsor tiers and benefits
 
+As well as ensuring the sustainability and longevity of PostGraphile and the wider Graphile
+suite of developer tooling, sponsorship also gives you or your company some additional benefits
+such as access to security announcements and being featured in the README files of Graphile’s
+main open source projects. Choose the tier which matches your funding goal, higher tiers come
+with more benefits.
 
+</MarketingSection>
+
+<MarketingSection bg="medium" left>
+
+<Tiers>
+  <Tier 
+    name="Supporter"
+    price="$25"
+    tagline="Thank you!"
+    href="https://github.com/sponsors/benjie/sponsorships?tier_id=369"
+    description={<ul>
+          <li>Your name on the Graphile Sponsors page</li>
+          <li>Graphile stickers</li>
+          <li>Your name among those randomly featured in the PostGraphile CLI</li>
+          <li>Post job opportunities to our Discord community</li>
+          <li>Access to the #supporter-lounge on Discord</li>
+          <li>The warm feeling from knowing you’re supporting Open Source Software</li>
+        </ul>}
+  />
+  <Tier 
+    name="Production Sponsor" 
+    price="$100" 
+    tagline="Support sustainability"
+    href="https://github.com/sponsors/benjie/sponsorships?tier_id=368"
+    description={<ul>
+          <li>The Supporter tier benefits and...</li>
+          <li>
+            Access to <strong>private security announcements</strong>
+          </li>
+          <li>
+            Free access to <a href="https://postgraphile.org/pricing"><strong>PostGraphile V4 Pro</strong></a> and <a href="https://worker.graphile.org/pricing"><strong>Worker Pro</strong></a>
+          </li>
+          <li>Access to <a href="https://github.com/graphile-pro"><strong>graphile-pro</strong></a></li>
+          <li>
+            Your name and <strong>avatar/logo</strong> featured on our websites
+          </li>
+          <li>
+            Your name <strong>more frequently featured</strong> in the
+            PostGraphile CLI
+          </li>
+          <li>
+            The warm feeling that comes from knowing you’re making a difference
+            to the sustainability of the Graphile suite of tooling
+          </li>
+        </ul>}
+  />
+  <Tier 
+    name="Featured Sponsor" 
+    price="$500" 
+    tagline="Get featured in the project"
+    href="https://github.com/sponsors/benjie/sponsorships?tier_id=367"
+    description={<ul>
+          <li>The Production tier benefits and...</li>
+          <li>
+            Your name and avatar/logo <strong>
+              featured in the READMEs of Graphile’s main OSS projects</strong> (shown on GitHub and npm)
+          </li>
+          <li>
+            Your name and <strong>avatar/logo prominently featured </strong>on our websites
+          </li>
+          <li>
+            Your name <strong>even more frequently featured</strong> in the PostGraphile CLI
+          </li>
+          <li>
+            Access to <strong>#vip-lounge</strong> on Discord
+          </li>
+          <li>
+            Free access to <strong>
+              <a href="https://pgrita.com">pgRITA</a>
+            </strong>
+          </li>
+          <li>
+            The warm feeling that comes from knowing{" "}
+            <strong>
+              you’re making a significant difference to the development and sustainability of
+              PostGraphile, Gra<em>fast</em>, and the wider suite of Graphile developer tooling</strong>
+          </li>
+        </ul>}
+  />
+</Tiers>
 
 
 
