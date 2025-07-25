@@ -3,6 +3,7 @@ import React from "react";
 export default function MarketingTiers({ children }) {
   return (
     <div
+      className="tier-row"
       style={{
         display: "flex",
         flexDirection: "row",
@@ -21,6 +22,7 @@ export class Tier extends React.Component {
 
     return (
       <div
+        className="tier"
         style={{
           display: "flex",
           flexDirection: "column",
@@ -40,10 +42,10 @@ export class Tier extends React.Component {
           <span style={{ fontSize: "1.5rem" }}>{price}</span>{" "}
           <span style={{ fontSize: "0.8rem" }}>/month</span>
         </span>
-        <div class="tc">
-          <a class="button--solid" href={href}>
+        <div className="tc">
+          <a className="button--solid" href={href}>
             Join on GitHub Sponsors{" "}
-            <span class="fas fa-fw fa-external-link-square-alt" />
+            <span className="fas fa-fw fa-external-link-square-alt" />
           </a>
         </div>
         <h4>{tagline}</h4>
