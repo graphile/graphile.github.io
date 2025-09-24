@@ -1151,7 +1151,8 @@ svg.MarketingDivide {
   align-content: flex-start;
   flex: 1 0 0;
 }
-.tier h3, .tier .price-line {
+.tier h3,
+.tier .price-line {
   text-align: center;
 }
 .tier .tc .button--solid {
@@ -1166,28 +1167,38 @@ svg.MarketingDivide {
   margin-bottom: 0;
 }
 .tier {
+  h3 {
+    color: rgb(31, 76, 119);
+  }
+  .tc .button--solid {
+    background-color: rgb(31, 76, 119);
+    border-color: rgb(31, 76, 119);
+    color: white;
+  }
 }
 
 .tier a {
-  color: #4a68b4;
+  color: rgb(31, 76, 119);
 }
 
 .tier.highlight {
   h3 {
-    color: red;
+    color: #4a68b4;
+    color: #2d80d3;
   }
   a {
-    color: red;
+    color: #4a68b4;
     &:hover {
-      color: red;
+      color: #4a68b4;
     }
     &:visited {
-      color: red;
+      color: #4a68b4;
     }
   }
   .tc .button--solid {
-    background-color: red;
-    border-color: red;
+    background-color: #2d80d3;
+    border-color: #2d80d3;
+    color: white;
   }
 }
 
@@ -1209,5 +1220,4 @@ svg.MarketingDivide {
     color: #1b3955;
     margin: 1rem 0;
   }
-
 }
