@@ -1124,11 +1124,90 @@ svg.MarketingDivide {
 // Sponsor Page
 
 .tier-row {
+  background-color: white;
+  padding: 2rem 1rem;
+  border-radius: 12px;
+  border: 4px solid #1b1b3d;
+  color: #1b3955;
 }
 
+.tier-item-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.tier-break {
+  width: 1px;
+  background-color: #777;
+  align-self: stretch;
+}
+
+.tier {
+  display: flex;
+  flex-direction: column;
+  justify-items: space-between;
+  align-content: flex-start;
+  flex: 1 0 0;
+}
+.tier h3, .tier .price-line {
+  text-align: center;
+}
+.tier .tc .button--solid {
+  width: 100%;
+}
+.tier h3:first-child {
+  padding-top: 0;
+  margin-top: 0;
+}
+.tier ul:last-child {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
 .tier {
 }
 
 .tier a {
   color: #4a68b4;
+}
+
+.tier.highlight {
+  h3 {
+    color: red;
+  }
+  a {
+    color: red;
+    &:hover {
+      color: red;
+    }
+    &:visited {
+      color: red;
+    }
+  }
+  .tc .button--solid {
+    background-color: red;
+    border-color: red;
+  }
+}
+
+@media screen and (max-width: 64rem) {
+  .tier-row {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+  }
+  .tier-item-container {
+    display: block;
+    gap: 0;
+  }
+  .tier {
+    background-color: white;
+    padding: 1rem 1rem;
+    border-radius: 12px;
+    border: 4px solid #1b1b3d;
+    color: #1b3955;
+    margin: 1rem 0;
+  }
+
 }
