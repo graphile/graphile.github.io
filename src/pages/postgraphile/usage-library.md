@@ -117,7 +117,7 @@ Next we need an adaptor to convert a generic PostGraphile route handler into a
 handler that's suitable for your given server framework. We provide the
 following out of the box:
 
-- `PostGraphileResponseNode` - for Node, Express, Connect, Nest, Restify, and 
+- `PostGraphileResponseNode` - for Node, Express, Connect, Nest, Restify, and
   Fastify v2 (NOT v3)
 - `PostGraphileResponseKoa` - for Koa
 - `PostGraphileResponseFastify3` - for Fastify v3
@@ -221,21 +221,25 @@ if (middleware.options.watchPg) {
 For Nest, this might look something like:
 
 ```js
-import { Controller, Get, Post, Req, Next, Res } from '@nestjs/common';
-import { Request, Response } from 'express';
-import { PostGraphileResponseNode } from 'postgraphile';
-import { middleware } from './postgraphile.middleware';
+import { Controller, Get, Post, Req, Next, Res } from "@nestjs/common";
+import { Request, Response } from "express";
+import { PostGraphileResponseNode } from "postgraphile";
+import { middleware } from "./postgraphile.middleware";
 
-@Controller('/')
+@Controller("/")
 export class PostGraphileController {
   @Get(middleware.graphiqlRoute)
-  graphiql (@Req() request: Request, @Res() response: Response, @Next() next) {
-    middleware.graphiqlRouteHandler(new PostGraphileResponseNode(request, response, next));
+  graphiql(@Req() request: Request, @Res() response: Response, @Next() next) {
+    middleware.graphiqlRouteHandler(
+      new PostGraphileResponseNode(request, response, next)
+    );
   }
 
   @Post(middleware.graphqlRoute)
-  graphql (@Req() request: Request, @Res() response: Response, @Next() next) {
-    middleware.graphqlRouteHandler(new PostGraphileResponseNode(request, response, next));
+  graphql(@Req() request: Request, @Res() response: Response, @Next() next) {
+    middleware.graphqlRouteHandler(
+      new PostGraphileResponseNode(request, response, next)
+    );
   }
 }
 ```
@@ -316,10 +320,10 @@ The `postgraphile` middleware factory function takes three arguments, all of
 which are optional. The below options are valid for
 <tt>postgraphile@<!-- LIBRARY_VERSION_BEGIN -->4.12.3<!-- LIBRARY_VERSION_END --></tt>.
 
-- **`pgConfig`**: Specifies the PostgreSQL database you wish to connect to.
-  You may pass a PostgreSQL connection string, a configuration object to pass
-  to the [`pg.Pool`][] constructor, or a [`pg.Pool`][] instance. Note: `pg.Pool`
-  has a default pool size of 10, to increase this you use the configuration
+- **`pgConfig`**: Specifies the PostgreSQL database you wish to connect to. You
+  may pass a PostgreSQL connection string, a configuration object to pass to the
+  [`pg.Pool`][] constructor, or a [`pg.Pool`][] instance. Note: `pg.Pool` has a
+  default pool size of 10, to increase this you use the configuration
   object/pg.Pool instance approach and pass a different value as `max`.
 - **`schemaName`**: A string, or array of strings, which specifies the
   PostgreSQL schema(s) you to expose via PostGraphile; defaults to 'public'
@@ -380,10 +384,11 @@ which are optional. The below options are valid for
     user in connection string and any role they can become); set this option
     true to skip these checks and create GraphQL fields and types for
     everything. The default is `true`, in v5 the default will change to `false`.
-  - `ignoreIndexes`: Set false to exclude filters, orderBy, and
+  - `ignoreIndexes`: Set false (recommended) to exclude filters, orderBy, and
     relations that would be expensive to access due to missing indexes. Changing
-    this from true to false is a breaking change, but false to true is not. The
-    default is `true`.
+    this from true to false is a breaking change, but false to true is not, so
+    we recommend you start with it set to `false`. The default is `true`, in v5
+    the default may change to `false`.
   - `includeExtensionResources`: By default, tables and functions that come from
     extensions are excluded from the generated GraphQL schema as general
     applications don't need them to be exposed to the end user. You can use this
@@ -757,5 +762,5 @@ You can find
 [express]: https://www.npmjs.com/express
 [graphql/express-graphql#82]: https://github.com/graphql/express-graphql/pull/82
 [`pg`]: https://www.npmjs.com/pg
-[`pg.Pool`]: https://node-postgres.com/api/pool
+[`pg.pool`]: https://node-postgres.com/api/pool
 [morgan]: https://www.npmjs.com/morgan
