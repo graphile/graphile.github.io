@@ -133,7 +133,7 @@ from
 * `--no-ignore-rbac`  
   [RECOMMENDED] set this to exclude fields, queries and mutations that are not available to any possible user (determined from the user in connection string and any role they can become); this will be enabled by default in v5
 * `--no-ignore-indexes`  
-  set this to exclude filters, orderBy, and relations that would be expensive to access due to missing indexes
+  [RECOMMENDED] set this to exclude filters, orderBy, and relations that would be expensive to access due to missing indexes
 * `--include-extension-resources`  
   by default, tables and functions that come from extensions are excluded; use this flag to include them (not recommended)
 * `--show-error-stack [json|string]`  
