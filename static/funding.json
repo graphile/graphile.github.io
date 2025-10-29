@@ -179,12 +179,14 @@
       {
         "guid": "github-sponsors",
         "type": "payment-provider",
-        "description": "We prefer GitHub sponsors due to their low fees. Pay by credit card as an individual or organisation."
+        "description": "We prefer GitHub sponsors due to their low fees. Pay by credit card as an individual or organisation.",
+        "address": "https://github.com/sponsors/benjie"
       },
       {
         "guid": "bespoke",
         "type": "bank",
-        "description": "Bespoke invoicing arrangements for larger sponsor amounts (USD 1500 or above). Please get in touch."
+        "description": "Bespoke invoicing arrangements for larger sponsor amounts (USD 1500 or above). Please get in touch.",
+        "address": "fundingjson@graphile.com"
       }
     ],
     "plans": [
@@ -223,9 +225,9 @@
         "status": "active",
         "name": "Private Advisor",
         "description": "A complementary support contract is offered (more detail on request), plus benefits of lower tiers",
-        "amount": 4500,
+        "amount": 10788,
         "currency": "USD",
-        "frequency": "other",
+        "frequency": "annual",
         "channels": ["bespoke"]
       },
       {
