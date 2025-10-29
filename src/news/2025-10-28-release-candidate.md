@@ -78,13 +78,11 @@ frustration or success and praise!) in our
 
 ### Read more
 
-Visit the announcement on
-[PostGraphile.org](https://postgraphile.org/news/2025-10-28-v5-release-candidate)
+[Visit the announcement on PostGraphile.org](https://postgraphile.org/news/2025-10-28-v5-release-candidate)
 for specific news about PostGraphile V5 and how to get the release candidate up
 and running.
 
-Visit the announcement on
-[Grafast.org](https://grafast.org/news/2025-10-28-grafast-v1-release-candidate)
+[Visit the announcement on Grafast.org](https://grafast.org/news/2025-10-28-grafast-v1-release-candidate)
 for news about Gra*fast* V1 - the new GraphQL planning and execution engine
 which powers PostGraphile under-the-hood.
 
