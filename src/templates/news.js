@@ -61,7 +61,7 @@ class News extends Component {
                       <div class="flex">
                         <a
                           class="button--solid-light"
-                          href="/news/20250324-major-grafast-beta/"
+                          href="/news/20251028-release-candidate/"
                         >
                           Latest Release News{" "}
                           <span class="fas fa-fw fa-arrow-right" />
