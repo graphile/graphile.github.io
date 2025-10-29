@@ -1,4 +1,73 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Graphile News]]></title><description><![CDATA[Community funded open source utilities to build powerful, performant and extensible applications rapidly]]></description><link>https://graphile.org</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 25 Sep 2025 13:00:16 GMT</lastBuildDate><item><title><![CDATA[Grafast beta: last epic solved!]]></title><description><![CDATA[Announced 2025-06-07 by the Graphile Team ✅ Global dependencies — solved via “unary” steps ✅ Early exit — solved via “flags” ✅ Eradicating…]]></description><link>https://graphile.org/news/20250607-last-epic-solved/</link><guid isPermaLink="false">https://graphile.org/news/20250607-last-epic-solved/</guid><pubDate>Sat, 07 Jun 2025 12:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;Announced 2025-06-07 by the Graphile Team&lt;/em&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Graphile News]]></title><description><![CDATA[Community funded open source utilities to build powerful, performant and extensible applications rapidly]]></description><link>https://graphile.org</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 29 Oct 2025 12:28:30 GMT</lastBuildDate><item><title><![CDATA[PostGraphile and Grafast release candidate!]]></title><description><![CDATA[Announced 2025-10-28 by the Graphile Team Five years in the making, PostGraphile V5 raises the bar again After a couple false starts, in…]]></description><link>https://graphile.org/news/20251028-release-candidate/</link><guid isPermaLink="false">https://graphile.org/news/20251028-release-candidate/</guid><pubDate>Tue, 28 Oct 2025 12:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;Announced 2025-10-28 by the Graphile Team&lt;/em&gt;&lt;/p&gt;
+&lt;p class=&apos;intro&apos;&gt;
+  After over 100 releases, PostGraphile V5 and Grafast V1 have finally reached
+  release candidate status!🎉 Assuming no issues are found, this software, these
+  APIs, are what will make up the final release. The runtime is ready and many
+  of you are already using it in production, but the types and docs are a little behind. 
+  Try it out and tell us where the gaps are, and maybe help fill them!
+&lt;/p&gt;
+&lt;h3 id=&quot;five-years-in-the-making-postgraphile-v5-raises-the-bar-again&quot;&gt;&lt;a href=&quot;#five-years-in-the-making-postgraphile-v5-raises-the-bar-again&quot; aria-label=&quot;five years in the making postgraphile v5 raises the bar again permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Five years in the making, PostGraphile V5 raises the bar again&lt;/h3&gt;
+&lt;p&gt;After a couple false starts, in February 2020 we kicked off the journey that
+would ultimately become PostGraphile V5 and the Gra&lt;em&gt;fast&lt;/em&gt; planning and execution
+engine. Since January 2023 we have shipped 38 pre-alpha, 20 alpha, and 49 beta
+releases. Every stage refined the ergonomics, uncovered tricky edge cases, and
+ultimately solved the four Gra&lt;em&gt;fast&lt;/em&gt; epics that blocked a stable release:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;✅ “Everything is batched” but “unary” values (variables, context, etc) are
+treated as a special case.&lt;/li&gt;
+&lt;li&gt;✅ Early termination of field execution with a &lt;code class=&quot;language-text&quot;&gt;null&lt;/code&gt; now has first-class
+support.&lt;/li&gt;
+&lt;li&gt;✅ Plan-time “peeking” at runtime values is now forbidden, improving plan
+re-use.&lt;/li&gt;
+&lt;li&gt;✅ The exponential polymorphic branching hazard is now eradicated by
+converging before branching again.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The result is a platform that is faster, more expressive, more configurable, and
+easier to extend than anything we have shipped before.&lt;/p&gt;
+&lt;h3 id=&quot;why-this-is-still-a-release-candidate&quot;&gt;&lt;a href=&quot;#why-this-is-still-a-release-candidate&quot; aria-label=&quot;why this is still a release candidate permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Why this is still a release candidate&lt;/h3&gt;
+&lt;p&gt;We do not anticipate breaking changes to the runtime behaviour. Numerous teams
+have already trusted beta builds in production for over a year and the feedback
+has been excellent. The remaining work is polish: verifying the docs, catching
+stray rough edges, and ensuring that migration guidance reflects the software as
+it exists today.&lt;/p&gt;
+&lt;p&gt;You can expect the occasional breaking change in TypeScript typings as we close
+gaps and fix inaccuracies. The runtime APIs will remain compatible, but you may
+need to adjust type annotations while we tighten things up. Likewise, some TSDoc
+comments are behind reality; we will update them alongside the docs.&lt;/p&gt;
+&lt;p&gt;If you bump into rough edges while trying V5, please raise an issue in the
+&lt;a href=&quot;https://github.com/graphile/crystal&quot;&gt;Crystal repo&lt;/a&gt; so we can address it before
+the final release.&lt;/p&gt;
+&lt;h3 id=&quot;thinking-in-plans&quot;&gt;&lt;a href=&quot;#thinking-in-plans&quot; aria-label=&quot;thinking in plans permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Thinking in plans&lt;/h3&gt;
+&lt;p&gt;For those using Gra&lt;em&gt;fast&lt;/em&gt; outside of PostGraphile, now is the perfect moment to
+validate that the “&lt;a href=&quot;https://grafast.com/grafast/flow&quot;&gt;plans as dataflow&lt;/a&gt;”
+approach clicks for you: do you understand the separation of “plan-time” and
+“execution-time”? Can you see how principled communication between the steps
+allows for optimization without needing to revisit plan resolvers?&lt;/p&gt;
+&lt;p&gt;If you don’t understand it, that’s likely a failing of our documentation! Help
+us improve our explanations by sharing your feedback (whether confusion and
+frustration or success and praise!) in our
+&lt;a href=&quot;https://discord.gg/graphile&quot;&gt;Discord&lt;/a&gt; or with GitHub issues and pull requests!&lt;/p&gt;
+&lt;h3 id=&quot;read-more&quot;&gt;&lt;a href=&quot;#read-more&quot; aria-label=&quot;read more permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Read more&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://postgraphile.org/news/2025-10-28-v5-release-candidate&quot;&gt;Visit the announcement on PostGraphile.org&lt;/a&gt;
+for specific news about PostGraphile V5 and how to get the release candidate up
+and running.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://grafast.org/news/2025-10-28-grafast-v1-release-candidate&quot;&gt;Visit the announcement on Grafast.org&lt;/a&gt;
+for news about Gra&lt;em&gt;fast&lt;/em&gt; V1 - the new GraphQL planning and execution engine
+which powers PostGraphile under-the-hood.&lt;/p&gt;
+&lt;h3 id=&quot;thank-you-sponsors&quot;&gt;&lt;a href=&quot;#thank-you-sponsors&quot; aria-label=&quot;thank you sponsors permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Thank you Sponsors&lt;/h3&gt;
+&lt;p&gt;Gra&lt;em&gt;fast&lt;/em&gt; and PostGraphile are crowd-funded open-source software, they rely on
+crowd-sourced funding from individuals and companies to keep advancing.&lt;/p&gt;
+&lt;p&gt;If your company benefits from Gra&lt;em&gt;fast&lt;/em&gt;, PostGraphile or the wider Graphile
+suite, you should consider asking them to fund our work. By significantly
+reducing the amount of work needed to achieve business goals and reducing
+running costs, Graphile’s software results in huge time and money savings for
+users. We encourage companies to contribute a portion of these savings back,
+enabling the projects to advance more rapidly, and result in even greater
+savings for your company.
+&lt;a href=&quot;/sponsor/&quot;&gt;Find out more about sponsorship here on our website&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&quot;flex flex-wrap justify-around&quot;&gt;
+&lt;img alt=&quot;Thanks!&quot; src=&quot;/images/news/thank-you.svg&quot; style=&quot;max-height: 300px&quot;&gt;
+&lt;/div&gt;</content:encoded></item><item><title><![CDATA[Grafast beta: last epic solved!]]></title><description><![CDATA[Announced 2025-06-07 by the Graphile Team ✅ Global dependencies — solved via “unary” steps ✅ Early exit — solved via “flags” ✅ Eradicating…]]></description><link>https://graphile.org/news/20250607-last-epic-solved/</link><guid isPermaLink="false">https://graphile.org/news/20250607-last-epic-solved/</guid><pubDate>Sat, 07 Jun 2025 12:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;em&gt;Announced 2025-06-07 by the Graphile Team&lt;/em&gt;&lt;/p&gt;
 &lt;p class=&apos;intro&apos;&gt;
 In the first Gra&lt;em&gt;fast&lt;/em&gt; Working Group, we outlined 4 &lt;em&gt;major&lt;/em&gt; issues in Gra&lt;em&gt;fast&lt;/em&gt; that needed to be addressed before we could think about general release. The fourth, and final, epic has now been solved! 
 &lt;/p&gt;
