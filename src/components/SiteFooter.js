@@ -89,8 +89,9 @@ const SiteFooter = () => {
           </div>
           <div className="col-xs-12 col-md-offset-1 col-md-5">
             <h6>About</h6>
-            PostGraphile, Gra<em>fast</em> and Graphile Build are crowd-funded
-            Open Source Software, developed and maintained primarily by{" "}
+            PostGraphile, Gra<em>fast</em> and all of the Graphile suite of
+            tools are crowd-funded Open Source Software, developed and
+            maintained primarily by{" "}
             <a href="https://twitter.com/benjie">@Benjie</a> with the help of
             the community.
             <br />

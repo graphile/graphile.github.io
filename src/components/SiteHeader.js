@@ -229,7 +229,6 @@ export default class SiteHeader extends React.Component {
                     </li>
                   )}
                 />
-                {/*
                 <Route
                   path={POSTGRAPHILE_ROUTES}
                   render={() => (
@@ -247,6 +246,7 @@ export default class SiteHeader extends React.Component {
                     </li>
                   )}
                 />
+                {/*}
                 <Route
                   path={POSTGRAPHILE_ROUTES}
                   render={() => (
@@ -355,7 +355,7 @@ export default class SiteHeader extends React.Component {
                   )}
                 />
                 {/* FIN */}
-
+                {/*  
                 <li className="navbar-item ml-auto navbar-item-right">
                   <span className="searchbox-container">
                     <input
@@ -366,7 +366,8 @@ export default class SiteHeader extends React.Component {
                     <span className="fas fa-search searchbox-search" />
                   </span>
                 </li>
-                <li className="navbar-item navbar-item-right">
+                */}
+                <li className="navbar-item ml-auto navbar-item-right">
                   <Link
                     className={`nav-link ${
                       location.pathname.match(/^\/support(\/|$)/)
