@@ -12,20 +12,20 @@ const SiteFooter = () => {
             <h6>PostGraphile</h6>
             <ul>
               <li>
-                <Link to="/postgraphile/introduction/">Documentation</Link>
-              </li>
-              <li>
-                <Link to="/postgraphile/">About</Link>
-              </li>
-              <li>
-                <Link to="/postgraphile/community-plugins/">
-                  Community Plugins
-                </Link>
-              </li>
-              <li>
-                <a href="https://github.com/graphile/postgraphile/releases">
-                  <i className="fab fa-github" /> Changelog
+                <a href="https://postgraphile.org/postgraphile/5/">
+                  Documentation
                 </a>
+              </li>
+              <li>
+                <a href="https://postgraphile.org">About</a>
+              </li>
+              <li>
+                <a href="https://postgraphile.org/postgraphile/5/community-plugins">
+                  Community Plugins
+                </a>
+              </li>
+              <li>
+                <a href="https://postgraphile.org/news">News</a>
               </li>
             </ul>
           </div>
@@ -33,13 +33,17 @@ const SiteFooter = () => {
             <h6>Graphile Engine</h6>
             <ul>
               <li>
-                <Link to="/graphile-build/getting-started/">Documentation</Link>
+                <a href="https://build.graphile.org/graphile-build/5/">
+                  Documentation
+                </a>
               </li>
               <li>
-                <Link to="/graphile-build/">About</Link>
+                <a href="https://build.graphile.org/">About</a>
               </li>
               <li>
-                <Link to="/graphile-build/plugins/">Plugins</Link>
+                <a href="https://build.graphile.org/graphile-build/5/plugins">
+                  Plugins
+                </a>
               </li>
             </ul>
           </div>
@@ -67,11 +71,6 @@ const SiteFooter = () => {
                 </a>
               </li>
               <li>
-                <a href="https://twitter.com/graphilehq">
-                  <i className="fab fa-twitter" /> Twitter
-                </a>
-              </li>
-              <li>
                 <a href="https://www.youtube.com/channel/UCPPQNCaD8ukbb5gp1KrYMqA">
                   <i className="fa fa-play" /> Youtube
                 </a>
@@ -82,7 +81,7 @@ const SiteFooter = () => {
                 </Link>
               </li>
               <li>
-                <a to="https://learn.graphile.org/">
+                <a href="https://learn.graphile.org/">
                   <i className="fas fa-graduation-cap" /> Learn
                 </a>
               </li>
@@ -90,17 +89,18 @@ const SiteFooter = () => {
           </div>
           <div className="col-xs-12 col-md-offset-1 col-md-5">
             <h6>About</h6>
-            PostGraphile and Graphile Build are crowd-funded Open Source
-            Software, developed and maintained primarily by{" "}
+            PostGraphile, Gra<em>fast</em> and all of the Graphile suite of
+            tools are crowd-funded Open Source Software, developed and
+            maintained primarily by{" "}
             <a href="https://twitter.com/benjie">@Benjie</a> with the help of
             the community.
             <br />
             <br />
             You can support the projects via{" "}
             <Link to="/sponsor/">sponsorship</Link>, by{" "}
-            <Link to="/postgraphile/pricing/">going Pro</Link>, or by paying for{" "}
-            <Link to="/support/">Professional Services</Link>. Your support is
-            gratefully received 🙏
+            <a href="https://postgraphile.org/pricing">going Pro</a>, or by
+            paying for <Link to="/support/">Professional Services</Link>. Your
+            support is gratefully received 🙏
             <br />
             <br />
             This site is copyright &copy; Benjie Gillam {currentYear}. Design
