@@ -160,7 +160,7 @@ export default class SiteHeader extends React.Component {
                 />
 
                 {/* PostGraphile pages */}
-
+                {/*  
                 <Route
                   path={POSTGRAPHILE_ROUTES}
                   render={() => (
@@ -211,6 +211,7 @@ export default class SiteHeader extends React.Component {
                     </li>
                   )}
                 />
+                */}
                 <Route
                   path={POSTGRAPHILE_ROUTES}
                   render={() => (
@@ -228,6 +229,7 @@ export default class SiteHeader extends React.Component {
                     </li>
                   )}
                 />
+                {/*
                 <Route
                   path={POSTGRAPHILE_ROUTES}
                   render={() => (
@@ -263,10 +265,10 @@ export default class SiteHeader extends React.Component {
                       </Link>
                     </li>
                   )}
-                />
+                />*/}
 
                 {/* Graphile-build pages */}
-
+                {/*  
                 <Route
                   path="/graphile-build"
                   render={() => (
@@ -312,7 +314,8 @@ export default class SiteHeader extends React.Component {
                       </Link>
                     </li>
                   )}
-                />
+                />*/}
+
                 {/* News pages */}
 
                 <Route
